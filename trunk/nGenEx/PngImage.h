@@ -15,6 +15,8 @@
 #ifndef PngImage_h
 #define PngImage_h
 
+#include "png.h"
+
 // +--------------------------------------------------------------------+
 
 enum { PNG_OK, PNG_NOMEM, PNG_INVALID, PNG_NOFILE };
@@ -30,7 +32,7 @@ struct PngImage
 
    int Load(char *filename);
    int LoadBuffer(unsigned char* buf, int len);
-   int CreateImage(void* png_ptr, void* info_ptr);
+   int CreateImage(png_structp png_ptr, png_infop info_ptr);
 
    DWORD*         image;
    DWORD          width;
