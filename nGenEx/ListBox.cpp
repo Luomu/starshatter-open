@@ -241,7 +241,7 @@ ListBox::ListBox(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
    seln_style        = LIST_ITEM_STYLE_PLAIN;
 
    char buf[32];
-   sprintf(buf, "ListBox %d", id);
+   sprintf_s(buf, "ListBox %d", id);
    desc = buf;
 }
 
@@ -260,7 +260,7 @@ ListBox::ListBox(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
    seln_style        = LIST_ITEM_STYLE_PLAIN;
 
    char buf[32];
-   sprintf(buf, "ListBox %d", id);
+   sprintf_s(buf, "ListBox %d", id);
    desc = buf;
 }
 
@@ -1116,8 +1116,9 @@ int ListBox::OnLButtonDown(int x, int y)
       if (show_headings && mouse_y < line_height+BORDER_WIDTH+EXTRA_WIDTH) {
          int next_col_start = 0;
          int max_column = columns.size()-1;
-
-         for (int column = 0; column < max_column; column++) {
+		 int column;
+         
+		 for (column = 0; column < max_column; column++) {
             next_col_start += GetColumnWidth(column);
 
             if (mouse_x < next_col_start)

@@ -701,7 +701,7 @@ Material::GetThumbColor(int i, int j, int size)
 
       // anisotropic diffuse lighting
       if (brilliance >= 0) {
-         diffuse = pow(diffuse, brilliance);
+         diffuse = pow(diffuse, (double)brilliance);
       }
 
       // forward lighting
@@ -713,7 +713,7 @@ Material::GetThumbColor(int i, int j, int size)
          if (power > 0) {
             double spec = ((nrm * 2*(nrm*light) - light) * eye);
             if (spec > 0.01) {
-               spec = pow(spec, power);
+               spec = pow(spec, (double)power);
                c += cs * (white * spec);
             }
          }
@@ -730,8 +730,8 @@ Material::GetThumbColor(int i, int j, int size)
 
             double spec = ((nrm * 2*(nrm*light) - light) * eye);
             if (spec > 0.01) {
-               spec = pow(spec, power);
-               c += cs * (white * spec) * 0.7;
+				spec = pow(spec, (double)power);
+				c += cs * (white * spec) * 0.7;
             }
          }
       }

@@ -27,7 +27,7 @@ Locale::Locale(const char* l, const char* c, const char* v)
 {
    ZeroMemory(this, sizeof(Locale));
    if (l && *l) {
-      strncpy(language, l, 6);
+      strncpy_s(language, l, 6);
       char* p = language;
       while (*p) {
          *p = tolower(*p);
@@ -36,7 +36,7 @@ Locale::Locale(const char* l, const char* c, const char* v)
    }
 
    if (c && *c) {
-      strncpy(country,  c, 6);
+      strncpy_s(country,  c, 6);
       char* p = country;
       while (*p) {
          *p = toupper(*p);
@@ -45,7 +45,7 @@ Locale::Locale(const char* l, const char* c, const char* v)
    }
 
    if (v && *v) {
-      strncpy(variant,  v, 6);
+      strncpy_s(variant,  v, 6);
       char* p = variant;
       while (*p) {
          *p = tolower(*p);
@@ -70,9 +70,9 @@ Locale::operator == (const Locale& that) const
 {
    if (this == &that) return 1;
 
-   return !stricmp(language, that.language) &&
-          !stricmp(country,  that.country)  &&
-          !stricmp(variant,  that.variant);
+   return !_stricmp(language, that.language) &&
+          !_stricmp(country,  that.country)  &&
+          !_stricmp(variant,  that.variant);
 }
 
 // +--------------------------------------------------------------------+
@@ -127,11 +127,11 @@ Locale::CreateLocale(const char* l, const char* c, const char* v)
    ListIter<Locale> iter = locales;
    while (++iter) {
       Locale* loc = iter.value();
-      if (!stricmp(l, loc->GetLanguage())) {
+      if (!_stricmp(l, loc->GetLanguage())) {
          if (c && *c) {
-            if (!stricmp(c, loc->GetCountry())) {
+            if (!_stricmp(c, loc->GetCountry())) {
                if (v && *v) {
-                  if (!stricmp(v, loc->GetVariant())) {
+                  if (!_stricmp(v, loc->GetVariant())) {
                      return loc;
                   }
                }
@@ -215,7 +215,7 @@ Locale::GetDisplayName() const
    Text result;
    if (*language) {
       for (int i = 0; i < 14; i += 2) {
-         if (!stricmp(language, languages[i])) {
+         if (!_stricmp(language, languages[i])) {
             result = languages[i+1];
             break;
          }
@@ -223,7 +223,7 @@ Locale::GetDisplayName() const
 
       if (*country) {
          for (int i = 0; i < 18; i += 2) {
-            if (!stricmp(country, countries[i])) {
+            if (!_stricmp(country, countries[i])) {
                result.append(" - ");
                result.append(countries[i+1]);
                break;

@@ -125,7 +125,7 @@ Font::Load(const char* name)
       return false;
    }
 
-   for (i = 0; i < 256; i++) {
+   for (int i = 0; i < 256; i++) {
       glyph[i].width = CalcWidth(i);
    }
    
@@ -134,7 +134,7 @@ Font::Load(const char* name)
    if (!(flags & (FONT_FIXED_PITCH | FONT_NO_KERN)))
       AutoKern();
 
-   for (i = 0; i < 256; i++) {
+   for (int i = 0; i < 256; i++) {
       for (int j = 0; j < 256; j++) {
          if (kern_tweak[i][j] < 100) {
             kern[i][j] = kern_tweak[i][j];

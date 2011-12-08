@@ -247,7 +247,7 @@ VideoMode::GetDescription() const
    case VideoMode::FMT_X8R8G8B8:   bpp = 32; break;
    }
 
-   sprintf(desc, "%d x %d x %d", width, height, bpp);
+   sprintf_s(desc, "%d x %d x %d", width, height, bpp);
    return desc;
 }
 

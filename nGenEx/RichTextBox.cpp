@@ -41,7 +41,7 @@ RichTextBox::RichTextBox(Screen* screen, int ax, int ay, int aw, int ah, DWORD a
    leading           = 2;
 
    char buf[32];
-   sprintf(buf, "RichTextBox %d", id);
+   sprintf_s(buf, "RichTextBox %d", id);
    desc = buf;
 }
 
@@ -162,7 +162,7 @@ int RichTextBox::process_tag(const char* text, int index, Font*& font)
 
       switch (tag[1]) {
       case 'c':
-      case 'C':   if (strnicmp(tag+1, "color", 5) == 0) {
+      case 'C':   if (_strnicmp(tag+1, "color", 5) == 0) {
                      int r = 0;
                      int g = 0;
                      int b = 0;
@@ -178,7 +178,7 @@ int RichTextBox::process_tag(const char* text, int index, Font*& font)
          break;
 
       case 'f':
-      case 'F':   if (strnicmp(tag+1, "font", 4) == 0) {
+      case 'F':   if (_strnicmp(tag+1, "font", 4) == 0) {
                      Color current_color = Color::White;
 
                      if (font)

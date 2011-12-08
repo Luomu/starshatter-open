@@ -831,7 +831,7 @@ VideoDX9::SetBackgroundColor(Color c)
 inline WORD
 RampValue(UINT i, double recip_gamma, double fade)
 {
-   return (WORD) (65535.0 * fade * pow(i/255.f, recip_gamma));
+   return (WORD) (65535.0 * fade * pow((double)i/255.f, recip_gamma));
 }
 
 //-----------------------------------------------------------------------------
@@ -1990,7 +1990,7 @@ VideoDX9::DrawScreenPolys(int npolys, Poly* polys, int blend)
       WORD* s = screen_indices;
       Poly* p = polys;
 
-      for (i = 0; i < npolys; i++) {
+      for (int i = 0; i < npolys; i++) {
          if (p->nverts == 3) {
             *s++ = p->verts[0] + first_vert;
             *s++ = p->verts[1] + first_vert;
@@ -2575,7 +2575,7 @@ VideoDX9::DrawPolyOutline(Poly* p)
 
       // last vertex, to close the loop
       index = p->verts[0];
-      i     = p->nverts;
+      int i = p->nverts;
 
       verts[i].x        = vset->loc[index].x;
       verts[i].y        = vset->loc[index].y;
@@ -2921,7 +2921,7 @@ VideoDX9::UseXFont(const char* name, int size, bool bold, bool ital)
    if (d3ddevice && name && *name && size > 4) {
       RELEASE(d3dx_font);
 
-      strcpy(font_name, name);
+      strcpy_s(font_name, name);
       font_size = size;
       font_bold = bold;
       font_ital = ital;
@@ -3590,7 +3590,7 @@ char* D3DErrStr(HRESULT hr)
 
    switch (hr) {
    default:
-      sprintf(errstrbuf, "Unrecognized error value = %08x.", hr);
+      sprintf_s(errstrbuf, "Unrecognized error value = %08x.", hr);
       return errstrbuf;
 
    case D3D_OK:

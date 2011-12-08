@@ -125,7 +125,7 @@ int RandomShuffle(int count)
          tmp[i] = i;
 
       // shuffle the cards
-      for (i = 0; i < set_size; i++) {
+      for (int i = 0; i < set_size; i++) {
          int n     = (int) Random(0, set_size);
          int tries = set_size;
          while (tmp[n] < 0 && tries--) {

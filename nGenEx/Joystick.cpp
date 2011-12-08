@@ -61,10 +61,10 @@ Joystick::Joystick()
    for (int i = 0; i < MotionController::MaxActions; i++)
       action[i] = false;
 
-   for (i = 0; i < KEY_MAP_SIZE; i++)
+   for (int i = 0; i < KEY_MAP_SIZE; i++)
       map[i] = 0;
 
-   for (i = 0; i < 4; i++) {
+   for (int i = 0; i < 4; i++) {
       for (int j = 0; j < 4; j++) {
          hat[i][j] = false;
       }
@@ -524,7 +524,7 @@ Joystick::Acquire()
    for (int i = 0; i < MotionController::MaxActions; i++)
       action[i] = false;
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       for (int j = 0; j < 4; j++)
          hat[i][j] = false;
 
@@ -585,7 +585,7 @@ Joystick::Acquire()
 
          ProcessAxes(joy_x, joy_y, joy_r, joy_t);
 
-         for (i = 0; i < 4; i++)
+         for (int i = 0; i < 4; i++)
             ProcessHat(i, joystate.rgdwPOV[i]);
 
          acquired = true;

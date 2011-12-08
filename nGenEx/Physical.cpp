@@ -39,7 +39,7 @@ Physical::Physical()
      radius(0.0f), mass(1.0f), integrity(1.0f), life(-1), dir(0),
      g_accel(0.0f), Do(0.0f), CL(0.0f), CD(0.0f), alpha(0.0f), stall(0.0f)
 {
-   strcpy(name, "unknown object");
+   strcpy_s(name, "unknown object");
 }
 
 // +--------------------------------------------------------------------+
@@ -56,7 +56,7 @@ Physical::Physical(const char* n, int t)
      radius(0.0f), mass(1.0f), integrity(1.0f), life(-1), dir(0),
      g_accel(0.0f), Do(0.0f), CL(0.0f), CD(0.0f), alpha(0.0f), stall(0.0f)
 {
-   strncpy(name, n, NAMELEN-1);
+   strncpy_s(name, n, NAMELEN-1);
    name[NAMELEN-1] = 0;
 }
 

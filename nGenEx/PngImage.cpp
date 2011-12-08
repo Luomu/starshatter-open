@@ -20,6 +20,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Needed for compatibility with libpng 1.4++
+#define png_infopp_NULL (png_infopp)NULL
+#define png_voidp_NULL (png_voidp)NULL
+#define int_p_NULL (int*)NULL
+
 #include "png.h"
 
 // +--------------------------------------------------------------------+

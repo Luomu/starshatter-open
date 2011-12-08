@@ -727,14 +727,14 @@ SoundD3D::Localize()
       HRESULT hr = buffer->SetPan((LONG) pan);
       if (!SUCCEEDED(hr)) {
          char warn[512];
-         sprintf(warn, "Warning could not set pan on buffer to %d", pan);
+         sprintf_s(warn, "Warning could not set pan on buffer to %d", pan);
          SoundD3DError(warn, hr);
       }
 
       hr = buffer->SetVolume((LONG) vol);
       if (!SUCCEEDED(hr)) {
          char warn[512];
-         sprintf(warn, "Warning: could not set volume on buffer to %d", vol);
+         sprintf_s(warn, "Warning: could not set volume on buffer to %d", vol);
          SoundD3DError(warn, hr);
       }
       
@@ -769,7 +769,7 @@ SoundD3D::Localize()
          hr = buffer->SetFrequency(f_shift);
          if (!SUCCEEDED(hr)) {
             char warn[512];
-            sprintf(warn, "Warning: could not set Doppler frequency on buffer to %d", f_shift);
+            sprintf_s(warn, "Warning: could not set Doppler frequency on buffer to %d", f_shift);
             SoundD3DError(warn, hr);
          }
       }
