@@ -243,10 +243,8 @@ template <class T>
 bool List<T>::contains(const T* val) const
 {
    if (val) {
-      for (int i = 0; i < items; i++) {
-         if (array[i] && ((*array[i])==(*val)))
-            return true;
-      }
+      if (index(val) != -1)
+		  return true;
    }
 
    return false;

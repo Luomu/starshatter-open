@@ -31,6 +31,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <UseOfAtl>Static</UseOfAtl>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -48,25 +49,27 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\Debug\</OutDir>
-    <IntDir>.\Debug\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\Release\</OutDir>
-    <IntDir>.\Release\</IntDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <IncludePath>$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>Disabled</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
@@ -80,6 +83,7 @@
       <ObjectFileName>.\Debug\</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -100,8 +104,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>Game/Stars_d.exe</OutputFile>
-      <AdditionalDependencies>..\Opcode\OpcodeLib\Debug\OpcodeLib.lib;..\ngenex\debug\ngenex.lib;..\netex\debug\netex.lib;..\zlib\debug\zlib.lib;..\libpng\debug\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
+      <AdditionalDependencies>..\Opcode\Debug\Opcode_D.lib;..\ngenex\debug\ngenex.lib;..\netex\debug\netex.lib;..\zlib\debug\zlib.lib;..\libpng\debug\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,8 +145,14 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>Game/Stars.exe</OutputFile>
-      <AdditionalDependencies>..\Opcode\OpcodeLib\Release\OpcodeLib.lib;..\ngenex\release\ngenex.lib;..\netex\release\netex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
+      <AdditionalDependencies>..\Opcode\Release\Opcode.lib;..\ngenex\release\ngenex.lib;..\netex\release\netex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Link>
+      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
