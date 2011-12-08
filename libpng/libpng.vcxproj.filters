@@ -11,72 +11,72 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\libpng\png.c">
+    <ClCompile Include="png.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngerror.c">
+    <ClCompile Include="pngerror.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngget.c">
+    <ClCompile Include="pngget.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngmem.c">
+    <ClCompile Include="pngmem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngpread.c">
+    <ClCompile Include="pngpread.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngread.c">
+    <ClCompile Include="pngread.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngrio.c">
+    <ClCompile Include="pngrio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngrtran.c">
+    <ClCompile Include="pngrtran.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngrutil.c">
+    <ClCompile Include="pngrutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngset.c">
+    <ClCompile Include="pngset.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngtrans.c">
+    <ClCompile Include="pngtrans.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngwio.c">
+    <ClCompile Include="pngwio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngwrite.c">
+    <ClCompile Include="pngwrite.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngwtran.c">
+    <ClCompile Include="pngwtran.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libpng\pngwutil.c">
+    <ClCompile Include="pngwutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\libpng\png.h">
+    <ClInclude Include="png.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pngconf.h">
+    <ClInclude Include="pngconf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pngdebug.h">
+    <ClInclude Include="pngdebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pnginfo.h">
+    <ClInclude Include="pnginfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pnglibconf.h">
+    <ClInclude Include="pnglibconf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pngpriv.h">
+    <ClInclude Include="pngpriv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libpng\pngstruct.h">
+    <ClInclude Include="pngstruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
