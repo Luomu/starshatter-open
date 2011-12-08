@@ -42,7 +42,7 @@ Token::Token(const Token& rhs)
 {
    mLength = rhs.mLength;
    if (mLength < 8) {
-      strcpy(mSymbol, rhs.mSymbol);
+      strcpy_s(mSymbol, rhs.mSymbol);
    }
    else {
       mFullSymbol = new(__FILE__, __LINE__) char[mLength + 1];
@@ -62,7 +62,7 @@ Token::Token(const char* s, int t, int k, int l, int c)
 {
    mLength = strlen(s);
    if (mLength < 8) {
-      strcpy(mSymbol, s);
+      strcpy_s(mSymbol, s);
    }
    else {
       mFullSymbol = new(__FILE__, __LINE__) char[mLength + 1];
@@ -75,7 +75,7 @@ Token::Token(const Text& s, int t, int k, int l, int c)
 {
    mLength = s.length();
    if (mLength < 8) {
-      strcpy(mSymbol, s.data());
+      strcpy_s(mSymbol, s.data());
    }
    else {
       mFullSymbol = new(__FILE__, __LINE__) char[mLength + 1];
@@ -107,7 +107,7 @@ Token::operator = (const Token& rhs)
 
    mLength = rhs.mLength;
    if (mLength < 8) {
-      strcpy(mSymbol, rhs.mSymbol);
+      strcpy_s(mSymbol, rhs.mSymbol);
    }
    else {
       mFullSymbol = new(__FILE__, __LINE__) char[mLength + 1];
@@ -181,7 +181,7 @@ bool
 Token::findKey(const Text& k, int& v)
 {
    if (keymap.contains(k)) {
-      v = keymap.find(k);
+      v = keymap.find(k, 0);
       return true;
    }
    else

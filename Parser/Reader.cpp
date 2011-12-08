@@ -15,7 +15,7 @@
 #include "MemDebug.h"
 #include "reader.h"
 #include <stdio.h>
-#include <fstream.h>
+#include <fstream>
 #include <ctype.h>
 
 
@@ -60,8 +60,7 @@ FileReader::more()
 {
    if (done) return Text();
 
-   ifstream fin;
-   fin.open(filename, ios::in | ios::nocreate);
+   std::fstream fin(filename, std::fstream::in);
 
    if (!fin) {
       Print("ERROR(Parse): Could not open file '%s'\n", filename);

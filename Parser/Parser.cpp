@@ -30,7 +30,7 @@ static int dump_tokens = 0;
 Term* error(char* msg, const Token& token)
 {
    static char buf[1024];
-   sprintf(buf, " near '%s' in line %d.", (const char*) token.symbol(), token.line());
+   sprintf_s(buf, " near '%s' in line %d.", (const char*) token.symbol(), token.line());
 
    return error(msg, buf);
 }
