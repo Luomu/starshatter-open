@@ -1193,7 +1193,7 @@ Player::Save()
             fprintf(f, "   chat_%d:       \"%s\",\n", i, SafeQuotes(p->chat_macros[i].data()));
          }
 
-         for (i = 0; i < 3; i++) {
+         for (int i = 0; i < 3; i++) {
             if (p->mfd[i] >= 0) {
                fprintf(f, "   mfd%d:         %d,\n", i, p->mfd[i]);
             }

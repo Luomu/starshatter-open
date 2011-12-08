@@ -186,14 +186,14 @@ CmdIntelDlg::ExecFrame()
             CombatEvent* info = events[i];
 
             const char* unread = info->Visited() ? " " : "*";
-            int i = lst_news->AddItemWithData(unread, (DWORD) info) - 1;
+            int j = lst_news->AddItemWithData(unread, (DWORD) info) - 1;
 
             char dateline[32];
             FormatDayTime(dateline, info->Time());
-            lst_news->SetItemText(i, 1, dateline);
-            lst_news->SetItemText(i, 2, info->Title());
-            lst_news->SetItemText(i, 3, info->Region());
-            lst_news->SetItemText(i, 4, Game::GetText(info->SourceName()));
+            lst_news->SetItemText(j, 1, dateline);
+            lst_news->SetItemText(j, 2, info->Title());
+            lst_news->SetItemText(j, 3, info->Region());
+            lst_news->SetItemText(j, 4, Game::GetText(info->SourceName()));
 
             if (!info->Visited())
                auto_scroll = true;

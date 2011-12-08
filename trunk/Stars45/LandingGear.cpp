@@ -48,8 +48,9 @@ LandingGear::LandingGear(const LandingGear& g)
 {
    Mount(g);
    SetAbbreviation(g.Abbreviation());
+   int i;
 
-   for (int i = 0; i < ngear; i++) {
+   for (i = 0; i < ngear; i++) {
       models[i] = 0;
       gear[i]   = new(__FILE__,__LINE__) Solid;
       start[i]  = g.start[i];

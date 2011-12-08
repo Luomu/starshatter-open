@@ -401,7 +401,7 @@ CombatGroup::Clone(bool deep)
    }
 
    if (deep) {
-      for (i = 0; i < components.size(); i++) {
+      for (int i = 0; i < components.size(); i++) {
          CombatGroup* g = components[i]->Clone(deep);
          clone->AddComponent(g);
 

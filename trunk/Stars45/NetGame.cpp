@@ -80,7 +80,7 @@ NetGame::~NetGame()
    players.destroy();
 
    if (link) {
-      double delta     = fabs(NetLayer::GetUTC() - start_time);
+      double delta     = fabs((double)(NetLayer::GetUTC() - start_time));
       double bandwidth = 10.0 * (link->GetBytesSent() + link->GetBytesRecv()) / delta;
       double recvrate  = link->GetPacketsRecv() / delta;
 

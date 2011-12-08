@@ -550,7 +550,7 @@ CampaignMissionStarship::CreateSingleElement(CombatGroup* g, CombatUnit* u)
             elem->AddObjective(obj);
       }
    }
-   else if (u->Type() & Ship::STARSHIPS != 0) {
+   else if ((u->Type() & Ship::STARSHIPS) != 0) {
       elem->SetMissionRole(Mission::FLEET);
    }
 
@@ -834,7 +834,7 @@ CampaignMissionStarship::CreateTargetsAssault()
 
                player_lead->AddNavPoint(instr);
 
-               for (i = 1; i < player_group_elements.size(); i++) {
+               for (int i = 1; i < player_group_elements.size(); i++) {
                   MissionElement*   pge = player_group_elements[i];
                   RLoc              rloc2;
 
@@ -921,7 +921,7 @@ CampaignMissionStarship::CreateTargetsPatrol()
    if (n)
       player->AddNavPoint(n);
 
-   for (i = 1; i < player_group_elements.size(); i++) {
+   for (int i = 1; i < player_group_elements.size(); i++) {
       MissionElement* elem = player_group_elements[i];
 
       n = new(__FILE__,__LINE__) Instruction(region,

@@ -1183,7 +1183,7 @@ Mission::ParseLoadout(TermStruct* val, MissionElement* element)
    if (name.length())
       load->SetName(name);
 
-   for (i = 0; i < 16; i++)
+   for (int i = 0; i < 16; i++)
       load->SetStation(i, stations[i]);
 
    element->loadouts.append(load);
@@ -2137,7 +2137,7 @@ MissionShip::MissionShip()
    for (int i = 0; i < 16; i++)
       ammo[i] = -10;
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       fuel[i] = -10;
 }
 

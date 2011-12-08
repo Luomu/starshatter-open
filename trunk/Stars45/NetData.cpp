@@ -196,15 +196,15 @@ NetJoinRequest::Pack()
    for (int i = 0; i < name.length() && i < 16; i++)
       data[2+i] = name[i];
 
-   for (i = 0; i < pass.length() && i < 16; i++)
+   for (int i = 0; i < pass.length() && i < 16; i++)
       data[18+i] = pass[i];
 
-   for (i = 0; i < elem.length() && i < 31; i++)
+   for (int i = 0; i < elem.length() && i < 31; i++)
       data[34+i] = elem[i];
 
    data[65] = (BYTE) index;
 
-   for (i = 0; i < serno.length() && i < 60; i++)
+   for (int i = 0; i < serno.length() && i < 60; i++)
       data[66+i] = serno[i];
 
    return data;
@@ -310,10 +310,10 @@ NetJoinAnnounce::Pack()
    for (int i = 0; i < name.length() && i < 16; i++)
       data[20+i] = name[i];
 
-   for (i = 0; i < elem.length() && i < 32; i++)
+   for (int i = 0; i < elem.length() && i < 32; i++)
       data[36+i] = elem[i];
 
-   for (i = 0; i < region.length() && i < 32; i++)
+   for (int i = 0; i < region.length() && i < 32; i++)
       data[68+i] = region[i];
 
    int*   p = (int*)   (data + 100);
@@ -325,7 +325,7 @@ NetJoinAnnounce::Pack()
    data[113]= (BYTE) shield;        // byte  113
 
    BYTE* a  = data + 116;
-   for (i = 0; i < 16; i++) {       // bytes 116 - 179
+   for (int i = 0; i < 16; i++) {       // bytes 116 - 179
       if (ammo[i] >= 0) {
          *a++ = ammo[i];
       }
@@ -1166,7 +1166,7 @@ NetElemCreate::Unpack(const BYTE* p)
 
       squadron    = data[150];
 
-      for (i = 0; i < 4; i++) {
+      for (int i = 0; i < 4; i++) {
          slots[i] = data[151+i];
          if (slots[i] >= 255)
             slots[i] = -1;

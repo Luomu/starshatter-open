@@ -2124,7 +2124,7 @@ Sim::CreateMissionElement(Element* elem)
       }
 
       int num_inst = elem->NumInstructions();
-      for (i = 0; i < num_inst; i++) {
+      for (int i = 0; i < num_inst; i++) {
          Text instr = elem->GetInstruction(i);
          msn_elem->AddInstruction(instr);
       }
@@ -2145,7 +2145,7 @@ Sim::CreateMissionElement(Element* elem)
          msn_elem->AddNavPoint(npt);
       }
 
-      for (i = 0; i < elem->NumShips(); i++) {
+      for (int i = 0; i < elem->NumShips(); i++) {
          ship = elem->GetShip(i+1);
 
          if (ship) {
@@ -3752,7 +3752,7 @@ SimRegion::CommitMission()
          s->GetCombatUnit()->Kill(1);
    }
 
-   for (i = 0; i < ships.size(); i++) {
+   for (int i = 0; i < ships.size(); i++) {
       Ship*       s = ships[i];
       CombatUnit* u = s->GetCombatUnit();
 

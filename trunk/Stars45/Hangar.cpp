@@ -312,7 +312,7 @@ Hangar::CreateSquadron(Text squadron, CombatGroup* group,
       nslots[nsquadrons]    = count;
       names[nsquadrons]     = squadron;
 
-      i = count-1;
+      int i = count-1;
       while (dead_count-- > 0)
          s[i--].state = UNAVAIL;
 

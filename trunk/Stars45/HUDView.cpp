@@ -255,7 +255,8 @@ HUDView::DrawHUDText(int index, const char* txt, Rect& rect, int align, int upca
 
    if (n > 250) n = 250;
 
-   for (int i = 0; i < n; i++) {
+   int i;
+   for (i = 0; i < n; i++) {
       if (upcase && islower(txt[i]))
          txt_buf[i] = toupper(txt[i]);
       else
@@ -635,7 +636,7 @@ HUDView::~HUDView()
       mfd[i] = 0;
    }
 
-   for (i = 0; i < 32; i++) {
+   for (int i = 0; i < 32; i++) {
       GRAPHIC_DESTROY(hud_sprite[i]);
    }
 
@@ -1705,7 +1706,7 @@ HUDView::DrawPitchLadder()
          pitch_ladder[15]->SetAngle(roll_angle);
       }
 
-      for (i = 1; i <= 15; i++) {
+      for (int i = 1; i <= 15; i++) {
          double angle = i * 5 * DEGREES;
 
          if (i > 12)
@@ -2881,7 +2882,7 @@ HUDView::DrawMessages()
 
    if (!message_queue_empty) {
       // advance message pipeline:
-      for (i = 0; i < MAX_MSG; i++) {
+      for (int i = 0; i < MAX_MSG; i++) {
          if (msg_time[0] == 0) {
             for (int j = 0; j < MAX_MSG-1; j++) {
                msg_time[j] = msg_time[j+1];
@@ -2894,7 +2895,7 @@ HUDView::DrawMessages()
       }
 
       // draw messages:
-      for (i = 0; i < MAX_MSG; i++) {
+      for (int i = 0; i < MAX_MSG; i++) {
          int index = TXT_MSG_1 + i;
 
          if (msg_time[i] > 0) {
@@ -3473,7 +3474,7 @@ HUDView::Refresh()
 
       Video* video = Video::GetInstance();
 
-      for (i = 0; i < 31; i++) {
+      for (int i = 0; i < 31; i++) {
          Sprite* s = pitch_ladder[i];
 
          if (s && !s->Hidden()) {
@@ -3779,7 +3780,7 @@ HUDView::ExecFrame()
       for (int i = 0; i < 3; i++)
          mfd[i]->Hide();
 
-      for (i = 0; i < 31; i++)
+      for (int i = 0; i < 31; i++)
          pitch_ladder[i]->Hide();
 
       DrawILS();
@@ -3974,7 +3975,7 @@ HUDView::HideAll()
 
    sim->ShowGrid(false);
 
-   for (i = 0; i < 31; i++)
+   for (int i = 0; i < 31; i++)
       pitch_ladder[i]->Hide();
 
    if (missile_lock_sound)
@@ -4067,7 +4068,7 @@ HUDView::SetHUDColorSet(int c)
    if (font)
       font->SetColor(txt_color);
 
-   for (i = 0; i < TXT_LAST; i++)
+   for (int i = 0; i < TXT_LAST; i++)
       hud_text[i].color = txt_color;
 }
 
@@ -4098,7 +4099,7 @@ HUDView::Message(const char* fmt, ...)
 
          // no space; advance pipeline:
          if (index < 0) {
-            for (i = 0; i < MAX_MSG-1; i++) {
+            for (int i = 0; i < MAX_MSG-1; i++) {
                hud_view->msg_text[i] = hud_view->msg_text[i+1];
                hud_view->msg_time[i] = hud_view->msg_time[i+1];
             }

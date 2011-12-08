@@ -64,7 +64,7 @@ void Grid::Render(Video* video, DWORD flags)
    
    c = 0;
 
-   for (i = 0; i <= size; i += step) {
+   for (int i = 0; i <= size; i += step) {
       Point p1(-size, 0,  i); p1 += Location();
       Point p2( size, 0,  i); p2 += Location();
       Point p3(-size, 0, -i); p3 += Location();

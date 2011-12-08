@@ -175,7 +175,7 @@ ShipKiller::ExecFrame(double seconds)
          }
       }
 
-      for (i = 0; i < ShipDesign::MAX_DEBRIS; i++) {
+      for (int i = 0; i < ShipDesign::MAX_DEBRIS; i++) {
          if (design->debris[i].model) {
             Point debris_loc = ship->Location() + (design->debris[i].loc * ship->Cam().Orientation());
             Point debris_vel = debris_loc - ship->Location();

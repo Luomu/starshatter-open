@@ -936,7 +936,7 @@ StarSystem::ParseTerrain(TermStruct* val)
 
    weather.SetPeriod(w_period);
 
-   for (i = 0; i < Weather::NUM_STATES; i++)
+   for (int i = 0; i < Weather::NUM_STATES; i++)
       weather.SetChance(i, w_chances[i]);
 
    region->LoadSkyColors(sky_name);

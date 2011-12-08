@@ -293,7 +293,7 @@ RadioView::Refresh()
 
    if (!message_queue_empty) {
       // advance message pipeline:
-      for (i = 0; i < MAX_MSG; i++) {
+      for (int i = 0; i < MAX_MSG; i++) {
          if (msg_time[0] == 0) {
             for (int j = 0; j < MAX_MSG-1; j++) {
                msg_time[j] = msg_time[j+1];
@@ -312,7 +312,7 @@ RadioView::Refresh()
 
       // draw messages:
       if (!hud_off) {
-         for (i = 0; i < MAX_MSG; i++) {
+         for (int i = 0; i < MAX_MSG; i++) {
             if (msg_time[i] > 0) {
                Rect msg_rect(0, 95 + i*10, width, 12);
 
@@ -615,7 +615,7 @@ RadioView::Message(const char* msg)
 
       // no space; advance pipeline:
       if (index < 0) {
-         for (i = 0; i < MAX_MSG-1; i++) {
+         for (int i = 0; i < MAX_MSG-1; i++) {
             radio_view->msg_text[i] = radio_view->msg_text[i+1];
             radio_view->msg_time[i] = radio_view->msg_time[i+1];
          }

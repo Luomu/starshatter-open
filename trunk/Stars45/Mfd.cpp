@@ -1355,8 +1355,9 @@ void MFD::DrawMFDText(int index, const char* txt, Rect& txt_rect, int align, int
       int  n = strlen(txt);
 
       if (n > 250) n = 250;
+	  int i;
 
-      for (int i = 0; i < n; i++) {
+      for (i = 0; i < n; i++) {
          if (islower(txt[i]))
             txt_buf[i] = toupper(txt[i]);
          else

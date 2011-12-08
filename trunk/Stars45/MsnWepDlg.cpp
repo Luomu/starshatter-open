@@ -302,7 +302,7 @@ MsnWepDlg::BuildLists()
             loadout = msn_load->GetStations();
          }
 
-         for (i = 0; i < nstations; i++) {
+         for (int i = 0; i < nstations; i++) {
             loads[i + first_station] = loadout[i];
          }
       }
@@ -485,10 +485,10 @@ MsnWepDlg::OnLoadout(AWEvent* event)
       for (int i = 0; i < 8; i++)
          loads[i] = -1;
 
-      for (i = 0; i < nstations; i++)
+      for (int i = 0; i < nstations; i++)
          loads[i + first_station] = PointIndexToLoad(i, loadout[i]);
 
-      for (i = 0; i < 8; i++) {
+      for (int i = 0; i < 8; i++) {
          for (int n = 0; n < 8; n++) {
             btn_load[i][n]->SetPicture(i == loads[n] ? led_on: led_off);
          }

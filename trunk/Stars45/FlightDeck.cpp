@@ -212,10 +212,10 @@ FlightDeck::FlightDeck(const FlightDeck& s)
       slots[i].filter   = s.slots[i].filter;
    }
 
-   for (i = 0; i < NUM_APPROACH_PTS; i++)
+   for (int i = 0; i < NUM_APPROACH_PTS; i++)
       approach_rel[i] = s.approach_rel[i];
 
-   for (i = 0; i < 2; i++)
+   for (int i = 0; i < 2; i++)
       runway_rel[i] = s.runway_rel[i];
 
    if (s.light) {
@@ -510,7 +510,7 @@ FlightDeck::ExecFrame(double seconds)
    }
    
    if (advance_queue) {
-      for (i = 0; i < num_slots; i++) {
+      for (int i = 0; i < num_slots; i++) {
          FlightDeckSlot* slot = &slots[i];
          if (slot->state == QUEUED && slot->sequence > 1)
             slot->sequence--;
@@ -688,7 +688,7 @@ FlightDeck::Orient(const Physical* rep)
    for (int i = 0; i < num_approach_pts; i++)
       approach_point[i] = (approach_rel[i] * orientation) + loc;
 
-   for (i = 0; i < num_slots; i++)
+   for (int i = 0; i < num_slots; i++)
       slots[i].spot_loc = (slots[i].spot_rel * orientation) + loc;
 
    if (IsRecoveryDeck()) {

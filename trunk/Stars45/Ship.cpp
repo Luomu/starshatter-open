@@ -173,7 +173,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
       systems.append(reactor);
    }
 
-   for (i = 0; i < design->drives.size(); i++) {
+   for (int i = 0; i < design->drives.size(); i++) {
       Drive* drive = new(__FILE__,__LINE__) Drive(*design->drives[i]);
       drive->SetShip(this);
       drive->SetID(sys_id++);
@@ -242,7 +242,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
       systems.append(shield);
    }
 
-   for (i = 0; i < design->flight_decks.size(); i++) {
+   for (int i = 0; i < design->flight_decks.size(); i++) {
       FlightDeck* deck = new(__FILE__,__LINE__) FlightDeck(*design->flight_decks[i]);
       deck->SetShip(this);
       deck->SetCarrier(this);
@@ -270,7 +270,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
          hangar->SetShip(this);
       }
 
-      for (i = 0; i < design->squadrons.size(); i++) {
+      for (int i = 0; i < design->squadrons.size(); i++) {
          ShipSquadron* s = design->squadrons[i];
          hangar->CreateSquadron(s->name, 0, s->design, s->count, GetIFF(), 0, 0, s->avail);
       }
@@ -305,7 +305,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
 
    int wep_index = 1;
 
-   for (i = 0; i < design->weapons.size(); i++) {
+   for (int i = 0; i < design->weapons.size(); i++) {
       Weapon* gun = new(__FILE__,__LINE__) Weapon(*design->weapons[i]);
       gun->SetID(sys_id++);
       gun->SetOwner(this);
@@ -332,7 +332,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
    if (load && loadout_size > 0) {
       loadout = new(__FILE__,__LINE__) int[loadout_size];
 
-      for (i = 0; i < loadout_size; i++) {
+      for (int i = 0; i < loadout_size; i++) {
          int mounted_weapon = loadout[i] = load[i];
 
          if (mounted_weapon < 0)
@@ -358,7 +358,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
       primary   = -1;
       secondary = -1;
 
-      for (i = 0; i < weapons.size(); i++) {
+      for (int i = 0; i < weapons.size(); i++) {
          WeaponGroup* group = weapons[i];
          if (group->IsPrimary() && primary < 0) {
             primary = i;
@@ -395,7 +395,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
       systems.append(decoy);
    }
 
-   for (i = 0; i < design->navlights.size(); i++) {
+   for (int i = 0; i < design->navlights.size(); i++) {
       NavLight* navlight = new(__FILE__,__LINE__) NavLight(*design->navlights[i]);
       navlight->SetShip(this);
       navlight->SetID(sys_id++);
@@ -429,7 +429,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
       systems.append(probe);
    }
 
-   for (i = 0; i < design->computers.size(); i++) {
+   for (int i = 0; i < design->computers.size(); i++) {
       Computer* comp = 0;
 
       if (design->computers[i]->Subtype() == Computer::FLIGHT) {
@@ -467,7 +467,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
    radio_orders = new(__FILE__,__LINE__) Instruction("", Point(0,0,0));
 
    // Load Detail Set:
-   for (i = 0; i < DetailSet::MAX_DETAIL; i++) {
+   for (int i = 0; i < DetailSet::MAX_DETAIL; i++) {
       if (design->models[i].size() > 0) {
          Solid* solid = new(__FILE__,__LINE__) ShipSolid(this);
          solid->UseModel(design->models[i].at(0));
@@ -530,7 +530,7 @@ Ship::Ship(const char* ship_name, const char* reg_num, ShipDesign* ship_dsn, int
    dir = 0;
    SetControls(0);
 
-   for (i = 0; i < 4; i++) {
+   for (int i = 0; i < 4; i++) {
       missile_id[i]  = 0;
       missile_eta[i] = 0;
       trigger[i]     = false;
@@ -2919,7 +2919,7 @@ Ship::LinearFrame(double seconds)
    }
 
    // fore-and-aft
-   if (!trans_y && fabs(thrust < 1)) {
+   if (!trans_y && fabs(thrust) < 1.0f) {
       Point transvec = cam.vpn();
       transvec *= (transvec * velocity) * seconds * 0.25;
       velocity -= transvec;
@@ -2987,7 +2987,7 @@ Ship::DockFrame(double seconds)
          reactors[i]->ExecFrame(seconds);
 
       // count up weapon ammo for status mfd:
-      for (i = 0; i < weapons.size(); i++)
+      for (int i = 0; i < weapons.size(); i++)
          weapons[i]->ExecFrame(seconds);
 
       // show drive flare while on catapult:
@@ -3256,7 +3256,7 @@ Ship::SelectDetail(double seconds)
                      }
                   }
                   if (w->IsMissile()) {
-                     for (i = 0; i < w->Ammo(); i++) {
+                     for (int i = 0; i < w->Ammo(); i++) {
                         Solid* store = w->GetVisibleStore(i);
                         if (store) {
                            if (detail_level == 0)
@@ -3323,7 +3323,7 @@ Ship::ShowRep()
          }
 
          if (w->IsMissile()) {
-            for (i = 0; i < w->Ammo(); i++) {
+            for (int i = 0; i < w->Ammo(); i++) {
                Solid* store = w->GetVisibleStore(i);
                if (store) {
                   store->Show();
@@ -3363,7 +3363,7 @@ Ship::HideRep()
          }
 
          if (w->IsMissile()) {
-            for (i = 0; i < w->Ammo(); i++) {
+            for (int i = 0; i < w->Ammo(); i++) {
                Solid* store = w->GetVisibleStore(i);
                if (store) {
                   store->Hide();
@@ -4895,16 +4895,16 @@ Ship::ExecMaintFrame(double seconds)
                   if (pwr != src) {
                      List<System> xfer;
 
-                     for (int i = 0; i < pwr->Clients().size(); i++) {
-                        System* s = pwr->Clients().at(i);
+                     for (int j = 0; j < pwr->Clients().size(); i++) {
+                        System* s = pwr->Clients().at(j);
 
                         if (s->GetSourceIndex() == isrc) {
                            xfer.append(s);
                         }
                      }
 
-                     for (i = 0; i < xfer.size(); i++) {
-                        System* s = xfer.at(i);
+                     for (int j = 0; j < xfer.size(); i++) {
+                        System* s = xfer.at(j);
                         pwr->RemoveClient(s);
                         src->AddClient(s);
                      }

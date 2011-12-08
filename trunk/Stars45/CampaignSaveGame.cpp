@@ -528,7 +528,7 @@ CampaignSaveGame::Load(const char* filename)
          }
 
          // if no next campaign found, start over from the beginning:
-         for (i = 0; i < list.size() && !found; i++) {
+         for (int i = 0; i < list.size() && !found; i++) {
             Campaign* c = list.at(i);
 
             if (c->IsDynamic()) {

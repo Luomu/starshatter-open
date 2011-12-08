@@ -672,7 +672,7 @@ WeaponDesign::Find(const char* name)
       }
    }
 
-   for (i = 0; i < mod_catalog.size(); i++) {
+   for (int i = 0; i < mod_catalog.size(); i++) {
       WeaponDesign* d = mod_catalog.at(i);
 
       if (d->name == name) {
@@ -717,7 +717,7 @@ WeaponDesign::GetDesignList(List<Text>& designs)
       designs.append(&design->name);
    }
 
-   for (i = 0; i < mod_catalog.size(); i++) {
+   for (int i = 0; i < mod_catalog.size(); i++) {
       WeaponDesign* design = mod_catalog[i];
       designs.append(&design->name);
    }
