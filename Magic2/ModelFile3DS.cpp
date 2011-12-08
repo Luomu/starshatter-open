@@ -151,11 +151,11 @@ ModelFile3DS::Load(Model* model, double scale)
       float       radius   = 0;
       int         v        = 0;
 
-      for (m = 0; m < nmeshs && v < nverts; m++) {
+      for (int m = 0; m < nmeshs && v < nverts; m++) {
          LMesh& mesh = loader.GetMesh(m);
 
          // read vertex set:
-         for (i = 0; i < mesh.GetVertexCount() && v < nverts; i++) {
+         for (int i = 0; i < mesh.GetVertexCount() && v < nverts; i++) {
             vset->loc[v].x = mesh.GetVertex(i).x;
             vset->loc[v].y = mesh.GetVertex(i).z;
             vset->loc[v].z = mesh.GetVertex(i).y;
@@ -182,7 +182,7 @@ ModelFile3DS::Load(Model* model, double scale)
 
       int n = 0;
 
-      for (m = 0; m < nmeshs && n < npolys; m++) {
+      for (int m = 0; m < nmeshs && n < npolys; m++) {
          LMesh& mesh = loader.GetMesh(m);
 
          // read polys:
@@ -228,7 +228,7 @@ ModelFile3DS::Load(Model* model, double scale)
       // then assign them to cohesive segments:
       Segment* segment = 0;
 
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          if (segment && segment->material == polys[n].material) {
             segment->npolys++;
          }

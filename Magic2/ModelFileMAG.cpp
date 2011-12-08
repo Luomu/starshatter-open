@@ -78,7 +78,7 @@ ModelFileMAG::Load(Model* m, double scale)
       }
 
       ZeroMemory(pname, 64);
-      strncpy(pname, filename, 63);
+      strncpy_s(pname, filename, 63);
 
       char file_id[5];
       fread(file_id, 4, 1, fp);
@@ -380,7 +380,7 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
       mtl->diffuse_color  = Color::LightGray;
       mtl->specular_value = 0.5f;
       mtl->specular_color = Color::White;
-      strcpy(mtl->name, "(default)");
+      strcpy_s(mtl->name, "(default)");
 
       m->GetMaterials().append(mtl);
    }
@@ -405,7 +405,7 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
 
          fread(tname, 32, 1, fp);
          LoadTexture(tname, mtl->tex_diffuse, Bitmap::BMP_SOLID);
-         strcpy(mtl->name, tname);
+         strcpy_s(mtl->name, tname);
 
          char* dot = strrchr(mtl->name, '.');
          if (dot)
@@ -450,7 +450,8 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
       ZeroMemory(vset->rw,       nverts * sizeof(float));
 
       // read vertex set:
-      for (int v = 0; v < mag_nverts; v++) {
+	  int v;
+      for (v = 0; v < mag_nverts; v++) {
          Vec3 vert, norm;
          DWORD vstate;
 
@@ -789,7 +790,7 @@ ModelFileMAG::LoadMag6(FILE* fp, Model* m, double scale)
       // then assign them to cohesive segments:
       Segment* segment = 0;
 
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          if (segment && segment->material == polys[n].material) {
             segment->npolys++;
          }

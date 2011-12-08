@@ -29,7 +29,7 @@
 Selection::Selection()
    : model(0), model_view(0)
 {
-   strcpy(name, "Selection");
+   strcpy_s(name, "Selection");
 }
 
 // +--------------------------------------------------------------------+

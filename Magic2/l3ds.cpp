@@ -767,7 +767,7 @@ void LMesh::CalcTextureSpace()
     // now for each vertex build a list of face that share this vertex
     std::vector< std::vector<int> > array;
     array.resize(m_vertices.size());
-    for (i=0; i<m_triangles.size(); i++)
+    for (int i=0; i<m_triangles.size(); i++)
     {
         uint k = m_tris[i].a;
         array[k].push_back(i);
@@ -780,7 +780,7 @@ void LMesh::CalcTextureSpace()
     } 
 
     // now average the tangents and compute the binormals as (tangent X normal)
-    for (i=0; i<m_vertices.size(); i++)
+    for (int i=0; i<m_vertices.size(); i++)
     {
         v1 = zero3;
         v2 = zero3;

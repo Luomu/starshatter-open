@@ -336,7 +336,7 @@ Editor::Resegment()
          // create new cohesive segments:
          Segment* segment = 0;
 
-         for (n = 0; n < npolys; n++) {
+         for (int n = 0; n < npolys; n++) {
             if (segment && segment->material == polys[n].material) {
                segment->npolys++;
             }

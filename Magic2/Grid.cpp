@@ -145,7 +145,7 @@ Grid::Render(Video* video, DWORD flags)
       origin[2].y += -EXTENT;
       origin[3].y +=  EXTENT;
 
-      for (i = 0; i < 2*MAJOR_COUNT; i += 2) {
+      for (int i = 0; i < 2*MAJOR_COUNT; i += 2) {
          float x = (float) (i-MAJOR_COUNT) * 64.0f;
          float y = (float) (i-MAJOR_COUNT) * 64.0f;
 
@@ -163,7 +163,7 @@ Grid::Render(Video* video, DWORD flags)
       origin[2].z += -EXTENT;
       origin[3].z +=  EXTENT;
 
-      for (i = 0; i < 2*MAJOR_COUNT; i += 2) {
+      for (int i = 0; i < 2*MAJOR_COUNT; i += 2) {
          float x = (float) (i-MAJOR_COUNT) * 64.0f;
          float z = (float) (i-MAJOR_COUNT) * 64.0f;
 
@@ -181,7 +181,7 @@ Grid::Render(Video* video, DWORD flags)
       origin[2].z += -EXTENT;
       origin[3].z +=  EXTENT;
 
-      for (i = 0; i < 2*MAJOR_COUNT; i += 2) {
+      for (int i = 0; i < 2*MAJOR_COUNT; i += 2) {
          float y = (float) (i-MAJOR_COUNT) * 64.0f;
          float z = (float) (i-MAJOR_COUNT) * 64.0f;
 
