@@ -1875,7 +1875,7 @@ Surface::SetName(const char* n)
    int len = sizeof(name);
 
    ZeroMemory(name, len);
-   strncpy(name, n, len-1);
+   strncpy_s(name, n, len-1);
 }
 
 void
@@ -2438,7 +2438,7 @@ ModelFile::ModelFile(const char* fname)
 {
    int len = sizeof(filename);
    ZeroMemory(filename, len);
-   strncpy(filename, fname, len);
+   strncpy_s(filename, fname, len);
    filename[len-1] = 0;
 }
 
