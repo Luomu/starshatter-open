@@ -81,7 +81,7 @@ int PngImage::Load(char *filename)
    png_init_io(png_ptr, f);
    png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, png_voidp_NULL);
 
-   status = CreateImage((void*) png_ptr, (void*) info_ptr);
+   status = CreateImage(png_ptr, info_ptr);
 
    png_destroy_read_struct(&png_ptr, &info_ptr, png_infopp_NULL);
 
@@ -159,7 +159,7 @@ int PngImage::LoadBuffer(unsigned char* buf, int len)
    png_set_read_fn(png_ptr, (void *) (&io), png_user_read_data);
    png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, png_voidp_NULL);
 
-   status = CreateImage((void*) png_ptr, (void*) info_ptr);
+   status = CreateImage(png_ptr, info_ptr);
 
    png_destroy_read_struct(&png_ptr, &info_ptr, png_infopp_NULL);
 
@@ -169,23 +169,20 @@ int PngImage::LoadBuffer(unsigned char* buf, int len)
 // +--------------------------------------------------------------------+
 
 int
-PngImage::CreateImage(void* pptr, void* iptr)
+PngImage::CreateImage(png_structp png_ptr, png_infop info_ptr)
 {
    int status = PNG_INVALID;
 
-   png_structp png_ptr  = (png_structp) pptr;
-   png_infop   info_ptr = (png_infop)   iptr;
-
-   width  = info_ptr->width;
-   height = info_ptr->height;
-   bpp    = info_ptr->pixel_depth;
+   width  = png_get_image_width(png_ptr, info_ptr);
+   height = png_get_image_height(png_ptr, info_ptr);
+   bpp    = png_get_bit_depth(png_ptr, info_ptr);
 
    if (width > 0 && width < 32768 && height > 0 && height < 32768) {
       // true-color:
       if (bpp >= 24) {
          status = PNG_OK;
 
-         if (info_ptr->channels == 4)
+         if ( png_get_channels(png_ptr, info_ptr) == 4)
             alpha_loaded = true;
 
          image = new DWORD[width*height];
@@ -200,7 +197,7 @@ PngImage::CreateImage(void* pptr, void* iptr)
                DWORD blue  = *p++;
                DWORD alpha = 0xff;
 
-               if (info_ptr->channels == 4)
+               if ( png_get_channels(png_ptr, info_ptr) == 4)
                   alpha = *p++;
 
                image[row*width+col] = (alpha << 24) | (red << 16) | (green << 8) | blue;
@@ -209,21 +206,28 @@ PngImage::CreateImage(void* pptr, void* iptr)
       }
 
       // paletted:
-      else if (bpp == 8 && info_ptr->num_palette > 0) {
+      else if (bpp == 8) {
          DWORD pal[256];
+		 
+		 png_bytep trans_alpha; int num_trans; png_color_16p trans_color;
+		 png_colorp palette;
+		 int num_palette;
 
-         if (info_ptr->num_trans > 0)
+		png_get_tRNS(png_ptr, info_ptr, &trans_alpha, &num_trans, &trans_color);
+		png_get_PLTE(png_ptr, info_ptr, &palette, &num_palette);
+
+         if (num_trans > 0)
             alpha_loaded = true;
 
          for (int i = 0; i < 256; i++) {
-            if (i < info_ptr->num_palette) {
-               DWORD red   = info_ptr->palette[i].red;
-               DWORD green = info_ptr->palette[i].green;
-               DWORD blue  = info_ptr->palette[i].blue;
+            if (i < num_palette) {
+               DWORD red   = palette[i].red;
+               DWORD green = palette[i].green;
+               DWORD blue  = palette[i].blue;
                DWORD alpha = 0xff;
 
-               if (i < info_ptr->num_trans)
-                  alpha = info_ptr->trans[i];
+               if (i < num_trans)
+                  alpha = trans_alpha[i];
                
                pal[i] = (alpha << 24) | (red << 16) | (green << 8) | blue;
             }
