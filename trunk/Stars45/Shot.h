@@ -96,6 +96,8 @@ public:
    virtual bool         Update(SimObject* obj);
    virtual const char*  GetObserverName() const;
 
+   int operator == (const Shot& s) const { return id == s.id; }
+
 protected:
    const Ship*       owner;
 
