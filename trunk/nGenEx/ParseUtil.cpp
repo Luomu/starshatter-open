@@ -458,12 +458,12 @@ bool GetDefTime(int& dst, TermDef* def, const char* file)
       int s = 0;
 
       char buf[64];
-      strcpy(buf, tn->value());
+      strcpy_s(buf, tn->value());
 
       if (strchr(buf, '/'))
-         sscanf(buf, "%d/%d:%d:%d", &d, &h, &m, &s);
+         sscanf_s(buf, "%d/%d:%d:%d", &d, &h, &m, &s);
       else
-         sscanf(buf, "%d:%d:%d", &h, &m, &s);
+         sscanf_s(buf, "%d:%d:%d", &h, &m, &s);
 
       dst = d * 24 * 60 * 60 +
             h      * 60 * 60 +
