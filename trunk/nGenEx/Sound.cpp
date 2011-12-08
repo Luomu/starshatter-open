@@ -236,7 +236,7 @@ Sound::Sound()
    : status(UNINITIALIZED), volume(0), flags(0), looped(0),
      velocity(0,0,0), location(0,0,0), sound_check(0)
 {
-   strcpy(filename, "Sound()");
+   strcpy_s(filename, "Sound()");
 }
 
 // +--------------------------------------------------------------------+
@@ -271,13 +271,13 @@ Sound::SetFilename(const char* s)
 
       if (n >= 60) {
          ZeroMemory(filename, sizeof(filename));
-         strcpy(filename, "...");
-         strcat(filename, s + n - 59);
+         strcpy_s(filename, "...");
+         strcat_s(filename, s + n - 59);
          filename[63] = 0;
       }
 
       else {
-         strcpy(filename, s);
+         strcpy_s(filename, s);
       }
    }
 }

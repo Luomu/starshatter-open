@@ -882,7 +882,7 @@ Window::Print(int x1, int y1, const char* fmt, ...)
    y1 += rect.y;
 
    char msgbuf[512];
-   vsprintf(msgbuf, fmt, (char *)(&fmt+1));
+   vsprintf_s(msgbuf, fmt, (char *)(&fmt+1));
    font->DrawString(msgbuf, strlen(msgbuf), x1, y1, rect);
 }
 

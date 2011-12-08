@@ -24,7 +24,7 @@ MultiController::MultiController()
       action[i] = 0;
 
    nctrl = 0;
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       ctrl[i] = 0;
 }
 
@@ -78,7 +78,7 @@ MultiController::Acquire()
    for (int i = 0; i < MotionController::MaxActions; i++)
       action[i] = 0;
 
-   for (i = 0; i < nctrl; i++) {
+   for (int i = 0; i < nctrl; i++) {
       ctrl[i]->Acquire();
 
       x += ctrl[i]->X();

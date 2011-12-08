@@ -58,7 +58,7 @@ ScrollWindow::ScrollWindow(ActiveWindow* p, int ax, int ay, int aw, int ah, DWOR
    thumb_pos         = TRACK_START;
 
    char buf[32];
-   sprintf(buf, "ScrollWindow %d", id);
+   sprintf_s(buf, "ScrollWindow %d", id);
    desc = buf;
 }
 
@@ -89,7 +89,7 @@ ScrollWindow::ScrollWindow(Screen* s, int ax, int ay, int aw, int ah, DWORD aid,
    thumb_pos         = TRACK_START;
 
    char buf[32];
-   sprintf(buf, "ScrollWindow %d", id);
+   sprintf_s(buf, "ScrollWindow %d", id);
    desc = buf;
 }
 

@@ -212,7 +212,7 @@ Layout::SetConstraints(const FloatList& min_x,
       for (int i = 0; i < min_x.size(); i++)
          cols.append((DWORD) min_x[i]);
 
-      for (i = 0; i < min_y.size(); i++)
+      for (int i = 0; i < min_y.size(); i++)
          rows.append((DWORD) min_y[i]);
 
       col_weights.append(weight_x);

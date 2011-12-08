@@ -137,7 +137,7 @@ Water::Init(int n, float s, float d)
       waves[3*WAVE_SIZE + i] = (float) (0.8 * s3*s3 - 0.4);
    }
 
-   for (i = 0; i < 4; i++) {
+   for (int i = 0; i < 4; i++) {
       offsets[i]   = (float) Random(0, WAVE_SIZE);
    }
 

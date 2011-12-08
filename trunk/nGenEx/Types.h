@@ -29,10 +29,10 @@
 #define _WIN32_WINDOWS 0x0410 
 #define _WIN32_WINNT   0x0500 
 
-#if !defined(HMONITOR_DECLARED)
-    #define HMONITOR_DECLARED
-    DECLARE_HANDLE(HMONITOR);
-#endif
+//#if !defined(HMONITOR_DECLARED)
+//    #define HMONITOR_DECLARED
+//    DECLARE_HANDLE(HMONITOR);
+//#endif
 
 #include <windows.h>
 #include <windowsx.h>

@@ -120,7 +120,7 @@ Shadow::Update(Light* light)
       extent.Normalize();
       extent *= 50.0e3f; //solid->Radius() * 2.1f;
 
-      for (i = 0; i < (int) num_edges; i++) {
+      for (int i = 0; i < (int) num_edges; i++) {
          if (nverts+6 <= max_verts) {
             Vec3 v1 = s->GetVLoc()[edges[2*i+0]];
             Vec3 v2 = s->GetVLoc()[edges[2*i+1]];

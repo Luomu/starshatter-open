@@ -141,7 +141,7 @@ void
 Sprite::SetAnimation(Bitmap* animation, int length, int repeat, int share)
 {
    if (animation) {
-      strncpy(name, animation->GetFilename(), 31);
+      strncpy_s(name, animation->GetFilename(), 31);
       name[31] = 0;
 
       if (own_frames) {

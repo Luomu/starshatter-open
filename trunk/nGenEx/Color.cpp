@@ -465,11 +465,11 @@ Color::SetPalette(PALETTEENTRY* pal, int palsize, BYTE* invpal)
       palette[i] = pal[i];
 
    if (invpal) {
-      for (i = 0; i < 32768; i++)
+      for (int i = 0; i < 32768; i++)
          table[i] = invpal[i];
    }
    else {
-      for (i = 0; i < 32768; i++) {
+      for (int i = 0; i < 32768; i++) {
          BYTE r = (i >> 10) & 0x1f;
          BYTE g = (i >>  5) & 0x1f;
          BYTE b = (i      ) & 0x1f;
@@ -483,7 +483,7 @@ Color::SetPalette(PALETTEENTRY* pal, int palsize, BYTE* invpal)
    // set up formatted palette:
    UseFormat(format);
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       UseTextureFormat(texture_format[i], i);
    
    // set up shade table:
@@ -603,8 +603,8 @@ Color::SaveShadeTable(const char* basename)
 
    BYTE  clut[256*256];
    BYTE* pc = clut;
-   
-   for (int i = 0; i < SHADE_LEVELS*2; i++)
+   int i;
+   for (i = 0; i < SHADE_LEVELS*2; i++)
       for (int j = 0; j < 256; j++)
          *pc++ = (BYTE) ColorIndex::shade_table[i*256+j];
    

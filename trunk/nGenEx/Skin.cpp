@@ -23,7 +23,7 @@ void  Print(const char* fmt, ...);
 Skin::Skin(const char* n)
 {
    if (n && *n) {
-      strncpy(name, n, NAMELEN);
+      strncpy_s(name, n, NAMELEN);
       name[NAMELEN-1] = 0;
    }
 
@@ -47,7 +47,7 @@ void
 Skin::SetName(const char* n)
 {
    if (n && *n) {
-      strncpy(name, n, NAMELEN);
+      strncpy_s(name, n, NAMELEN);
       name[NAMELEN-1] = 0;
    }
 }
@@ -56,7 +56,7 @@ void
 Skin::SetPath(const char* n)
 {
    if (n && *n) {
-      strncpy(path, n, 256);
+      strncpy_s(path, n, 256);
       path[255] = 0;
    }
 

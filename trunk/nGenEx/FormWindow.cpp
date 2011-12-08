@@ -34,7 +34,7 @@ FormWindow::FormWindow(Screen* screen, int ax, int ay, int aw, int ah,
    : ActiveWindow(screen, ax, ay, aw, ah, aid, s, pParent)
 {
    char buf[32];
-   sprintf(buf, "Form %d", id);
+   sprintf_s(buf, "Form %d", id);
    desc = buf;
 }
 
@@ -584,7 +584,7 @@ FormWindow::CreateDefList(CtrlDef& def)
    }
 
    int nitems = def.NumItems();
-   for (i = 0; i < nitems; i++)
+   for (int i = 0; i < nitems; i++)
       ctrl->AddItem(def.GetItem(i));
 
    Font* f = FontMgr::Find(def.GetFont());

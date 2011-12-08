@@ -131,7 +131,7 @@ Solid::Solid()
      roll(0.0f), pitch(0.0f), yaw(0.0f), intersection_poly(0)
 {
    shadow = true;
-   sprintf(name, "Solid %d", id);
+   sprintf_s(name, "Solid %d", id);
 }
 
 // +--------------------------------------------------------------------+
@@ -557,7 +557,7 @@ Solid::Load(const char* mag_file, double scale)
    // now load the model:
    if (model->Load(mag_file, scale)) {
       radius = model->radius;
-      strncpy(name, model->name, sizeof(name));
+      strncpy_s(name, model->name, sizeof(name));
       return true;
    }
 
@@ -935,7 +935,7 @@ Model::Load(const char* mag_file, double scale)
       return result;
    }
 
-   strncpy(name, mag_file, 31);
+   strncpy_s(name, mag_file, 31);
    name[31] = 0;
 
    char file_id[5];
@@ -1039,7 +1039,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
       mtl->diffuse_color  = Color::LightGray;
       mtl->specular_value = 0.2f;
       mtl->specular_color = Color::White;
-      strcpy(mtl->name, "(default)");
+      strcpy_s(mtl->name, "(default)");
 
       materials.append(mtl);
    }
@@ -1064,7 +1064,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
          loader->fread(tname, 32, 1, fp);
          loader->LoadTexture(tname, mtl->tex_diffuse, Bitmap::BMP_SOLID, true);
-         strcpy(mtl->name, tname);
+         strcpy_s(mtl->name, tname);
 
          char* dot = strrchr(mtl->name, '.');
          if (dot)
@@ -1092,7 +1092,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
    VertexSet*  vset = 0;
 
    if (s) {
-      strcpy(s->name, "default");
+      strcpy_s(s->name, "default");
 
       s->model       = this;
       s->vertex_set  = new(__FILE__,__LINE__) VertexSet(nverts);
@@ -1114,8 +1114,9 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
       vset = s->vertex_set;
 
+	  int v;
       // read vertex set:
-      for (int v = 0; v < mag_nverts; v++) {
+      for (v = 0; v < mag_nverts; v++) {
          Vec3 vert, norm;
          DWORD vstate;
 
@@ -1229,13 +1230,13 @@ Model::LoadMag5(BYTE* block, int len, double scale)
          }
       
          loader->fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tu's
-         for (vi = 0; vi < poly_nverts; vi++) {
+         for (int vi = 0; vi < poly_nverts; vi++) {
             int v = poly.verts[vi];
             vset->tu[v] = texture_index_buffer[vi];
          }
 
          loader->fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tv's
-         for (vi = 0; vi < poly_nverts; vi++) {
+         for (int vi = 0; vi < poly_nverts; vi++) {
             int v = poly.verts[vi];
             vset->tv[v] = texture_index_buffer[vi];
          }
@@ -1244,7 +1245,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
       }
 
       // pass 2 (adjust vertex normals for flat polys):
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          Poly& poly  = s->polys[n];
          poly.plane  = Plane(vset->loc[poly.verts[0]],
                              vset->loc[poly.verts[2]],
@@ -1267,7 +1268,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
       // then assign them to cohesive segments:
       Segment* segment = 0;
 
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          if (segment && segment->material == s->polys[n].material) {
             segment->npolys++;
          }
@@ -1504,7 +1505,7 @@ Model::LoadMag6(BYTE* block, int len, double scale)
       // then assign them to cohesive segments:
       Segment* segment = 0;
 
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          if (segment && segment->material == polys[n].material) {
             segment->npolys++;
          }
@@ -2260,7 +2261,7 @@ Surface::Normalize()
       if (faces.size()) {
          vertex_set->nrm[v] = Vec3(0.0f, 0.0f, 0.0f);
 
-         for (i = 0; i < faces.size(); i++) {
+         for (int i = 0; i < faces.size(); i++) {
             vertex_set->nrm[v] += faces[i]->plane.normal;
          }
 
@@ -2279,7 +2280,7 @@ Surface::Normalize()
 
    // STEP THREE: adjust vertex normals for poly flatness
 
-   for (i = 0; i < npolys; i++) {
+   for (int i = 0; i < npolys; i++) {
       Poly* p = polys + i;
 
       for (int n = 0; n < p->nverts; n++) {

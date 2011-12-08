@@ -37,10 +37,10 @@ WebBrowser::OpenURL(const char* url)
       char cmdline[256];
 
       if (command.contains("%1")) {
-         strcpy(cmdline, command.replace("%1", url).data());
+         strcpy_s(cmdline, command.replace("%1", url).data());
       }
       else {
-         strcpy(cmdline, Text(command + " " + url).data());
+         strcpy_s(cmdline, Text(command + " " + url).data());
       }
 
       STARTUPINFO s;

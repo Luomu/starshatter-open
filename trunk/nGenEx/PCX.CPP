@@ -112,11 +112,11 @@ PcxImage::PcxImage(short w, short h, unsigned char* bits, unsigned char* colors)
    bitmap = new(__FILE__,__LINE__) unsigned char [imagebytes];
 
    if (bitmap) {
-      for (i = 0; i < imagebytes; i++)
+      for (int i = 0; i < imagebytes; i++)
          bitmap[i] = bits[i];
 
       unsigned char* p = pal;
-      for (i = 0; i < 256; i++) {   
+      for (int i = 0; i < 256; i++) {   
          *p++ = *colors++;
          *p++ = *colors++;
          *p++ = *colors++;
@@ -205,7 +205,7 @@ PcxImage::PcxImage(short w, short h, unsigned long* hibits)
    himap = new(__FILE__,__LINE__) unsigned long [imagebytes];
 
    if (himap) {
-      for (i = 0; i < imagebytes; i++)
+      for (int i = 0; i < imagebytes; i++)
          himap[i] = hibits[i];
    }
 }
