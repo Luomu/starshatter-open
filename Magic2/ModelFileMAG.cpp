@@ -551,13 +551,13 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
          }
       
          fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tu's
-         for (vi = 0; vi < poly_nverts; vi++) {
+         for (int vi = 0; vi < poly_nverts; vi++) {
             int v = poly.verts[vi];
             vset->tu[v] = texture_index_buffer[vi];
          }
 
          fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tv's
-         for (vi = 0; vi < poly_nverts; vi++) {
+         for (int vi = 0; vi < poly_nverts; vi++) {
             int v = poly.verts[vi];
             vset->tv[v] = texture_index_buffer[vi];
          }
@@ -567,7 +567,7 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
       }
 
       // pass 2 (adjust vertex normals for flat polys):
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          Poly& poly = polys[n];
 
          poly.plane = Plane(vset->loc[poly.verts[0]],
@@ -591,7 +591,7 @@ ModelFileMAG::LoadMag5(FILE* fp, Model* m, double scale)
       // then assign them to cohesive segments:
       Segment* segment = 0;
 
-      for (n = 0; n < npolys; n++) {
+      for (int n = 0; n < npolys; n++) {
          if (segment && segment->material == polys[n].material) {
             segment->npolys++;
          }
