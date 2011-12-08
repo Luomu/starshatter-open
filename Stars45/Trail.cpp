@@ -52,7 +52,7 @@ Trail::Trail(Bitmap* tex, int n)
 
    polys = new(__FILE__,__LINE__) Poly[maxtrail];
    
-   for (i = 0; i < maxtrail; i++) {
+   for (int i = 0; i < maxtrail; i++) {
       polys[i].vertex_set  = verts;
       polys[i].nverts      = 4;
       polys[i].material    = &mtl;

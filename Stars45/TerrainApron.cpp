@@ -267,7 +267,7 @@ TerrainApron::Illuminate(Color ambient, List<Light>& lights)
          Vec3 vl = light->Location();
          vl.Normalize();
 
-         for (i = 0; i < nverts; i++) {
+         for (int i = 0; i < nverts; i++) {
             Vec3&  nrm = vset->nrm[i];
             double val = 0;
 

@@ -317,12 +317,12 @@ MapView::BuildMenu()
       ship_menu->AddItem(Game::GetText("MapView.item.Clear-All"), MAP_CLEAR);
 
       action_menu = new(__FILE__,__LINE__) Menu(Game::GetText("MapView.menu.ACTION"));
-      for (i = 0; i < Instruction::NUM_ACTIONS; i++) {
+      for (int i = 0; i < Instruction::NUM_ACTIONS; i++) {
          action_menu->AddItem(Game::GetText(Text("MapView.item.") + Instruction::ActionName(i)), MAP_ACTION + i);
       }
 
       formation_menu = new(__FILE__,__LINE__) Menu(Game::GetText("MapView.menu.FORMATION"));
-      for (i = 0; i < Instruction::NUM_FORMATIONS; i++) {
+      for (int i = 0; i < Instruction::NUM_FORMATIONS; i++) {
          formation_menu->AddItem(Game::GetText(Text("MapView.item.") + Instruction::FormationName(i)), MAP_FORMATION + i);
       }
 
@@ -2598,7 +2598,7 @@ MapView::DrawNavRoute(OrbitalRegion*       rgn,
             int y1 = (ioy-isy);
 
             if (draw_bold) {
-               if (fabs(x1) > fabs(y1)) {
+               if (x1 > y1) {
                   window->DrawLine(iox, ioy+1, isx, isy+1, s_marker);
                }
                else {
@@ -2724,7 +2724,7 @@ MapView::DrawNavRoute(OrbitalRegion*       rgn,
          int y1 = (ioy-first_y);
 
          if (draw_bold) {
-            if (fabs(x1) > fabs(y1)) {
+            if (x1 > y1) {
                window->DrawLine(iox, ioy+1, first_x, first_y+1, s_marker);
             }
             else {

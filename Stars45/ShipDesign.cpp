@@ -304,7 +304,7 @@ ShipDesign::ShipDesign(const char* n, const char* p, const char* fname, bool s)
    }
    while (term);
    
-   for (i = 0; i < 4; i++) {
+   for (int i = 0; i < 4; i++) {
       int n = 0;
       ListIter<Text> iter = detail[i];
       while (++iter) {
@@ -454,7 +454,7 @@ ShipDesign::~ShipDesign()
 
    spin_rates.destroy();
 
-   for (i = 0; i < 10; i++) {
+   for (int i = 0; i < 10; i++) {
       delete debris[i].model;
    }
 }
@@ -487,7 +487,7 @@ void AddModCatalogEntry(const char* design_name, const char* design_path)
       }
    }
 
-   for (i = 0; i < mod_catalog.size(); i++) {
+   for (int i = 0; i < mod_catalog.size(); i++) {
       ShipCatalogEntry* e = mod_catalog[i];
       if (e->name == design_name) {
          if (design_path && *design_path) {
@@ -1031,7 +1031,7 @@ ShipDesign::GetDesignList(int type, List<Text>& designs)
       }
    }
 
-   for (i = 0; i < mod_catalog.size(); i++) {
+   for (int i = 0; i < mod_catalog.size(); i++) {
       ShipCatalogEntry* e = mod_catalog[i];
 
       int etype = ClassForName(e->type);
@@ -2004,7 +2004,7 @@ ShipDesign::ParseFarcaster(TermStruct* val)
    caster->SetStartPoint(start);
    caster->SetEndPoint(end);
 
-   for (i = 0; i < napproach; i++)
+   for (int i = 0; i < napproach; i++)
       caster->SetApproachPoint(i, approach[i]);
 
    if (emcon_1 >= 0 && emcon_1 <= 100)
@@ -2279,7 +2279,7 @@ ShipDesign::ParseNavlight(TermStruct* val)
          nav->SetDesign(sd);
    }
 
-   for (i = 0; i < nlights; i++)
+   for (int i = 0; i < nlights; i++)
       nav->AddBeacon(bloc[i], pattern[i], btype[i]);
 
    navlights.append(nav);
@@ -2450,13 +2450,13 @@ ShipDesign::ParseFlightDeck(TermStruct* val)
    if (light > 0)
       deck->SetLight(light);
 
-   for (i = 0; i < napproach; i++)
+   for (int i = 0; i < napproach; i++)
       deck->SetApproachPoint(i, approach[i]);
 
-   for (i = 0; i < nrunway; i++)
+   for (int i = 0; i < nrunway; i++)
       deck->SetRunwayPoint(i, runway[i]);
 
-   for (i = 0; i < nslots; i++)
+   for (int i = 0; i < nslots; i++)
       deck->AddSlot(spots[i], filters[i]);
 
    if (cycle_time > 0)
@@ -2555,7 +2555,7 @@ ShipDesign::ParseLandingGear(TermStruct* val)
          gear->SetDesign(sd);
    }
 
-   for (i = 0; i < ngear; i++)
+   for (int i = 0; i < ngear; i++)
       gear->AddGear(model[i], start[i], end[i]);
 }
 

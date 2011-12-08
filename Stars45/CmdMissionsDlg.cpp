@@ -207,7 +207,7 @@ CmdMissionsDlg::ExecFrame()
             lst_missions->ClearItems();
             seln = -1;
 
-            for (i = 0; i < missions.size(); i++) {
+            for (int i = 0; i < missions.size(); i++) {
                MissionInfo* info = missions[i];
                lst_missions->AddItemWithData(info->name, info->id);
 

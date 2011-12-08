@@ -190,31 +190,31 @@ TerrainRegion::LoadSkyColors(const char* bmp_name)
       shade_color[i] = Color::Gray;
    }
 
-   for (i = 0; i < max_color; i++)
+   for (int i = 0; i < max_color; i++)
       sky_color[i] = sky_colors_bmp.GetColor(i, 0);
 
    if (sky_colors_bmp.Height() > 1)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          fog_color[i].Set(sky_colors_bmp.GetColor(i, 1).Value() | Color(0,0,0,255).Value());
 
    if (sky_colors_bmp.Height() > 2)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          ambient[i] = sky_colors_bmp.GetColor(i, 2);
 
    if (sky_colors_bmp.Height() > 3)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          sun_color[i] = sky_colors_bmp.GetColor(i, 3);
 
    if (sky_colors_bmp.Height() > 4)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          overcast[i] = sky_colors_bmp.GetColor(i, 4);
 
    if (sky_colors_bmp.Height() > 5)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          cloud_color[i] = sky_colors_bmp.GetColor(i, 5);
 
    if (sky_colors_bmp.Height() > 6)
-      for (i = 0; i < max_color; i++)
+      for (int i = 0; i < max_color; i++)
          shade_color[i] = sky_colors_bmp.GetColor(i, 6);
 }
 

@@ -723,7 +723,7 @@ TerrainPatch::CalcLayer(Poly* poly)
       if (y <= terrain->GetLayers().first()->GetMinHeight())
          return 0;
 
-      for (i = 0; i < terrain->GetLayers().size(); i++) {
+      for (int i = 0; i < terrain->GetLayers().size(); i++) {
          TerrainLayer* layer = terrain->GetLayers().at(i);
 
          if (y >= layer->GetMinHeight() && y < layer->GetMaxHeight()) {
@@ -847,7 +847,7 @@ TerrainPatch::Illuminate(Color ambient, List<Light>& lights)
          Vec3 vl = light->Location();
          vl.Normalize();
 
-         for (i = 0; i < nverts; i++) {
+         for (int i = 0; i < nverts; i++) {
             Vec3&  nrm = vset->nrm[i];
             double val = 0;
             double gain = vl * nrm;
@@ -867,7 +867,7 @@ TerrainPatch::Illuminate(Color ambient, List<Light>& lights)
 
    // combine blend weights:
    if (ndetail >= 2) {
-      for (i = 0; i < nverts; i++) {
+      for (int i = 0; i < nverts; i++) {
          vset->diffuse[i] = vset->specular[i] | (vset->diffuse[i] & 0x00ffffff);
       }
    }

@@ -66,14 +66,14 @@ Weather::NormalizeChances()
    else {
       chances[0] = 0;
 
-      for (i = 1; i < NUM_STATES; i++)
+      for (int i = 1; i < NUM_STATES; i++)
          chances[i] /= total;
    }
 
    int    index = 0;
    double level = 0;
 
-   for (i = 0; i < NUM_STATES; i++) {
+   for (int i = 0; i < NUM_STATES; i++) {
       if (chances[i] > 0) {
          level += chances[i];
 

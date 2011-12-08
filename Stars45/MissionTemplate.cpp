@@ -645,7 +645,7 @@ MissionTemplate::ParseAlias(TermStruct* val)
 
    // re-parse the struct, dealing with stuff
    // that needs to be attached to the element:
-   for (i = 0; i < val->elements()->size(); i++) {
+   for (int i = 0; i < val->elements()->size(); i++) {
       TermDef* pdef = val->elements()->at(i)->isDef();
       if (pdef) {
          Text defname = pdef->name()->value();

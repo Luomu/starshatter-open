@@ -98,7 +98,7 @@ CmdTheaterDlg::RegisterControls()
    if (map_theater)
       map_view = new(__FILE__,__LINE__) MapView(map_theater);
 
-   for (i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; i++) {
       view_btn[i] = (Button*) FindControl(401 + i);
       REGISTER_CLIENT(EID_CLICK, view_btn[i], CmdTheaterDlg, OnView);
    }

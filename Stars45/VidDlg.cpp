@@ -144,7 +144,7 @@ VidDlg::Show()
          int n = stars->MaxTexSize();
 
          for (int i = 0; i < 7; i++) {
-            if (n <= pow(2, i+6)) {
+            if (n <= pow(2.0f, i+6)) {
                selected_tex_size = i;
                break;
             }
@@ -340,7 +340,7 @@ VidDlg::Apply()
       d = 32;
 
    if (selected_tex_size)
-      t = (int) pow(2, selected_tex_size + 6);
+      t = (int) pow(2.0f, selected_tex_size + 6);
 
    bool video_change = false;
 
@@ -393,7 +393,7 @@ VidDlg::Apply()
       fprintf(f, "height:    %4d\n", h);
       fprintf(f, "depth:     %4d\n", d);
       fprintf(f, "\n");
-      fprintf(f, "max_tex:   %d\n",  (int) pow(2, 6 + selected_tex_size));
+      fprintf(f, "max_tex:   %d\n",  (int) pow(2.0f, 6 + selected_tex_size));
       fprintf(f, "primary3D: %s\n",  (a>0)?"true":"false");
       fprintf(f, "gamma:     %4d\n", g);
       fprintf(f, "\n");

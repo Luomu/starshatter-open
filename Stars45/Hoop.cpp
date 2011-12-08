@@ -99,7 +99,7 @@ Hoop::CreatePolys()
       vset->tv[i]    = v;
    }
 
-   for (i = 0; i < 2; i++) {
+   for (int i = 0; i < 2; i++) {
       Poly& poly        = polys[i];
 
       poly.nverts       = 4;

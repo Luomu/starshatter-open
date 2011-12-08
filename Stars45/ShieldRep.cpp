@@ -170,7 +170,7 @@ ShieldRep::Illuminate()
 
    if (nhits < 1) return;
 
-   for (i = 0; i < MAX_SHIELD_HITS; i++) {
+   for (int i = 0; i < MAX_SHIELD_HITS; i++) {
       if (hits[i].damage > 0) {
          // add the hit's contribution to the shield verts:
          Vec3   hitloc = hits[i].hitloc;

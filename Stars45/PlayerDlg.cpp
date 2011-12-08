@@ -90,7 +90,7 @@ PlayerDlg::RegisterControls()
          REGISTER_CLIENT(EID_CLICK, img_medals[i], PlayerDlg, OnMedal);
    }
 
-   for (i = 0; i < 10; i++) {
+   for (int i = 0; i < 10; i++) {
       txt_chat[i] = (EditBox*) FindControl(300 + i);
    }
 
@@ -192,7 +192,7 @@ PlayerDlg::ShowPlayer()
          }
       }
 
-      for (i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++) {
          if (txt_chat[i])
             txt_chat[i]->SetText(p->ChatMacro(i));
       }
@@ -219,7 +219,7 @@ PlayerDlg::ShowPlayer()
             img_medals[i]->Hide();
       }
 
-      for (i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++) {
          if (txt_chat[i])
             txt_chat[i]->SetText("");
       }
@@ -349,9 +349,9 @@ PlayerDlg::OnMedal(AWEvent* event)
    AwardShowDlg*  award_dlg   = manager->GetAwardDlg();
    
    if (p && award_dlg) {
-      int m = -1;
+      int m = -1, i;
 
-      for (int i = 0; i < 15; i++) {
+      for (i = 0; i < 15; i++) {
          if (event->window == img_medals[i]) {
             m = i;
             break;

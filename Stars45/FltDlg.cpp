@@ -185,12 +185,13 @@ FltDlg::UpdateSelection()
    Hangar*     hangar   = ship->GetHangar();
    int         seln     = filter_list->GetSelectedIndex();
    char        txt[32];
+   int item;
 
    // selected squadron:
    if (seln < hangar->NumSquadrons()) {
       int         nslots   = hangar->SquadronSize(seln);
 
-      for (int item = 0; item < hangar_list->NumItems(); item++) {
+      for (item = 0; item < hangar_list->NumItems(); item++) {
          int i = hangar_list->GetItemData(item);
          const HangarSlot* s = hangar->GetSlot(seln, i);
 
@@ -253,7 +254,7 @@ FltDlg::UpdateSelection()
 
    // selected pending filter:
    else if (seln == hangar->NumSquadrons()) {
-      for (int item = 0; item < hangar_list->NumItems(); item++) {
+      for (item = 0; item < hangar_list->NumItems(); item++) {
          int f = hangar_list->GetItemData(item, 1);
          int i = hangar_list->GetItemData(item, 2);
 
@@ -316,7 +317,7 @@ FltDlg::UpdateSelection()
    else if (seln == hangar->NumSquadrons()+1) {
       int last_index = -1;
 
-      for (int item = 0; item < hangar_list->NumItems(); item++) {
+      for (item = 0; item < hangar_list->NumItems(); item++) {
          int squadron = hangar_list->GetItemData(item, 1);
          int slot     = hangar_list->GetItemData(item, 2);
 
@@ -717,10 +718,10 @@ FltDlg::OnPackage(AWEvent* event)
    int npackage = 0;
    int slots[4];
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       slots[i] = -1;
 
-   for (i = 0; i < hangar_list->NumItems(); i++) {
+   for (int i = 0; i < hangar_list->NumItems(); i++) {
       if (hangar_list->IsSelected(i)) {
          int nslot = hangar_list->GetItemData(i);
          hangar->GotoAlert(squad, nslot, deck, elem, load, true);
@@ -799,10 +800,10 @@ FltDlg::OnAlert(AWEvent* event)
    int nalert = 0;
    int slots[4];
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       slots[i] = -1;
 
-   for (i = 0; i < hangar_list->NumItems(); i++) {
+   for (int i = 0; i < hangar_list->NumItems(); i++) {
       if (hangar_list->IsSelected(i)) {
          int nslot = hangar_list->GetItemData(i);
          slots[nalert] = nslot;

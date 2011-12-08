@@ -706,7 +706,7 @@ NetGameClient::DoElemCreate(NetMsg* msg)
                }
             }
 
-            for (i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++) {
                int slot = slots[i];
                if (slot > -1) {
                   hangar->GotoAlert(squadron, slot, deck, elem, load, !alert);

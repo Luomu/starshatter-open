@@ -348,7 +348,7 @@ CarrierAI::CreatePackage(int squadron, int size, int code, const char* target, c
    int npackage = 0;
    int slots[4];
 
-   for (i = 0; i < 4; i++)
+   for (int i = 0; i < 4; i++)
       slots[i] = -1;
 
    for (int slot = 0; slot < hangar->SquadronSize(squadron); slot++) {
