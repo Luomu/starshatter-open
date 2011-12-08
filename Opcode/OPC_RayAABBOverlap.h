@@ -1,7 +1,7 @@
 // Opcode 1.1: ray-AABB overlap tests based on Woo's code
 // Opcode 1.2: ray-AABB overlap tests based on the separating axis theorem
 //
-// The point of intersection is not computed anymore. The distance to impact is not needed anymore
+// The IcePoint of intersection is not computed anymore. The distance to impact is not needed anymore
 // since we now have two different queries for segments or rays.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12,7 +12,7 @@
  *	\return		true on overlap
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-inline_ BOOL RayCollider::SegmentAABBOverlap(const Point& center, const Point& extents)
+inline_ BOOL RayCollider::SegmentAABBOverlap(const IcePoint& center, const IcePoint& extents)
 {
 	// Stats
 	mNbRayBVTests++;
@@ -37,7 +37,7 @@ inline_ BOOL RayCollider::SegmentAABBOverlap(const Point& center, const Point& e
  *	\return		true on overlap
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-inline_ BOOL RayCollider::RayAABBOverlap(const Point& center, const Point& extents)
+inline_ BOOL RayCollider::RayAABBOverlap(const IcePoint& center, const IcePoint& extents)
 {
 	// Stats
 	mNbRayBVTests++;

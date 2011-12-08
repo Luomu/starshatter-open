@@ -24,8 +24,8 @@
 	{
 					LSSCache()
 					{
-						Previous.mP0 = Point(0.0f, 0.0f, 0.0f);
-						Previous.mP1 = Point(0.0f, 0.0f, 0.0f);
+						Previous.mP0 = IcePoint(0.0f, 0.0f, 0.0f);
+						Previous.mP1 = IcePoint(0.0f, 0.0f, 0.0f);
 						Previous.mRadius = 0.0f;
 						FatCoeff = 1.1f;
 					}
@@ -77,9 +77,9 @@
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNode* node);
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNoLeafNode* node);
 			// Overlap tests
-		inline_				BOOL			LSSContainsBox(const Point& bc, const Point& be);
-		inline_				BOOL			LSSAABBOverlap(const Point& center, const Point& extents);
-		inline_				BOOL			LSSTriOverlap(const Point& vert0, const Point& vert1, const Point& vert2);
+		inline_				BOOL			LSSContainsBox(const IcePoint& bc, const IcePoint& be);
+		inline_				BOOL			LSSAABBOverlap(const IcePoint& center, const IcePoint& extents);
+		inline_				BOOL			LSSTriOverlap(const IcePoint& vert0, const IcePoint& vert1, const IcePoint& vert2);
 			// Init methods
 							BOOL			InitQuery(LSSCache& cache, const LSS& lss, const Matrix4x4* worldl=null, const Matrix4x4* worldm=null);
 	};

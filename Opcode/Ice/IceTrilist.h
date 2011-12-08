@@ -29,7 +29,7 @@
 									Add(tri.mVerts[2].x).Add(tri.mVerts[2].y).Add(tri.mVerts[2].z);
 								}
 
-				void			AddTri(const Point& p0, const Point& p1, const Point& p2)
+				void			AddTri(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)
 								{
 									Add(p0.x).Add(p0.y).Add(p0.z);
 									Add(p1.x).Add(p1.y).Add(p1.z);

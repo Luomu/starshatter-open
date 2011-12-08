@@ -25,16 +25,16 @@ using namespace IceMaths;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  *	Computes the plane equation from 3 points.
- *	\param		p0	[in] first point
- *	\param		p1	[in] second point
- *	\param		p2	[in] third point
+ *	\param		p0	[in] first IcePoint
+ *	\param		p1	[in] second IcePoint
+ *	\param		p2	[in] third IcePoint
  *	\return		Self-reference
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Plane& Plane::Set(const Point& p0, const Point& p1, const Point& p2)
+Plane& Plane::Set(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)
 {
-	Point Edge0 = p1 - p0;
-	Point Edge1 = p2 - p0;
+	IcePoint Edge0 = p1 - p0;
+	IcePoint Edge1 = p2 - p0;
 
 	n = Edge0 ^ Edge1;
 	n.Normalize();

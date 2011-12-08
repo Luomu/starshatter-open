@@ -27,36 +27,36 @@
 		//! Constructor
 		inline_					Sphere()																		{}
 		//! Constructor
-		inline_					Sphere(const Point& center, float radius) : mCenter(center), mRadius(radius)	{}
+		inline_					Sphere(const IcePoint& center, float radius) : mCenter(center), mRadius(radius)	{}
 		//! Constructor
-								Sphere(udword nb_verts, const Point* verts);
+								Sphere(udword nb_verts, const IcePoint* verts);
 		//! Copy constructor
 		inline_					Sphere(const Sphere& sphere) : mCenter(sphere.mCenter), mRadius(sphere.mRadius)	{}
 		//! Destructor
 		inline_					~Sphere()																		{}
 
-				BSphereMethod	Compute(udword nb_verts, const Point* verts);
-				bool			FastCompute(udword nb_verts, const Point* verts);
+				BSphereMethod	Compute(udword nb_verts, const IcePoint* verts);
+				bool			FastCompute(udword nb_verts, const IcePoint* verts);
 
 		// Access methods
-		inline_	const Point&	GetCenter()						const		{ return mCenter; }
+		inline_	const IcePoint&	GetCenter()						const		{ return mCenter; }
 		inline_	float			GetRadius()						const		{ return mRadius; }
 
-		inline_	const Point&	Center()						const		{ return mCenter; }
+		inline_	const IcePoint&	Center()						const		{ return mCenter; }
 		inline_	float			Radius()						const		{ return mRadius; }
 
-		inline_	Sphere&			Set(const Point& center, float radius)		{ mCenter = center; mRadius = radius; return *this; }
-		inline_	Sphere&			SetCenter(const Point& center)				{ mCenter = center; return *this; }
+		inline_	Sphere&			Set(const IcePoint& center, float radius)		{ mCenter = center; mRadius = radius; return *this; }
+		inline_	Sphere&			SetCenter(const IcePoint& center)				{ mCenter = center; return *this; }
 		inline_	Sphere&			SetRadius(float radius)						{ mRadius = radius; return *this; }
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
-		 *	Tests if a point is contained within the sphere.
-		 *	\param		p	[in] the point to test
+		 *	Tests if a IcePoint is contained within the sphere.
+		 *	\param		p	[in] the IcePoint to test
 		 *	\return		true if inside the sphere
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		inline_	bool			Contains(const Point& p)		const
+		inline_	bool			Contains(const IcePoint& p)		const
 								{
 									return mCenter.SquareDistance(p) <= mRadius*mRadius;
 								}
@@ -90,13 +90,13 @@
 									// Sounds ok but maybe there's a better way?
 									float R2 = mRadius * mRadius;
 #ifdef USE_MIN_MAX
-									const Point& Max = ((ShadowAABB&)&aabb).mMax;
-									const Point& Min = ((ShadowAABB&)&aabb).mMin;
+									const IcePoint& Max = ((ShadowAABB&)&aabb).mMax;
+									const IcePoint& Min = ((ShadowAABB&)&aabb).mMin;
 #else
-									Point Max; aabb.GetMax(Max);
-									Point Min; aabb.GetMin(Min);
+									IcePoint Max; aabb.GetMax(Max);
+									IcePoint Min; aabb.GetMin(Min);
 #endif
-									Point p;
+									IcePoint p;
 									p.x=Max.x; p.y=Max.y; p.z=Max.z;	if(mCenter.SquareDistance(p)>=R2)	return FALSE;
 									p.x=Min.x;							if(mCenter.SquareDistance(p)>=R2)	return FALSE;
 									p.x=Max.x; p.y=Min.y;				if(mCenter.SquareDistance(p)>=R2)	return FALSE;
@@ -135,7 +135,7 @@
 									return TRUE;
 								}
 		public:
-				Point			mCenter;		//!< Sphere center
+				IcePoint			mCenter;		//!< Sphere center
 				float			mRadius;		//!< Sphere radius
 	};
 

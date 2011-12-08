@@ -26,7 +26,7 @@
 					~SphereCache()																{}
 
 		// Cached faces signature
-		Point		Center;		//!< Sphere used when performing the query resulting in cached faces
+		IcePoint		Center;		//!< Sphere used when performing the query resulting in cached faces
 		float		FatRadius2;	//!< Sphere used when performing the query resulting in cached faces
 		// User settings
 		float		FatCoeff;	//!< mRadius2 multiplier used to create a fat sphere
@@ -61,7 +61,7 @@
 							bool			Collide(SphereCache& cache, const Sphere& sphere, const AABBTree* tree);
 		protected:
 		// Sphere in model space
-							Point			mCenter;			//!< Sphere center
+							IcePoint			mCenter;			//!< Sphere center
 							float			mRadius2;			//!< Sphere radius squared
 		// Internal methods
 							void			_Collide(const AABBCollisionNode* node);
@@ -74,9 +74,9 @@
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNode* node);
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNoLeafNode* node);
 			// Overlap tests
-		inline_				BOOL			SphereContainsBox(const Point& bc, const Point& be);
-		inline_				BOOL			SphereAABBOverlap(const Point& center, const Point& extents);
-							BOOL			SphereTriOverlap(const Point& vert0, const Point& vert1, const Point& vert2);
+		inline_				BOOL			SphereContainsBox(const IcePoint& bc, const IcePoint& be);
+		inline_				BOOL			SphereAABBOverlap(const IcePoint& center, const IcePoint& extents);
+							BOOL			SphereTriOverlap(const IcePoint& vert0, const IcePoint& vert1, const IcePoint& vert2);
 			// Init methods
 							BOOL			InitQuery(SphereCache& cache, const Sphere& sphere, const Matrix4x4* worlds=null, const Matrix4x4* worldm=null);
 	};

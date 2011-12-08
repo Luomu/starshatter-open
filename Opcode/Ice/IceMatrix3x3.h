@@ -43,13 +43,13 @@
 								}
 
 		//! Sets the scale from a Point. The point is put on the diagonal.
-		inline_	void			SetScale(const Point& p)					{ m[0][0] = p.x;	m[1][1] = p.y;	m[2][2] = p.z;	}
+		inline_	void			SetScale(const IcePoint& p)					{ m[0][0] = p.x;	m[1][1] = p.y;	m[2][2] = p.z;	}
 
 		//! Sets the scale from floats. Values are put on the diagonal.
 		inline_	void			SetScale(float sx, float sy, float sz)		{ m[0][0] = sx;		m[1][1] = sy;	m[2][2] = sz;	}
 
 		//! Scales from a Point. Each row is multiplied by a component.
-		inline_	void			Scale(const Point& p)
+		inline_	void			Scale(const IcePoint& p)
 								{
 									m[0][0] *= p.x;	m[0][1] *= p.x;	m[0][2] *= p.x;
 									m[1][0] *= p.y;	m[1][1] *= p.y;	m[1][2] *= p.y;
@@ -69,17 +69,17 @@
 
 		// Row-column access
 		//! Returns a row.
-		inline_	void			GetRow(const udword r, Point& p)	const	{ p.x = m[r][0];	p.y = m[r][1];	p.z = m[r][2];	}
+		inline_	void			GetRow(const udword r, IcePoint& p)	const	{ p.x = m[r][0];	p.y = m[r][1];	p.z = m[r][2];	}
 		//! Returns a row.
-		inline_	const Point&	GetRow(const udword r)				const	{ return *(const Point*)&m[r][0];	}
+		inline_	const IcePoint&	GetRow(const udword r)				const	{ return *(const IcePoint*)&m[r][0];	}
 		//! Returns a row.
-		inline_	Point&			GetRow(const udword r)						{ return *(Point*)&m[r][0];			}
+		inline_	IcePoint&		GetRow(const udword r)						{ return *(IcePoint*)&m[r][0];			}
 		//! Sets a row.
-		inline_	void			SetRow(const udword r, const Point& p)		{ m[r][0] = p.x;	m[r][1] = p.y;	m[r][2] = p.z;	}
+		inline_	void			SetRow(const udword r, const IcePoint& p)		{ m[r][0] = p.x;	m[r][1] = p.y;	m[r][2] = p.z;	}
 		//! Returns a column.
-		inline_	void			GetCol(const udword c, Point& p)	const	{ p.x = m[0][c];	p.y = m[1][c];	p.z = m[2][c];	}
+		inline_	void			GetCol(const udword c, IcePoint& p)	const	{ p.x = m[0][c];	p.y = m[1][c];	p.z = m[2][c];	}
 		//! Sets a column.
-		inline_	void			SetCol(const udword c, const Point& p)		{ m[0][c] = p.x;	m[1][c] = p.y;	m[2][c] = p.z;	}
+		inline_	void			SetCol(const udword c, const IcePoint& p)		{ m[0][c] = p.x;	m[1][c] = p.y;	m[2][c] = p.z;	}
 
 		//! Computes the trace. The trace is the sum of the 3 diagonal components.
 		inline_	float			Trace()					const				{ return m[0][0] + m[1][1] + m[2][2];				}
@@ -124,7 +124,7 @@
 		//!	[ -a.y   a.x   0.0 ]
 		//! This is also called a "cross matrix" since for any vectors A and B,
 		//! A^B = Skew(A) * B = - B * Skew(A);
-		inline_	void			SkewSymmetric(const Point& a)
+		inline_	void			SkewSymmetric(const IcePoint& a)
 								{
 									m[0][0] = 0.0f;
 									m[0][1] = -a.z;
@@ -258,7 +258,7 @@
 								}
 
 		//! Makes a rotation matrix mapping vector "from" to vector "to".
-				Matrix3x3&		FromTo(const Point& from, const Point& to);
+				Matrix3x3&		FromTo(const IcePoint& from, const IcePoint& to);
 
 		//! Set a rotation matrix around the X axis.
 		//!		 1		0		0
@@ -281,7 +281,7 @@
 				void			RotYX(float y, float x);
 
 		//! Make a rotation matrix about an arbitrary axis
-				Matrix3x3&		Rot(float angle, const Point& axis);
+				Matrix3x3&		Rot(float angle, const IcePoint& axis);
 
 		//! Transpose the matrix.
 				void			Transpose()
@@ -380,7 +380,7 @@ void FromQuatL2(const Quat &q, float l2);
 								}
 
 		//! Operator for Point Mul = Matrix3x3 * Point;
-		inline_	Point			operator*(const Point& v)		const		{ return Point(GetRow(0)|v, GetRow(1)|v, GetRow(2)|v); }
+		inline_	IcePoint		operator*(const IcePoint& v)	const		{ return IcePoint(GetRow(0)|v, GetRow(1)|v, GetRow(2)|v); }
 
 		//! Operator for Matrix3x3 Mul = Matrix3x3 * float;
 		inline_	Matrix3x3		operator*(float s)				const
@@ -440,7 +440,7 @@ void FromQuatL2(const Quat &q, float l2);
 		//! Operator for Matrix3x3 *= Matrix3x3
 		inline_	Matrix3x3&		operator*=(const Matrix3x3& mat)
 								{
-									Point TempRow;
+									IcePoint TempRow;
 
 									GetRow(0, TempRow);
 									m[0][0] = TempRow.x*mat.m[0][0] + TempRow.y*mat.m[1][0] + TempRow.z*mat.m[2][0];
@@ -484,8 +484,8 @@ void FromQuatL2(const Quat &q, float l2);
 		//! Cast a Matrix3x3 to a Quat.
 								operator Quat()			const;
 
-		inline_	const Point&	operator[](int row)		const	{ return *(const Point*)&m[row][0];	}
-		inline_	Point&			operator[](int row)				{ return *(Point*)&m[row][0];		}
+		inline_	const IcePoint&	operator[](int row)		const	{ return *(const IcePoint*)&m[row][0];	}
+		inline_	IcePoint&		operator[](int row)				{ return *(IcePoint*)&m[row][0];		}
 
 		public:
 

@@ -22,72 +22,72 @@
 
 	const float EPSILON2 = 1.0e-20f;
 
-	class ICEMATHS_API Point
+	class ICEMATHS_API IcePoint
 	{
 		public:
 
 		//! Empty constructor
-		inline_					Point()														{}
+		inline_					IcePoint()														{}
 		//! Constructor from a single float
 //		inline_					Point(float val) : x(val), y(val), z(val)					{}
 // Removed since it introduced the nasty "Point T = *Matrix4x4.GetTrans();" bug.......
 		//! Constructor from floats
-		inline_					Point(float _x, float _y, float _z) : x(_x), y(_y), z(_z)	{}
+		inline_					IcePoint(float _x, float _y, float _z) : x(_x), y(_y), z(_z)	{}
 		//! Constructor from array
-		inline_					Point(const float f[3]) : x(f[_X]), y(f[_Y]), z(f[_Z])		{}
+		inline_					IcePoint(const float f[3]) : x(f[_X]), y(f[_Y]), z(f[_Z])		{}
 		//! Copy constructor
-		inline_					Point(const Point& p) : x(p.x), y(p.y), z(p.z)				{}
+		inline_					IcePoint(const IcePoint& p) : x(p.x), y(p.y), z(p.z)				{}
 		//! Destructor
-		inline_					~Point()													{}
+		inline_					~IcePoint()													{}
 
 		//! Clears the vector
-		inline_	Point&			Zero()									{ x =			y =			z = 0.0f;			return *this;	}
+		inline_	IcePoint&			Zero()									{ x =			y =			z = 0.0f;			return *this;	}
 
 		//! + infinity
-		inline_	Point&			SetPlusInfinity()						{ x =			y =			z = MAX_FLOAT;		return *this;	}
+		inline_	IcePoint&			SetPlusInfinity()						{ x =			y =			z = MAX_FLOAT;		return *this;	}
 		//! - infinity
-		inline_	Point&			SetMinusInfinity()						{ x =			y =			z = MIN_FLOAT;		return *this;	}
+		inline_	IcePoint&			SetMinusInfinity()						{ x =			y =			z = MIN_FLOAT;		return *this;	}
 
 		//! Sets positive unit random vector
-				Point&			PositiveUnitRandomVector();
+				IcePoint&			PositiveUnitRandomVector();
 		//! Sets unit random vector
-				Point&			UnitRandomVector();
+				IcePoint&			UnitRandomVector();
 
 		//! Assignment from values
-		inline_	Point&			Set(float _x, float _y, float _z)		{ x  = _x;		y  = _y;	z  = _z;			return *this;	}
+		inline_	IcePoint&			Set(float _x, float _y, float _z)		{ x  = _x;		y  = _y;	z  = _z;			return *this;	}
 		//! Assignment from array
-		inline_	Point&			Set(const float f[3])					{ x  = f[_X];	y  = f[_Y];	z  = f[_Z];			return *this;	}
+		inline_	IcePoint&			Set(const float f[3])					{ x  = f[_X];	y  = f[_Y];	z  = f[_Z];			return *this;	}
 		//! Assignment from another point
-		inline_	Point&			Set(const Point& src)					{ x  = src.x;	y  = src.y;	z  = src.z;			return *this;	}
+		inline_	IcePoint&			Set(const IcePoint& src)					{ x  = src.x;	y  = src.y;	z  = src.z;			return *this;	}
 
 		//! Adds a vector
-		inline_	Point&			Add(const Point& p)						{ x += p.x;		y += p.y;	z += p.z;			return *this;	}
+		inline_	IcePoint&			Add(const IcePoint& p)						{ x += p.x;		y += p.y;	z += p.z;			return *this;	}
 		//! Adds a vector
-		inline_	Point&			Add(float _x, float _y, float _z)		{ x += _x;		y += _y;	z += _z;			return *this;	}
+		inline_	IcePoint&			Add(float _x, float _y, float _z)		{ x += _x;		y += _y;	z += _z;			return *this;	}
 		//! Adds a vector
-		inline_	Point&			Add(const float f[3])					{ x += f[_X];	y += f[_Y];	z += f[_Z];			return *this;	}
+		inline_	IcePoint&			Add(const float f[3])					{ x += f[_X];	y += f[_Y];	z += f[_Z];			return *this;	}
 		//! Adds vectors
-		inline_	Point&			Add(const Point& p, const Point& q)		{ x = p.x+q.x;	y = p.y+q.y;	z = p.z+q.z;	return *this;	}
+		inline_	IcePoint&			Add(const IcePoint& p, const IcePoint& q)		{ x = p.x+q.x;	y = p.y+q.y;	z = p.z+q.z;	return *this;	}
 
 		//! Subtracts a vector
-		inline_	Point&			Sub(const Point& p)						{ x -= p.x;		y -= p.y;	z -= p.z;			return *this;	}
+		inline_	IcePoint&			Sub(const IcePoint& p)						{ x -= p.x;		y -= p.y;	z -= p.z;			return *this;	}
 		//! Subtracts a vector
-		inline_	Point&			Sub(float _x, float _y, float _z)		{ x -= _x;		y -= _y;	z -= _z;			return *this;	}
+		inline_	IcePoint&			Sub(float _x, float _y, float _z)		{ x -= _x;		y -= _y;	z -= _z;			return *this;	}
 		//! Subtracts a vector
-		inline_	Point&			Sub(const float f[3])					{ x -= f[_X];	y -= f[_Y];	z -= f[_Z];			return *this;	}
+		inline_	IcePoint&			Sub(const float f[3])					{ x -= f[_X];	y -= f[_Y];	z -= f[_Z];			return *this;	}
 		//! Subtracts vectors
-		inline_	Point&			Sub(const Point& p, const Point& q)		{ x = p.x-q.x;	y = p.y-q.y;	z = p.z-q.z;	return *this;	}
+		inline_	IcePoint&			Sub(const IcePoint& p, const IcePoint& q)		{ x = p.x-q.x;	y = p.y-q.y;	z = p.z-q.z;	return *this;	}
 
 		//! this = -this
-		inline_	Point&			Neg()									{ x = -x;		y = -y;			z = -z;			return *this;	}
+		inline_	IcePoint&			Neg()									{ x = -x;		y = -y;			z = -z;			return *this;	}
 		//! this = -a
-		inline_	Point&			Neg(const Point& a)						{ x = -a.x;		y = -a.y;		z = -a.z;		return *this;	}
+		inline_	IcePoint&			Neg(const IcePoint& a)						{ x = -a.x;		y = -a.y;		z = -a.z;		return *this;	}
 
 		//! Multiplies by a scalar
-		inline_	Point&			Mult(float s)							{ x *= s;		y *= s;		z *= s;				return *this;	}
+		inline_	IcePoint&			Mult(float s)							{ x *= s;		y *= s;		z *= s;				return *this;	}
 
 		//! this = a * scalar
-		inline_	Point&			Mult(const Point& a, float scalar)
+		inline_	IcePoint&			Mult(const IcePoint& a, float scalar)
 								{
 									x = a.x * scalar;
 									y = a.y * scalar;
@@ -96,7 +96,7 @@
 								}
 
 		//! this = a + b * scalar
-		inline_	Point&			Mac(const Point& a, const Point& b, float scalar)
+		inline_	IcePoint&			Mac(const IcePoint& a, const IcePoint& b, float scalar)
 								{
 									x = a.x + b.x * scalar;
 									y = a.y + b.y * scalar;
@@ -105,7 +105,7 @@
 								}
 
 		//! this = this + a * scalar
-		inline_	Point&			Mac(const Point& a, float scalar)
+		inline_	IcePoint&			Mac(const IcePoint& a, float scalar)
 								{
 									x += a.x * scalar;
 									y += a.y * scalar;
@@ -114,7 +114,7 @@
 								}
 
 		//! this = a - b * scalar
-		inline_	Point&			Msc(const Point& a, const Point& b, float scalar)
+		inline_	IcePoint&			Msc(const IcePoint& a, const IcePoint& b, float scalar)
 								{
 									x = a.x - b.x * scalar;
 									y = a.y - b.y * scalar;
@@ -123,7 +123,7 @@
 								}
 
 		//! this = this - a * scalar
-		inline_	Point&			Msc(const Point& a, float scalar)
+		inline_	IcePoint&			Msc(const IcePoint& a, float scalar)
 								{
 									x -= a.x * scalar;
 									y -= a.y * scalar;
@@ -132,7 +132,7 @@
 								}
 
 		//! this = a + b * scalarb + c * scalarc
-		inline_	Point&			Mac2(const Point& a, const Point& b, float scalarb, const Point& c, float scalarc)
+		inline_	IcePoint&			Mac2(const IcePoint& a, const IcePoint& b, float scalarb, const IcePoint& c, float scalarc)
 								{
 									x = a.x + b.x * scalarb + c.x * scalarc;
 									y = a.y + b.y * scalarb + c.y * scalarc;
@@ -141,7 +141,7 @@
 								}
 
 		//! this = a - b * scalarb - c * scalarc
-		inline_	Point&			Msc2(const Point& a, const Point& b, float scalarb, const Point& c, float scalarc)
+		inline_	IcePoint&			Msc2(const IcePoint& a, const IcePoint& b, float scalarb, const IcePoint& c, float scalarc)
 								{
 									x = a.x - b.x * scalarb - c.x * scalarc;
 									y = a.y - b.y * scalarb - c.y * scalarc;
@@ -150,19 +150,19 @@
 								}
 
 		//! this = mat * a
-		inline_	Point&			Mult(const Matrix3x3& mat, const Point& a);
+		inline_	IcePoint&			Mult(const Matrix3x3& mat, const IcePoint& a);
 
 		//! this = mat1 * a1 + mat2 * a2
-		inline_	Point&			Mult2(const Matrix3x3& mat1, const Point& a1, const Matrix3x3& mat2, const Point& a2);
+		inline_	IcePoint&			Mult2(const Matrix3x3& mat1, const IcePoint& a1, const Matrix3x3& mat2, const IcePoint& a2);
 
 		//! this = this + mat * a
-		inline_	Point&			Mac(const Matrix3x3& mat, const Point& a);
+		inline_	IcePoint&			Mac(const Matrix3x3& mat, const IcePoint& a);
 
 		//! this = transpose(mat) * a
-		inline_	Point&			TransMult(const Matrix3x3& mat, const Point& a);
+		inline_	IcePoint&			TransMult(const Matrix3x3& mat, const IcePoint& a);
 
 		//! Linear interpolate between two vectors: this = a + t * (b - a)
-		inline_	Point&			Lerp(const Point& a, const Point& b, float t)
+		inline_	IcePoint&			Lerp(const IcePoint& a, const IcePoint& b, float t)
 								{
 									x = a.x + t * (b.x - a.x);
 									y = a.y + t * (b.y - a.y);
@@ -175,7 +175,7 @@
 		//!			+ p1 * (3t^3 - 5t^2 + 2)/2
 		//!			+ p2 * (4t^2 - 3t^3 + t)/2
 		//!			+ p3 * (t^3 - t^2)/2
-		inline_	Point&			Herp(const Point& p0, const Point& p1, const Point& p2, const Point& p3, float t)
+		inline_	IcePoint&			Herp(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2, const IcePoint& p3, float t)
 								{
 									float t2 = t * t;
 									float t3 = t2 * t;
@@ -190,22 +190,22 @@
 								}
 
 		//! this = rotpos * r + linpos
-		inline_	Point&			Transform(const Point& r, const Matrix3x3& rotpos, const Point& linpos);
+		inline_	IcePoint&			Transform(const IcePoint& r, const Matrix3x3& rotpos, const IcePoint& linpos);
 
 		//! this = trans(rotpos) * (r - linpos)
-		inline_	Point&			InvTransform(const Point& r, const Matrix3x3& rotpos, const Point& linpos);
+		inline_	IcePoint&			InvTransform(const IcePoint& r, const Matrix3x3& rotpos, const IcePoint& linpos);
 
 		//! Returns MIN(x, y, z);
 		inline_	float			Min()				const		{ return MIN(x, MIN(y, z));												}
 		//! Returns MAX(x, y, z);
 		inline_	float			Max()				const		{ return MAX(x, MAX(y, z));												}
 		//! Sets each element to be componentwise minimum
-		inline_	Point&			Min(const Point& p)				{ x = MIN(x, p.x); y = MIN(y, p.y); z = MIN(z, p.z);	return *this;	}
+		inline_	IcePoint&			Min(const IcePoint& p)				{ x = MIN(x, p.x); y = MIN(y, p.y); z = MIN(z, p.z);	return *this;	}
 		//! Sets each element to be componentwise maximum
-		inline_	Point&			Max(const Point& p)				{ x = MAX(x, p.x); y = MAX(y, p.y); z = MAX(z, p.z);	return *this;	}
+		inline_	IcePoint&			Max(const IcePoint& p)				{ x = MAX(x, p.x); y = MAX(y, p.y); z = MAX(z, p.z);	return *this;	}
 
 		//! Clamps each element
-		inline_	Point&			Clamp(float min, float max)
+		inline_	IcePoint&			Clamp(float min, float max)
 								{
 									if(x<min)	x=min;	if(x>max)	x=max;
 									if(y<min)	y=min;	if(y>max)	y=max;
@@ -220,7 +220,7 @@
 		//! Computes volume
 		inline_	float			Volume()			const		{ return x * y * z;														}
 
-		//! Checks the point is near zero
+		//! Checks the IcePoint is near zero
 		inline_	bool			ApproxZero()		const		{ return SquareMagnitude() < EPSILON2;									}
 
 		//! Tests for exact zero vector
@@ -230,7 +230,7 @@
 									return TRUE;
 								}
 
-		//! Checks point validity
+		//! Checks IcePoint validity
 		inline_	BOOL			IsValid()			const
 								{
 									if(!IsValidFloat(x))	return FALSE;
@@ -239,7 +239,7 @@
 									return TRUE;
 								}
 
-		//! Slighty moves the point
+		//! Slighty moves the IcePoint
 				void			Tweak(udword coord_mask, udword tweak_mask)
 								{
 									if(coord_mask&1)	{ udword Dummy = IR(x);	Dummy^=tweak_mask;	x = FR(Dummy); }
@@ -249,7 +249,7 @@
 
 		#define TWEAKMASK		0x3fffff
 		#define TWEAKNOTMASK	~TWEAKMASK
-		//! Slighty moves the point out
+		//! Slighty moves the IcePoint out
 		inline_	void			TweakBigger()
 								{
 									udword	Dummy = (IR(x)&TWEAKNOTMASK);	if(!IS_NEGATIVE_FLOAT(x))	Dummy+=TWEAKMASK+1;	x = FR(Dummy);
@@ -257,7 +257,7 @@
 											Dummy = (IR(z)&TWEAKNOTMASK);	if(!IS_NEGATIVE_FLOAT(z))	Dummy+=TWEAKMASK+1;	z = FR(Dummy);
 								}
 
-		//! Slighty moves the point in
+		//! Slighty moves the IcePoint in
 		inline_	void			TweakSmaller()
 								{
 									udword	Dummy = (IR(x)&TWEAKNOTMASK);	if(IS_NEGATIVE_FLOAT(x))	Dummy+=TWEAKMASK+1;	x = FR(Dummy);
@@ -266,7 +266,7 @@
 								}
 
 		//! Normalizes the vector
-		inline_	Point&			Normalize()
+		inline_	IcePoint&			Normalize()
 								{
 									float M = x*x + y*y + z*z;
 									if(M)
@@ -280,7 +280,7 @@
 								}
 
 		//! Sets vector length
-		inline_	Point&			SetLength(float length)
+		inline_	IcePoint&			SetLength(float length)
 								{
 									float NewLength = length / Magnitude();
 									x *= NewLength;
@@ -290,7 +290,7 @@
 								}
 
 		//! Clamps vector length
-		inline_	Point&			ClampLength(float limit_length)
+		inline_	IcePoint&			ClampLength(float limit_length)
 								{
 									if(limit_length>=0.0f)	// Magnitude must be positive
 									{
@@ -307,23 +307,23 @@
 									return *this;
 								}
 
-		//! Computes distance to another point
-		inline_	float			Distance(const Point& b)			const
+		//! Computes distance to another IcePoint
+		inline_	float			Distance(const IcePoint& b)			const
 								{
 									return sqrtf((x - b.x)*(x - b.x) + (y - b.y)*(y - b.y) + (z - b.z)*(z - b.z));
 								}
 
-		//! Computes square distance to another point
-		inline_	float			SquareDistance(const Point& b)		const
+		//! Computes square distance to another IcePoint
+		inline_	float			SquareDistance(const IcePoint& b)		const
 								{
 									return ((x - b.x)*(x - b.x) + (y - b.y)*(y - b.y) + (z - b.z)*(z - b.z));
 								}
 
 		//! Dot product dp = this|a
-		inline_	float			Dot(const Point& p)					const		{	return p.x * x + p.y * y + p.z * z;				}
+		inline_	float			Dot(const IcePoint& p)					const		{	return p.x * x + p.y * y + p.z * z;				}
 
 		//! Cross product this = a x b
-		inline_	Point&			Cross(const Point& a, const Point& b)
+		inline_	IcePoint&			Cross(const IcePoint& a, const IcePoint& b)
 								{
 									x = a.y * b.z - a.z * b.y;
 									y = a.z * b.x - a.x * b.z;
@@ -367,17 +367,17 @@
 									return m;
 								}
 
-		//! Refracts the point
-				Point&			Refract(const Point& eye, const Point& n, float refractindex, Point& refracted);
+		//! Refracts the IcePoint
+				IcePoint&			Refract(const IcePoint& eye, const IcePoint& n, float refractindex, IcePoint& refracted);
 
-		//! Projects the point onto a plane
-				Point&			ProjectToPlane(const Plane& p);
+		//! Projects the IcePoint onto a plane
+				IcePoint&			ProjectToPlane(const Plane& p);
 
-		//! Projects the point onto the screen
+		//! Projects the IcePoint onto the screen
 				void			ProjectToScreen(float halfrenderwidth, float halfrenderheight, const Matrix4x4& mat, HPoint& projected) const;
 
-		//! Unfolds the point onto a plane according to edge(a,b)
-				Point&			Unfold(Plane& p, Point& a, Point& b);
+		//! Unfolds the IcePoint onto a plane according to edge(a,b)
+				IcePoint&			Unfold(Plane& p, IcePoint& a, IcePoint& b);
 
 		//! Hash function from Ville Miettinen
 		inline_	udword			GetHashValue()						const
@@ -387,101 +387,101 @@
 									return (f>>22)^(f>>12)^(f);
 								}
 
-		//! Stuff magic values in the point, marking it as explicitely not used.
+		//! Stuff magic values in the IcePoint, marking it as explicitely not used.
 				void			SetNotUsed();
-		//! Checks the point is marked as not used
+		//! Checks the IcePoint is marked as not used
 				BOOL			IsNotUsed()							const;
 
 		// Arithmetic operators
 
-		//! Unary operator for Point Negate = - Point
-		inline_	Point			operator-()							const		{ return Point(-x, -y, -z);							}
+		//! Unary operator for IcePoint Negate = - IcePoint
+		inline_	IcePoint			operator-()							const		{ return IcePoint(-x, -y, -z);							}
 
-		//! Operator for Point Plus = Point + Point.
-		inline_	Point			operator+(const Point& p)			const		{ return Point(x + p.x, y + p.y, z + p.z);			}
-		//! Operator for Point Minus = Point - Point.
-		inline_	Point			operator-(const Point& p)			const		{ return Point(x - p.x, y - p.y, z - p.z);			}
+		//! Operator for IcePoint Plus = IcePoint + IcePoint.
+		inline_	IcePoint			operator+(const IcePoint& p)			const		{ return IcePoint(x + p.x, y + p.y, z + p.z);			}
+		//! Operator for IcePoint Minus = IcePoint - IcePoint.
+		inline_	IcePoint			operator-(const IcePoint& p)			const		{ return IcePoint(x - p.x, y - p.y, z - p.z);			}
 
-		//! Operator for Point Mul   = Point * Point.
-		inline_	Point			operator*(const Point& p)			const		{ return Point(x * p.x, y * p.y, z * p.z);			}
-		//! Operator for Point Scale = Point * float.
-		inline_	Point			operator*(float s)					const		{ return Point(x * s,   y * s,   z * s );			}
-		//! Operator for Point Scale = float * Point.
-		inline_ friend	Point	operator*(float s, const Point& p)				{ return Point(s * p.x, s * p.y, s * p.z);			}
+		//! Operator for IcePoint Mul   = IcePoint * IcePoint.
+		inline_	IcePoint			operator*(const IcePoint& p)			const		{ return IcePoint(x * p.x, y * p.y, z * p.z);			}
+		//! Operator for IcePoint Scale = IcePoint * float.
+		inline_	IcePoint			operator*(float s)					const		{ return IcePoint(x * s,   y * s,   z * s );			}
+		//! Operator for IcePoint Scale = float * IcePoint.
+		inline_ friend	IcePoint	operator*(float s, const IcePoint& p)				{ return IcePoint(s * p.x, s * p.y, s * p.z);			}
 
-		//! Operator for Point Div   = Point / Point.
-		inline_	Point			operator/(const Point& p)			const		{ return Point(x / p.x, y / p.y, z / p.z);			}
-		//! Operator for Point Scale = Point / float.
-		inline_	Point			operator/(float s)					const		{ s = 1.0f / s; return Point(x * s, y * s, z * s);	}
-		//! Operator for Point Scale = float / Point.
-		inline_	friend	Point	operator/(float s, const Point& p)				{ return Point(s / p.x, s / p.y, s / p.z);			}
+		//! Operator for IcePoint Div   = IcePoint / IcePoint.
+		inline_	IcePoint			operator/(const IcePoint& p)			const		{ return IcePoint(x / p.x, y / p.y, z / p.z);			}
+		//! Operator for IcePoint Scale = IcePoint / float.
+		inline_	IcePoint			operator/(float s)					const		{ s = 1.0f / s; return IcePoint(x * s, y * s, z * s);	}
+		//! Operator for IcePoint Scale = float / IcePoint.
+		inline_	friend	IcePoint	operator/(float s, const IcePoint& p)				{ return IcePoint(s / p.x, s / p.y, s / p.z);			}
 
-		//! Operator for float DotProd = Point | Point.
-		inline_	float			operator|(const Point& p)			const		{ return x*p.x + y*p.y + z*p.z;						}
-		//! Operator for Point VecProd = Point ^ Point.
-		inline_	Point			operator^(const Point& p)			const
+		//! Operator for float DotProd = IcePoint | IcePoint.
+		inline_	float			operator|(const IcePoint& p)			const		{ return x*p.x + y*p.y + z*p.z;						}
+		//! Operator for IcePoint VecProd = IcePoint ^ IcePoint.
+		inline_	IcePoint			operator^(const IcePoint& p)			const
 								{
-									return Point(
+									return IcePoint(
 									y * p.z - z * p.y,
 									z * p.x - x * p.z,
 									x * p.y - y * p.x );
 								}
 
-		//! Operator for Point += Point.
-		inline_	Point&			operator+=(const Point& p)						{ x += p.x; y += p.y; z += p.z;	return *this;		}
-		//! Operator for Point += float.
-		inline_	Point&			operator+=(float s)								{ x += s;   y += s;   z += s;	return *this;		}
+		//! Operator for IcePoint += IcePoint.
+		inline_	IcePoint&			operator+=(const IcePoint& p)						{ x += p.x; y += p.y; z += p.z;	return *this;		}
+		//! Operator for IcePoint += float.
+		inline_	IcePoint&			operator+=(float s)								{ x += s;   y += s;   z += s;	return *this;		}
 
-		//! Operator for Point -= Point.
-		inline_	Point&			operator-=(const Point& p)						{ x -= p.x; y -= p.y; z -= p.z;	return *this;		}
-		//! Operator for Point -= float.
-		inline_	Point&			operator-=(float s)								{ x -= s;   y -= s;   z -= s;	return *this;		}
+		//! Operator for IcePoint -= IcePoint.
+		inline_	IcePoint&			operator-=(const IcePoint& p)						{ x -= p.x; y -= p.y; z -= p.z;	return *this;		}
+		//! Operator for IcePoint -= float.
+		inline_	IcePoint&			operator-=(float s)								{ x -= s;   y -= s;   z -= s;	return *this;		}
 
-		//! Operator for Point *= Point.
-		inline_	Point&			operator*=(const Point& p)						{ x *= p.x; y *= p.y; z *= p.z;	return *this;		}
-		//! Operator for Point *= float.
-		inline_	Point&			operator*=(float s)								{ x *= s; y *= s; z *= s;		return *this;		}
+		//! Operator for IcePoint *= IcePoint.
+		inline_	IcePoint&			operator*=(const IcePoint& p)						{ x *= p.x; y *= p.y; z *= p.z;	return *this;		}
+		//! Operator for IcePoint *= float.
+		inline_	IcePoint&			operator*=(float s)								{ x *= s; y *= s; z *= s;		return *this;		}
 
-		//! Operator for Point /= Point.
-		inline_	Point&			operator/=(const Point& p)						{ x /= p.x; y /= p.y; z /= p.z;	return *this;		}
-		//! Operator for Point /= float.
-		inline_	Point&			operator/=(float s)								{ s = 1.0f/s; x *= s; y *= s; z *= s; return *this; }
+		//! Operator for IcePoint /= IcePoint.
+		inline_	IcePoint&			operator/=(const IcePoint& p)						{ x /= p.x; y /= p.y; z /= p.z;	return *this;		}
+		//! Operator for IcePoint /= float.
+		inline_	IcePoint&			operator/=(float s)								{ s = 1.0f/s; x *= s; y *= s; z *= s; return *this; }
 
 		// Logical operators
 
-		//! Operator for "if(Point==Point)"
-		inline_	bool			operator==(const Point& p)			const		{ return ( (IR(x)==IR(p.x))&&(IR(y)==IR(p.y))&&(IR(z)==IR(p.z)));	}
-		//! Operator for "if(Point!=Point)"
-		inline_	bool			operator!=(const Point& p)			const		{ return ( (IR(x)!=IR(p.x))||(IR(y)!=IR(p.y))||(IR(z)!=IR(p.z)));	}
+		//! Operator for "if(IcePoint==IcePoint)"
+		inline_	bool			operator==(const IcePoint& p)			const		{ return ( (IR(x)==IR(p.x))&&(IR(y)==IR(p.y))&&(IR(z)==IR(p.z)));	}
+		//! Operator for "if(IcePoint!=IcePoint)"
+		inline_	bool			operator!=(const IcePoint& p)			const		{ return ( (IR(x)!=IR(p.x))||(IR(y)!=IR(p.y))||(IR(z)!=IR(p.z)));	}
 
 		// Arithmetic operators
 
-		//! Operator for Point Mul = Point * Matrix3x3.
-		inline_	Point			operator*(const Matrix3x3& mat)		const
+		//! Operator for IcePoint Mul = IcePoint * Matrix3x3.
+		inline_	IcePoint			operator*(const Matrix3x3& mat)		const
 								{
 									class ShadowMatrix3x3{ public: float m[3][3]; };	// To allow inlining
 									const ShadowMatrix3x3* Mat = (const ShadowMatrix3x3*)&mat;
 
-									return Point(
+									return IcePoint(
 									x * Mat->m[0][0] + y * Mat->m[1][0] + z * Mat->m[2][0],
 									x * Mat->m[0][1] + y * Mat->m[1][1] + z * Mat->m[2][1],
 									x * Mat->m[0][2] + y * Mat->m[1][2] + z * Mat->m[2][2] );
 								}
 
-		//! Operator for Point Mul = Point * Matrix4x4.
-		inline_	Point			operator*(const Matrix4x4& mat)		const
+		//! Operator for IcePoint Mul = IcePoint * Matrix4x4.
+		inline_	IcePoint			operator*(const Matrix4x4& mat)		const
 								{
 									class ShadowMatrix4x4{ public: float m[4][4]; };	// To allow inlining
 									const ShadowMatrix4x4* Mat = (const ShadowMatrix4x4*)&mat;
 
-									return Point(
+									return IcePoint(
 									x * Mat->m[0][0] + y * Mat->m[1][0] + z * Mat->m[2][0] + Mat->m[3][0],
 									x * Mat->m[0][1] + y * Mat->m[1][1] + z * Mat->m[2][1] + Mat->m[3][1],
 									x * Mat->m[0][2] + y * Mat->m[1][2] + z * Mat->m[2][2] + Mat->m[3][2]);
 								}
 
-		//! Operator for Point *= Matrix3x3.
-		inline_	Point&			operator*=(const Matrix3x3& mat)
+		//! Operator for IcePoint *= Matrix3x3.
+		inline_	IcePoint&			operator*=(const Matrix3x3& mat)
 								{
 									class ShadowMatrix3x3{ public: float m[3][3]; };	// To allow inlining
 									const ShadowMatrix3x3* Mat = (const ShadowMatrix3x3*)&mat;
@@ -495,8 +495,8 @@
 									return *this;
 								}
 
-		//! Operator for Point *= Matrix4x4.
-		inline_	Point&			operator*=(const Matrix4x4& mat)
+		//! Operator for IcePoint *= Matrix4x4.
+		inline_	IcePoint&			operator*=(const Matrix4x4& mat)
 								{
 									class ShadowMatrix4x4{ public: float m[4][4]; };	// To allow inlining
 									const ShadowMatrix4x4* Mat = (const ShadowMatrix4x4*)&mat;
@@ -512,7 +512,7 @@
 
 		// Cast operators
 
-		//! Cast a Point to a HPoint. w is set to zero.
+		//! Cast a IcePoint to a HPoint. w is set to zero.
 								operator	HPoint()				const;
 
 		inline_					operator	const	float*() const	{ return &x; }
@@ -522,7 +522,7 @@
 				float			x, y, z;
 	};
 
-	FUNCTION ICEMATHS_API void Normalize1(Point& a);
-	FUNCTION ICEMATHS_API void Normalize2(Point& a);
+	FUNCTION ICEMATHS_API void Normalize1(IcePoint& a);
+	FUNCTION ICEMATHS_API void Normalize2(IcePoint& a);
 
 #endif //__ICEPOINT_H__

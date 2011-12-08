@@ -37,24 +37,24 @@
 		//! Destructor
 		inline_				~CollisionAABB()					{}
 
-		//! Get min point of the box
-		inline_	void		GetMin(Point& min)		const		{ min = mCenter - mExtents;					}
-		//! Get max point of the box
-		inline_	void		GetMax(Point& max)		const		{ max = mCenter + mExtents;					}
+		//! Get min IcePoint of the box
+		inline_	void		GetMin(IcePoint& min)		const		{ min = mCenter - mExtents;					}
+		//! Get max IcePoint of the box
+		inline_	void		GetMax(IcePoint& max)		const		{ max = mCenter + mExtents;					}
 
-		//! Get component of the box's min point along a given axis
+		//! Get component of the box's min IcePoint along a given axis
 		inline_	float		GetMin(udword axis)		const		{ return mCenter[axis] - mExtents[axis];	}
-		//! Get component of the box's max point along a given axis
+		//! Get component of the box's max IcePoint along a given axis
 		inline_	float		GetMax(udword axis)		const		{ return mCenter[axis] + mExtents[axis];	}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 *	Setups an AABB from min & max vectors.
-		 *	\param		min			[in] the min point
-		 *	\param		max			[in] the max point
+		 *	\param		min			[in] the min IcePoint
+		 *	\param		max			[in] the max IcePoint
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		inline_	void		SetMinMax(const Point& min, const Point& max)		{ mCenter = (max + min)*0.5f; mExtents = (max - min)*0.5f;		}
+		inline_	void		SetMinMax(const IcePoint& min, const IcePoint& max)		{ mCenter = (max + min)*0.5f; mExtents = (max - min)*0.5f;		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
@@ -74,8 +74,8 @@
 								return TRUE;
 							}
 
-				Point		mCenter;				//!< Box center
-				Point		mExtents;				//!< Box extents
+				IcePoint		mCenter;				//!< Box center
+				IcePoint		mExtents;				//!< Box extents
 	};
 
 	class OPCODE_API QuantizedAABB
@@ -91,7 +91,7 @@
 	};
 
 	//! Quickly rotates & translates a vector
-	inline_ void TransformPoint(Point& dest, const Point& source, const Matrix3x3& rot, const Point& trans)
+	inline_ void TransformPoint(IcePoint& dest, const IcePoint& source, const Matrix3x3& rot, const IcePoint& trans)
 	{
 		dest.x = trans.x + source.x * rot.m[0][0] + source.y * rot.m[1][0] + source.z * rot.m[2][0];
 		dest.y = trans.y + source.x * rot.m[0][1] + source.y * rot.m[1][1] + source.z * rot.m[2][1];

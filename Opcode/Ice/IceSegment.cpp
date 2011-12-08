@@ -26,10 +26,10 @@
 
 using namespace IceMaths;
 
-float Segment::SquareDistance(const Point& point, float* t)	const
+float Segment::SquareDistance(const IcePoint& Point, float* t)	const
 {
-	Point Diff = point - mP0;
-	Point Dir = mP1 - mP0;
+	IcePoint Diff = Point - mP0;
+	IcePoint Dir = mP1 - mP0;
 	float fT = Diff | Dir;
 
 	if(fT<=0.0f)

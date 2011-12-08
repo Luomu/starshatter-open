@@ -12,18 +12,18 @@
 #ifndef __ICEHPOINT_H__
 #define __ICEHPOINT_H__
 
-	class ICEMATHS_API HPoint : public Point
+	class ICEMATHS_API HPoint : public IcePoint
 	{
 		public:
 
 		//! Empty constructor
 		inline_				HPoint()																		{}
 		//! Constructor from floats
-		inline_				HPoint(float _x, float _y, float _z, float _w=0.0f) : Point(_x, _y, _z), w(_w)	{}
+		inline_				HPoint(float _x, float _y, float _z, float _w=0.0f) : IcePoint(_x, _y, _z), w(_w)	{}
 		//! Constructor from array
-		inline_				HPoint(const float f[4]) : Point(f), w(f[3])									{}
+		inline_				HPoint(const float f[4]) : IcePoint(f), w(f[3])									{}
 		//! Constructor from a Point
-		inline_				HPoint(const Point& p, float _w=0.0f) : Point(p), w(_w)							{}
+		inline_				HPoint(const IcePoint& p, float _w=0.0f) : IcePoint(p), w(_w)							{}
 		//! Destructor
 		inline_				~HPoint()																		{}
 
@@ -129,7 +129,7 @@
 		// Arithmetic operators
 
 		//! Operator for Point Mul = HPoint * Matrix3x3;
-				Point		operator*(const Matrix3x3& mat)		const;
+				IcePoint	operator*(const Matrix3x3& mat)		const;
 		//! Operator for HPoint Mul = HPoint * Matrix4x4;
 				HPoint		operator*(const Matrix4x4& mat)		const;
 
@@ -147,7 +147,7 @@
 		// Cast operators
 
 		//! Cast a HPoint to a Point. w is discarded.
-		inline_				operator	Point()					const		{ return Point(x, y, z);									}
+		inline_				operator	HPoint()					const		{ return IcePoint(x, y, z);									}
 
 		public:
 				float		w;

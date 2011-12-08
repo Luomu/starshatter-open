@@ -85,12 +85,12 @@
 							Matrix3x3		mAR;				//!< Absolute rotation matrix
 							Matrix3x3		mRModelToBox;		//!< Rotation from model space to obb space
 							Matrix3x3		mRBoxToModel;		//!< Rotation from obb space to model space
-							Point			mTModelToBox;		//!< Translation from model space to obb space
-							Point			mTBoxToModel;		//!< Translation from obb space to model space
+							IcePoint			mTModelToBox;		//!< Translation from model space to obb space
+							IcePoint			mTBoxToModel;		//!< Translation from obb space to model space
 
-							Point			mBoxExtents;
-							Point			mB0;				//!< - mTModelToBox + mBoxExtents
-							Point			mB1;				//!< - mTModelToBox - mBoxExtents
+							IcePoint			mBoxExtents;
+							IcePoint			mB0;				//!< - mTModelToBox + mBoxExtents
+							IcePoint			mB1;				//!< - mTModelToBox - mBoxExtents
 
 							float			mBBx1;
 							float			mBBy1;
@@ -107,7 +107,7 @@
 							float			mBB_9;
 
 		// Leaf description
-							Point			mLeafVerts[3];		//!< Triangle vertices
+							IcePoint			mLeafVerts[3];		//!< Triangle vertices
 		// Settings
 							bool			mFullBoxBoxTest;	//!< Perform full BV-BV tests (true) or SAT-lite tests (false)
 		// Internal methods
@@ -120,8 +120,8 @@
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNode* node);
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNoLeafNode* node);
 			// Overlap tests
-		inline_				BOOL			OBBContainsBox(const Point& bc, const Point& be);
-		inline_				BOOL			BoxBoxOverlap(const Point& extents, const Point& center);
+		inline_				BOOL			OBBContainsBox(const IcePoint& bc, const IcePoint& be);
+		inline_				BOOL			BoxBoxOverlap(const IcePoint& extents, const IcePoint& center);
 		inline_				BOOL			TriBoxOverlap();
 			// Init methods
 							BOOL			InitQuery(OBBCache& cache, const OBB& box, const Matrix4x4* worldb=null, const Matrix4x4* worldm=null);

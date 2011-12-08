@@ -22,16 +22,16 @@
 
 	struct VertexPointers
 	{
-		const Point*	Vertex[3];
+		const IcePoint*	Vertex[3];
 
-		bool BackfaceCulling(const Point& source)
+		bool BackfaceCulling(const IcePoint& source)
 		{
-			const Point& p0 = *Vertex[0];
-			const Point& p1 = *Vertex[1];
-			const Point& p2 = *Vertex[2];
+			const IcePoint& p0 = *Vertex[0];
+			const IcePoint& p1 = *Vertex[1];
+			const IcePoint& p2 = *Vertex[2];
 
 			// Compute normal direction
-			Point Normal = (p2 - p1)^(p0 - p1);
+			IcePoint Normal = (p2 - p1)^(p0 - p1);
 
 			// Backface culling
 			return (Normal | (source - p0)) >= 0.0f;
@@ -87,9 +87,9 @@
 		 *	\return		true if success
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						bool				SetPointers(const IndexedTriangle* tris, const Point* verts);
+						bool				SetPointers(const IndexedTriangle* tris, const IcePoint* verts);
 		inline_	const	IndexedTriangle*	GetTris()			const	{ return mTris;			}
-		inline_	const	Point*				GetVerts()			const	{ return mVerts;		}
+		inline_	const	IcePoint*				GetVerts()			const	{ return mVerts;		}
 
 	#ifdef OPC_USE_STRIDE
 		// Strides settings
@@ -98,11 +98,11 @@
 		/**
 		 *	Strides control
 		 *	\param		tri_stride		[in] size of a triangle in bytes. The first sizeof(IndexedTriangle) bytes are used to get vertex indices.
-		 *	\param		vertex_stride	[in] size of a vertex in bytes. The first sizeof(Point) bytes are used to get vertex position.
+		 *	\param		vertex_stride	[in] size of a vertex in bytes. The first sizeof(IcePoint) bytes are used to get vertex position.
 		 *	\return		true if success
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						bool				SetStrides(udword tri_stride=sizeof(IndexedTriangle), udword vertex_stride=sizeof(Point));
+						bool				SetStrides(udword tri_stride=sizeof(IndexedTriangle), udword vertex_stride=sizeof(IcePoint));
 		inline_			udword				GetTriStride()		const	{ return mTriStride;	}
 		inline_			udword				GetVertexStride()	const	{ return mVertexStride;	}
 	#endif
@@ -122,9 +122,9 @@
 #else
 	#ifdef OPC_USE_STRIDE
 												const IndexedTriangle* T = (const IndexedTriangle*)(((ubyte*)mTris) + index * mTriStride);
-												vp.Vertex[0] = (const Point*)(((ubyte*)mVerts) + T->mVRef[0] * mVertexStride);
-												vp.Vertex[1] = (const Point*)(((ubyte*)mVerts) + T->mVRef[1] * mVertexStride);
-												vp.Vertex[2] = (const Point*)(((ubyte*)mVerts) + T->mVRef[2] * mVertexStride);
+												vp.Vertex[0] = (const IcePoint*)(((ubyte*)mVerts) + T->mVRef[0] * mVertexStride);
+												vp.Vertex[1] = (const IcePoint*)(((ubyte*)mVerts) + T->mVRef[1] * mVertexStride);
+												vp.Vertex[2] = (const IcePoint*)(((ubyte*)mVerts) + T->mVRef[2] * mVertexStride);
 	#else
 												const IndexedTriangle* T = &mTris[index];
 												vp.Vertex[0] = &mVerts[T->mVRef[0]];
@@ -171,7 +171,7 @@
 #else
 		// User pointers
 				const	IndexedTriangle*	mTris;				//!< Array of indexed triangles
-				const	Point*				mVerts;				//!< Array of vertices
+				const	IcePoint*				mVerts;				//!< Array of vertices
 	#ifdef OPC_USE_STRIDE
 						udword				mTriStride;			//!< Possible triangle stride in bytes [Opcode 1.3]
 						udword				mVertexStride;		//!< Possible vertex stride in bytes [Opcode 1.3]

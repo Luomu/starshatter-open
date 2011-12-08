@@ -3,13 +3,13 @@
 
 static const float gs_fTolerance = 1e-05f;
 
-static float OPC_PointTriangleSqrDist(const Point& point, const Point& p0, const Point& p1, const Point& p2)
+static float OPC_PointTriangleSqrDist(const IcePoint& Point, const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)
 {
 	// Hook
-	Point TriEdge0 = p1 - p0;
-	Point TriEdge1 = p2 - p0;
+	IcePoint TriEdge0 = p1 - p0;
+	IcePoint TriEdge1 = p2 - p0;
 
-	Point kDiff	= p0 - point;
+	IcePoint kDiff	= p0 - Point;
 	float fA00	= TriEdge0.SquareMagnitude();
 	float fA01	= TriEdge0 | TriEdge1;
 	float fA11	= TriEdge1.SquareMagnitude();
@@ -54,7 +54,7 @@ static float OPC_PointTriangleSqrDist(const Point& point, const Point& p0, const
 		}
 		else  // region 0
 		{
-			// minimum at interior point
+			// minimum at interior IcePoint
 			if(fDet==0.0f)
 			{
 				fSqrDist = MAX_FLOAT;
@@ -153,10 +153,10 @@ static float OPC_PointTriangleSqrDist(const Point& point, const Point& p0, const
 static float OPC_SegmentSegmentSqrDist(const Segment& rkSeg0, const Segment& rkSeg1)
 {
 	// Hook
-	Point rkSeg0Direction	= rkSeg0.ComputeDirection();
-	Point rkSeg1Direction	= rkSeg1.ComputeDirection();
+	IcePoint rkSeg0Direction	= rkSeg0.ComputeDirection();
+	IcePoint rkSeg1Direction	= rkSeg1.ComputeDirection();
 
-	Point kDiff	= rkSeg0.mP0 - rkSeg1.mP0;
+	IcePoint kDiff	= rkSeg0.mP0 - rkSeg1.mP0;
 	float fA00	= rkSeg0Direction.SquareMagnitude();
 	float fA01	= -rkSeg0Direction.Dot(rkSeg1Direction);
 	float fA11	= rkSeg1Direction.SquareMagnitude();
@@ -352,16 +352,16 @@ inline_ float OPC_SegmentRaySqrDist(const Segment& rkSeg0, const Ray& rkSeg1)
 	return OPC_SegmentSegmentSqrDist(rkSeg0, Segment(rkSeg1.mOrig, rkSeg1.mOrig + rkSeg1.mDir));
 }
 
-static float OPC_SegmentTriangleSqrDist(const Segment& segment, const Point& p0, const Point& p1, const Point& p2)
+static float OPC_SegmentTriangleSqrDist(const Segment& segment, const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)
 {
 	// Hook
-	const Point TriEdge0 = p1 - p0;
-	const Point TriEdge1 = p2 - p0;
+	const IcePoint TriEdge0 = p1 - p0;
+	const IcePoint TriEdge1 = p2 - p0;
 
-	const Point& rkSegOrigin	= segment.GetOrigin();
-	Point rkSegDirection		= segment.ComputeDirection();
+	const IcePoint& rkSegOrigin	= segment.GetOrigin();
+	IcePoint rkSegDirection		= segment.ComputeDirection();
 
-	Point kDiff = p0 - rkSegOrigin;
+	IcePoint kDiff = p0 - rkSegOrigin;
 	float fA00 = rkSegDirection.SquareMagnitude();
 	float fA01 = -rkSegDirection.Dot(TriEdge0);
 	float fA02 = -rkSegDirection.Dot(TriEdge1);
@@ -377,7 +377,7 @@ static float OPC_SegmentTriangleSqrDist(const Segment& segment, const Point& p0,
 	float fDet = fA00*fCof00+fA01*fCof01+fA02*fCof02;
 
 	Ray kTriSeg;
-	Point kPt;
+	IcePoint kPt;
 	float fSqrDist, fSqrDist0;
 
 	if(fabsf(fDet)>=gs_fTolerance)
@@ -668,7 +668,7 @@ static float OPC_SegmentTriangleSqrDist(const Segment& segment, const Point& p0,
     return fabsf(fSqrDist);
 }
 
-inline_ BOOL LSSCollider::LSSTriOverlap(const Point& vert0, const Point& vert1, const Point& vert2)
+inline_ BOOL LSSCollider::LSSTriOverlap(const IcePoint& vert0, const IcePoint& vert1, const IcePoint& vert2)
 {
 	// Stats
 	mNbVolumePrimTests++;

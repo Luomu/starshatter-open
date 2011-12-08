@@ -6,13 +6,13 @@
 // Overall this approach should run faster.
 
 // Original code by David Eberly in Magic.
-BOOL SphereCollider::SphereTriOverlap(const Point& vert0, const Point& vert1, const Point& vert2)
+BOOL SphereCollider::SphereTriOverlap(const IcePoint& vert0, const IcePoint& vert1, const IcePoint& vert2)
 {
 	// Stats
 	mNbVolumePrimTests++;
 
 	// Early exit if one of the vertices is inside the sphere
-	Point kDiff = vert2 - mCenter;
+	IcePoint kDiff = vert2 - mCenter;
 	float fC = kDiff.SquareMagnitude();
 	if(fC <= mRadius2)	return TRUE;
 
@@ -25,10 +25,10 @@ BOOL SphereCollider::SphereTriOverlap(const Point& vert0, const Point& vert1, co
 	if(fC <= mRadius2)	return TRUE;
 
 	// Else do the full distance test
-	Point TriEdge0	= vert1 - vert0;
-	Point TriEdge1	= vert2 - vert0;
+	IcePoint TriEdge0	= vert1 - vert0;
+	IcePoint TriEdge1	= vert2 - vert0;
 
-//Point kDiff	= vert0 - mCenter;
+//IcePoint kDiff	= vert0 - mCenter;
 	float fA00	= TriEdge0.SquareMagnitude();
 	float fA01	= TriEdge0 | TriEdge1;
 	float fA11	= TriEdge1.SquareMagnitude();
@@ -77,7 +77,7 @@ BOOL SphereCollider::SphereTriOverlap(const Point& vert0, const Point& vert1, co
 		}
 		else  // region 0
 		{
-			// minimum at interior point
+			// minimum at interior IcePoint
 			if(fDet==0.0f)
 			{
 //				u = 0.0f;
