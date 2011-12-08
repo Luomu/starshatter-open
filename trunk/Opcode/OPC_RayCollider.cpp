@@ -26,7 +26,7 @@
  *		- d = distance between P0 and P1
  *		- Origin	= P0
  *		- Direction	= (P1 - P0) / d = normalized direction vector
- *		- A parameter t such as a point P on the line (P0,P1) is P = Origin + t * Direction
+ *		- A parameter t such as a IcePoint P on the line (P0,P1) is P = Origin + t * Direction
  *		- t = 0  -->  P = P0
  *		- t = d  -->  P = P1
  *
@@ -34,8 +34,8 @@
  *
  *			struct Ray
  *			{
- *				Point	Origin;
- *				Point	Direction;
+ *				IcePoint	Origin;
+ *				IcePoint	Direction;
  *			};
  *
  *		But it actually maps three different things:
@@ -178,7 +178,7 @@ using namespace Opcode;
 	/* Perform ray-tri overlap test and return */											\
 	if(RayTriOverlap(*VP.Vertex[0], *VP.Vertex[1], *VP.Vertex[2]))							\
 	{																						\
-		/* Intersection point is valid if dist < segment's length */						\
+		/* Intersection IcePoint is valid if dist < segment's length */						\
 		/* We know dist>0 so we can use integers */											\
 		if(IR(mStabbedFace.mDistance)<IR(mMaxDist))											\
 		{																					\
@@ -392,8 +392,8 @@ BOOL RayCollider::InitQuery(const Ray& world_ray, const Matrix4x4* world, udword
 			// Perform ray-cached tri overlap test
 			if(RayTriOverlap(*VP.Vertex[0], *VP.Vertex[1], *VP.Vertex[2]))
 			{
-				// Intersection point is valid if:
-				// - distance is positive (else it can just be a face behind the orig point)
+				// Intersection IcePoint is valid if:
+				// - distance is positive (else it can just be a face behind the orig IcePoint)
 				// - distance is smaller than a given max distance (useful for shadow feelers)
 //				if(mStabbedFace.mDistance>0.0f && mStabbedFace.mDistance<mMaxDist)
 				if(IR(mStabbedFace.mDistance)<IR(mMaxDist))	// The other test is already performed in RayTriOverlap
@@ -519,8 +519,8 @@ void RayCollider::_SegmentStab(const AABBQuantizedNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform Segment-AABB overlap test
 	if(!SegmentAABBOverlap(Center, Extents))	return;
@@ -575,8 +575,8 @@ void RayCollider::_SegmentStab(const AABBQuantizedNoLeafNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform Segment-AABB overlap test
 	if(!SegmentAABBOverlap(Center, Extents))	return;
@@ -606,7 +606,7 @@ void RayCollider::_SegmentStab(const AABBQuantizedNoLeafNode* node)
 void RayCollider::_SegmentStab(const AABBTreeNode* node, Container& box_indices)
 {
 	// Test the box against the segment
-	Point Center, Extents;
+	IcePoint Center, Extents;
 	node->GetAABB()->GetCenter(Center);
 	node->GetAABB()->GetExtents(Extents);
 	if(!SegmentAABBOverlap(Center, Extents))	return;
@@ -657,8 +657,8 @@ void RayCollider::_RayStab(const AABBQuantizedNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform Ray-AABB overlap test
 	if(!RayAABBOverlap(Center, Extents))	return;
@@ -713,8 +713,8 @@ void RayCollider::_RayStab(const AABBQuantizedNoLeafNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform Ray-AABB overlap test
 	if(!RayAABBOverlap(Center, Extents))	return;
@@ -744,7 +744,7 @@ void RayCollider::_RayStab(const AABBQuantizedNoLeafNode* node)
 void RayCollider::_RayStab(const AABBTreeNode* node, Container& box_indices)
 {
 	// Test the box against the ray
-	Point Center, Extents;
+	IcePoint Center, Extents;
 	node->GetAABB()->GetCenter(Center);
 	node->GetAABB()->GetExtents(Extents);
 	if(!RayAABBOverlap(Center, Extents))	return;

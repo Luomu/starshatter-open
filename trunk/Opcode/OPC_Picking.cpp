@@ -85,7 +85,7 @@ bool Opcode::SetupInOutTest(RayCollider& collider)
 bool Opcode::Picking(
 CollisionFace& picked_face,
 const Ray& world_ray, const Model& model, const Matrix4x4* world,
-float min_dist, float max_dist, const Point& view_point, CullModeCallback callback, void* user_data)
+float min_dist, float max_dist, const IcePoint& view_point, CullModeCallback callback, void* user_data)
 {
 	struct Local
 	{
@@ -95,7 +95,7 @@ float min_dist, float max_dist, const Point& view_point, CullModeCallback callba
 			float					MinLimit;
 			CullModeCallback		Callback;
 			void*					UserData;
-			Point					ViewPoint;
+			IcePoint					ViewPoint;
 			const MeshInterface*	IMesh;
 		};
 
@@ -107,7 +107,7 @@ float min_dist, float max_dist, const Point& view_point, CullModeCallback callba
 			// Discard face if we already have a closer hit
 			if(hit.mDistance>=Data->Closest->mDistance)	return;
 
-			// Discard face if hit point is smaller than min limit. This mainly happens when the face is in front
+			// Discard face if hit IcePoint is smaller than min limit. This mainly happens when the face is in front
 			// of the near clip plane (or straddles it). If we keep the face nonetheless, the user can select an
 			// object that he may not even be able to see, which is very annoying.
 			if(hit.mDistance<=Data->MinLimit)	return;

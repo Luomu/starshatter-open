@@ -177,10 +177,10 @@
 
 		protected:
 		// Ray in local space
-							Point			mOrigin;			//!< Ray origin
-							Point			mDir;				//!< Ray direction (normalized)
-							Point			mFDir;				//!< fabsf(mDir)
-							Point			mData, mData2;
+							IcePoint			mOrigin;			//!< Ray origin
+							IcePoint			mDir;				//!< Ray direction (normalized)
+							IcePoint			mFDir;				//!< fabsf(mDir)
+							IcePoint			mData, mData2;
 		// Stabbed faces
 							CollisionFace	mStabbedFace;		//!< Current stabbed face
 #ifdef OPC_RAYHIT_CALLBACK
@@ -195,8 +195,8 @@
 		// In-out test
 							udword			mNbIntersections;	//!< Number of valid intersections
 		// Dequantization coeffs
-							Point			mCenterCoeff;
-							Point			mExtentsCoeff;
+							IcePoint			mCenterCoeff;
+							IcePoint			mExtentsCoeff;
 		// Settings
 							float			mMaxDist;			//!< Valid segment on the ray
 #ifndef OPC_RAYHIT_CALLBACK
@@ -215,9 +215,9 @@
 							void			_RayStab(const AABBQuantizedNoLeafNode* node);
 							void			_RayStab(const AABBTreeNode* node, Container& box_indices);
 			// Overlap tests
-		inline_				BOOL			RayAABBOverlap(const Point& center, const Point& extents);
-		inline_				BOOL			SegmentAABBOverlap(const Point& center, const Point& extents);
-		inline_				BOOL			RayTriOverlap(const Point& vert0, const Point& vert1, const Point& vert2);
+		inline_				BOOL			RayAABBOverlap(const IcePoint& center, const IcePoint& extents);
+		inline_				BOOL			SegmentAABBOverlap(const IcePoint& center, const IcePoint& extents);
+		inline_				BOOL			RayTriOverlap(const IcePoint& vert0, const IcePoint& vert1, const IcePoint& vert2);
 			// Init methods
 							BOOL			InitQuery(const Ray& world_ray, const Matrix4x4* world=null, udword* face_id=null);
 	};

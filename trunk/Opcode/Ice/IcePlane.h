@@ -22,11 +22,11 @@
 		//! Constructor from a normal and a distance
 		inline_			Plane(float nx, float ny, float nz, float d)					{ Set(nx, ny, nz, d);							}
 		//! Constructor from a point on the plane and a normal
-		inline_			Plane(const Point& p, const Point& n)							{ Set(p, n);									}
+		inline_			Plane(const IcePoint& p, const IcePoint& n)							{ Set(p, n);									}
 		//! Constructor from three points
-		inline_			Plane(const Point& p0, const Point& p1, const Point& p2)		{ Set(p0, p1, p2);								}
+		inline_			Plane(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)		{ Set(p0, p1, p2);								}
 		//! Constructor from a normal and a distance
-		inline_			Plane(const Point& _n, float _d)								{ n = _n; d = _d;								}
+		inline_			Plane(const IcePoint& _n, float _d)								{ n = _n; d = _d;								}
 		//! Copy constructor
 		inline_			Plane(const Plane& plane) : n(plane.n), d(plane.d)				{												}
 		//! Destructor
@@ -34,11 +34,11 @@
 
 		inline_	Plane&	Zero()															{ n.Zero(); d = 0.0f;			return *this;	}
 		inline_	Plane&	Set(float nx, float ny, float nz, float _d)						{ n.Set(nx, ny, nz); d = _d;	return *this;	}
-		inline_	Plane&	Set(const Point& p, const Point& _n)							{ n = _n; d = - p | _n;			return *this;	}
-				Plane&	Set(const Point& p0, const Point& p1, const Point& p2);
+		inline_	Plane&	Set(const IcePoint& p, const IcePoint& _n)							{ n = _n; d = - p | _n;			return *this;	}
+				Plane&	Set(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2);
 
-		inline_	float	Distance(const Point& p)			const						{ return (p | n) + d;							}
-		inline_	bool	Belongs(const Point& p)				const						{ return fabsf(Distance(p)) < PLANE_EPSILON;	}
+		inline_	float	Distance(const IcePoint& p)			const						{ return (p | n) + d;							}
+		inline_	bool	Belongs(const IcePoint& p)				const						{ return fabsf(Distance(p)) < PLANE_EPSILON;	}
 
 		inline_	void	Normalize()
 						{
@@ -50,11 +50,11 @@
 						}
 		public:
 		// Members
-				Point	n;		//!< The normal to the plane
+				IcePoint	n;		//!< The normal to the plane
 				float	d;		//!< The distance from the origin
 
 		// Cast operators
-		inline_			operator Point()					const						{ return n;										}
+		inline_			operator IcePoint()					const						{ return n;										}
 		inline_			operator HPoint()					const						{ return HPoint(n, d);							}
 
 		// Arithmetic operators
@@ -68,8 +68,8 @@
 		inline_	Plane&	operator*=(const Matrix4x4& m)
 						{
 							// Old code from Irion. Kept for reference.
-							Point n2 = HPoint(n, 0.0f) * m;
-							d = -((Point) (HPoint( -d*n, 1.0f ) * m) | n2);
+							IcePoint n2 = HPoint(n, 0.0f) * m;
+							d = -((IcePoint) (HPoint( -d*n, 1.0f ) * m) | n2);
 							n = n2;
 							return *this;
 						}
@@ -90,7 +90,7 @@
 		transformed.n = plane.n * Matrix3x3(transform);
 
 		// Compute new d
-		transformed.d = plane.d - (Point(transform.GetTrans())|transformed.n);
+		transformed.d = plane.d - (IcePoint(transform.GetTrans())|transformed.n);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +107,7 @@
 		plane.n *= Matrix3x3(transform);
 
 		// Compute new d
-		plane.d -= Point(transform.GetTrans())|plane.n;
+		plane.d -= IcePoint(transform.GetTrans())|plane.n;
 	}
 
 #endif // __ICEPLANE_H__

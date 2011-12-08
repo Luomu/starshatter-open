@@ -56,7 +56,7 @@ using namespace IceMaths;
  *	\return		Self-reference
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Point& Point::PositiveUnitRandomVector()
+IcePoint& IcePoint::PositiveUnitRandomVector()
 {
 	x = UnitRandomFloat();
 	y = UnitRandomFloat();
@@ -71,7 +71,7 @@ Point& Point::PositiveUnitRandomVector()
  *	\return		Self-reference
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Point& Point::UnitRandomVector()
+IcePoint& IcePoint::UnitRandomVector()
 {
 	x = UnitRandomFloat() - 0.5f;
 	y = UnitRandomFloat() - 0.5f;
@@ -82,16 +82,16 @@ Point& Point::UnitRandomVector()
 
 // Cast operator
 // WARNING: not inlined
-Point::operator HPoint() const	{ return HPoint(x, y, z, 0.0f); }
+IcePoint::operator HPoint() const	{ return HPoint(x, y, z, 0.0f); }
 
-Point& Point::Refract(const Point& eye, const Point& n, float refractindex, Point& refracted)
+IcePoint& IcePoint::Refract(const IcePoint& eye, const IcePoint& n, float refractindex, IcePoint& refracted)
 {
-	//	Point EyePt = eye position
-	//	Point p = current vertex
-	//	Point n = vertex normal
-	//	Point rv = refracted vector
+	//	IcePoint EyePt = eye position
+	//	IcePoint p = current vertex
+	//	IcePoint n = vertex normal
+	//	IcePoint rv = refracted vector
 	//	Eye vector - doesn't need to be normalized
-	Point Env;
+	IcePoint Env;
 	Env.x = eye.x - x;
 	Env.y = eye.y - y;
 	Env.z = eye.z - z;
@@ -106,13 +106,13 @@ Point& Point::Refract(const Point& eye, const Point& n, float refractindex, Poin
 	return *this;
 }
 
-Point& Point::ProjectToPlane(const Plane& p)
+IcePoint& IcePoint::ProjectToPlane(const Plane& p)
 {
 	*this-= (p.d + (*this|p.n))*p.n;
 	return *this;
 }
 
-void Point::ProjectToScreen(float halfrenderwidth, float halfrenderheight, const Matrix4x4& mat, HPoint& projected) const
+void IcePoint::ProjectToScreen(float halfrenderwidth, float halfrenderheight, const Matrix4x4& mat, HPoint& projected) const
 {
 	projected = HPoint(x, y, z, 1.0f) * mat;
 	projected.w = 1.0f / projected.w;
@@ -125,7 +125,7 @@ void Point::ProjectToScreen(float halfrenderwidth, float halfrenderheight, const
 	projected.y *= -halfrenderheight;	projected.y += halfrenderheight;
 }
 
-void Point::SetNotUsed()
+void IcePoint::SetNotUsed()
 {
 	// We use a particular integer pattern : 0xffffffff everywhere. This is a NAN.
 	IR(x) = 0xffffffff;
@@ -133,7 +133,7 @@ void Point::SetNotUsed()
 	IR(z) = 0xffffffff;
 }
 
-BOOL Point::IsNotUsed()	const
+BOOL IcePoint::IsNotUsed()	const
 {
 	if(IR(x)!=0xffffffff)	return FALSE;
 	if(IR(y)!=0xffffffff)	return FALSE;
@@ -141,7 +141,7 @@ BOOL Point::IsNotUsed()	const
 	return TRUE;
 }
 
-Point& Point::Mult(const Matrix3x3& mat, const Point& a)
+IcePoint& IcePoint::Mult(const Matrix3x3& mat, const IcePoint& a)
 {
 	x = a.x * mat.m[0][0] + a.y * mat.m[0][1] + a.z * mat.m[0][2];
 	y = a.x * mat.m[1][0] + a.y * mat.m[1][1] + a.z * mat.m[1][2];
@@ -149,7 +149,7 @@ Point& Point::Mult(const Matrix3x3& mat, const Point& a)
 	return *this;
 }
 
-Point& Point::Mult2(const Matrix3x3& mat1, const Point& a1, const Matrix3x3& mat2, const Point& a2)
+IcePoint& IcePoint::Mult2(const Matrix3x3& mat1, const IcePoint& a1, const Matrix3x3& mat2, const IcePoint& a2)
 {
 	x = a1.x * mat1.m[0][0] + a1.y * mat1.m[0][1] + a1.z * mat1.m[0][2] + a2.x * mat2.m[0][0] + a2.y * mat2.m[0][1] + a2.z * mat2.m[0][2];
 	y = a1.x * mat1.m[1][0] + a1.y * mat1.m[1][1] + a1.z * mat1.m[1][2] + a2.x * mat2.m[1][0] + a2.y * mat2.m[1][1] + a2.z * mat2.m[1][2];
@@ -157,7 +157,7 @@ Point& Point::Mult2(const Matrix3x3& mat1, const Point& a1, const Matrix3x3& mat
 	return *this;
 }
 
-Point& Point::Mac(const Matrix3x3& mat, const Point& a)
+IcePoint& IcePoint::Mac(const Matrix3x3& mat, const IcePoint& a)
 {
 	x += a.x * mat.m[0][0] + a.y * mat.m[0][1] + a.z * mat.m[0][2];
 	y += a.x * mat.m[1][0] + a.y * mat.m[1][1] + a.z * mat.m[1][2];
@@ -165,7 +165,7 @@ Point& Point::Mac(const Matrix3x3& mat, const Point& a)
 	return *this;
 }
 
-Point& Point::TransMult(const Matrix3x3& mat, const Point& a)
+IcePoint& IcePoint::TransMult(const Matrix3x3& mat, const IcePoint& a)
 {
 	x = a.x * mat.m[0][0] + a.y * mat.m[1][0] + a.z * mat.m[2][0];
 	y = a.x * mat.m[0][1] + a.y * mat.m[1][1] + a.z * mat.m[2][1];
@@ -173,7 +173,7 @@ Point& Point::TransMult(const Matrix3x3& mat, const Point& a)
 	return *this;
 }
 
-Point& Point::Transform(const Point& r, const Matrix3x3& rotpos, const Point& linpos)
+IcePoint& IcePoint::Transform(const IcePoint& r, const Matrix3x3& rotpos, const IcePoint& linpos)
 {
 	x = r.x * rotpos.m[0][0] + r.y * rotpos.m[0][1] + r.z * rotpos.m[0][2] + linpos.x;
 	y = r.x * rotpos.m[1][0] + r.y * rotpos.m[1][1] + r.z * rotpos.m[1][2] + linpos.y;
@@ -181,7 +181,7 @@ Point& Point::Transform(const Point& r, const Matrix3x3& rotpos, const Point& li
 	return *this;
 }
 
-Point& Point::InvTransform(const Point& r, const Matrix3x3& rotpos, const Point& linpos)
+IcePoint& IcePoint::InvTransform(const IcePoint& r, const Matrix3x3& rotpos, const IcePoint& linpos)
 {
 	float sx = r.x - linpos.x;
 	float sy = r.y - linpos.y;

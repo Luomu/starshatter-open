@@ -72,7 +72,7 @@
 		//! Returns a row.
 		inline_	void				GetRow(const udword r, HPoint& p)	const	{ p.x=m[r][0];	p.y=m[r][1];	p.z=m[r][2];	p.w=m[r][3];		}
 		//! Returns a row.
-		inline_	void				GetRow(const udword r, Point& p)	const	{ p.x=m[r][0];	p.y=m[r][1];	p.z=m[r][2];						}
+		inline_	void				GetRow(const udword r, IcePoint& p)	const	{ p.x=m[r][0];	p.y=m[r][1];	p.z=m[r][2];						}
 		//! Returns a row.
 		inline_	const HPoint&		GetRow(const udword r)				const	{ return *(const HPoint*)&m[r][0];									}
 		//! Returns a row.
@@ -80,23 +80,23 @@
 		//! Sets a row.
 		inline_	void				SetRow(const udword r, const HPoint& p)		{ m[r][0]=p.x;	m[r][1]=p.y;	m[r][2]=p.z;	m[r][3]=p.w;		}
 		//! Sets a row.
-		inline_	void				SetRow(const udword r, const Point& p)		{ m[r][0]=p.x;	m[r][1]=p.y;	m[r][2]=p.z;	m[r][3]= (r!=3) ? 0.0f : 1.0f;		}
+		inline_	void				SetRow(const udword r, const IcePoint& p)		{ m[r][0]=p.x;	m[r][1]=p.y;	m[r][2]=p.z;	m[r][3]= (r!=3) ? 0.0f : 1.0f;		}
 		//! Returns a column.
 		inline_	void				GetCol(const udword c, HPoint& p)	const	{ p.x=m[0][c];	p.y=m[1][c];	p.z=m[2][c];	p.w=m[3][c];		}
 		//! Returns a column.
-		inline_	void				GetCol(const udword c, Point& p)	const	{ p.x=m[0][c];	p.y=m[1][c];	p.z=m[2][c];						}
+		inline_	void				GetCol(const udword c, IcePoint& p)	const	{ p.x=m[0][c];	p.y=m[1][c];	p.z=m[2][c];						}
 		//! Sets a column.
 		inline_	void				SetCol(const udword c, const HPoint& p)		{ m[0][c]=p.x;	m[1][c]=p.y;	m[2][c]=p.z;	m[3][c]=p.w;		}
 		//! Sets a column.
-		inline_	void				SetCol(const udword c, const Point& p)		{ m[0][c]=p.x;	m[1][c]=p.y;	m[2][c]=p.z;	m[3][c]= (c!=3) ? 0.0f : 1.0f;	}
+		inline_	void				SetCol(const udword c, const IcePoint& p)		{ m[0][c]=p.x;	m[1][c]=p.y;	m[2][c]=p.z;	m[3][c]= (c!=3) ? 0.0f : 1.0f;	}
 
 		// Translation
 		//! Returns the translation part of the matrix.
 		inline_	const HPoint&		GetTrans()							const	{ return GetRow(3);								}
 		//! Gets the translation part of the matrix
-		inline_	void				GetTrans(Point& p)					const	{ p.x=m[3][0];	p.y=m[3][1];	p.z=m[3][2];	}
+		inline_	void				GetTrans(IcePoint& p)					const	{ p.x=m[3][0];	p.y=m[3][1];	p.z=m[3][2];	}
 		//! Sets the translation part of the matrix, from a Point.
-		inline_	void				SetTrans(const Point& p)					{ m[3][0]=p.x;	m[3][1]=p.y;	m[3][2]=p.z;	}
+		inline_	void				SetTrans(const IcePoint& p)					{ m[3][0]=p.x;	m[3][1]=p.y;	m[3][2]=p.z;	}
 		//! Sets the translation part of the matrix, from a HPoint.
 		inline_	void				SetTrans(const HPoint& p)					{ m[3][0]=p.x;	m[3][1]=p.y;	m[3][2]=p.z;	m[3][3]=p.w;	}
 		//! Sets the translation part of the matrix, from floats.
@@ -104,11 +104,11 @@
 
 		// Scale
 		//! Sets the scale from a Point. The point is put on the diagonal.
-		inline_	void				SetScale(const Point& p)					{ m[0][0]=p.x;	m[1][1]=p.y;	m[2][2]=p.z;	}
+		inline_	void				SetScale(const IcePoint& p)					{ m[0][0]=p.x;	m[1][1]=p.y;	m[2][2]=p.z;	}
 		//! Sets the scale from floats. Values are put on the diagonal.
 		inline_	void				SetScale(float sx, float sy, float sz)		{ m[0][0]=sx;	m[1][1]=sy;		m[2][2]=sz;		}
 		//! Scales from a Point. Each row is multiplied by a component.
-				void				Scale(const Point& p)
+				void				Scale(const IcePoint& p)
 									{
 										m[0][0] *= p.x;	m[1][0] *= p.y;	m[2][0] *= p.z;
 										m[0][1] *= p.x;	m[1][1] *= p.y;	m[2][1] *= p.z;
@@ -218,7 +218,7 @@
 				void				RotZ(float angle)	{ float Cos = cosf(angle), Sin = sinf(angle); Identity(); m[0][0] = m[1][1] = Cos; m[1][0] = -Sin;	m[0][1] = Sin;	}
 
 		//! Makes a rotation matrix about an arbitrary axis
-				Matrix4x4&			Rot(float angle, Point& p1, Point& p2);
+				Matrix4x4&			Rot(float angle, IcePoint& p1, IcePoint& p2);
 
 		//! Transposes the matrix.
 				void				Transpose()
@@ -303,9 +303,9 @@
 		inline_	HPoint				operator*(const HPoint& v)		const	{ return HPoint(GetRow(0)|v, GetRow(1)|v, GetRow(2)|v, GetRow(3)|v); }
 
 		//! Operator for Point Mul = Matrix4x4 * Point;
-		inline_	Point				operator*(const Point& v)		const
+		inline_	IcePoint				operator*(const IcePoint& v)		const
 									{
-										return Point(	m[0][0]*v.x + m[0][1]*v.y + m[0][2]*v.z + m[0][3],
+										return IcePoint(	m[0][0]*v.x + m[0][1]*v.y + m[0][2]*v.z + m[0][3],
 														m[1][0]*v.x + m[1][1]*v.y + m[1][2]*v.z + m[1][3],
 														m[2][0]*v.x + m[2][1]*v.y + m[2][2]*v.z + m[2][3]	);
 									}
@@ -434,7 +434,7 @@
 	};
 
 	//! Quickly rotates & translates a vector, using the 4x3 part of a 4x4 matrix
-	inline_ void TransformPoint4x3(Point& dest, const Point& source, const Matrix4x4& rot)
+	inline_ void TransformPoint4x3(IcePoint& dest, const IcePoint& source, const Matrix4x4& rot)
 	{
 		dest.x = rot.m[3][0] + source.x * rot.m[0][0] + source.y * rot.m[1][0] + source.z * rot.m[2][0];
 		dest.y = rot.m[3][1] + source.x * rot.m[0][1] + source.y * rot.m[1][1] + source.z * rot.m[2][1];
@@ -442,7 +442,7 @@
 	}
 
 	//! Quickly rotates a vector, using the 3x3 part of a 4x4 matrix
-	inline_ void TransformPoint3x3(Point& dest, const Point& source, const Matrix4x4& rot)
+	inline_ void TransformPoint3x3(IcePoint& dest, const IcePoint& source, const Matrix4x4& rot)
 	{
 		dest.x = source.x * rot.m[0][0] + source.y * rot.m[1][0] + source.z * rot.m[2][0];
 		dest.y = source.x * rot.m[0][1] + source.y * rot.m[1][1] + source.z * rot.m[2][1];

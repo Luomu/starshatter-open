@@ -60,10 +60,10 @@
 							bool			Collide(AABBCache& cache, const CollisionAABB& box, const AABBTree* tree);
 		protected:
 							CollisionAABB	mBox;			//!< Query box in (center, extents) form
-							Point			mMin;			//!< Query box min point
-							Point			mMax;			//!< Query box max point
+							IcePoint			mMin;			//!< Query box min IcePoint
+							IcePoint			mMax;			//!< Query box max IcePoint
 		// Leaf description
-							Point			mLeafVerts[3];	//!< Triangle vertices
+							IcePoint			mLeafVerts[3];	//!< Triangle vertices
 		// Internal methods
 							void			_Collide(const AABBCollisionNode* node);
 							void			_Collide(const AABBNoLeafNode* node);
@@ -75,8 +75,8 @@
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNode* node);
 							void			_CollideNoPrimitiveTest(const AABBQuantizedNoLeafNode* node);
 			// Overlap tests
-		inline_				BOOL			AABBContainsBox(const Point& bc, const Point& be);
-		inline_				BOOL			AABBAABBOverlap(const Point& b, const Point& Pb);
+		inline_				BOOL			AABBContainsBox(const IcePoint& bc, const IcePoint& be);
+		inline_				BOOL			AABBAABBOverlap(const IcePoint& b, const IcePoint& Pb);
 		inline_				BOOL			TriBoxOverlap();
 			// Init methods
 							BOOL			InitQuery(AABBCache& cache, const CollisionAABB& box);

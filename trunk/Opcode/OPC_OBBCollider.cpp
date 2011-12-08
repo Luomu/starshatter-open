@@ -308,7 +308,7 @@ BOOL OBBCollider::InitQuery(OBBCache& cache, const OBB& box, const Matrix4x4* wo
 	{
 		for(udword j=0;j<3;j++)
 		{
-			// Epsilon value prevents floating-point inaccuracies (strategy borrowed from RAPID)
+			// Epsilon value prevents floating-IcePoint inaccuracies (strategy borrowed from RAPID)
 			mAR.m[i][j] = 1e-6f + fabsf(mRBoxToModel.m[i][j]);
 		}
 	}
@@ -343,7 +343,7 @@ BOOL OBBCollider::InitQuery(OBBCache& cache, const OBB& box, const Matrix4x4* wo
  *	\return		true if the OBB contains the whole box
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-inline_ BOOL OBBCollider::OBBContainsBox(const Point& bc, const Point& be)
+inline_ BOOL OBBCollider::OBBContainsBox(const IcePoint& bc, const IcePoint& be)
 {
 	// I assume if all 8 box vertices are inside the OBB, so does the whole box.
 	// Sounds ok but maybe there's a better way?
@@ -354,7 +354,7 @@ inline_ BOOL OBBCollider::OBBContainsBox(const Point& bc, const Point& be)
 	f = p.x * mRModelToBox.m[0][1] + p.y * mRModelToBox.m[1][1] + p.z * mRModelToBox.m[2][1];	if(f>mB0.y || f<mB1.y) return FALSE;\
 	f = p.x * mRModelToBox.m[0][2] + p.y * mRModelToBox.m[1][2] + p.z * mRModelToBox.m[2][2];	if(f>mB0.z || f<mB1.z) return FALSE;
 
-	Point p;
+	IcePoint p;
 	float f;
 
 	TEST_PT(be.x, be.y, be.z)
@@ -466,8 +466,8 @@ void OBBCollider::_Collide(const AABBQuantizedNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform OBB-AABB overlap test
 	if(!BoxBoxOverlap(Extents, Center))	return;
@@ -498,8 +498,8 @@ void OBBCollider::_CollideNoPrimitiveTest(const AABBQuantizedNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform OBB-AABB overlap test
 	if(!BoxBoxOverlap(Extents, Center))	return;
@@ -574,8 +574,8 @@ void OBBCollider::_Collide(const AABBQuantizedNoLeafNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform OBB-AABB overlap test
 	if(!BoxBoxOverlap(Extents, Center))	return;
@@ -601,8 +601,8 @@ void OBBCollider::_CollideNoPrimitiveTest(const AABBQuantizedNoLeafNode* node)
 {
 	// Dequantize box
 	const QuantizedAABB& Box = node->mAABB;
-	const Point Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
-	const Point Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
+	const IcePoint Center(float(Box.mCenter[0]) * mCenterCoeff.x, float(Box.mCenter[1]) * mCenterCoeff.y, float(Box.mCenter[2]) * mCenterCoeff.z);
+	const IcePoint Extents(float(Box.mExtents[0]) * mExtentsCoeff.x, float(Box.mExtents[1]) * mExtentsCoeff.y, float(Box.mExtents[2]) * mExtentsCoeff.z);
 
 	// Perform OBB-AABB overlap test
 	if(!BoxBoxOverlap(Extents, Center))	return;

@@ -6,7 +6,7 @@
  *	\return		TRUE on overlap
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-inline_ BOOL SphereCollider::SphereAABBOverlap(const Point& center, const Point& extents)
+inline_ BOOL SphereCollider::SphereAABBOverlap(const IcePoint& center, const IcePoint& extents)
 { 
 	// Stats
 	mNbVolumeBVTests++;
@@ -93,8 +93,8 @@ inline_ BOOL SphereCollider::SphereAABBOverlap(const Point& center, const Point&
 //#endif
 
 #ifdef OLDIES
-//	Point Min = center - extents;
-//	Point Max = center + extents;
+//	IcePoint Min = center - extents;
+//	IcePoint Max = center + extents;
 
 	float d = 0.0f;
 

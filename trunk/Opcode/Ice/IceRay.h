@@ -18,31 +18,31 @@
 		//! Constructor
 		inline_					Ray()																{}
 		//! Constructor
-		inline_					Ray(const Point& orig, const Point& dir) : mOrig(orig), mDir(dir)	{}
+		inline_					Ray(const IcePoint& orig, const IcePoint& dir) : mOrig(orig), mDir(dir)	{}
 		//! Copy constructor
 		inline_					Ray(const Ray& ray) : mOrig(ray.mOrig), mDir(ray.mDir)				{}
 		//! Destructor
 		inline_					~Ray()																{}
 
-						float	SquareDistance(const Point& point, float* t=null)	const;
-		inline_			float	Distance(const Point& point, float* t=null)			const			{ return sqrtf(SquareDistance(point, t));	}
+						float	SquareDistance(const IcePoint& point, float* t=null)	const;
+		inline_			float	Distance(const IcePoint& point, float* t=null)			const			{ return sqrtf(SquareDistance(point, t));	}
 
-						Point	mOrig;		//!< Ray origin
-						Point	mDir;		//!< Normalized direction
+						IcePoint	mOrig;		//!< Ray origin
+						IcePoint	mDir;		//!< Normalized direction
 	};
 
-	inline_ void ComputeReflexionVector(Point& reflected, const Point& incoming_dir, const Point& outward_normal)
+	inline_ void ComputeReflexionVector(IcePoint& reflected, const IcePoint& incoming_dir, const IcePoint& outward_normal)
 	{
 		reflected = incoming_dir - outward_normal * 2.0f * (incoming_dir|outward_normal);
 	}
 
-	inline_ void ComputeReflexionVector(Point& reflected, const Point& source, const Point& impact, const Point& normal)
+	inline_ void ComputeReflexionVector(IcePoint& reflected, const IcePoint& source, const IcePoint& impact, const IcePoint& normal)
 	{
-		Point V = impact - source;
+		IcePoint V = impact - source;
 		reflected = V - normal * 2.0f * (V|normal);
 	}
 
-	inline_ void DecomposeVector(Point& normal_compo, Point& tangent_compo, const Point& outward_dir, const Point& outward_normal)
+	inline_ void DecomposeVector(IcePoint& normal_compo, IcePoint& tangent_compo, const IcePoint& outward_dir, const IcePoint& outward_normal)
 	{
 		normal_compo = outward_normal * (outward_dir|outward_normal);
 		tangent_compo = outward_dir - normal_compo;
@@ -56,7 +56,7 @@
 	 *	\param		world		[in] world transform
 	 */
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	inline_ void ComputeLocalDirection(Point& local_dir, const Point& world_dir, const Matrix4x4& world)
+	inline_ void ComputeLocalDirection(IcePoint& local_dir, const IcePoint& world_dir, const Matrix4x4& world)
 	{
 		// Get world direction back in local space
 //		Matrix3x3 InvWorld = world;
@@ -72,7 +72,7 @@
 	 *	\param		world		[in] world transform
 	 */
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	inline_ void ComputeLocalPoint(Point& local_pt, const Point& world_pt, const Matrix4x4& world)
+	inline_ void ComputeLocalPoint(IcePoint& local_pt, const IcePoint& world_pt, const Matrix4x4& world)
 	{
 		// Get world vertex back in local space
 		Matrix4x4 InvWorld = world;

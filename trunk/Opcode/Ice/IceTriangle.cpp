@@ -24,7 +24,7 @@ using namespace IceMaths;
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static sdword VPlaneSideEps(const Point& v, const Plane& plane, float epsilon)
+static sdword VPlaneSideEps(const IcePoint& v, const Plane& plane, float epsilon)
 {
 	// Compute distance from current vertex to the plane
 	float Dist = plane.Distance(v);
@@ -42,7 +42,7 @@ static sdword VPlaneSideEps(const Point& v, const Plane& plane, float epsilon)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Triangle::Flip()
 {
-	Point Tmp = mVerts[1];
+	IcePoint Tmp = mVerts[1];
 	mVerts[1] = mVerts[2];
 	mVerts[2] = Tmp;
 }
@@ -55,9 +55,9 @@ void Triangle::Flip()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 float Triangle::Area() const
 {
-	const Point& p0 = mVerts[0];
-	const Point& p1 = mVerts[1];
-	const Point& p2 = mVerts[2];
+	const IcePoint& p0 = mVerts[0];
+	const IcePoint& p1 = mVerts[1];
+	const IcePoint& p2 = mVerts[2];
 	return ((p0 - p1)^(p0 - p2)).Magnitude() * 0.5f;
 }
 
@@ -69,9 +69,9 @@ float Triangle::Area() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 float Triangle::Perimeter()	const
 {
-	const Point& p0 = mVerts[0];
-	const Point& p1 = mVerts[1];
-	const Point& p2 = mVerts[2];
+	const IcePoint& p0 = mVerts[0];
+	const IcePoint& p1 = mVerts[1];
+	const IcePoint& p2 = mVerts[2];
 	return		p0.Distance(p1)
 			+	p0.Distance(p2)
 			+	p1.Distance(p2);
@@ -96,11 +96,11 @@ float Triangle::Compacity() const
  *	\param		normal	[out] the computed normal
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Triangle::Normal(Point& normal) const
+void Triangle::Normal(IcePoint& normal) const
 {
-	const Point& p0 = mVerts[0];
-	const Point& p1 = mVerts[1];
-	const Point& p2 = mVerts[2];
+	const IcePoint& p0 = mVerts[0];
+	const IcePoint& p1 = mVerts[1];
+	const IcePoint& p2 = mVerts[2];
 	normal = ((p0 - p1)^(p0 - p2)).Normalize();
 }
 
@@ -110,11 +110,11 @@ void Triangle::Normal(Point& normal) const
  *	\param		normal	[out] the computed normal
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Triangle::DenormalizedNormal(Point& normal) const
+void Triangle::DenormalizedNormal(IcePoint& normal) const
 {
-	const Point& p0 = mVerts[0];
-	const Point& p1 = mVerts[1];
-	const Point& p2 = mVerts[2];
+	const IcePoint& p0 = mVerts[0];
+	const IcePoint& p1 = mVerts[1];
+	const IcePoint& p2 = mVerts[2];
 	normal = ((p0 - p1)^(p0 - p2));
 }
 
@@ -124,11 +124,11 @@ void Triangle::DenormalizedNormal(Point& normal) const
  *	\param		center	[out] the computed center
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Triangle::Center(Point& center) const
+void Triangle::Center(IcePoint& center) const
 {
-	const Point& p0 = mVerts[0];
-	const Point& p1 = mVerts[1];
-	const Point& p2 = mVerts[2];
+	const IcePoint& p0 = mVerts[0];
+	const IcePoint& p1 = mVerts[1];
+	const IcePoint& p2 = mVerts[2];
 	center = (p0 + p1 + p2)*INV3;
 }
 
@@ -171,9 +171,9 @@ void Triangle::ComputeMoment(Moment& m)
 	Center(m.mCentroid);
 
 	// Second-order components. Handle zero-area faces.
-	Point& p = mVerts[0];
-	Point& q = mVerts[1];
-	Point& r = mVerts[2];
+	IcePoint& p = mVerts[0];
+	IcePoint& q = mVerts[1];
+	IcePoint& r = mVerts[2];
 	if(m.mArea==0.0f)
 	{
 		// This triangle has zero area. The second order components would be eliminated with the usual formula, so, for the 
@@ -242,24 +242,24 @@ float Triangle::MaxEdgeLength()	const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- *	Computes a point on the triangle according to the stabbing information.
- *	\param		u,v			[in] point's barycentric coordinates
- *	\param		pt			[out] point on triangle
+ *	Computes a IcePoint on the triangle according to the stabbing information.
+ *	\param		u,v			[in] IcePoint's barycentric coordinates
+ *	\param		pt			[out] IcePoint on triangle
  *	\param		nearvtx		[out] index of nearest vertex
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Triangle::ComputePoint(float u, float v, Point& pt, udword* nearvtx)	const
+void Triangle::ComputePoint(float u, float v, IcePoint& pt, udword* nearvtx)	const
 {
-	// Compute point coordinates
+	// Compute IcePoint coordinates
 	pt = (1.0f - u - v)*mVerts[0] + u*mVerts[1] + v*mVerts[2];
 
 	// Compute nearest vertex if needed
 	if(nearvtx)
 	{
 		// Compute distance vector
-		Point d(mVerts[0].SquareDistance(pt),	// Distance^2 from vertex 0 to point on the face
-				mVerts[1].SquareDistance(pt),	// Distance^2 from vertex 1 to point on the face
-				mVerts[2].SquareDistance(pt));	// Distance^2 from vertex 2 to point on the face
+		IcePoint d(mVerts[0].SquareDistance(pt),	// Distance^2 from vertex 0 to IcePoint on the face
+				mVerts[1].SquareDistance(pt),	// Distance^2 from vertex 1 to IcePoint on the face
+				mVerts[2].SquareDistance(pt));	// Distance^2 from vertex 2 to IcePoint on the face
 
 		// Get smallest distance
 		*nearvtx = d.SmallestAxis();
@@ -269,7 +269,7 @@ void Triangle::ComputePoint(float u, float v, Point& pt, udword* nearvtx)	const
 void Triangle::Inflate(float fat_coeff, bool constant_border)
 {
 	// Compute triangle center
-	Point TriangleCenter;
+	IcePoint TriangleCenter;
 	Center(TriangleCenter);
 
 	// Don't normalize?
@@ -277,7 +277,7 @@ void Triangle::Inflate(float fat_coeff, bool constant_border)
 	// Don't => add more to big triangles
 	for(udword i=0;i<3;i++)
 	{
-		Point v = mVerts[i] - TriangleCenter;
+		IcePoint v = mVerts[i] - TriangleCenter;
 
 		if(constant_border)	v.Normalize();
 

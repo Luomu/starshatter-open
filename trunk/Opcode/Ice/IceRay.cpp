@@ -18,7 +18,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
-	O = Origin = impact point
+	O = Origin = impact IcePoint
 	i = normalized vector along the x axis
 	j = normalized vector along the y axis = actually the normal vector in O
 	D = Direction vector, norm |D| = 1
@@ -63,9 +63,9 @@
 
 using namespace IceMaths;
 
-float Ray::SquareDistance(const Point& point, float* t)	const
+float Ray::SquareDistance(const IcePoint& Point, float* t)	const
 {
-	Point Diff = point - mOrig;
+	IcePoint Diff = Point - mOrig;
 	float fT = Diff | mDir;
 
 	if(fT<=0.0f)

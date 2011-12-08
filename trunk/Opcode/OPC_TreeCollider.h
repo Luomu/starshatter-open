@@ -45,7 +45,7 @@
 								HullTest		= true;
 								SepVector.pid	= 0;
 								SepVector.qid	= 0;
-								SepVector.SV	= Point(1.0f, 0.0f, 0.0f);
+								SepVector.SV	= IcePoint(1.0f, 0.0f, 0.0f);
 #endif // __MESHMERIZER_H__
 							}
 
@@ -191,15 +191,15 @@
 							Matrix3x3		mAR;				//!< Absolute rotation matrix
 							Matrix3x3		mR0to1;				//!< Rotation from object0 to object1
 							Matrix3x3		mR1to0;				//!< Rotation from object1 to object0
-							Point			mT0to1;				//!< Translation from object0 to object1
-							Point			mT1to0;				//!< Translation from object1 to object0
+							IcePoint			mT0to1;				//!< Translation from object0 to object1
+							IcePoint			mT1to0;				//!< Translation from object1 to object0
 		// Dequantization coeffs
-							Point			mCenterCoeff0;
-							Point			mExtentsCoeff0;
-							Point			mCenterCoeff1;
-							Point			mExtentsCoeff1;
+							IcePoint			mCenterCoeff0;
+							IcePoint			mExtentsCoeff0;
+							IcePoint			mCenterCoeff1;
+							IcePoint			mExtentsCoeff1;
 		// Leaf description
-							Point			mLeafVerts[3];		//!< Triangle vertices
+							IcePoint			mLeafVerts[3];		//!< Triangle vertices
 							udword			mLeafIndex;			//!< Triangle index
 		// Settings
 							bool			mFullBoxBoxTest;	//!< Perform full BV-BV tests (true) or SAT-lite tests (false)
@@ -209,7 +209,7 @@
 			// Standard AABB trees
 							void			_Collide(const AABBCollisionNode* b0, const AABBCollisionNode* b1);
 			// Quantized AABB trees
-							void			_Collide(const AABBQuantizedNode* b0, const AABBQuantizedNode* b1, const Point& a, const Point& Pa, const Point& b, const Point& Pb);
+							void			_Collide(const AABBQuantizedNode* b0, const AABBQuantizedNode* b1, const IcePoint& a, const IcePoint& Pa, const IcePoint& b, const IcePoint& Pb);
 			// No-leaf AABB trees
 							void			_CollideTriBox(const AABBNoLeafNode* b);
 							void			_CollideBoxTri(const AABBNoLeafNode* b);
@@ -223,9 +223,9 @@
 			inline_			void			PrimTestTriIndex(udword id1);
 			inline_			void			PrimTestIndexTri(udword id0);
 
-			inline_			BOOL			BoxBoxOverlap(const Point& ea, const Point& ca, const Point& eb, const Point& cb);
-			inline_			BOOL			TriBoxOverlap(const Point& center, const Point& extents);
-			inline_			BOOL			TriTriOverlap(const Point& V0, const Point& V1, const Point& V2, const Point& U0, const Point& U1, const Point& U2);
+			inline_			BOOL			BoxBoxOverlap(const IcePoint& ea, const IcePoint& ca, const IcePoint& eb, const IcePoint& cb);
+			inline_			BOOL			TriBoxOverlap(const IcePoint& center, const IcePoint& extents);
+			inline_			BOOL			TriTriOverlap(const IcePoint& V0, const IcePoint& V1, const IcePoint& V2, const IcePoint& U0, const IcePoint& U1, const IcePoint& U2);
 			// Init methods
 							void			InitQuery(const Matrix4x4* world0=null, const Matrix4x4* world1=null);
 							bool			CheckTemporalCoherence(Pair* cache);

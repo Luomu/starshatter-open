@@ -138,7 +138,7 @@
 		override(AABBTreeBuilder)	float			GetSplittingValue(udword index, udword axis)									const;
 		override(AABBTreeBuilder)	float			GetSplittingValue(const udword* primitives, udword nb_prims, const AABB& global_box, udword axis)	const;
 
-		const						Point*			mVertexArray;		//!< Shortcut to an app-controlled array of vertices.
+		const						IcePoint*			mVertexArray;		//!< Shortcut to an app-controlled array of vertices.
 	};
 
 	class OPCODE_API AABBTreeOfAABBsBuilder : public AABBTreeBuilder

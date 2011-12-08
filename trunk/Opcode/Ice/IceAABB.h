@@ -20,15 +20,15 @@
 			AABB&			Add(const AABB& aabb);																					\
 			float			MakeCube(AABB& cube)																			const;	\
 			void			MakeSphere(Sphere& sphere)																		const;	\
-			const sbyte*	ComputeOutline(const Point& local_eye, sdword& num)												const;	\
-			float			ComputeBoxArea(const Point& eye, const Matrix4x4& mat, float width, float height, sdword& num)	const;	\
+			const sbyte*	ComputeOutline(const IcePoint& local_eye, sdword& num)												const;	\
+			float			ComputeBoxArea(const IcePoint& eye, const Matrix4x4& mat, float width, float height, sdword& num)	const;	\
 			bool			IsInside(const AABB& box)																		const;	\
 			bool			ComputePlanes(Plane* planes)																	const;	\
-			bool			ComputePoints(Point* pts)																		const;	\
-			const Point*	GetVertexNormals()																				const;	\
+			bool			ComputePoints(IcePoint* pts)																		const;	\
+			const IcePoint*	GetVertexNormals()																				const;	\
 			const udword*	GetEdges()																						const;	\
-			const Point*	GetEdgeNormals()																				const;	\
-	inline_	BOOL			ContainsPoint(const Point& p)																	const	\
+			const IcePoint*	GetEdgeNormals()																				const;	\
+	inline_	BOOL			ContainsPoint(const IcePoint& p)																	const	\
 							{																										\
 								if(p.x > GetMax(0) || p.x < GetMin(0)) return FALSE;												\
 								if(p.y > GetMax(1) || p.y < GetMin(1)) return FALSE;												\
@@ -282,7 +282,7 @@
 		 *	\param		max			[in] the max point
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						void		SetMinMax(const Point& min, const Point& max)		{ mCenter = (max + min)*0.5f; mExtents = (max - min)*0.5f;		}
+						void		SetMinMax(const IcePoint& min, const IcePoint& max)		{ mCenter = (max + min)*0.5f; mExtents = (max - min)*0.5f;		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
@@ -291,7 +291,7 @@
 		 *	\param		e			[in] the extents vector
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						void		SetCenterExtents(const Point& c, const Point& e)	{ mCenter = c;	 mExtents = e;									}
+						void		SetCenterExtents(const IcePoint& c, const IcePoint& e)	{ mCenter = c;	 mExtents = e;									}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
@@ -305,7 +305,7 @@
 		 *	Setups a point AABB.
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						void		SetPoint(const Point& pt)							{ mCenter = pt; mExtents.Zero();								}
+						void		SetPoint(const IcePoint& pt)							{ mCenter = pt; mExtents.Zero();								}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
@@ -321,10 +321,10 @@
 		 *	\param		p	[in] the next point
 		 */
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						void		Extend(const Point& p)
+						void		Extend(const IcePoint& p)
 									{
-										Point Max = mCenter + mExtents;
-										Point Min = mCenter - mExtents;
+										IcePoint Max = mCenter + mExtents;
+										IcePoint Min = mCenter - mExtents;
 
 										if(p.x > Max.x)	Max.x = p.x;
 										if(p.x < Min.x)	Min.x = p.x;
@@ -340,9 +340,9 @@
 		// Data access
 
 		//! Get min point of the box
-		inline_			void		GetMin(Point& min)						const		{ min = mCenter - mExtents;					}
+		inline_			void		GetMin(IcePoint& min)						const		{ min = mCenter - mExtents;					}
 		//! Get max point of the box
-		inline_			void		GetMax(Point& max)						const		{ max = mCenter + mExtents;					}
+		inline_			void		GetMax(IcePoint& max)						const		{ max = mCenter + mExtents;					}
 
 		//! Get component of the box's min point along a given axis
 		inline_			float		GetMin(udword axis)						const		{ return mCenter[axis] - mExtents[axis];	}
@@ -350,9 +350,9 @@
 		inline_			float		GetMax(udword axis)						const		{ return mCenter[axis] + mExtents[axis];	}
 
 		//! Get box center
-		inline_			void		GetCenter(Point& center)				const		{ center = mCenter;							}
+		inline_			void		GetCenter(IcePoint& center)				const		{ center = mCenter;							}
 		//! Get box extents
-		inline_			void		GetExtents(Point& extents)				const		{ extents = mExtents;						}
+		inline_			void		GetExtents(IcePoint& extents)				const		{ extents = mExtents;						}
 
 		//! Get component of the box's center along a given axis
 		inline_			float		GetCenter(udword axis)					const		{ return mCenter[axis];						}
@@ -360,7 +360,7 @@
 		inline_			float		GetExtents(udword axis)					const		{ return mExtents[axis];					}
 
 		//! Get box diagonal
-		inline_			void		GetDiagonal(Point& diagonal)			const		{ diagonal = mExtents * 2.0f;				}
+		inline_			void		GetDiagonal(IcePoint& diagonal)			const		{ diagonal = mExtents * 2.0f;				}
 		inline_			float		GetWidth()								const		{ return mExtents.x * 2.0f;					}
 		inline_			float		GetHeight()								const		{ return mExtents.y * 2.0f;					}
 		inline_			float		GetDepth()								const		{ return mExtents.z * 2.0f;					}
@@ -392,7 +392,7 @@
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		inline_			bool		GomezIntersect(const AABB& a)
 									{
-										Point	T = mCenter - a.mCenter;	// Vector from A to B
+										IcePoint	T = mCenter - a.mCenter;	// Vector from A to B
 										return	((fabsf(T.x) <= (a.mExtents.x + mExtents.x))
 												&& (fabsf(T.y) <= (a.mExtents.y + mExtents.y))
 												&& (fabsf(T.z) <= (a.mExtents.z + mExtents.z)));
@@ -427,13 +427,13 @@
 										aabb.mCenter = mCenter * mtx;
 
 										// Compute new extents. FPU code & CPU code have been interleaved for improved performance.
-										Point Ex(mtx.m[0][0] * mExtents.x, mtx.m[0][1] * mExtents.x, mtx.m[0][2] * mExtents.x);
+										IcePoint Ex(mtx.m[0][0] * mExtents.x, mtx.m[0][1] * mExtents.x, mtx.m[0][2] * mExtents.x);
 										IR(Ex.x)&=0x7fffffff;	IR(Ex.y)&=0x7fffffff;	IR(Ex.z)&=0x7fffffff;
 
-										Point Ey(mtx.m[1][0] * mExtents.y, mtx.m[1][1] * mExtents.y, mtx.m[1][2] * mExtents.y);
+										IcePoint Ey(mtx.m[1][0] * mExtents.y, mtx.m[1][1] * mExtents.y, mtx.m[1][2] * mExtents.y);
 										IR(Ey.x)&=0x7fffffff;	IR(Ey.y)&=0x7fffffff;	IR(Ey.z)&=0x7fffffff;
 
-										Point Ez(mtx.m[2][0] * mExtents.z, mtx.m[2][1] * mExtents.z, mtx.m[2][2] * mExtents.z);
+										IcePoint Ez(mtx.m[2][0] * mExtents.z, mtx.m[2][1] * mExtents.z, mtx.m[2][2] * mExtents.z);
 										IR(Ez.x)&=0x7fffffff;	IR(Ez.y)&=0x7fffffff;	IR(Ez.z)&=0x7fffffff;
 
 										aabb.mExtents.x = Ex.x + Ey.x + Ez.x;
@@ -463,19 +463,19 @@
 		inline_			AABB&		operator/=(float s)		{ mExtents/=s;	return *this;	}
 
 		//! Operator for AABB += Point. Translates the box.
-		inline_			AABB&		operator+=(const Point& trans)
+		inline_			AABB&		operator+=(const IcePoint& trans)
 									{
 										mCenter+=trans;
 										return *this;
 									}
 		private:
-						Point		mCenter;			//!< AABB Center
-						Point		mExtents;			//!< x, y and z extents
+						IcePoint		mCenter;			//!< AABB Center
+						IcePoint		mExtents;			//!< x, y and z extents
 	};
 
 #endif
 
-	inline_ void ComputeMinMax(const Point& p, Point& min, Point& max)
+	inline_ void ComputeMinMax(const IcePoint& p, IcePoint& min, IcePoint& max)
 	{
 		if(p.x > max.x)	max.x = p.x;
 		if(p.x < min.x)	min.x = p.x;
@@ -487,12 +487,12 @@
 		if(p.z < min.z)	min.z = p.z;
 	}
 
-	inline_ void ComputeAABB(AABB& aabb, const Point* list, udword nb_pts)
+	inline_ void ComputeAABB(AABB& aabb, const IcePoint* list, udword nb_pts)
 	{
 		if(list)
 		{
-			Point Maxi(MIN_FLOAT, MIN_FLOAT, MIN_FLOAT);
-			Point Mini(MAX_FLOAT, MAX_FLOAT, MAX_FLOAT);
+			IcePoint Maxi(MIN_FLOAT, MIN_FLOAT, MIN_FLOAT);
+			IcePoint Mini(MAX_FLOAT, MAX_FLOAT, MAX_FLOAT);
 			while(nb_pts--)
 			{
 //				_prefetch(list+1);	// off by one ?

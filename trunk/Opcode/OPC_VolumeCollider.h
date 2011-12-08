@@ -93,8 +93,8 @@
 							Container*		mTouchedPrimitives;	//!< List of touched primitives
 
 		// Dequantization coeffs
-							Point			mCenterCoeff;
-							Point			mExtentsCoeff;
+							IcePoint			mCenterCoeff;
+							IcePoint			mExtentsCoeff;
 		// Stats
 							udword			mNbVolumeBVTests;	//!< Number of Volume-BV tests
 							udword			mNbVolumePrimTests;	//!< Number of Volume-Primitive tests

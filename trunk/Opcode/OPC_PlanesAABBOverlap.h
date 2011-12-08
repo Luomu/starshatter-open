@@ -11,7 +11,7 @@
  *	\return		TRUE if boxes overlap planes
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-inline_ BOOL PlanesCollider::PlanesAABBOverlap(const Point& center, const Point& extents, udword& out_clip_mask, udword in_clip_mask)
+inline_ BOOL PlanesCollider::PlanesAABBOverlap(const IcePoint& center, const IcePoint& extents, udword& out_clip_mask, udword in_clip_mask)
 {
 	// Stats
 	mNbVolumeBVTests++;
@@ -21,7 +21,7 @@ inline_ BOOL PlanesCollider::PlanesAABBOverlap(const Point& center, const Point&
 	// Evaluate through all active frustum planes. We determine the relation 
 	// between the AABB and a plane by using the concept of "near" and "far"
 	// vertices originally described by Zhang (and later by Möller). Our
-	// variant here uses 3 fabs ops, 6 muls, 7 adds and two floating point
+	// variant here uses 3 fabs ops, 6 muls, 7 adds and two floating IcePoint
 	// comparisons per plane. The routine early-exits if the AABB is found
 	// to be outside any of the planes. The loop also constructs a new output
 	// clip mask. Most FPUs have a native single-cycle fabsf() operation.

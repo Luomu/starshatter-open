@@ -33,7 +33,7 @@
 		//! Constructor
 		inline_					Triangle()													{}
 		//! Constructor
-		inline_					Triangle(const Point& p0, const Point& p1, const Point& p2)	{ mVerts[0]=p0; mVerts[1]=p1; mVerts[2]=p2; }
+		inline_					Triangle(const IcePoint& p0, const IcePoint& p1, const IcePoint& p2)	{ mVerts[0]=p0; mVerts[1]=p1; mVerts[2]=p2; }
 		//! Copy constructor
 		inline_					Triangle(const Triangle& triangle)
 								{
@@ -44,16 +44,16 @@
 		//! Destructor
 		inline_					~Triangle()													{}
 		//! Vertices
-				Point			mVerts[3];
+				IcePoint			mVerts[3];
 
 		// Methods
 				void			Flip();
 				float			Area() const;
 				float			Perimeter()	const;
 				float			Compacity()	const;
-				void			Normal(Point& normal) const;
-				void			DenormalizedNormal(Point& normal) const;
-				void			Center(Point& center) const;
+				void			Normal(IcePoint& normal) const;
+				void			DenormalizedNormal(IcePoint& normal) const;
+				void			Center(IcePoint& center) const;
 		inline_	Plane			PlaneEquation() const	{ return Plane(mVerts[0], mVerts[1], mVerts[2]);	}
 
 				PartVal			TestAgainstPlane(const Plane& plane, float epsilon) const;
@@ -61,7 +61,7 @@
 				void			ComputeMoment(Moment& m);
 				float			MinEdgeLength() const;
 				float			MaxEdgeLength() const;
-				void			ComputePoint(float u, float v, Point& pt, udword* nearvtx=null)	const;
+				void			ComputePoint(float u, float v, IcePoint& pt, udword* nearvtx=null)	const;
 				void			Inflate(float fat_coeff, bool constant_border);
 	};
 

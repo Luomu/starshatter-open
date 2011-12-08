@@ -91,7 +91,7 @@ bool AABBTreeOfAABBsBuilder::ComputeGlobalBox(const udword* primitives, udword n
 float AABBTreeOfAABBsBuilder::GetSplittingValue(udword index, udword axis) const
 {
 	// For an AABB, the splitting value is the middle of the given axis,
-	// i.e. the corresponding component of the center point
+	// i.e. the corresponding component of the center IcePoint
 	return mAABBArray[index].GetCenter(axis);
 }
 
@@ -110,8 +110,8 @@ bool AABBTreeOfTrianglesBuilder::ComputeGlobalBox(const udword* primitives, udwo
 	if(!primitives || !nb_prims)	return false;
 
 	// Initialize global box
-	Point Min(MAX_FLOAT, MAX_FLOAT, MAX_FLOAT);
-	Point Max(MIN_FLOAT, MIN_FLOAT, MIN_FLOAT);
+	IcePoint Min(MAX_FLOAT, MAX_FLOAT, MAX_FLOAT);
+	IcePoint Max(MIN_FLOAT, MIN_FLOAT, MIN_FLOAT);
 
 	// Loop through triangles
 	VertexPointers VP;
@@ -138,7 +138,7 @@ bool AABBTreeOfTrianglesBuilder::ComputeGlobalBox(const udword* primitives, udwo
 float AABBTreeOfTrianglesBuilder::GetSplittingValue(udword index, udword axis) const
 {
 /*	// Compute center of triangle
-	Point Center;
+	IcePoint Center;
 	mTriList[index].Center(mVerts, Center);
 	// Return value
 	return Center[axis];*/

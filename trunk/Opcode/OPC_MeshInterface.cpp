@@ -81,7 +81,7 @@
  *	POINTERS:
  *
  *	If you're internally using the following canonical structures:
- *	- a vertex made of three 32-bits floating point values
+ *	- a vertex made of three 32-bits floating IcePoint values
  *	- a triangle made of three 32-bits integer vertex references
  *	...then you may want to use pointers instead of callbacks. This is the same, except OPCODE will directly
  *	use provided pointers to access the topology and geometry, without using a callback. It might be faster,
@@ -134,7 +134,7 @@ MeshInterface::MeshInterface() :
 	mVerts			(null),
 	#ifdef OPC_USE_STRIDE
 	mTriStride		(sizeof(IndexedTriangle)),
-	mVertexStride	(sizeof(Point)),
+	mVertexStride	(sizeof(IcePoint)),
 	#endif
 #endif
 	mNbTris			(0),
@@ -225,7 +225,7 @@ bool MeshInterface::SetCallback(RequestCallback callback, void* user_data)
  *	\return		true if success
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool MeshInterface::SetPointers(const IndexedTriangle* tris, const Point* verts)
+bool MeshInterface::SetPointers(const IndexedTriangle* tris, const IcePoint* verts)
 {
 	if(!tris || !verts)	return SetIceError("MeshInterface::SetPointers: pointer is null", null);
 
@@ -238,14 +238,14 @@ bool MeshInterface::SetPointers(const IndexedTriangle* tris, const Point* verts)
 /**
  *	Strides control
  *	\param		tri_stride		[in] size of a triangle in bytes. The first sizeof(IndexedTriangle) bytes are used to get vertex indices.
- *	\param		vertex_stride	[in] size of a vertex in bytes. The first sizeof(Point) bytes are used to get vertex position.
+ *	\param		vertex_stride	[in] size of a vertex in bytes. The first sizeof(IcePoint) bytes are used to get vertex position.
  *	\return		true if success
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool MeshInterface::SetStrides(udword tri_stride, udword vertex_stride)
 {
 	if(tri_stride<sizeof(IndexedTriangle))	return SetIceError("MeshInterface::SetStrides: invalid triangle stride", null);
-	if(vertex_stride<sizeof(Point))			return SetIceError("MeshInterface::SetStrides: invalid vertex stride", null);
+	if(vertex_stride<sizeof(IcePoint))			return SetIceError("MeshInterface::SetStrides: invalid vertex stride", null);
 
 	mTriStride		= tri_stride;
 	mVertexStride	= vertex_stride;

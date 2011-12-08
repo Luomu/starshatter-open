@@ -113,11 +113,11 @@ bool AABBTreeCollider::Collide(BVTCache& cache, const Matrix4x4* world0, const M
 		{
 			struct Local
 			{
-				static Point* SVCallback(const Point& sv, udword& previndex, udword user_data)
+				static IcePoint* SVCallback(const IcePoint& sv, udword& previndex, udword user_data)
 				{
 					CollisionHull* Hull = (CollisionHull*)user_data;
 					previndex = Hull->ComputeSupportingVertex(sv, previndex);
-					return (Point*)&Hull->GetVerts()[previndex];
+					return (IcePoint*)&Hull->GetVerts()[previndex];
 				}
 			};
 
@@ -260,7 +260,7 @@ void AABBTreeCollider::InitQuery(const Matrix4x4* world0, const Matrix4x4* world
 	{
 		for(udword j=0;j<3;j++)
 		{
-			// Epsilon value prevents floating-point inaccuracies (strategy borrowed from RAPID)
+			// Epsilon value prevents floating-IcePoint inaccuracies (strategy borrowed from RAPID)
 			mAR.m[i][j] = 1e-6f + fabsf(mR1to0.m[i][j]);
 		}
 	}
@@ -379,12 +379,12 @@ bool AABBTreeCollider::Collide(const AABBQuantizedTree* tree0, const AABBQuantiz
 
 	// Dequantize box A
 	const AABBQuantizedNode* N0 = tree0->GetNodes();
-	const Point a(float(N0->mAABB.mExtents[0]) * mExtentsCoeff0.x, float(N0->mAABB.mExtents[1]) * mExtentsCoeff0.y, float(N0->mAABB.mExtents[2]) * mExtentsCoeff0.z);
-	const Point Pa(float(N0->mAABB.mCenter[0]) * mCenterCoeff0.x, float(N0->mAABB.mCenter[1]) * mCenterCoeff0.y, float(N0->mAABB.mCenter[2]) * mCenterCoeff0.z);
+	const IcePoint a(float(N0->mAABB.mExtents[0]) * mExtentsCoeff0.x, float(N0->mAABB.mExtents[1]) * mExtentsCoeff0.y, float(N0->mAABB.mExtents[2]) * mExtentsCoeff0.z);
+	const IcePoint Pa(float(N0->mAABB.mCenter[0]) * mCenterCoeff0.x, float(N0->mAABB.mCenter[1]) * mCenterCoeff0.y, float(N0->mAABB.mCenter[2]) * mCenterCoeff0.z);
 	// Dequantize box B
 	const AABBQuantizedNode* N1 = tree1->GetNodes();
-	const Point b(float(N1->mAABB.mExtents[0]) * mExtentsCoeff1.x, float(N1->mAABB.mExtents[1]) * mExtentsCoeff1.y, float(N1->mAABB.mExtents[2]) * mExtentsCoeff1.z);
-	const Point Pb(float(N1->mAABB.mCenter[0]) * mCenterCoeff1.x, float(N1->mAABB.mCenter[1]) * mCenterCoeff1.y, float(N1->mAABB.mCenter[2]) * mCenterCoeff1.z);
+	const IcePoint b(float(N1->mAABB.mExtents[0]) * mExtentsCoeff1.x, float(N1->mAABB.mExtents[1]) * mExtentsCoeff1.y, float(N1->mAABB.mExtents[2]) * mExtentsCoeff1.z);
+	const IcePoint Pb(float(N1->mAABB.mCenter[0]) * mCenterCoeff1.x, float(N1->mAABB.mCenter[1]) * mCenterCoeff1.y, float(N1->mAABB.mCenter[2]) * mCenterCoeff1.z);
 
 	// Perform collision query
 	_Collide(N0, N1, a, Pa, b, Pb);
@@ -534,7 +534,7 @@ void AABBTreeCollider::PrimTest(udword id0, udword id1)
 	mIMesh1->GetTriangle(VP1, id1);
 
 	// Transform from space 1 to space 0
-	Point u0,u1,u2;
+	IcePoint u0,u1,u2;
 	TransformPoint(u0, *VP1.Vertex[0], mR1to0, mT1to0);
 	TransformPoint(u1, *VP1.Vertex[1], mR1to0, mT1to0);
 	TransformPoint(u2, *VP1.Vertex[2], mR1to0, mT1to0);
@@ -749,7 +749,7 @@ void AABBTreeCollider::_Collide(const AABBNoLeafNode* a, const AABBNoLeafNode* b
  *	\param		Pb		[in] center from box B
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void AABBTreeCollider::_Collide(const AABBQuantizedNode* b0, const AABBQuantizedNode* b1, const Point& a, const Point& Pa, const Point& b, const Point& Pb)
+void AABBTreeCollider::_Collide(const AABBQuantizedNode* b0, const AABBQuantizedNode* b1, const IcePoint& a, const IcePoint& Pa, const IcePoint& b, const IcePoint& Pb)
 {
 	// Perform BV-BV overlap test
 	if(!BoxBoxOverlap(a, Pa, b, Pb))	return;
@@ -760,32 +760,32 @@ void AABBTreeCollider::_Collide(const AABBQuantizedNode* b0, const AABBQuantized
 	{
 		// Dequantize box
 		const QuantizedAABB* Box = &b0->GetNeg()->mAABB;
-		const Point negPa(float(Box->mCenter[0]) * mCenterCoeff0.x, float(Box->mCenter[1]) * mCenterCoeff0.y, float(Box->mCenter[2]) * mCenterCoeff0.z);
-		const Point nega(float(Box->mExtents[0]) * mExtentsCoeff0.x, float(Box->mExtents[1]) * mExtentsCoeff0.y, float(Box->mExtents[2]) * mExtentsCoeff0.z);
+		const IcePoint negPa(float(Box->mCenter[0]) * mCenterCoeff0.x, float(Box->mCenter[1]) * mCenterCoeff0.y, float(Box->mCenter[2]) * mCenterCoeff0.z);
+		const IcePoint nega(float(Box->mExtents[0]) * mExtentsCoeff0.x, float(Box->mExtents[1]) * mExtentsCoeff0.y, float(Box->mExtents[2]) * mExtentsCoeff0.z);
 		_Collide(b0->GetNeg(), b1, nega, negPa, b, Pb);
 
 		if(ContactFound()) return;
 
 		// Dequantize box
 		Box = &b0->GetPos()->mAABB;
-		const Point posPa(float(Box->mCenter[0]) * mCenterCoeff0.x, float(Box->mCenter[1]) * mCenterCoeff0.y, float(Box->mCenter[2]) * mCenterCoeff0.z);
-		const Point posa(float(Box->mExtents[0]) * mExtentsCoeff0.x, float(Box->mExtents[1]) * mExtentsCoeff0.y, float(Box->mExtents[2]) * mExtentsCoeff0.z);
+		const IcePoint posPa(float(Box->mCenter[0]) * mCenterCoeff0.x, float(Box->mCenter[1]) * mCenterCoeff0.y, float(Box->mCenter[2]) * mCenterCoeff0.z);
+		const IcePoint posa(float(Box->mExtents[0]) * mExtentsCoeff0.x, float(Box->mExtents[1]) * mExtentsCoeff0.y, float(Box->mExtents[2]) * mExtentsCoeff0.z);
 		_Collide(b0->GetPos(), b1, posa, posPa, b, Pb);
 	}
 	else
 	{
 		// Dequantize box
 		const QuantizedAABB* Box = &b1->GetNeg()->mAABB;
-		const Point negPb(float(Box->mCenter[0]) * mCenterCoeff1.x, float(Box->mCenter[1]) * mCenterCoeff1.y, float(Box->mCenter[2]) * mCenterCoeff1.z);
-		const Point negb(float(Box->mExtents[0]) * mExtentsCoeff1.x, float(Box->mExtents[1]) * mExtentsCoeff1.y, float(Box->mExtents[2]) * mExtentsCoeff1.z);
+		const IcePoint negPb(float(Box->mCenter[0]) * mCenterCoeff1.x, float(Box->mCenter[1]) * mCenterCoeff1.y, float(Box->mCenter[2]) * mCenterCoeff1.z);
+		const IcePoint negb(float(Box->mExtents[0]) * mExtentsCoeff1.x, float(Box->mExtents[1]) * mExtentsCoeff1.y, float(Box->mExtents[2]) * mExtentsCoeff1.z);
 		_Collide(b0, b1->GetNeg(), a, Pa, negb, negPb);
 
 		if(ContactFound()) return;
 
 		// Dequantize box
 		Box = &b1->GetPos()->mAABB;
-		const Point posPb(float(Box->mCenter[0]) * mCenterCoeff1.x, float(Box->mCenter[1]) * mCenterCoeff1.y, float(Box->mCenter[2]) * mCenterCoeff1.z);
-		const Point posb(float(Box->mExtents[0]) * mExtentsCoeff1.x, float(Box->mExtents[1]) * mExtentsCoeff1.y, float(Box->mExtents[2]) * mExtentsCoeff1.z);
+		const IcePoint posPb(float(Box->mCenter[0]) * mCenterCoeff1.x, float(Box->mCenter[1]) * mCenterCoeff1.y, float(Box->mCenter[2]) * mCenterCoeff1.z);
+		const IcePoint posb(float(Box->mExtents[0]) * mExtentsCoeff1.x, float(Box->mExtents[1]) * mExtentsCoeff1.y, float(Box->mExtents[2]) * mExtentsCoeff1.z);
 		_Collide(b0, b1->GetPos(), a, Pa, posb, posPb);
 	}
 }
@@ -805,8 +805,8 @@ void AABBTreeCollider::_CollideTriBox(const AABBQuantizedNoLeafNode* b)
 {
 	// Dequantize box
 	const QuantizedAABB* bb = &b->mAABB;
-	const Point Pb(float(bb->mCenter[0]) * mCenterCoeff1.x, float(bb->mCenter[1]) * mCenterCoeff1.y, float(bb->mCenter[2]) * mCenterCoeff1.z);
-	const Point eb(float(bb->mExtents[0]) * mExtentsCoeff1.x, float(bb->mExtents[1]) * mExtentsCoeff1.y, float(bb->mExtents[2]) * mExtentsCoeff1.z);
+	const IcePoint Pb(float(bb->mCenter[0]) * mCenterCoeff1.x, float(bb->mCenter[1]) * mCenterCoeff1.y, float(bb->mCenter[2]) * mCenterCoeff1.z);
+	const IcePoint eb(float(bb->mExtents[0]) * mExtentsCoeff1.x, float(bb->mExtents[1]) * mExtentsCoeff1.y, float(bb->mExtents[2]) * mExtentsCoeff1.z);
 
 	// Perform triangle-box overlap test
 	if(!TriBoxOverlap(Pb, eb))	return;
@@ -831,8 +831,8 @@ void AABBTreeCollider::_CollideBoxTri(const AABBQuantizedNoLeafNode* b)
 {
 	// Dequantize box
 	const QuantizedAABB* bb = &b->mAABB;
-	const Point Pa(float(bb->mCenter[0]) * mCenterCoeff0.x, float(bb->mCenter[1]) * mCenterCoeff0.y, float(bb->mCenter[2]) * mCenterCoeff0.z);
-	const Point ea(float(bb->mExtents[0]) * mExtentsCoeff0.x, float(bb->mExtents[1]) * mExtentsCoeff0.y, float(bb->mExtents[2]) * mExtentsCoeff0.z);
+	const IcePoint Pa(float(bb->mCenter[0]) * mCenterCoeff0.x, float(bb->mCenter[1]) * mCenterCoeff0.y, float(bb->mCenter[2]) * mCenterCoeff0.z);
+	const IcePoint ea(float(bb->mExtents[0]) * mExtentsCoeff0.x, float(bb->mExtents[1]) * mExtentsCoeff0.y, float(bb->mExtents[2]) * mExtentsCoeff0.z);
 
 	// Perform triangle-box overlap test
 	if(!TriBoxOverlap(Pa, ea))	return;
@@ -857,12 +857,12 @@ void AABBTreeCollider::_Collide(const AABBQuantizedNoLeafNode* a, const AABBQuan
 {
 	// Dequantize box A
 	const QuantizedAABB* ab = &a->mAABB;
-	const Point Pa(float(ab->mCenter[0]) * mCenterCoeff0.x, float(ab->mCenter[1]) * mCenterCoeff0.y, float(ab->mCenter[2]) * mCenterCoeff0.z);
-	const Point ea(float(ab->mExtents[0]) * mExtentsCoeff0.x, float(ab->mExtents[1]) * mExtentsCoeff0.y, float(ab->mExtents[2]) * mExtentsCoeff0.z);
+	const IcePoint Pa(float(ab->mCenter[0]) * mCenterCoeff0.x, float(ab->mCenter[1]) * mCenterCoeff0.y, float(ab->mCenter[2]) * mCenterCoeff0.z);
+	const IcePoint ea(float(ab->mExtents[0]) * mExtentsCoeff0.x, float(ab->mExtents[1]) * mExtentsCoeff0.y, float(ab->mExtents[2]) * mExtentsCoeff0.z);
 	// Dequantize box B
 	const QuantizedAABB* bb = &b->mAABB;
-	const Point Pb(float(bb->mCenter[0]) * mCenterCoeff1.x, float(bb->mCenter[1]) * mCenterCoeff1.y, float(bb->mCenter[2]) * mCenterCoeff1.z);
-	const Point eb(float(bb->mExtents[0]) * mExtentsCoeff1.x, float(bb->mExtents[1]) * mExtentsCoeff1.y, float(bb->mExtents[2]) * mExtentsCoeff1.z);
+	const IcePoint Pb(float(bb->mCenter[0]) * mCenterCoeff1.x, float(bb->mCenter[1]) * mCenterCoeff1.y, float(bb->mCenter[2]) * mCenterCoeff1.z);
+	const IcePoint eb(float(bb->mExtents[0]) * mExtentsCoeff1.x, float(bb->mExtents[1]) * mExtentsCoeff1.y, float(bb->mExtents[2]) * mExtentsCoeff1.z);
 
 	// Perform BV-BV overlap test
 	if(!BoxBoxOverlap(ea, Pa, eb, Pb))	return;
