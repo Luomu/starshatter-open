@@ -35,7 +35,7 @@ Selector::Selector(Selection* s)
       own_selection  = true;
    }
 
-   strcpy(name, "Selector");
+   strcpy_s(name, "Selector");
 }
 
 Selector::~Selector()
@@ -185,7 +185,7 @@ Selector::End()
          }
 
          // find all selected polys:
-         for (i = 0; i < s->NumPolys(); i++) {
+         for (int i = 0; i < s->NumPolys(); i++) {
             Poly* poly = s->GetPolys() + i;
 
             bool will_select = true;
@@ -230,7 +230,7 @@ Selector::SelectAll(int select_mode)
             selection->GetPolys().append(s->GetPolys() + i);
          }
 
-         for (i = 0; i < s->NumVerts(); i++) {
+         for (int i = 0; i < s->NumVerts(); i++) {
             DWORD value = (iter.index() << 16) | i;
             selection->GetVerts().append(value);
          }
@@ -259,7 +259,7 @@ Selector::SelectInverse()
                selection->AddPoly(p);
          }
 
-         for (i = 0; i < s->NumVerts(); i++) {
+         for (int i = 0; i < s->NumVerts(); i++) {
             if (selection->Contains(s_index, i))
                selection->RemoveVert(s_index, i);
             else
@@ -284,7 +284,7 @@ Selector::SelectSurface(Surface* s, int select_mode)
          selection->RemovePoly(s->GetPolys() + i);
       }
 
-      for (i = 0; i < s->NumVerts(); i++) {
+      for (int i = 0; i < s->NumVerts(); i++) {
          selection->RemoveVert(index, i);
       }
    }
@@ -293,7 +293,7 @@ Selector::SelectSurface(Surface* s, int select_mode)
          selection->AddPoly(s->GetPolys() + i);
       }
 
-      for (i = 0; i < s->NumVerts(); i++) {
+      for (int i = 0; i < s->NumVerts(); i++) {
          selection->AddVert(index, i);
       }
    }

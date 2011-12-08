@@ -90,7 +90,7 @@ static void ParsePoly(const char* line, ObjFace* face)
    while (isspace(*p))
       p++;
 
-   i = 0;
+   int i = 0;
    while (*p && i < MAX_OBJ_FACE_VERTS) {
       int factor = 1;
 

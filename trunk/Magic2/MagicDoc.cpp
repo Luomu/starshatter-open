@@ -500,7 +500,7 @@ int LoadTexture(const char* fname, Bitmap*& bitmap, int type)
                }
 
                if (found) {
-                  strcat(tmp, "+.pcx");
+                  strcat_s(tmp, "+.pcx");
                   if (pcx.Load(tmp) == PCX_OK && pcx.himap != 0) {
                      bitmap->CopyHighColorImage(pcx.width, pcx.height, pcx.himap);
                   }
@@ -544,7 +544,7 @@ int LoadAlpha(const char* name, Bitmap& bitmap, int type)
 
    // check for an associated alpha-only (grayscale) bitmap:
    char filename[256];
-   strcpy(filename, name);
+   strcpy_s(filename, name);
 
    char* dot = strrchr(filename, '.');
    if (dot && pcx_file)

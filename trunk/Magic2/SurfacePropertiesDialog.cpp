@@ -43,25 +43,25 @@ SurfacePropertiesDialog::SurfacePropertiesDialog(MagicView* pParent /*=NULL*/)
          surface->GetVertexSet()->CalcExtents(plus, minus);
 
          char buffer[256];
-         strcpy(buffer, surface->Name());
+         strcpy_s(buffer, surface->Name());
          mSurfaceName = buffer;
 
-         sprintf(buffer, "%d", surface->NumPolys());
+         sprintf_s(buffer, "%d", surface->NumPolys());
          mNumPolys = buffer;
 
-         sprintf(buffer, "%d", surface->NumVerts());
+         sprintf_s(buffer, "%d", surface->NumVerts());
          mNumVerts = buffer;
 
-         sprintf(buffer, "%.1f", surface->Radius());
+         sprintf_s(buffer, "%.1f", surface->Radius());
          mSurfaceRadius = buffer;
 
-         sprintf(buffer, "%.1f  (%.1f - %.1f)", plus.z-minus.z, minus.z, plus.z);
+         sprintf_s(buffer, "%.1f  (%.1f - %.1f)", plus.z-minus.z, minus.z, plus.z);
          mSurfaceLength = buffer;
 
-         sprintf(buffer, "%.1f  (%.1f - %.1f)", plus.x-minus.x, minus.x, plus.x);
+         sprintf_s(buffer, "%.1f  (%.1f - %.1f)", plus.x-minus.x, minus.x, plus.x);
          mSurfaceWidth = buffer;
 
-         sprintf(buffer, "%.1f  (%.1f - %.1f)", plus.y-minus.y, minus.y, plus.y);
+         sprintf_s(buffer, "%.1f  (%.1f - %.1f)", plus.y-minus.y, minus.y, plus.y);
          mSurfaceHeight = buffer;
       }
    }

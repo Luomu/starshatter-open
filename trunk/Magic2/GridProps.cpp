@@ -44,10 +44,10 @@ GridProps::GridProps(Grid* g, CWnd* pParent /*=NULL*/)
 static const char* C(CString& str)
 {
    static char buf[512];
-
-   for (int i = 0; i < str.GetLength(); i++)
+   int i;
+   for (i = 0; i < str.GetLength(); i++)
       buf[i] = (char) str.GetAt(i);
-   buf[i] = 0;
+	buf[i] = 0;
 
    return buf;
 }

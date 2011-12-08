@@ -188,8 +188,8 @@ void MaterialDialog::UpdateMaterial()
    if (material) {
       UpdateData();
 
-      strcpy(material->name,   mMaterialName);
-      strcpy(material->shader, mMaterialShader);
+      strcpy_s(material->name,   mMaterialName);
+      strcpy_s(material->shader, mMaterialShader);
 
       material->ambient_value    = mAmbientValue;
       material->diffuse_value    = mDiffuseValue;
@@ -381,7 +381,7 @@ void MaterialDialog::OnFileTexture(int type)
       return;
 
    char tex_name[512];
-   sprintf(tex_name, "%s", ofd.GetFileName().GetBuffer(0));
+   sprintf_s(tex_name, "%s", ofd.GetFileName().GetBuffer(0));
 
    ChangeFileTexture(tex_name, type);
 }
@@ -514,7 +514,7 @@ void MaterialDialog::OnChangeMaterialName()
 {
    if (material) {
       UpdateData();
-      strcpy(material->name, mMaterialName);
+      strcpy_s(material->name, mMaterialName);
    }
 }
 
@@ -522,7 +522,7 @@ void MaterialDialog::OnChangeMaterialShader()
 {
    if (material) {
       UpdateData();
-      strcpy(material->shader, mMaterialShader);
+      strcpy_s(material->shader, mMaterialShader);
    }
 }
 
@@ -597,7 +597,7 @@ void MaterialDialog::OnNewMaterial()
          mtl->diffuse_color  = Color::LightGray;
          mtl->specular_value = 0.5f;
          mtl->specular_color = Color::White;
-         strcpy(mtl->name, "(new)");
+         strcpy_s(mtl->name, "(new)");
 
          model->GetMaterials().append(mtl);
 

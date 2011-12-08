@@ -787,7 +787,7 @@ void MagicView::OnFileImport()
       return;
 
    char mag_name[256];
-   sprintf(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
+   sprintf_s(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
 
    MagicDoc*   pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -814,7 +814,7 @@ void MagicView::OnFileExport()
       return;
 
    char mag_name[256];
-   sprintf(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
+   sprintf_s(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
 
    MagicDoc*   pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -1115,9 +1115,9 @@ void MagicView::OnMouseMove(UINT nFlags, CPoint point)
       int np = seln ? seln->GetPolys().size() : 0;
 
       if (np || nv)
-         sprintf(xy, "(%05d,%05d)  Verts:%d Polys:%d", mouse.x, mouse.y, nv, np);
+         sprintf_s(xy, "(%05d,%05d)  Verts:%d Polys:%d", mouse.x, mouse.y, nv, np);
       else
-         sprintf(xy, "(%05d,%05d)", mouse.x, mouse.y);
+         sprintf_s(xy, "(%05d,%05d)", mouse.x, mouse.y);
       MainFrame::StatusXY(xy);
    }
 
