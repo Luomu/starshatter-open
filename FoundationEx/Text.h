@@ -136,7 +136,7 @@ inline int Text::compare(const char* s) const
    if (rep->sensitive)
       return strcmp(sym, s);
    else
-      return stricmp(sym, s);
+      return _stricmp(sym, s);
 }
 
 inline int Text::compare(const Text& s) const
@@ -144,7 +144,7 @@ inline int Text::compare(const Text& s) const
    if (rep->sensitive && s.rep->sensitive)
       return strcmp(sym, s.sym);
    else
-      return stricmp(sym, s.sym);
+      return _stricmp(sym, s.sym);
 }
 
 // +-------------------------------------------------------------------+

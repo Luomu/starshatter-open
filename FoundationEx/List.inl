@@ -130,8 +130,8 @@ void List<T>::resize(int newsize)
 #else
       T** v = new PTR[extent];
 #endif
-
-      for (int i = 0; i < items; i++)
+	  int i;
+      for (i = 0; i < items; i++)
          v[i] = array[i];
 
       for (; i < extent; i++)
@@ -187,14 +187,15 @@ void List<T>::insert(const T* item, int index)
 template <class T>
 void List<T>::insertSort(const T* item)
 {
-   if (item) {
-      for (int i = 0; i < items; i++) {
-         if (*item < *array[i])
-            break;
-      }
+	if (item) {
+		int i;
+		for (i = 0; i < items; i++) {
+			if (*item < *array[i])
+				break;
+		}
 
-      insert(item, i);
-   }
+		insert(item, i);
+	}
 }
 
 // +-------------------------------------------------------------------+

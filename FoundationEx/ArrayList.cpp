@@ -102,8 +102,8 @@ void ArrayList::resize(int newsize)
 #else
       DWORD* v = new DWORD[extent];
 #endif
-
-      for (int i = 0; i < items; i++)
+	  int i;
+      for (i = 0; i < items; i++)
          v[i] = array[i];
 
       for (; i < extent; i++)
@@ -157,7 +157,8 @@ void ArrayList::insert(DWORD item, int index)
 
 void ArrayList::insertSort(DWORD item)
 {
-   for (int i = 0; i < items; i++) {
+	int i;
+   for (i = 0; i < items; i++) {
       if (item < array[i])
          break;
    }
@@ -456,8 +457,8 @@ void FloatList::resize(int newsize)
 #else
       float* v = new float[extent];
 #endif
-
-      for (int i = 0; i < items; i++)
+	  int i;
+      for (i = 0; i < items; i++)
          v[i] = array[i];
 
       for (; i < extent; i++)
@@ -511,7 +512,8 @@ void FloatList::insert(float item, int index)
 
 void FloatList::insertSort(float item)
 {
-   for (int i = 0; i < items; i++) {
+	int i;
+   for (i = 0; i < items; i++) {
       if (item < array[i])
          break;
    }
