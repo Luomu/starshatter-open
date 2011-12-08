@@ -119,7 +119,7 @@ HttpServer::DoGet(HttpRequest& request, HttpResponse& response)
    content += "</h1>\n";
    content += "<br><h3>Client Address:</h3><p>\n";
 
-   sprintf(buffer, "%d.%d.%d.%d:%d<br><br>\n",
+   sprintf_s(buffer, "%d.%d.%d.%d:%d<br><br>\n",
             client_addr.B1(),
             client_addr.B2(),
             client_addr.B3(),
@@ -158,7 +158,7 @@ HttpServer::DoGet(HttpRequest& request, HttpResponse& response)
       ListIter<HttpParam> q_iter = request.GetQuery();
       while (++q_iter) {
          HttpParam* q = q_iter.value();
-         sprintf(buffer, "<b>%s:</b> <i>%s</i><br>\n", q->name.data(), q->value.data());
+         sprintf_s(buffer, "<b>%s:</b> <i>%s</i><br>\n", q->name.data(), q->value.data());
          content += buffer;
       }
    }
@@ -167,7 +167,7 @@ HttpServer::DoGet(HttpRequest& request, HttpResponse& response)
    ListIter<HttpParam> h_iter = request.GetHeaders();
    while (++h_iter) {
       HttpParam* h = h_iter.value();
-      sprintf(buffer, "<b>%s:</b> <i>%s</i><br>\n", h->name.data(), h->value.data());
+      sprintf_s(buffer, "<b>%s:</b> <i>%s</i><br>\n", h->name.data(), h->value.data());
       content += buffer;
    }
 
@@ -199,7 +199,7 @@ HttpServer::DoHead(HttpRequest& request, HttpResponse& response)
       int len = response.Content().length();
  
       char buffer[256];
-      sprintf(buffer, "%d", len);
+      sprintf_s(buffer, "%d", len);
       response.SetHeader("Content-Length", buffer);
       response.SetContent("");
 
@@ -344,7 +344,7 @@ HttpRequest::ParseRequest(Text request)
          value_buf[i++] = *p++;
       value_buf[i] = 0;
 
-      if (!stricmp(name_buf, "Cookie")) {
+      if (!_stricmp(name_buf, "Cookie")) {
          ParseCookie(value_buf);
       }
       else {
@@ -680,7 +680,7 @@ HttpRequest::operator Text()
       response += "\n";
    }
 
-   for (i = 0; i < cookies.size(); i++) {
+   for (int i = 0; i < cookies.size(); i++) {
       HttpParam* c = cookies[i];
       response += "Cookie: ";
       response += c->name;
@@ -769,20 +769,20 @@ HttpResponse::operator Text()
    char buffer[256];
 
    if (content.length()) {
-      sprintf(buffer, "%d", content.length());
+      sprintf_s(buffer, "%d", content.length());
       SetHeader("Content-Length", buffer);
    }
 
    for (int i = 0; i < cookies.size(); i++) {
       HttpParam* cookie = cookies.at(i);
-      sprintf(buffer, "%s=\"%s\"; Version=\"1\"", cookie->name.data(), cookie->value.data());
+      sprintf_s(buffer, "%s=\"%s\"; Version=\"1\"", cookie->name.data(), cookie->value.data());
 
       AddHeader("Set-Cookie", buffer);
    }
 
-   for (i = 0; i < headers.size(); i++) {
+   for (int i = 0; i < headers.size(); i++) {
       const HttpParam* p = headers.at(i);
-      sprintf(buffer, "%s: %s\n", p->name.data(), p->value.data());
+      sprintf_s(buffer, "%s: %s\n", p->name.data(), p->value.data());
       response += buffer;
    }
 
@@ -895,7 +895,7 @@ HttpResponse::ParseResponse(Text response)
 
    const char* pStatus = response.data() + 9;
 
-   sscanf(pStatus, "%d", &status);
+   sscanf_s(pStatus, "%d", &status);
    if (!status) return;
 
    int  i = 0;
@@ -924,7 +924,7 @@ HttpResponse::ParseResponse(Text response)
          value_buf[i++] = *p++;
       value_buf[i] = 0;
 
-      if (!stricmp(name_buf, "Set-Cookie")) {
+      if (!_stricmp(name_buf, "Set-Cookie")) {
          ParseCookie(value_buf);
       }
       else {
@@ -987,7 +987,7 @@ HttpResponse::ParseCookie(const char* param)
             p++;
 
          // ignore the version attribute
-         if (stricmp(name, "version")) {
+         if (_stricmp(name, "version")) {
             HttpParam* param = new(__FILE__,__LINE__) HttpParam(name, data);
             if (param)
                cookies.append(param);
