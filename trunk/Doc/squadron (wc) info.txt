@@ -1,0 +1,96 @@
+
+
+SQUADRON
+
+
+PRODUCT DESCRIPTION
+
+Background
+     By the year 2654 AD, mankind has spread throughout his section of the galaxy. Along the way, humanity has come in contact with a handful of sentient races. Soon after first contact, most of these races have proven friendly.
+     The Kilrathi definitely are not.
+     Vessels of the Empire of Humanity first encountered Kilrathi explorers twenty-five years ago, in 2629. The Imperials offered the standard, non-linguistic greeting to the new aliens this opening gesture of friendship was met with a volley of laser fire. Within five years, the Empire and the Kilrathi were locked in an all-out-war for survival. 
+
+The Kilrathi
+     The Kilrathi are a vaguely mammalian race from a planet several hundred light years from Sol. Before they encountered humanity, the Kilrathi had never met a race capable of faster-than-light travel. Their warlike nature and technological superiority over their near neighbors led the Kilrathi to conquer and enslave every race they encountered. Over four centuries, the Kilrathi built a martial state two hundred light years across, ruled by the Supreme General of Kilrah.
+     When the Kilrathi met humankind, they had finally encountered a race whose technology and power rivaled their own. Unfortunately, half a millennium of experience made it impossible for the Kilrathi to accept another race as their equal -- their only method for dealing with alien cultures was to conquer and subjugate them. 
+
+The War
+     In 2634, the Supreme General committed the entirety of the Kilrathi to the defeat or destruction of humankind. The ferocity of their initial attacks caught the Empire by surprise; thousands of worlds and billions of lives were lost before the Empire could marshal any serious opposition to the alien onslaught.
+     The desperate struggle between man and Kilrath has pitted the determination and ingenuity of human defenders against the specialization and fanaticism of the genetically-engineered Kilrathi war machine. Through desperation as much as genius, the humans have fought back after their early losses. Today, twenty years after the war broke out, the conflict has devolved into a bloody stalemate, typified by a constant stream of dirty little skirmishes over war-torn worlds. 
+
+
+Premise
+     You are one of the Imperial Navy's finest --- a hot, young starfighter pilot, fresh from the Imperial Academy on Terra and combat flight training in the Vega system. All your life, you've heard the stories of the brave Imperial pilots, defending humanity against the vicious Kilrathi monsters. As you arrive on the Kilrathi frontier, your heart soars in anticipation of a life of glory and adventure.
+     A newly-commissioned officer, you've been assigned to a strike carrier, the ISS Tiger's Claw. Your exemplary performance back at Vega has earned you the position of a flight leader with the 2411th Imperial Fighter Squadron -- the well-known "Blood Hawks." The men and women who have served before you, both on the Tiger's Claw and in the Blood Hawks, have established a tradition of bravery, skill and excellence you will be proud to uphold.
+     One of the Empire's fastest carrier ships, the Tiger's Claw fulfills a troubleshooting role in the 36th Imperial Battle Fleet. It is one of the Fleet's "first response" vessels, usually the first Imperial ship to encounter the enemy in a combat situation. 
+
+
+Spaceflight and Combat
+     The core of Squadron is a state-of-the-art spaceflight combat simulation in which you and your two wingmen dogfight with the fighters, corvettes, cruisers, dreadnoughts, and other ships of the Kilrathi Star Force. 
+
+Imperial Starships
+     The starships that battle in the Squadron universe are not the simple, blocky polygon vessels that populate most space games. Instead, Squadron's starfighters -- and all the other vessels and objects in the game -- are amazingly photo-realistic, bit-mapped images, offering a crispness and tangibility previous games have lacked. The computer will depict every vessel using 64 ray-traced images, providing the smooth, realistic movement in any direction in three-dimensional space.
+     Approximately 25 to 30 different vessel designs will appear in Squadron. You will be able to lead wings composed of four or five different Imperial fighter ships, ranging from the small, lightly-armed one-man Hornet to the two-man Raptor, a heavy fighter featuring a wide array of laser and missile systems. Other vessels in the Imperial fleet will include the strike carrier Tiger's Claw as well as the Venture-class corvette, the Drayman-class transport and the Diligent-class tanker. 
+
+Kilrathi Starships
+     The half-dozen starfighters representing the Kilrathi Star Fleet will run a gamut similar to that of the Imperial fighters, ranging from a light, highly-maneuverable ship to a tough, heavily-armed one. The Kilrathi battlefleet will be even more completely represented than the human one, though, five larger warships will be included as well; from smallest to largest, they include the corvette, the destroyed, the cruiser, the carrier, and the dreadnought.The dreadnought sports a number of independently-controlled weapons turrets, which pivot on the surface of the vessel to target enemy ships. Supporting the Kilrathi fleet will be transport and ranker ships, as well as a large starbase.
+     Adding color to the Kilrathi fleet are four unique vessels, flown by NPC Kilrathi aces in key battles; once encountered, these distinctive starfighters will be instantly recognizable, allowing you to establish rivalries with enemy pilots over the course of a campaign. 
+
+The Environment
+     But starships are not the only photo-realistic, ray-traced objects in the Squadron universe. Some of the battles against the Kilrathi will take place in fields of spinning, drifting asteroids, or around large spare stations. And the projectiles launched by starships -- from laser bolts to mines to heat-seeking, image recognizing, or dead-fire misfiles -- will also be represented with three-dimensional, ray-traced graphics.
+     Beyond the spaceships, missiles and asteroids, at the very limit of Squadron space, are a variety of celestial bodies. Though they will be so far away from the player's vessel that they will seem fixed in place, these planets, stars and nebulae provide the game with a reference for the pilots. For example, one battle may take place in an alien solar system; the star would be similar in the distance on one side, while its planets could be seen in other directions. Of course, the inner planets, whose dark sides would be turned to the battlefield, would appear as only crescent-shaped slivers, while those farther out will be nearly-full spheres, since it is their lit faces that will be turned towards the combatants. 
+
+
+In the Cockpit
+     But the breathtaking realism of Squadron doesn't end at the edge of the pilots windshield -- the interior of his ship is also depicted in vivid detail. 
+
+Control Panels
+     In fact, each of the four or five fighter-ships you can fly will have a different interior. Arranged around the control panels are a variety of functional scanners, readouts, and displays. Two scanners show the position of the enemy ships, one short-range and the other long. Other displays indicate the ship's available power, its shield level, its armament. As your ship is damaged, various displays will spark, explode or go dead, depriving you of vital information. 
+
+The Pilot
+     The heart of a starfighter is its pilot, and the ships in Squadron are no exception. Unlike existing airplane and spaceflight simulators, which show -- at best -- the pilots hand on the joystick, Squadron offers a full-body, over-the-shoulder of an animated pilot. Not only does his right hand steer the on-screen joystick along with your maneuvers, but his whole body moves in response to your actions and the environment. When the ship pulls a tight turn, the pilot's hand tilts with the G-force of the maneuver; when the ship is hit by lasers or missiles his whole body shakes with the impact. If you hit a key, to drop your shields or fire a missile, the on-screen pilot reaches with his left hand to hit the appropriate button on his control panel. The pilot even expresses emotion, to convey the drama of the dogfight -- when things get tense, you'll see him clench his fist to hold his nerves in check, and when you score a hit, he'll flash a quick, self-congratulatory thumbs-up sign! 
+
+Radio Communications
+     One of the most important parts of any dogfight is the radio chatter that accompanies and describes the action. This too will be reflected in Squadron. A video screen on the pilot's control panel will display a close-up shot of who ever happens to be speaking to you at any given moment -- your commander back on the Tiger's Claw, one of your wingmen, or the alien ace you've met in previous battles. the speaker's situation will be reflected on the video screen-- if he's been damaged, the image will be fuzzy and flickering. If he blows up, the screen glows white, then goes dead.
+     The speaker's message will scroll across the bottom of the cockpit screen, like subtitles in a movie a tornado warning on television the speech of your fellow Imperials will appear as white text, while aliens talk in yellow or lime-green text. 
+
+
+Scenarios
+     At its most basic level, Squadron can be played by electing any of roughly 10 to 15 stand-alone battle scenarios. Each scenario is a unique combat situation, pitting you and your wingmen against a different assortment of enemy starships, and offering a different mission objective. Before the Battle
+     Each scenario begins with a briefing, in which your squadron commander aboard the Tiger's Claw describes your mission, the opposition you are likely to face, and your mission objectives. Using a simple keyword system, you can ask your commander for additional information about the mission or strategic advice.
+     From the briefing, the action cuts to the flight deck, where you see yourself climbing into the cockpit of your starfighter. The screen then cuts to the cockpit interior, where you'll have a few moments to go over your equipment, pre-set your shield levels, review your array of missiles, etc. Looking out the viewscreen of the fighter, you can see down the launch tubes; when you're ready to begin your mission, you hit the launch button. Through the viewscreen, you'll see the launch tube rushing by at a frightening speed -- then blackness surrounds you and you're in space. Your wingmen are just a bit head of you, to the right and left. You check your long-range scanners for bogeys, and head off to intercept the enemy. 
+
+Killed in Action
+     You should already have a feel for Squadron's remarkable space-combat simulation. Worth mentioning here, however, is the animated sequence which will run if your ship is destroyed.
+     Should you suffer a fatal hit, the action will cut from the interior cockpit view to an exterior shot of your vessel. In a brief animation, your ship will explode in bright red and orange flames, with small bits of debris flying off in all directions. Once the explosion has faded to black, the scene cuts back to the briefing room, for the post-mission debriefing. Your pilots seat in the room will be conspicuously absent at the debriefing. 
+
+Coming Home
+     If you managed to survive to the conclusion of your mission, whether successful or not, the screen will cut from the cockpit view you saw throughout the battle to an exterior view of the Tiger's Claw. If the Claw suffered damage during the scenario, this will be apparent from this vantage.
+     Your ship, and those of your wingmen if they survived, can be seen approaching in the distance, returning to the carrier after the mission. As you draw near, a tractor beam from the Tiger's Claw grabs your ships and guides them into the landing bay on the flight deck. Next, the scene cuts to a view of you climbing out of your fighter while an attentive mechanic inspects the ship for damage. In the background are the ships of your wingmen, if they made it back; if they were lost in combat, the next two spaces in the landing bay are conspicuously empty.
+     When you leave the landing bay, you report to the briefing room for a mission analysis and debriefing. There, your squadron commander briefly analyzes your performance, and assesses mission success. He offers his congratulations if you've done well, or chews you out if you've performed poorly.
+     After debriefing, the game returns to the main menu screen, where you can select another stand-alone scenario or begin the full-scale Squadron campaign. 
+
+
+The Campaign
+     Squadron is at its richest, most satisfying, and best when played as a Campaign. The Campaign version of Squadron allows you to participate in a series of crucial battles in the year 2654, at the height of the Imperial-Kilrathi war. By performing well in the scenarios, you can advance in rank, receive a variety of decorations, and be reassigned to various types of starfighters. Poor performance on the other hand, will weaken the Imperial position in the war, and result in more and harder scenarios later on, as the Kilrathi erode Imperial resources and personnel while suffering minimal losses themselves. 
+
+Campaign Structure
+     The Campaign consists of 20 scenarios, linked by a branching flow-chart. Your performance on earlier missions will directly affect your position in later ones, not to mention occasionally determining which branch you'll follow through the Campaign.
+     In many cases, the effects of your performance might be subtle. For example, in the first scenario, you might be pitted against three alien starfighters. If any of these ships escape your dogfight, they will also appear in the second scenario, along with the ships which would appear in any case. Later on, if you fail to protect a supply ship, the Tiger's Claw may find itself short of material in the following scenarios, resulting in fuel and ammo rationing, and preventing certain repairs from being made to your starfighters between missions.
+     In other instances, your performance may divert the Campaign onto another path of scenarios. If you destroy a Kilrathi strike carrier in the Symmett system, for example, this may set you up to press your advantage, making a direct assault on the Kilrathi starbase in that system. Or, if you fail to make it back from a scouting mission in a certain period of time, you may return to the Tiger's Claw only to find it under attack by Kilrathi fighters, which you'll have to defeat before you can land.
+     In all, a typical run through the Squadron Campaign will involve you in about 12 of the 20 scenarios. This will add to the replay value of the game -- you'll have to play the Campaign several times before you've encountered every possible situation in every possible scenario. Further enhancing replay value is the fact that none of the stand-alone scenarios are included in the Campaign -- each battle in the Campaign will be completely new to the player. 
+
+Beginning the Campaign
+     You'll begin the Squadron Campaign by selecting the appropriate option on the main men u screen. From there, the game will take you to briefing room, for your mission briefing, just as with a stand-alone scenario. At the end of your briefing, however, you'll be asked to choose your wingmen for the mission from among the members of your squadron.
+     A screen showing pictures and brief descriptions of the available pilots will appear. Based on your personal style of play and the information in the mission briefing, you may want to choose flashier, reckless and more daring pilots, or more careful and conservative wingmates. Of course, as you proceed through the Campaign, you'll come to know the members of your squadron better, and will settle on a handful of pilots you can count on as your regular wingman. In later scenarios, when you've moved up to a larger, two-man fighter, you'll also need to pick your own tailgunner.
+     After you've chosen your crew, the game will proceed just as described for a stand-alone scenario -- climbing into your ship, launching and fighting the battle. 
+
+Back on the Carrier
+     After you've completed your missions, you'll return to the Tiger's Claw just as described for the stand-alone scenarios, above. The game will cut to the animated docking sequence, then the landing bay scene, and finally take you into the mission debriefing. After debriefing, if you've performed especially well, you may be awarded a promotion or a decoration. These honors are conferred by the commander of the Claw in an awards ceremony with simple animation.
+     Following the debriefing, the game may take you to any of a handful of inter-scenario scenes, showing you sharing a drink in the officer's club with your fellow pilots, enjoying a brief shore leave planetside, or watching the news in the Claw's recreation hall.
+     Of course, the lead story on the newscast is the latest update on the war against the Kilrathi. The holovision newscast will show highlights of your most recent battle as a miniaturized, holographic dogfight over the holoprojector in the rec hall. You and your fellow pilots can be seen sitting around the projector, watching the progress. 
+
+Technical Notes
+     [Chris -- you'll have to add this yourself if you need it. I'd recommend covering all the things the program covers that are transparent to someone playing the game, such as NPC morale, NPC intelligence, and ship's characteristics.
+     You'll probably want to make a list of technical features, which I really can't do with any hope of accuracy. Things that would fit on this list would be the changing cockpit interiors for side and rear views, the ability to customize the key assignment for keyboard controls, the PC's ability to choose his complement of missiles for each mission, etc.] 
+ 

@@ -1,0 +1,380 @@
+STARSHATTER TASK LIST AND SCHEDULE
+
+AUGUST 1997
+
+1     Magic Enhancements
+      *  modify poly (finish)
+      *  triangulate poly
+      *  remove degenerate polys (fewer than 3 distinct verts)
+      *  scale selection
+      *  rotate selection
+      *  primitives (sphere, cylinder, cone)
+
+SEPTEMBER 1997
+
+1     Magic Enhancements
+      *  texture mapping
+      *  new test ship designs and textures
+      +  stabilization (bug fixing)
+
+1     Low-level AI (idle / attack / reverse / evade)
+      *  Auto-bank on turn
+      *  2 AI fighters attacking each other
+      *  1+ AI fighters attacking the player
+
+1     Flocking AI
+      *  Collision Avoidance
+      *  Seek Target
+      *  Flee, Avoid object
+      *  Evade Threat
+      *  Drop/re-acquire target
+      *  Fire control based on Projected Silhouette
+      *  Readiness (speed multiplier, likelihood of fire)
+
+1     Combat results (damage to resources/ships)
+      *  Fix sprite animation rate
+      +  Shields
+      *  Explosions / Flashes / Particles
+      *  Ship-to-ship collisions
+      *  Impulse from collisions and shots
+
+1     Compound data file and asset manager
+      *  including zlib compression
+
+      Misc.
+      *  test mode
+      *  respawn
+      *  gaea texture generator
+
+OCTOBER 1997
+
+1     Sound
+      * Ambient Sound Effects
+      * 3D Sound Effects
+      + Streamed Sound (e.g. voice over)
+
+1     Renderer Architecture
+      *  get rid of span buffer (CamView, SpanBuff)
+      *  get rid of poly id and key (Geometry)
+      *  single clipped polygon
+         * no more clipped_verts in poly (Geometry)
+         * ClipPoly just before ProjectPoly (CamView)
+         * Clip from source poly into dest poly (CamClip)
+         * fixed overhead of 16 verts in vertex set (Solid::Allocate)
+      *  colored lights
+      *  directional backlighting
+      *  z-scaling for 3Dfx
+      *  snapshot of D3D frame buffer (not working on 3Dfx?)
+      *  remove Span pointer from poly
+
+1     Memory Leak Debugging
+      *  MemDebug class
+
+1     Idle (schedule slip)
+         Played Wing Commander 3 and Darklight Conflict a bit
+         Thought a lot about game design
+         Learned to use Photoshop
+
+NOVEMBER 1997
+
+1     Renderer Architecture
+      *  move texture indices from vertex to poly (Geometry)
+      *  modify nGen to support new formats
+
+1     Misc.
+      *  Polygon-accurate shot-intersection
+      *  Translucent shield bubble
+      *  Improved laser graphics
+      *  Target "Pickle"
+
+1     Combat
+      *  seeker missiles
+      *  missile cam
+      *  smooth camera zoom
+      *  improved ship collision logic
+      *  physical vibration
+
+DECEMBER 1997
+
+1     Misc.
+      *  Lens flare occlusion
+      *  improved collision avoidance AI
+      *  improved seeker AI
+      *  ship physics for missile carrying and launch
+      o  starfield texture in sw (tried and removed: too slow)
+
+1     Misc.
+      *  additional sounds (engines, shot-impact)
+      *  3Dfx bug fixes
+      *  upgraded data archiver
+      *  planetary rings
+      *  clipping/zooming bug fixes
+      *  simple ultra-drive
+
+1     Collision Detection
+      *  RAPID Collision detection
+
+JANUARY 1998
+
+1     Misc.
+      *  polygon properties (e.g. flat-shaded, transparent)
+      *  bridge cam
+      *  independent agility parameters
+      *  LOD clipping of graphics
+      -  LOD model support for ships and planets
+
+1     Key/joystick button mapper
+      *  define key codes for actions and load from file
+      -  GUI support for mapping keys within the game
+
+1     Weapon Aiming AI
+      *  Improved missile graphics
+      *  Load weapon/shot parameters from data file
+      *  Handle slow charging / variable charge cap ship guns
+      *  Compute deflection vector to lead target
+
+FEBRUARY
+      *  completed font designer
+      *  designed HUD font
+      *  basic button control
+      *  basic form class
+      *  improved collision avoidance AI
+      *  physical modeling - vibration
+      *  improved shield graphics
+
+MARCH
+      *  simple padlock view
+      *  improved gaea planetary texture
+      *  fixed planet texture mapping defects
+      *  multi-quality bitmaps
+      *  use 8-bit texture format in hardware, when available
+      *  power management and multiple reactors
+      *  HUD view
+      *  2D cockpit view
+
+      HUD enhancements
+      *  IFF color indications
+      *  markers for distant contacts
+      *  weapon range bar
+      *  mode indicator
+      *  fullscreen mode for external cameras
+         
+      Guns and Missiles
+      *  weapon selection (G for guns, M for missiles?)
+      *  weapon range indicator
+      *  chase vector indicator
+      *  missile lock
+      +  missile track/lock graphic and audio cue
+
+APRIL
+      Misc
+      *  HUD display off
+      *  HUD color/brightness
+      *  Doppler shift and distance roll off
+      *  Orient theater/padlock views to world coordinates
+      *  AI roll to orient with world coordinates (y+ is up)
+      *  Fighter AI: roll+pitch instead of yaw
+
+      Sensor/Scanner and Emission Control
+      *  passive and active sensors
+      -  manual emcon
+      -  environmental sensor efficiency
+
+MAY
+      Misc
+      *  joystick configuration
+      *  performance tuning (clip vertex set in view space)
+      *  (x,y,z) translation thrusters
+      *  movable external camera (rotate, zoom, center on object)
+      *  "enhanced" two-frequency doppler effect
+
+      Tactical Situation MFD
+      *  properly clipped 3D grid
+      *  contact info for each contact
+      *  tactical hud
+      *  cycle view object
+      ?  clipped circles indicating target weapon range
+
+      Magic Enhancements
+      *  optional second texture and flag set per polygon
+      *  specular highlight flag
+      *  two-pass texture rendering in nGen (sw and d3d)
+
+      Combat Results
+      *  System Damage Combat Results
+      *  particle burst/trail for severe system damage
+      *  caution and warning panel
+      -  target damage feedback
+      -  vocal warning system
+
+      System Damage Modeling
+      *  avionics HUD/NAV degradation
+      *  attitude stabilizer
+      -  attitude control
+      -  throttle control
+      -  sensor weapon aiming control
+
+JUNE
+      Combat Enhancements
+      -  subsystem targeting for starship targets
+      -  AA turrets on starships
+      -  mines and/or gunpods
+      -  long range weapon types
+
+JULY
+      Simulation and Navigation
+      *  star system modeling
+      *  orbital mechanics
+      *  navigation map
+      *  autonav ai
+      *  hyperdrive navigation
+      *  improved planetary texture mapping
+
+AUGUST
+      Operational Simulation and Navigation
+      *  performance optimization for large fleets
+      *  enhanced hyperdrive auto nav ai
+      *  animated hyperspace effects
+      *  new navigation mfd design
+      *  starship fire control mfd
+
+      Misc
+      *  improved plasma trail effect
+      *  corrected rendering of large grids
+      *  improved performance of button control
+      *  fixed lighting and lens flare bugs
+      *  improved star shell texture mapping
+
+SEPTEMBER
+      Operational Simulation
+      *  fire control mfd
+      *  weapon firing orders
+      *  flight deck modeling
+      *  flight deck control (recover/launch ships)
+      *  created starship ai
+      *  improved fighter evasion techniques
+      *  starship point defense
+
+      Graphics and Collision Detection
+      *  fixed specular highlighting
+      *  fixed collision matrix
+      *  removed collision resolution for fighter/fighter
+      *  render planetary atmosphere
+      *  improved planet generator
+
+OCTOBER
+      Operational Simulation
+      -  air tasking orders, manual order assignment
+      -  starship ai threat assessment, targetting and navigation
+      -  starship ai flight deck control
+      -  time skip, including combat resolution
+      -  hyperspatial navigation
+      -  packages, cooperation, formations, orders
+      -  communications and squadron commands
+
+----------------------------(unscheduled)------------------------------------
+
+      Other HUD Modes
+      -  IDS (docking)
+      -  RHAW
+      -  MAW
+
+      Misc
+      -  reactor power level control
+      -  planet craters
+
+      Bug List
+      *  faceting (flat-shading) in D3D
+      *  nebula sky invisible during fade in
+      *  specular highlights visible during fade in
+      *  show missile count in HUD
+      *  correct ship class determination
+      *  improve fighter steering behavior
+      *  extraneous keys on startup
+      -  sound memory leak
+      -  sound dropouts
+
+      Auto Pilots
+      -  match velocity
+      -  form up
+      -  approach
+      -  dock
+
+?     DX6 DrawPrimitive support
+
+2     Mid/High level AI
+      -  strategy and tactics
+      -  stealth and detection
+      -  morale simulation
+      -  difficulty settings
+
+2     Docking and Resupply
+
+1     Ship model parts
+      -  additional ship designs
+      -  solid model loading using surfaces for sub parts
+      -  Complex explosions for composite ships
+
+1     Fonts (including alpha blended anti-aliased)
+
+1     GUI logic / real menu tree
+
+8+    Final ship designs
+1     Final weapon designs
+
+1     Death-spiral Animations
+
+2     Special Effects
+      +  Shields
+      +  Hyperspace
+      -  Starshatter and other Big Explosions
+      -  Shock waves, weapon trails
+      *  Planetary Rings
+
+1     Wingman command interface
+
+2     Cockpit designs
+
+1     Other External Views
+      + theater view
+      + padlock
+      - rear view
+      - (looping) flyby
+
+2     Save/Restore Game
+
+2     Galaxy Design
+2     Planet, moon, and starfield textures
+2     Campaign Logic
+?     Mission Design
+1     Mission Objectives Representation
+
+1     Promotions / Scoring
+1     Mission Briefing System
+1     Animation Cutscene System
+1     Strategic Briefing Data and Design
+
+?     Info Database and Help content
+      User's Manual
+
+2     Sound Effects Production
+      - Foley editing
+
+1     Music
+      - Midi or digital audio streaming
+
+3     Music Production
+      - Composition and recording
+
+      High quality renderer for Magic
+      -  phong shading
+      -  multiple colored light sources with shadows
+      *  double precision z buffer
+      -  very high resolution (1280 x 960)
+      -  high polygon count
+
+
+(possibles)
+
+1     WinGlide support for 3Dfx?
+

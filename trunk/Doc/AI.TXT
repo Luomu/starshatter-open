@@ -1,0 +1,1248 @@
+==================== STARSHATTER ==================== 
+                       ACTION
+
+Starshatter is a 3D action-simulation game in a space
+combat setting.  The player will control a space
+ship of one type or another, and attempt to defeat
+various enemy forces composed of small, medium
+and large space ships, space stations, and ground-
+based resources.
+
+The game is designed as a series of combat missions
+in which the goal is to destroy an enemy resource,
+secure an enemy position, or defend a friendly resource
+from an enemy attack.  Unlike most space combat sims,
+Starshatter missions are fought within the context of
+a large dynamic military operation.
+
+In the attack type of mission, victory is achieved
+by destroying the resource(s) and escaping to safety.
+In the secure and defend types of missions, victory is
+achieved by preventing the destruction of the resource
+while simultaneously destroying the enemy or forcing
+the enemy to retire.  In any mission, achieving a
+partial victory is a possibility.
+
+Individual mission designs will be characterized by:
+1) the locale, including various space bodies such as
+   stars, planets, planetoids, asteroid fields, space
+   stations, nebulae, terrain, cities, and so forth
+2) the composition and placement of enemy forces
+3) the composition and placement of friendly or neutral
+   forces, if any
+4) the objectives / resources / victory conditions
+   for each force element
+
+
+RELEVANT TECHNOLOGY:
+
+Space ships and ground units are each endowed with a
+group of resources that they use in battle.  These
+resources fall into eight different categories:
+
+Ship System List:
+
+  1.  Vital (Hull/Stabilizer/Core/Life Support)
+  2.  Econ (power management)
+  3.  Conventional Drive
+  4.  Hyperdrive (optional)
+  5.  Shields
+  6.  Weapons
+  7.  Flight Ops (optional)
+  8.* Systems (computer)
+    a.Communications
+    b.Sensors
+    c.GNC
+    d.Tactical (target tracking)
+
+Large space ships are capable of supralight travel by
+means of "hyperdrive," which is similar to the same
+concepts used in Star Wars and Babylon 5.
+
+Smaller ships (fighters, attack) are not capable of long
+distance travel using hyperdrive, and must be carried
+to and from missions by a larger ship (a destroyer or cruiser).
+
+All combat will occur at sublight velocities using
+conventional plasma projection or fusion drive.  However,
+damage to the hyperdrive may effect the outcome of a
+mission (e.g. by delaying a safe escape).
+
+Ships and ground targets may employ various types of
+weapons, both matter and radiant energy based.  From
+the AI's point of view, all weapons are of one of three
+different types: guided, unguided, or regional.  Guided
+weapons include their own AI to direct their flight path
+to a target.  Unguided weapons simply follow the straight
+line course set for them at launch time.  Regional weapons
+inflict damage on any resources that happen to occupy the
+same volume of space as the weapon during its deployment.
+Any single ship or ground target may employ several fire
+control AI systems to manage multiple beam weapons and
+missile launchers.
+
+Ships and ground targets may employ defensive screens
+or shields.  These shields are invisible barriers that
+prevent the transmission of both matter and radiant
+energy weapons.  Shields (actually, shield generators)
+are degraded by the process of deflecting weapons and
+will eventually burn out, leaving the ship open to
+attack.  Larger ships will employ multiple shield
+generators to screen various parts of the ship.  In
+addition, larger ships can mount more robust shield
+technology, requiring heavier weapons to penetrate.
+
+Laser/Particle Beam cannon types:
+* Alpha
+* Gamma
+* Delta
+* Omega
+
+Explosive Missile weapon types:
+* Pyrotechnic
+* Thermonuclear
+* Antimatter
+* Varion (Torpedo)
+
+In addition to basic laser and explosive missile types
+of weapons, Starshatter features several advanced weapon
+types:
+
+* Cruise Missiles (very long range guided munition)
+* Bomb-pumped Laser Warheads
+* CIWS Laser Turrets
+
+* Plasma Cannon  (very high power energy weapon)
+* Fusion Burst   (ultra high power energy weapon)
+* Graviton Pulse (goes through all shields)
+
+Whenever any ship system takes damage, the capabilities
+of the ship in that area are temporarily or permanently
+downgraded.  Most systems are capable of limited self-
+repair.  Safe bases will be provided for full repair
+both during and between missions.
+
+Although there will be no powerups just lying around,
+there will be both friendly and enemy supply ships on
+each mission.  Small ships can resupply themselves at
+any time by docking with a friendly supply depot or
+ship.
+
+While ships are grouped into the broad categories of
+"large," "medium," and "small", there are several
+distinct classes within those categories.  Ships in
+each class will have typical size parameters as
+follows:
+
+   CLASS       LENGTH (m)  CREW
+   ----------- ----------- -------
+   Fighter     10-20       1           Small
+   Attack      25-50       2-3
+   Destroyer   200+                    Medium
+   Cruiser     400+
+   Battleship  800+                    Large
+   Carrier     1000+
+
+   Station     unlimited
+
+As the class names indicate, small ships are analogous
+to modern combat aircraft, while medium and large ships
+are analogous to modern naval surface warships.  Medium
+and large ships are sometimes referred to as "Starships"
+because they are capable of interstellar travel.
+
+Medium ships may be outfitted with towing rigs.  Large
+ships may be outfitted with flight decks.  Both of these
+can be used to capture a ship.  Flight decks can also
+be used to repair and re-supply smaller ships.
+
+Ships may be organized into battle groups that are led
+by a "flagship."  The flagship is responsible for the
+general direction of the other ships in the battle group.
+This includes such things as setting the overall state
+of readiness, prioritizing targets, and deciding to
+pursue or retire.
+
+==================== STARSHATTER ==================== 
+                       TACTICS 
+
+Aside:
+
+I really want to avoid the typical "furball" (as seen
+in XvT, WCn, etc.) as much as possible.  One thing I've
+always liked about DOOM style games is the measured pace
+of the action.  During the course of a single level, the
+player faces a variety of enemies and situations in small
+packets, controlled by the level architecture.  I would
+like to mimic this in Starshatter somehow, but the "open-
+ness" of the space setting makes it difficult.
+
+Some ideas:
+
+Missions will be sliced up into sections by distance and
+obstacles.  So there might be a group of sentry ships to
+defeat as you enter the playfield, followed by a short
+flight to the next enemy force package.  The enemy will
+be somewhat slow to react to the player's presence.  Per-
+haps enemy ships will need to stick close by other resources
+on guard duty or some such.
+
+A challenge:
+
+Unlike DOOM, the player and enemy ships have the same
+capabilities.  This means that with reasonable AI, the
+player will get killed about as often as the enemies.
+As a result, if the player is vastly out-numbered as
+usual he won't last very long with even odds.  Result:
+we may need to fudge the damage on the player's ship
+somewhat to give him an edge.  Either that, or the
+player will only be allowed to battle one or two enemy
+ships at a time.  Or, the enemy AI should preferentially
+attack red-shirt pilots instead of the player.
+
+USING HYPERDRIVE:
+
+How about, most ships are equipped with hyperdrive.
+This allows the player to travel to places that are too
+far away to be seen with tactical scanners.  In effect,
+jumping through hyperspace places "doors" between scenes
+of action.
+
+Let's postulate that hyperdrive allows supra-light travel
+at some ridiculous velocity.  While in hyperspace the ship
+is essentially impervious to everything except gravitons.
+If the ship passes too close to a gravity well or gravitic
+weapon, the hyperdrive will "stall".  The ship will return
+to normal space, and the hyperdrive will be offline for
+several seconds.
+
+Further postulate that shields and weapons are powered
+down during hyperspace transit.  So you can run, or you
+can fight, but not both at the same time.
+
+While in hyperspace, the player can pilot the ship in
+the usual manner (or perhaps just using the keyboard),
+but the ship is no longer as agile (perhaps 1/5th as
+agile as in sublight flight, perhaps this is variable
+depending on ship design).  The point is that the player
+can point and go, without some hokey "warp out" animation
+sequence.
+
+Of course, it's a big universe out there.  There is no
+point in *making* the player wander around in the middle
+of nowhere for an hour because he overshot the battle.  So
+we will also provide a nav map with preset way points.
+The player can plot a course to anywhere in the mission
+profile by clicking on the way points and pressing "GO".
+While under "auto-pilot" like this, the player can still
+operate all of the ship systems, review the database, etc.
+Nav courses can also be pre-plotted as part of the mission
+profile.  Nav points should be reasonably close together,
+so as to provide a "breather" but not "boredom".
+
+At any time, the player can steer the ship and break out
+of autopilot, without the navigation system forgetting
+the plan.  This provides a nice possibility of "secret areas"
+like checking for the secret base on the far side of the
+3rd moon.
+
+While in hyperspace, the view of the universe is altered.
+Sublight ships are invisible, as is space dust.  Planets
+and other gravity wells are important, so these are still
+visible in some way.  Probably want to replace the "star
+and nebula" sky shell with something more distinctive, a'la
+Bab5 hyperspace, might be nice to have it be animated.
+
+Even though you never see your own ship go into hyperspace,
+it would be great to have a suitable special effect for when
+another ship does so.  Perhaps something like the spiral
+smoke trail from "Eraser".  Whatever it is, it has to convey
+a sense of speed (without silly elongation effects or fake
+motion blur).
+
+SENSORS AND SCOUTING:
+
+Ships will have access to both passive (short range) and
+active (long range) sensors.  Passive sensors rely on the
+detection of radiation emissions from target ship systems
+such as shields, weapons, drive, reactors, active sensors,
+and communications (this is analogous to IR or passive sonar).
+Active sensors transmit an energy beam into space and detect
+the "echo" of the energy bouncing off a target ship (in a
+manner analogous to radar or active sonar).
+
+The fundamental strategy of scouting is to detect the enemy
+targets while simultaneously thwarting the enemy's attempt
+to detect the player.  The basic tool for implementing this
+strategy is Emission Control.  The player must balance the
+energy output of his own ship against the ability of the
+enemy to detect and target him.
+
+The ships will have an Emission Control system, with a range
+of EmCon options.  As the EmCon level is increased, more
+ship systems are enabled and allowed to radiate.  The ship's 
+computer will attempt to minimize the EmCon level to the
+greatest degree in accordance with safety.  If unfriendly
+ships are detected at close range, the computer will increase
+the EmCon level to allow the use of shields and weapon systems.
+The player can also override the automatic EmCon setting in
+situations where stealth is paramount.
+
+Each ship will be modeled by a passive and active sensor
+cross-section.  The passive cross-section (PCS) is a dynamic
+number that represents the current radiation level of the
+entire ship.  The PCS is the current sum of the radiation
+levels produced by all active ship systems.  The active
+cross-section (ACS) is a fixed number for each ship type
+which represents the amount of energy reflected by the ship's
+hull (aspect angle ignored).
+
+Each sensor system will be modeled by type and efficiency.
+During each frame of simulation, the sensor system will
+sample all targets in the game.  For each target, two levels
+of detection will be computed as:
+
+   Detect_pas = PCS / range   * Eff_pas
+   Detect_act = ACS / range^2 * Eff_act(Power_act)
+
+If the level of detection for a target is 0.5 or less, the
+avionics will not register the target as a contact, and will
+not display it in the HUD or tactical viewscreens.  If the
+level of detection is 1.0 or greater, the avionics will
+register the target as a contact, display it in all view-
+screens, and allow weapons targeting of the contact.
+
+If the level of detection is between 0.51 and 0.99, the
+avionics will be able to detect position and classification
+only (not velocity or capability).  Weapon targeting will
+not be possible.  
+
+The target's affiliation will only be displayed if its IFF
+transponder is enabled. (in all cases?)
+
+-----------------------------------------------------------
+EmCon 1: Silent
+   Generator   - idle
+   Shields     - disabled, discharged
+   Weapons     - disabled, discharged
+   Sensors     - passive only
+   Comms       - receive only, IFF disabled
+
+EmCon 2: Stealthy
+   Generator   - 50% limit
+   Shields     - disabled, discharged
+   Weapons     - enabled,  discharged (missiles only?)
+   Sensors     - active low power
+   Comms       - receive, transmit encrypted, IFF disabled
+
+EmCon 3: Normal (launch condition)
+   Generator   - 100% limit
+   Shields     - enabled, charged
+   Weapons     - enabled, charged
+   Sensors     - active full power
+   Comms       - receive, transmit, IFF enabled
+-----------------------------------------------------------
+Table 1: EmCon Settings
+
+
+Short range (passive) sensors will be able to detect EmCon
+2 targets up to a range of 100K, and EmCon 4 targets up to
+a range of 500K.  Long range (active) sensors will be able
+to track all targets up to a range of 1M (maybe as high
+as 2M).
+
+The flag ship serves as Wide Area Search Protocol (WASP)
+coordinator for the fleet.  That is, all ships in the fleet
+will have access to the flag ship's target list.  All ships
+will periodically send their own target list back to the
+flag ship for distribution to the fleet.
+
+==================== STARSHATTER ==================== 
+                        STORY
+
+An ancient Evil has awoken in the galaxy...
+
+The story will be told against a backdrop of two warring
+powers, one peaceful/isolationist, one warlike/imperial.
+The warlike power seeks to control less sophisticated
+races and civilizations and to lead them in an attack on
+the peaceful power.  The player is a member of one of
+these "less sophisticated" races (i.e. a human) who gets
+caught up in the subtle yet violent conflict between the
+two titans.
+
+Since the conflict between the powers involves the con-
+trol of lesser species, you can never really know who is
+on your side.  Or even which side is really yours.  As a
+soldier, you will be forced to choose between obeying
+orders from your superiors, and doing what you believe
+is right.
+
+The game begins with the player assigned to the Tekton-
+Organon Combat Training Facility in the Janus System.
+The player can choose a career path as a fighter pilot
+or as a starship commander.  In either case, they are
+assigned a first vessel, and sent through a course of
+ten or so training missions with both simulated and live
+fire against combat instructors and drone targets.
+
+During the last training mission (a sort of final exam)
+the CTF is destroyed in a hit-and-run attack by the enemy.
+The player is immediately assigned to a combat billet and
+sent into the fray.  (Note that once the player has
+completed the training missions, future games will not
+require the player to repeat them.)
+
+The remainder of the game takes the player through a
+series of combat missions against more and more difficult
+alien opponents.  Midway through the game, the player
+learns that the true enemy is the EVIL that has instigated
+the conflict in the first place.
+
+In the end, the "good" power offers a weapon of last
+resort to the player.  This weapon will cause the explosive
+annihilation of several dozen stars in enemy space.  It
+will immediately result in several billion civilian deaths,
+with tens of billions of casualties resulting from radiation
+poisoning over the next several centuries.  Other, more
+dire, and more global consequences will also result...
+
+==================== STARSHATTER ==================== 
+                      STRATEGY
+
+Although Starshatter is fundamentally an action title,
+there is also a significant back-story and strategic
+element to the gameplay.
+
+The game occurs in a far-distant future of the Milky
+Way galaxy.  Our corner of the galaxy, an area some
+ten or twenty thousand light years in diameter is popu-
+lated by thousands of human-intelligent species on tens
+of thousands of worlds.  Many races live in approximate
+isolation, but most are organized into complex poly-
+specific civilizations spanning many star systems.
+Humans are not central in galactic affairs (as in Star
+Trek or Star Wars) but are merely another species.  And
+some of the other species and civilizations are *much*
+older and *much* more advanced than ours.
+
+
+POLITICAL FACTIONS:
+
+- Starshatter (warlike/imperial power)
+
+* Sterat Empire (controlled by the Starshatter)
+
+* Brenel Core (military/intelligence corporation)
+
+* Zolon Empire (hive-like hereditary empire)
+
+* Marakan Hegemony (Failing human imperial civilization)
+
+* Terellian Alliance (peaceful commerce group)
+  Alliance of Terellian Republics (ATR)
+
++ Ele'aan Fusion (peaceful/isolationist power)
+
+The player is a human starfighter pilot in the military
+of one such civilization, Tekton-Organon, which is in
+turn part of the Terellian Alliance.  The computer plays
+the part of the player's superior officers in assigning
+missions and offering criticism and praise for performance.
+In addition, the computer plays the role of all enemy
+pilots and politicians.
+
+The game follows the action in an interstellar conflict
+between the Terellian Alliance and those civilizations in
+the control of the Starshatter.  The player is assigned
+missions and ships commensurate with his ability by the
+computer.
+
+==================== STARSHATTER ==================== 
+                      MISSIONS
+
+Each of the three episodes follows the action in a military
+campaign against a single enemy civilization.  Individual
+missions will be constructed on the fly by the dynamic
+campaign manager (or by the player if acting as operational
+commander).
+
+Each episode takes place in a fixed volume of space con-
+taining about a dozen star systems.  The global campaign
+map will treat the star systems as points in a 2D map.
+The action will take place within individual star systems,
+which use a finer grained map.  The enemy will control
+most of the star systems, although a few will be neutral,
+allied, or controlled by the player's faction.  These may
+need to be defended if the enemy is able to incur.
+
+Rather than being "mission based", Starshatter is an
+"operational simulation".  Each campaign episode is
+broken down into a series of military operations, each
+of which occur in a given star system.  Different opera-
+tions will have different rules of engagement and victory
+conditions.  Some will require the player to secure a
+neutral or allied star system from hostile threats.
+Others will involve incursion into hostile territory.
+Still others will have more limited objectives, such
+as securing a friendly position in a neutral system,
+without violating neutral airspace or damaging neutral
+assets.
+
+Major resources such as space stations, ship yards,
+SAM and sensor sites will be part of the fixed universe
+design.  Likewise, the initial number, type, and location
+of warships is fixed at design time.  It is hoped that
+the combination of large numbers of ships and small
+random factors (battle outcome, planetary position,
+time of attack) will result in increased variety of
+enounter for the player.
+
+During the game, the campaign manager must keep track
+of the location and make-up of each ship and battle group.
+As each ship is destroyed in battle, it must be removed
+(permanently) from play.  New ships and battle groups
+can be constructed on each side, at a rate dependent
+on how many critical resources the side controls.  In
+addition, reserves may be advanced from rearward areas
+to support an operation.
+
+For each mission, the computer will assemble a mission
+profile by selecting one or more objectives, selecting
+a location for the battle, and assigning friendly and
+enemy forces. The computer can choose randomly from
+among the nearby resources to attack (or defend) and
+the nearby ships on both sides to fight.
+
+Missions will be generated in accordance with the current
+strategic objectives for the operation.  The dynamic
+campaign manager will keep a prioritized list of
+strategic objectives, mostly related to major fixed
+resources.
+
+Before the battle, the player will be given a gene-
+rated mission briefing describing the mission objec-
+tives, locale, and the makeup of his own group.
+
+Once the player completes the mission (or loses it),
+the computer will tally up the losses on both sides
+and remove those ships from the campaign roster.  A
+generated mission debriefing will detail kills and
+losses, pilot ratings, etc.
+
+In order to keep the player doing something interesting,
+he will have to be assigned to an attack force, either
+a battle group or fighter wing.  Early missions will be
+shorter and simpler, with a single objective in a
+single system.  Later missions will get more involved,
+with multiple objectives and sometimes requiring free
+drive travel to other systems.  In addition, the com-
+plexity of missions will be modulated by the user's
+chosen difficulty level.
+
+Sometimes, the objectives will be enemy forces: e.g.
+destroy a fighter wing or cripple a battle group.
+Other times, they will be fixed resources like space
+stations or fortified moons.  Still other times, they
+will be distributed or moving targets: e.g. shut down
+interplanetary shipping throughout the system.
+
+At any time, the player's group may get assigned to
+a defensive mission (scramble).  This can mean defending
+a fixed resource from an incoming enemy attack.  Or it
+could mean escorting an important freight convey through
+unsecured space.
+
+Mission objectives can be constructed from verb-noun
+imperatives:
+
+       Verb List              Object List
+   ----------------        -----------------
+   Intercept               Ship
+   Shadow                  Group of Ships
+   Escort
+   Defend
+
+   Strike                  Space Station
+   Capture                 
+   Blockade
+   Defend
+
+   Launch From             Starship or Station
+   Dock With
+   Dock/Rearm/Launch
+
+   Clear                   Mine Field / Satellite Grid
+
+   Go To                   Location
+   Patrol
+   Hold At
+
+
+We may also need to define some high-level tactics for
+achieving these objectives which can be used by the
+enemy AI.
+
+Here are some ideas:
+
+   Massed or Dispersed
+   Attack at Long Range or Up Close
+   Stealthy or Overt Approach (psychological impact, force disposition)
+
+   Clear space or Nebula (won't always have a choice)
+      * Find other ways to screw up sensors
+        - pulsars
+        - jammers
+
+   Guerre de Course?
+   Use Decoys?
+   Keep Reserves?
+   What kind of Antiscouting/Deception?
+   What kind of weapons?
+
+==================== STARSHATTER ==================== 
+                       COMMAND
+
+A unique feature of STARSHATTER is the ability to choose
+between a career as a fighter jock or a starship commander.
+The fighter side of the game will play similar to a space
+combat sim or an air combat sim.  The starship side will be
+quite different:
+
+Starships are big, expensive, powerful platforms, but they
+are not terribly maneuverable.  In general, one does not
+"knife fight" with a star destroyer.  Starships will make
+use of a variety of long range (even beyond visual range)
+weapons including cruise missiles, varion torpedoes, and
+attack ships.  These can be used to weaken or destroy an
+enemy vessel while putting the ship at minimal risk.  Once
+the enemy has been sufficiently weakened, the player can
+safely close range and finish the job with supremely power-
+ful but short range energy weapons.
+
+The commander can select and direct long range weapons
+to attack enemy sub-targets to achieve a specific goal,
+whether it is to disable, disarm, or outright destroy an
+opponent.  It will probably be great fun to disable an
+enemy, close range, and ask them to "surrender...or DIE!"
+
+In these long range attacks, timing and distance will be
+everything.  The player must be close enough to detect the
+enemy and coordinate a strike, but not too close to be
+detected first.  Then the player must close range quickly
+enough to finish off the enemy before an effective counter
+attack can be mounted.  The opportunity for deception and
+possum-playing on both sides will add to the tension.
+
+However if the player is unlucky enough to find himself
+on the receiving end of a BVR attack, he still has several
+interesting options.  If the long range attack has revealed
+the location of the enemy (a likelihood), the player can
+request assistance from better positioned allies (if any).
+Alternately, he can choose to hunker down into a defensive
+posture or launch a counter-attack.  If the situation seems
+truly grim, he can also choose to reconfigure power systems
+and run.
+
+To compensate for the lack of maneuverability, the player
+will need to be given control over a richer variety of
+defensive assets.  In addition to basic fighter cover and
+CIWS lasers, starships will be able to carry and deploy
+sensor probes and weapons pods.  Sensor probes are usually
+passive sensor arrays mounted on a stable platform analogous
+to a modern sonobouy.  They are deployed by the starship and
+send target contact information back to it.  Weapons pods
+are more like unmanned, unshielded, undriven fighters.
+They have the ability to orient themselves in space, and may
+even be capable of limited movement through translation
+thrusters.  But basically they sit where they are left and
+fire lasers and missiles at any unfriendly targets that
+wander into range.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Steps needed to get there:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+-  Passive and Active Sensors
+-  Tactical Situtation MFD
+-  System Targeting
+-  System Damage Combat Results
+-  Long Range Weapon Types
+-  Sensor Probes and Weapons Pods
+-  AA Turrets on Starships
+-  Fighter AI Commands
+-  Starship AI
+-  Squadron AI Commands
+-  Big Explosions and Shock Waves
+
+==================== STARSHATTER ==================== 
+                         AI
+
+AI STATE
+-----------------------------------------------------
+Threats
+Targets
+Allies
+Destinations
+Objectives
+Self health
+Team strength
+Morale
+Tenacity/Recklessness
+Mood/Stability
+Difficulty
+
+
+High Level Behavior
+-----------------------------------------------------
+Choose to continue or retire the engagement
+Guard a position or resource
+Search for a target
+Plan an assault on a group of targets
+Assign an objective to a teammate
+Call for help
+
+Mid Level Behavior
+-----------------------------------------------------
+Assess a threat, or group of threats
+Select a target from a group of targets
+Select a subcomponent of a larger target
+Select a weapon to use when attacking
+Attack a Target using an offensive combat maneuver
+Assess own capabilities or "health"
+Assess team capabilities or strength
+Set levels of agression and desperation
+Set desired level of stealthiness
+Choose to pursue or break-off an attack
+Seek cover
+Seek repair or supplies
+Follow a flight plan
+Launch or recall a ship
+
+Low Level Behavior
+-----------------------------------------------------
+Navigation:
+   Idle
+   Evade a Threat
+   Seek an Objective
+   Avoid an Obstacle
+   Match Target Velocity
+   Form with Target (ally)
+   Dock with Target (ally)
+   Hold Position
+   Orbit(patrol) Position
+
+FireControl:
+   Fire upon a target
+   Set EMCON level
+
+Primitive Behavior
+-----------------------------------------------------
+Turn or Establish Heading
+Accelerate or Slow Down
+Fire a Weapon
+Target a Weapon
+Select Sensor Mode
+Set EMCON Level
+Activate Countermeasures
+
+==================== STARSHATTER ==================== 
+                      INTERFACE
+
+SCREEN CONCEPTS:
+
+-----------------------------------------------------
+Main Menu
+-----------------------------------------------------
+
+   New Game
+   Continue Game
+   Quick Mission
+   Training
+
+   Player Info (callsign, difficulty level, stats)
+   Game Options (controls, audio-video settings)
+
+   Help!
+   Exit
+
+-----------------------------------------------------
+Help Menu
+-----------------------------------------------------
+
+   Online Manual
+   Keymap
+   About...
+   Credits
+
+-----------------------------------------------------
+Operational Command
+-----------------------------------------------------
+
+   Operation Name, Date, Status
+   ----
+   Orders               (overview of operation)
+   Theater              (system map showing resources)
+   Strat Plan           (edit objective list)
+   Intel Rpt            (news feed)
+   Status               (current score, us vs. them)
+
+   - missions -
+   Active    ##         (current mission list)
+   Pending   ##         (missions in prep)
+   Scramble  ##         (inbound threat list)
+
+   Commit               (engage current mission)
+   Cancel               (back to main menu)
+
+   Also need controls to navigate the maps, and
+   control visual clutter.
+   
+   [May want to offer simpler versions of this
+   screen for "Starship Command" and "Fighter
+   Command", allowing the player to focus on
+   combat simulation rather than strategy.]
+
+-----------------------------------------------------
+Mission Planning
+-----------------------------------------------------
+
+   Briefing Data (scrolling text and images)
+      Mission Title
+      Objective List
+      Force Package
+         package callsign
+         wingmen and loadout
+      Annotated Flight Plan
+         launch time
+         nav points and events
+         time on target
+      Intel Report
+         expected counterforce
+         degree of confidence
+
+   Package              (select wingmen)
+   Loadout              (select weapons)
+   Nav Map              (edit nav points)
+   Targets              (assign objectives to flights)
+
+   Commit               (engage current mission)
+   Cancel               (back to previous screen)
+
+   [NOTE: same screen can double as Alert Intercept
+   by changing the title and removing the edit buttons]
+
+
+==================== STARSHATTER ==================== 
+                      TRAINING
+
+Training Missions (both services)
+
+1. Basic Flight and Navigation
+2. Guns
+3. Missiles
+4. Combat Maneuver
+5. Sensors / Stealth
+6. Wingman Interface
+7. Long Range Scan
+8. Tactical Navigation and Waypoint Setting
+9. Advanced Tactics
+   a. Starship Assault (fighter weapon school)
+   b. Cruise missiles & Flight Ops (fleet tactical school)
+10. Situation Awareness (Final Exam)
+
+
+=======================================================
+                     MISCELLANIA
+
+Sensor ships and stations will be important resources in
+winning the information war.  Both the player and the AI
+will need to exploit and protect them appropriately.
+
+Briefings/Debriefings and other Intelligence Reports
+must adequately communicate the overall game situation
+to the player in order to allow the player to make
+meaningful decisions.  This is crucial to establishing
+immersion and making the player care about the outcome
+of the game.
+
+Briefings and Info Bursts will be more visceral if they
+include simulated "news footage" of the events being
+related.
+
+
+=======================================================
+                DYNAMIC CAMPAIGN NOTES
+
+1. Fighter jocks will be allowed to choose from a
+   menu of generated missions that have been assigned
+   to the player's squadron.
+
+2. Cruiser skippers will be given only one generated
+   mission at a time (like KA or SFC), but it will be
+   somewhat broader in scope.
+
+3. Carrier admirals will do what exactly?
+
+4. Both cruiser and carrier missions will often start
+   in the field or on patrol.  Fighter missions will
+   always start and end at a base (carrier|station|
+   dirtside starbase).
+
+5. Cruiser and carrier missions will not normally
+   include the starsender translation to the area of
+   conflict.  The player will only go through the
+   sender in real time as part of a mission (not as
+   prelude or ending to a mission).
+
+6. Admirals will need to be able to generate orders
+   for their forces during the battle.  This implies
+   some kind of Op Command workstation.
+
+7. The mission planner algorithm must construct
+   generated missions that are "fun", not just logical
+   to the campaign.  I have a vague notion of using
+   time/distance heuristics to place enemy units as
+   "challenges" on the battle field.  e.g. For xxx
+   type of mission, place an enemy destroyer yyy
+   minutes away from the (player|objective|sender).
+
+8. The generated missions do not have to hang together
+   as well as previously planned.  That is, we don't
+   need to maintain the feeling that the player is just
+   a unit in an RTS game.  Instead, the campaign manager
+   is just a device for generating interesting single
+   player missions as would be found in any game with
+   a static campaign.
+
+   On the other hand, the player should not see any
+   obvious contradictions between the big board and
+   what occurred during their missions.  That means,
+   any kills they witnessed must still be visible
+   between missions in the intel report/event log.
+
+
+=======================================================
+             SAMPLE OPERATIONAL SCENARIOS
+
+--- COLD WAR, LOW TENSION ---
+
+1) Training Center (see above)
+
+1a) Live Fire:
+   Engage in "live fire" exercise with a friendly
+   power.
+
+--- COLD WAR, HIGH TENSION ---
+
+2) Restore Order:
+   The enemy is supporting a terrorist puppet govt
+   in an allied star system.  Aid the locals in putting
+   down the disturbance.
+
+3) Deliverance:
+   The enemy is sponsoring terrorists and pirates
+   harassing a small outpost system.  Ensure free
+   access to the space lanes and aid the delivery
+   of needed supply convoys.
+
+4) Freedom Fighters:
+   The enemy is supporting a despotic govt that is
+   occupying a weaker friendly or neutral system.
+   Aid the locals in driving out the occupying force.
+
+5) Strategic Withdrawal:
+   Ownership of a former protected star system is
+   passing back to the enemy.  Oversee the withdrawal
+   of friendly forces.  Try to avoid active conflict.
+
+--- FORMAL DECLARATION OF WAR ---
+
+6) First Blood:
+   A research and educational center is on the front
+   lines and in harms way.  Set up a strong defensive
+   posture, and oversee the evacuation of non-military
+   personnel.
+
+7) Sneak Attack!
+   The enemy has already struck a friendly system,
+   but they have not yet had time to fortify their
+   position.  Coordinate with local forces and evict
+   the hostiles.
+
+8) Fortress of Light:
+   Protect an Eleaan frontier system from enemy
+   attack.
+ 
+9) Turning Point:
+   The enemy is seeking a decisive victory by wiping
+   out the home fleet.  Turn the tables on them by
+   attacking first.
+
+10) Firestorm:
+   Press the advantage by invading a series of
+   enemy manufacturing and military systems.
+
+11) Nightfall:
+   Climactic operation against the enemy home system.
+
+
+=======================================================
+                 MISSION TEMPLATE TYPES
+
+FIGHTER
+  TACTICAL FIGHTER WING
+
+  ATTACK SQUADRON
+
+DESTROYER/CRUISER
+  SQUADRON
+    Anti-shipping
+    Shipping Escort, anti-fighter
+    Shipping Escort, anti-cruiser
+    Shipping Escort, general
+    Picket
+    Squadron Hunter
+
+  BATTLE GROUP/TASK FORCE
+    Force-on-Force Engagement
+    Starbase Bombardment, pre-assault
+    Starbase Bombardment, anti-fighter
+
+CARRIER
+
+
+=======================================================
+
+Ship Names:
+
+F-32G   Falcon Squadrons
+   Flying Tigers, Bearcats,  Aces High,   Cool Hands, Wizards
+
+F-36C   Stormhawk Squadrons
+   Nighthawks,  Mustangs,    Stallions,   Chargers,   Blazers
+
+F/A-38D Talon Squadrons
+   Starknights, Lancers,     Wild Bunch,  Razorbacks, Buzzards
+
+
+Berents Class FF
+   Berents,     Bosporus,    Barth,       Bering,     Balen,
+   Clarkeston,  Carlisle,    Canton,      Delmar,     Dardenelles,
+   Darmstadt,   Leyte,       Messina,     Mountebank, Morgan,
+   Malory,      Parker,      Rainier,     Sorrel,     Seychelles,
+   Tanly,       Trieste,     Yarmuz,      Zephyr,     Zodiac
+   
+   
+Spectre Class DD
+   Spectre,     Wraith,      Shadow,      Warlock,    Phantom,
+   Mistral,     Nemesis,     Necromancer, Merlin,     Nightshade,
+   Moloch,      Demon,       Phobos,      Deimos,     Enigma, 
+   Phantasm,    Revenant,    Banshee,     Barrows,    Gorgon
+
+Courageous Class DG
+   Courageous,  Fearless,    Stalwart,    Defender,   Guardian,
+   Steadfast,   Assurance,   Protector,   Heroic,     Valiant,
+   Dauntless,   Vanguard,    Redstone,    Victory,    Honor,
+   Braveheart,  Defiant,     Audacious,   Valorous,   Confident
+
+Devastator Class CA
+   Devastator,  Annihilator, Onslaught,   Relentless, Argent,
+   Stormwind,   Thunder,     Hurricane,   Inferno,    Torrent,
+   Typhoon,     Vortex,      Predator,    Ravager,    Demolisher,
+   Havoc,       Scourge,     Huntress,    Warrior,    Shrike
+
+Orion Class CV
+   Orion,       Antares,     Archon,      Titan,      Hyperion
+
+
+
+OTHERS
+   Wasp, Hornet, Scorpion, Deaths Head, 
+   Wolf, Cobra, Viper, Raptor, Python
+
+   Jackal, Zodiac, Scarab, Sphinx, Osiris,
+   Onyx, Isis
+
+-------------------
+1 Fleet = 95 starships + 300 fighters
+
+5 carrier groups
+  1 CV + 60 Fighters
+  2 CA
+  1 DG
+  1 DD
+  2 FF
+
+5 battle groups
+  2 CA
+  1 DG
+  1 DD
+  2 FF
+  
+5 destroyer squadrons
+  2 DG
+  2 DD
+  2 FF
+
+==================== STARSHATTER ==================== 
+                    GALAXY : NAMES
+
+   Adavan
+   Aram
+   Borreal
+   Bress
+   Casalle
+   Chi
+   Dawn
+   Elkhart
+   Fenn
+   Gaul
+   Garrison
+   Haiche
+   Hemmik
+   Ilon
+   Janek (Janus-3)
+   Jarnell
+   Kala
+   Khalife
+   Kolchev
+   Korius
+   Lanos
+   Loris
+   Marak
+   Manse
+   Muir
+   Navara
+   Nephrys
+   Nergal
+   Oleanne
+   Omin
+   Patagon
+   Path
+   Pollus
+   Relay
+   Renser
+   Ri
+   Rodis
+   Senna
+   Suven
+   Tal Amin
+   Tarsus
+   Theramin
+   Thralis
+   Ur
+   Volante
+   Warren - world crack canyon/rain-forest settlement (must always face the sun)
+   Whorl
+   Xanthe
+   Zephyr
+   Zone
+
+==================== STARSHATTER ==================== 
+                 GALAXY : PLANET TYPES
+
+   --= Landform Types =--
+   Arid Desert   (Arrakis)
+   Frigid Desert (Mars)
+   Frozen Exotic (Titan)
+   Temperate Planar
+   Temperate Mountainous
+   Tropical Forest
+   Tropical Oceanic
+   Icy Oceanic   (Scandinavia)
+   Rocky Planar
+   Rocky Mountainous
+   Volcanic      (Venus, Io)
+   Barren        (Pluto)
+
+   --= Atmospheric Types =--
+   Thin
+   Clear, Breathable
+   Dusty
+   Foggy/Cloudy
+   Dense Poisonous
+   Layered
+
+   --= Population Types =--
+   Agrarian
+   Industrial
+   Mining
+   Research/Technology
+   Military
+   Political
+   Terraforming
+
+==================== STARSHATTER ==================== 
+                    GALAXY : RACES
+
+   Human
+
+   Ele'aan
+   Eltaar - "Those Who Speak for Ele'aas"
+
+   Marakan
+   Commar
+
+   Kasatti
+   
+   Zolon Empire
+
+
+
+==================== STARSHATTER ==================== 
+                  CAMPAIGN SEQUENCE
+
+--- COLD WAR, LOW TENSION ---
+
+1) Training Center - Live Fire:
+   Engage in "live fire" exercise with friendly
+   units on the border of Hegemony territory.
+
+--- COLD WAR, HIGH TENSION ---
+
+2) Restore Order:
+   An outlying Hegemony system is using terrorist
+   tactics to gain control of a neighboring neutral star
+   system to create "breathing room" between themselves
+   and the Alliance.  Drive out the terrorists and get the
+   neutrals to sign a treaty with the Alliance.
+
+3) Freedom Fighters:
+   Hegemony taxation policy has driven an outlying
+   system to resort to despotism to collect needed
+   revenue.  A group of local freedom fighters is
+   attempting to overthrow the Hegemony backed govt.
+   Aid the locals in driving out Hegemony forces.
+
+--- OPEN WARFARE ---
+
+In response to campaign 3, the Hegemony formally
+declares war on the Alliance.
+
+4) Fortress of Light:
+   The Hegemony has struck three Alliance systems,
+   but they have not yet had time to fortify their
+   position.  Drive out the enemy forces, and
+   protect Alliance citizens and assets in the area.
+
+5) Firestorm:
+   Alliance Force:Command is planning a major offensive
+   against the core Hegemony systems.  This operation
+   is to strike major war production and ship yards
+   to weaken the Hegemony resistance before the
+   main offensive.
+
+6) Nightfall:
+   Climactic operation against the enemy home system.
+   Discovery that the Hegemony worlds have been overrun
+   by the Zolon Empire.
+
+--- ALIEN STRIFE ---
+
+7) Spear of Triton
+
+8) 
+
+
+
+

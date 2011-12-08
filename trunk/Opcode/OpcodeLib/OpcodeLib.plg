@@ -1,0 +1,259 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: OpcodeLib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68A9.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/OpcodeLib.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceAABB.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceContainer.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceHPoint.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceIndexedTriangle.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceMatrix3x3.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceMatrix4x4.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceOBB.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IcePlane.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IcePoint.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRandom.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRay.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRevisitedRadix.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceSegment.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceTriangle.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceUtils.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_AABBCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_AABBTree.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_BaseModel.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Collider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Common.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_HybridModel.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_MeshInterface.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Model.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_OBBCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_OptimizedTree.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_RayCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_TreeBuilders.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_TreeCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_VolumeCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Opcode.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68A9.tmp" 
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AA.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/OpcodeLib.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\GameDev\Opcode\OpcodeLib\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AA.tmp" 
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AB.tmp" with contents
+[
+/nologo /out:"Release\OpcodeLib.lib" 
+.\Release\IceAABB.obj
+.\Release\IceContainer.obj
+.\Release\IceHPoint.obj
+.\Release\IceIndexedTriangle.obj
+.\Release\IceMatrix3x3.obj
+.\Release\IceMatrix4x4.obj
+.\Release\IceOBB.obj
+.\Release\IcePlane.obj
+.\Release\IcePoint.obj
+.\Release\IceRandom.obj
+.\Release\IceRay.obj
+.\Release\IceRevisitedRadix.obj
+.\Release\IceSegment.obj
+.\Release\IceTriangle.obj
+.\Release\IceUtils.obj
+.\Release\OPC_AABBCollider.obj
+.\Release\OPC_AABBTree.obj
+.\Release\OPC_BaseModel.obj
+.\Release\OPC_Collider.obj
+.\Release\OPC_Common.obj
+.\Release\OPC_HybridModel.obj
+.\Release\OPC_MeshInterface.obj
+.\Release\OPC_Model.obj
+.\Release\OPC_OBBCollider.obj
+.\Release\OPC_OptimizedTree.obj
+.\Release\OPC_RayCollider.obj
+.\Release\OPC_TreeBuilders.obj
+.\Release\OPC_TreeCollider.obj
+.\Release\OPC_VolumeCollider.obj
+.\Release\Opcode.obj
+.\Release\StdAfx.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AB.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling on Windows...
+Compiling with VC++...
+Compiling...
+IceAABB.cpp
+IceContainer.cpp
+IceHPoint.cpp
+IceIndexedTriangle.cpp
+IceMatrix3x3.cpp
+IceMatrix4x4.cpp
+IceOBB.cpp
+IcePlane.cpp
+IcePoint.cpp
+IceRandom.cpp
+IceRay.cpp
+IceRevisitedRadix.cpp
+IceSegment.cpp
+IceTriangle.cpp
+IceUtils.cpp
+OPC_AABBCollider.cpp
+OPC_AABBTree.cpp
+OPC_BaseModel.cpp
+OPC_Collider.cpp
+OPC_Common.cpp
+Generating Code...
+Compiling...
+OPC_HybridModel.cpp
+OPC_MeshInterface.cpp
+OPC_Model.cpp
+OPC_OBBCollider.cpp
+OPC_OptimizedTree.cpp
+OPC_RayCollider.cpp
+OPC_TreeBuilders.cpp
+OPC_TreeCollider.cpp
+OPC_VolumeCollider.cpp
+Opcode.cpp
+Generating Code...
+Creating library...
+
+
+
+<h3>Results</h3>
+OpcodeLib.lib - 0 error(s), 0 warning(s)
+<h3>
+--------------------Configuration: OpcodeLib - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AC.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/OpcodeLib.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceAABB.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceContainer.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceHPoint.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceIndexedTriangle.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceMatrix3x3.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceMatrix4x4.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceOBB.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IcePlane.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IcePoint.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRandom.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRay.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceRevisitedRadix.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceSegment.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceTriangle.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Ice\IceUtils.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_AABBCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_AABBTree.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_BaseModel.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Collider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Common.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_HybridModel.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_MeshInterface.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_Model.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_OBBCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_OptimizedTree.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_RayCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_TreeBuilders.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_TreeCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\OPC_VolumeCollider.cpp"
+"C:\GameDev\Opcode\OpcodeLib\Opcode.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AC.tmp" 
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AD.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/OpcodeLib.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\GameDev\Opcode\OpcodeLib\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AD.tmp" 
+Creating temporary file "C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AE.tmp" with contents
+[
+/nologo /out:"Debug\OpcodeLib.lib" 
+.\Debug\IceAABB.obj
+.\Debug\IceContainer.obj
+.\Debug\IceHPoint.obj
+.\Debug\IceIndexedTriangle.obj
+.\Debug\IceMatrix3x3.obj
+.\Debug\IceMatrix4x4.obj
+.\Debug\IceOBB.obj
+.\Debug\IcePlane.obj
+.\Debug\IcePoint.obj
+.\Debug\IceRandom.obj
+.\Debug\IceRay.obj
+.\Debug\IceRevisitedRadix.obj
+.\Debug\IceSegment.obj
+.\Debug\IceTriangle.obj
+.\Debug\IceUtils.obj
+.\Debug\OPC_AABBCollider.obj
+.\Debug\OPC_AABBTree.obj
+.\Debug\OPC_BaseModel.obj
+.\Debug\OPC_Collider.obj
+.\Debug\OPC_Common.obj
+.\Debug\OPC_HybridModel.obj
+.\Debug\OPC_MeshInterface.obj
+.\Debug\OPC_Model.obj
+.\Debug\OPC_OBBCollider.obj
+.\Debug\OPC_OptimizedTree.obj
+.\Debug\OPC_RayCollider.obj
+.\Debug\OPC_TreeBuilders.obj
+.\Debug\OPC_TreeCollider.obj
+.\Debug\OPC_VolumeCollider.obj
+.\Debug\Opcode.obj
+.\Debug\StdAfx.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\milo\LOCALS~1\Temp\RSP68AE.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling on Windows...
+Compiling with VC++...
+Compiling...
+IceAABB.cpp
+IceContainer.cpp
+IceHPoint.cpp
+IceIndexedTriangle.cpp
+IceMatrix3x3.cpp
+IceMatrix4x4.cpp
+IceOBB.cpp
+IcePlane.cpp
+IcePoint.cpp
+IceRandom.cpp
+IceRay.cpp
+IceRevisitedRadix.cpp
+IceSegment.cpp
+IceTriangle.cpp
+IceUtils.cpp
+OPC_AABBCollider.cpp
+OPC_AABBTree.cpp
+OPC_BaseModel.cpp
+OPC_Collider.cpp
+OPC_Common.cpp
+Generating Code...
+Compiling...
+OPC_HybridModel.cpp
+OPC_MeshInterface.cpp
+OPC_Model.cpp
+OPC_OBBCollider.cpp
+OPC_OptimizedTree.cpp
+OPC_RayCollider.cpp
+OPC_TreeBuilders.cpp
+OPC_TreeCollider.cpp
+OPC_VolumeCollider.cpp
+Opcode.cpp
+Generating Code...
+Creating library...
+
+
+
+<h3>Results</h3>
+OpcodeLib.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

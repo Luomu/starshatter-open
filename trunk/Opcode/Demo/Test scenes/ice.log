@@ -1,0 +1,192 @@
+// Opening Ice Core
+
+Registering dynamic identifier 1 (Out of memory)
+Registering dynamic identifier 2 (File not found)
+Registering dynamic identifier 3 (Invalid callback)
+Registering dynamic identifier 4 (Cloning process has failed)
+Registering dynamic identifier 5 (Too many unread messages. Kernel has automatically disabled messages.)
+Registering dynamic identifier 6 (Shared data block)
+Registering dynamic identifier 7 (Kernel has sent a self-destruction order)
+Registering dynamic identifier 8 (Kernel is corrupted)
+Registering dynamic identifier 9 (Kernel contains lost cells)
+Registering dynamic identifier 10 (A cell has been deleted while still referenced)
+Registering dynamic identifier 11 (Provided reference is now invalid)
+Registering dynamic identifier 12 (Provided cell has been modified by the kernel)
+Registering dynamic identifier 13 (Provided field has been modified)
+Registering dynamic identifier 14 (Fields are not compatible)
+Registering dynamic identifier 15 (Custom list)
+Unknown processor type.
+FPU detected.
+MMX detected.
+RDTSC supported.
+CMOV supported.
+FCOMI supported.
+Registering API: IceCore
+// Opening Ice Maths
+
+Registering API: IceMaths
+// Opening Ice Meshmerizer
+
+Registering dynamic identifier 16 (Only works with manifold meshes)
+// Opening Ice Character
+
+Registering dynamic identifier 17 (An invalid motion creation structure has been used)
+Registering dynamic identifier 18 (An invalid number of bones has been specified)
+Registering dynamic identifier 19 (An invalid CSID has been specified)
+Registering dynamic identifier 20 (A CSID has been multiply defined)
+// Opening Ice ImageWork
+
+// Opening Ice Renderer
+
+Registering dynamic identifier 21 (Texture size exceeds device caps)
+Registering dynamic identifier 22 (An unsupported render state has been used)
+// Opening Ice DX7 Renderer
+
+Registering dynamic identifier 23 (An unsupported render state has been used)
+Registering dynamic identifier 24 (Unable to find valid device)
+Registering dynamic identifier 25 (Unable to find valid video mode)
+Registering dynamic identifier 26 (A DirectDraw method has failed)
+Registering dynamic identifier 27 (Unable to query interface)
+Registering dynamic identifier 28 (Unable to set cooperative level)
+Registering dynamic identifier 29 (Unable to set display mode)
+Registering dynamic identifier 30 (Unable to create surface)
+Registering dynamic identifier 31 (Unable to create clipper)
+Registering dynamic identifier 32 (Can't get surface)
+Registering dynamic identifier 33 (Unable to create device)
+Registering dynamic identifier 34 (Enumeration has failed)
+Registering dynamic identifier 35 (Unable to find a valid ZBuffer)
+// Opening Ice Z-Collide
+
+// Opening OPCODE
+
+// Opening Ice Terrain
+
+// Opening Ice Render Manager
+
+Registering dynamic identifier 36 (RM Scene)
+Registering dynamic identifier 37 (RM Camera)
+Registering dynamic identifier 38 (RM Controller)
+Registering dynamic identifier 39 (RM Light)
+Registering dynamic identifier 40 (RM Material)
+Registering dynamic identifier 41 (RM Mesh)
+Registering dynamic identifier 42 (RM Shape)
+Registering dynamic identifier 43 (RM Texture)
+Registering dynamic identifier 44 (RM Helper)
+Registering dynamic identifier 45 (RM Skin)
+Registering dynamic identifier 46 (RM Skeleton)
+Registering dynamic identifier 47 (RM Cloth)
+Registering dynamic identifier 48 (RM ClothSupport)
+Registering dynamic identifier 49 (RM Water)
+Registering dynamic identifier 50 (RM Terrain)
+Registering dynamic identifier 51 (RM Portal)
+Registering dynamic identifier 52 (RM Particle System)
+Registering dynamic identifier 53 (Invalid ZCB file)
+Registering dynamic identifier 54 (Translucency code must be recomputed)
+Registering dynamic identifier 55 (ChangeShowFPS)
+Registering dynamic identifier 56 (ChangeShowInfo)
+Registering dynamic identifier 57 (ChangeProfiling)
+Registering dynamic identifier 58 (ChangeShowCoords)
+Registering dynamic identifier 59 (Dump)
+Registering dynamic identifier 60 (ChangePause)
+Registering dynamic identifier 61 (ChangeOneFrame)
+Registering dynamic identifier 62 (SetTextureControl)
+Registering dynamic identifier 63 (SetCameraControl)
+Registering dynamic identifier 64 (SetMeshControl)
+Registering dynamic identifier 65 (SetMaterialControl)
+Registering dynamic identifier 66 (SetSceneControl)
+Registering dynamic identifier 67 (SetLightControl)
+Registering dynamic identifier 68 (SetHelperControl)
+Registering dynamic identifier 69 (SetShapeControl)
+Registering dynamic identifier 70 (ChangeBBoxMode)
+Registering dynamic identifier 71 (ChangeTexturing)
+Registering dynamic identifier 72 (ChangeAntialiasing)
+Registering dynamic identifier 73 (ChangeFillMode)
+Registering dynamic identifier 74 (ChangeShading)
+Registering dynamic identifier 75 (ChangeAutoNormalize)
+Registering dynamic identifier 76 (ChangeComputeNormals)
+Registering dynamic identifier 77 (MakeManifold)
+Registering dynamic identifier 78 (Unfold)
+Registering dynamic identifier 79 (ChangeAutoSpin)
+Registering dynamic identifier 80 (Butterfly)
+Registering dynamic identifier 81 (LockedSmooth)
+Registering dynamic identifier 82 (DeleteCurrent)
+Registering dynamic identifier 83 (NextCurrent)
+Registering dynamic identifier 84 (PrevCurrent)
+Registering dynamic identifier 85 (UserIncrease)
+Registering dynamic identifier 86 (UserDecrease)
+Registering dynamic identifier 87 (UserIncrease2)
+Registering dynamic identifier 88 (UserDecrease2)
+Registering dynamic identifier 89 (ChangeHidden)
+Registering dynamic identifier 90 (ChangeScreenQuad)
+Registering dynamic identifier 91 (ChangeFirstContact)
+Registering dynamic identifier 92 (ChangeFullBoxBoxTest)
+Registering dynamic identifier 93 (ChangeFullPrimBoxTest)
+Registering dynamic identifier 94 (ChangeNoLeaf)
+Registering dynamic identifier 95 (ChangeQuantizedTree)
+Registering dynamic identifier 96 (ChangeTemporalCoherence)
+Renderer: enumerating drivers...
+Driver name: display
+Driver description: Primary Display Driver
+Selecting TnL HAL device...
+ZBuffer depth: 32
+Stencil depth: 8
+3D Card identifier: VID = 4318, DID = 835, Rev = 161 (unknown card)
+Importing 3 cameras...
+Importing 1 lights...
+New point light..Type 0, TDist: -1.000000
+Importing 2 materials...
+Importing 2 meshes...
+Importing 1 shapes...
+Vertex cloud reducer: 288 (before) => 288 (after)
+Surface optimization succeeded.
+MeshBuilder: reduced 288 to 288 vertices (0.0%)
+Creating vertex buffer (XYZ NORMAL WRITEONLY - 6912 bytes)
+Optimizing vertex buffer...
+Vertex cloud reducer: 288 (before) => 288 (after)
+Surface optimization succeeded.
+MeshBuilder: reduced 288 to 288 vertices (0.0%)
+Creating vertex buffer (XYZ NORMAL WRITEONLY - 6912 bytes)
+Optimizing vertex buffer...
+Original tree: 1151 nodes, depth 13
+AABB Collision tree: 1151 nodes, 32228 bytes - Alignment: 8
+Original tree: 1151 nodes, depth 13
+AABB quantized tree: 575 nodes, 18400 bytes - Alignment: 16
+Original tree: 1151 nodes, depth 13
+AABB quantized tree: 1151 nodes, 18416 bytes - Alignment: 16
+Original tree: 1151 nodes, depth 13
+AABB quantized no-leaf tree: 575 nodes, 11500 bytes - Alignment: 8
+Original tree: 1151 nodes, depth 12
+AABB Collision tree: 1151 nodes, 32228 bytes - Alignment: 8192
+Original tree: 1151 nodes, depth 12
+AABB quantized tree: 575 nodes, 18400 bytes - Alignment: 16
+Original tree: 1151 nodes, depth 12
+AABB quantized tree: 1151 nodes, 18416 bytes - Alignment: 8
+Original tree: 1151 nodes, depth 12
+AABB quantized no-leaf tree: 575 nodes, 11500 bytes - Alignment: 16
+// Closing Ice Render Manager
+
+// Closing Ice Terrain
+
+// Closing OPCODE
+
+// Closing Ice Z-Collide
+
+// Closing Ice DX7 Renderer
+
+// Closing Ice Renderer
+
+// Closing Ice ImageWork
+
+// Closing Ice Character
+
+// Closing Ice Meshmerizer
+
+// Closing Ice Maths
+
+// Closing Ice Core
+
+0 entries left in kernel (max = 31), 1228 bytes used by ref-tracking.
+96 registered dynamic identifiers.
+28 flushed messages.
+0 flushed errors.
+Trash buffer size: 2928 bytes

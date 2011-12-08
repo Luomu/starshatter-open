@@ -1,0 +1,59 @@
+Freespace 2 - great game.  Lots of action, great looking, good
+storyline, gotta love it.
+ 
+But I want the thing to be more realistic.  Before you freak out and yell at me for wanting a game with subspace nodes, meson bombs, and alien critter to be realistic, let me explain what I mean.
+ 
+The background I'm coming from is that of a pretty serious flight simmer.  Those military sims involve, like FS2 and other space sim, large amounts of moving ans shooting things, but military sims have reality to be compared against.
+ 
+If you look at the progression of flight sims since their inception, what you see is that the first sims were the "you against the world" sims, like Andy Hollis' F-19 Stealth Fighter and F-15 Strike Eagle 3. You'd go in by your lonesome and complete your mission.
+ 
+Around the time of Falcon 3, we started getting a more integrated world -- while much of the "immersion" of Falcon 3 was all cleverly faked, it sure looked good.  You could plan missions for your
+squadron, enemy aircraft would show up over targets, friendly flights would appear to have their own mission, and everything would look pretty much like a real war.
+ 
+Moving onto Falcon 4, I think Microprose went overboard and the entire war on the Korean Peninsula is simulated down to battalion level. Sure, its really immersive, but hard as hell to debug. :-)
+ 
+Anyway, back to space sims.
+ 
+We started off with sims like Wing Commander.  Remember Wing Commander and its limitations?  The fixed number of objects and types.  You would have you and your wingman, and up to two other flights of up to five fighters, with the possibility of a couple capital ships around. With your wingman not much better than cannon fodder (Gee!  Pav, looks like you got 22 today! Spirit, you came up empty!)  It pretty much was "you against the world."
+ 
+Enter X-Wing, Tie Fighter, X-Wing Alliance, WC 2, 3, 4, P, and
+Freespace.  All these sims get better, are prettier, and allow for more ships, but unlike flight sims, they're still all canned and scripted missions.  Not to fault canned missions, but they can lead to some odd situations.
+ 
+For example, in Freespace 2, there is a mission where a <spoiler friendly> BIG GOOD GUY SHIP faces off against a BIG BAD GUY SHIP, and what else is currently in the mission?
+ 
+Me.  That's it.  Two capital ships and me.  What happened to the escorts of the big ships?  What happened to the fighter cover?  In this mission, the big ships never hard any support ships.  Everything is canned.  
+ 
+In Freespace 2, when you see a bunch of friendly ships jump in, what does that mean?  It means that the designer told some friendly ships to jump in, and maybe some protect the others.  More likely, a
+destroyer will jump in with no supporting ships, and just go attack the bad guy destroyer, also with no supporting ships.
+ 
+From a flight simmers perspective, used to realism and military
+organizations, this is just sort of odd.  How many large ships cruise around without a battlegroup?  Look at a US carrier battlegroup.  One carrier, couple cruisers, some destroyers, maybe a few frigate, couple subs, and auxiliaries.  
+ 
+Each unit has their responsbilities, and the overall goal is to
+protect the big ship at the center of the formation.
+ 
+<aside:  Shouldn't it go Corvette->Destroyer->Cruiser when it comes to increasing ship size, and not Cruiser->Corvette->Destroyer?> 
+ 
+Ditto for the fighters.  Where do fighters in FS2 come from?
+Subspace, yeah, but why don't fighters scramble from fighterbays? 
+ 
+It just feels artificial to me.
+ 
+What I want?
+ 
+In the missions themselves:
+I want to have a space sim where the ships on both sides fight as a cohesive unit.  I want the ability to end the "massive waves of enemy fighters coming from nowhere" tactic that every major space sim relies on.  I want to see a finite number of enemy fighters coming from *somewhere*, like a base or carrier somewhere.  It might be too far away to reach, but that's another matter.  I want to see a the GTD Aquitaine jump in with two corvettes and four cruisers in support.  I want to see fighters erupt from the fighterbay when it detect the enemy.  I want to *be* one of those erupting fighters.
+ 
+In the overall game:
+I want to have wingment with names and a dossier.  I want a campaign in a space sim that doesn't consist of scripted missions.  I want to see a big star map showing the current status of the war.  I want to be assigned missions where I can pick and chose wingmen and loadouts. I want to be able to see my performance have effect on the war.  I want to have my wingmen mean something, rather than just people who die and leave more bandits to come after you.
+ 
+So, in short, what do I want?
+ 
+I want space sims to take the step that flight sims did a long time ago -- namely, step away from completely canned missions and go for a more open-ended playing style.
+ 
+What suffers?  The story, obviously.  However, I would maintain that the story for a space sim, already secondary to gameplay and graphics, should go behind replayability.
+ 
+But then again, I'm a flight simmer first and foremost, and as such, I look for different things in my games than those raised on Quake. 
+ 
+Thoughts, comments?
+
