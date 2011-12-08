@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../Opcode/OpcodeLib;../libpng;../Magic2;../FoundationEx;../nGenEx;../zlib;../parser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;FOUNDATION_USE_MFC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\Magic.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\Magic.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\Magic.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCD;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Debug\Magic.exe</OutputFile>
+      <AdditionalDependencies>..\Opcode\OpcodeLib\Debug\OpcodeLib.lib;..\zlib\debug\zlib.lib;..\libpng\debug\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>../pnglib;../Opcode/OpcodeLib;../libpng;../Magic2;../FoundationEx;../nGenEx;../zlib;../parser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;FOUNDATION_USE_MFC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\Magic.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\Magic.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\Magic.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Release\Magic.exe</OutputFile>
+      <AdditionalDependencies>..\Opcode\OpcodeLib\Release\OpcodeLib.lib;..\ngenex\release\ngenex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nGenEx\ActiveWindow.cpp" />
+    <ClCompile Include="AlphaInverse.cpp" />
+    <ClCompile Include="AlphaPalette.cpp" />
+    <ClCompile Include="..\nGenEx\Archive.cpp" />
+    <ClCompile Include="..\FoundationEx\ArrayList.cpp" />
+    <ClCompile Include="..\nGenEx\AviFile.cpp" />
+    <ClCompile Include="..\nGenEx\Bitmap.cpp" />
+    <ClCompile Include="..\nGenEx\Bmp.cpp" />
+    <ClCompile Include="..\nGenEx\Bolt.cpp" />
+    <ClCompile Include="..\nGenEx\Button.cpp" />
+    <ClCompile Include="..\nGenEx\Camera.cpp" />
+    <ClCompile Include="..\nGenEx\CameraView.cpp" />
+    <ClCompile Include="..\nGenEx\Color.cpp" />
+    <ClCompile Include="..\nGenEx\ComboBox.cpp" />
+    <ClCompile Include="..\nGenEx\ComboList.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="..\nGenEx\D3DXImage.cpp" />
+    <ClCompile Include="..\nGenEx\DataLoader.cpp" />
+    <ClCompile Include="..\nGenEx\EditBox.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="..\nGenEx\Encrypt.cpp" />
+    <ClCompile Include="..\nGenEx\EventDispatch.cpp" />
+    <ClCompile Include="..\nGenEx\FadeView.cpp" />
+    <ClCompile Include="..\nGenEx\Fix.cpp" />
+    <ClCompile Include="..\nGenEx\Font.cpp" />
+    <ClCompile Include="..\nGenEx\FontMgr.cpp" />
+    <ClCompile Include="..\nGenEx\FormatUtil.cpp" />
+    <ClCompile Include="..\nGenEx\FormDef.cpp" />
+    <ClCompile Include="..\nGenEx\FormWindow.cpp" />
+    <ClCompile Include="..\nGenEx\Game.cpp" />
+    <ClCompile Include="..\nGenEx\Geometry.cpp" />
+    <ClCompile Include="..\nGenEx\Graphic.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridProps.cpp" />
+    <ClCompile Include="..\nGenEx\ImageBox.cpp" />
+    <ClCompile Include="..\nGenEx\ImgView.cpp" />
+    <ClCompile Include="..\nGenEx\Joystick.cpp" />
+    <ClCompile Include="..\nGenEx\Keyboard.cpp" />
+    <ClCompile Include="l3ds.cpp" />
+    <ClCompile Include="..\nGenEx\Layout.cpp" />
+    <ClCompile Include="..\nGenEx\Light.cpp" />
+    <ClCompile Include="..\nGenEx\ListBox.cpp" />
+    <ClCompile Include="..\nGenEx\MachineInfo.cpp" />
+    <ClCompile Include="Magic.cpp" />
+    <ClCompile Include="MagicDoc.cpp" />
+    <ClCompile Include="MagicView.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MaterialDialog.cpp" />
+    <ClCompile Include="..\nGenEx\MCIWave.cpp" />
+    <ClCompile Include="..\nGenEx\Menu.cpp" />
+    <ClCompile Include="ModelFile3DS.cpp" />
+    <ClCompile Include="ModelFileMAG.cpp" />
+    <ClCompile Include="ModelFileOBJ.cpp" />
+    <ClCompile Include="ModelView.cpp" />
+    <ClCompile Include="..\nGenEx\Mouse.cpp" />
+    <ClCompile Include="..\nGenEx\MouseController.cpp" />
+    <ClCompile Include="..\nGenEx\MultiController.cpp" />
+    <ClCompile Include="..\Parser\Parser.cpp" />
+    <ClCompile Include="..\nGenEx\ParseUtil.cpp" />
+    <ClCompile Include="..\nGenEx\Particles.cpp" />
+    <ClCompile Include="..\nGenEx\PCX.CPP" />
+    <ClCompile Include="..\nGenEx\Physical.cpp" />
+    <ClCompile Include="..\nGenEx\PngImage.cpp" />
+    <ClCompile Include="..\nGenEx\Polygon.cpp" />
+    <ClCompile Include="..\nGenEx\Projector.cpp" />
+    <ClCompile Include="..\nGenEx\Random.cpp" />
+    <ClCompile Include="..\Parser\Reader.cpp" />
+    <ClCompile Include="..\nGenEx\Res.cpp" />
+    <ClCompile Include="..\nGenEx\RichTextBox.cpp" />
+    <ClCompile Include="..\nGenEx\Scene.cpp" />
+    <ClCompile Include="..\nGenEx\Screen.cpp" />
+    <ClCompile Include="..\nGenEx\ScrollWindow.cpp" />
+    <ClCompile Include="Selection.cpp" />
+    <ClCompile Include="Selector.cpp" />
+    <ClCompile Include="..\nGenEx\Sha1.cpp" />
+    <ClCompile Include="..\nGenEx\Shadow.cpp" />
+    <ClCompile Include="..\nGenEx\Slider.cpp" />
+    <ClCompile Include="..\nGenEx\Solid.cpp" />
+    <ClCompile Include="..\nGenEx\Sound.cpp" />
+    <ClCompile Include="..\nGenEx\SoundCard.cpp" />
+    <ClCompile Include="..\nGenEx\SoundD3D.cpp" />
+    <ClCompile Include="..\nGenEx\Sprite.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="SurfacePropertiesDialog.cpp" />
+    <ClCompile Include="..\Parser\Term.cpp" />
+    <ClCompile Include="..\nGenEx\TexDX9.cpp" />
+    <ClCompile Include="..\FoundationEx\Text.cpp" />
+    <ClCompile Include="TextureMapDialog.cpp" />
+    <ClCompile Include="Thumbnail.cpp" />
+    <ClCompile Include="..\Parser\Token.cpp" />
+    <ClCompile Include="UVMapView.cpp" />
+    <ClCompile Include="..\nGenEx\Video.cpp" />
+    <ClCompile Include="..\nGenEx\VideoDX9.cpp" />
+    <ClCompile Include="..\nGenEx\VideoDX9Enum.cpp" />
+    <ClCompile Include="..\nGenEx\VideoDX9VertexBuffer.cpp" />
+    <ClCompile Include="..\nGenEx\VideoFactory.cpp" />
+    <ClCompile Include="..\nGenEx\VideoSettings.cpp" />
+    <ClCompile Include="..\nGenEx\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Magic.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nGenEx\AviFile.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridProps.h" />
+    <ClInclude Include="l3ds.h" />
+    <ClInclude Include="Magic.h" />
+    <ClInclude Include="MagicDoc.h" />
+    <ClInclude Include="MagicView.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MaterialDialog.h" />
+    <ClInclude Include="ModelFile3DS.h" />
+    <ClInclude Include="ModelFileMAG.h" />
+    <ClInclude Include="ModelFileOBJ.h" />
+    <ClInclude Include="ModelView.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Selection.h" />
+    <ClInclude Include="Selector.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="SurfacePropertiesDialog.h" />
+    <ClInclude Include="TextureMapDialog.h" />
+    <ClInclude Include="Thumbnail.h" />
+    <ClInclude Include="UVMapView.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\Magic.ico" />
+    <CustomBuild Include="res\Magic.rc2">
+      <FileType>RC</FileType>
+    </CustomBuild>
+    <CustomBuild Include="res\MagicDoc.ico" />
+    <CustomBuild Include="res\Toolbar.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

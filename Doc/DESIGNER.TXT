@@ -1,0 +1,173 @@
+Nicholas Walkland asked:
+
+>>I'm currently researching a feature [snip] about game design ideas 
+>>and how to get developers and publishers
+>>interested. Basically, it's [for] people who think they
+>>have a good idea for a game [snip].
+>>How to present the ideas?
+>>Which companies accept these?
+>>Any games (good or bad) that have arisen from straightforward game
+>>plan/ideas?
+
+Kasey Chang answered,
+>Unfortunately, if you are NOT in the industry itself, it is
+>practically impossible to see your idea being even considered by major
+>companies, much less implemented.  Almost all companies get their 
+>ideas internally, esp. now in the days
+>of the sequels. In fact, I am NOT aware of ANY company that accepts
+>external ideas (probably due to possibility of law suits). [snip]
+>I imagine that it MAY be possible to get someone interested if one has
+>a complete game design document written and polished, preferably with
+>some sort of tech demo (minimal graphics), but that's more of a
+>"calling card" by one programmer or a small team hoping to become a
+>"studio" for a major developer, than one game enthusiast's fantasy. 
+
+So now, I, Tom Sloper, add in my two cents:
+
+Very well said, Kasey!  That is pretty much it, in a nutshell.  Only a little
+more to add, which may help outsiders understand a little more of the reasoning
+behind this admittedly unfortunate reality.
+It has been said (right here at this NG) that "ideas are free" (which is
+considerably more true than what I would have said: that "ideas are a dime a
+dozen").  
+Every employee in every game company's studio or production department (or R&D
+department, whatever yawannacallit) has at least one idea for their own "dream
+game."  I myself have well over half a dozen such ideas that I've been wanting
+to do for years -- and I'm a "Senior Producer" (that just means I'm an /old/
+producer!) at a major game publishing company.   
+So let's say that somebody -- "Joe Gamefan" -- writes to me and says (after
+signing a Disclosure Agreement in which we mutually agree that whatever he
+tells us may in fact be something we had already thought of, in which case we
+are not obligated to pay him if we had already started working on something
+similar, and a bunch of other clauses that cover a wide range of possible
+reasons for him to sue us for nothing more than the fact that he wrote us a
+letter), "Ooh!  Ooh!  I have a great idea for a new game -- why don't you guys
+do Fighter Raid (the classic Atari 2600 game originally published by my
+company, Publishcom), only set in Vietnam!"  
+
+Several problems with this idea: 
+
+- Like, uh, you think nobody here at Publishcom ever thought of this, or
+something really really close?
+- Like, duh!  We LOST Vietnam, ya know???
+- Like, what hardware are you suggesting we do this game on?  The Atari 2600? 
+You didn't say!
+- Like, who is going to buy this game, why are they going to buy it, why is it
+better than a jillion other jet fighter games out there, etc., etc., etc.?
+- Like, who are you anyway?  If we decide we like the idea, are you going to
+program it for us?  Can you show it to me on a TV screen?  Is that all you're
+sending me?  A one-sentence idea in a letter???
+- Fighter Raid is a Publishcom trademark, fully owned and controlled by
+Publishcom.  Now that you, Joe Gamefan, have proposed to us that we do an
+updated version, is the trademark diluted?  If we do your idea, have you
+somehow weaseled your way into ownership of our trademark?  What shenanigans do
+our lawyers have to perform to structure the contract with you so that we
+haven't somehow given away a valuable property over to you, after all you did
+was write a letter?
+
+So guess what I write back to Joe Gamefan?  "Thank you very much for your
+submission.  Unfortunately, it does not fit into Publishcom's plans at this
+time." Yadda yadda yadda.
+
+I have received numerous non-industry non-professionals' ideas over the years. 
+Only one of them really made me sit up and take notice, not because of the game
+idea that it described, but rather because of its excellent presentation.  I
+recommended that the submitter (obviously a budding artist of some spectacular
+talent) continue to pursue his interests, even though we didn't follow up on
+his game idea.  I never heard from him again, unfortunately, so I don't know
+what he's doing now.  
+
+I have also received numerous industry professionals' ideas in the 19 years
+I've been in this industry (I /told/ you I was old!).  Guess how many of those
+made me (and my employer) sit up and take notice?  Well, I don't have an exact
+count for you, but it was approximately two.  Games that subsequently got
+produced and published on (1) the Super Nintendo and Sega Genesis, and (2) the
+Sony Playstation and Sega Saturn (the DOS version was eventually canceled).  
+
+Here's the secret formula:
+
+1. Game ideas by a non-industry non-professional, described in a sentence (or a
+few sentences) on paper -- Chances: ZERO!  Zilch.  Zip.  Forget it, it ain't
+gonna happen.  Not in this lifetime, nosirreebob!  Uh-uh, no way, Jose!  Thanks
+for writing, so long now!  My employer used to accept non-professional idea
+submissions, but I think the official stance now is that such things are more
+or less discouraged.  I haven't checked recently.
+
+2. Games described in an impressive design document, by a very creative guy
+(non-industry, non-professional) who details all the aspects of the game, its
+prospective audience, its chances for success in the competitive marketplace,
+with detailed sketches and illustrations, and maybe even a hint of
+acknowledgment for the technical challenges inherent in the design -- Chances: 
+A little better.  At the very least, we would possibly (if there were openings)
+offer the creator of such a document a job as a game designer.  His game most
+likely will not get made, however.
+
+3. Games adequately described in a written concept document, supplemented by an
+impressive video animation (viewable on a computer or game machine) -- Chances:
+Even better yet.  One of the two games I referred to above came in to my
+employer in this form.  We can see the idea, we can see that it is fun, we can
+see that the creator(s) can take the idea to the next step -- a finished game
+that we can sell.  The party bringing us such a submission may well get a
+contract to develop the game into a real product that actually makes it to
+market.  Note that anybody with the wherewithal to make such a presentation is
+most likely in the industry already.
+
+4. Game partially implemented, running on a computer or game machine --
+Chances: Better still.  But the game had damn well better be really original
+and exciting, or filling a niche, or in keeping with current market hot
+buttons, or able to be adapted to a hot license, yadda yadda yadda.  The other
+of the two games I referred to above came in to my employer in this form --
+from industry professionals.
+
+5. Game fully implemented.  All a publisher has to do is put it in a box and
+it'll sell itself -- Chances: The Best.  But the game had damn well better be
+really original and exciting, or filling a niche, or in keeping with current
+market hot buttons, or able to be adapted to a hot license, yadda yadda yadda. 
+And you had better be ready to make changes if you want Publishcom to
+distribute it (and if they think it needs tweaking).  Here's the kicker -- my
+employer gets these submissions in all the time, yet only one in twenty of
+these do we actually pick!  
+
+Do the math.  Games in category Five have a one in twenty chance -- and games
+in category One have a zero chance.  The pattern should be clear to anyone
+who's got a good sense for games.
+
+Still don't understand why this is (why game publishers are so unreasonable)? 
+Okay.  Imagine for a second that we're talking about a movie idea instead of a
+game idea:
+1. You have a one-sentence idea for a movie, and you are an outsider -- you
+think a Hollywood studio is going to do anything with it?  Hah!
+2. You have a full movie script, fully fleshed out, and/or a full movie
+storyboard -- but no actors, no producer, no director -- somebody is going to
+commit money to start production on it?  How?  Who?  In what lifetime?
+3. You have a full script and a full storyboard, and some name actors who have
+read it and found it interesting -- looking a little better -- at least you
+have grounds for starting up some ulcers now, right?
+4. You have a full script, a full storyboard, some name actors ready to go,
+locations all lined up, equipment supplier identified, and a director who is
+interested -- all you need is a movie studio producer to put up some money so
+filming can start.  Those ulcers are starting to grow pretty nicely now!  Guess
+what industry you are in if you are at this stage??
+5. You have a completely finished, fully edited and post-produced film.  All
+you need is to get it marketed and distributed.  Have those ulcers eaten their
+way through the stomach lining yet?  Surely you don't work in a profession
+unrelated to movie-making if you're in this position -- ???
+
+I reiterate what I have said before at this NG:  You want to get your dream
+game produced and published?  Get a job in the industry.  Work your way up and
+become a producer (or above), or the president of your own company.   That's
+step one.  Step two will be self-evident once you have completed step one.  In
+addition to knowing what step two is, you only need one more thing (assuming
+that the game idea is already world-class): luck.  And good timing (I lied when
+I said there was only one more thing).
+
+I suppose, though, in the end, that Kasey's brief statement of the reality of
+this situation has not been added to in large measure by what I have said.  His
+4 sentences said it all.  All I did was beat that dead horse into the
+GROUND!!!!
+
+Tom Sloper
+(I have mentioned in previous posts what company I work for -- WELL, FORGET IT!
+ Pretend you never heard of me before!  All I'm saying is, I'm stating my own
+opinions herein, and not the opinions of my employer.  End of disclaimer.)   
+:o)

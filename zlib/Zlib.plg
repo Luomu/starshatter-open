@@ -1,0 +1,68 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Zlib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "H:\TMP\RSP85.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/Zlib.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\GameDev\Zlib\adler32.c"
+"C:\GameDev\Zlib\compress.c"
+"C:\GameDev\Zlib\crc32.c"
+"C:\GameDev\Zlib\deflate.c"
+"C:\GameDev\Zlib\gzio.c"
+"C:\GameDev\Zlib\infback.c"
+"C:\GameDev\Zlib\inffast.c"
+"C:\GameDev\Zlib\inflate.c"
+"C:\GameDev\Zlib\inftrees.c"
+"C:\GameDev\Zlib\minigzip.c"
+"C:\GameDev\Zlib\trees.c"
+"C:\GameDev\Zlib\uncompr.c"
+"C:\GameDev\Zlib\zutil.c"
+]
+Creating command line "cl.exe @H:\TMP\RSP85.tmp" 
+Creating temporary file "H:\TMP\RSP86.tmp" with contents
+[
+/nologo /out:"Release\Zlib.lib" 
+.\Release\adler32.obj
+.\Release\compress.obj
+.\Release\crc32.obj
+.\Release\deflate.obj
+.\Release\gzio.obj
+.\Release\infback.obj
+.\Release\inffast.obj
+.\Release\inflate.obj
+.\Release\inftrees.obj
+.\Release\minigzip.obj
+.\Release\trees.obj
+.\Release\uncompr.obj
+.\Release\zutil.obj
+]
+Creating command line "link.exe -lib @H:\TMP\RSP86.tmp"
+<h3>Output Window</h3>
+Compiling...
+adler32.c
+compress.c
+crc32.c
+deflate.c
+gzio.c
+infback.c
+inffast.c
+inflate.c
+inftrees.c
+minigzip.c
+trees.c
+uncompr.c
+zutil.c
+Creating library...
+
+
+
+<h3>Results</h3>
+Zlib.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

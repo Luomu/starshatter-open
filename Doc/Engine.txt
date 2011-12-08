@@ -1,0 +1,106 @@
+Generic 3D Game Engine
+----------------------
+
+Game              // the main loop
+   <Specific Game>
+
+Video             // abstract video interface
+   VideoDirect    // any old full screen direct draw
+   VideoDirect3D  // direct draw and direct 3d
+   VideoWindow    // WinG or DDraw in a window
+
+PolyRend          // abstract polygon renderer
+   PolyRendSW     // software renderer
+   PolyRendD3D    // Direct 3D renderer
+   PolyRend3Dfx   // Glide renderer
+
+Screen            // the whole screen, a collection of canvases
+   FullScreen     // a single screen, full screen or in a single window
+      <Various Game Screens>
+   MultiWinScreen // multiple windows, one canvas per window
+
+Window            // rectangular region of screen, basic 2D graphics
+   Canvas         // window with View attached
+      Form        // a collection of controls
+   Control        // abstract dialog widgets
+      Label       // static text
+      Edit        // text input
+      List        // single or multi-select
+      Button      // various styles and states
+      Slider      // also a gauge
+      Scrollbox   // a scrolling window, user must subclass?
+
+WinEvent
+
+Cursor            // mouse pointer
+
+View              // what to draw in a canvas
+   CameraView     // handles projection and clipping of visible polys
+   FormView
+      <Various Game Dialogs>
+   ImageView      // displays a single bitmap
+   FadeView       // fades the whole display in/out
+   MovieView      // displays a movie or animation
+   <Various Game Views>
+
+Camera            // position and point of view
+CameraClipper     // view pyramid clipping for a given camera
+
+Color             // RGBA color (32-bit)
+ColorIndex        // index into 256 color palette (8-bit)
+
+fix               // fixed point math
+Rect
+Vector
+Point
+Plane
+Poly
+Matrix
+
+// These are private to a particular camera view
+// Texture, MipMap, Cache, etc.
+
+DataLoader
+Asset
+   Palette (and inverse palette)
+   Bitmap
+   Model (3d)
+   Sound
+   Song (RedBook / MIDI ?)
+   Movie
+   Text
+   Font
+      ColorFont
+
+Physical          // an entity in a 3d simulation that responds to physical
+                  // forces (velocity, acceleration, drag, thrust)
+
+Director          // something that controls something else, once per frame
+
+Universe          // a collection of physical models
+   <Game universe>
+
+Graphic3D         // a generic image in a 3d scene
+   Solid3D        // polygon model
+   Sprite3D       // textured billboard, with optional animation
+   Blob3D         // textured poly, oriented towards camera
+   Composite3D    // a graphic composed of other graphics (?)
+
+Light             // a point light source
+
+Scene             // collection of graphics and lights
+
+Sound             // abstract sound (ambient or localized, memory or streamed)
+   SoundD3D       // concrete sound using DirectSound(3D)
+SoundCard         // something that plays sounds
+   SoundCardD3D   // concrete sound card using DirectSound(3D)
+
+MotionController
+   Keyboard
+   Joystick
+   Mouse
+   ComboController
+ControllerInfo
+
+
+

@@ -1,0 +1,88 @@
+Subject:      Re: Landscape Eng
+From:         "Ville Miettinen" <wili@surrender3d.com>
+Date:         1997/05/09
+Message-Id:   <5kto6g$2tu$1@news.clinet.fi>
+References:   <33704A59.50AB@csc.liv.ac.uk> <3371D8DE.7B8E@funcom.ie>
+X-MimeOLE:    Produced By Microsoft MimeOLE Engine V4.71.0544.0
+Organization: Hybrid Holding-HH Ltd.
+Newsgroups:   rec.games.programmer
+[Fewer Headers]
+
+After checking out the article in Edge magazine we implemented a similar
+landscape on a PC system for mainly experimental reasons. The main point
+here was not trying to solve the problem of showing enormous
+ amounts of high-detail data with less polygons, but rather adding extra
+detail to closer areas. I.e. your database consists of the 'lowest level'
+presentation of an area and if we want more precision, we can calculate it
+from the low level presentation.
+
+I used a spline heightfield where the "low level" presentation defined the
+control points. Fractal noise was then added (easiest way is to use a
+simple LUT) to produce more variance. The whole world is divided into a set
+of large grids. For each visible grid (clip the world to the view frustrum)
+we allocate
+a LOD (level of detail) value which determines how many times the grid will
+be subdivided. The LOD is calculated by a variety of factors including the
+grid bounding box projected height, z-distance etc. When subdividing the
+grid we calculate new vertex height coordinates by using the spline
+functions and fractal noise as stated before. Special care must be taken so
+that shared edges (I used a vertex cache system which finds common vertices
+between polygons) are set properly; otherwise you'll end up
+with gaps in the landscape when a lower LOD grid meets a higher LOD grid.
+
+With an octree (or quadtree for single-level heightfields) presentation, we
+can easily store higher
+resolution info for 'important areas' of the landscape. Also, using an
+efficient hidden surface removal system in as early phase as possible is
+important; otherwise you'll have a hard time rendering
+all the covered grids. A scanline-buffering (or CSG) coverage determination
+for octree branches works
+well and kills quickly most of the hidden areas.
+
+This was all simple. However the texturing proved quite a bit trickier.
+Apparently the Innerloop people hadn't solved the problem; I haven't seen
+the engine running, but all of the shots displayed landscapes with a single
+texture map wrapped over the whole world. In one of the pictures I think
+there was another texture as well, but there weren't any shots of
+individually textured polygons or grids.
+
+As our landscape engine was using individual texture maps for all 'large
+grids' (each texture map being real-time RGB alpha-blended from
+neighbouring textures), I made the grid subdivision to subdivide each grid
+into 4 parts and created four new textures for them. Each new texture was a
+corner of the old texture, bilinearly interpolated to same size, after
+which a microtexture ('detail texture') was added on top of it. This method
+brings in loads of extra detail (although random fractal detail) however
+close you zoom.
+
+cheers,
+-wili
+
+--
+Ville Miettinen
+3D Programmer, Hybrid Holding Ltd.
+http://hybrid.org/surrender (SurRender home page)
+http://hybrid.org/wtga (free quantization tools)
+ Ivar Just Olsen wrote in article <3371D8DE.7B8E@funcom.ie>...
+>N.R. Matthews wrote:
+>>
+>> Hi I'm trying to write a fast lasdscape engine, recenly I read an
+>> article in the Edge magazine and came across a group called Innerloop
+>> who had got a pretty amazing engine out. Now apparently this works of
+>> something called IFS (Iterated Function Systems) a mathematical term
+for
+>> a special type of fractals. Does anyone have any idea how you could use
+>> a fractal to efficiently render an entire landscape. On a undulating or
+>> "bumpy" landscape most of the landscape is hidden, depending on the
+>> bumpiness perhaps 90% hidden.
+>>
+>>         Any ideas appeciated NatMat
+>
+>I know these guys, and I know how it's done. But the method is
+>copyrighted, so I can't tell. Sorry.
+>
+>Hint: Clever use of subdivision (and have a look at NURBS while thinking
+>;-)
+>
+>--
+>Ivar, just another Funcom programmer.

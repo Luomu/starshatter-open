@@ -1,0 +1,124 @@
+STARSHATTER GAMEPLAY DESIGN
+
+   Challenge                     Skill
+   -------------                 ----------------
+ 1 Basic flight                  control the stick and throttle
+
+ 2 Destroy a target              coordinate flight to track the target
+                                 use the gunsight to lead
+                                 select an appropriate weapon
+                                 fire upon the target
+
+ 3 Avoid being destroyed         recognize a threat
+                                 perform evasive ACM
+
+ 4 Avoid a rear attack           recognize the threat warning
+                                 perform reversal (split-s, loop, etc)
+
+ 5 Avoid a collision             recognize the impending collision
+                                 steer away or slow down to miss
+
+ 6 Maintain ship integrity       recognize low shield status
+                                 disengage and wait for shields to regenerate
+                                 -or- seek a repair site or powerup
+
+ 7 Locate a target               interpret the scanner
+                                 fly towards the target
+
+ 8 Coordinate with a wingman     avoid colliding
+                                 avoid friendly fire
+                                 coordinate target selection
+                                 provide cover fire
+
+
+
+(--misc challenges--)
+
+deal with large numbers of enemy forces
+assess enemy capabilities
+attack and destroy large (cap) ships
+partial loss of control (e.g. loss of stabilizer or loss of yaw control)
+
+(--misc skills--)
+
+manage resources and health status
+prioritize objectives
+lock and fire a smart weapon
+avoid an incoming smart weapon
+assign a target or an objective to a wingman
+navigate with ultradrive
+effectively use tactical view
+seek cover behind a large ship/station
+seek re-supply
+
+-------------------------
+avoid detection / detect an enemy
+
+This needs a little explanation.  I hate cloaking systems.
+They are way too common (like everything else isn't?) and
+there is no skill to using them.  Instead, we will use a
+system of reduced radiation signature reducing probability
+of detection (remember F-19 Stealth Fighter?)
+
+The ships will have an Emission Control mode switch.  When
+in EmCon B mode, shields, weapons, target computer and IFF
+will be disabled.  Long range sensors will be disabled, and
+the ship will need to rely on short range (passive) sensors
+alone.  There will be a 3 to 5 second delay between commanding
+and completing an EmCon mode change.
+
+While running silent, the ship (and especially the drive
+flares will still be visible, but much harder to track or
+detect.  Possibility of detection can be reduced further
+by reducing throttle or using a flare-less "stealth" drive.
+
+Short range (passive) sensors will be able to detect EmCon
+B targets up to a range of 30K, and EmCon A targets up to
+a range of 100K.  Long range (active) sensors will be able
+to track all targets up to a range of 300K (maybe as high
+as 1M). [Actually, you probably want to make these prob-
+abilities of detection.]
+
+The flag ship serves as Wide Area Search And Track (WASAT)
+coordinator for the fleet.  That is, all ships in the fleet
+will have access to the flag ship's target list.  All ships
+will periodically send their own target list back to the
+flag ship for distribution to the fleet.
+
+-------------------------
+prioritize ship sub-targets
+
+When dealing with larger ships, there is the problem of
+"what to shoot first?"  Larger ships have multiple subsystems,
+each of which may be targetted separately.  (Of course, you
+can always just shoot for the hull and try to blow up the
+whole ship -- however, this will not always be the wisest
+course of action.)  What system to target depends on what
+actions you are trying to prevent:
+
+Weapons: destroy these to prevent the cap-ship from attacking
+         another ship or space station.  Doesn't prevent
+         escape or fighter operation.
+
+Ultra:   destroy this to keep the ship from leaving.
+
+Drive:   destroy this to keep the ship from advancing and
+         forming up.  The ship can still turn and fire and
+         still launch and recover fighters.  Also prevents
+         ultra navigation.
+
+Flt Dck: destroy this to keep the ship from launching or
+         recovering (or resupplying) fighters.
+
+Systems: damage here has a random effect.  May take out
+         targetting, or navigation, or fighter ops.  Wild
+         Card.
+
+Vital:   the whole works.  If the ship gets hulled, it dies.
+         This is most relevant for smaller ships.  Big ships
+         have *huge* integrity values, and require huge
+         amounts of force to destroy.
+
+Each of these resources has a unique location on the ship.
+They are protected by whatever shield generator is protecting
+that part of the ship.

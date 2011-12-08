@@ -1,0 +1,9 @@
+Thanks. I'm currently working as a graphics programmer at Pandemic in LA, finishing Star Wars Battlefront 2. Its alright. I still ocassionally get the urge to finish cocommand, but its demands too much.
+
+The atmosphere shader is a somewhat straightforward optimization of a typical, if simplified, offline atmosphere model. The basic idea is to accumulate/integrate the in-scattering of light along a ray based on a density function which decreases exponentially with height above the sphere's surface. You integrate the density function along the ray which represents the total number of atmosphere particles hit along that ray. The in/out scattering (which I simplified to a single replacement % - an alpha value, really) are then determined from a simple exponential function of the accumulated density.
+
+The realtime aspect is that the ray integral density function is precomputed and fetched in a pixel shader with a texture lookup. This is straightforward because the model has just three basic scalar inputs - the ray's hit angle on the sphere, and the start and end intercepts along the ray (this model handles the cases where you are inside the atmosphere.) These setup parameters are calculated in the vertex shader.
+
+I later realized it could be further simplified to a 2D lookup. . .
+
+The atmosphere is rendered as the inner surface(reversed backface culling) of a sphere which surrounds the planet, and is necessarily somewhat larger than it. The shader is also rendered directly as a second pass on the planet geometry. The atmosphere sphere-shell is used for that sliver silhoutte of atmosphere overlapping empty space and for the atmosphere up close if you are near the planet surface.

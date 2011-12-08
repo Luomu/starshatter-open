@@ -1,0 +1,701 @@
+From - Mon Nov 02 22:29:24 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!news-peer.gip.net!news.gsl.net!gip.net!cpk-news-hub1.bbnplanet.com!news.news.gtei.net!firehose.mindspring.com!not-for-mail
+From: dennya@mindspring.com (Denny Atkin)
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Dynamic Campaigns: Discuss.
+Date: Tue, 03 Nov 1998 04:03:25 GMT
+Organization: Not officially representing CGW here in my free time
+Lines: 40
+Message-ID: <364067e5.15703318@news.mindspring.com>
+Reply-To: dennya@mindspring.com
+NNTP-Posting-Host: user-38ld6ro.dialup.mindspring.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Server-Date: 3 Nov 1998 04:05:20 GMT
+X-Newsreader: Forte Agent 1.5/32.451
+X-No-Archive: yes
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154235
+
+Okay, there are a number of folks here who SWEAR by dynamic campaigns, some
+going so far as to say they won't buy a sim that doesn't feature them.
+
+Here's the big question: Which sims are you holding up as examples of good
+dynamic campaigns? Because until VERY recently, there haven't been that many
+opportunities to experience a good dynamic campaign. Falcon 3.0's is often held
+up as the previous Holy Grail, but that's mostly people remembering things
+better than they were. Falcon 3.0 had a number of kludgy elements and faked
+occurrences in its campaign--such as the MiG-19s that often spontaneously
+spawned to harass you when you were landing. EF2000 had a fully dynamic
+campaign, but the mission structures were so repetitive that I bored of it as
+quickly as I did any "canned mission" sim. Longbow 2 had a good dynamic
+campaign, but the most interesting missions were the prescripted ones.
+
+So I pose these questions, just for discussion:
+1) What are the examples of good past dynamic campaigns? What made them good,
+and kept them from getting boring?
+
+2) If a mission featured a scripted campaign, but had features that kept it
+from being repetitive -- targets that stayed destroyed, enemy locations and
+force makeups that were randomly generated to keep them from being predictable,
+being retasked to destroy missed targets -- would that be an acceptable
+substitute?
+
+3) Is it replayability or the chance to affect the outcome of the war that
+makes dynamic campaigns appealing to you? 
+
+4) A dynamic campaign is never going to generate a mission such as "shoot down
+Admiral Yamamoto in your P-38. " Don't scripted campaigns have the potential to
+be a lot more interesting?
+
+(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+what I think the perfect campaign for today's techology is in a future post.
+But I want to hear from some of the rest of you without "leading" into a
+discussion of my own theories. And let's not even open hte multiplayer can of
+worms. :-)
+ ---------------------------------------------------
+        Denny Atkin / dennya@mindspring.com
+       I have not yet begun to procrastinate
+ ---------------------------------------------------
+From - Mon Nov 02 22:29:24 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!news-peer.gip.net!news.gsl.net!gip.net!ix.netcom.com!news
+From: "Greg Cisko" <gcisko@nOsPaMix.netcom.net>
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Re: Dynamic Campaigns: Discuss.
+Date: Mon, 2 Nov 1998 22:19:54 -0600
+Organization: ICGNetcom
+Lines: 81
+Message-ID: <71m0g1$bim@sjx-ixn6.ix.netcom.com>
+References: <364067e5.15703318@news.mindspring.com>
+NNTP-Posting-Host: chf-il5-83.ix.netcom.com
+X-NETCOM-Date: Mon Nov 02  8:23:29 PM PST 1998
+X-Newsreader: Microsoft Outlook Express 4.72.3110.1
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154240
+
+Denny Atkin wrote in message <364067e5.15703318@news.mindspring.com>...
+>Okay, there are a number of folks here who SWEAR by dynamic campaigns, some
+>going so far as to say they won't buy a sim that doesn't feature them.
+>
+>Here's the big question: Which sims are you holding up as examples of good
+>dynamic campaigns? Because until VERY recently, there haven't been that
+many
+
+
+In shirt I would almost have to say there are no good dynamic
+campaigns yet :-) I did hear the campaigns in iF22 were supposedly
+good. But the rest of the game was basicly crap so I wouldn't even
+give it a shot.
+
+>opportunities to experience a good dynamic campaign. Falcon 3.0's is often
+held
+>up as the previous Holy Grail, but that's mostly people remembering things
+>better than they were. Falcon 3.0 had a number of kludgy elements and faked
+
+
+Correct. I remember vividly the first mission if the Kurile(sp?) campaign
+was
+always the same mission. Not very dynamic imho. Also not very realistic
+to shoot 15 migs only to get wasted while I was on final approach. Like
+there wouldn't be any air defenses near an american base...
+
+>occurrences in its campaign--such as the MiG-19s that often spontaneously
+>spawned to harass you when you were landing. EF2000 had a fully dynamic
+>campaign, but the mission structures were so repetitive that I bored of it
+as
+>quickly as I did any "canned mission" sim. Longbow 2 had a good dynamic
+>campaign, but the most interesting missions were the prescripted ones.
+
+
+I guess you can't have your cake and eat it too :-)
+
+>2) If a mission featured a scripted campaign, but had features that kept it
+>from being repetitive -- targets that stayed destroyed, enemy locations and
+>force makeups that were randomly generated to keep them from being
+predictable,
+>being retasked to destroy missed targets -- would that be an acceptable
+>substitute?
+
+
+For me yes definately.
+
+>3) Is it replayability or the chance to affect the outcome of the war that
+>makes dynamic campaigns appealing to you?
+
+
+Replayability for me is not the issue. But rather a chance to effect the
+outcome.
+
+>4) A dynamic campaign is never going to generate a mission such as "shoot
+down
+>Admiral Yamamoto in your P-38. " Don't scripted campaigns have the
+potential to
+>be a lot more interesting?
+
+
+Yes. Until you run into one that you cannot beat. Which you always know
+a flight of migs will be at a certain place every time. Yada, yada yada :-)
+
+--
+Header address intentionally scrambled to ward off the spamming hordes.
+
+cisko [AT] ix [DOT] netcom [DOT] com
+
+>(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+>what I think the perfect campaign for today's techology is in a future
+post.
+>But I want to hear from some of the rest of you without "leading" into a
+>discussion of my own theories. And let's not even open hte multiplayer can
+of
+>worms. :-)
+> ---------------------------------------------------
+>        Denny Atkin / dennya@mindspring.com
+>       I have not yet begun to procrastinate
+> ---------------------------------------------------
+
+
+From - Mon Nov 02 22:29:25 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!news.rdc1.bc.wave.home.com.POSTED!not-for-mail
+From: silenus@home.com (David Clark)
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Re: Dynamic Campaigns: Discuss.
+Message-ID: <363e80ff.260853340@192.168.0.2>
+References: <364067e5.15703318@news.mindspring.com>
+X-Newsreader: Forte Free Agent 1.11/32.235
+Lines: 89
+Date: Tue, 03 Nov 1998 04:42:17 GMT
+NNTP-Posting-Host: 24.112.120.121
+NNTP-Posting-Date: Mon, 02 Nov 1998 20:42:17 PDT
+Organization: @Home Network Canada
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154251
+
+On Tue, 03 Nov 1998 04:03:25 GMT, dennya@mindspring.com (Denny Atkin)
+wrote:
+
+>Here's the big question: Which sims are you holding up as examples of good
+>dynamic campaigns? 
+
+Umm... perhaps EF2000 and Longbow 2. The best "dynamic campaigns" that
+I've seen weren't Flight Sims at all - they were strategy games like
+X-Com and Jagged Alliance.
+
+>So I pose these questions, just for discussion:
+
+Good questions, well phrased.
+
+>1) What are the examples of good past dynamic campaigns? What made them good,
+>and kept them from getting boring?
+
+IMHO, the property that makes a dynamic campaign valuable is that the
+missions seem plausible, but unplanned. Modern warfare is
+extraordinarily fluid and chaotic, and set-piece battles are very
+rare. Battles should just sort of 'precipitate' out of the strategic
+situation - often large air battles are unplanned, and are simply the
+result of a few fighters running into one another - the furball grows
+as both sides dump in additional aircraft, while neither commander
+really understands the scale of the battle that is developing.
+
+The thing that made EF2000 so enjoyable was that most of the battles
+had a 'meeting engagement' feel to them - since there was no 'plot',
+my actions weren't constrained at all. I could avoid battles (if I was
+lucky), or search out more fights, depending on my understanding of
+the tactical situation.
+
+>2) If a mission featured a scripted campaign, but had features that kept it
+>from being repetitive -- targets that stayed destroyed, enemy locations and
+>force makeups that were randomly generated to keep them from being predictable,
+>being retasked to destroy missed targets -- would that be an acceptable
+>substitute?
+
+I guess so. My criteria is that the forces I face have a _reason_ for
+being there (even if the 'reason' is just random chance). If I feel
+like a scenario has been 'tweaked' for 'balance', my suspension of
+disbelief is gone. I want to fight the forces that would _probably be
+there_ in real life, not the ones that a scenario designer feels I can
+handle. I never minded being outnumbered in EF2000, since if I was, it
+was just my bad luck, not designer maliciousness.
+
+>3) Is it replayability or the chance to affect the outcome of the war that
+>makes dynamic campaigns appealing to you? 
+
+The chance to affect the outcome of the war is not important to me at
+all. Most pilots won't  affect the outcome of a war materially either
+- the reason I play flight sims is to role-play (however inaccurately)
+the experiences of someone with a much more interesting job than me -
+and the limits of individual power is part of that role.
+
+Of course, I also loved the occasional uneventful CAP mission in
+EF2000, so I guess I'm kind of peculiar.
+
+>4) A dynamic campaign is never going to generate a mission such as "shoot down
+>Admiral Yamamoto in your P-38. " Don't scripted campaigns have the potential to
+>be a lot more interesting?
+
+I suppose. I find the generated missions in EF2000 and Longbow2 to be
+extremely interesting - no two are the same, since the strategic
+situation, the position of the threat, etc are always different.
+Others disagree, and say that after a while, one dam-busting mission
+is pretty much like the next. I've never felt that way, but I can
+understand their position.
+
+>(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+>what I think the perfect campaign for today's techology is in a future post.
+>But I want to hear from some of the rest of you without "leading" into a
+>discussion of my own theories. And let's not even open hte multiplayer can of
+>worms. :-)
+
+Without having seen the game, I guess Falcon4 offers the most
+promising type of dynamic campaign.
+
+What I really want to play is a highly detailed 'world simulator' in
+which both armies would carry out their war plans in real time. My
+aircraft would be one of the combatants, neither more or less
+influential than any other. In the end the victor would win because
+they _won_, not because I managed a 75% kill rate instead of a 65%...
+
+David Clark
+Third World War (GDW) website...
+http://members.home.net/silenus/tww/index.htm
+
+
+From - Mon Nov 02 22:29:25 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!news-peer.gip.net!news.gsl.net!gip.net!newsfeed.cwix.com!192.220.250.21!netnews1.nw.verio.net!netnews.nwnet.net!news.nodak.edu!not-for-mail
+From: "Michael J. Iverson" <micivers@badlands.nodak.edu>
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Re: Dynamic Campaigns: Discuss.
+Date: Mon, 02 Nov 1998 22:48:53 -0600
+Organization: North Dakota Higher Ed. Network
+Lines: 62
+Message-ID: <363E8B35.64CBAFDD@badlands.nodak.edu>
+References: <364067e5.15703318@news.mindspring.com>
+NNTP-Posting-Host: und-as3p28.und.nodak.edu
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 4.5 [en] (Win98; U)
+X-Accept-Language: en
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154263
+
+For me, a dynamic campaign should give me that "OK, time to go to work"
+feeling when I roll down the runway (or lift off from the FARP).  It
+might not be the most challenging mission I've ever flown, but I know
+that I'm contributing towards the "war effort."  I'd like to feel that
+the world is alive around me.  One thing I didn't like in LB2 was that
+after a half hour or so, the "world" would just go to sleep - no more
+enemy CAPs or strike missions, no more enemy advances.  
+
+Show me stats, supplies, squadron members, and info on my pilot.  I
+think Red Baron II was one of the only sims that made me genuinely
+pissed off by having my pilot killed in action.  I definitely wanted to
+stay alive in that sim.  
+
+IMO, scripted missions have a tendency to be made a little too hard. 
+Some game designers seem to think that impossible odds = fun.  I
+disagree.  
+
+Mike
+http://volunteers.warbirds.org
+
+From - Mon Nov 02 22:29:25 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!newsfeed.direct.ca!cyclone.bc.net!logbridge.uoregon.edu!news.ycc.yale.edu!mars.its.yale.edu!rjl26
+From: rjl26@mars.its.yale.edu (Robin Lee)
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Re: Dynamic Campaigns: Discuss.
+Date: 3 Nov 1998 05:14:22 GMT
+Organization: YLS
+Lines: 61
+Message-ID: <71m3fe$pk3$1@news.ycc.yale.edu>
+References: <364067e5.15703318@news.mindspring.com>
+NNTP-Posting-Host: mars.its.yale.edu
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154269
+
+In article <364067e5.15703318@news.mindspring.com>,
+Denny Atkin <dennya@mindspring.com> wrote:
+>
+>(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+>what I think the perfect campaign for today's techology is in a future post.
+>But I want to hear from some of the rest of you without "leading" into a
+>discussion of my own theories. And let's not even open hte multiplayer can of
+>worms. :-)
+
+Just a few thoughts...
+
+1.  For me, the "generic mission" problem is not a particularly
+troublesome issue because I find little appeal in the high dramatics of a
+"mission that won the war."  Drama on that level does not take place very
+often in air warfare; by and large, an air campaign consists of a series
+of routinized mission profiles run on targets that aircrews know little
+about.  Even for those rare missions that do wind up having a hugely
+significant impact on the war, aircrews are not likely to know about this
+until after the fact, though they may have some good guesses as to what
+they are doing (witness Smallwood's account of the anti-Saddam missions
+during Desert Storm, for instance).  A so-called "routine" sortie provides
+more than enough drama for me -- "blow up the Death Star" missions have
+a little too much of Hollywood about them for my taste.  
+
+2.  Extension of the first point:  for training, planning, and proficiency
+reasons, mission types are by nature generic.  You want aircrews to be
+able to fit the mission into one of a fixed number of profiles for which
+they have been trained.  Even where the mission is genuinely different,
+the operations structure of a modern air force is going to try to force
+the situation into familiar terms.  Therefore, missions that "feel the
+same" may be realistic, and while some may argue that they become boring
+and therefore undesireable, I don't necessarily see them as such.
+
+3.  An interesting mission does not have to be scripted; a relatively
+generic, template-based sortie can be turned into a genuinely memorable
+mission by the introduction of those random events that make tactical
+military aviation such a chaotic affair -- assigned tanker could go down,
+somebody crashes and fouls the runway, somebody goes down and you get
+called to CAP the survivors, etc.  There is no particular reason that
+these events need to be scripted; their very randomness is what makes them
+exciting.
+
+4.  As a general matter, I view mission generation and campaign dynamics
+in much the same light as I view sausage production; I don't really want
+to inquire too closely into the details of either.  The illusion that I
+want to maintain is that the missions are generated by a real operations
+staff reacting to unpredictable events, not by a software campaign engine
+or by selection from a fixed database of mission scripts.  And like
+sausages, the worst imaginable case is when the mission itself reveals
+obvious hints as to its origin.  To me, a so-called "dynamic
+campaign" produces missions that simply *look* less contrived than
+"handpainted" missions, and therefore is a little better at maintaining
+the illusion.
+
+
+-R.
+-- 
+_____
+Robin John Lee <amraam@ix.netcom.com>
+YLS '99 - New Haven, Connecticut, USA
+Vulture's Row/Russian Navy - <http://www.webcom.com/amraam>
+From - Mon Nov 02 22:29:25 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!news-peer.gip.net!news.gsl.net!gip.net!newsfeed.cwix.com!204.210.0.20!news.san.rr.com!not-for-mail
+From: "Jarrod Smith" <jsmith@scripps.edu>
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+References: <364067e5.15703318@news.mindspring.com>
+Subject: Re: Dynamic Campaigns: Discuss.
+Lines: 105
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+X-Newsreader: Microsoft Outlook Express 4.72.3155.0
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3155.0
+Message-ID: <2Rw%1.5101$q15.153954@news.san.rr.com>
+Date: Mon, 2 Nov 1998 21:50:44 -0800
+NNTP-Posting-Host: 204.210.61.137
+X-Trace: news.san.rr.com 910072254 204.210.61.137 (Mon, 02 Nov 1998 21:50:54 PDT)
+NNTP-Posting-Date: Mon, 02 Nov 1998 21:50:54 PDT
+Organization: TWC Road Runner, San Diego, CA
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154285
+
+
+Denny Atkin wrote in message <364067e5.15703318@news.mindspring.com>...
+>Okay, there are a number of folks here who SWEAR by dynamic campaigns, some
+>going so far as to say they won't buy a sim that doesn't feature them.
+>
+>Here's the big question: Which sims are you holding up as examples of good
+>dynamic campaigns?
+
+For me, it is Longbow2 and Falcon 3.0.  I had a hiatus from simming during
+my collegiate years (lack of hardware fundage :-), so I can't comment on
+anything in between.
+
+>
+>So I pose these questions, just for discussion:
+>1) What are the examples of good past dynamic campaigns? What made them
+good,
+>and kept them from getting boring?
+
+
+Essentially, I don't much care for branching type missions that make up a
+"campaign".  It annoys me that the mission objectives will be the same each
+time you play through the campaign in one of the "winning branches".  That
+detracts from replayability which is something I value very much in a sim.
+What keeps a dynamic campaign interesting for me:
+
+Each mission provides different objectives depending on the state of the
+total war (air and ground, supply lines, etc.).  If your supply lines are
+out, you open them up.  If you are losing ground, you cover the retreat.  If
+you are taking ground, you take out critical elements of the enemy's
+defenses, and/or defend your ground assets as they move forward to capture
+territory.  This type of ebb and flow can go on indefinitely until you make
+some decisive moves toward accomplishing your objective.  This is limited by
+your performance both in the cockpit as well as inventory and personnel
+management, etc.  This is what immerses me into a dynamic campaign.  The
+individual missions are less important, and any good stout mission generator
+with subsequent mission editing options will fill the bill in that dept.  I
+did like the splash of hollywood that was infused into LB2 by virtue of its
+scripted missions interspersed with the generated ones.  You still can't
+argue with the entertainment value of a well-designed scripted mission.  I
+guess for me, I seperate the mission from the campaign.  I can enjoy flying
+a cool scripted mission.  But it is different from fighting war from the
+campaign perspective.  I guess I like the illusion of a strategic element
+that is infused into a good dynamic campaign engine.
+
+>2) If a mission featured a scripted campaign, but had features that kept it
+>from being repetitive -- targets that stayed destroyed, enemy locations and
+>force makeups that were randomly generated to keep them from being
+predictable,
+>being retasked to destroy missed targets -- would that be an acceptable
+>substitute?
+
+
+Much of what you said above would go a long way toward fixing some of the
+problems, but in the end, even though this is realistic and believable, it
+doesn't help the replayability aspect a whole lot.  I'm not saying a sim
+like this wouldn't be fun, though.  It certainly could be an acceptable
+substitute, but there would have to be some type of extraordinary
+multiplayer capability and/or mission builder to enhance the experience.
+Otherwise, it wouldn't last that long on my harddrive.
+
+>3) Is it replayability or the chance to affect the outcome of the war that
+>makes dynamic campaigns appealing to you?
+
+
+As outlined above, I think both are important to me.  Also the illusion of
+strategy going on behind the scenes and you playing your part in that
+strategy makes a good dynamic campaign compelling to play.
+
+>4) A dynamic campaign is never going to generate a mission such as "shoot
+down
+>Admiral Yamamoto in your P-38. " Don't scripted campaigns have the
+potential to
+>be a lot more interesting?
+
+
+Scripted *missions* do have the potential to be more interesting.  Scripted
+campaigns do not, IMO.
+
+>(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+>what I think the perfect campaign for today's techology is in a future
+post.
+>But I want to hear from some of the rest of you without "leading" into a
+>discussion of my own theories. And let's not even open hte multiplayer can
+of
+>worms. :-)
+
+
+Here is what I think would be incredible in a "campaign engine".  The engine
+calculates orders which get handed to you from on high.  These orders state
+that you need to accomplish some objective to further the war effort.  Say
+it is to reduce the opposition's EWR capabilities by some percentage, or
+reduce their naval capabilites in some capacity.  Whatever.  This becomes
+your short-term objective over the next handful of missions.  The sim then
+hands you tools:  Intelligence gathering tools, a sophisticated mission
+planner/builder, updated information on the assets that you have to complete
+the task, etc.  Then you set out to work and build your own campaign, or at
+least part of it. Then jump in and fly whichever missions look to be the
+most fun to you.  The combination of immersion, strategy, replayability, and
+challenge in a sim like this would make it irresistable, IMO.
+Unfortunately, it also sounds difficult and expensive to put together :-)
+
+Jarrod Smith
+The Scripps Research Institute
+http://www.scripps.edu/~jsmith
+
+From - Mon Nov 02 22:29:25 1998
+Path: news.rdc2.occa.home.com!newshub1.home.com!news.home.com!newsfeed.direct.ca!newspeer.monmouth.com!newsfeed-east.supernews.com!supernews.com!Supernews69!not-for-mail
+From: "enzo" <enzo@nospam.com>
+Newsgroups: comp.sys.ibm.pc.games.flight-sim
+Subject: Re: Dynamic Campaigns: Discuss.
+Date: Mon, 2 Nov 1998 22:07:25 -0800
+Organization: http://www.supernews.com, The World's Usenet: Discussions Start Here
+Lines: 186
+Message-ID: <71m6db$49n$1@supernews.com>
+References: <364067e5.15703318@news.mindspring.com>
+NNTP-Posting-Host: 207.211.61.222
+X-Trace: 910073067 WUENVH4GT3DDECFD3C usenet78.supernews.com
+X-Complaints-To: newsabuse@supernews.com
+X-Newsreader: Microsoft Outlook Express 4.72.3110.1
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+Xref: newshub1.home.com comp.sys.ibm.pc.games.flight-sim:30154288
+
+Denny's starting a new thread! I'm getting verklempt! ; )
+
+Ok, I've gotta bite on this one - can't allow the possibility for a new
+pro-canned movement (or even a "maybe scripted isn't so bad"
+movement, for that matter either!)   : )
+
+Disclaimers - this is all MHO. I ended up getting really wordy. My apologies,
+                        but I wanted to write until I got it all off my chest.
+
+Denny Atkin wrote in message <364067e5.15703318@news.mindspring.com>...
+>Okay, there are a number of folks here who SWEAR by dynamic campaigns, some
+>going so far as to say they won't buy a sim that doesn't feature them.
+>
+>Here's the big question: Which sims are you holding up as examples of good
+>dynamic campaigns? Because until VERY recently, there haven't been that many
+>opportunities to experience a good dynamic campaign. Falcon 3.0's is often held
+>up as the previous Holy Grail, but that's mostly people remembering things
+>better than they were. Falcon 3.0 had a number of kludgy elements and faked
+>occurrences in its campaign--such as the MiG-19s that often spontaneously
+>spawned to harass you when you were landing. EF2000 had a fully dynamic
+>campaign, but the mission structures were so repetitive that I bored of it as
+>quickly as I did any "canned mission" sim. Longbow 2 had a good dynamic
+>campaign, but the most interesting missions were the prescripted ones.
+>
+>So I pose these questions, just for discussion:
+>1) What are the examples of good past dynamic campaigns? What made them good,
+>and kept them from getting boring?
+
+
+----Top examples were Falcon 3 and Longbow 2.
+
+ Both integrate air and ground
+combat well, give a certain degree of flexibility, and both calculate the
+progress of the war according to the ability of the ground forces to fight, not
+according to your mission score. Therefore, you can get killed in a mission, but
+still win a battle, because you managed to make a positive impact. You are a
+part of the picture - important, but you are *in* the world, not "the world revolves
+around you" - critical distinction to make.
+
+--------Good examples include iF/A-18E, TAW, and apparently Tornado (although I
+didn't get very far into Tornado's campaign, but for non-campaign related reasons)
+
+iF/A-18E is good, but TALON still needs more refinement before it will realize it's
+goals properly IMHO. Very important that friendly assets (eg friendly naval ships)
+will try to protect you/themselves with their SAM screens - opens up possibilities
+TAW took an interesting "multiple scoreboard" approach, but it seems to have taken
+a purely political aspect to the war rather than considering the ground war. That
+pays too much homage to the low-intensity conflicts IMHO. That prevents it from
+being ranked with Falcon 3/Longbow 2.
+
+(I could even sneak X-COM into the picture! : )
+
+----------Mediocre examples include RB2, EF2000, M1TP2
+
+RB2 - basically a random mission generator. M1TP2 - same thing.
+EF2000 - no ground war, your FEBA moves as a result not of
+the battle, not even of your accomplishments, but exclusively as a
+result of your mission score.
+
+---------Examples that deserve to be shot are iF-22 Raptor and Team Apache.
+
+iF-22 Raptor claimed dynamic and was scripted. Team Apache either
+also claimed it, or at least hinted strongly at it with it's real time clock
+(that ended up being utterly superfluous). JSF might belong here, too, but
+frankly I got sick of it way too fast to figure that out.
+
+>2) If a mission featured a scripted campaign, but had features that kept it
+>from being repetitive -- targets that stayed destroyed, enemy locations and
+>force makeups that were randomly generated to keep them from being predictable,
+>being retasked to destroy missed targets -- would that be an acceptable
+>substitute?
+
+
+You seem to be describing Janes F-15 for the most past. My answer is no.
+
+For starters, poor scripted missions are no better than random mission generators.
+Good scripted missions, no matter how you shake or stir it, end up where the
+player is always trying to second-guess the designer. Also, "randomizing" a
+scripted mission isn't a whole lot more fun than shaking up one of those
+glass paperweights with the fake snow inside. Sure, a few elements may
+shift around, but you're looking at the same scene no matter what. IMHO, even
+when dynamic campaign missions get somewhat repetitive, it still doesn't
+feel as rigidly constrained.
+
+>3) Is it replayability or the chance to affect the outcome of the war that
+>makes dynamic campaigns appealing to you?
+
+
+Both, but there is more to it than that.
+
+Several things (most have a little interrelation):
+
+1- Yes, replayability
+
+2- Not doing the same mission over again just because I failed it the first time
+
+3- Being able to play a part/have an affect in a simulated war, absolutely -
+    as long as the designers carefully balance my ability to affect that war so as not
+    to over or under value my contribution. If I find myself *caring* about the state
+    of the war when I'm driving to class, that's a good sign. That's never happened
+    to me in any game except those with dynamic campaigns.
+
+4- related to #3 - What you do, actually **matters**. There is a point to it
+    other than simply "jumping through hoops", then getting Pavlovian
+    reinforcement by little FMV treats. :^P Phooey! I want a sense of
+    accomplishment that's more profound than that.
+
+5A - Not second guessing the designer. You are focused on what needs to be
+     done, what you can do to help the war effort, not "Would the mission
+     designers really hide an ambush over there? Do they expect me to have to resort
+     to guns or try something else? Maybe I'm supposed to use a stealthy fighter?"
+
+5B - MISSIONS ARE NOT PUZZLES!!!
+    the worst examples -  "Ok - let me get this straight - I have to first go to point A
+    and hit the tanks with the Mavericks, then I have only a few seconds left to
+    afterburn to point B and use the AMRAAMs on the Mig-21's to protect my
+    rescue helo from being shot down, then I have to go to point C and dogfight
+    with another group of MiGs before they bomb my airbase. Whew, that only
+    took eight failures to figure out!"
+
+6 - Unpredictability - I've repeatedly heard the claim that only a scripted mission can
+    really surprise a player. I disagree - There are many things that I have experienced
+    in dynamic campaigns that were surprising, entertaining, and all the more fun
+    because elements create situations that mission designers couldn't or wouldn't
+    have possibly dreamt up.
+
+                Ask me if I'd prefer to explore the state by train, car, or helicopter...
+    Sure, a train may go through some nice scenery, but really you're just along for the ride.
+    In a car, you can go pretty much where you want. In a helicopter, you can do whatever
+    you want. Even if you still choose to travel in a straight line, just the knowledge that there
+    is a wide expanse of possibilities is very powerful.
+
+7 - Dynamic campaigns tend to have a world that reacts more to what you and other
+     vehicles do. Scripted campaigns tend to only care about what happens in the
+      context of the mission design. (Example - In Team Apache, enemy helicopters
+      and AAA are only located along the line created by your waypoints. Take the
+      scenic route instead, and you can completely bypass the vast majority of threats.
+      Worse yet, the helicopters in Team Apache can only operate in a little tiny area.
+       They're nothing more than flying roadblocks. Even if I was spotted in another
+       location, they couldn't be vectored in after me.) Now while there are exceptions,
+      the fact is that such omissions would be *glaringly* obvious in dynamic campaigns
+      where they may be more subtle in a scripted one. In other words, you can't fake things
+      as much.
+
+
+>4) A dynamic campaign is never going to generate a mission such as "shoot down
+>Admiral Yamamoto in your P-38. "
+
+
+Why can't it generate such a mission? It really wouldn't be all that hard if you think
+about it. Games like Warlords have "heroes" that lead the armies as they move
+around the board. A WW2 dynamic campaign could fairly easily model the
+movement of such VIPs as they travel around to lead their forces. Some dynamic
+campaigns already model intelligence assets. Given that the computer is tracking
+the movement of VIPs and an intelligence asset is present in the area (in this case,
+in-theatre codebreakers and a transmission intercept, as I recall), a dynamic "kill VIP
+mission" to "shoot down Yamamoto in your P-38", "Go shoot Saddam's Winnebago"
+or "drop a bunker-buster on Saddam's HQ" is certainly possible. It only takes
+imagination,  a little development time, and perhaps the development of a few tools
+to help make such things possible.
+
+> Don't scripted campaigns have the potential to
+>be a lot more interesting?
+
+I don't believe so. The simplest way to put it is this - take the number of times
+you've finished a mission and said to yourself or a friend afterward "Wow! That
+was one hell of a mission!" For me, the number of times I had that feeling in
+a scripted campaign to the number of times I felt that in a dynamic campaign
+is not even remotely close. I'd honestly ballpark the frequency at an 8-to-1 ratio
+in favor of the dynamic campaign.
+
+>(I'm not at all saying I'm not a fan of dynamic campaigns, and I'll outline
+>what I think the perfect campaign for today's techology is in a future post.
+>But I want to hear from some of the rest of you without "leading" into a
+>discussion of my own theories. And let's not even open hte multiplayer can of
+>worms. :-)
+
+
+Good idea. Let's focus on the campaign. : )
+
+Bottom line for me - If forced to choose, I'd still take a mediocre dynamic
+campaign over the best scripted campaign any day of the week.
+
+Neil M.
+
+

@@ -1,0 +1,998 @@
+
+==================== STARSHATTER ==================== 
+                      STRATEGY
+
+Although Starshatter is fundamentally an action title,
+there is also a significant back-story and strategic
+element to the gameplay.
+
+The game occurs in a far-distant future of the Milky
+Way galaxy.  Our corner of the galaxy, an area some
+ten or twenty thousand light years in diameter is popu-
+lated by thousands of human-intelligent species on tens
+of thousands of worlds.  Many races live in approximate
+isolation, but most are organized into complex poly-
+specific civilizations spanning many star systems.
+Humans are not central in galactic affairs (as in Star
+Trek or Star Wars) but are merely another species.  And
+some of the other species and civilizations are *much*
+older and *much* more advanced than ours.
+
+
+POLITICAL FACTIONS:
+
+- Starshatter (warlike/imperial power)
+
+* Sterat Empire (controlled by the Starshatter)
+
+* Brenel Core (military/intelligence corporation)
+
+* Zolon Empire (hive-like hereditary empire)
+
+* Marakan Hegemony (Failing human imperial civilization)
+
+* Terellian Alliance (peaceful commerce group)
+  Alliance of Terellian Republics (ATR)
+
++ Ele'aan Fusion (peaceful/isolationist power)
+
+The player is a human starfighter pilot in the military
+of one such civilization, the Terellian Alliance or ATR.
+The computer plays the part of the player's superior
+officers in assigning missions and offering criticism
+and praise for performance.  In addition, the computer
+plays the role of all enemy pilots and politicians.
+
+The game follows the action in an interstellar conflict
+between the Terellian Alliance and those civilizations in
+the control of the Starshatter.  The player is assigned
+missions and ships commensurate with his ability by the
+computer.
+
+==================== STARSHATTER ==================== 
+                      MISSIONS
+
+Each of the three episodes follows the action in a military
+campaign against a single enemy civilization.  Individual
+missions will be constructed on the fly by the dynamic
+campaign manager (or by the player if acting as operational
+commander).
+
+Each episode takes place in a fixed volume of space con-
+taining about a dozen star systems.  The global campaign
+map will treat the star systems as points in a 2D map.
+The action will take place within individual star systems,
+which use a finer grained map.  The enemy will control
+most of the star systems, although a few will be neutral,
+allied, or controlled by the player's faction.  These may
+need to be defended if the enemy is able to incur.
+
+Rather than being "mission based", Starshatter is an
+"operational simulation".  Each campaign episode is
+broken down into a series of military operations, each
+of which occur in a given star system.  Different opera-
+tions will have different rules of engagement and victory
+conditions.  Some will require the player to secure a
+neutral or allied star system from hostile threats.
+Others will involve incursion into hostile territory.
+Still others will have more limited objectives, such
+as securing a friendly position in a neutral system,
+without violating neutral airspace or damaging neutral
+assets.
+
+Major resources such as space stations, ship yards,
+SAM and sensor sites will be part of the fixed universe
+design.  Likewise, the initial number, type, and location
+of warships is fixed at design time.  It is hoped that
+the combination of large numbers of ships and small
+random factors (battle outcome, planetary position,
+time of attack) will result in increased variety of
+enounter for the player.
+
+During the game, the campaign manager must keep track
+of the location and make-up of each ship and battle group.
+As each ship is destroyed in battle, it must be removed
+(permanently) from play.  New ships and battle groups
+can be constructed on each side, at a rate dependent
+on how many critical resources the side controls.  In
+addition, reserves may be advanced from rearward areas
+to support an operation.
+
+For each mission, the computer will assemble a mission
+profile by selecting one or more objectives, selecting
+a location for the battle, and assigning friendly and
+enemy forces. The computer can choose randomly from
+among the nearby resources to attack (or defend) and
+the nearby ships on both sides to fight.
+
+Missions will be generated in accordance with the current
+strategic objectives for the operation.  The dynamic
+campaign manager will keep a prioritized list of
+strategic objectives, mostly related to major fixed
+resources.
+
+Before the battle, the player will be given a gene-
+rated mission briefing describing the mission objec-
+tives, locale, and the makeup of his own group.
+
+Once the player completes the mission (or loses it),
+the computer will tally up the losses on both sides
+and remove those ships from the campaign roster.  A
+generated mission debriefing will detail kills and
+losses, pilot ratings, etc.
+
+In order to keep the player doing something interesting,
+he will have to be assigned to an attack force, either
+a battle group or fighter wing.  Early missions will be
+shorter and simpler, with a single objective in a
+single system.  Later missions will get more involved,
+with multiple objectives and sometimes requiring free
+drive travel to other systems.  In addition, the com-
+plexity of missions will be modulated by the user's
+chosen difficulty level.
+
+Sometimes, the objectives will be enemy forces: e.g.
+destroy a fighter wing or cripple a battle group.
+Other times, they will be fixed resources like space
+stations or fortified moons.  Still other times, they
+will be distributed or moving targets: e.g. shut down
+interplanetary shipping throughout the system.
+
+At any time, the player's group may get assigned to
+a defensive mission (scramble).  This can mean defending
+a fixed resource from an incoming enemy attack.  Or it
+could mean escorting an important freight convey through
+unsecured space.
+
+Mission objectives can be constructed from verb-noun
+imperatives:
+
+       Verb List              Object List
+   ----------------        -----------------
+   Intercept               Ship
+   Shadow                  Group of Ships
+   Escort
+   Defend
+
+   Strike                  Space Station
+   Capture                 
+   Blockade
+   Defend
+
+   Recon                   Ship, building, or station
+   Jam
+   Designate
+
+   Launch From             Starship or Station
+   Dock With
+   Dock/Rearm/Launch
+
+   Clear                   Mine Field / Satellite Grid
+   Deploy
+
+   Go To                   Location
+   Patrol
+   Hold At
+
+
+==================== STARSHATTER ==================== 
+                      INTERFACE
+
+SCREEN CONCEPTS:
+
+-----------------------------------------------------
+Main Menu
+-----------------------------------------------------
+
+   New Game
+   Continue Game
+   Quick Mission
+   Training
+
+   Player Info (callsign, difficulty level, stats)
+   Game Options (controls, audio-video settings)
+
+   Help!
+   Exit
+
+-----------------------------------------------------
+Help Menu
+-----------------------------------------------------
+
+   Online Manual
+   Keymap
+   About...
+   Credits
+
+-----------------------------------------------------
+Operational Command
+-----------------------------------------------------
+
+   Operation Name, Date, Status
+   ----
+   Orders               (overview of operation)
+   Theater              (system map showing resources)
+   Strat Plan           (edit objective list)
+   Intel Rpt            (news feed)
+   Status               (current score, us vs. them)
+
+   - missions -
+   Active    ##         (current mission list)
+   Pending   ##         (missions in prep)
+   Scramble  ##         (inbound threat list)
+
+   Commit               (engage current mission)
+   Cancel               (back to main menu)
+
+   Also need controls to navigate the maps, and
+   control visual clutter.
+   
+   [May want to offer simpler versions of this
+   screen for "Starship Command" and "Fighter
+   Command", allowing the player to focus on
+   combat simulation rather than strategy.]
+
+-----------------------------------------------------
+Mission Planning
+-----------------------------------------------------
+
+   Briefing Data (scrolling text and images)
+      Mission Title
+      Objective List
+      Force Package
+         package callsign
+         wingmen and loadout
+      Annotated Flight Plan
+         launch time
+         nav points and events
+         time on target
+      Intel Report
+         expected counterforce
+         degree of confidence
+
+   Package              (select wingmen)
+   Loadout              (select weapons)
+   Nav Map              (edit nav points)
+   Targets              (assign objectives to flights)
+
+   Commit               (engage current mission)
+   Cancel               (back to previous screen)
+
+   [NOTE: same screen can double as Alert Intercept
+   by changing the title and removing the edit buttons]
+
+
+==================== STARSHATTER ==================== 
+                      TRAINING
+
+Training Missions (both services)
+
+1. Basic Flight and Navigation
+2. Guns
+3. Missiles
+4. Combat Maneuver
+5. Sensors / Stealth
+6. Wingman Interface
+7. Long Range Scan
+8. Tactical Navigation and Waypoint Setting
+9. Advanced Tactics
+   a. Starship Assault (fighter weapon school)
+   b. Cruise missiles & Flight Ops (fleet tactical school)
+10. Situation Awareness (Final Exam)
+
+
+=======================================================
+                     MISCELLANIA
+
+Sensor ships and stations will be important resources in
+winning the information war.  Both the player and the AI
+will need to exploit and protect them appropriately.
+
+Briefings/Debriefings and other Intelligence Reports
+must adequately communicate the overall game situation
+to the player in order to allow the player to make
+meaningful decisions.  This is crucial to establishing
+immersion and making the player care about the outcome
+of the game.
+
+Briefings and Info Bursts will be more visceral if they
+include simulated "news footage" of the events being
+related.
+
+
+=======================================================
+                DYNAMIC CAMPAIGN NOTES
+
+1. Fighter jocks will be allowed to choose from a
+   menu of generated missions that have been assigned
+   to the player's squadron.
+
+2. Cruiser skippers will be given only one generated
+   mission at a time (like KA or SFC), but it will be
+   somewhat broader in scope.
+
+3. Carrier admirals will do what exactly?
+
+4. Both cruiser and carrier missions will often start
+   in the field or on patrol.  Fighter missions will
+   always start and end at a base (carrier|station|
+   dirtside starbase).
+
+5. Cruiser and carrier missions will not normally
+   include the starsender translation to the area of
+   conflict.  The player will only go through the
+   sender in real time as part of a mission (not as
+   prelude or ending to a mission).
+
+6. Admirals will need to be able to generate orders
+   for their forces during the battle.  This implies
+   some kind of Op Command workstation.
+
+7. The mission planner algorithm must construct
+   generated missions that are "fun", not just logical
+   to the campaign.  I have a vague notion of using
+   time/distance heuristics to place enemy units as
+   "challenges" on the battle field.  e.g. For xxx
+   type of mission, place an enemy destroyer yyy
+   minutes away from the (player|objective|sender).
+
+8. The generated missions do not have to hang together
+   as well as previously planned.  That is, we don't
+   need to maintain the feeling that the player is just
+   a unit in an RTS game.  Instead, the campaign manager
+   is just a device for generating interesting single
+   player missions as would be found in any game with
+   a static campaign.
+
+   On the other hand, the player should not see any
+   obvious contradictions between the big board and
+   what occurred during their missions.  That means,
+   any kills they witnessed must still be visible
+   between missions in the intel report/event log.
+
+
+=======================================================
+                      SHIP NAMES
+
+--- TERELLIAN SHIP NAMES ---
+
+F-32    Falcon Squadrons
+   Tigers       Bearcats     Avengers     Windriders   Wizards      Warriors     Aces
+
+F-36C   Stormhawk Squadrons
+   Nighthawks   Mustangs     Stallions    Chargers     Hunters      Broncos      Trailblazers
+
+F/A-38D Talon Squadrons
+   Starknights  Lancers      Warbirds     Razorbacks   Rangers      Sabres       Kings
+
+
+Berents Class FF (922 - 951) 924
+   1............2............3............4............5............6............7............
+22 Berents      Bosporus     Belfast      Bering       Dalton       Surrey       Halston
+27 Clarkeston   Carlisle     Canton       Davis        Delmar       Kent         Portsmouth
+32 Darvon       Leyte        Hemmet       Messina      Morgan       Durham       Bristol
+37 Avalon       Argiles      Essex        Nalu         Normandy     Kingston     Oxford
+42 Malory       Parker       Rainier      Kelvin       Nellis       Saratoga     Columbia
+47 Sorrel       Suffolk      Tanner       Trieste      Wolfram      Broome       Orleans
+
+Asher Class DDK (708 - 737)  710
+08 Asher        Ryan         Gerson       Reynolds     Nordic       Vernor       Arthur
+13 Shaw         Card         Simmons      Hawker       Hughes       Nichols      Smith
+18 Vance        Gibson       Raven        Hale         Salas        Hoffman      Parks
+23 Douglas      Mahan        Brunner      Weber        Smith        Deforest     Standish
+28 Robinson     Clarke       Gerrond      Gamma        Roberts      Bear         Drayton
+33 Keller       Jackson      Radix        Lawrence     Rand         Chance       Cavanaugh
+   
+Spectre Class DD (350 - 395) 352
+50 Spectre      Wraith       Shadow       Warlock      Phantom 
+55 Charon       Nemesis      Necromancer  Merlin       Nightshade 
+60 Morlock      Demon        Hydra        Typhon       Enigma  
+65 Phantasm     Revenant     Banshee      Chimaera     Gorgon 
+70 Nightmare    Darkmage     Ogre         Chaos        Death's Head 
+75 Ghola        Efrite       Ettin        Incubus      Secret Fire 
+80 Siren        Cerberus     Mantis       Orknies      Fell Hunter 
+85 Warspite     Fire Angel   Silence      Mysterious   Flame of Gorath 
+90 Centaur      Minotaur     Dark Spirit  Aegis        Void Walker
+
+Courageous Class CG (521 - 545)
+   1............2............3............4............5............6............7............
+21 Courageous   Fearless     Stalwart     Defender     Guardian     Loyalty      Forthright
+26 Steadfast    Assurance    Protector    Heroic       Valiant      Justice      Honesty
+31 Dauntless    Vanguard     Redstone     Victorious   Honorable    Truth        Gallantry
+36 Braveheart   Defiant      Audacious    Valorous     Confident    Response     Resolve
+41 Integrity    Capable      Fortitude    Intrepid     Virtuous     Daring       Bold
+
+Devastator Class CA (400 - 419)
+00 Devastator   Annihilator  Onslaught    Relentless   Furious      Stormwind    Demolisher
+05 ---------    Thunder      Hurricane    Inferno      Torrent      Typhoon      Shrike
+10 -------      Vortex       Predator     Ravager
+15 Havoc        Scourge      Huntress     Warrior
+
+Orion Class CVF
+   Orion        Antares      Archon       Titan        Hyperion     Atlas        Hercules 
+   Chronos      Poseidon     Cygnus
+
+--- MARAKAN SHIP NAMES ---
+
+F-MK1   Viper Squadrons
+   Scorpions    Dragons      Hornets      Sharks       Demons       Vipers       Black Widows
+
+F-MK2   Razor Squadrons
+   Raptors      Vultures     Cougars      Vandals      Vigilantes   Wolfpack     Black Diamonds
+
+F-MK3   Cobra Squadrons
+   Avengers     Vampires     Lions        Kestrels     Ravens       Bounty Hunters  Panthers
+
+Baikal Class FF
+   Baikal       Irkutsk      Olkha        Iskra        Lebedinka 
+   Meget        Homutovo     Ivanovka     Yagat        Kyren 
+   Vasad        Nasaly       Letkes       Dorog        Pomoz 
+   Lovo         Kerta        Nova         Marcali      Csorna 
+   Bajna        Vorka        Setla        Rodina       Markov 
+   Dolina       Porac        Tarnov       Udel         Karalon
+
+Tiger Bay Class FF
+   1............2............3............4............5............6............7............
+
+01 Tiger Bay
+08 Southern Isles
+15 Hellas Point
+22 Iron Canyon
+29 Mount Teras 
+36 Black River
+43 Guard Hills
+50 Gulf of Kirt
+57 Star Island
+64 Rodis Station
+
+02 Tarsus Pride
+09 Eternal City
+16 Kala Docks
+23 Outer Rim
+30 Kolchev
+37 Rock Ridge
+44 Aenia
+51 Boma Beach
+58 Falcrest
+65 Angel Shore
+
+03 Valley of Flame
+10 Leopard Ridge
+17 Kalis Basin
+24 Cape Nor
+31 Blue Forest
+38 Landfall
+45 Lake Orsan
+52 Wind River
+59 Tolan Locks
+66 Mount Zoare
+
+04 Silas Cave
+11 River Ceres
+18 Elkhorn Pass
+25 Port Hanson
+32 Oak Hall
+39 North Point
+46 Loris Dunes   - not used
+53 Beacon Bay    - not used
+60 Sand Canyon   - not used
+67 Iron Mountain - not used
+
+05 Khaital
+12 Ash Hills
+19 Albus Gulf
+26 Siren Island
+33 Neptune Station
+40 Trocanther
+47 Night City
+54 Joran Docks
+61 Hunter Coast
+68 Nephrys
+
+06 Storm Island
+13 Orinoco
+20 Jewel Beach
+27 Knife Ridge
+34 Secret Shore
+41 Crown of Fire
+48 Hilger Coast
+55 Sword Cliffs
+62 Capetown
+69 Smoke Forest
+
+07 Blackrock
+14 Sutton Lake
+21 Fourth Sector
+28 Kans Ferry
+35 Tol Harbor
+42 Gunston
+49 Fort Hollis
+56 Shield Mountains
+63 Sea of Glass
+70 Tannis Port
+
+80 Ramek
+83 Senna
+86 Radelix
+91 Arcturus
+94 Pelius
+96 Matrix
+98 Clavius
+
+
+Broadsword Class DD (3C21 - 3C51)
+   1............2............3............4............5............6............7............
+21 Broadsword   Starknight   Battleaxe    Claymore     Scimitar     Saber        Morningstar 
+28 Truncheon    Poleaxe      Clovis       Gladius      Trident      Lance        Crossbow 
+35 Warsign      Warhammer    Longbow      Ironhelm     Boneclaw     Shield       Longsword 
+42 Quickbolt    Kindjal      Siege        Mattock      Runesword    Blacknife    Pike 
+49 Scepter      Icefang                   Rapier
+56 Firebolt     Shortsword   Joust        Attack
+
+Volnaris Class DD (4D01 - 4D40)
+
+01 Alin Volnaris
+05 Pav Enke
+09 Pol Basilus
+13 Hal Rifa
+17 Kalas Gannet
+
+21 Senn Alon
+25 Jan Boma
+29 Tremel Isa
+33 Joran Kas
+37 Ambassador Ston
+
+02 Tol Branta
+06 Gol Duvain
+10 Jiri Sutton
+14 Famis Tett
+18 Hett Galinas
+22 Nova Sem
+
+26 Gray Lars - 4th fleet?
+30 Penn Sidus
+34 Savan Joss
+38 Kans Sefa
+03 Jael Pelorus
+07 Kel Masten
+
+11 Mos Antares
+15 Vin Silas
+19 Lieutentant Bolis
+23 Telen Setana
+27 Galen Teras
+31 Ro Hollis
+
+35 Tor Palver
+39 Rath Karalan
+04 Nels Berens
+08 Masil Korius
+12 Toran Elos
+16 Thule Arven
+
+20 Jes Kirta
+24 Loma Alta
+28 Merin Asgar
+32 Dian Soma
+36 Commander Sumas
+40 Bail Ennis
+
+45 Rik Eranes
+49 Senator Hasla
+
+51 Variak
+53 Talus
+55 Mindalante
+57 Manarkan
+59 Velan
+
+Imperial Class CA (5C44 - 5C73)
+44 Imperial     Coronation   Clavius      Ascendance   Marak I      
+51 Marak II     Imperator    Overlord     Throne       Glory        
+58 Principality Bennet       Powerful     Viceroy      Regal        Primacy
+65 Excellence   Cleon I      Marak IV     Eminence     Royale
+
+
+Vendetta Class CA (5D15 - 5D39)
+15 Vendetta     Malice       Wrath        Rage         Fury 	    Menace       Intruder
+22 Risk         Hazard       Peril        Threat       Exigency     Attack       Avalanche
+29 Assailant    Raider       Agressor     Invader      Retaliator   Pursuit      Darkness 
+36 Silencer     Punisher     Vengeance    xxxxxx       Terror       Dread        Savage     
+43 Hood         Omega  
+
+
+Dragon Class CVF (7A1 - 7A7)
+   Dragon       Serpent      Gryphon      Manticore    Baldread     Cyclops      Argus         Blackwing
+
+OTHERS
+   Wasp  Hornet  Scorpion  Deaths Head  
+   Wolf  Cobra  Viper  Raptor  Python
+
+   Jackal  Zodiac  Scarab  Sphinx  Osiris 
+   Onyx  Isis
+
+   Bellerophon  Hephaestus
+
+   Tiger        Panther      Cougar       Sea Lion     Leopard      Wildcat      Jaguar
+   Bengal       Claw         Lynx         Ursa         Orca         Jackal       White Lion
+
+
+Terellian Fleet Makeup
+----------------------
+
+1 carrier battle group
+  1 CVF + 60 Fighters + 8 LCAs
+  1 CG
+  2 DDK
+
+2 cruiser battle groups
+  1 CA
+  2 CG
+  1 DDK
+
+2 destroyer squadrons
+  2 DD
+  2 FF
+
+1 destroyer/escort squadron
+  2 DDK
+  2 FF
+
+
+
+Marakan Fleet Makeup
+--------------------
+
+1 carrier battle group
+  1 CVF + 60 Fighters + 8 LCAs
+  2 DDK (Volnaris)
+  2 FF  (Tiger Bay)
+
+2 cruiser battle groups
+  2 CA  (Vendetta)
+  1 DDK (Volnaris)
+  1 FF  (Tiger Bay)
+
+2 destroyer squadrons
+  2 DD  (Broadsword)
+  2 FF  (Tiger Bay)
+
+1 destroyer/escort squadron
+  2 DDK (Volnaris)
+  2 FF  (Tiger Bay)
+
+
+==================== STARSHATTER ==================== 
+                   COMMERCIAL NAMES
+Ahime-Maru
+Boko-Maru
+Hikawa-Maru
+Hokko-Maru
+Junyo-Maru
+Kaijin-Maru
+Kankoh-Maru
+Komagata-Maru
+Koro-Maru
+Tankai-Maru
+Tenyo-Maru
+Yumigo-Maru
+
+Roika Adventure
+Roika Endurance
+Roika Mariner
+Roika Vantage
+Roika Wayfarer
+
+Roika Challenger
+Roika Explorer
+Roika Seeker
+Roika Viking
+Roika Wanderer
+
+Roika Discovery
+Roika Harvester
+Roika Sojourner
+Roika Voyager
+Roika Windward
+
+Chemstar One (through Twelve)
+
+
+==================== STARSHATTER ==================== 
+                    GALAXY : NAMES
+
+   Adavan    Alban    Aram       Aslan   Athenar   Avalon
+   Borreal   Borova   Bryn
+   Casalle   Chi
+   Dawn
+   Eiller    Elkhart
+   Fenn
+   Gaul      Garden   Garrison
+   Haiche    Hiro
+   Ilon      Isham
+   Janek     Jarnell
+   Kala      Khalife  Kolchev    Korius
+   Lanos     Loris
+   Marak     Muir
+   Navara    Nephrys  Nergal
+   Oleanne   Omin     Ostara
+   Paragon   Path     Pirrin     Pollus
+   Relay     Renser   Ri         Radix
+   Senna     Silessia Solus      Suven
+   Tal Amin  Tarsus   Theramin   Thrale   Trocanther
+   Ur
+   Vail      Vesta    Volante
+   Warren    Whorl
+   Xanthe
+   Zephyr    Zoare
+
+
+
+==================== STARSHATTER ==================== 
+                    SECTOR : NAMES
+
+TERELLIAN ALLIANCE
+   Jarnell
+      Adonai
+      Jarnell
+      Caladan
+      Dawn
+
+   Borova
+      Talistar
+      Maraner
+      Borova
+      Danova
+      Zhalisal
+      Tulkas
+
+   Athenar
+      Athenar
+      Pallas
+
+   Paragon
+      Dorrath
+      Paragon
+      Bryn
+      Atlan
+
+   Thralis
+      Pollux
+      Thrale
+      Hera
+      Zeus
+      Sparta
+
+   Janus
+      Dante
+      Janek Station
+      Janek
+      Alystra
+      Navara
+
+INDEPENDENT SYSTEMS
+   Solus
+      Meridian
+      Solus
+      Telmera
+      Omane
+      Jalah
+      Trellis
+
+   Silessia
+      Silessia
+      Prosenar
+      Vesta
+      Nero
+
+   Haiche
+      Haiche
+      Cygnus
+      Tal Amin
+      Kala
+
+MARAKAN SYSTEMS
+   Renser
+      Garana
+      Rhomindal
+      Renser
+      Marisol
+      Lornas
+      Khaital
+
+   Loris
+      Duna
+      Kaius
+      Loris
+      Casalle
+
+   Ostara
+      Aram
+
+   Kolchev
+      Ilya
+      Kolchev
+      Anatoly
+      Volova
+
+   Korius
+      Moneta
+      Korius
+      Adantar
+      Solnas
+
+   Tarsus
+      Tarsus
+      Theramin
+
+   Nephrys
+      Nergal
+
+   Radix
+      Senna
+      Radix
+      Cavenda
+
+   Isham
+      Garden
+      Senesca
+      Rom
+      Relay
+
+   Garrison
+      Garrison
+
+   Trocanther
+      Volante
+      Narcissus
+      Path
+
+   Marakan
+      Marak
+      Xanthe
+
+
+==================== STARSHATTER ==================== 
+                 GALAXY : PLANET TYPES
+
+   --= Landform Types =--
+   Arid Desert   (Arrakis)
+   Frigid Desert (Mars)
+   Frozen Exotic (Titan)
+   Temperate Planar
+   Temperate Mountainous
+   Tropical Forest
+   Tropical Oceanic
+   Icy Oceanic   (Scandinavia)
+   Rocky Planar
+   Rocky Mountainous
+   Volcanic      (Venus, Io)
+   Barren        (Pluto)
+
+   --= Atmospheric Types =--
+   Thin
+   Clear, Breathable
+   Dusty
+   Foggy/Cloudy
+   Dense Poisonous
+   Layered
+
+   --= Population Types =--
+   Agrarian
+   Industrial
+   Mining
+   Research/Technology
+   Military
+   Political
+   Terraforming
+
+==================== STARSHATTER ==================== 
+                    GALAXY : RACES
+
+   Human
+      Terrelian Alliance
+      Marakan Hegemony
+
+   Ele'aan
+
+   Zolon Empire
+
+
+==================== STARSHATTER ==================== 
+                  CAMPAIGN SEQUENCE
+
+--- COLD WAR, LOW TENSION ---
+
+1) Training Center - Live Fire:
+   JANEK SHIPYARD / HEPHAESTUS STATION
+   Engage in "live fire" exercise with friendly
+   units on the border of Hegemony territory.
+
+--- COLD WAR, HIGH TENSION ---
+
+2) Highland:
+   SOLUS(N) RENSER(H)
+   An outlying Hegemony system is using terrorist
+   tactics to gain control of a neighboring neutral star
+   system to create "breathing room" between themselves
+   and the Alliance.  Drive out the terrorists and get the
+   neutrals to sign a treaty with the Alliance.
+
+Quest Notes:
+* Restore free shipping by tracking down pirate base
+  in asteroid field.
+* Terrorists have declared they will destroy prominent
+  landmarks or assets in the system, stop them.
+* Find the terrorist base.
+* Protect local officials on a tour of afflicted areas.
+* Demonstrate Hegemony involvement by tracking down
+  Renser military ships supporting the terrorists.
+* Establish a no-fly zone around a vulnerable space
+  station.
+* Deliver humanitarian assistance to a station or city
+  that has been attacked by the terrorists.
+* Some kind of covert op in the Renser system - spy
+  insertion and/or recovery or hostage extraction.
+* Evacuate wounded civilians from an attacked station
+  or city.
+
+3) Freedom Fighters:
+   HAICHE(H)
+   Hegemony taxation policy has driven an outlying
+   system to resort to despotism to collect needed
+   revenue.  A group of local freedom fighters is
+   attempting to overthrow the Hegemony backed govt.
+   Aid the locals in driving out Hegemony forces.
+
+--- OPEN WARFARE ---
+
+In response to campaign 3, the Hegemony formally
+declares war on the Alliance.
+
+4) Shining Fortress:
+   JARNELL BOROVA ATHENAR
+   The Hegemony has struck three Alliance systems,
+   but they have not yet had time to fortify their
+   position.  Drive out the enemy forces, and
+   protect Alliance citizens and assets in the area.
+
+5) Firestorm:
+   OSTARA ARAM KOLCHEV KORIUS TARSUS LORIS NEPHRYS NERGAL
+   Alliance Force:Command is planning a major offensive
+   against the core Hegemony systems.  This operation
+   is to strike major war production and ship yards
+   to weaken the Hegemony resistance before the
+   main offensive.
+
+6) Nightfall:
+   MARAKAN ISHAM GARRISON TROCANTHER
+   Climactic operation against the enemy home system.
+   Discovery that the Hegemony worlds have been overrun
+   by the Zolon Empire.
+
+--- ALIEN STRIFE ---
+
+7) Fatal Spear
+   Alliance forces attack the Zolon border worlds
+
+8) Iron Mountain
+   THRALIS PARAGON
+   Zolon counter-attack, defense of the remaining
+   core Alliance worlds
+
+9) No Refuge
+   Purge of Zolon Royal Breeding Colonies
+
+
+==================== STARSHATTER ==================== 
+                   COMBAT SEQUENCE
+
+Each campaign will include a set of combat sequences
+for each combatant.  The combat sequences will guide
+mission generation and statistical simulation, as well
+as providing supporting background fiction in the form
+of news items, intel reports, directives from Command,
+and game-rendered movie scripts/clips.
+
+

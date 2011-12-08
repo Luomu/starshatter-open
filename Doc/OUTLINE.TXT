@@ -1,0 +1,47 @@
+STARSHATTER DEMO 1.0 MANUAL (OUTLINE)
+
+1. INTRODUCTION
+   What is StarShatter?
+   What is this demo all about?
+   What is required to play?
+      Hardware
+      Operating System and Drivers
+
+2. INSTALLATION
+   (just unzip into a directory)
+
+3. SETUP / OPTIONS
+   Video Options
+      Software Only
+      Direct3D
+      Detail Settings
+   Sound Options
+      (none)
+   Keyboard Config
+
+4. GAMEPLAY INSTRUCTIONS
+   Fighters and Starships
+   The Displays
+      HUD
+      NAV
+      ENG
+      WEP
+   The Controls
+      Keyboard
+      Joystick
+      Using the Mouse
+   About Your Ship
+      Drive
+      Weapons
+      Shields
+      Sensors
+   
+5. MISSION INFO
+   Training Cruise
+   Fighter Sweep
+   Air Superiority
+   Destroyer Duel
+
+6. TROUBLESHOOTING and KNOWN PROBLEMS
+
+7. CREDITS and CONTACT INFO
