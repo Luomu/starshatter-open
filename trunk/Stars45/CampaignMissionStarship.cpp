@@ -875,7 +875,7 @@ CampaignMissionStarship::CreateTargetsCarrier()
                        RandomDirection() * Random( 50e3, 100e3);
 
 
-   int ntargets = 2 + RandomChance() ? 1 : 0;
+   int ntargets = 2 + (RandomChance() ? 1 : 0);
    int ntries   = 8;
 
    while (ntargets > 0 && ntries > 0) {
@@ -932,7 +932,7 @@ CampaignMissionStarship::CreateTargetsPatrol()
          elem->AddNavPoint(n);
    }
 
-   int ntargets = 2 + RandomChance() ? 1 : 0;
+   int ntargets = 2 + (RandomChance() ? 1 : 0);
    int ntries   = 8;
 
    while (ntargets > 0 && ntries > 0) {

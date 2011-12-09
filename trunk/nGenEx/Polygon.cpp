@@ -64,7 +64,6 @@ VertexSet::Resize(int m, bool preserve)
 
          if (!loc || !nrm || !s_loc || !rw || !tu || !tv || !diffuse || !specular) {
             nverts = 0;
-            nverts = 0;
 
             delete [] loc;
             delete [] nrm;

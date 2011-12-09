@@ -620,7 +620,7 @@ CampaignMissionFighter::CreateSingleElement(CombatGroup* g, CombatUnit* u)
       Instruction* obj = new(__FILE__,__LINE__) Instruction(Instruction::VECTOR, dst + "-" + src);
       elem->AddObjective(obj);
    }
-   else if (u->Type() & Ship::STARSHIPS != 0) {
+   else if ((u->Type() & Ship::STARSHIPS) != 0) {
       elem->SetMissionRole(Mission::FLEET);
    }
 

@@ -136,7 +136,7 @@ CampaignPlanMovement::MoveUnit(CombatUnit* u)
 
          if (unit->GetCombatGroup() != u->GetCombatGroup() && unit->GetRegion() == u->GetRegion() && !unit->IsDropship()) {
             Point  delta = loc - unit->Location();
-            double dist  = delta.Normalize();
+            dist  = delta.Normalize();
 
             if (dist < closest_dist) {
                closest_unit = unit;
@@ -147,7 +147,7 @@ CampaignPlanMovement::MoveUnit(CombatUnit* u)
 
       if (closest_unit && closest_dist < MIN_DIST) {
          Point  delta = loc - closest_unit->Location();
-         double dist  = delta.Normalize();
+         dist  = delta.Normalize();
 
          loc += delta * 1.1 * (MIN_DIST - closest_dist);
 
