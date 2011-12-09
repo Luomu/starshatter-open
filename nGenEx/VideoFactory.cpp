@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         VideoFac.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         VideoFac.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Video and Polygon Renderer Factory class
+	OVERVIEW
+	========
+	Video and Polygon Renderer Factory class
 */
 
 #include "MemDebug.h"
@@ -21,7 +21,7 @@
 // +--------------------------------------------------------------------+
 
 VideoFactory::VideoFactory(HWND h)
-   : hwnd(h), video(0), audio(0)
+: hwnd(h), video(0), audio(0)
 { }
 
 VideoFactory::~VideoFactory()
@@ -32,16 +32,16 @@ VideoFactory::~VideoFactory()
 Video*
 VideoFactory::CreateVideo(VideoSettings* vs)
 {
-   if (!video) {
-      video = (Video*) new(__FILE__,__LINE__) VideoDX9(hwnd, vs);
-      
-      if (!video) {
-         delete video;
-         video = 0;
-      }
-   }
-   
-   return video;
+	if (!video) {
+		video = (Video*) new(__FILE__,__LINE__) VideoDX9(hwnd, vs);
+		
+		if (!video) {
+			delete video;
+			video = 0;
+		}
+	}
+
+	return video;
 }
 
 // +--------------------------------------------------------------------+
@@ -49,10 +49,10 @@ VideoFactory::CreateVideo(VideoSettings* vs)
 void
 VideoFactory::DestroyVideo(Video* v)
 {
-   if (v == video) {
-      delete video;
-      video = 0;
-   }
+	if (v == video) {
+		delete video;
+		video = 0;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -60,12 +60,12 @@ VideoFactory::DestroyVideo(Video* v)
 SoundCard*
 VideoFactory::CreateSoundCard()
 {
-   if (!audio) {
-      audio = new(__FILE__,__LINE__) SoundCardD3D(hwnd);
-      Sound::UseSoundCard(audio);
-   }
-   
-   return audio;
+	if (!audio) {
+		audio = new(__FILE__,__LINE__) SoundCardD3D(hwnd);
+		Sound::UseSoundCard(audio);
+	}
+
+	return audio;
 }
 
 

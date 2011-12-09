@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2006. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2006. All Rights Reserved.
 
-    SUBSYSTEM:    nGen.lib
-    FILE:         Water.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGen.lib
+	FILE:         Water.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Water surface effect w/ reflection and refraction
+	OVERVIEW
+	========
+	Water surface effect w/ reflection and refraction
 */
 
 #ifndef Water_h
@@ -28,24 +28,24 @@ struct WATER_SURFACE;
 class Water
 {
 public:
-   Water();
-   virtual ~Water();
+	Water();
+	virtual ~Water();
 
-   virtual void   Init(int nVerts, float size, float depth);
-   virtual void   CalcWaves(double seconds);
-   virtual void   UpdateSurface(Vec3& eyePos, VertexSet* vset);
+	virtual void   Init(int nVerts, float size, float depth);
+	virtual void   CalcWaves(double seconds);
+	virtual void   UpdateSurface(Vec3& eyePos, VertexSet* vset);
 
 protected:
-   float          size;
-   float          depth;
-   float          scaleTex;
-   float          avgHeight;
+	float          size;
+	float          depth;
+	float          scaleTex;
+	float          avgHeight;
 
-   DWORD          nVertices;
+	DWORD          nVertices;
 
-   WATER_SURFACE* surface;
-   float*         waves;
-   float          offsets[16];
+	WATER_SURFACE* surface;
+	float*         waves;
+	float          offsets[16];
 };
 
 // +--------------------------------------------------------------------+

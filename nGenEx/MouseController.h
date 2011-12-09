@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         MouseController.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         MouseController.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Joystick Input class
+	OVERVIEW
+	========
+	Joystick Input class
 */
 
 #ifndef MouseController_h
@@ -22,48 +22,48 @@
 class MouseController : public MotionController
 {
 public:
-   static const char* TYPENAME() { return "MouseController"; }
+	static const char* TYPENAME() { return "MouseController"; }
 
-   MouseController();
-   virtual ~MouseController();
-   
-   // setup
-   virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
-   
-   // sample the physical device
-   virtual void   Acquire();
+	MouseController();
+	virtual ~MouseController();
 
-   // translations
-   virtual double X()         { return 0; }
-   virtual double Y()         { return 0; }
-   virtual double Z()         { return 0; }
+	// setup
+	virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
 
-   // rotations
-   virtual double Pitch()     { if (active) return p; return 0; }
-   virtual double Roll()      { if (active) return r; return 0; }
-   virtual double Yaw()       { if (active) return w; return 0; }
-   virtual int    Center()    { return 0; }
+	// sample the physical device
+	virtual void   Acquire();
 
-   // throttle
-   virtual double Throttle()  { if (active) return t; return 0; }
-   virtual void   SetThrottle(double throttle) { t = throttle; }
+	// translations
+	virtual double X()         { return 0; }
+	virtual double Y()         { return 0; }
+	virtual double Z()         { return 0; }
 
-   // actions
-   virtual int    Action(int n)     { return action[n];     }
-   virtual int    ActionMap(int n);
+	// rotations
+	virtual double Pitch()     { if (active) return p; return 0; }
+	virtual double Roll()      { if (active) return r; return 0; }
+	virtual double Yaw()       { if (active) return w; return 0; }
+	virtual int    Center()    { return 0; }
 
-   // actively sampling?
-   virtual bool   Active()                { return active;   }
-   virtual void   SetActive(bool a)       { active = a;      }
+	// throttle
+	virtual double Throttle()  { if (active) return t; return 0; }
+	virtual void   SetThrottle(double throttle) { t = throttle; }
 
-   static MouseController* GetInstance();
+	// actions
+	virtual int    Action(int n)     { return action[n];     }
+	virtual int    ActionMap(int n);
+
+	// actively sampling?
+	virtual bool   Active()                { return active;   }
+	virtual void   SetActive(bool a)       { active = a;      }
+
+	static MouseController* GetInstance();
 
 protected:
-   double         p,r,w, dx, dy, t;
-   int            action[MotionController::MaxActions];
-   int            map[32];
-   bool           active;
-   int            active_key;
+	double         p,r,w, dx, dy, t;
+	int            action[MotionController::MaxActions];
+	int            map[32];
+	bool           active;
+	int            active_key;
 };
 
 #endif MouseController_h

@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         SoundCard.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         SoundCard.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Abstract sound card class
+	OVERVIEW
+	========
+	Abstract sound card class
 */
 
 #include "MemDebug.h"
@@ -23,37 +23,37 @@ DWORD WINAPI SoundCardUpdateProc(LPVOID link);
 // +--------------------------------------------------------------------+
 
 SoundCard::SoundCard()
-   : status(SC_UNINITIALIZED), hthread(0), shutdown(false)
+: status(SC_UNINITIALIZED), hthread(0), shutdown(false)
 {
-   DWORD thread_id = 0;
-   hthread = CreateThread(0, 4096, SoundCardUpdateProc,
-                           (LPVOID) this, 0, &thread_id);
+	DWORD thread_id = 0;
+	hthread = CreateThread(0, 4096, SoundCardUpdateProc,
+	(LPVOID) this, 0, &thread_id);
 }
 
 // +--------------------------------------------------------------------+
 
 SoundCard::~SoundCard()
 {
-   shutdown = true;
+	shutdown = true;
 
-   WaitForSingleObject(hthread, 500);
-   CloseHandle(hthread);
-   hthread = 0;
+	WaitForSingleObject(hthread, 500);
+	CloseHandle(hthread);
+	hthread = 0;
 
-   sounds.destroy();
-   status = SC_UNINITIALIZED;
+	sounds.destroy();
+	status = SC_UNINITIALIZED;
 }
 
 // +--------------------------------------------------------------------+
 
 DWORD WINAPI SoundCardUpdateProc(LPVOID link)
 {
-   SoundCard* card = (SoundCard*) link;
+	SoundCard* card = (SoundCard*) link;
 
-   if (card)
-      return card->UpdateThread();
+	if (card)
+	return card->UpdateThread();
 
-   return (DWORD) E_POINTER;
+	return (DWORD) E_POINTER;
 }
 
 // +--------------------------------------------------------------------+
@@ -61,12 +61,12 @@ DWORD WINAPI SoundCardUpdateProc(LPVOID link)
 DWORD
 SoundCard::UpdateThread()
 {
-   while (!shutdown) {
-      Update();
-      Sleep(50);
-   }
+	while (!shutdown) {
+		Update();
+		Sleep(50);
+	}
 
-   return 0;
+	return 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -74,20 +74,20 @@ SoundCard::UpdateThread()
 void
 SoundCard::Update()
 {
-   AutoThreadSync a(sync);
+	AutoThreadSync a(sync);
 
-   ListIter<Sound> iter = sounds;
-   while (++iter) {
-      Sound* s = iter.value();
+	ListIter<Sound> iter = sounds;
+	while (++iter) {
+		Sound* s = iter.value();
 
-      s->Update();
+		s->Update();
 
-      if (s->GetStatus() == Sound::DONE &&
-        !(s->GetFlags()  &  Sound::LOCKED)) {
+		if (s->GetStatus() == Sound::DONE &&
+				!(s->GetFlags()  &  Sound::LOCKED)) {
 
-         delete iter.removeItem();
-      }
-   }
+			delete iter.removeItem();
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -95,9 +95,9 @@ SoundCard::Update()
 void
 SoundCard::AddSound(Sound* s)
 {
-   AutoThreadSync a(sync);
+	AutoThreadSync a(sync);
 
-   if (!sounds.contains(s))
-      sounds.append(s);
+	if (!sounds.contains(s))
+	sounds.append(s);
 }
 

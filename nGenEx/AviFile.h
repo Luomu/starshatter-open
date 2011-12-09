@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         AviFile.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         AviFile.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    PCX image file loader
+	OVERVIEW
+	========
+	PCX image file loader
 */
 
 #ifndef AviFile_h
@@ -30,17 +30,17 @@ struct IAVIStream;
 class AviFile
 {
 public:
-   static const char* TYPENAME() { return "AviFile"; }
+	static const char* TYPENAME() { return "AviFile"; }
 
-   // open for reading:
-   AviFile(const char* fname);
+	// open for reading:
+	AviFile(const char* fname);
 
-   // create for writing
-   AviFile(const char* fname, const Rect& rect, int frame_rate=30);
-   ~AviFile();
+	// create for writing
+	AviFile(const char* fname, const Rect& rect, int frame_rate=30);
+	~AviFile();
 
-   HRESULT  AddFrame(const Bitmap& bmp);
-   HRESULT  GetFrame(double seconds, Bitmap& bmp);
+	HRESULT  AddFrame(const Bitmap& bmp);
+	HRESULT  GetFrame(double seconds, Bitmap& bmp);
 
 private:
 	Rect           rect;

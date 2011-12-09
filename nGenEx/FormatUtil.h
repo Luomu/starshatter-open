@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         FormatUtil.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         FormatUtil.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Text formatting utilities
+	OVERVIEW
+	========
+	Text formatting utilities
 */
 
 #ifndef FormatUtil_h

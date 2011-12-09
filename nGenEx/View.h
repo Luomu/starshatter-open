@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         View.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         View.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Abstract View class
+	OVERVIEW
+	========
+	Abstract View class
 */
 
 #ifndef View_h
@@ -25,27 +25,27 @@ class Window;
 
 class View
 {
-   friend class Window;
+	friend class Window;
 
 public:
-   static const char* TYPENAME() { return "View"; }
+	static const char* TYPENAME() { return "View"; }
 
-   View(Window* c) : window(c)               { }
-   virtual ~View()                           { }
-   
-   int operator == (const View& that) const { return this == &that; }
+	View(Window* c) : window(c)               { }
+	virtual ~View()                           { }
 
-   // Operations:
-   virtual void      Refresh()               { }
-   virtual void      OnWindowMove()          { }
-   virtual void      OnShow()                { }
-   virtual void      OnHide()                { }
+	int operator == (const View& that) const { return this == &that; }
 
-   virtual void      SetWindow(Window* w)    { window = w; OnWindowMove(); }
-   virtual Window*   GetWindow()             { return window; }
+	// Operations:
+	virtual void      Refresh()               { }
+	virtual void      OnWindowMove()          { }
+	virtual void      OnShow()                { }
+	virtual void      OnHide()                { }
+
+	virtual void      SetWindow(Window* w)    { window = w; OnWindowMove(); }
+	virtual Window*   GetWindow()             { return window; }
 
 protected:
-   Window*  window;
+	Window*  window;
 };
 
 #endif View_h

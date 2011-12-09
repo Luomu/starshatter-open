@@ -1,10 +1,10 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Wave.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Wave.h
+	AUTHOR:       John DiCamillo
 
 */
 
@@ -17,33 +17,33 @@
 
 struct WAVE_HEADER
 {
-   DWORD RIFF;
-   DWORD file_len;
-   DWORD WAVE;
+	DWORD RIFF;
+	DWORD file_len;
+	DWORD WAVE;
 };
 
 struct WAVE_FMT
 {
-   DWORD FMT;
-   DWORD chunk_size;
-   WORD  wFormatTag; 
-   WORD  nChannels; 
-   DWORD nSamplesPerSec; 
-   DWORD nAvgBytesPerSec; 
-   WORD  nBlockAlign; 
-   WORD  wBitsPerSample;
+	DWORD FMT;
+	DWORD chunk_size;
+	WORD  wFormatTag; 
+	WORD  nChannels; 
+	DWORD nSamplesPerSec; 
+	DWORD nAvgBytesPerSec; 
+	WORD  nBlockAlign; 
+	WORD  wBitsPerSample;
 };
 
 struct WAVE_FACT
 {
-   DWORD FACT;
-   DWORD chunk_size;
+	DWORD FACT;
+	DWORD chunk_size;
 };
 
 struct WAVE_DATA
 {
-   DWORD DATA;
-   DWORD chunk_size;
+	DWORD DATA;
+	DWORD chunk_size;
 };
 
 // +--------------------------------------------------------------------+

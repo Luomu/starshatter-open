@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Res.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Res.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Abstract Resource class
+	OVERVIEW
+	========
+	Abstract Resource class
 */
 
 #ifndef Res_h
@@ -22,15 +22,15 @@
 class Resource
 {
 public:
-   Resource();
-   virtual ~Resource();
-   
-   int operator == (const Resource& r) const { return id == r.id; }
-   
-   HANDLE   Handle() const { return id; }
+	Resource();
+	virtual ~Resource();
+
+	int operator == (const Resource& r) const { return id == r.id; }
+
+	HANDLE   Handle() const { return id; }
 
 protected:
-   HANDLE   id;
+	HANDLE   id;
 };
 
 #endif Res_h
