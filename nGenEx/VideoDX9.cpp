@@ -265,10 +265,6 @@ VideoDX9::VideoDX9(const HWND& window, VideoSettings* vs)
    d3d      = Direct3DCreate9(D3D_SDK_VERSION);
    dx9enum  = new(__FILE__,__LINE__) VideoDX9Enum(d3d);
 
-   // DEBUG
-   vs->is_windowed = true;
-   // DEBUG
-
    if (d3d && dx9enum) {
       if (vs) {
          dx9enum->req_fullscreen    = vs->is_windowed ? false : true;
