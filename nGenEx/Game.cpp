@@ -257,17 +257,20 @@ Game::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
    }
 
    if (status == OK) {
-      if (MachineInfo::GetPlatform() == MachineInfo::OS_WINNT) {
-         Panic("  D3D not available under WinNT 4");
-         status = INIT_FAILED;
-      }
+	   static int os_version = MachineInfo::GetPlatform();
 
-      else if (MachineInfo::GetDirectXVersion() < MachineInfo::DX_9) {
-         Panic(" Insufficient DirectX detected (Dx9 IS REQUIRED)");
-         status = INIT_FAILED;
-      }
+	if (os_version == MachineInfo::OS_WIN95 || os_version == MachineInfo::OS_WIN98) {
+		Panic("  Windows 95 and 98 are no longer supported. Please update to Windows XP or higher.");
+		status = INIT_FAILED;
+	} else if (os_version == MachineInfo::OS_WINNT) {
+		Panic("  D3D not available under WinNT 4");
+		status = INIT_FAILED;
+	} else if (MachineInfo::GetDirectXVersion() < MachineInfo::DX_9) {
+		Panic(" Insufficient DirectX detected (Dx9 IS REQUIRED)");
+		status = INIT_FAILED;
+	}
 
-      Print("  Gamma Level = %d\n", gamma);
+	Print("  Gamma Level = %d\n", gamma);
    }
 
    if (status == OK) {
