@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Keyboard.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Keyboard.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Keyboard Input class
+	OVERVIEW
+	========
+	Keyboard Input class
 */
 
 #ifndef Keyboard_h
@@ -22,50 +22,50 @@
 class Keyboard : public MotionController
 {
 public:
-   static const char* TYPENAME() { return "Keyboard"; }
+	static const char* TYPENAME() { return "Keyboard"; }
 
-   Keyboard();
-   virtual ~Keyboard();
-   
-   // setup
-   virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
+	Keyboard();
+	virtual ~Keyboard();
 
-   // sample the physical device
-   virtual void   Acquire();
+	// setup
+	virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
 
-   // translations
-   virtual double X()         { return x; }
-   virtual double Y()         { return y; }
-   virtual double Z()         { return z; }
+	// sample the physical device
+	virtual void   Acquire();
 
-   // rotations
-   virtual double Pitch()     { return p; }
-   virtual double Roll()      { return r; }
-   virtual double Yaw()       { return w; }
-   virtual int    Center()    { return c; }
+	// translations
+	virtual double X()         { return x; }
+	virtual double Y()         { return y; }
+	virtual double Z()         { return z; }
 
-   // throttle
-   virtual double Throttle()  { return t; }
-   virtual void   SetThrottle(double throttle) { t = throttle; }
+	// rotations
+	virtual double Pitch()     { return p; }
+	virtual double Roll()      { return r; }
+	virtual double Yaw()       { return w; }
+	virtual int    Center()    { return c; }
 
-   // actions
-   virtual int    Action(int n)     { return action[n];     }
-   virtual int    ActionMap(int n)  { return KeyDownMap(n); }
+	// throttle
+	virtual double Throttle()  { return t; }
+	virtual void   SetThrottle(double throttle) { t = throttle; }
 
-   static bool    KeyDown(int key);
-   static bool    KeyDownMap(int key);
-   static void    FlushKeys();
+	// actions
+	virtual int    Action(int n)     { return action[n];     }
+	virtual int    ActionMap(int n)  { return KeyDownMap(n); }
 
-   static Keyboard* GetInstance();
+	static bool    KeyDown(int key);
+	static bool    KeyDownMap(int key);
+	static void    FlushKeys();
+
+	static Keyboard* GetInstance();
 
 protected:
-   double         x,y,z,p,r,w,t;
-   double         p1, r1, w1;
-   int            c;
-   int            action[MotionController::MaxActions];
+	double         x,y,z,p,r,w,t;
+	double         p1, r1, w1;
+	int            c;
+	int            action[MotionController::MaxActions];
 
-   static int     map[KEY_MAP_SIZE];
-   static int     alt[KEY_MAP_SIZE];
+	static int     map[KEY_MAP_SIZE];
+	static int     alt[KEY_MAP_SIZE];
 };
 
 // +--------------------------------------------------------------------+

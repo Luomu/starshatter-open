@@ -1,15 +1,15 @@
 /*  Project nGen
-    John DiCamillo Software Consulting
-    Copyright © 1997-2000. All Rights Reserved.
+	John DiCamillo Software Consulting
+	Copyright © 1997-2000. All Rights Reserved.
 
-    SUBSYSTEM:    nGen.lib
-    FILE:         MCIWave.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGen.lib
+	FILE:         MCIWave.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    MCI Wave Output stuff
+	OVERVIEW
+	========
+	MCI Wave Output stuff
 */
 
 #ifndef MCI_WAVE_H

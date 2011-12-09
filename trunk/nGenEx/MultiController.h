@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         MultiController.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         MultiController.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    ComboController Motion Controller class
+	OVERVIEW
+	========
+	ComboController Motion Controller class
 */
 
 #ifndef MultiController_h
@@ -22,46 +22,46 @@
 class MultiController : public MotionController
 {
 public:
-   static const char* TYPENAME() { return "MultiController"; }
+	static const char* TYPENAME() { return "MultiController"; }
 
-   MultiController();
-   virtual ~MultiController();
-   
-   virtual void   AddController(MotionController* c);
-   virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
-   virtual void   SwapYawRoll(int swap);
-   virtual int    GetSwapYawRoll() const;
+	MultiController();
+	virtual ~MultiController();
 
-   // sample the physical device
-   virtual void   Acquire();
+	virtual void   AddController(MotionController* c);
+	virtual void   MapKeys(KeyMapEntry* mapping, int nkeys);
+	virtual void   SwapYawRoll(int swap);
+	virtual int    GetSwapYawRoll() const;
 
-   // translations
-   virtual double X()         { return x; }
-   virtual double Y()         { return y; }
-   virtual double Z()         { return z; }
+	// sample the physical device
+	virtual void   Acquire();
 
-   // rotations
-   virtual double Pitch()     { return p; }
-   virtual double Roll()      { return r; }
-   virtual double Yaw()       { return w; }
-   virtual int    Center()    { return c; }
+	// translations
+	virtual double X()         { return x; }
+	virtual double Y()         { return y; }
+	virtual double Z()         { return z; }
 
-   // throttle
-   virtual double Throttle()  { return t; }
-   virtual void   SetThrottle(double throttle);
+	// rotations
+	virtual double Pitch()     { return p; }
+	virtual double Roll()      { return r; }
+	virtual double Yaw()       { return w; }
+	virtual int    Center()    { return c; }
 
-   // actions
-   virtual int    Action(int n) { return action[n]; }
-   virtual int    ActionMap(int n);
+	// throttle
+	virtual double Throttle()  { return t; }
+	virtual void   SetThrottle(double throttle);
+
+	// actions
+	virtual int    Action(int n) { return action[n]; }
+	virtual int    ActionMap(int n);
 
 protected:
-   int                  nctrl;
-   MotionController*    ctrl[4];
+	int                  nctrl;
+	MotionController*    ctrl[4];
 
-   double         x,y,z,p,r,w,t;
-   double         p1, r1, w1;
-   int            c;
-   int            action[MotionController::MaxActions];
+	double         x,y,z,p,r,w,t;
+	double         p1, r1, w1;
+	int            c;
+	int            action[MotionController::MaxActions];
 };
 
 #endif // MultiController_h

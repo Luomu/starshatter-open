@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         ImgView.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         ImgView.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Bitmap "Billboard" View class
+	OVERVIEW
+	========
+	Bitmap "Billboard" View class
 */
 
 #ifndef ImgView_h
@@ -27,24 +27,24 @@ class  Bitmap;
 class ImgView : public View
 {
 public:
-   static const char* TYPENAME() { return "ImgView"; }
+	static const char* TYPENAME() { return "ImgView"; }
 
-   ImgView(Window* c, Bitmap* bmp);
-   virtual ~ImgView();
+	ImgView(Window* c, Bitmap* bmp);
+	virtual ~ImgView();
 
-   // Operations:
-   virtual void      Refresh();
+	// Operations:
+	virtual void      Refresh();
 
-   virtual Bitmap*   GetPicture()   const { return img;     }
-   virtual void      SetPicture(Bitmap* bmp);
-   virtual int       GetBlend()     const { return blend;   }
-   virtual void      SetBlend(int b)      { blend = b;      }
+	virtual Bitmap*   GetPicture()   const { return img;     }
+	virtual void      SetPicture(Bitmap* bmp);
+	virtual int       GetBlend()     const { return blend;   }
+	virtual void      SetBlend(int b)      { blend = b;      }
 
 protected:
-   Bitmap*     img;
-   int         x_offset, y_offset;
-   int         width, height;
-   int         blend;
+	Bitmap*     img;
+	int         x_offset, y_offset;
+	int         width, height;
+	int         blend;
 };
 
 #endif ImgView_h

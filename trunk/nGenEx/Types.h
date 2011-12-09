@@ -1,15 +1,15 @@
 /*  Project nGen
-    John DiCamillo
-    Copyright © 1997-2002. All Rights Reserved.
+	John DiCamillo
+	Copyright © 1997-2002. All Rights Reserved.
 
-    SUBSYSTEM:    nGen.lib
-    FILE:         Types.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGen.lib
+	FILE:         Types.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Basic Type Definitions
+	OVERVIEW
+	========
+	Basic Type Definitions
 */
 
 #ifndef Types_h

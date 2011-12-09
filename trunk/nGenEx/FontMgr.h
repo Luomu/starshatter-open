@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         FontMgr.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         FontMgr.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Font Resource Manager class
+	OVERVIEW
+	========
+	Font Resource Manager class
 */
 
 #ifndef FontMgr_h
@@ -26,24 +26,24 @@ class Font;
 
 struct FontItem
 {
-   static const char* TYPENAME() { return "FontItem"; }
+	static const char* TYPENAME() { return "FontItem"; }
 
-   Text  name;
-   int   size;
-   Font* font;
+	Text  name;
+	int   size;
+	Font* font;
 };
 
 class FontMgr
 {
 public:
-   static const char* TYPENAME() { return "FontMgr"; }
+	static const char* TYPENAME() { return "FontMgr"; }
 
-   static void    Close();
-   static void    Register(const char* name, Font* font);
-   static Font*   Find(const char* name);
+	static void    Close();
+	static void    Register(const char* name, Font* font);
+	static Font*   Find(const char* name);
 
 private:
-   static List<FontItem> fonts;
+	static List<FontItem> fonts;
 };
 
 #endif FontMgr_h

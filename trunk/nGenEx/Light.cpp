@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Light.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Light.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Dynamic Light Source
+	OVERVIEW
+	========
+	Dynamic Light Source
 */
 
 #include "MemDebug.h"
@@ -23,9 +23,9 @@ int Light::id_key = 1;
 // +--------------------------------------------------------------------+
 
 Light::Light(float l, float dl, int time)
-   : id(id_key++), type(LIGHT_POINT), life(time), 
-     light(l), dldt(dl), color(255,255,255),
-     active(true), shadow(false), scene(0)
+: id(id_key++), type(LIGHT_POINT), life(time), 
+light(l), dldt(dl), color(255,255,255),
+active(true), shadow(false), scene(0)
 { }
 
 // +--------------------------------------------------------------------+
@@ -38,10 +38,10 @@ Light::~Light()
 void
 Light::Update()
 {
-   if (dldt < 1.0f)
-      light *= dldt;
+	if (dldt < 1.0f)
+	light *= dldt;
 
-   if (life > 0) life--;
+	if (life > 0) life--;
 }
 
 // +--------------------------------------------------------------------+
@@ -49,10 +49,10 @@ Light::Update()
 void
 Light::Destroy()
 {
-   if (scene)
-      scene->DelLight(this);
+	if (scene)
+	scene->DelLight(this);
 
-   delete this;
+	delete this;
 }
 
 // +--------------------------------------------------------------------+
@@ -60,13 +60,13 @@ Light::Destroy()
 void
 Light::MoveTo(const Point& dst)
 {
-   //if (type != LIGHT_DIRECTIONAL)
-   loc = dst;
+	//if (type != LIGHT_DIRECTIONAL)
+	loc = dst;
 }
 
 void
 Light::TranslateBy(const Point& ref)
 {
-   if (type != LIGHT_DIRECTIONAL)
-      loc = loc - ref;
+	if (type != LIGHT_DIRECTIONAL)
+	loc = loc - ref;
 }

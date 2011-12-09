@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         FontMgr.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         FontMgr.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Font Resource Manager class implementation
+	OVERVIEW
+	========
+	Font Resource Manager class implementation
 */
 
 #include "MemDebug.h"
@@ -24,7 +24,7 @@ List<FontItem> FontMgr::fonts;
 void
 FontMgr::Close()
 {
-   fonts.destroy();
+	fonts.destroy();
 }
 
 // +--------------------------------------------------------------------+
@@ -32,15 +32,15 @@ FontMgr::Close()
 void
 FontMgr::Register(const char* name, Font* font)
 {
-   FontItem* item = new(__FILE__,__LINE__) FontItem;
+	FontItem* item = new(__FILE__,__LINE__) FontItem;
 
-   if (item) {
-      item->name = name;
-      item->size = 0;
-      item->font = font;
+	if (item) {
+		item->name = name;
+		item->size = 0;
+		item->font = font;
 
-      fonts.append(item);
-   }
+		fonts.append(item);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -48,11 +48,11 @@ FontMgr::Register(const char* name, Font* font)
 Font*
 FontMgr::Find(const char* name)
 {
-   ListIter<FontItem> item = fonts;
-   while (++item) {
-      if (item->name == name)
-         return item->font;
-   }
-   
-   return 0;
+	ListIter<FontItem> item = fonts;
+	while (++item) {
+		if (item->name == name)
+		return item->font;
+	}
+
+	return 0;
 }

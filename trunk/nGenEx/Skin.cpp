@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Skin.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Skin.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Classes for rendering solid meshes of polygons
+	OVERVIEW
+	========
+	Classes for rendering solid meshes of polygons
 */
 
 #include "MemDebug.h"
@@ -22,23 +22,23 @@ void  Print(const char* fmt, ...);
 
 Skin::Skin(const char* n)
 {
-   if (n && *n) {
-      strncpy_s(name, n, NAMELEN);
-      name[NAMELEN-1] = 0;
-   }
+	if (n && *n) {
+		strncpy_s(name, n, NAMELEN);
+		name[NAMELEN-1] = 0;
+	}
 
-   else {
-      ZeroMemory(name, NAMELEN);
-   }
+	else {
+		ZeroMemory(name, NAMELEN);
+	}
 
-   ZeroMemory(path, 256);
+	ZeroMemory(path, 256);
 }
 
 // +--------------------------------------------------------------------+
 
 Skin::~Skin()
 {
-   cells.destroy();
+	cells.destroy();
 }
 
 // +--------------------------------------------------------------------+
@@ -46,23 +46,23 @@ Skin::~Skin()
 void
 Skin::SetName(const char* n)
 {
-   if (n && *n) {
-      strncpy_s(name, n, NAMELEN);
-      name[NAMELEN-1] = 0;
-   }
+	if (n && *n) {
+		strncpy_s(name, n, NAMELEN);
+		name[NAMELEN-1] = 0;
+	}
 }
 
 void
 Skin::SetPath(const char* n)
 {
-   if (n && *n) {
-      strncpy_s(path, n, 256);
-      path[255] = 0;
-   }
+	if (n && *n) {
+		strncpy_s(path, n, 256);
+		path[255] = 0;
+	}
 
-   else {
-      ZeroMemory(path, 256);
-   }
+	else {
+		ZeroMemory(path, 256);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -70,24 +70,24 @@ Skin::SetPath(const char* n)
 void
 Skin::AddMaterial(const Material* mtl)
 {
-   if (!mtl) return;
+	if (!mtl) return;
 
-   bool found = false;
+	bool found = false;
 
-   ListIter<SkinCell> iter = cells;
-   while (++iter && !found) {
-      SkinCell* s = iter.value();
+	ListIter<SkinCell> iter = cells;
+	while (++iter && !found) {
+		SkinCell* s = iter.value();
 
-      if (s->skin && !strcmp(s->skin->name, mtl->name)) {
-         s->skin = mtl;
-         found   = true;
-      }
-   }
+		if (s->skin && !strcmp(s->skin->name, mtl->name)) {
+			s->skin = mtl;
+			found   = true;
+		}
+	}
 
-   if (!found) {
-      SkinCell* s = new(__FILE__,__LINE__) SkinCell(mtl);
-      cells.append(s);
-   }
+	if (!found) {
+		SkinCell* s = new(__FILE__,__LINE__) SkinCell(mtl);
+		cells.append(s);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -95,30 +95,30 @@ Skin::AddMaterial(const Material* mtl)
 void
 Skin::ApplyTo(Model* model) const
 {
-   if (model) {
-      for (int i = 0; i < cells.size(); i++) {
-         SkinCell* s = cells[i];
+	if (model) {
+		for (int i = 0; i < cells.size(); i++) {
+			SkinCell* s = cells[i];
 
-         if (s->skin) {
-            s->orig = model->ReplaceMaterial(s->skin);
-         }
-      }
-   }
+			if (s->skin) {
+				s->orig = model->ReplaceMaterial(s->skin);
+			}
+		}
+	}
 }
 
 void
 Skin::Restore(Model* model) const
 {
-   if (model) {
-      for (int i = 0; i < cells.size(); i++) {
-         SkinCell* s = cells[i];
+	if (model) {
+		for (int i = 0; i < cells.size(); i++) {
+			SkinCell* s = cells[i];
 
-         if (s->orig) {
-            model->ReplaceMaterial(s->orig);
-            s->orig = 0;
-         }
-      }
-   }
+			if (s->orig) {
+				model->ReplaceMaterial(s->orig);
+				s->orig = 0;
+			}
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -126,13 +126,13 @@ Skin::Restore(Model* model) const
 // +--------------------------------------------------------------------+
 
 SkinCell::SkinCell(const Material* mtl)
-   : skin(mtl), orig(0)
+: skin(mtl), orig(0)
 {
 }
 
 SkinCell::~SkinCell()
 {
-   delete skin;
+	delete skin;
 }
 
 // +--------------------------------------------------------------------+
@@ -140,13 +140,13 @@ SkinCell::~SkinCell()
 int
 SkinCell::operator == (const SkinCell& other) const
 {
-   if (skin == other.skin)
-      return true;
+	if (skin == other.skin)
+	return true;
 
-   if (skin && other.skin)
-      return !strcmp(skin->name, other.skin->name);
+	if (skin && other.skin)
+	return !strcmp(skin->name, other.skin->name);
 
-   return false;
+	return false;
 }
 
 // +--------------------------------------------------------------------+
@@ -154,10 +154,10 @@ SkinCell::operator == (const SkinCell& other) const
 const char*
 SkinCell::Name() const
 {
-   if (skin)
-      return skin->name;
+	if (skin)
+	return skin->name;
 
-   return "Invalid Skin Cell";
+	return "Invalid Skin Cell";
 }
 
 // +--------------------------------------------------------------------+
@@ -165,11 +165,11 @@ SkinCell::Name() const
 void
 SkinCell::SetSkin(const Material* mtl)
 {
-   skin = mtl;
+	skin = mtl;
 }
 
 void
 SkinCell::SetOrig(const Material* mtl)
 {
-   orig = mtl;
+	orig = mtl;
 }

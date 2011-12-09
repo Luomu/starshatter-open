@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         ParseUtil.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         ParseUtil.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Parser utility functions
+	OVERVIEW
+	========
+	Parser utility functions
 */
 
 #ifndef ParseUtil_h

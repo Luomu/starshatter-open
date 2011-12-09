@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         Shadow.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         Shadow.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Dynamic Stencil Shadow Volumes
+	OVERVIEW
+	========
+	Dynamic Stencil Shadow Volumes
 */
 
 #ifndef Shadow_h
@@ -34,34 +34,34 @@ class Video;
 class Shadow
 {
 public:
-   static const char* TYPENAME() { return "Shadow"; }
+	static const char* TYPENAME() { return "Shadow"; }
 
-   Shadow(Solid* solid);
-   virtual ~Shadow();
-   
-   int operator == (const Shadow& s) const { return this == &s; }
+	Shadow(Solid* solid);
+	virtual ~Shadow();
 
-   // operations
-   void     Render(Video* video);
-   void     Update(Light* light);
-   void     AddEdge(WORD v1, WORD v2);
-   void     Reset();
+	int operator == (const Shadow& s) const { return this == &s; }
 
-   bool     IsEnabled()          const { return enabled; }
-   void     SetEnabled(bool e)         { enabled = e;    }
+	// operations
+	void     Render(Video* video);
+	void     Update(Light* light);
+	void     AddEdge(WORD v1, WORD v2);
+	void     Reset();
 
-   static void SetVisibleShadowVolumes(bool vis);
-   static bool GetVisibleShadowVolumes();
+	bool     IsEnabled()          const { return enabled; }
+	void     SetEnabled(bool e)         { enabled = e;    }
+
+	static void SetVisibleShadowVolumes(bool vis);
+	static bool GetVisibleShadowVolumes();
 
 protected:
-   Solid*   solid;
-   Vec3*    verts;
-   int      nverts;
-   int      max_verts;
-   bool     enabled;
+	Solid*   solid;
+	Vec3*    verts;
+	int      nverts;
+	int      max_verts;
+	bool     enabled;
 
-   WORD*    edges;
-   DWORD    num_edges;
+	WORD*    edges;
+	DWORD    num_edges;
 };
 
 // +--------------------------------------------------------------------+

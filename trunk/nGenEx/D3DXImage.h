@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         D3DXImage.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         D3DXImage.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    D3DX image file loader
+	OVERVIEW
+	========
+	D3DX image file loader
 */
 
 #ifndef D3DXImage_h
@@ -21,21 +21,21 @@
 
 struct D3DXImage
 {
-   static const char* TYPENAME() { return "D3DXImage"; }
+	static const char* TYPENAME() { return "D3DXImage"; }
 
-   D3DXImage();
-   D3DXImage(WORD w, WORD h, DWORD* img);
-   ~D3DXImage();
+	D3DXImage();
+	D3DXImage(WORD w, WORD h, DWORD* img);
+	~D3DXImage();
 
-   bool Load(char *filename);
-   bool Save(char *filename);
+	bool Load(char *filename);
+	bool Save(char *filename);
 
-   bool LoadBuffer(BYTE* buf, int len);
+	bool LoadBuffer(BYTE* buf, int len);
 
-   DWORD*         image;
-   DWORD          width;
-   DWORD          height;
-   DWORD          format;
+	DWORD*         image;
+	DWORD          width;
+	DWORD          height;
+	DWORD          format;
 };
 
 // +--------------------------------------------------------------------+

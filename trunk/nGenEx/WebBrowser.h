@@ -1,15 +1,15 @@
 /*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2006. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2006. All Rights Reserved.
 
-    SUBSYSTEM:    nGenEx.lib
-    FILE:         WebBrowser.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    nGenEx.lib
+	FILE:         WebBrowser.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Helper class to find and launch user's default web browser
+	OVERVIEW
+	========
+	Helper class to find and launch user's default web browser
 */
 
 #ifndef WebBrowser_h
@@ -24,19 +24,19 @@
 class WebBrowser
 {
 public:
-   static const char* TYPENAME() { return "WebBrowser"; }
+	static const char* TYPENAME() { return "WebBrowser"; }
 
-   WebBrowser();
-   virtual ~WebBrowser();
+	WebBrowser();
+	virtual ~WebBrowser();
 
-   virtual void OpenURL(const char* url);
+	virtual void OpenURL(const char* url);
 
 protected:
-   void FindDefaultBrowser();
-   void FindOpenCommand();
+	void FindDefaultBrowser();
+	void FindOpenCommand();
 
-   Text browser;
-   Text command;
+	Text browser;
+	Text command;
 };
 
 // +--------------------------------------------------------------------+
