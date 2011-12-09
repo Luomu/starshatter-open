@@ -67,7 +67,7 @@ Bitmap::Bitmap()
      pix(0), hipix(0), mapsize(0),
      last_modified(0)
 {
-   strcpy(filename, "Bitmap()");
+   strcpy_s(filename, "Bitmap()");
 }
 
 Bitmap::Bitmap(int w, int h, ColorIndex* p, int t)
@@ -76,7 +76,7 @@ Bitmap::Bitmap(int w, int h, ColorIndex* p, int t)
      pix(p), hipix(0), mapsize(w*h),
      last_modified(GetRealTime())
 {
-   sprintf(filename, "Bitmap(%d, %d, index, type=%d)", w, h, (int) t);
+   sprintf_s(filename, "Bitmap(%d, %d, index, type=%d)", w, h, (int) t);
 }
 
 Bitmap::Bitmap(int w, int h, Color* p, int t)
@@ -85,7 +85,7 @@ Bitmap::Bitmap(int w, int h, Color* p, int t)
      pix(0), hipix(p), mapsize(w*h),
      last_modified(GetRealTime())
 {
-   sprintf(filename, "Bitmap(%d, %d, hicolor, type=%d)", w, h, (int) t);
+   sprintf_s(filename, "Bitmap(%d, %d, hicolor, type=%d)", w, h, (int) t);
 }
 
 // +--------------------------------------------------------------------+
@@ -781,13 +781,13 @@ Bitmap::SetFilename(const char* s)
 
       if (n >= 60) {
          ZeroMemory(filename, sizeof(filename));
-         strcpy(filename, "...");
-         strcat(filename, s + n - 59);
+         strcpy_s(filename, "...");
+         strcat_s(filename, s + n - 59);
          filename[63] = 0;
       }
 
       else {
-         strcpy(filename, s);
+         strcpy_s(filename, s);
       }
    }
 }
@@ -847,7 +847,7 @@ Bitmap*
 Bitmap::CheckCache(const char* filename)
 {
    for (int i = 0; i < bitmap_cache.size(); i++) {
-      if (!stricmp(bitmap_cache[i]->GetFilename(), filename)) {
+      if (!_stricmp(bitmap_cache[i]->GetFilename(), filename)) {
          return bitmap_cache[i];
       }
    }

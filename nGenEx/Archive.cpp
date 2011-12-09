@@ -191,9 +191,10 @@ void DataArchive::LoadDatafile(const char* name)
    delete [] block_map;
 
    ZeroMemory(this, sizeof(DataArchive));
-   strncpy(datafile, name, NAMELEN-1);
+   strncpy_s(datafile, name, NAMELEN-1);
 
-   FILE* f = fopen(datafile, "rb");
+   FILE* f; 
+   fopen_s(&f, datafile, "rb");
    if (f) {
       fread(&header, sizeof(DataHeader), 1, f);
       
@@ -268,7 +269,7 @@ int DataArchive::FindEntry(const char* req_name)
       }
 
       for (DWORD i = 0; i < header.nfiles; i++) {
-         if (!stricmp(directory[i].name, path))
+         if (!_stricmp(directory[i].name, path))
             return i;
       }
    }
@@ -283,7 +284,8 @@ BYTE* DataArchive::CompressEntry(int i)
    if (directory && i >= 0 && i < (int) header.nfiles) {
       char* name = directory[i].name;
 
-      FILE* f = fopen(name, "rb");
+      FILE* f;
+	  fopen_s(&f, name, "rb");
 
       if (f) {
          fseek(f, 0, SEEK_END);
@@ -329,7 +331,8 @@ int DataArchive::ExpandEntry(int i, BYTE*& buf, bool null_terminate)
    DWORD len = 0;
 
    if (directory && i >= 0 && i < (int) header.nfiles) {
-      FILE* f = fopen(datafile, "rb");
+      FILE* f;
+	  fopen_s(&f, datafile, "rb");
 
       if (f) {
          DWORD clen = directory[i].size_comp;
@@ -398,7 +401,7 @@ int DataArchive::InsertEntry(const char* name)
          for (int i = 0; i < dirsize; i++) {
             if (directory[i].size_orig == 0) {
                ZeroMemory(directory[i].name, NAMELEN);
-               strncpy(directory[i].name, path, NAMELEN);
+               strncpy_s(directory[i].name, path, NAMELEN);
                directory[i].name[NAMELEN-1] = '\0';
                directory[i].size_orig = 1;
          
@@ -420,7 +423,7 @@ int DataArchive::InsertEntry(const char* name)
       directory     = dir;
 
       ZeroMemory(directory[dirsize].name, NAMELEN);
-      strncpy(directory[dirsize].name, path, NAMELEN);
+      strncpy_s(directory[dirsize].name, path, NAMELEN);
       directory[dirsize].name[NAMELEN-1] = '\0';
       directory[dirsize].size_orig = 1;
 
@@ -520,7 +523,8 @@ void DataArchive::Extract(const char* name)
    BYTE* buf;
    ExpandEntry(index, buf);
    
-   FILE* f = fopen(directory[index].name, "wb");
+   FILE* f;
+   fopen_s(&f, directory[index].name, "wb");
    if (f) {
       fwrite(buf, directory[index].size_orig, 1, f);
       fclose(f);

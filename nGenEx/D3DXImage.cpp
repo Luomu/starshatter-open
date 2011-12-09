@@ -52,7 +52,7 @@ bool D3DXImage::Load(char *filename)
    bool success = false;
    FILE* f;
 
-   f = fopen(filename,"rb");
+   fopen_s(&f, filename,"rb");
    if (f == NULL)
       return success;
 
@@ -162,7 +162,8 @@ bool D3DXImage::Save(char *filename)
    if (!image || !width || !height)
       return success;
 
-   FILE* f = fopen(filename,"wb");
+   FILE* f;
+   fopen_s(&f, filename,"wb");
    if (f == NULL)
       return success;
 

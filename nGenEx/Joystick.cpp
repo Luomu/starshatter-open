@@ -837,7 +837,7 @@ char* DIErrStr(HRESULT hr)
 {
    switch (hr) {
    default:
-      sprintf(errstrbuf, "Unrecognized error value = %08x.", hr);
+      sprintf_s(errstrbuf, "Unrecognized error value = %08x.", hr);
       return errstrbuf;
 
    case DI_OK:

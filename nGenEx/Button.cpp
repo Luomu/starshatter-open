@@ -64,7 +64,7 @@ Button::Button(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
    transition_image  = 0;
 
    char buf[32];
-   sprintf(buf, "Button %d", id);
+   sprintf_s(buf, "Button %d", id);
    desc = buf;
 }
 
@@ -87,7 +87,7 @@ Button::Button(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
    transition_image  = 0;
 
    char buf[32];
-   sprintf(buf, "Button %d", id);
+   sprintf_s(buf, "Button %d", id);
    desc = buf;
 }
 

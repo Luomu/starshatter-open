@@ -47,7 +47,7 @@ static void heapdump()
 
    hinfo._pentry = NULL;
    while ((heapstatus = _heapwalk( &hinfo )) == _HEAPOK) { 
-      sprintf(report, "%6s block at %Fp of size %4.4X\n",
+      sprintf_s(report, "%6s block at %Fp of size %4.4X\n",
                ( hinfo._useflag == _USEDENTRY ? "USED" : "FREE" ),
                  hinfo._pentry, hinfo._size);
 
@@ -59,7 +59,7 @@ static void heapdump()
          avail += hinfo._size;
    }
 
-   sprintf(report, "------\nUsed Blocks:  %d\nAvail Blocks: %d\nTotal Blocks: %d\n", used, avail, used+avail);
+   sprintf_s(report, "------\nUsed Blocks:  %d\nAvail Blocks: %d\nTotal Blocks: %d\n", used, avail, used+avail);
    _RPT0(_CRT_WARN, report);
 
    switch (heapstatus) {

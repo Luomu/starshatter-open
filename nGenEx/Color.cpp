@@ -503,8 +503,9 @@ Color::SavePalette(const char* basename)
 {
    char  filename[256];
    
-   sprintf(filename, "%s.ipl", basename);
-   FILE* f = fopen(filename, "wb");
+   sprintf_s(filename, "%s.ipl", basename);
+   FILE* f;
+   fopen_s(&f, filename, "wb");
    if (f) {
       fwrite(table, sizeof(table), 1, f);
       fclose(f);
@@ -599,7 +600,7 @@ Color::SaveShadeTable(const char* basename)
       return;
 
    char filename[256];
-   sprintf(filename, "%s_clut.pcx", basename);
+   sprintf_s(filename, "%s_clut.pcx", basename);
 
    BYTE  clut[256*256];
    BYTE* pc = clut;

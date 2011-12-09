@@ -112,7 +112,7 @@ PcxImage::PcxImage(short w, short h, unsigned char* bits, unsigned char* colors)
    bitmap = new(__FILE__,__LINE__) unsigned char [imagebytes];
 
    if (bitmap) {
-      for (int i = 0; i < imagebytes; i++)
+      for (unsigned long i = 0; i < imagebytes; i++)
          bitmap[i] = bits[i];
 
       unsigned char* p = pal;
@@ -205,7 +205,7 @@ PcxImage::PcxImage(short w, short h, unsigned long* hibits)
    himap = new(__FILE__,__LINE__) unsigned long [imagebytes];
 
    if (himap) {
-      for (int i = 0; i < imagebytes; i++)
+      for (unsigned long i = 0; i < imagebytes; i++)
          himap[i] = hibits[i];
    }
 }
@@ -225,7 +225,7 @@ int PcxImage::Load(char *filename)
    unsigned char abyte, *p;
    FILE *f;
 
-   f = fopen(filename,"rb");
+	fopen_s(&f, filename,"rb");
    if (f == NULL)
       return PCX_NOFILE;
 
@@ -437,7 +437,7 @@ int PcxImage::Save(char *filename)
    short  mode=BYTEMODE;
    FILE *f;
 
-   f = fopen(filename,"wb");
+   fopen_s(&f, filename,"wb");
    if (f == NULL)
       return PCX_NOFILE;
 

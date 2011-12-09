@@ -45,7 +45,7 @@ int PngImage::Load(char *filename)
    int   status = PNG_INVALID;
    FILE* f;
 
-   f = fopen(filename,"rb");
+   fopen_s(&f, filename,"rb");
    if (f == NULL)
       return PNG_NOFILE;
 
