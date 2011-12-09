@@ -416,7 +416,7 @@ Font::FindEdges(BYTE c, double* l, double* r)
 
 static bool nokern(char c)
 {
-   if (c <= Font::ARROW_RIGHT || c >= 128)
+   if (c <= Font::ARROW_RIGHT)
       return true;
 
    const char* nokernchars = "0123456789+=<>-.,:;?'\"";
@@ -917,14 +917,13 @@ Font::DrawTextMulti(const char* text, int count, const Rect& text_rect, Rect& cl
    else if (flags & DT_CENTER)
       align = DT_CENTER;   
 
-   int nlines           = 1;
    int max_width        = 0;
    int line_start       = 0;
    int count_remaining  = count;
 
    int xoffset = 0;
    int yoffset = 0;
-       nlines  = 0;
+   int nlines  = 0;
 
    // repeat for each line of text:
    while (count_remaining > 0) {

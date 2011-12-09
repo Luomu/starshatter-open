@@ -4895,7 +4895,7 @@ Ship::ExecMaintFrame(double seconds)
                   if (pwr != src) {
                      List<System> xfer;
 
-                     for (int j = 0; j < pwr->Clients().size(); i++) {
+                     for (int j = 0; j < pwr->Clients().size(); j++) {
                         System* s = pwr->Clients().at(j);
 
                         if (s->GetSourceIndex() == isrc) {
@@ -4903,7 +4903,7 @@ Ship::ExecMaintFrame(double seconds)
                         }
                      }
 
-                     for (int j = 0; j < xfer.size(); i++) {
+                     for (int j = 0; j < xfer.size(); j++) {
                         System* s = xfer.at(j);
                         pwr->RemoveClient(s);
                         src->AddClient(s);

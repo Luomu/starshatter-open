@@ -103,16 +103,16 @@ public:
 class SimSplash
 {
 public:
-   SimSplash(SimRegion* r, const Point& l, double d, double n)
-      : rgn(r), loc(l), damage(d), range(n),
-        owner_name("Collateral Damage"), missile(false) { }
+	SimSplash(SimRegion* r, const Point& l, double d, double n)
+		: rgn(r), loc(l), damage(d), range(n),
+		owner_name("Collateral Damage"), missile(false) { }
 
-   SimRegion*  rgn;
-   Point       loc;
-   double      damage;
-   double      range;
-   Text        owner_name;
-   bool        missile;
+	Text        owner_name;
+	Point       loc;
+	double      damage;
+	double      range;
+	SimRegion*  rgn;
+	bool        missile;
 };
 
 // +--------------------------------------------------------------------+

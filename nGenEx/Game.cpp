@@ -282,10 +282,8 @@ Game::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
    if (status == OK) {
       Print("  Initializing content...\n");
       InitContent();
-   }
 
-   if (status == OK) {
-      Print("  Initializing game...\n");
+	  Print("  Initializing game...\n");
       if (!InitGame()) {
          if (!panicbuf[0])
             Panic("Could not initialize the game.");

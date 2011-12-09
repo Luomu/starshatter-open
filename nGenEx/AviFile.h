@@ -43,18 +43,18 @@ public:
    HRESULT  GetFrame(double seconds, Bitmap& bmp);
 
 private:
-   Text           filename;
-   Rect           rect;
-   int            fps;
-   bool           play;
+	Rect           rect;
+	Text           filename;
+	int            fps;  
 
-   IAVIFile*      pfile;         // created by CreateAvi
-   IAVIStream*    ps; 
-   IAVIStream*    ps_comp;       // video stream, when first created
-   DWORD          frame_size;    // total bytes per frame of video
-   DWORD          nframe;        // which frame will be added next
-   DWORD          nsamp;         // which sample will be added next
-   bool           iserr;         // if true, then no function will do anything
+	IAVIFile*      pfile;         // created by CreateAvi
+	IAVIStream*    ps; 
+	IAVIStream*    ps_comp;       // video stream, when first created
+	DWORD          frame_size;    // total bytes per frame of video
+	DWORD          nframe;        // which frame will be added next
+	DWORD          nsamp;         // which sample will be added next
+	bool           play;
+	bool           iserr;         // if true, then no function will do anything
 };
 
 // +--------------------------------------------------------------------+

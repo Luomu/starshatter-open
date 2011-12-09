@@ -265,6 +265,10 @@ VideoDX9::VideoDX9(const HWND& window, VideoSettings* vs)
    d3d      = Direct3DCreate9(D3D_SDK_VERSION);
    dx9enum  = new(__FILE__,__LINE__) VideoDX9Enum(d3d);
 
+   // DEBUG
+   vs->is_windowed = true;
+   // DEBUG
+
    if (d3d && dx9enum) {
       if (vs) {
          dx9enum->req_fullscreen    = vs->is_windowed ? false : true;
@@ -3364,24 +3368,12 @@ VideoDX9::SetupPass(int pass)
          current_texture = texture_0;
 
          if (tex_bmp_1) {
-            if (strategy >= DX9_STRATEGY_BLEND) {
-               texture_1 = texcache->FindTexture(tex_bmp_1);
-               hr = d3ddevice->SetTexture(1, texture_1);
+            texture_1 = texcache->FindTexture(tex_bmp_1);
+            hr = d3ddevice->SetTexture(1, texture_1);
 
-               if (tex_bmp_2) {
-                  texture_2 = texcache->FindTexture(tex_bmp_2);
-                  hr = d3ddevice->SetTexture(2, texture_2);
-               }
-            }
-
-            else {
-               texture_1 = texcache->FindTexture(tex_bmp_1);
-               hr = d3ddevice->SetTexture(1, texture_1);
-
-               if (tex_bmp_2) {
-                  texture_2 = texcache->FindTexture(tex_bmp_2);
-                  hr = d3ddevice->SetTexture(2, texture_2);
-               }
+            if (tex_bmp_2) {
+                texture_2 = texcache->FindTexture(tex_bmp_2);
+                hr = d3ddevice->SetTexture(2, texture_2);
             }
          }
       }

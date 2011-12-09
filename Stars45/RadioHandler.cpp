@@ -71,10 +71,7 @@ RadioHandler::ProcessMessage(RadioMessage* msg, Ship* s)
    if (msg->Action() == RadioMessage::SKIP_NAVPOINT && !respond)
       ProcessMessageAction(msg, s);
 
-   if (ProcessMessageOrders(msg, s))
-      respond = respond && true;
-
-   else
+   if (!ProcessMessageOrders(msg, s))
       respond = respond && ProcessMessageAction(msg, s);
 
    return respond;
