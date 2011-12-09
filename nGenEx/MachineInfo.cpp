@@ -63,7 +63,11 @@ MachineInfo::GetShortDescription()
       "Windows 98",
       "Windows NT",
       "Windows 2000",
-      "Windows XP"
+      "Windows XP",
+	  "Windows XP x64",
+	  "Windows Vista",
+	  "Windows Seven",
+	  "Future Windows"
    };
 
    int cpu_index = GetCpuClass();
@@ -72,7 +76,6 @@ MachineInfo::GetShortDescription()
 
    int os_index = GetPlatform();
    if (os_index < 0)      os_index = 0;
-   else if (os_index > 5) os_index = 5;
 
    sprintf_s(desc, "%s %d MHz %d MB RAM %s",
       cpu_names[cpu_index],
@@ -231,27 +234,29 @@ MachineInfo::GetPlatform()
 
       switch (os_ver.dwPlatformId) {
       default:
-      case VER_PLATFORM_WIN32s: {
+      case VER_PLATFORM_WIN32s:
+		case VER_PLATFORM_WIN32_WINDOWS: {
          char msg[256];
          sprintf_s(msg, "Invalid Operating System Platform: %d\n", os_ver.dwPlatformId);
          Print(msg);
          }
          break;
 
-      case VER_PLATFORM_WIN32_WINDOWS:
-         if (os_ver.dwMajorVersion == 4 && os_ver.dwMinorVersion == 0)
-            platform = OS_WIN95;
-         else
-            platform = OS_WIN98;
-         break;
-
       case VER_PLATFORM_WIN32_NT:
          if (os_ver.dwMajorVersion == 4)
             platform = OS_WINNT;
-         else if (os_ver.dwMajorVersion == 5 && os_ver.dwMinorVersion ==  0)
+         else if (os_ver.dwMajorVersion == 5 && os_ver.dwMinorVersion == 0)
             platform = OS_WIN2K;
-         else if (os_ver.dwMajorVersion >= 5)
+		 else if (os_ver.dwMajorVersion == 5 && os_ver.dwMinorVersion == 1)
             platform = OS_WINXP;
+		 else if (os_ver.dwMajorVersion == 5 && os_ver.dwMinorVersion == 2)
+			 platform = OS_WINXP64;
+		 else if (os_ver.dwMajorVersion == 6 && os_ver.dwMinorVersion == 0)
+			 platform = OS_WINVISTA;
+		 else if (os_ver.dwMajorVersion == 6 && os_ver.dwMinorVersion == 1)
+			 platform = OS_WINSEVEN;
+		 else if (os_ver.dwMajorVersion >= 6)
+			 platform = OS_WINFUTURE;
 
          else {
             platform = OS_INVALID;
@@ -325,6 +330,34 @@ MachineInfo::DescribeMachine()
 
    case OS_WINXP:
       sprintf_s(txt, "Windows XP %d.%d (Build %d) %s",
+              os_ver.dwMajorVersion,
+              os_ver.dwMinorVersion,
+              os_ver.dwBuildNumber,
+              os_ver.szCSDVersion);
+      break;
+   case OS_WINXP64:
+	   sprintf_s(txt, "Windows XP x64 %d.%d (Build %d) %s",
+              os_ver.dwMajorVersion,
+              os_ver.dwMinorVersion,
+              os_ver.dwBuildNumber,
+              os_ver.szCSDVersion);
+      break;
+   case OS_WINVISTA:
+	   sprintf_s(txt, "Windows Vista %d.%d (Build %d) %s",
+              os_ver.dwMajorVersion,
+              os_ver.dwMinorVersion,
+              os_ver.dwBuildNumber,
+              os_ver.szCSDVersion);
+      break;
+   case OS_WINSEVEN:
+	   sprintf_s(txt, "Windows 7 %d.%d (Build %d) %s",
+              os_ver.dwMajorVersion,
+              os_ver.dwMinorVersion,
+              os_ver.dwBuildNumber,
+              os_ver.szCSDVersion);
+      break;
+   case OS_WINFUTURE:
+	   sprintf_s(txt, "Windows from the future %d.%d (Build %d) %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               os_ver.dwBuildNumber,
