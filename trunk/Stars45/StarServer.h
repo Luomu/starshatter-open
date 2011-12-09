@@ -1,10 +1,10 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars
-    FILE:         StarServer.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars
+	FILE:         StarServer.h
+	AUTHOR:       John DiCamillo
 
 */
 
@@ -35,42 +35,42 @@ class NetLobbyServer;
 class StarServer : public Game
 {
 public:
-   StarServer();
-   virtual ~StarServer();
+	StarServer();
+	virtual ~StarServer();
 
-   virtual bool      Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow);
-   virtual bool      InitGame();
-   virtual void      GameState();
-   virtual bool      OnPaint();
+	virtual bool      Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow);
+	virtual bool      InitGame();
+	virtual void      GameState();
+	virtual bool      OnPaint();
 
-   enum MODE {       MENU_MODE,  // main menu
-                     LOAD_MODE,  // loading mission into simulator
-                     PLAY_MODE   // active simulation
-             };
+	enum MODE {       MENU_MODE,  // main menu
+		LOAD_MODE,  // loading mission into simulator
+		PLAY_MODE   // active simulation
+	};
 
-           int       GetGameMode()       { return game_mode; }
-           void      SetGameMode(int mode);
-           void      SetNextMission(const char* script);
+	int       GetGameMode()       { return game_mode; }
+	void      SetGameMode(int mode);
+	void      SetNextMission(const char* script);
 
-           void      CreateWorld();
-           void      Shutdown(bool restart=false);
+	void      CreateWorld();
+	void      Shutdown(bool restart=false);
 
-   static StarServer*   GetInstance()     { return instance; }
+	static StarServer*   GetInstance()     { return instance; }
 
 
 protected:
-   virtual bool      GameLoop();
-   virtual void      UpdateWorld();
-   virtual void      InstantiateMission();
+	virtual bool      GameLoop();
+	virtual void      UpdateWorld();
+	virtual void      InstantiateMission();
 
-   static StarServer*      instance;
-   NetServer*              admin_server;
-   NetLobbyServer*         lobby_server;
-   DataLoader*             loader;
+	static StarServer*      instance;
+	NetServer*              admin_server;
+	NetLobbyServer*         lobby_server;
+	DataLoader*             loader;
 
-   int                     game_mode;
-   DWORD                   time_mark;
-   DWORD                   minutes;
+	int                     game_mode;
+	DWORD                   time_mark;
+	DWORD                   minutes;
 };
 
 #endif StarServer_h

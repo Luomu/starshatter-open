@@ -1,16 +1,16 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         FlightPlanner.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         FlightPlanner.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Flight Planning class for creating navpoint routes for fighter elements.
-    Used both by the CarrierAI class and the Flight Dialog.
+	OVERVIEW
+	========
+	Flight Planning class for creating navpoint routes for fighter elements.
+	Used both by the CarrierAI class and the Flight Dialog.
 */
 
 #ifndef FlightPlanner_h
@@ -33,16 +33,16 @@ class Element;
 class FlightPlanner
 {
 public:
-   FlightPlanner(Ship* s);
-   virtual ~FlightPlanner();
+	FlightPlanner(Ship* s);
+	virtual ~FlightPlanner();
 
-   virtual void      CreatePatrolRoute(Element* elem,   int index);
-   virtual void      CreateStrikeRoute(Element* strike, Element* target);
-   virtual void      CreateEscortRoute(Element* escort, Element* ward);
+	virtual void      CreatePatrolRoute(Element* elem,   int index);
+	virtual void      CreateStrikeRoute(Element* strike, Element* target);
+	virtual void      CreateEscortRoute(Element* escort, Element* ward);
 
-   Sim*              sim;
-   Ship*             ship;
-   float             patrol_range;
+	Sim*              sim;
+	Ship*             ship;
+	float             patrol_range;
 };
 
 // +--------------------------------------------------------------------+

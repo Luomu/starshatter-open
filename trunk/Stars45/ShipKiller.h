@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ShipKiller.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ShipKiller.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    ShipKiller (i.e. death spiral) class
+	OVERVIEW
+	========
+	ShipKiller (i.e. death spiral) class
 */
 
 #ifndef ShipKiller_h
@@ -28,27 +28,27 @@ class Ship;
 class ShipKiller
 {
 public:
-   const float       DEATH_CAM_LINGER;
+	const float       DEATH_CAM_LINGER;
 
-   // CONSTRUCTORS:
-   ShipKiller(Ship* ship);
-   virtual ~ShipKiller();
+	// CONSTRUCTORS:
+	ShipKiller(Ship* ship);
+	virtual ~ShipKiller();
 
-   virtual void      BeginDeathSpiral();
-   virtual void      ExecFrame(double seconds);
+	virtual void      BeginDeathSpiral();
+	virtual void      ExecFrame(double seconds);
 
-   // GENERAL ACCESSORS:
-   virtual float     TransitionTime() const { return time; }
-   virtual Point     TransitionLoc()  const { return loc;  }
+	// GENERAL ACCESSORS:
+	virtual float     TransitionTime() const { return time; }
+	virtual Point     TransitionLoc()  const { return loc;  }
 
 protected:
-   Ship*             ship;
+	Ship*             ship;
 
-   float             time;
-   Point             loc;
+	float             time;
+	Point             loc;
 
-   float             exp_time;
-   int               exp_index;
+	float             exp_time;
+	int               exp_index;
 };
 
 #endif ShipKiller_h

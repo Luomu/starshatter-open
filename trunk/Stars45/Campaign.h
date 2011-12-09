@@ -1,17 +1,17 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2006. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2006. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         Campaign.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         Campaign.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Campaign defines a strategic military scenario.  This class
-    owns (or generates) the Mission list that defines the action
-    in the campaign.
+	OVERVIEW
+	========
+	Campaign defines a strategic military scenario.  This class
+	owns (or generates) the Mission list that defines the action
+	in the campaign.
 */
 
 #ifndef Campaign_h
@@ -44,50 +44,50 @@ class StarSystem;
 class MissionInfo
 {
 public:
-   static const char* TYPENAME() { return "MissionInfo"; }
+	static const char* TYPENAME() { return "MissionInfo"; }
 
-   MissionInfo();
-   ~MissionInfo();
+	MissionInfo();
+	~MissionInfo();
 
-   int operator == (const MissionInfo& m) const { return id == m.id; }
-   int operator <  (const MissionInfo& m) const { return id <  m.id; }
-   int operator <= (const MissionInfo& m) const { return id <= m.id; }
+	int operator == (const MissionInfo& m) const { return id == m.id; }
+	int operator <  (const MissionInfo& m) const { return id <  m.id; }
+	int operator <= (const MissionInfo& m) const { return id <= m.id; }
 
-   bool     IsAvailable();
+	bool     IsAvailable();
 
-   int      id;
-   Text     name;
-   Text     player_info;
-   Text     description;
-   Text     system;
-   Text     region;
-   Text     script;
-   int      start;
-   int      type;
+	int      id;
+	Text     name;
+	Text     player_info;
+	Text     description;
+	Text     system;
+	Text     region;
+	Text     script;
+	int      start;
+	int      type;
 
-   int      min_rank;
-   int      max_rank;
-   int      action_id;
-   int      action_status;
-   int      exec_once;
-   int      start_before;
-   int      start_after;
+	int      min_rank;
+	int      max_rank;
+	int      action_id;
+	int      action_status;
+	int      exec_once;
+	int      start_before;
+	int      start_after;
 
-   Mission* mission;
+	Mission* mission;
 };
 
 class TemplateList
 {
 public:
-   static const char* TYPENAME() { return "TemplateList"; }
+	static const char* TYPENAME() { return "TemplateList"; }
 
-   TemplateList();
-   ~TemplateList();
+	TemplateList();
+	~TemplateList();
 
-   int               mission_type;
-   int               group_type;
-   int               index;
-   List<MissionInfo> missions;
+	int               mission_type;
+	int               group_type;
+	int               index;
+	List<MissionInfo> missions;
 };
 
 // +--------------------------------------------------------------------+
@@ -95,187 +95,187 @@ public:
 class Campaign
 {
 public:
-   static const char* TYPENAME() { return "Campaign"; }
+	static const char* TYPENAME() { return "Campaign"; }
 
-   enum CONSTANTS {
-            TRAINING_CAMPAIGN    =    1,
-            DYNAMIC_CAMPAIGN,
-            MOD_CAMPAIGN         =  100,
-            SINGLE_MISSIONS      = 1000,
-            MULTIPLAYER_MISSIONS,
-            CUSTOM_MISSIONS,
+	enum CONSTANTS {
+		TRAINING_CAMPAIGN    =    1,
+		DYNAMIC_CAMPAIGN,
+		MOD_CAMPAIGN         =  100,
+		SINGLE_MISSIONS      = 1000,
+		MULTIPLAYER_MISSIONS,
+		CUSTOM_MISSIONS,
 
-            NUM_IMAGES           = 6
-   };
+		NUM_IMAGES           = 6
+	};
 
-   enum STATUS {
-            CAMPAIGN_INIT,
-            CAMPAIGN_ACTIVE,
-            CAMPAIGN_SUCCESS,
-            CAMPAIGN_FAILED
-   };
+	enum STATUS {
+		CAMPAIGN_INIT,
+		CAMPAIGN_ACTIVE,
+		CAMPAIGN_SUCCESS,
+		CAMPAIGN_FAILED
+	};
 
-   Campaign(int id, const char* name=0);
-   Campaign(int id, const char* name, const char* path);
-   virtual ~Campaign();
-   
-   int operator == (const Campaign& s) const   { return name == s.name; }
-   int operator <  (const Campaign& s) const   { return campaign_id < s.campaign_id; }
+	Campaign(int id, const char* name=0);
+	Campaign(int id, const char* name, const char* path);
+	virtual ~Campaign();
 
-   // operations:
-   virtual void         Load();
-   virtual void         Prep();
-   virtual void         Start();
-   virtual void         ExecFrame();
-   virtual void         Unload();
+	int operator == (const Campaign& s) const   { return name == s.name; }
+	int operator <  (const Campaign& s) const   { return campaign_id < s.campaign_id; }
 
-   virtual void         Clear();
-   virtual void         CommitExpiredActions();
-   virtual void         LockoutEvents(int seconds);
-   virtual void         CheckPlayerGroup();
-   void                 CreatePlanners();
+	// operations:
+	virtual void         Load();
+	virtual void         Prep();
+	virtual void         Start();
+	virtual void         ExecFrame();
+	virtual void         Unload();
 
-   // accessors:
-   const char*          Name()         const { return name;          }
-   const char*          Description()  const { return description;   }
-   const char*          Path()         const { return path;          }
+	virtual void         Clear();
+	virtual void         CommitExpiredActions();
+	virtual void         LockoutEvents(int seconds);
+	virtual void         CheckPlayerGroup();
+	void                 CreatePlanners();
 
-   const char*          Situation()    const { return situation;     }
-   const char*          Orders()       const { return orders;        }
+	// accessors:
+	const char*          Name()         const { return name;          }
+	const char*          Description()  const { return description;   }
+	const char*          Path()         const { return path;          }
 
-   void                 SetSituation(const char* s) { situation = s; }
-   void                 SetOrders(const char* o)    { orders = o;    }
+	const char*          Situation()    const { return situation;     }
+	const char*          Orders()       const { return orders;        }
 
-   int                  GetPlayerTeamScore();
-   List<MissionInfo>&   GetMissionList()     { return missions;      }
-   List<Combatant>&     GetCombatants()      { return combatants;    }
-   List<CombatZone>&    GetZones()           { return zones;         }
-   List<StarSystem>&    GetSystemList()      { return systems;       }
-   List<CombatAction>&  GetActions()         { return actions;       }
-   List<CombatEvent>&   GetEvents()          { return events;        }
-   CombatEvent*         GetLastEvent();
+	void                 SetSituation(const char* s) { situation = s; }
+	void                 SetOrders(const char* o)    { orders = o;    }
 
-   CombatAction*        FindAction(int id);
+	int                  GetPlayerTeamScore();
+	List<MissionInfo>&   GetMissionList()     { return missions;      }
+	List<Combatant>&     GetCombatants()      { return combatants;    }
+	List<CombatZone>&    GetZones()           { return zones;         }
+	List<StarSystem>&    GetSystemList()      { return systems;       }
+	List<CombatAction>&  GetActions()         { return actions;       }
+	List<CombatEvent>&   GetEvents()          { return events;        }
+	CombatEvent*         GetLastEvent();
 
-   int                  CountNewEvents() const;
+	CombatAction*        FindAction(int id);
 
-   int                  GetPlayerIFF();
-   CombatGroup*         GetPlayerGroup()     { return player_group;  }
-   void                 SetPlayerGroup(CombatGroup* pg);
-   CombatUnit*          GetPlayerUnit()      { return player_unit;   }
-   void                 SetPlayerUnit(CombatUnit* pu);
+	int                  CountNewEvents() const;
 
-   Combatant*           GetCombatant(const char* name);
-   CombatGroup*         FindGroup(int iff, int type, int id);
-   CombatGroup*         FindGroup(int iff, int type, CombatGroup* near_group=0);
-   CombatGroup*         FindStrikeTarget(int iff, CombatGroup* strike_group);
+	int                  GetPlayerIFF();
+	CombatGroup*         GetPlayerGroup()     { return player_group;  }
+	void                 SetPlayerGroup(CombatGroup* pg);
+	CombatUnit*          GetPlayerUnit()      { return player_unit;   }
+	void                 SetPlayerUnit(CombatUnit* pu);
 
-   StarSystem*          GetSystem(const char* sys);
-   CombatZone*          GetZone(const char* rgn);
-   MissionInfo*         CreateNewMission();
-   void                 DeleteMission(int id);
-   Mission*             GetMission();
-   Mission*             GetMission(int id);
-   Mission*             GetMissionByFile(const char* filename);
-   MissionInfo*         GetMissionInfo(int id);
-   MissionInfo*         FindMissionTemplate(int msn_type, CombatGroup* player_group);
-   void                 ReloadMission(int id);
-   void                 LoadNetMission(int id, const char* net_mission);
-   void                 StartMission();
-   void                 RollbackMission();
+	Combatant*           GetCombatant(const char* name);
+	CombatGroup*         FindGroup(int iff, int type, int id);
+	CombatGroup*         FindGroup(int iff, int type, CombatGroup* near_group=0);
+	CombatGroup*         FindStrikeTarget(int iff, CombatGroup* strike_group);
 
-   void                 SetCampaignId(int id);
-   int                  GetCampaignId()   const { return campaign_id; }
-   void                 SetMissionId(int id);
-   int                  GetMissionId()    const { return mission_id;  }
-   Bitmap*              GetImage(int n)         { return &image[n];   }
-   double               GetTime()         const { return time;        }
-   double               GetStartTime()    const { return startTime;   }
-   void                 SetStartTime(double t)  { startTime = t;      }
-   double               GetLoadTime()     const { return loadTime;    }
-   void                 SetLoadTime(double t)   { loadTime = t;       }
-   double               GetUpdateTime()   const { return updateTime;  }
-   void                 SetUpdateTime(double t) { updateTime = t;     }
+	StarSystem*          GetSystem(const char* sys);
+	CombatZone*          GetZone(const char* rgn);
+	MissionInfo*         CreateNewMission();
+	void                 DeleteMission(int id);
+	Mission*             GetMission();
+	Mission*             GetMission(int id);
+	Mission*             GetMissionByFile(const char* filename);
+	MissionInfo*         GetMissionInfo(int id);
+	MissionInfo*         FindMissionTemplate(int msn_type, CombatGroup* player_group);
+	void                 ReloadMission(int id);
+	void                 LoadNetMission(int id, const char* net_mission);
+	void                 StartMission();
+	void                 RollbackMission();
 
-   bool                 InCutscene()      const;
-   bool                 IsDynamic()       const;
-   bool                 IsTraining()      const;
-   bool                 IsScripted()      const;
-   bool                 IsSequential()    const;
-   bool                 IsSaveGame()      const { return loaded_from_savegame;       }
-   void                 SetSaveGame(bool s)     { loaded_from_savegame = s;          }
+	void                 SetCampaignId(int id);
+	int                  GetCampaignId()   const { return campaign_id; }
+	void                 SetMissionId(int id);
+	int                  GetMissionId()    const { return mission_id;  }
+	Bitmap*              GetImage(int n)         { return &image[n];   }
+	double               GetTime()         const { return time;        }
+	double               GetStartTime()    const { return startTime;   }
+	void                 SetStartTime(double t)  { startTime = t;      }
+	double               GetLoadTime()     const { return loadTime;    }
+	void                 SetLoadTime(double t)   { loadTime = t;       }
+	double               GetUpdateTime()   const { return updateTime;  }
+	void                 SetUpdateTime(double t) { updateTime = t;     }
 
-   bool                 IsActive()        const { return status == CAMPAIGN_ACTIVE;  }
-   bool                 IsComplete()      const { return status == CAMPAIGN_SUCCESS; }
-   bool                 IsFailed()        const { return status == CAMPAIGN_FAILED;  }
-   void                 SetStatus(int s);
-   int                  GetStatus()       const { return status;                     }
+	bool                 InCutscene()      const;
+	bool                 IsDynamic()       const;
+	bool                 IsTraining()      const;
+	bool                 IsScripted()      const;
+	bool                 IsSequential()    const;
+	bool                 IsSaveGame()      const { return loaded_from_savegame;       }
+	void                 SetSaveGame(bool s)     { loaded_from_savegame = s;          }
 
-   int                  GetAllCombatUnits(int iff, List<CombatUnit>& units);
+	bool                 IsActive()        const { return status == CAMPAIGN_ACTIVE;  }
+	bool                 IsComplete()      const { return status == CAMPAIGN_SUCCESS; }
+	bool                 IsFailed()        const { return status == CAMPAIGN_FAILED;  }
+	void                 SetStatus(int s);
+	int                  GetStatus()       const { return status;                     }
 
-   static void          Initialize();
-   static void          Close();
-   static Campaign*     GetCampaign();
-   static List<Campaign>&
-                        GetAllCampaigns();
-   static int           GetLastCampaignId();
-   static Campaign*     SelectCampaign(const char* name);
-   static Campaign*     CreateCustomCampaign(const char* name, const char* path);
+	int                  GetAllCombatUnits(int iff, List<CombatUnit>& units);
 
-   static double        Stardate();
+	static void          Initialize();
+	static void          Close();
+	static Campaign*     GetCampaign();
+	static List<Campaign>&
+	GetAllCampaigns();
+	static int           GetLastCampaignId();
+	static Campaign*     SelectCampaign(const char* name);
+	static Campaign*     CreateCustomCampaign(const char* name, const char* path);
+
+	static double        Stardate();
 
 protected:
-   void                 LoadCampaign(DataLoader* loader, bool full=false);
-   void                 LoadTemplateList(DataLoader* loader);
-   void                 LoadMissionList(DataLoader* loader);
-   void                 LoadCustomMissions(DataLoader* loader);
-   void                 ParseGroup(TermStruct*  val,
-                                   CombatGroup* force,
-                                   CombatGroup* clone,
-                                   const char*  filename);
-   void                 ParseAction(TermStruct* val,
-                                    const char* filename);
-   CombatGroup*         CloneOver(CombatGroup*  force,
-                                  CombatGroup*  clone,
-                                  CombatGroup*  group);
-   void                 SelectDefaultPlayerGroup(CombatGroup* g, int type);
-   TemplateList*        GetTemplateList(int msn_type, int grp_type);
+	void                 LoadCampaign(DataLoader* loader, bool full=false);
+	void                 LoadTemplateList(DataLoader* loader);
+	void                 LoadMissionList(DataLoader* loader);
+	void                 LoadCustomMissions(DataLoader* loader);
+	void                 ParseGroup(TermStruct*  val,
+	CombatGroup* force,
+	CombatGroup* clone,
+	const char*  filename);
+	void                 ParseAction(TermStruct* val,
+	const char* filename);
+	CombatGroup*         CloneOver(CombatGroup*  force,
+	CombatGroup*  clone,
+	CombatGroup*  group);
+	void                 SelectDefaultPlayerGroup(CombatGroup* g, int type);
+	TemplateList*        GetTemplateList(int msn_type, int grp_type);
 
-   // attributes:
-   int                  campaign_id;
-   int                  status;
-   char                 filename[64];
-   char                 path[64];
-   Text                 name;
-   Text                 description;
-   Text                 situation;
-   Text                 orders;
-   Bitmap               image[NUM_IMAGES];
+	// attributes:
+	int                  campaign_id;
+	int                  status;
+	char                 filename[64];
+	char                 path[64];
+	Text                 name;
+	Text                 description;
+	Text                 situation;
+	Text                 orders;
+	Bitmap               image[NUM_IMAGES];
 
-   bool                 scripted;
-   bool                 sequential;
-   bool                 loaded_from_savegame;
+	bool                 scripted;
+	bool                 sequential;
+	bool                 loaded_from_savegame;
 
-   List<Combatant>      combatants;
-   List<StarSystem>     systems;
-   List<CombatZone>     zones;
-   List<CampaignPlan>   planners;
-   List<MissionInfo>    missions;
-   List<TemplateList>   templates;
-   List<CombatAction>   actions;
-   List<CombatEvent>    events;
-   CombatGroup*         player_group;
-   CombatUnit*          player_unit;
+	List<Combatant>      combatants;
+	List<StarSystem>     systems;
+	List<CombatZone>     zones;
+	List<CampaignPlan>   planners;
+	List<MissionInfo>    missions;
+	List<TemplateList>   templates;
+	List<CombatAction>   actions;
+	List<CombatEvent>    events;
+	CombatGroup*         player_group;
+	CombatUnit*          player_unit;
 
-   int                  mission_id;
-   Mission*             mission;
-   Mission*             net_mission;
+	int                  mission_id;
+	Mission*             mission;
+	Mission*             net_mission;
 
-   double               time;
-   double               loadTime;
-   double               startTime;
-   double               updateTime;
-   int                  lockout;
+	double               time;
+	double               loadTime;
+	double               startTime;
+	double               updateTime;
+	int                  lockout;
 };
 
 #endif Campaign_h

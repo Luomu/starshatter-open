@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CampaignMissionRequest.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CampaignMissionRequest.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    CampaignMissionRequest 
+	OVERVIEW
+	========
+	CampaignMissionRequest 
 */
 
 #include "MemDebug.h"
@@ -29,11 +29,11 @@
 // +--------------------------------------------------------------------+
 
 CampaignMissionRequest::CampaignMissionRequest(Campaign*    c,
-                                               int          t,
-                                               int          s,
-                                               CombatGroup* p,
-                                               CombatGroup* tgt)
-   : campaign(c), type(t), opp_type(-1), start(s), 
-     primary_group(p), secondary_group(0),
-     objective(tgt), use_loc(false)
+int          t,
+int          s,
+CombatGroup* p,
+CombatGroup* tgt)
+: campaign(c), type(t), opp_type(-1), start(s), 
+primary_group(p), secondary_group(0),
+objective(tgt), use_loc(false)
 { }

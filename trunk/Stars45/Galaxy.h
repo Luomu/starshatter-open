@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         Galaxy.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         Galaxy.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Galaxy (list of star systems) for a single campaign.
+	OVERVIEW
+	========
+	Galaxy (list of star systems) for a single campaign.
 */
 
 #ifndef Galaxy_h
@@ -36,38 +36,38 @@ class Scene;
 class Galaxy
 {
 public:
-   Galaxy(const char* name);
-   virtual ~Galaxy();
-   
-   int operator == (const Galaxy& s)   const { return name == s.name; }
-   
-   // operations:
-   virtual void         Load();
-   virtual void         Load(const char* filename);
-   virtual void         ExecFrame();
+	Galaxy(const char* name);
+	virtual ~Galaxy();
 
-   // accessors:
-   const char*          Name()         const { return name;        }
-   const char*          Description()  const { return description; }
-   List<StarSystem>&    GetSystemList()      { return systems;     }
-   List<Star>&          Stars()              { return stars;       }
-   double               Radius()       const { return radius;      }
+	int operator == (const Galaxy& s)   const { return name == s.name; }
 
-   StarSystem*          GetSystem(const char* name);
-   StarSystem*          FindSystemByRegion(const char* rgn_name);
+	// operations:
+	virtual void         Load();
+	virtual void         Load(const char* filename);
+	virtual void         ExecFrame();
 
-   static void          Initialize();
-   static void          Close();
-   static Galaxy*       GetInstance();
+	// accessors:
+	const char*          Name()         const { return name;        }
+	const char*          Description()  const { return description; }
+	List<StarSystem>&    GetSystemList()      { return systems;     }
+	List<Star>&          Stars()              { return stars;       }
+	double               Radius()       const { return radius;      }
+
+	StarSystem*          GetSystem(const char* name);
+	StarSystem*          FindSystemByRegion(const char* rgn_name);
+
+	static void          Initialize();
+	static void          Close();
+	static Galaxy*       GetInstance();
 
 protected:
-   char                 filename[64];
-   Text                 name;
-   Text                 description;
-   double               radius;           // radius in parsecs
+	char                 filename[64];
+	Text                 name;
+	Text                 description;
+	double               radius;           // radius in parsecs
 
-   List<StarSystem>     systems;
-   List<Star>           stars;
+	List<StarSystem>     systems;
+	List<Star>           stars;
 };
 
 #endif Galaxy_h

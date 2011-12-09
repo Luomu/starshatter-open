@@ -1,15 +1,15 @@
 /*  Project Starshatter 5.0
-    Destroyer Studios LLC
-    Copyright © 1997-2007. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2007. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         MsnPkgDlg.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         MsnPkgDlg.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Briefing Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Briefing Dialog Active Window class
 */
 
 #include "MemDebug.h"
@@ -41,14 +41,14 @@ DEF_MAP_CLIENT(MsnPkgDlg, OnTabButton);
 // +--------------------------------------------------------------------+
 
 MsnPkgDlg::MsnPkgDlg(Screen* s, FormDef& def, PlanScreen* mgr)
-   : FormWindow(s,  0,  0, s->Width(), s->Height()), MsnDlg(mgr)
+: FormWindow(s,  0,  0, s->Width(), s->Height()), MsnDlg(mgr)
 {
-   campaign = Campaign::GetCampaign();
+	campaign = Campaign::GetCampaign();
 
-   if (campaign)
-      mission = campaign->GetMission();
+	if (campaign)
+	mission = campaign->GetMission();
 
-   Init(def);
+	Init(def);
 }
 
 MsnPkgDlg::~MsnPkgDlg()
@@ -60,34 +60,34 @@ MsnPkgDlg::~MsnPkgDlg()
 void
 MsnPkgDlg::RegisterControls()
 {
-   pkg_list                   = (ListBox*) FindControl(320);
-   nav_list                   = (ListBox*) FindControl(330);
+	pkg_list                   = (ListBox*) FindControl(320);
+	nav_list                   = (ListBox*) FindControl(330);
 
-   for (int i = 0; i < 5; i++)
-      threat[i]         = FindControl(251 + i);
+	for (int i = 0; i < 5; i++)
+	threat[i]         = FindControl(251 + i);
 
-   RegisterMsnControls(this);
+	RegisterMsnControls(this);
 
-   if (pkg_list)
-      REGISTER_CLIENT(EID_SELECT, pkg_list, MsnPkgDlg, OnPackage);
+	if (pkg_list)
+	REGISTER_CLIENT(EID_SELECT, pkg_list, MsnPkgDlg, OnPackage);
 
-   if (commit)
-      REGISTER_CLIENT(EID_CLICK, commit, MsnPkgDlg, OnCommit);
+	if (commit)
+	REGISTER_CLIENT(EID_CLICK, commit, MsnPkgDlg, OnCommit);
 
-   if (cancel)
-      REGISTER_CLIENT(EID_CLICK, cancel, MsnPkgDlg, OnCancel);
+	if (cancel)
+	REGISTER_CLIENT(EID_CLICK, cancel, MsnPkgDlg, OnCancel);
 
-   if (sit_button)
-      REGISTER_CLIENT(EID_CLICK, sit_button, MsnPkgDlg, OnTabButton);
+	if (sit_button)
+	REGISTER_CLIENT(EID_CLICK, sit_button, MsnPkgDlg, OnTabButton);
 
-   if (pkg_button)
-      REGISTER_CLIENT(EID_CLICK, pkg_button, MsnPkgDlg, OnTabButton);
+	if (pkg_button)
+	REGISTER_CLIENT(EID_CLICK, pkg_button, MsnPkgDlg, OnTabButton);
 
-   if (nav_button)
-      REGISTER_CLIENT(EID_CLICK, nav_button, MsnPkgDlg, OnTabButton);
+	if (nav_button)
+	REGISTER_CLIENT(EID_CLICK, nav_button, MsnPkgDlg, OnTabButton);
 
-   if (wep_button)
-      REGISTER_CLIENT(EID_CLICK, wep_button, MsnPkgDlg, OnTabButton);
+	if (wep_button)
+	REGISTER_CLIENT(EID_CLICK, wep_button, MsnPkgDlg, OnTabButton);
 }
 
 // +--------------------------------------------------------------------+
@@ -95,12 +95,12 @@ MsnPkgDlg::RegisterControls()
 void
 MsnPkgDlg::Show()
 {
-   FormWindow::Show();
-   ShowMsnDlg();
+	FormWindow::Show();
+	ShowMsnDlg();
 
-   DrawPackages();
-   DrawNavPlan();
-   DrawThreats();
+	DrawPackages();
+	DrawNavPlan();
+	DrawThreats();
 }
 
 // +--------------------------------------------------------------------+
@@ -108,50 +108,50 @@ MsnPkgDlg::Show()
 void
 MsnPkgDlg::DrawPackages()
 {
-   if (mission) {
-      if (pkg_list) {
-         pkg_list->ClearItems();
+	if (mission) {
+		if (pkg_list) {
+			pkg_list->ClearItems();
 
-         int i = 0;
-         int elem_index = 0;
-         ListIter<MissionElement> elem = mission->GetElements();
-         while (++elem) {
-            // display this element?
-            if (elem->GetIFF() == mission->Team()        && 
-                !elem->IsSquadron()                      &&
-                elem->Region() == mission->GetRegion()   &&
-                elem->GetDesign()->type < Ship::STATION) {
+			int i = 0;
+			int elem_index = 0;
+			ListIter<MissionElement> elem = mission->GetElements();
+			while (++elem) {
+				// display this element?
+				if (elem->GetIFF() == mission->Team()        && 
+						!elem->IsSquadron()                      &&
+						elem->Region() == mission->GetRegion()   &&
+						elem->GetDesign()->type < Ship::STATION) {
 
-               char txt[256];
+					char txt[256];
 
-               if (elem->Player() > 0) {
-                  sprintf(txt, "==>");
-                  if (pkg_index < 0)
-                     pkg_index = elem_index;
-               }
-               else {
-                  strcpy(txt, " ");
-               }
+					if (elem->Player() > 0) {
+						sprintf(txt, "==>");
+						if (pkg_index < 0)
+						pkg_index = elem_index;
+					}
+					else {
+						strcpy(txt, " ");
+					}
 
-               pkg_list->AddItemWithData(txt, elem->ElementID());
-               pkg_list->SetItemText(i, 1, elem->Name());
-               pkg_list->SetItemText(i, 2, elem->RoleName());
+					pkg_list->AddItemWithData(txt, elem->ElementID());
+					pkg_list->SetItemText(i, 1, elem->Name());
+					pkg_list->SetItemText(i, 2, elem->RoleName());
 
-               const ShipDesign* design = elem->GetDesign();
+					const ShipDesign* design = elem->GetDesign();
 
-               if (elem->Count() > 1)
-                  sprintf(txt, "%d %s", elem->Count(), design->abrv);
-               else
-                  sprintf(txt, "%s %s", design->abrv, design->name);
-               pkg_list->SetItemText(i, 3, txt);
+					if (elem->Count() > 1)
+					sprintf(txt, "%d %s", elem->Count(), design->abrv);
+					else
+					sprintf(txt, "%s %s", design->abrv, design->name);
+					pkg_list->SetItemText(i, 3, txt);
 
-               i++;
-            }
+					i++;
+				}
 
-            elem_index++;
-         }
-      }
-   }
+				elem_index++;
+			}
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -159,38 +159,38 @@ MsnPkgDlg::DrawPackages()
 void
 MsnPkgDlg::DrawNavPlan()
 {
-   if (mission) {
-      if (pkg_index < 0 || pkg_index >= mission->GetElements().size())
-         pkg_index = 0;
+	if (mission) {
+		if (pkg_index < 0 || pkg_index >= mission->GetElements().size())
+		pkg_index = 0;
 
-      MissionElement* element = mission->GetElements()[pkg_index];
-      if (nav_list && element) {
-         nav_list->ClearItems();
+		MissionElement* element = mission->GetElements()[pkg_index];
+		if (nav_list && element) {
+			nav_list->ClearItems();
 
-         Point loc          = element->Location();
-         int   i            = 0;
+			Point loc          = element->Location();
+			int   i            = 0;
 
-         ListIter<Instruction> navpt = element->NavList();
-         while (++navpt) {
-            char txt[256];
-            sprintf(txt, "%d", i + 1);
+			ListIter<Instruction> navpt = element->NavList();
+			while (++navpt) {
+				char txt[256];
+				sprintf(txt, "%d", i + 1);
 
-            nav_list->AddItem(txt);
-            nav_list->SetItemText(i, 1, Instruction::ActionName(navpt->Action()));
-            nav_list->SetItemText(i, 2, navpt->RegionName());
+				nav_list->AddItem(txt);
+				nav_list->SetItemText(i, 1, Instruction::ActionName(navpt->Action()));
+				nav_list->SetItemText(i, 2, navpt->RegionName());
 
-            double dist = Point(loc - navpt->Location()).length();
-            FormatNumber(txt, dist);
-            nav_list->SetItemText(i, 3, txt);
+				double dist = Point(loc - navpt->Location()).length();
+				FormatNumber(txt, dist);
+				nav_list->SetItemText(i, 3, txt);
 
-            sprintf(txt, "%d", navpt->Speed());
-            nav_list->SetItemText(i, 4, txt);
+				sprintf(txt, "%d", navpt->Speed());
+				nav_list->SetItemText(i, 4, txt);
 
-            loc = navpt->Location();
-            i++;
-         }
-      }
-   }
+				loc = navpt->Location();
+				i++;
+			}
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -198,85 +198,85 @@ MsnPkgDlg::DrawNavPlan()
 void
 MsnPkgDlg::DrawThreats()
 {
-   for (int i = 0; i < 5; i++)
-      if (threat[i])
-         threat[i]->SetText("");
+	for (int i = 0; i < 5; i++)
+	if (threat[i])
+	threat[i]->SetText("");
 
-   if (!mission) return;
+	if (!mission) return;
 
-   MissionElement* player = mission->GetPlayer();
-   Text            rgn0   = player->Region();
-   Text            rgn1;
-   int             iff    = player->GetIFF();
+	MissionElement* player = mission->GetPlayer();
+	Text            rgn0   = player->Region();
+	Text            rgn1;
+	int             iff    = player->GetIFF();
 
-   if (!player)
-      return;
+	if (!player)
+	return;
 
-   ListIter<Instruction> nav = player->NavList();
-   while (++nav) {
-      if (rgn0 != nav->RegionName())
-         rgn1 = nav->RegionName();
-   }
+	ListIter<Instruction> nav = player->NavList();
+	while (++nav) {
+		if (rgn0 != nav->RegionName())
+		rgn1 = nav->RegionName();
+	}
 
-   if (threat[0]) {
-      Point base_loc = mission->GetElements()[0]->Location();
+	if (threat[0]) {
+		Point base_loc = mission->GetElements()[0]->Location();
 
-      int i = 0;
-      ListIter<MissionElement> iter = mission->GetElements();
-      while (++iter) {
-         MissionElement* elem = iter.value();
+		int i = 0;
+		ListIter<MissionElement> iter = mission->GetElements();
+		while (++iter) {
+			MissionElement* elem = iter.value();
 
-         if (elem->GetIFF() == 0 || elem->GetIFF() == iff || elem->IntelLevel() <= Intel::SECRET)
-            continue;
+			if (elem->GetIFF() == 0 || elem->GetIFF() == iff || elem->IntelLevel() <= Intel::SECRET)
+			continue;
 
-         if (elem->IsSquadron())
-            continue;
+			if (elem->IsSquadron())
+			continue;
 
-         if (elem->IsGroundUnit()) {
-            if (!elem->GetDesign() || 
-                 elem->GetDesign()->type != Ship::SAM)
-               continue;
+			if (elem->IsGroundUnit()) {
+				if (!elem->GetDesign() || 
+						elem->GetDesign()->type != Ship::SAM)
+				continue;
 
-            if (elem->Region() != rgn0 && 
-                elem->Region() != rgn1)
-               continue;
-         }
+				if (elem->Region() != rgn0 && 
+						elem->Region() != rgn1)
+				continue;
+			}
 
-         int mission_role = elem->MissionRole();
+			int mission_role = elem->MissionRole();
 
-         if (mission_role == Mission::STRIKE    ||
-             mission_role == Mission::INTEL     ||
-             mission_role >= Mission::TRANSPORT)
-            continue;
+			if (mission_role == Mission::STRIKE    ||
+					mission_role == Mission::INTEL     ||
+					mission_role >= Mission::TRANSPORT)
+			continue;
 
-         char   rng[32];
-         char   role[32];
-         char   txt[256];
+			char   rng[32];
+			char   role[32];
+			char   txt[256];
 
-         if (mission_role == Mission::SWEEP     ||
-             mission_role == Mission::INTERCEPT ||
-             mission_role == Mission::FLEET     ||
-             mission_role == Mission::BOMBARDMENT)
-            strcpy(role, Game::GetText("MsnDlg.ATTACK").data());
-         else
-            strcpy(role, Game::GetText("MsnDlg.PATROL").data());
+			if (mission_role == Mission::SWEEP     ||
+					mission_role == Mission::INTERCEPT ||
+					mission_role == Mission::FLEET     ||
+					mission_role == Mission::BOMBARDMENT)
+			strcpy(role, Game::GetText("MsnDlg.ATTACK").data());
+			else
+			strcpy(role, Game::GetText("MsnDlg.PATROL").data());
 
-         double dist = Point(base_loc - elem->Location()).length();
-         FormatNumber(rng, dist);
+			double dist = Point(base_loc - elem->Location()).length();
+			FormatNumber(rng, dist);
 
-         sprintf(txt, "%s - %d %s - %s",  role, 
-                                          elem->Count(), 
-                                          elem->GetDesign()->abrv,
-                                          rng);
-         if (threat[i])
-            threat[i]->SetText(txt);
+			sprintf(txt, "%s - %d %s - %s",  role, 
+			elem->Count(), 
+			elem->GetDesign()->abrv,
+			rng);
+			if (threat[i])
+			threat[i]->SetText(txt);
 
-         i++;
+			i++;
 
-         if (i >= 5)
-            break;
-      }
-   }
+			if (i >= 5)
+			break;
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -284,9 +284,9 @@ MsnPkgDlg::DrawThreats()
 void
 MsnPkgDlg::ExecFrame()
 {
-   if (Keyboard::KeyDown(VK_RETURN)) {
-      OnCommit(0);
-   }
+	if (Keyboard::KeyDown(VK_RETURN)) {
+		OnCommit(0);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -294,25 +294,25 @@ MsnPkgDlg::ExecFrame()
 void
 MsnPkgDlg::OnPackage(AWEvent* event)
 {
-   if (!pkg_list || !mission)
-      return;
+	if (!pkg_list || !mission)
+	return;
 
-   int seln = pkg_list->GetListIndex();
-   int pkg  = pkg_list->GetItemData(seln);
+	int seln = pkg_list->GetListIndex();
+	int pkg  = pkg_list->GetItemData(seln);
 
-   int i = 0;
-   ListIter<MissionElement> elem = mission->GetElements();
-   while (++elem) {
-      if (elem->ElementID() == pkg) {
-         pkg_index = i;
-         //mission->SetPlayer(elem.value());
-      }
+	int i = 0;
+	ListIter<MissionElement> elem = mission->GetElements();
+	while (++elem) {
+		if (elem->ElementID() == pkg) {
+			pkg_index = i;
+			//mission->SetPlayer(elem.value());
+		}
 
-      i++;
-   }
+		i++;
+	}
 
-   //DrawPackages();
-   DrawNavPlan();
+	//DrawPackages();
+	DrawNavPlan();
 }
 
 // +--------------------------------------------------------------------+
@@ -320,17 +320,17 @@ MsnPkgDlg::OnPackage(AWEvent* event)
 void
 MsnPkgDlg::OnCommit(AWEvent* event)
 {
-   MsnDlg::OnCommit(event);
+	MsnDlg::OnCommit(event);
 }
 
 void
 MsnPkgDlg::OnCancel(AWEvent* event)
 {
-   MsnDlg::OnCancel(event);
+	MsnDlg::OnCancel(event);
 }
 
 void
 MsnPkgDlg::OnTabButton(AWEvent* event)
 {
-   MsnDlg::OnTabButton(event);
+	MsnDlg::OnTabButton(event);
 }

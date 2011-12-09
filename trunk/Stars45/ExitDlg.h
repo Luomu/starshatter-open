@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ExitDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ExitDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Navigation Active Window class
+	OVERVIEW
+	========
+	Navigation Active Window class
 */
 
 #ifndef ExitDlg_h
@@ -33,27 +33,27 @@ class MenuScreen;
 class ExitDlg : public FormWindow
 {
 public:
-   ExitDlg(Screen* s, FormDef& def, MenuScreen* mgr);
-   virtual ~ExitDlg();
+	ExitDlg(Screen* s, FormDef& def, MenuScreen* mgr);
+	virtual ~ExitDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
+	virtual void      RegisterControls();
+	virtual void      Show();
 
-   // Operations:
-   virtual void      ExecFrame();
+	// Operations:
+	virtual void      ExecFrame();
 
-   virtual void      OnApply(AWEvent* event);
-   virtual void      OnCancel(AWEvent* event);
+	virtual void      OnApply(AWEvent* event);
+	virtual void      OnCancel(AWEvent* event);
 
 protected:
-   MenuScreen*       manager;
+	MenuScreen*       manager;
 
-   RichTextBox*      credits;
-   Button*           apply;
-   Button*           cancel;
-   Rect              def_rect;
+	RichTextBox*      credits;
+	Button*           apply;
+	Button*           cancel;
+	Rect              def_rect;
 
-   bool              exit_latch;
+	bool              exit_latch;
 };
 
 #endif ExitDlg_h

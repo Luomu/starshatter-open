@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdMissionsDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdMissionsDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Mission List Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Mission List Tab)
 */
 
 #ifndef CmdMissionsDlg_h
@@ -32,33 +32,33 @@ class Mission;
 // +--------------------------------------------------------------------+
 
 class CmdMissionsDlg : public FormWindow,
-                       public CmdDlg
+public CmdDlg
 {
 public:
-   CmdMissionsDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmdMissionsDlg();
+	CmdMissionsDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmdMissionsDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnMode(AWEvent* event);
-   virtual void      OnSave(AWEvent* event);
-   virtual void      OnExit(AWEvent* event);
-   virtual void      OnMission(AWEvent* event);
-   virtual void      OnAccept(AWEvent* event);
-   
+	// Operations:
+	virtual void      OnMode(AWEvent* event);
+	virtual void      OnSave(AWEvent* event);
+	virtual void      OnExit(AWEvent* event);
+	virtual void      OnMission(AWEvent* event);
+	virtual void      OnAccept(AWEvent* event);
+
 protected:
-   CmpnScreen*       manager;
+	CmpnScreen*       manager;
 
-   ListBox*          lst_missions;
-   ActiveWindow*     txt_desc;
-   Button*           btn_accept;
+	ListBox*          lst_missions;
+	ActiveWindow*     txt_desc;
+	Button*           btn_accept;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
-   Mission*          mission;
+	Starshatter*      stars;
+	Campaign*         campaign;
+	Mission*          mission;
 };
 
 #endif CmdMissionsDlg_h

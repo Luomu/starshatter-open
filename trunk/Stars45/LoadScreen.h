@@ -1,10 +1,10 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         LoadScreen.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         LoadScreen.h
+	AUTHOR:       John DiCamillo
 
 */
 
@@ -32,30 +32,30 @@ class VideoFactory;
 class LoadScreen
 {
 public:
-   LoadScreen();
-   virtual ~LoadScreen();
+	LoadScreen();
+	virtual ~LoadScreen();
 
-   virtual void         Setup(Screen* screen);
-   virtual void         TearDown();
-   virtual bool         CloseTopmost();
+	virtual void         Setup(Screen* screen);
+	virtual void         TearDown();
+	virtual bool         CloseTopmost();
 
-   virtual bool         IsShown()         const { return isShown; }
-   virtual void         Show();
-   virtual void         Hide();
+	virtual bool         IsShown()         const { return isShown; }
+	virtual void         Show();
+	virtual void         Hide();
 
-   virtual void         ShowLoadDlg();
-   virtual void         HideLoadDlg();
-   virtual LoadDlg*     GetLoadDlg()            { return load_dlg;      }
-   virtual CmpLoadDlg*  GetCmpLoadDlg()         { return cmp_load_dlg;  }
+	virtual void         ShowLoadDlg();
+	virtual void         HideLoadDlg();
+	virtual LoadDlg*     GetLoadDlg()            { return load_dlg;      }
+	virtual CmpLoadDlg*  GetCmpLoadDlg()         { return cmp_load_dlg;  }
 
-   virtual void         ExecFrame();
+	virtual void         ExecFrame();
 
 private:
-   Screen*              screen;
-   LoadDlg*             load_dlg;
-   CmpLoadDlg*          cmp_load_dlg;
+	Screen*              screen;
+	LoadDlg*             load_dlg;
+	CmpLoadDlg*          cmp_load_dlg;
 
-   bool                 isShown;
+	bool                 isShown;
 };
 
 // +--------------------------------------------------------------------+

@@ -1,17 +1,17 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         RadioTraffic.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         RadioTraffic.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    RadioTraffic maintains a history of all messages sent between ships
-    in the simulation.  This class also handles displaying relevant
-    traffic to the player.
+	OVERVIEW
+	========
+	RadioTraffic maintains a history of all messages sent between ships
+	in the simulation.  This class also handles displaying relevant
+	traffic to the player.
 */
 
 #ifndef RadioTraffic_h
@@ -35,28 +35,28 @@ class SimObject;
 class RadioTraffic
 {
 public:
-   RadioTraffic();
-   ~RadioTraffic();
+	RadioTraffic();
+	~RadioTraffic();
 
-   // accessors:
-   static void          Initialize();
-   static void          Close();
+	// accessors:
+	static void          Initialize();
+	static void          Close();
 
-   static RadioTraffic* GetInstance()  { return radio_traffic; }
+	static RadioTraffic* GetInstance()  { return radio_traffic; }
 
-   static void          SendQuickMessage(Ship* ship, int msg);
-   static void          Transmit(RadioMessage* msg);
-   static void          DiscardMessages();
-   static Text          TranslateVox(const char* phrase);
+	static void          SendQuickMessage(Ship* ship, int msg);
+	static void          Transmit(RadioMessage* msg);
+	static void          DiscardMessages();
+	static Text          TranslateVox(const char* phrase);
 
-   void                 SendMessage(RadioMessage* msg);
-   void                 DisplayMessage(RadioMessage* msg);
+	void                 SendMessage(RadioMessage* msg);
+	void                 DisplayMessage(RadioMessage* msg);
 
 
 protected:
-   List<RadioMessage>   traffic;
+	List<RadioMessage>   traffic;
 
-   static RadioTraffic* radio_traffic;
+	static RadioTraffic* radio_traffic;
 };
 
 // +--------------------------------------------------------------------+

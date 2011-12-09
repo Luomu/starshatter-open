@@ -1,14 +1,14 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmpLoadDlg.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmpLoadDlg.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
+	OVERVIEW
+	========
 */
 
 #include "MemDebug.h"
@@ -28,10 +28,10 @@
 // +--------------------------------------------------------------------+
 
 CmpLoadDlg::CmpLoadDlg(Screen* s, FormDef& def)
-   : FormWindow(s, 0, 0, s->Width(), s->Height()),
-     lbl_progress(0), lbl_activity(0), lbl_title(0), img_title(0), show_time(0)
+: FormWindow(s, 0, 0, s->Width(), s->Height()),
+lbl_progress(0), lbl_activity(0), lbl_title(0), img_title(0), show_time(0)
 {
-   Init(def);
+	Init(def);
 }
 
 CmpLoadDlg::~CmpLoadDlg()
@@ -41,35 +41,35 @@ CmpLoadDlg::~CmpLoadDlg()
 void
 CmpLoadDlg::RegisterControls()
 {
-   img_title    = (ImageBox*) FindControl(100);
-   lbl_title    =             FindControl(200);
-   lbl_activity =             FindControl(101);
-   lbl_progress = (Slider*)   FindControl(102);
+	img_title    = (ImageBox*) FindControl(100);
+	lbl_title    =             FindControl(200);
+	lbl_activity =             FindControl(101);
+	lbl_progress = (Slider*)   FindControl(102);
 }
 
 void
 CmpLoadDlg::Show()
 {
-   FormWindow::Show();
+	FormWindow::Show();
 
-   Campaign* campaign = Campaign::GetCampaign();
+	Campaign* campaign = Campaign::GetCampaign();
 
-   if (campaign) {
-      Bitmap* bmp = campaign->GetImage(3);
-      if (img_title && bmp) {
-         Rect tgt_rect;
-         tgt_rect.w = img_title->Width();
-         tgt_rect.h = img_title->Height();
+	if (campaign) {
+		Bitmap* bmp = campaign->GetImage(3);
+		if (img_title && bmp) {
+			Rect tgt_rect;
+			tgt_rect.w = img_title->Width();
+			tgt_rect.h = img_title->Height();
 
-         img_title->SetTargetRect(tgt_rect);
-         img_title->SetPicture(*bmp);
-      }
+			img_title->SetTargetRect(tgt_rect);
+			img_title->SetPicture(*bmp);
+		}
 
-      if (lbl_title)
-         lbl_title->SetText(campaign->Name());
-   }
+		if (lbl_title)
+		lbl_title->SetText(campaign->Name());
+	}
 
-   show_time = Game::RealTime();
+	show_time = Game::RealTime();
 }
 
 // +--------------------------------------------------------------------+
@@ -77,12 +77,12 @@ CmpLoadDlg::Show()
 void
 CmpLoadDlg::ExecFrame()
 {
-   Starshatter* stars = Starshatter::GetInstance();
+	Starshatter* stars = Starshatter::GetInstance();
 
-   if (stars) {
-      if (lbl_activity) lbl_activity->SetText(stars->GetLoadActivity());
-      if (lbl_progress) lbl_progress->SetValue(stars->GetLoadProgress());
-   }
+	if (stars) {
+		if (lbl_activity) lbl_activity->SetText(stars->GetLoadActivity());
+		if (lbl_progress) lbl_progress->SetValue(stars->GetLoadProgress());
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -90,20 +90,20 @@ CmpLoadDlg::ExecFrame()
 void
 CmpLoadDlg::MoveTo(const Rect& r)
 {
-   FormWindow::MoveTo(r);
+	FormWindow::MoveTo(r);
 
-   Campaign* campaign = Campaign::GetCampaign();
+	Campaign* campaign = Campaign::GetCampaign();
 
-   if (campaign && img_title && campaign->GetImage(3)) {
-      Bitmap* bmp = campaign->GetImage(3);
+	if (campaign && img_title && campaign->GetImage(3)) {
+		Bitmap* bmp = campaign->GetImage(3);
 
-      Rect tgt_rect;
-      tgt_rect.w = img_title->Width();
-      tgt_rect.h = img_title->Height();
+		Rect tgt_rect;
+		tgt_rect.w = img_title->Width();
+		tgt_rect.h = img_title->Height();
 
-      img_title->SetTargetRect(tgt_rect);
-      img_title->SetPicture(*bmp);
-   }
+		img_title->SetTargetRect(tgt_rect);
+		img_title->SetPicture(*bmp);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -111,8 +111,8 @@ CmpLoadDlg::MoveTo(const Rect& r)
 bool
 CmpLoadDlg::IsDone()
 {
-   if (Game::RealTime() - show_time < 5000)
-      return false;
+	if (Game::RealTime() - show_time < 5000)
+	return false;
 
-   return true;
+	return true;
 }

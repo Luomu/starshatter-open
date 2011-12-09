@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         NetAdminChat.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         NetAdminChat.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    HTTP Servlet Engine for Multiplayer Admin
+	OVERVIEW
+	========
+	HTTP Servlet Engine for Multiplayer Admin
 */
 
 
@@ -23,11 +23,11 @@
 class NetAdminChat : public NetAdminServlet
 {
 public:
-   NetAdminChat();
-   virtual ~NetAdminChat()  { }
+	NetAdminChat();
+	virtual ~NetAdminChat()  { }
 
-   virtual bool      DoGet(HttpRequest& request, HttpResponse& response);
-   virtual Text      GetContent();
+	virtual bool      DoGet(HttpRequest& request, HttpResponse& response);
+	virtual Text      GetContent();
 };
 
 #endif NetAdminChat_h

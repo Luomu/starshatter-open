@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ShipCtrl.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ShipCtrl.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Starship (or space/ground station) class
+	OVERVIEW
+	========
+	Starship (or space/ground station) class
 */
 
 #ifndef ShipCtrl_h
@@ -32,27 +32,27 @@ class KeyMap;
 class ShipCtrl : public Director
 {
 public:
-   enum TYPE { DIR_TYPE = 1 };
+	enum TYPE { DIR_TYPE = 1 };
 
-   ShipCtrl(Ship* s, MotionController* m);
+	ShipCtrl(Ship* s, MotionController* m);
 
-   virtual void      ExecFrame(double seconds);
-   virtual int       Subframe()  const { return true; }
-   virtual void      Launch();
+	virtual void      ExecFrame(double seconds);
+	virtual int       Subframe()  const { return true; }
+	virtual void      Launch();
 
-   static  int       KeyDown(int action);
-   static  int       Toggled(int action);
+	static  int       KeyDown(int action);
+	static  int       Toggled(int action);
 
-   virtual int       Type()      const { return DIR_TYPE; }
+	virtual int       Type()      const { return DIR_TYPE; }
 
 protected:
-   Ship*             ship;
-   MotionController* controller;
+	Ship*             ship;
+	MotionController* controller;
 
-   bool              throttle_active;
-   bool              launch_latch;
-   bool              pickle_latch;
-   bool              target_latch;
+	bool              throttle_active;
+	bool              launch_latch;
+	bool              pickle_latch;
+	bool              target_latch;
 };
 
 #endif ShipCtrl_h

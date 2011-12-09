@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         NetLobbyDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         NetLobbyDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Main Menu Dialog Active Window class
+	OVERVIEW
+	========
+	Main Menu Dialog Active Window class
 */
 
 #ifndef NetLobbyDlg_h
@@ -39,48 +39,48 @@ class NetUser;
 class NetLobbyDlg : public FormWindow
 {
 public:
-   NetLobbyDlg(Screen* s, FormDef& def, MenuScreen* mgr);
-   virtual ~NetLobbyDlg();
+	NetLobbyDlg(Screen* s, FormDef& def, MenuScreen* mgr);
+	virtual ~NetLobbyDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnCampaignSelect(AWEvent* event);
-   virtual void      OnMissionSelect(AWEvent* event);
+	// Operations:
+	virtual void      OnCampaignSelect(AWEvent* event);
+	virtual void      OnMissionSelect(AWEvent* event);
 
-   virtual void      OnApply(AWEvent* event);
-   virtual void      OnCancel(AWEvent* event);
+	virtual void      OnApply(AWEvent* event);
+	virtual void      OnCancel(AWEvent* event);
 
-   virtual void      ExecLobbyFrame();
+	virtual void      ExecLobbyFrame();
 
 protected:
-   virtual void      GetPlayers();
-   virtual void      GetChat();
-   virtual void      GetMissions();
-   virtual void      GetSelectedMission();
-   virtual void      SendChat(Text msg);
-   virtual void      SelectMission();
+	virtual void      GetPlayers();
+	virtual void      GetChat();
+	virtual void      GetMissions();
+	virtual void      GetSelectedMission();
+	virtual void      SendChat(Text msg);
+	virtual void      SelectMission();
 
-   MenuScreen*       manager;
+	MenuScreen*       manager;
 
-   ComboBox*         lst_campaigns;
-   ListBox*          lst_missions;
-   ActiveWindow*     txt_desc;
-   ListBox*          lst_players;
-   ListBox*          lst_chat;
-   EditBox*          edt_chat;
+	ComboBox*         lst_campaigns;
+	ListBox*          lst_missions;
+	ActiveWindow*     txt_desc;
+	ListBox*          lst_players;
+	ListBox*          lst_chat;
+	EditBox*          edt_chat;
 
-   Button*           apply;
-   Button*           cancel;
+	Button*           apply;
+	Button*           cancel;
 
-   NetLobby*         net_lobby;
+	NetLobby*         net_lobby;
 
-   int               selected_campaign;
-   int               selected_mission;
-   int               last_chat;
-   bool              host_mode;
+	int               selected_campaign;
+	int               selected_mission;
+	int               last_chat;
+	bool              host_mode;
 };
 
 // +--------------------------------------------------------------------+

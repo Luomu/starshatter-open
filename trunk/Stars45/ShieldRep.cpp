@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ShieldRep.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ShieldRep.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    ShieldRep Solid class
+	OVERVIEW
+	========
+	ShieldRep Solid class
 */
 
 #include "MemDebug.h"
@@ -31,29 +31,29 @@ const int MAX_SHIELD_HITS = 16;
 
 struct ShieldHit
 {
-   Vec3     hitloc;
-   double   damage;
-   double   age;
-   Shot*    shot;
-   
-   ShieldHit() : damage(0), age(0), shot(0) { }
+	Vec3     hitloc;
+	double   damage;
+	double   age;
+	Shot*    shot;
+
+	ShieldHit() : damage(0), age(0), shot(0) { }
 };
 
 // +--------------------------------------------------------------------+
 
 ShieldRep::ShieldRep()
 {
-   bubble      = false;
-   luminous    = true;
-   trans       = true;
-   nhits       = 0;
-   
-   hits = new(__FILE__,__LINE__) ShieldHit[MAX_SHIELD_HITS];
+	bubble      = false;
+	luminous    = true;
+	trans       = true;
+	nhits       = 0;
+
+	hits = new(__FILE__,__LINE__) ShieldHit[MAX_SHIELD_HITS];
 }
 
 ShieldRep::~ShieldRep()
 {
-   delete [] hits;
+	delete [] hits;
 }
 
 // +--------------------------------------------------------------------+
@@ -61,54 +61,54 @@ ShieldRep::~ShieldRep()
 void
 ShieldRep::Hit(Vec3 impact, Shot* shot, double damage)
 {
-   if (!model || model->GetSurfaces().size() < 1)
-      return;
+	if (!model || model->GetSurfaces().size() < 1)
+	return;
 
-   // transform impact into object space:
-   Matrix xform(Orientation());
+	// transform impact into object space:
+	Matrix xform(Orientation());
 
-   Vec3 tmp = impact - loc;
+	Vec3 tmp = impact - loc;
 
-   impact.x = tmp * Vec3(xform(0,0), xform(0,1), xform(0,2));
-   impact.y = tmp * Vec3(xform(1,0), xform(1,1), xform(1,2));
-   impact.z = tmp * Vec3(xform(2,0), xform(2,1), xform(2,2));
+	impact.x = tmp * Vec3(xform(0,0), xform(0,1), xform(0,2));
+	impact.y = tmp * Vec3(xform(1,0), xform(1,1), xform(1,2));
+	impact.z = tmp * Vec3(xform(2,0), xform(2,1), xform(2,2));
 
-   // find slot to store the hit:
-   int    i;
-   int    slot = -1;
-   double age  = -1;
+	// find slot to store the hit:
+	int    i;
+	int    slot = -1;
+	double age  = -1;
 
-   for (i = 0; i < MAX_SHIELD_HITS; i++) {
-      if (hits[i].shot == shot) {
-         slot = i;
-         break;
-      }
-   }
+	for (i = 0; i < MAX_SHIELD_HITS; i++) {
+		if (hits[i].shot == shot) {
+			slot = i;
+			break;
+		}
+	}
 
-   if (slot < 0) {
-      for (i = 0; i < MAX_SHIELD_HITS; i++) {
-         if (hits[i].damage <= 0) {
-            slot = i;
-            break;
-         }
+	if (slot < 0) {
+		for (i = 0; i < MAX_SHIELD_HITS; i++) {
+			if (hits[i].damage <= 0) {
+				slot = i;
+				break;
+			}
 
-         if (hits[i].age > age) {
-            slot = i;
-            age  = hits[i].age;
-         }
-      }
-   }
+			if (hits[i].age > age) {
+				slot = i;
+				age  = hits[i].age;
+			}
+		}
+	}
 
-   if (slot >= 0 && slot < MAX_SHIELD_HITS) {
-      // record the hit in the slot:
-      hits[slot].hitloc  = impact;
-      hits[slot].damage  = damage;
-      hits[slot].age     = 1;
-      hits[slot].shot    = shot;
+	if (slot >= 0 && slot < MAX_SHIELD_HITS) {
+		// record the hit in the slot:
+		hits[slot].hitloc  = impact;
+		hits[slot].damage  = damage;
+		hits[slot].age     = 1;
+		hits[slot].shot    = shot;
 
-      if (nhits < MAX_SHIELD_HITS)
-         nhits++;
-   }
+		if (nhits < MAX_SHIELD_HITS)
+		nhits++;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -116,29 +116,29 @@ ShieldRep::Hit(Vec3 impact, Shot* shot, double damage)
 void
 ShieldRep::Energize(double seconds, bool b)
 {
-   bubble = b;
+	bubble = b;
 
-   if (nhits < 1) return;
+	if (nhits < 1) return;
 
-   nhits = 0;
+	nhits = 0;
 
-   for (int i = 0; i < MAX_SHIELD_HITS; i++) {
-      if (hits[i].damage > 0) {
-         // age the hit:
-         hits[i].age += seconds;
-         hits[i].damage -= (hits[i].damage * 4 * seconds);
+	for (int i = 0; i < MAX_SHIELD_HITS; i++) {
+		if (hits[i].damage > 0) {
+			// age the hit:
+			hits[i].age += seconds;
+			hits[i].damage -= (hits[i].damage * 4 * seconds);
 
-         // collect garbage:
-         if (hits[i].damage < 10) {
-            hits[i].age     = 0;
-            hits[i].damage  = 0;
-            hits[i].shot    = 0;
-         }
-         else {
-            nhits++;
-         }
-      }
-   }
+			// collect garbage:
+			if (hits[i].damage < 10) {
+				hits[i].age     = 0;
+				hits[i].damage  = 0;
+				hits[i].shot    = 0;
+			}
+			else {
+				nhits++;
+			}
+		}
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -146,8 +146,8 @@ ShieldRep::Energize(double seconds, bool b)
 void
 ShieldRep::TranslateBy(const Point& ref)
 {
-   true_eye_point = ref;
-   Solid::TranslateBy(ref);
+	true_eye_point = ref;
+	Solid::TranslateBy(ref);
 }
 
 // +--------------------------------------------------------------------+
@@ -155,96 +155,96 @@ ShieldRep::TranslateBy(const Point& ref)
 void
 ShieldRep::Illuminate()
 {
-   if (!model) return;
+	if (!model) return;
 
-   Surface*   surf   = model->GetSurfaces().first();
-   VertexSet* vset   = surf->GetVertexSet();
-   int        nverts = vset->nverts;
+	Surface*   surf   = model->GetSurfaces().first();
+	VertexSet* vset   = surf->GetVertexSet();
+	int        nverts = vset->nverts;
 
-   for (int i = 0; i < nverts; i++) {
-      vset->diffuse[i]  = 0;
-      vset->specular[i] = 0;
-   }
+	for (int i = 0; i < nverts; i++) {
+		vset->diffuse[i]  = 0;
+		vset->specular[i] = 0;
+	}
 
-   double all_damage = 0;
+	double all_damage = 0;
 
-   if (nhits < 1) return;
+	if (nhits < 1) return;
 
-   for (int i = 0; i < MAX_SHIELD_HITS; i++) {
-      if (hits[i].damage > 0) {
-         // add the hit's contribution to the shield verts:
-         Vec3   hitloc = hits[i].hitloc;
-         double hitdam = hits[i].damage * 2000;
+	for (int i = 0; i < MAX_SHIELD_HITS; i++) {
+		if (hits[i].damage > 0) {
+			// add the hit's contribution to the shield verts:
+			Vec3   hitloc = hits[i].hitloc;
+			double hitdam = hits[i].damage * 2000;
 
-         all_damage += hits[i].damage;
+			all_damage += hits[i].damage;
 
-         if (!bubble) {
+			if (!bubble) {
 
-            double limit = radius * radius;
-            if (hitdam > limit)
-               hitdam = limit;
+				double limit = radius * radius;
+				if (hitdam > limit)
+				hitdam = limit;
 
-            for (int v = 0; v < nverts; v++) {
-               double dist  = (vset->loc[v] - hitloc).length();
+				for (int v = 0; v < nverts; v++) {
+					double dist  = (vset->loc[v] - hitloc).length();
 
-               if (dist < 1)
-                  dist  = 1;  // can't divide by zero!
+					if (dist < 1)
+					dist  = 1;  // can't divide by zero!
 
-               else
-                  dist = pow(dist, 2.7);
+					else
+					dist = pow(dist, 2.7);
 
-               double pert      = Random(0.1, 1.5);
-               double intensity = pert*hitdam/dist;
+					double pert      = Random(0.1, 1.5);
+					double intensity = pert*hitdam/dist;
 
-               if (intensity > 0.003)
-               vset->diffuse[v] = ((Color::White * intensity)  + vset->diffuse[v]).Value();
-            }
-   
-         }
-      }
-   }
+					if (intensity > 0.003)
+					vset->diffuse[v] = ((Color::White * intensity)  + vset->diffuse[v]).Value();
+				}
 
-   if (bubble) {
-      double shield_gain = 1;
+			}
+		}
+	}
 
-      if (all_damage < 1000) {
-         shield_gain = all_damage / 1000;
-      }
+	if (bubble) {
+		double shield_gain = 1;
 
-      for (int i = 0; i < nverts; i++) {
-         Vec3  vloc = (vset->loc[i] * orientation) + loc;
-         Vec3  vnrm = (vset->nrm[i] * orientation);
+		if (all_damage < 1000) {
+			shield_gain = all_damage / 1000;
+		}
 
-         Vec3  V   = vloc * -1.0f;
-         V.Normalize();
+		for (int i = 0; i < nverts; i++) {
+			Vec3  vloc = (vset->loc[i] * orientation) + loc;
+			Vec3  vnrm = (vset->nrm[i] * orientation);
 
-         double intensity = 1 - V*vnrm;
+			Vec3  V   = vloc * -1.0f;
+			V.Normalize();
 
-         if (intensity > 0) {
-            intensity *= intensity;
+			double intensity = 1 - V*vnrm;
 
-            if (intensity > 1) intensity = 1;
+			if (intensity > 0) {
+				intensity *= intensity;
 
-            intensity *= (shield_gain * Random(0.75, 1.0));
+				if (intensity > 1) intensity = 1;
 
-            Color vs = Color::White * intensity;
-            vset->diffuse[i] = vs.Value();
-         }
-      }
-   }
+				intensity *= (shield_gain * Random(0.75, 1.0));
 
-   InvalidateSurfaceData();
+				Color vs = Color::White * intensity;
+				vset->diffuse[i] = vs.Value();
+			}
+		}
+	}
+
+	InvalidateSurfaceData();
 }
 
 void
 ShieldRep::Render(Video* video, DWORD flags)
 {
-   if ((flags & RENDER_ADDITIVE) == 0)
-      return;
+	if ((flags & RENDER_ADDITIVE) == 0)
+	return;
 
-   if (nhits > 0) {
-      Illuminate();
-      Solid::Render(video, RENDER_ALPHA); // have to lie about the render flag
-                                          // or the engine will reject the solid
-   }
+	if (nhits > 0) {
+		Illuminate();
+		Solid::Render(video, RENDER_ALPHA); // have to lie about the render flag
+		// or the engine will reject the solid
+	}
 }

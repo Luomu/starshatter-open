@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         MsnNavDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         MsnNavDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Briefing Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Briefing Dialog Active Window class
 */
 
 #ifndef MsnNavDlg_h
@@ -35,19 +35,19 @@ class MissionInfo;
 // +--------------------------------------------------------------------+
 
 class MsnNavDlg : public NavDlg,
-                  public MsnDlg
+public MsnDlg
 {
 public:
-   MsnNavDlg(Screen* s, FormDef& def, PlanScreen* mgr);
-   virtual ~MsnNavDlg();
+	MsnNavDlg(Screen* s, FormDef& def, PlanScreen* mgr);
+	virtual ~MsnNavDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnCommit(AWEvent* event);
-   virtual void      OnCancel(AWEvent* event);
+	// Operations:
+	virtual void      OnCommit(AWEvent* event);
+	virtual void      OnCancel(AWEvent* event);
 };
 
 #endif MsnNavDlg_h

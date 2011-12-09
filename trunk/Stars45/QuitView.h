@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         QuitView.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         QuitView.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    View class for End Mission menu
+	OVERVIEW
+	========
+	View class for End Mission menu
 */
 
 #ifndef QuitView_h
@@ -32,32 +32,32 @@ class Menu;
 class QuitView : public View
 {
 public:
-   QuitView(Window* c);
-   virtual ~QuitView();
+	QuitView(Window* c);
+	virtual ~QuitView();
 
-   // Operations:
-   virtual void      Refresh();
-   virtual void      OnWindowMove();
-   virtual void      ExecFrame();
+	// Operations:
+	virtual void      Refresh();
+	virtual void      OnWindowMove();
+	virtual void      ExecFrame();
 
-   virtual bool      CanAccept();
-   virtual bool      IsMenuShown();
-   virtual void      ShowMenu();
-   virtual void      CloseMenu();
+	virtual bool      CanAccept();
+	virtual bool      IsMenuShown();
+	virtual void      ShowMenu();
+	virtual void      CloseMenu();
 
-   static void       Initialize();
-   static void       Close();
+	static void       Initialize();
+	static void       Close();
 
-   static QuitView*  GetInstance() { return quit_view; }
+	static QuitView*  GetInstance() { return quit_view; }
 
 protected:
-   int         width, height;
-   int         xcenter, ycenter;
-   bool        mouse_latch;
+	int         width, height;
+	int         xcenter, ycenter;
+	bool        mouse_latch;
 
-   Sim*        sim;
+	Sim*        sim;
 
-   static QuitView* quit_view;
+	static QuitView* quit_view;
 };
 
 #endif QuitView_h

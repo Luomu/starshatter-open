@@ -1,16 +1,16 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         MusicDirector.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         MusicDirector.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Music Director class to manage selection, setup, and playback
-    of background music tracks for both menu and game modes
+	OVERVIEW
+	========
+	Music Director class to manage selection, setup, and playback
+	of background music tracks for both menu and game modes
 */
 
 
@@ -30,85 +30,85 @@ class MusicTrack;
 class MusicDirector
 {
 public:
-   enum MODES {
-      NONE,
+	enum MODES {
+		NONE,
 
-      // menu modes:
+		// menu modes:
 
-      MENU,
-      INTRO,
-      BRIEFING,
-      DEBRIEFING,
-      PROMOTION,
-      VICTORY,
-      DEFEAT,
-      CREDITS,
+		MENU,
+		INTRO,
+		BRIEFING,
+		DEBRIEFING,
+		PROMOTION,
+		VICTORY,
+		DEFEAT,
+		CREDITS,
 
-      // in game modes:
+		// in game modes:
 
-      FLIGHT,
-      COMBAT,
-      LAUNCH,
-      RECOVERY,
+		FLIGHT,
+		COMBAT,
+		LAUNCH,
+		RECOVERY,
 
-      // special modes:
-      SHUTDOWN
-   };
+		// special modes:
+		SHUTDOWN
+	};
 
-   enum TRANSITIONS {
-      CUT,
-      FADE_OUT,
-      FADE_IN,
-      FADE_BOTH,
-      CROSS_FADE
-   };
+	enum TRANSITIONS {
+		CUT,
+		FADE_OUT,
+		FADE_IN,
+		FADE_BOTH,
+		CROSS_FADE
+	};
 
-   MusicDirector();
-   ~MusicDirector();
+	MusicDirector();
+	~MusicDirector();
 
-   // Operations:
-   void                    ExecFrame();
-   void                    ScanTracks();
+	// Operations:
+	void                    ExecFrame();
+	void                    ScanTracks();
 
-   int                     CheckMode(int mode);
-   int                     GetMode()   const { return mode; }
+	int                     CheckMode(int mode);
+	int                     GetMode()   const { return mode; }
 
-   static void             Initialize();
-   static void             Close();
-   static MusicDirector*   GetInstance();
-   static void             SetMode(int mode);
-   static const char*      GetModeName(int mode);
-   static bool             IsNoMusic();
+	static void             Initialize();
+	static void             Close();
+	static MusicDirector*   GetInstance();
+	static void             SetMode(int mode);
+	static const char*      GetModeName(int mode);
+	static bool             IsNoMusic();
 
 protected:
-   void                    StartThread();
-   void                    StopThread();
-   void                    GetNextTrack(int index);
-   void                    ShuffleTracks();
+	void                    StartThread();
+	void                    StopThread();
+	void                    GetNextTrack(int index);
+	void                    ShuffleTracks();
 
-   int               mode;
-   int               transition;
+	int               mode;
+	int               transition;
 
-   MusicTrack*       track;
-   MusicTrack*       next_track;
+	MusicTrack*       track;
+	MusicTrack*       next_track;
 
-   List<Text>        menu_tracks;
-   List<Text>        intro_tracks;
-   List<Text>        brief_tracks;
-   List<Text>        debrief_tracks;
-   List<Text>        promote_tracks;
-   List<Text>        flight_tracks;
-   List<Text>        combat_tracks;
-   List<Text>        launch_tracks;
-   List<Text>        recovery_tracks;
-   List<Text>        victory_tracks;
-   List<Text>        defeat_tracks;
-   List<Text>        credit_tracks;
+	List<Text>        menu_tracks;
+	List<Text>        intro_tracks;
+	List<Text>        brief_tracks;
+	List<Text>        debrief_tracks;
+	List<Text>        promote_tracks;
+	List<Text>        flight_tracks;
+	List<Text>        combat_tracks;
+	List<Text>        launch_tracks;
+	List<Text>        recovery_tracks;
+	List<Text>        victory_tracks;
+	List<Text>        defeat_tracks;
+	List<Text>        credit_tracks;
 
-   bool              no_music;
+	bool              no_music;
 
-   HANDLE            hproc;
-   ThreadSync        sync;
+	HANDLE            hproc;
+	ThreadSync        sync;
 };
 
 #endif MusicDirector_h
