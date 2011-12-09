@@ -1,14 +1,14 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ShipSolid.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ShipSolid.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
+	OVERVIEW
+	========
 */
 
 #include "MemDebug.h"
@@ -24,7 +24,7 @@
 // +--------------------------------------------------------------------+
 
 ShipSolid::ShipSolid(Ship* s)
-   : ship(s), skin(0), in_soup(false)
+: ship(s), skin(0), in_soup(false)
 {
 }
 
@@ -39,8 +39,8 @@ ShipSolid::~ShipSolid()
 void
 ShipSolid::TranslateBy(const Point& ref)
 {
-   true_eye_point = ref;
-   Solid::TranslateBy(ref);
+	true_eye_point = ref;
+	Solid::TranslateBy(ref);
 }
 
 // +--------------------------------------------------------------------+
@@ -48,49 +48,49 @@ ShipSolid::TranslateBy(const Point& ref)
 void
 ShipSolid::Render(Video* video, DWORD flags)
 {
-   if (hidden || !visible || !video || Depth() > 5e6)
-      return;
+	if (hidden || !visible || !video || Depth() > 5e6)
+	return;
 
-   const Skin* s = 0;
-   
-   if (ship)
-      s = ship->GetSkin();
-   else
-      s = skin;
+	const Skin* s = 0;
 
-   if (s)
-      s->ApplyTo(model);
+	if (ship)
+	s = ship->GetSkin();
+	else
+	s = skin;
 
-   bool fog    = false;
+	if (s)
+	s->ApplyTo(model);
 
-   if (ship && ship->IsAirborne()) {
-      fog = true;
+	bool fog    = false;
 
-      TerrainRegion* rgn         = (TerrainRegion*) ship->GetRegion()->GetOrbitalRegion();
-      double         visibility  = rgn->GetWeather().Visibility();
-      FLOAT          fog_density = (FLOAT) (rgn->FogDensity() * 2.5e-5 * 1/visibility);
-      Color          fog_color   = rgn->FogColor();
+	if (ship && ship->IsAirborne()) {
+		fog = true;
 
-      // Use BLACK fog on secondary lighting pass
-      // This will effectively "filter out" the highlights
-      // with distance...
+		TerrainRegion* rgn         = (TerrainRegion*) ship->GetRegion()->GetOrbitalRegion();
+		double         visibility  = rgn->GetWeather().Visibility();
+		FLOAT          fog_density = (FLOAT) (rgn->FogDensity() * 2.5e-5 * 1/visibility);
+		Color          fog_color   = rgn->FogColor();
 
-      if (flags & Graphic::RENDER_ADD_LIGHT)
-         fog_color = Color::Black;
+		// Use BLACK fog on secondary lighting pass
+		// This will effectively "filter out" the highlights
+		// with distance...
 
-      video->SetRenderState(Video::FOG_ENABLE,  true);
-      video->SetRenderState(Video::FOG_COLOR,   fog_color.Value());
-      video->SetRenderState(Video::FOG_DENSITY, *((DWORD*) &fog_density));
-   }
+		if (flags & Graphic::RENDER_ADD_LIGHT)
+		fog_color = Color::Black;
 
-   if (!fog)   video->SetRenderState(Video::FOG_ENABLE,  false);
+		video->SetRenderState(Video::FOG_ENABLE,  true);
+		video->SetRenderState(Video::FOG_COLOR,   fog_color.Value());
+		video->SetRenderState(Video::FOG_DENSITY, *((DWORD*) &fog_density));
+	}
 
-   Solid::Render(video, flags);
+	if (!fog)   video->SetRenderState(Video::FOG_ENABLE,  false);
 
-   if (fog)    video->SetRenderState(Video::FOG_ENABLE,  false);
+	Solid::Render(video, flags);
 
-   if (s)
-      s->Restore(model);
+	if (fog)    video->SetRenderState(Video::FOG_ENABLE,  false);
+
+	if (s)
+	s->Restore(model);
 }
 
 

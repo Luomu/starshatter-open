@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         AwardShowDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         AwardShowDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Main Menu Dialog Active Window class
+	OVERVIEW
+	========
+	Main Menu Dialog Active Window class
 */
 
 #ifndef AwardShowDlg_h
@@ -32,31 +32,31 @@ class MenuScreen;
 class AwardShowDlg : public FormWindow
 {
 public:
-   AwardShowDlg(Screen* s, FormDef& def, MenuScreen* mgr);
-   virtual ~AwardShowDlg();
+	AwardShowDlg(Screen* s, FormDef& def, MenuScreen* mgr);
+	virtual ~AwardShowDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnClose(AWEvent* event);
-   virtual void      ShowAward();
-   virtual void      SetRank(int r);
-   virtual void      SetMedal(int r);
+	// Operations:
+	virtual void      OnClose(AWEvent* event);
+	virtual void      ShowAward();
+	virtual void      SetRank(int r);
+	virtual void      SetMedal(int r);
 
 protected:
-   MenuScreen*       manager;
+	MenuScreen*       manager;
 
-   ActiveWindow*     lbl_name;
-   ActiveWindow*     lbl_info;
-   ImageBox*         img_rank;
-   Button*           btn_close;
+	ActiveWindow*     lbl_name;
+	ActiveWindow*     lbl_info;
+	ImageBox*         img_rank;
+	Button*           btn_close;
 
-   bool              exit_latch;
+	bool              exit_latch;
 
-   int               rank;
-   int               medal;
+	int               rank;
+	int               medal;
 };
 
 #endif AwardShowDlg_h

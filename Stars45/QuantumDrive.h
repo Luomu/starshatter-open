@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         QuantumDrive.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         QuantumDrive.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Quantum (JUMP) Drive (system) class
+	OVERVIEW
+	========
+	Quantum (JUMP) Drive (system) class
 */
 
 #ifndef QuantumDrive_h
@@ -29,44 +29,44 @@ class SimRegion;
 class QuantumDrive : public System
 {
 public:
-   enum SUBTYPE { QUANTUM, HYPER };
+	enum SUBTYPE { QUANTUM, HYPER };
 
-   QuantumDrive(SUBTYPE s, double capacity, double sink_rate);
-   QuantumDrive(const QuantumDrive& rhs);
-   virtual ~QuantumDrive();
+	QuantumDrive(SUBTYPE s, double capacity, double sink_rate);
+	QuantumDrive(const QuantumDrive& rhs);
+	virtual ~QuantumDrive();
 
-   enum ACTIVE_STATES {
-      ACTIVE_READY, ACTIVE_COUNTDOWN, ACTIVE_PREWARP, ACTIVE_POSTWARP
-   };
+	enum ACTIVE_STATES {
+		ACTIVE_READY, ACTIVE_COUNTDOWN, ACTIVE_PREWARP, ACTIVE_POSTWARP
+	};
 
-   void              SetDestination(SimRegion* rgn, const Point& loc);
-   bool              Engage(bool immediate=false);
-   int               ActiveState() const { return active_state; }
-   double            WarpFactor()  const { return warp_fov;     }
-   double            JumpTime()    const { return jump_time;    }
-   virtual void      PowerOff();
+	void              SetDestination(SimRegion* rgn, const Point& loc);
+	bool              Engage(bool immediate=false);
+	int               ActiveState() const { return active_state; }
+	double            WarpFactor()  const { return warp_fov;     }
+	double            JumpTime()    const { return jump_time;    }
+	virtual void      PowerOff();
 
-   virtual void      ExecFrame(double seconds);
+	virtual void      ExecFrame(double seconds);
 
-   void              SetShip(Ship* s)  { ship = s;    }
-   Ship*             GetShip() const   { return ship; }
+	void              SetShip(Ship* s)  { ship = s;    }
+	Ship*             GetShip() const   { return ship; }
 
-   double            GetCountdown() const    { return countdown; }
-   void              SetCountdown(double d)  { countdown = d;    }
+	double            GetCountdown() const    { return countdown; }
+	void              SetCountdown(double d)  { countdown = d;    }
 
 protected:
-   void              Jump();
-   void              AbortJump();
+	void              Jump();
+	void              AbortJump();
 
-   int               active_state;
+	int               active_state;
 
-   Ship*             ship;
-   double            warp_fov;
-   double            jump_time;
-   double            countdown;
+	Ship*             ship;
+	double            warp_fov;
+	double            jump_time;
+	double            countdown;
 
-   SimRegion*        dst_rgn;
-   Point             dst_loc;
+	SimRegion*        dst_rgn;
+	Point             dst_loc;
 };
 
 #endif // QuantumDrive_h

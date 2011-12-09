@@ -1,16 +1,16 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CombatRoster.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CombatRoster.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    The complete roster of all known persistent entities
-    for all combatants in the game.
+	OVERVIEW
+	========
+	The complete roster of all known persistent entities
+	for all combatants in the game.
 */
 
 #ifndef CombatRoster_h
@@ -28,20 +28,20 @@ class CombatGroup;
 
 class CombatRoster
 {
-   CombatRoster();
-   ~CombatRoster();
+	CombatRoster();
+	~CombatRoster();
 
 public:
-   static const char* TYPENAME() { return "CombatRoster"; }
+	static const char* TYPENAME() { return "CombatRoster"; }
 
-   static void             Initialize();
-   static void             Close();
-   static CombatRoster*    GetInstance();
+	static void             Initialize();
+	static void             Close();
+	static CombatRoster*    GetInstance();
 
-   CombatGroup*            GetForce(const char* name);
+	CombatGroup*            GetForce(const char* name);
 
 private:
-   List<CombatGroup>       forces;
+	List<CombatGroup>       forces;
 };
 
 

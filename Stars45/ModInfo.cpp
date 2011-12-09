@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ModInfo.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ModInfo.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Information block for describing and deploying third party mods
+	OVERVIEW
+	========
+	Information block for describing and deploying third party mods
 */
 
 
@@ -27,29 +27,29 @@
 // +-------------------------------------------------------------------+
 
 ModInfo::ModInfo()
-   : logo(0), distribute(false), enabled(false), catalog(0)
+: logo(0), distribute(false), enabled(false), catalog(0)
 { }
 
 ModInfo::ModInfo(const char* fname)
-   : logo(0), distribute(false), enabled(false), catalog(0)
+: logo(0), distribute(false), enabled(false), catalog(0)
 {
-   if (fname && *fname) {
-      Load(fname);
-   }
+	if (fname && *fname) {
+		Load(fname);
+	}
 }
 
 ModInfo::ModInfo(const char* n, const char* v, const char* u)
-   : name(n), logo(0), version(v), url(u), distribute(false), enabled(false), catalog(0)
+: name(n), logo(0), version(v), url(u), distribute(false), enabled(false), catalog(0)
 { }
 
 ModInfo::~ModInfo()
 {
-   if (enabled)
-      Disable();
+	if (enabled)
+	Disable();
 
-   delete logo;
-   delete catalog;
-   campaigns.destroy();
+	delete logo;
+	delete catalog;
+	campaigns.destroy();
 }
 
 // +-------------------------------------------------------------------+
@@ -57,198 +57,198 @@ ModInfo::~ModInfo()
 bool
 ModInfo::Load(const char* fname)
 {
-   bool ok = false;
+	bool ok = false;
 
-   filename = fname;
-   DataArchive a(filename);
+	filename = fname;
+	DataArchive a(filename);
 
-   int n = a.FindEntry("mod_info.def");
-   if (n > -1) {
-      BYTE* buf = 0;
-      int   len = a.ExpandEntry(n, buf, true);
+	int n = a.FindEntry("mod_info.def");
+	if (n > -1) {
+		BYTE* buf = 0;
+		int   len = a.ExpandEntry(n, buf, true);
 
-      if (len > 0 && buf != 0) {
-         ok = ParseModInfo((const char*) buf);
-         delete [] buf;
-      }
-   }
+		if (len > 0 && buf != 0) {
+			ok = ParseModInfo((const char*) buf);
+			delete [] buf;
+		}
+	}
 
-   if (logoname.length()) {
-      PcxImage pcx;
+	if (logoname.length()) {
+		PcxImage pcx;
 
-      logo = new(__FILE__,__LINE__) Bitmap;
+		logo = new(__FILE__,__LINE__) Bitmap;
 
-      n = a.FindEntry(logoname);
-      if (n > -1) {
-         BYTE* buf = 0;
-         int   len = a.ExpandEntry(n, buf, true);
+		n = a.FindEntry(logoname);
+		if (n > -1) {
+			BYTE* buf = 0;
+			int   len = a.ExpandEntry(n, buf, true);
 
-         pcx.LoadBuffer(buf, len);
-         delete [] buf;
-      }
+			pcx.LoadBuffer(buf, len);
+			delete [] buf;
+		}
 
-      // now copy the image into the bitmap:
-      if (pcx.bitmap) {
-         logo->CopyImage(pcx.width, pcx.height, pcx.bitmap);
-      }
+		// now copy the image into the bitmap:
+		if (pcx.bitmap) {
+			logo->CopyImage(pcx.width, pcx.height, pcx.bitmap);
+		}
 
-      else if (pcx.himap) {
-         logo->CopyHighColorImage(pcx.width, pcx.height, pcx.himap);
-      }
+		else if (pcx.himap) {
+			logo->CopyHighColorImage(pcx.width, pcx.height, pcx.himap);
+		}
 
-      else {
-         logo->ClearImage();
-      }
-   }
+		else {
+			logo->ClearImage();
+		}
+	}
 
-   return ok;
+	return ok;
 }
 
 bool
 ModInfo::ParseModInfo(const char* block)
 {
-   bool   ok = false;
-   Parser parser(new(__FILE__,__LINE__) BlockReader(block));
-   Term*  term = parser.ParseTerm();
-   
-   if (!term) {
-      Print("ERROR: could not parse '%s'\n", filename.data());
-      return ok;
-   }
-   else {
-      TermText* file_type = term->isText();
-      if (!file_type || file_type->value() != "MOD_INFO") {
-         Print("ERROR: invalid mod_info file '%s'\n", filename.data());
-         term->print(10);
-         return ok;
-      }
-   }
+	bool   ok = false;
+	Parser parser(new(__FILE__,__LINE__) BlockReader(block));
+	Term*  term = parser.ParseTerm();
 
-   ok = true;
+	if (!term) {
+		Print("ERROR: could not parse '%s'\n", filename.data());
+		return ok;
+	}
+	else {
+		TermText* file_type = term->isText();
+		if (!file_type || file_type->value() != "MOD_INFO") {
+			Print("ERROR: invalid mod_info file '%s'\n", filename.data());
+			term->print(10);
+			return ok;
+		}
+	}
 
-   do {
-      delete term; term = 0;
-      term = parser.ParseTerm();
+	ok = true;
 
-      if (term) {
-         TermDef* def = term->isDef();
-         if (def) {
-            Text defname = def->name()->value();
+	do {
+		delete term; term = 0;
+		term = parser.ParseTerm();
 
-            if (defname == "name")
-               GetDefText(name, def, filename);
+		if (term) {
+			TermDef* def = term->isDef();
+			if (def) {
+				Text defname = def->name()->value();
 
-            else if (defname == "desc" || defname == "description")
-               GetDefText(desc, def, filename);
+				if (defname == "name")
+				GetDefText(name, def, filename);
 
-            else if (defname == "author")
-               GetDefText(author, def, filename);
+				else if (defname == "desc" || defname == "description")
+				GetDefText(desc, def, filename);
 
-            else if (defname == "url")
-               GetDefText(url, def, filename);
+				else if (defname == "author")
+				GetDefText(author, def, filename);
 
-            else if (defname == "copyright")
-               GetDefText(copyright, def, filename);
+				else if (defname == "url")
+				GetDefText(url, def, filename);
 
-            else if (defname == "logo")
-               GetDefText(logoname, def, filename);
+				else if (defname == "copyright")
+				GetDefText(copyright, def, filename);
 
-            else if (defname == "version") {
-               if (def->term()) {
-                  if (def->term()->isNumber()) {
-                     int  v = 0;
-                     char buf[32];
-                     GetDefNumber(v, def, filename);
-                     sprintf(buf, "%d", v);
+				else if (defname == "logo")
+				GetDefText(logoname, def, filename);
 
-                     version = buf;
-                  }
+				else if (defname == "version") {
+					if (def->term()) {
+						if (def->term()->isNumber()) {
+							int  v = 0;
+							char buf[32];
+							GetDefNumber(v, def, filename);
+							sprintf(buf, "%d", v);
 
-                  else if (def->term()->isText()) {
-                     GetDefText(version, def, filename);
-                  }
-               }
-            }
+							version = buf;
+						}
 
-            else if (defname == "distribute")
-               GetDefBool(distribute, def, filename);
+						else if (def->term()->isText()) {
+							GetDefText(version, def, filename);
+						}
+					}
+				}
 
-            else if (defname == "campaign") {
-               if (!def->term() || !def->term()->isStruct()) {
-                  Print("WARNING: campaign structure missing in mod_info.def for '%s'\n", name.data());
-               }
-               else {
-                  TermStruct* val = def->term()->isStruct();
+				else if (defname == "distribute")
+				GetDefBool(distribute, def, filename);
 
-                  ModCampaign* c = new(__FILE__,__LINE__) ModCampaign;
+				else if (defname == "campaign") {
+					if (!def->term() || !def->term()->isStruct()) {
+						Print("WARNING: campaign structure missing in mod_info.def for '%s'\n", name.data());
+					}
+					else {
+						TermStruct* val = def->term()->isStruct();
 
-                  for (int i = 0; i < val->elements()->size(); i++) {
-                     TermDef* pdef = val->elements()->at(i)->isDef();
-                     if (pdef) {
-                        defname = pdef->name()->value();
+						ModCampaign* c = new(__FILE__,__LINE__) ModCampaign;
 
-                        if (defname == "name") {
-                           GetDefText(c->name, pdef, filename);
-                        }
+						for (int i = 0; i < val->elements()->size(); i++) {
+							TermDef* pdef = val->elements()->at(i)->isDef();
+							if (pdef) {
+								defname = pdef->name()->value();
 
-                        else if (defname == "path") {
-                           GetDefText(c->path, pdef, filename);
-                        }
+								if (defname == "name") {
+									GetDefText(c->name, pdef, filename);
+								}
 
-                        else if (defname == "dynamic") {
-                           GetDefBool(c->dynamic, pdef, filename);
-                        }
-                     }
-                  }
+								else if (defname == "path") {
+									GetDefText(c->path, pdef, filename);
+								}
 
-                  if (c->name.length() && c->path.length())
-                     campaigns.append(c);
-                  else
-                     delete c;
-               }
-            }
+								else if (defname == "dynamic") {
+									GetDefBool(c->dynamic, pdef, filename);
+								}
+							}
+						}
 
-            else if (defname == "catalog") {
-               if (!def->term() || !def->term()->isStruct()) {
-                  Print("WARNING: catalog structure missing in mod_info.def for '%s'\n", name.data());
-               }
-               else {
-                  TermStruct* val = def->term()->isStruct();
+						if (c->name.length() && c->path.length())
+						campaigns.append(c);
+						else
+						delete c;
+					}
+				}
 
-                  ModCatalog* c = new(__FILE__,__LINE__) ModCatalog;
+				else if (defname == "catalog") {
+					if (!def->term() || !def->term()->isStruct()) {
+						Print("WARNING: catalog structure missing in mod_info.def for '%s'\n", name.data());
+					}
+					else {
+						TermStruct* val = def->term()->isStruct();
 
-                  for (int i = 0; i < val->elements()->size(); i++) {
-                     TermDef* pdef = val->elements()->at(i)->isDef();
-                     if (pdef) {
-                        defname = pdef->name()->value();
+						ModCatalog* c = new(__FILE__,__LINE__) ModCatalog;
 
-                        if (defname == "file") {
-                           GetDefText(c->file, pdef, filename);
-                        }
+						for (int i = 0; i < val->elements()->size(); i++) {
+							TermDef* pdef = val->elements()->at(i)->isDef();
+							if (pdef) {
+								defname = pdef->name()->value();
 
-                        else if (defname == "path") {
-                           GetDefText(c->path, pdef, filename);
+								if (defname == "file") {
+									GetDefText(c->file, pdef, filename);
+								}
 
-                           char last_char = c->path[c->path.length()-1];
+								else if (defname == "path") {
+									GetDefText(c->path, pdef, filename);
 
-                           if (last_char != '/' && last_char != '\\')
-                              c->path += "/";
-                        }
-                     }
-                  }
+									char last_char = c->path[c->path.length()-1];
 
-                  if (c->file.length() && c->path.length() && !catalog)
-                     catalog = c;
-                  else
-                     delete c;
-               }
-            }
-         }     // def
-      }        // term
-   }
-   while (term);
+									if (last_char != '/' && last_char != '\\')
+									c->path += "/";
+								}
+							}
+						}
 
-   return ok;
+						if (c->file.length() && c->path.length() && !catalog)
+						catalog = c;
+						else
+						delete c;
+					}
+				}
+			}     // def
+		}        // term
+	}
+	while (term);
+
+	return ok;
 }
 
 // +-------------------------------------------------------------------+
@@ -256,37 +256,37 @@ ModInfo::ParseModInfo(const char* block)
 bool
 ModInfo::Enable()
 {
-   DataLoader* loader = DataLoader::GetLoader();
+	DataLoader* loader = DataLoader::GetLoader();
 
-   if (loader && !enabled) {
-      loader->EnableDatafile(filename);
-      enabled = true;
+	if (loader && !enabled) {
+		loader->EnableDatafile(filename);
+		enabled = true;
 
-      if (catalog)
-         ShipDesign::LoadCatalog(catalog->Path(), catalog->File(), true);
+		if (catalog)
+		ShipDesign::LoadCatalog(catalog->Path(), catalog->File(), true);
 
-      ShipDesign::LoadSkins("/Mods/Skins/", filename);
+		ShipDesign::LoadSkins("/Mods/Skins/", filename);
 
-      for (int i = 0; i < campaigns.size(); i++) {
-         ModCampaign* c = campaigns[i];
-         Campaign::CreateCustomCampaign(c->Name(), c->Path());
-      }
-   }
+		for (int i = 0; i < campaigns.size(); i++) {
+			ModCampaign* c = campaigns[i];
+			Campaign::CreateCustomCampaign(c->Name(), c->Path());
+		}
+	}
 
-   return enabled;
+	return enabled;
 }
 
 bool
 ModInfo::Disable()
 {
-   DataLoader* loader = DataLoader::GetLoader();
+	DataLoader* loader = DataLoader::GetLoader();
 
-   if (loader) {
-      loader->DisableDatafile(filename);
-      enabled = false;
-   }
+	if (loader) {
+		loader->DisableDatafile(filename);
+		enabled = false;
+	}
 
-   return !enabled;
+	return !enabled;
 }
 
 // +-------------------------------------------------------------------+

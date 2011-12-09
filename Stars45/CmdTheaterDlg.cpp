@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdTheaterDlg.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdTheaterDlg.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Theater Map Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Theater Map Tab)
 */
 
 #include "MemDebug.h"
@@ -62,13 +62,13 @@ const int VIEW_REGION      =  2;
 // +--------------------------------------------------------------------+
 
 CmdTheaterDlg::CmdTheaterDlg(Screen* s, FormDef& def, CmpnScreen* mgr)
-   : FormWindow(s, 0, 0, s->Width(), s->Height()), CmdDlg(mgr), manager(mgr),
-     map_theater(0), map_view(0), stars(0), campaign(0)
+: FormWindow(s, 0, 0, s->Width(), s->Height()), CmdDlg(mgr), manager(mgr),
+map_theater(0), map_view(0), stars(0), campaign(0)
 {
-   stars    = Starshatter::GetInstance();
-   campaign = Campaign::GetCampaign();
+	stars    = Starshatter::GetInstance();
+	campaign = Campaign::GetCampaign();
 
-   Init(def);
+	Init(def);
 }
 
 CmdTheaterDlg::~CmdTheaterDlg()
@@ -80,31 +80,31 @@ CmdTheaterDlg::~CmdTheaterDlg()
 void
 CmdTheaterDlg::RegisterControls()
 {
-   map_theater = FindControl(400);
+	map_theater = FindControl(400);
 
-   RegisterCmdControls(this);
+	RegisterCmdControls(this);
 
-   if (btn_save)
-      REGISTER_CLIENT(EID_CLICK,  btn_save,    CmdTheaterDlg, OnSave);
+	if (btn_save)
+	REGISTER_CLIENT(EID_CLICK,  btn_save,    CmdTheaterDlg, OnSave);
 
-   if (btn_exit)
-      REGISTER_CLIENT(EID_CLICK,  btn_exit,    CmdTheaterDlg, OnExit);
+	if (btn_exit)
+	REGISTER_CLIENT(EID_CLICK,  btn_exit,    CmdTheaterDlg, OnExit);
 
-   for (int i = 0; i < 5; i++) {
-      if (btn_mode[i])
-      REGISTER_CLIENT(EID_CLICK,  btn_mode[i], CmdTheaterDlg, OnMode);
-   }
+	for (int i = 0; i < 5; i++) {
+		if (btn_mode[i])
+		REGISTER_CLIENT(EID_CLICK,  btn_mode[i], CmdTheaterDlg, OnMode);
+	}
 
-   if (map_theater)
-      map_view = new(__FILE__,__LINE__) MapView(map_theater);
+	if (map_theater)
+	map_view = new(__FILE__,__LINE__) MapView(map_theater);
 
-   for (int i = 0; i < 3; i++) {
-      view_btn[i] = (Button*) FindControl(401 + i);
-      REGISTER_CLIENT(EID_CLICK, view_btn[i], CmdTheaterDlg, OnView);
-   }
+	for (int i = 0; i < 3; i++) {
+		view_btn[i] = (Button*) FindControl(401 + i);
+		REGISTER_CLIENT(EID_CLICK, view_btn[i], CmdTheaterDlg, OnView);
+	}
 
-   zoom_in_btn  = (Button*) FindControl(410);
-   zoom_out_btn = (Button*) FindControl(411);
+	zoom_in_btn  = (Button*) FindControl(410);
+	zoom_out_btn = (Button*) FindControl(411);
 }
 
 // +--------------------------------------------------------------------+
@@ -112,16 +112,16 @@ CmdTheaterDlg::RegisterControls()
 void
 CmdTheaterDlg::Show()
 {
-   mode = MODE_THEATER;
+	mode = MODE_THEATER;
 
-   FormWindow::Show();
-   ShowCmdDlg();
+	FormWindow::Show();
+	ShowCmdDlg();
 
-   campaign = Campaign::GetCampaign();
+	campaign = Campaign::GetCampaign();
 
-   if (campaign && map_theater) {
-      map_view->SetCampaign(campaign);
-   }
+	if (campaign && map_theater) {
+		map_view->SetCampaign(campaign);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -129,31 +129,31 @@ CmdTheaterDlg::Show()
 void
 CmdTheaterDlg::ExecFrame()
 {
-   CmdDlg::ExecFrame();
+	CmdDlg::ExecFrame();
 
-   if (!map_view)
-      return;
+	if (!map_view)
+	return;
 
-   if (Keyboard::KeyDown(VK_ADD) ||
-      (zoom_in_btn && zoom_in_btn->GetButtonState() > 0)) {
-      map_view->ZoomIn();
-   }
-   else if (Keyboard::KeyDown(VK_SUBTRACT) || 
-           (zoom_out_btn && zoom_out_btn->GetButtonState() > 0)) {
-      map_view->ZoomOut();
-   }
+	if (Keyboard::KeyDown(VK_ADD) ||
+			(zoom_in_btn && zoom_in_btn->GetButtonState() > 0)) {
+		map_view->ZoomIn();
+	}
+	else if (Keyboard::KeyDown(VK_SUBTRACT) || 
+			(zoom_out_btn && zoom_out_btn->GetButtonState() > 0)) {
+		map_view->ZoomOut();
+	}
 
-   else if (Mouse::Wheel() > 0) {
-      map_view->ZoomIn();
-      map_view->ZoomIn();
-      map_view->ZoomIn();
-   }
+	else if (Mouse::Wheel() > 0) {
+		map_view->ZoomIn();
+		map_view->ZoomIn();
+		map_view->ZoomIn();
+	}
 
-   else if (Mouse::Wheel() < 0) {
-      map_view->ZoomOut();
-      map_view->ZoomOut();
-      map_view->ZoomOut();
-   }
+	else if (Mouse::Wheel() < 0) {
+		map_view->ZoomOut();
+		map_view->ZoomOut();
+		map_view->ZoomOut();
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -161,19 +161,19 @@ CmdTheaterDlg::ExecFrame()
 void
 CmdTheaterDlg::OnSave(AWEvent* event)
 {
-   CmdDlg::OnSave(event);
+	CmdDlg::OnSave(event);
 }
 
 void
 CmdTheaterDlg::OnExit(AWEvent* event)
 {
-   CmdDlg::OnExit(event);
+	CmdDlg::OnExit(event);
 }
 
 void
 CmdTheaterDlg::OnMode(AWEvent* event)
 {
-   CmdDlg::OnMode(event);
+	CmdDlg::OnMode(event);
 }
 
 // +--------------------------------------------------------------------+
@@ -181,33 +181,33 @@ CmdTheaterDlg::OnMode(AWEvent* event)
 void
 CmdTheaterDlg::OnView(AWEvent* event)
 {
-   int use_filter_mode = -1;
+	int use_filter_mode = -1;
 
-   view_btn[VIEW_GALAXY]->SetButtonState(0);
-   view_btn[VIEW_SYSTEM]->SetButtonState(0);
-   view_btn[VIEW_REGION]->SetButtonState(0);
+	view_btn[VIEW_GALAXY]->SetButtonState(0);
+	view_btn[VIEW_SYSTEM]->SetButtonState(0);
+	view_btn[VIEW_REGION]->SetButtonState(0);
 
-   if (view_btn[0] == event->window) {
-      if (map_view) map_view->SetViewMode(VIEW_GALAXY);
-      view_btn[VIEW_GALAXY]->SetButtonState(1);
-      use_filter_mode = SELECT_SYSTEM;
-   }
-   
-   else if (view_btn[VIEW_SYSTEM] == event->window) {
-      if (map_view) map_view->SetViewMode(VIEW_SYSTEM);
-      view_btn[VIEW_SYSTEM]->SetButtonState(1);
-      use_filter_mode = SELECT_REGION;
-   }
-   
-   else if (view_btn[VIEW_REGION] == event->window) {
-      if (map_view) map_view->SetViewMode(VIEW_REGION);
-      view_btn[VIEW_REGION]->SetButtonState(1);
-      use_filter_mode = SELECT_STARSHIP;
-   }
+	if (view_btn[0] == event->window) {
+		if (map_view) map_view->SetViewMode(VIEW_GALAXY);
+		view_btn[VIEW_GALAXY]->SetButtonState(1);
+		use_filter_mode = SELECT_SYSTEM;
+	}
 
-   if (use_filter_mode >= 0) {
-      if (map_view) map_view->SetSelectionMode(use_filter_mode);
-   }
+	else if (view_btn[VIEW_SYSTEM] == event->window) {
+		if (map_view) map_view->SetViewMode(VIEW_SYSTEM);
+		view_btn[VIEW_SYSTEM]->SetButtonState(1);
+		use_filter_mode = SELECT_REGION;
+	}
+
+	else if (view_btn[VIEW_REGION] == event->window) {
+		if (map_view) map_view->SetViewMode(VIEW_REGION);
+		view_btn[VIEW_REGION]->SetButtonState(1);
+		use_filter_mode = SELECT_STARSHIP;
+	}
+
+	if (use_filter_mode >= 0) {
+		if (map_view) map_view->SetSelectionMode(use_filter_mode);
+	}
 }
 
 // +--------------------------------------------------------------------+

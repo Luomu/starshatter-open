@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         ModInfoDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         ModInfoDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mod Info Splash Dialog Active Window class
+	OVERVIEW
+	========
+	Mod Info Splash Dialog Active Window class
 */
 
 #ifndef ModInfoDlg_h
@@ -35,30 +35,30 @@ class ModInfo;
 class ModInfoDlg : public FormWindow
 {
 public:
-   ModInfoDlg(Screen* s, FormDef& def, BaseScreen* mgr);
-   virtual ~ModInfoDlg();
+	ModInfoDlg(Screen* s, FormDef& def, BaseScreen* mgr);
+	virtual ~ModInfoDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      SetModInfo(ModInfo* info);
-   virtual void      OnAccept(AWEvent* event);
+	// Operations:
+	virtual void      SetModInfo(ModInfo* info);
+	virtual void      OnAccept(AWEvent* event);
 
 protected:
-   BaseScreen*       manager;
+	BaseScreen*       manager;
 
-   ActiveWindow*     lbl_name;
-   ActiveWindow*     lbl_desc;
-   ActiveWindow*     lbl_copy;
-   ImageBox*         img_logo;
+	ActiveWindow*     lbl_name;
+	ActiveWindow*     lbl_desc;
+	ActiveWindow*     lbl_copy;
+	ImageBox*         img_logo;
 
-   Button*           btn_accept;
+	Button*           btn_accept;
 
-   ModInfo*          mod_info;
+	ModInfo*          mod_info;
 
-   Bitmap            bmp_default;
+	Bitmap            bmp_default;
 };
 
 #endif ModInfoDlg_h

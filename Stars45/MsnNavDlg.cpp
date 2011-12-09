@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         MsnNavDlg.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         MsnNavDlg.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Briefing Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Briefing Dialog Active Window class
 */
 
 #include "MemDebug.h"
@@ -33,9 +33,9 @@ DEF_MAP_CLIENT(MsnNavDlg, OnTabButton);
 // +--------------------------------------------------------------------+
 
 MsnNavDlg::MsnNavDlg(Screen* s, FormDef& def, PlanScreen* mgr)
-   : NavDlg(s, def, mgr), MsnDlg(mgr)
+: NavDlg(s, def, mgr), MsnDlg(mgr)
 {
-   RegisterControls();
+	RegisterControls();
 }
 
 MsnNavDlg::~MsnNavDlg()
@@ -47,25 +47,25 @@ MsnNavDlg::~MsnNavDlg()
 void
 MsnNavDlg::RegisterControls()
 {
-   RegisterMsnControls(this);
+	RegisterMsnControls(this);
 
-   if (commit)
-      REGISTER_CLIENT(EID_CLICK, commit, MsnNavDlg, OnCommit);
+	if (commit)
+	REGISTER_CLIENT(EID_CLICK, commit, MsnNavDlg, OnCommit);
 
-   if (cancel)
-      REGISTER_CLIENT(EID_CLICK, cancel, MsnNavDlg, OnCancel);
+	if (cancel)
+	REGISTER_CLIENT(EID_CLICK, cancel, MsnNavDlg, OnCancel);
 
-   if (sit_button)
-      REGISTER_CLIENT(EID_CLICK, sit_button, MsnNavDlg, OnTabButton);
+	if (sit_button)
+	REGISTER_CLIENT(EID_CLICK, sit_button, MsnNavDlg, OnTabButton);
 
-   if (pkg_button)
-      REGISTER_CLIENT(EID_CLICK, pkg_button, MsnNavDlg, OnTabButton);
+	if (pkg_button)
+	REGISTER_CLIENT(EID_CLICK, pkg_button, MsnNavDlg, OnTabButton);
 
-   if (nav_button)
-      REGISTER_CLIENT(EID_CLICK, nav_button, MsnNavDlg, OnTabButton);
+	if (nav_button)
+	REGISTER_CLIENT(EID_CLICK, nav_button, MsnNavDlg, OnTabButton);
 
-   if (wep_button)
-      REGISTER_CLIENT(EID_CLICK, wep_button, MsnNavDlg, OnTabButton);
+	if (wep_button)
+	REGISTER_CLIENT(EID_CLICK, wep_button, MsnNavDlg, OnTabButton);
 }
 
 // +--------------------------------------------------------------------+
@@ -73,18 +73,18 @@ MsnNavDlg::RegisterControls()
 void
 MsnNavDlg::Show()
 {
-   NavDlg::Show();
-   ShowMsnDlg();
+	NavDlg::Show();
+	ShowMsnDlg();
 }
 
 void
 MsnNavDlg::ExecFrame()
 {
-   NavDlg::ExecFrame();
+	NavDlg::ExecFrame();
 
-   if (Keyboard::KeyDown(VK_RETURN)) {
-      OnCommit(0);
-   }
+	if (Keyboard::KeyDown(VK_RETURN)) {
+		OnCommit(0);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -92,13 +92,13 @@ MsnNavDlg::ExecFrame()
 void
 MsnNavDlg::OnCommit(AWEvent* event)
 {
-   MsnDlg::OnCommit(event);
-   NavDlg::OnCommit(event);
+	MsnDlg::OnCommit(event);
+	NavDlg::OnCommit(event);
 }
 
 void
 MsnNavDlg::OnCancel(AWEvent* event)
 {
-   MsnDlg::OnCancel(event);
-   NavDlg::OnCancel(event);
+	MsnDlg::OnCancel(event);
+	NavDlg::OnCancel(event);
 }

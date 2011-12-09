@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         DebriefDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         DebriefDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Debriefing Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Debriefing Dialog Active Window class
 */
 
 #ifndef DebriefDlg_h
@@ -38,43 +38,43 @@ class Ship;
 class DebriefDlg : public FormWindow
 {
 public:
-   DebriefDlg(Screen* s, FormDef& def, PlanScreen* mgr);
-   virtual ~DebriefDlg();
+	DebriefDlg(Screen* s, FormDef& def, PlanScreen* mgr);
+	virtual ~DebriefDlg();
 
-   virtual void      RegisterControls();
-   virtual void      ExecFrame();
-   virtual void      Show();
+	virtual void      RegisterControls();
+	virtual void      ExecFrame();
+	virtual void      Show();
 
-   // Operations:
-   virtual void      OnClose(AWEvent* event);
-   virtual void      OnUnit(AWEvent* event);
-   
+	// Operations:
+	virtual void      OnClose(AWEvent* event);
+	virtual void      OnUnit(AWEvent* event);
+
 protected:
-   virtual void      DrawUnits();
+	virtual void      DrawUnits();
 
-   PlanScreen*       manager;
-   Button*           close_btn;
+	PlanScreen*       manager;
+	Button*           close_btn;
 
-   ActiveWindow*     mission_name;
-   ActiveWindow*     mission_system;
-   ActiveWindow*     mission_sector;
-   ActiveWindow*     mission_time_start;
+	ActiveWindow*     mission_name;
+	ActiveWindow*     mission_system;
+	ActiveWindow*     mission_sector;
+	ActiveWindow*     mission_time_start;
 
-   ActiveWindow*     objectives;
-   ActiveWindow*     situation;
-   ActiveWindow*     mission_score;
+	ActiveWindow*     objectives;
+	ActiveWindow*     situation;
+	ActiveWindow*     mission_score;
 
-   ListBox*          unit_list;
-   ListBox*          summary_list;
-   ListBox*          event_list;
+	ListBox*          unit_list;
+	ListBox*          summary_list;
+	ListBox*          event_list;
 
-   Campaign*         campaign;
-   Mission*          mission;
-   MissionInfo*      info;
-   int               unit_index;
+	Campaign*         campaign;
+	Mission*          mission;
+	MissionInfo*      info;
+	int               unit_index;
 
-   Sim*              sim;
-   Ship*             ship;
+	Sim*              sim;
+	Ship*             ship;
 };
 
 #endif DebriefDlg_h

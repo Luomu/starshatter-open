@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdTheaterDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdTheaterDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Order of Battle Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Order of Battle Tab)
 */
 
 #ifndef CmdTheaterDlg_h
@@ -29,33 +29,33 @@
 // +--------------------------------------------------------------------+
 
 class CmdTheaterDlg : public FormWindow,
-                      public CmdDlg
+public CmdDlg
 {
 public:
-   CmdTheaterDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmdTheaterDlg();
+	CmdTheaterDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmdTheaterDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnMode(AWEvent* event);
-   virtual void      OnSave(AWEvent* event);
-   virtual void      OnExit(AWEvent* event);
-   virtual void      OnView(AWEvent* event);
+	// Operations:
+	virtual void      OnMode(AWEvent* event);
+	virtual void      OnSave(AWEvent* event);
+	virtual void      OnExit(AWEvent* event);
+	virtual void      OnView(AWEvent* event);
 
 protected:
-   CmpnScreen*       manager;
+	CmpnScreen*       manager;
 
-   ActiveWindow*     map_theater;
-   MapView*          map_view;
-   Button*           view_btn[3];
-   Button*           zoom_in_btn;
-   Button*           zoom_out_btn;
+	ActiveWindow*     map_theater;
+	MapView*          map_view;
+	Button*           view_btn[3];
+	Button*           zoom_in_btn;
+	Button*           zoom_out_btn;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
+	Starshatter*      stars;
+	Campaign*         campaign;
 };
 
 #endif CmdTheaterDlg_h

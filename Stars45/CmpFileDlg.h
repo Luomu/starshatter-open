@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmpFileDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmpFileDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Select Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Select Dialog Active Window class
 */
 
 #ifndef CmpFileDlg_h
@@ -35,29 +35,29 @@ class  Starshatter;
 class CmpFileDlg : public FormWindow
 {
 public:
-   CmpFileDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmpFileDlg();
+	CmpFileDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmpFileDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
+	virtual void      RegisterControls();
+	virtual void      Show();
 
-   // Operations:
-   virtual void      ExecFrame();
+	// Operations:
+	virtual void      ExecFrame();
 
-   virtual void      OnSave(AWEvent* event);
-   virtual void      OnCancel(AWEvent* event);
-   virtual void      OnCampaign(AWEvent* event);
+	virtual void      OnSave(AWEvent* event);
+	virtual void      OnCancel(AWEvent* event);
+	virtual void      OnCampaign(AWEvent* event);
 
 protected:
-   CmpnScreen*       manager;
-   Campaign*         campaign;
+	CmpnScreen*       manager;
+	Campaign*         campaign;
 
-   Button*           btn_save;
-   Button*           btn_cancel;
-   EditBox*          edt_name;
-   ListBox*          lst_campaigns;
+	Button*           btn_save;
+	Button*           btn_cancel;
+	EditBox*          edt_name;
+	ListBox*          lst_campaigns;
 
-   bool              exit_latch;
+	bool              exit_latch;
 };
 
 #endif CmpFileDlg_h

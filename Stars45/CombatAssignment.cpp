@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CombatAssignment.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CombatAssignment.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    High level assignment of one group to damage another
+	OVERVIEW
+	========
+	High level assignment of one group to damage another
 */
 
 #include "MemDebug.h"
@@ -20,7 +20,7 @@
 // +--------------------------------------------------------------------+
 
 CombatAssignment::CombatAssignment(int t, CombatGroup* obj, CombatGroup* rsc)
-   : type(t), objective(obj), resource(rsc)
+: type(t), objective(obj), resource(rsc)
 {
 }
 
@@ -38,13 +38,13 @@ CombatAssignment::~CombatAssignment()
 int
 CombatAssignment::operator < (const CombatAssignment& a) const
 {
-   if (!objective)
-      return 0;
+	if (!objective)
+	return 0;
 
-   if (!a.objective)
-      return 1;
+	if (!a.objective)
+	return 1;
 
-   return objective->GetPlanValue() > a.objective->GetPlanValue();
+	return objective->GetPlanValue() > a.objective->GetPlanValue();
 }
 
 // +--------------------------------------------------------------------+
@@ -52,17 +52,17 @@ CombatAssignment::operator < (const CombatAssignment& a) const
 const char*
 CombatAssignment::GetDescription() const
 {
-   static char desc[256];
+	static char desc[256];
 
-   if (!resource)
-      sprintf(desc, "%s %s", 
-               (const char*) Mission::RoleName(type),
-               (const char*) objective->Name());
-   else
-      sprintf(desc, "%s %s %s", 
-               (const char*) resource->Name(),
-               (const char*) Mission::RoleName(type),
-               (const char*) objective->Name());
+	if (!resource)
+	sprintf(desc, "%s %s", 
+	(const char*) Mission::RoleName(type),
+	(const char*) objective->Name());
+	else
+	sprintf(desc, "%s %s %s", 
+	(const char*) resource->Name(),
+	(const char*) Mission::RoleName(type),
+	(const char*) objective->Name());
 
-   return desc;
+	return desc;
 }

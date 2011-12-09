@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         QuantumView.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         QuantumView.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    View class for Radio Communications HUD Overlay
+	OVERVIEW
+	========
+	View class for Radio Communications HUD Overlay
 */
 
 #ifndef QuantumView_h
@@ -32,41 +32,41 @@ class Font;
 // +--------------------------------------------------------------------+
 
 class QuantumView : public View, 
-                    public SimObserver
+public SimObserver
 {
 public:
-   QuantumView(Window* c);
-   virtual ~QuantumView();
+	QuantumView(Window* c);
+	virtual ~QuantumView();
 
-   // Operations:
-   virtual void      Refresh();
-   virtual void      OnWindowMove();
-   virtual void      ExecFrame();
+	// Operations:
+	virtual void      Refresh();
+	virtual void      OnWindowMove();
+	virtual void      ExecFrame();
 
-   virtual Menu*     GetQuantumMenu(Ship* ship);
-   virtual bool      IsMenuShown();
-   virtual void      ShowMenu();
-   virtual void      CloseMenu();
+	virtual Menu*     GetQuantumMenu(Ship* ship);
+	virtual bool      IsMenuShown();
+	virtual void      ShowMenu();
+	virtual void      CloseMenu();
 
-   virtual bool         Update(SimObject* obj);
-   virtual const char*  GetObserverName() const;
+	virtual bool         Update(SimObject* obj);
+	virtual const char*  GetObserverName() const;
 
-   static void       SetColor(Color c);
+	static void       SetColor(Color c);
 
-   static void       Initialize();
-   static void       Close();
+	static void       Initialize();
+	static void       Close();
 
-   static QuantumView* GetInstance() { return quantum_view; }
+	static QuantumView* GetInstance() { return quantum_view; }
 
 protected:
-   int         width, height;
-   double      xcenter, ycenter;
+	int         width, height;
+	double      xcenter, ycenter;
 
-   Font*       font;
-   Sim*        sim;
-   Ship*       ship;
+	Font*       font;
+	Sim*        sim;
+	Ship*       ship;
 
-   static QuantumView* quantum_view;
+	static QuantumView* quantum_view;
 };
 
 #endif QuantumView_h

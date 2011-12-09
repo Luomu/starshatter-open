@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdTitleDlg.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdTitleDlg.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Intel/Newsfeed Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Intel/Newsfeed Tab)
 */
 
 #include "MemDebug.h"
@@ -41,13 +41,13 @@
 // +--------------------------------------------------------------------+
 
 CmdTitleDlg::CmdTitleDlg(Screen* s, FormDef& def, CmpnScreen* mgr)
-   : FormWindow(s, 0, 0, s->Width(), s->Height()), manager(mgr),
-     stars(0), campaign(0), showTime(0)
+: FormWindow(s, 0, 0, s->Width(), s->Height()), manager(mgr),
+stars(0), campaign(0), showTime(0)
 {
-   stars    = Starshatter::GetInstance();
-   campaign = Campaign::GetCampaign();
+	stars    = Starshatter::GetInstance();
+	campaign = Campaign::GetCampaign();
 
-   Init(def);
+	Init(def);
 }
 
 CmdTitleDlg::~CmdTitleDlg()
@@ -59,7 +59,7 @@ CmdTitleDlg::~CmdTitleDlg()
 void
 CmdTitleDlg::RegisterControls()
 {
-   img_title = (ImageBox*)  FindControl(200);
+	img_title = (ImageBox*)  FindControl(200);
 }
 
 // +--------------------------------------------------------------------+
@@ -67,7 +67,7 @@ CmdTitleDlg::RegisterControls()
 void
 CmdTitleDlg::Show()
 {
-   FormWindow::Show();
+	FormWindow::Show();
 }
 
 // +--------------------------------------------------------------------+

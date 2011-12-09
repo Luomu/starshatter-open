@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdOrdersDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdOrdersDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Campaign Orders Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Campaign Orders Tab)
 */
 
 #ifndef CmdOrdersDlg_h
@@ -28,28 +28,28 @@
 // +--------------------------------------------------------------------+
 
 class CmdOrdersDlg : public FormWindow,
-                     public CmdDlg
+public CmdDlg
 {
 public:
-   CmdOrdersDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmdOrdersDlg();
+	CmdOrdersDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmdOrdersDlg();
 
-   virtual void      RegisterControls();
-   virtual void      ExecFrame();
-   virtual void      Show();
+	virtual void      RegisterControls();
+	virtual void      ExecFrame();
+	virtual void      Show();
 
-   // Operations:
-   virtual void      OnMode(AWEvent* event);
-   virtual void      OnSave(AWEvent* event);
-   virtual void      OnExit(AWEvent* event);
+	// Operations:
+	virtual void      OnMode(AWEvent* event);
+	virtual void      OnSave(AWEvent* event);
+	virtual void      OnExit(AWEvent* event);
 
 protected:
-   CmpnScreen*       manager;
+	CmpnScreen*       manager;
 
-   ActiveWindow*     lbl_orders;
+	ActiveWindow*     lbl_orders;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
+	Starshatter*      stars;
+	Campaign*         campaign;
 };
 
 #endif CmdOrdersDlg_h

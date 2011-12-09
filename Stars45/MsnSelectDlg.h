@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         MsnSelectDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         MsnSelectDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Mission Select Dialog Active Window class
+	OVERVIEW
+	========
+	Mission Select Dialog Active Window class
 */
 
 #ifndef MsnSelectDlg_h
@@ -35,46 +35,46 @@ class Starshatter;
 class MsnSelectDlg : public FormWindow
 {
 public:
-   MsnSelectDlg(Screen* s, FormDef& def, MenuScreen* mgr);
-   virtual ~MsnSelectDlg();
+	MsnSelectDlg(Screen* s, FormDef& def, MenuScreen* mgr);
+	virtual ~MsnSelectDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnCampaignSelect(AWEvent* event);
-   virtual void      OnMissionSelect(AWEvent* event);
+	// Operations:
+	virtual void      OnCampaignSelect(AWEvent* event);
+	virtual void      OnMissionSelect(AWEvent* event);
 
-   virtual void      OnMod(AWEvent* event);
-   virtual void      OnNew(AWEvent* event);
-   virtual void      OnEdit(AWEvent* event);
-   virtual void      OnDel(AWEvent* event);
-   virtual void      OnDelConfirm(AWEvent* event);
-   virtual void      OnAccept(AWEvent* event);
-   virtual void      OnCancel(AWEvent* event);
-   
+	virtual void      OnMod(AWEvent* event);
+	virtual void      OnNew(AWEvent* event);
+	virtual void      OnEdit(AWEvent* event);
+	virtual void      OnDel(AWEvent* event);
+	virtual void      OnDelConfirm(AWEvent* event);
+	virtual void      OnAccept(AWEvent* event);
+	virtual void      OnCancel(AWEvent* event);
+
 protected:
-   MenuScreen*       manager;
+	MenuScreen*       manager;
 
-   Button*           btn_mod;
-   Button*           btn_new;
-   Button*           btn_edit;
-   Button*           btn_del;
-   Button*           btn_accept;
-   Button*           btn_cancel;
+	Button*           btn_mod;
+	Button*           btn_new;
+	Button*           btn_edit;
+	Button*           btn_del;
+	Button*           btn_accept;
+	Button*           btn_cancel;
 
-   ComboBox*         cmb_campaigns;
-   ListBox*          lst_campaigns;
-   ListBox*          lst_missions;
+	ComboBox*         cmb_campaigns;
+	ListBox*          lst_campaigns;
+	ListBox*          lst_missions;
 
-   ActiveWindow*     description;
+	ActiveWindow*     description;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
-   int               selected_mission;
-   int               mission_id;
-   bool              editable;
+	Starshatter*      stars;
+	Campaign*         campaign;
+	int               selected_mission;
+	int               mission_id;
+	bool              editable;
 };
 
 #endif MsnSelectDlg_h

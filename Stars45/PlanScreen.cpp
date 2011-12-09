@@ -1,10 +1,10 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars
-    FILE:         PlanScreen.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars
+	FILE:         PlanScreen.cpp
+	AUTHOR:       John DiCamillo
 
 */
 
@@ -41,15 +41,15 @@
 // +--------------------------------------------------------------------+
 
 PlanScreen::PlanScreen()
-   : screen(0), navdlg(0), award_dlg(0), debrief_dlg(0),
-     objdlg(0), pkgdlg(0), wepdlg(0), isShown(false)
+: screen(0), navdlg(0), award_dlg(0), debrief_dlg(0),
+objdlg(0), pkgdlg(0), wepdlg(0), isShown(false)
 {
-   loader   = DataLoader::GetLoader();
+	loader   = DataLoader::GetLoader();
 }
 
 PlanScreen::~PlanScreen()
 {
-   TearDown();
+	TearDown();
 }
 
 // +--------------------------------------------------------------------+
@@ -57,40 +57,40 @@ PlanScreen::~PlanScreen()
 void
 PlanScreen::Setup(Screen* s)
 {
-   if (!s)
-      return;
+	if (!s)
+	return;
 
-   screen        = s;
+	screen        = s;
 
-   // create windows
-   loader->UseFileSystem(true);
+	// create windows
+	loader->UseFileSystem(true);
 
-   FormDef msn_obj_def("MsnObjDlg", 0);
-   msn_obj_def.Load("MsnObjDlg");
-   objdlg = new(__FILE__,__LINE__) MsnObjDlg(screen, msn_obj_def, this);
+	FormDef msn_obj_def("MsnObjDlg", 0);
+	msn_obj_def.Load("MsnObjDlg");
+	objdlg = new(__FILE__,__LINE__) MsnObjDlg(screen, msn_obj_def, this);
 
-   FormDef msn_pkg_def("MsnPkgDlg", 0);
-   msn_pkg_def.Load("MsnPkgDlg");
-   pkgdlg = new(__FILE__,__LINE__) MsnPkgDlg(screen, msn_pkg_def, this);
+	FormDef msn_pkg_def("MsnPkgDlg", 0);
+	msn_pkg_def.Load("MsnPkgDlg");
+	pkgdlg = new(__FILE__,__LINE__) MsnPkgDlg(screen, msn_pkg_def, this);
 
-   FormDef msn_nav_def("MsnNavDlg", 0);
-   msn_nav_def.Load("MsnNavDlg");
-   navdlg = new(__FILE__,__LINE__) MsnNavDlg(screen, msn_nav_def, this);
+	FormDef msn_nav_def("MsnNavDlg", 0);
+	msn_nav_def.Load("MsnNavDlg");
+	navdlg = new(__FILE__,__LINE__) MsnNavDlg(screen, msn_nav_def, this);
 
-   FormDef msn_wep_def("MsnWepDlg", 0);
-   msn_wep_def.Load("MsnWepDlg");
-   wepdlg = new(__FILE__,__LINE__) MsnWepDlg(screen, msn_wep_def, this);
+	FormDef msn_wep_def("MsnWepDlg", 0);
+	msn_wep_def.Load("MsnWepDlg");
+	wepdlg = new(__FILE__,__LINE__) MsnWepDlg(screen, msn_wep_def, this);
 
-   FormDef award_def("AwardDlg", 0);
-   award_def.Load("AwardDlg");
-   award_dlg = new(__FILE__,__LINE__) AwardDlg(screen, award_def, this);
+	FormDef award_def("AwardDlg", 0);
+	award_def.Load("AwardDlg");
+	award_dlg = new(__FILE__,__LINE__) AwardDlg(screen, award_def, this);
 
-   FormDef debrief_def("DebriefDlg", 0);
-   debrief_def.Load("DebriefDlg");
-   debrief_dlg = new(__FILE__,__LINE__) DebriefDlg(screen, debrief_def, this);
+	FormDef debrief_def("DebriefDlg", 0);
+	debrief_def.Load("DebriefDlg");
+	debrief_dlg = new(__FILE__,__LINE__) DebriefDlg(screen, debrief_def, this);
 
-   loader->UseFileSystem(Starshatter::UseFileSystem());
-   ShowMsnDlg();
+	loader->UseFileSystem(Starshatter::UseFileSystem());
+	ShowMsnDlg();
 }
 
 // +--------------------------------------------------------------------+
@@ -98,29 +98,29 @@ PlanScreen::Setup(Screen* s)
 void
 PlanScreen::TearDown()
 {
-   if (screen) {
-      screen->DelWindow(objdlg);
-      screen->DelWindow(pkgdlg);
-      screen->DelWindow(wepdlg);
-      screen->DelWindow(navdlg);
-      screen->DelWindow(debrief_dlg);
-      screen->DelWindow(award_dlg);
-   }
+	if (screen) {
+		screen->DelWindow(objdlg);
+		screen->DelWindow(pkgdlg);
+		screen->DelWindow(wepdlg);
+		screen->DelWindow(navdlg);
+		screen->DelWindow(debrief_dlg);
+		screen->DelWindow(award_dlg);
+	}
 
-   delete objdlg;
-   delete pkgdlg;
-   delete wepdlg;
-   delete navdlg;
-   delete debrief_dlg;
-   delete award_dlg;
+	delete objdlg;
+	delete pkgdlg;
+	delete wepdlg;
+	delete navdlg;
+	delete debrief_dlg;
+	delete award_dlg;
 
-   objdlg           = 0;
-   pkgdlg           = 0;
-   wepdlg           = 0;
-   navdlg           = 0;
-   debrief_dlg      = 0;
-   award_dlg        = 0;
-   screen           = 0;
+	objdlg           = 0;
+	pkgdlg           = 0;
+	wepdlg           = 0;
+	navdlg           = 0;
+	debrief_dlg      = 0;
+	award_dlg        = 0;
+	screen           = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -128,40 +128,40 @@ PlanScreen::TearDown()
 void
 PlanScreen::ExecFrame()
 {
-   Game::SetScreenColor(Color::Black);
+	Game::SetScreenColor(Color::Black);
 
-   Mission*    mission  = 0;
-   Campaign*   campaign = Campaign::GetCampaign();
+	Mission*    mission  = 0;
+	Campaign*   campaign = Campaign::GetCampaign();
 
-   if (campaign)
-      mission = campaign->GetMission();
+	if (campaign)
+	mission = campaign->GetMission();
 
-   if (navdlg) {
-      navdlg->SetMission(mission);
+	if (navdlg) {
+		navdlg->SetMission(mission);
 
-      if (navdlg->IsShown())
-         navdlg->ExecFrame();
-   }
+		if (navdlg->IsShown())
+		navdlg->ExecFrame();
+	}
 
-   if (objdlg && objdlg->IsShown()) {
-      objdlg->ExecFrame();
-   }
+	if (objdlg && objdlg->IsShown()) {
+		objdlg->ExecFrame();
+	}
 
-   if (pkgdlg && pkgdlg->IsShown()) {
-      pkgdlg->ExecFrame();
-   }
+	if (pkgdlg && pkgdlg->IsShown()) {
+		pkgdlg->ExecFrame();
+	}
 
-   if (wepdlg && wepdlg->IsShown()) {
-      wepdlg->ExecFrame();
-   }
+	if (wepdlg && wepdlg->IsShown()) {
+		wepdlg->ExecFrame();
+	}
 
-   if (award_dlg && award_dlg->IsShown()) {
-      award_dlg->ExecFrame();
-   }
+	if (award_dlg && award_dlg->IsShown()) {
+		award_dlg->ExecFrame();
+	}
 
-   if (debrief_dlg && debrief_dlg->IsShown()) {
-      debrief_dlg->ExecFrame();
-   }
+	if (debrief_dlg && debrief_dlg->IsShown()) {
+		debrief_dlg->ExecFrame();
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -169,31 +169,31 @@ PlanScreen::ExecFrame()
 bool
 PlanScreen::CloseTopmost()
 {
-   if (debrief_dlg->IsShown()) {
-      debrief_dlg->OnClose(0);
-   }
+	if (debrief_dlg->IsShown()) {
+		debrief_dlg->OnClose(0);
+	}
 
-   if (award_dlg->IsShown()) {
-      return true;
-   }
+	if (award_dlg->IsShown()) {
+		return true;
+	}
 
-   return false;
+	return false;
 }
 
 void
 PlanScreen::Show()
 {
-   if (!isShown) {
-      ShowMsnDlg();
-      isShown = true;
-   }
+	if (!isShown) {
+		ShowMsnDlg();
+		isShown = true;
+	}
 }
 
 void
 PlanScreen::Hide()
 {
-   HideAll();
-   isShown = false;
+	HideAll();
+	isShown = false;
 }
 
 // +--------------------------------------------------------------------+
@@ -201,9 +201,9 @@ PlanScreen::Hide()
 void
 PlanScreen::ShowMsnDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   objdlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	objdlg->Show();
 }
 
 // +--------------------------------------------------------------------+
@@ -211,15 +211,15 @@ PlanScreen::ShowMsnDlg()
 void
 PlanScreen::HideMsnDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   objdlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	objdlg->Show();
 }
 
 bool
 PlanScreen::IsMsnShown()
 {
-   return IsMsnObjShown() || IsMsnPkgShown() || IsMsnWepShown();
+	return IsMsnObjShown() || IsMsnPkgShown() || IsMsnWepShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -227,9 +227,9 @@ PlanScreen::IsMsnShown()
 void
 PlanScreen::ShowMsnObjDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   objdlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	objdlg->Show();
 }
 
 // +--------------------------------------------------------------------+
@@ -237,8 +237,8 @@ PlanScreen::ShowMsnObjDlg()
 void
 PlanScreen::HideMsnObjDlg()
 {
-   HideAll();
-   Mouse::Show(true);
+	HideAll();
+	Mouse::Show(true);
 }
 
 // +--------------------------------------------------------------------+
@@ -246,7 +246,7 @@ PlanScreen::HideMsnObjDlg()
 bool
 PlanScreen::IsMsnObjShown()
 {
-   return objdlg && objdlg->IsShown();
+	return objdlg && objdlg->IsShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -254,9 +254,9 @@ PlanScreen::IsMsnObjShown()
 void
 PlanScreen::ShowMsnPkgDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   pkgdlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	pkgdlg->Show();
 }
 
 // +--------------------------------------------------------------------+
@@ -264,8 +264,8 @@ PlanScreen::ShowMsnPkgDlg()
 void
 PlanScreen::HideMsnPkgDlg()
 {
-   HideAll();
-   Mouse::Show(true);
+	HideAll();
+	Mouse::Show(true);
 }
 
 // +--------------------------------------------------------------------+
@@ -273,7 +273,7 @@ PlanScreen::HideMsnPkgDlg()
 bool
 PlanScreen::IsMsnPkgShown()
 {
-   return pkgdlg && pkgdlg->IsShown();
+	return pkgdlg && pkgdlg->IsShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -281,9 +281,9 @@ PlanScreen::IsMsnPkgShown()
 void
 PlanScreen::ShowMsnWepDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   wepdlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	wepdlg->Show();
 }
 
 // +--------------------------------------------------------------------+
@@ -291,8 +291,8 @@ PlanScreen::ShowMsnWepDlg()
 void
 PlanScreen::HideMsnWepDlg()
 {
-   HideAll();
-   Mouse::Show(true);
+	HideAll();
+	Mouse::Show(true);
 }
 
 // +--------------------------------------------------------------------+
@@ -300,7 +300,7 @@ PlanScreen::HideMsnWepDlg()
 bool
 PlanScreen::IsMsnWepShown()
 {
-   return wepdlg && wepdlg->IsShown();
+	return wepdlg && wepdlg->IsShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -308,11 +308,11 @@ PlanScreen::IsMsnWepShown()
 void
 PlanScreen::ShowNavDlg()
 {
-   if (navdlg && !navdlg->IsShown()) {
-      HideAll();
-      Mouse::Show(true);
-      navdlg->Show();
-   }
+	if (navdlg && !navdlg->IsShown()) {
+		HideAll();
+		Mouse::Show(true);
+		navdlg->Show();
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -320,10 +320,10 @@ PlanScreen::ShowNavDlg()
 void
 PlanScreen::HideNavDlg()
 {
-   if (navdlg && navdlg->IsShown()) {
-      HideAll();
-      Mouse::Show(true);
-   }
+	if (navdlg && navdlg->IsShown()) {
+		HideAll();
+		Mouse::Show(true);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -331,7 +331,7 @@ PlanScreen::HideNavDlg()
 bool
 PlanScreen::IsNavShown()
 {
-   return navdlg && navdlg->IsShown();
+	return navdlg && navdlg->IsShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -339,22 +339,22 @@ PlanScreen::IsNavShown()
 void
 PlanScreen::ShowDebriefDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   debrief_dlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	debrief_dlg->Show();
 }
 
 void
 PlanScreen::HideDebriefDlg()
 {
-   HideAll();
-   Mouse::Show(true);
+	HideAll();
+	Mouse::Show(true);
 }
 
 bool
 PlanScreen::IsDebriefShown()
 {
-   return debrief_dlg && debrief_dlg->IsShown();
+	return debrief_dlg && debrief_dlg->IsShown();
 }
 
 // +--------------------------------------------------------------------+
@@ -362,22 +362,22 @@ PlanScreen::IsDebriefShown()
 void
 PlanScreen::ShowAwardDlg()
 {
-   HideAll();
-   Mouse::Show(true);
-   award_dlg->Show();
+	HideAll();
+	Mouse::Show(true);
+	award_dlg->Show();
 }
 
 void
 PlanScreen::HideAwardDlg()
 {
-   HideAll();
-   Mouse::Show(true);
+	HideAll();
+	Mouse::Show(true);
 }
 
 bool
 PlanScreen::IsAwardShown()
 {
-   return award_dlg && award_dlg->IsShown();
+	return award_dlg && award_dlg->IsShown();
 }
 
 
@@ -386,10 +386,10 @@ PlanScreen::IsAwardShown()
 void
 PlanScreen::HideAll()
 {
-   if (objdlg)       objdlg->Hide();
-   if (pkgdlg)       pkgdlg->Hide();
-   if (wepdlg)       wepdlg->Hide();
-   if (navdlg)       navdlg->Hide();
-   if (award_dlg)    award_dlg->Hide();
-   if (debrief_dlg)  debrief_dlg->Hide();
+	if (objdlg)       objdlg->Hide();
+	if (pkgdlg)       pkgdlg->Hide();
+	if (wepdlg)       wepdlg->Hide();
+	if (navdlg)       navdlg->Hide();
+	if (award_dlg)    award_dlg->Hide();
+	if (debrief_dlg)  debrief_dlg->Hide();
 }

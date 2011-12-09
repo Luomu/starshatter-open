@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdTitleDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdTitleDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Campaign Title Card
+	OVERVIEW
+	========
+	Campaign Title Card
 */
 
 #ifndef CmdTitleDlg_h
@@ -35,21 +35,21 @@ class Starshatter;
 class CmdTitleDlg : public FormWindow
 {
 public:
-   CmdTitleDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmdTitleDlg();
+	CmdTitleDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmdTitleDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
-   
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
+
 protected:
-   CmpnScreen*       manager;
+	CmpnScreen*       manager;
 
-   ImageBox*         img_title;
+	ImageBox*         img_title;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
-   double            showTime;
+	Starshatter*      stars;
+	Campaign*         campaign;
+	double            showTime;
 };
 
 #endif CmdTitleDlg_h

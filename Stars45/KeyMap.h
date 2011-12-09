@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.6
-    Destroyer Studios LLC
-    Copyright © 1997-2006. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2006. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         KeyMap.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         KeyMap.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Keyboard Mapping
+	OVERVIEW
+	========
+	Keyboard Mapping
 */
 
 #ifndef KeyMap_h
@@ -24,41 +24,41 @@
 class KeyMap
 {
 public:
-   KeyMap();
-   virtual ~KeyMap();
+	KeyMap();
+	virtual ~KeyMap();
 
-   int DefaultKeyMap(int max_keys = 256);
-   int LoadKeyMap(const char* filename, int max_keys = 256);
-   int SaveKeyMap(const char* filename, int max_keys = 256);
+	int DefaultKeyMap(int max_keys = 256);
+	int LoadKeyMap(const char* filename, int max_keys = 256);
+	int SaveKeyMap(const char* filename, int max_keys = 256);
 
-   enum KEY_CATEGORY { KEY_FLIGHT, KEY_WEAPONS, KEY_VIEW, KEY_MISC };
+	enum KEY_CATEGORY { KEY_FLIGHT, KEY_WEAPONS, KEY_VIEW, KEY_MISC };
 
-   int                     GetCategory(int i);
-   const char*             DescribeAction(int i);
-   const char*             DescribeKey(int i);
-   int                     FindMapIndex(int act);
+	int                     GetCategory(int i);
+	const char*             DescribeAction(int i);
+	const char*             DescribeKey(int i);
+	int                     FindMapIndex(int act);
 
-   static const char*      DescribeKey(int vk, int shift, int joy);
-   static int              GetMappableVKey(int n);
+	static const char*      DescribeKey(int vk, int shift, int joy);
+	static int              GetMappableVKey(int n);
 
-   int                     GetNumKeys()      { return nkeys;      }
-   KeyMapEntry*            GetMapping()      { return map;        }
-   KeyMapEntry*            GetKeyMap(int i)  { return &map[i];    }
-   KeyMapEntry*            GetDefault(int i) { return &defmap[i]; }
+	int                     GetNumKeys()      { return nkeys;      }
+	KeyMapEntry*            GetMapping()      { return map;        }
+	KeyMapEntry*            GetKeyMap(int i)  { return &map[i];    }
+	KeyMapEntry*            GetDefault(int i) { return &defmap[i]; }
 
-   void                    Bind(int a, int k, int s);
+	void                    Bind(int a, int k, int s);
 
-   static int              GetKeyAction(const char* act_str);
-   static int              GetKeyActionIndex(int act);
-   static int              GetKeyKey(const char* key_str);
-   static int              GetKeyKeyIndex(int key);
+	static int              GetKeyAction(const char* act_str);
+	static int              GetKeyActionIndex(int act);
+	static int              GetKeyKey(const char* key_str);
+	static int              GetKeyKeyIndex(int key);
 
 protected:
-   int                     BuildDefaultKeyMap();
+	int                     BuildDefaultKeyMap();
 
-   KeyMapEntry             map[256];
-   KeyMapEntry             defmap[256];
-   int                     nkeys;
+	KeyMapEntry             map[256];
+	KeyMapEntry             defmap[256];
+	int                     nkeys;
 };
 
 // +--------------------------------------------------------------------+

@@ -54,8 +54,8 @@
 
 // DATA FIELDS
 #define	NPControl		8	// indicates a control data field
-						// the second parameter of a message bearing control data information contains a packed data format. 
-						// The High byte indicates what the data is, and the Low byte contains the actual data
+// the second parameter of a message bearing control data information contains a packed data format. 
+// The High byte indicates what the data is, and the Low byte contains the actual data
 // roll, pitch, yaw
 #define	NPRoll		1	// +/- 16383 (representing +/- 180) [data = input - 16383]
 #define	NPPitch		2	// +/- 16383 (representing +/- 180) [data = input - 16383]
@@ -91,7 +91,7 @@
 typedef enum tagNPResult
 {
 	NP_OK = 0,
-    NP_ERR_DEVICE_NOT_PRESENT,
+	NP_ERR_DEVICE_NOT_PRESENT,
 	NP_ERR_UNSUPPORTED_OS,
 	NP_ERR_INVALID_ARG,
 	NP_ERR_DLL_NOT_FOUND,

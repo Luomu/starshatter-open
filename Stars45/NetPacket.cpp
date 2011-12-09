@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         NetGame.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         NetGame.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Network Game Manager and Player classes
+	OVERVIEW
+	========
+	Network Game Manager and Player classes
 */
 
 #include "MemDebug.h"
@@ -31,45 +31,45 @@ const int QUIT_ANN_SIZE    =   8;
 // +--------------------------------------------------------------------+
 
 NetPacket::NetPacket(NetMsg* g)
-   : msg(g)
+: msg(g)
 { }
 
 NetPacket::NetPacket(DWORD netid, BYTE type)
 {
-   int   len = 0;
-   char  buf[256];
-   ZeroMemory(buf, 256);
+	int   len = 0;
+	char  buf[256];
+	ZeroMemory(buf, 256);
 
-   switch (type) {
-   case NET_PING:          len = PING_SIZE;     break;
-   case NET_PONG:          len = PING_SIZE;     break;
-   case NET_OBJ_LOC:       len = SHIP_LOC_SIZE; break;
+	switch (type) {
+	case NET_PING:          len = PING_SIZE;     break;
+	case NET_PONG:          len = PING_SIZE;     break;
+	case NET_OBJ_LOC:       len = SHIP_LOC_SIZE; break;
 
-   case NET_JOIN_REQUEST:  len = JOIN_REQ_SIZE; break;
-   case NET_JOIN_ANNOUNCE: len = JOIN_ANN_SIZE; break;
-   case NET_QUIT_ANNOUNCE: len = QUIT_ANN_SIZE; break;
+	case NET_JOIN_REQUEST:  len = JOIN_REQ_SIZE; break;
+	case NET_JOIN_ANNOUNCE: len = JOIN_ANN_SIZE; break;
+	case NET_QUIT_ANNOUNCE: len = QUIT_ANN_SIZE; break;
 
-   default:                len = JOIN_REQ_SIZE; break;
-   }
+	default:                len = JOIN_REQ_SIZE; break;
+	}
 
-   msg = new(__FILE__,__LINE__) NetMsg(netid, type, buf, len);
+	msg = new(__FILE__,__LINE__) NetMsg(netid, type, buf, len);
 }
 
 NetPacket::~NetPacket()
 {
-   delete msg;
+	delete msg;
 }
 
 bool
 NetPacket::Send(NetLink& link)
 {
-   bool sent = false;
+	bool sent = false;
 
-   if (msg)
-      sent = link.SendMessage(msg);
+	if (msg)
+	sent = link.SendMessage(msg);
 
-   msg = 0;
-   return sent;
+	msg = 0;
+	return sent;
 }
 
 // +--------------------------------------------------------------------+
@@ -77,19 +77,19 @@ NetPacket::Send(NetLink& link)
 DWORD
 NetPacket::NetID() const
 {
-   if (msg)
-      return msg->NetID();
-   
-   return 0;
+	if (msg)
+	return msg->NetID();
+
+	return 0;
 }
 
 BYTE
 NetPacket::Type() const
 {
-   if (msg)
-      return msg->Type();
+	if (msg)
+	return msg->Type();
 
-   return 0;
+	return 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -97,21 +97,21 @@ NetPacket::Type() const
 DWORD
 NetPacket::GetPingSequence()
 {
-   if (msg && msg->Length() >= PING_SIZE) {
-      DWORD* data = (DWORD*) (msg->Data()+4);
-      return *data;
-   }
-   
-   return 0;
+	if (msg && msg->Length() >= PING_SIZE) {
+		DWORD* data = (DWORD*) (msg->Data()+4);
+		return *data;
+	}
+
+	return 0;
 }
 
 void
 NetPacket::SetPingSequence(DWORD seq)
 {
-   if (msg && msg->Length() >= PING_SIZE) {
-      DWORD* data = (DWORD*) (msg->Data()+4);
-      *data = seq;
-   }
+	if (msg && msg->Length() >= PING_SIZE) {
+		DWORD* data = (DWORD*) (msg->Data()+4);
+		*data = seq;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -119,21 +119,21 @@ NetPacket::SetPingSequence(DWORD seq)
 DWORD
 NetPacket::GetNetID()
 {
-   if (msg && msg->Length() >= PING_SIZE) {
-      DWORD* data = (DWORD*) (msg->Data()+4);
-      return *data;
-   }
-   
-   return 0;
+	if (msg && msg->Length() >= PING_SIZE) {
+		DWORD* data = (DWORD*) (msg->Data()+4);
+		return *data;
+	}
+
+	return 0;
 }
 
 void
 NetPacket::SetNetID(DWORD id)
 {
-   if (msg && msg->Length() >= PING_SIZE) {
-      DWORD* data = (DWORD*) (msg->Data()+4);
-      *data = id;
-   }
+	if (msg && msg->Length() >= PING_SIZE) {
+		DWORD* data = (DWORD*) (msg->Data()+4);
+		*data = id;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -141,32 +141,32 @@ NetPacket::SetNetID(DWORD id)
 Point
 NetPacket::GetShipLocation()
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      long* data = (long*) (msg->Data()+8);
-      long  x    = *(data + 0);
-      long  y    = *(data + 1);
-      long  z    = *(data + 2);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		long* data = (long*) (msg->Data()+8);
+		long  x    = *(data + 0);
+		long  y    = *(data + 1);
+		long  z    = *(data + 2);
 
-      return Point(x/100.0, y/100.0, z/100.0);
-   }
-   
-   return Point();
+		return Point(x/100.0, y/100.0, z/100.0);
+	}
+
+	return Point();
 }
 
 void
 NetPacket::SetShipLocation(const Point& loc)
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      long x = (long) (loc.x * 100);
-      long y = (long) (loc.y * 100);
-      long z = (long) (loc.z * 100);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		long x = (long) (loc.x * 100);
+		long y = (long) (loc.y * 100);
+		long z = (long) (loc.z * 100);
 
-      long* data = (long*) (msg->Data()+8);
+		long* data = (long*) (msg->Data()+8);
 
-      *(data + 0) = x;
-      *(data + 1) = y;
-      *(data + 2) = z;
-   }
+		*(data + 0) = x;
+		*(data + 1) = y;
+		*(data + 2) = z;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -174,29 +174,29 @@ NetPacket::SetShipLocation(const Point& loc)
 Point
 NetPacket::GetShipVelocity()
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      short* data = (short*) (msg->Data()+20);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		short* data = (short*) (msg->Data()+20);
 
-      short  dx   = *(data + 0);
-      short  dy   = *(data + 1);
-      short  dz   = *(data + 2);
+		short  dx   = *(data + 0);
+		short  dy   = *(data + 1);
+		short  dz   = *(data + 2);
 
-      return Point(dx, dy, dz);
-   }
+		return Point(dx, dy, dz);
+	}
 
-   return Point();
+	return Point();
 }
 
 void
 NetPacket::SetShipVelocity(const Point& vel)
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      short* data = (short*) (msg->Data()+20);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		short* data = (short*) (msg->Data()+20);
 
-      *(data + 0) = (short) vel.x;
-      *(data + 1) = (short) vel.y;
-      *(data + 2) = (short) vel.z;
-   }
+		*(data + 0) = (short) vel.x;
+		*(data + 1) = (short) vel.y;
+		*(data + 2) = (short) vel.z;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -204,29 +204,29 @@ NetPacket::SetShipVelocity(const Point& vel)
 Point
 NetPacket::GetShipOrientation()
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      short* data = (short*) (msg->Data()+26);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		short* data = (short*) (msg->Data()+26);
 
-      short  r    = *(data + 0);
-      short  p    = *(data + 1);
-      short  y    = *(data + 2);
+		short  r    = *(data + 0);
+		short  p    = *(data + 1);
+		short  y    = *(data + 2);
 
-      return Point(2*PI*r/32767, 2*PI*p/32767, 2*PI*y/32767);
-   }
+		return Point(2*PI*r/32767, 2*PI*p/32767, 2*PI*y/32767);
+	}
 
-   return Point();
+	return Point();
 }
 
 void
 NetPacket::SetShipOrientation(const Point& rpy)
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      short* data = (short*) (msg->Data()+26);
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		short* data = (short*) (msg->Data()+26);
 
-      *(data + 0) = (short) (32767*rpy.x/(2*PI));
-      *(data + 1) = (short) (32767*rpy.y/(2*PI));
-      *(data + 2) = (short) (32767*rpy.z/(2*PI));
-   }
+		*(data + 0) = (short) (32767*rpy.x/(2*PI));
+		*(data + 1) = (short) (32767*rpy.y/(2*PI));
+		*(data + 2) = (short) (32767*rpy.z/(2*PI));
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -234,23 +234,23 @@ NetPacket::SetShipOrientation(const Point& rpy)
 double
 NetPacket::GetThrottle()
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+32;
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+32;
 
-      return (double) *data;
-   }
+		return (double) *data;
+	}
 
-   return 0;
+	return 0;
 }
 
 void
 NetPacket::SetThrottle(double t)
 {
-   if (msg && msg->Length() >= SHIP_LOC_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+32;
+	if (msg && msg->Length() >= SHIP_LOC_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+32;
 
-      *data = (BYTE) t;
-   }
+		*data = (BYTE) t;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -258,29 +258,29 @@ NetPacket::SetThrottle(double t)
 bool
 NetPacket::GetTrigger(int i)
 {
-   if (i >= 0 && i < 8 && msg && msg->Length() >= SHIP_LOC_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+33;
+	if (i >= 0 && i < 8 && msg && msg->Length() >= SHIP_LOC_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+33;
 
-      BYTE select = 1 << i;
-      return (*data & select)?true:false;
-   }
+		BYTE select = 1 << i;
+		return (*data & select)?true:false;
+	}
 
-   return false;
+	return false;
 }
 
 void
 NetPacket::SetTrigger(int i, bool trigger)
 {
-   if (i >= 0 && i < 8 && msg && msg->Length() >= SHIP_LOC_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+33;
+	if (i >= 0 && i < 8 && msg && msg->Length() >= SHIP_LOC_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+33;
 
-      BYTE select = 1 << i;
+		BYTE select = 1 << i;
 
-      if (trigger)
-         *data = *data | select;
-      else
-         *data = *data & ~select;
-   }
+		if (trigger)
+		*data = *data | select;
+		else
+		*data = *data & ~select;
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -288,22 +288,22 @@ NetPacket::SetTrigger(int i, bool trigger)
 const char*
 NetPacket::GetName()
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+20;
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+20;
 
-      return (const char*) data;
-   }
+		return (const char*) data;
+	}
 
-   return 0;
+	return 0;
 }
 
 void
 NetPacket::SetName(const char* name)
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+20;
-      strncpy((char*) data, name, 32);
-   }
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+20;
+		strncpy((char*) data, name, 32);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -311,22 +311,22 @@ NetPacket::SetName(const char* name)
 const char*
 NetPacket::GetDesign()
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+52;
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+52;
 
-      return (const char*) data;
-   }
+		return (const char*) data;
+	}
 
-   return 0;
+	return 0;
 }
 
 void
 NetPacket::SetDesign(const char* design)
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+52;
-      strncpy((char*) data, design, 32);
-   }
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+52;
+		strncpy((char*) data, design, 32);
+	}
 }
 
 // +--------------------------------------------------------------------+
@@ -334,22 +334,22 @@ NetPacket::SetDesign(const char* design)
 const char*
 NetPacket::GetRegion()
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+84;
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+84;
 
-      return (const char*) data;
-   }
+		return (const char*) data;
+	}
 
-   return 0;
+	return 0;
 }
 
 void
 NetPacket::SetRegion(const char* rgn_name)
 {
-   if (msg && msg->Length() >= JOIN_REQ_SIZE) {
-      BYTE* data = (BYTE*) msg->Data()+84;
-      strncpy((char*) data, rgn_name, 32);
-   }
+	if (msg && msg->Length() >= JOIN_REQ_SIZE) {
+		BYTE* data = (BYTE*) msg->Data()+84;
+		strncpy((char*) data, rgn_name, 32);
+	}
 }
 
 // +--------------------------------------------------------------------+

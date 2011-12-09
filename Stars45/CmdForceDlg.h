@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CmdForceDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CmdForceDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Operational Command Dialog (Order of Battle Tab)
+	OVERVIEW
+	========
+	Operational Command Dialog (Order of Battle Tab)
 */
 
 #ifndef CmdForceDlg_h
@@ -28,41 +28,41 @@
 // +--------------------------------------------------------------------+
 
 class CmdForceDlg : public FormWindow,
-                    public CmdDlg
+public CmdDlg
 {
 public:
-   CmdForceDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
-   virtual ~CmdForceDlg();
+	CmdForceDlg(Screen* s, FormDef& def, CmpnScreen* mgr);
+	virtual ~CmdForceDlg();
 
-   virtual void      RegisterControls();
-   virtual void      Show();
-   virtual void      ExecFrame();
+	virtual void      RegisterControls();
+	virtual void      Show();
+	virtual void      ExecFrame();
 
-   // Operations:
-   virtual void      OnMode(AWEvent* event);
-   virtual void      OnSave(AWEvent* event);
-   virtual void      OnExit(AWEvent* event);
-   virtual void      OnForces(AWEvent* event);
-   virtual void      OnCombat(AWEvent* event);
-   virtual void      OnTransfer(AWEvent* event);
+	// Operations:
+	virtual void      OnMode(AWEvent* event);
+	virtual void      OnSave(AWEvent* event);
+	virtual void      OnExit(AWEvent* event);
+	virtual void      OnForces(AWEvent* event);
+	virtual void      OnCombat(AWEvent* event);
+	virtual void      OnTransfer(AWEvent* event);
 
 protected:
-   void              ShowCombatant(Combatant* c);
-   void              AddCombatGroup(CombatGroup* grp, bool last_child=false);
-   bool              CanTransfer(CombatGroup* grp);
-   bool              IsVisible(Combatant* c);
+	void              ShowCombatant(Combatant* c);
+	void              AddCombatGroup(CombatGroup* grp, bool last_child=false);
+	bool              CanTransfer(CombatGroup* grp);
+	bool              IsVisible(Combatant* c);
 
-   CmpnScreen*       manager;
+	CmpnScreen*       manager;
 
-   ComboBox*         cmb_forces;
-   ListBox*          lst_combat;
-   ListBox*          lst_desc;
-   Button*           btn_transfer;
+	ComboBox*         cmb_forces;
+	ListBox*          lst_combat;
+	ListBox*          lst_desc;
+	Button*           btn_transfer;
 
-   Starshatter*      stars;
-   Campaign*         campaign;
-   CombatGroup*      current_group;
-   CombatUnit*       current_unit;
+	Starshatter*      stars;
+	Campaign*         campaign;
+	CombatGroup*      current_group;
+	CombatUnit*       current_unit;
 };
 
 #endif CmdForceDlg_h

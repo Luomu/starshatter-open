@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         LoadDlg.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         LoadDlg.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Loading progress dialog box
+	OVERVIEW
+	========
+	Loading progress dialog box
 */
 
 #ifndef LoadDlg_h
@@ -23,18 +23,18 @@
 class LoadDlg : public FormWindow
 {
 public:
-   LoadDlg(Screen* s, FormDef& def);
-   virtual ~LoadDlg();
+	LoadDlg(Screen* s, FormDef& def);
+	virtual ~LoadDlg();
 
-   virtual void      RegisterControls();
+	virtual void      RegisterControls();
 
-   // Operations:
-   virtual void      ExecFrame();
+	// Operations:
+	virtual void      ExecFrame();
 
 protected:
-   ActiveWindow*     title;
-   ActiveWindow*     activity;
-   Slider*           progress;
+	ActiveWindow*     title;
+	ActiveWindow*     activity;
+	Slider*           progress;
 };
 
 #endif LoadDlg_h

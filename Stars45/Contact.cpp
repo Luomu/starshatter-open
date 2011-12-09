@@ -1,15 +1,15 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         Contact.cpp
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         Contact.cpp
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    Integrated (Passive and Active) Sensor Package class implementation
+	OVERVIEW
+	========
+	Integrated (Passive and Active) Sensor Package class implementation
 */
 
 #include "MemDebug.h"
@@ -32,33 +32,33 @@ const double   SENSOR_THRESHOLD     = 0.25;
 // +----------------------------------------------------------------------+
 
 Contact::Contact()
-   : ship(0), shot(0), d_pas(0.0f), d_act(0.0f),
-     track(0), ntrack(0), time(0), track_time(0), probe(false)
+: ship(0), shot(0), d_pas(0.0f), d_act(0.0f),
+track(0), ntrack(0), time(0), track_time(0), probe(false)
 {
-   acquire_time = Game::GameTime();
+	acquire_time = Game::GameTime();
 }
 
 Contact::Contact(Ship* s, float p, float a)
-   : ship(s), shot(0), d_pas(p), d_act(a),
-     track(0), ntrack(0), time(0), track_time(0), probe(false)
+: ship(s), shot(0), d_pas(p), d_act(a),
+track(0), ntrack(0), time(0), track_time(0), probe(false)
 {
-   acquire_time = Game::GameTime();
-   Observe(ship);
+	acquire_time = Game::GameTime();
+	Observe(ship);
 }
 
 Contact::Contact(Shot* s, float p, float a)
-   : ship(0), shot(s), d_pas(p), d_act(a),
-     track(0), ntrack(0), time(0), track_time(0), probe(false)
+: ship(0), shot(s), d_pas(p), d_act(a),
+track(0), ntrack(0), time(0), track_time(0), probe(false)
 {
-   acquire_time = Game::GameTime();
-   Observe(shot);
+	acquire_time = Game::GameTime();
+	Observe(shot);
 }
 
 // +----------------------------------------------------------------------+
 
 Contact::~Contact()
 {
-   delete [] track;
+	delete [] track;
 }
 
 // +----------------------------------------------------------------------+
@@ -66,13 +66,13 @@ Contact::~Contact()
 int 
 Contact::operator == (const Contact& c) const
 {
-   if (ship)
-      return ship == c.ship;
+	if (ship)
+	return ship == c.ship;
 
-   else if (shot)
-      return shot == c.shot;
+	else if (shot)
+	return shot == c.shot;
 
-   return 0;
+	return 0;
 }
 
 // +----------------------------------------------------------------------+
@@ -80,31 +80,31 @@ Contact::operator == (const Contact& c) const
 bool
 Contact::Update(SimObject* obj)
 {
-   if (obj == ship || obj == shot) {
-      ship  = 0;
-      shot  = 0;
-      d_act = 0;
-      d_pas = 0;
+	if (obj == ship || obj == shot) {
+		ship  = 0;
+		shot  = 0;
+		d_act = 0;
+		d_pas = 0;
 
-      ClearTrack();
-   }
+		ClearTrack();
+	}
 
-   return SimObserver::Update(obj);   
+	return SimObserver::Update(obj);   
 }
 
 const char*
 Contact::GetObserverName() const
 {
-   static char name[128];
+	static char name[128];
 
-   if (ship)
-      sprintf(name, "Contact Ship='%s'", ship->Name());
-   else if (shot)
-      sprintf(name, "Contact Shot='%s' %s", shot->Name(), shot->DesignName());
-   else
-      sprintf(name, "Contact (unknown)");
+	if (ship)
+	sprintf(name, "Contact Ship='%s'", ship->Name());
+	else if (shot)
+	sprintf(name, "Contact Shot='%s' %s", shot->Name(), shot->DesignName());
+	else
+	sprintf(name, "Contact (unknown)");
 
-   return name;
+	return name;
 }
 
 // +----------------------------------------------------------------------+
@@ -112,56 +112,56 @@ Contact::GetObserverName() const
 double
 Contact::Age() const
 {
-   double age = 0;
+	double age = 0;
 
-   if (!ship && !shot)
-      return age;
+	if (!ship && !shot)
+	return age;
 
-   double seconds = (Game::GameTime() - time) / 1000.0;
+	double seconds = (Game::GameTime() - time) / 1000.0;
 
-   age = 1.0 - seconds/DEFAULT_TRACK_AGE;
+	age = 1.0 - seconds/DEFAULT_TRACK_AGE;
 
-   if (age < 0)
-      age = 0;
+	if (age < 0)
+	age = 0;
 
-   return age;
+	return age;
 }
 
 int
 Contact::GetIFF(const Ship* observer) const
 {
-   int i = 0;
+	int i = 0;
 
-   if (ship) {
-      i = ship->GetIFF();
+	if (ship) {
+		i = ship->GetIFF();
 
-      // if the contact is on our side or has locked us up,
-      // we know whose side he's on.
+		// if the contact is on our side or has locked us up,
+		// we know whose side he's on.
 
-      // Otherwise:
-      if (i != observer->GetIFF() && !Threat(observer)) {
-         if (d_pas < 2*SENSOR_THRESHOLD && d_act < SENSOR_THRESHOLD && !Visible(observer))
-            i = -1000;   // indeterminate iff reading
-      }
-   }
+		// Otherwise:
+		if (i != observer->GetIFF() && !Threat(observer)) {
+			if (d_pas < 2*SENSOR_THRESHOLD && d_act < SENSOR_THRESHOLD && !Visible(observer))
+			i = -1000;   // indeterminate iff reading
+		}
+	}
 
-   else if (shot && shot->Owner()) {
-      i = shot->Owner()->GetIFF();
-   }
+	else if (shot && shot->Owner()) {
+		i = shot->Owner()->GetIFF();
+	}
 
-   return i;
+	return i;
 }
 
 bool
 Contact::ActLock() const
 {
-   return d_act >= SENSOR_THRESHOLD;
+	return d_act >= SENSOR_THRESHOLD;
 }
 
 bool
 Contact::PasLock() const
 {
-   return d_pas >= SENSOR_THRESHOLD;
+	return d_pas >= SENSOR_THRESHOLD;
 }
 
 // +----------------------------------------------------------------------+
@@ -169,54 +169,54 @@ Contact::PasLock() const
 void
 Contact::GetBearing(const Ship* observer, double& az, double& el, double& rng) const
 {
-   // translate:
-   Point targ_pt = loc - observer->Location();
+	// translate:
+	Point targ_pt = loc - observer->Location();
 
-   // rotate:
-   const Camera* cam = &observer->Cam();
-   double        tx  = targ_pt * cam->vrt();
-   double        ty  = targ_pt * cam->vup();
-   double        tz  = targ_pt * cam->vpn();
+	// rotate:
+	const Camera* cam = &observer->Cam();
+	double        tx  = targ_pt * cam->vrt();
+	double        ty  = targ_pt * cam->vup();
+	double        tz  = targ_pt * cam->vpn();
 
-   // convert to spherical coords:
-   rng = targ_pt.length();
-   az  = asin(fabs(tx) / rng);
-   el  = asin(fabs(ty) / rng);
+	// convert to spherical coords:
+	rng = targ_pt.length();
+	az  = asin(fabs(tx) / rng);
+	el  = asin(fabs(ty) / rng);
 
-   if (tx < 0) az = -az;
-   if (ty < 0) el = -el;
+	if (tx < 0) az = -az;
+	if (ty < 0) el = -el;
 
-   // correct az/el for back hemisphere:
-   if (tz < 0) {
-      if (az < 0) az = -PI - az;
-      else        az =  PI - az;
-   }
+	// correct az/el for back hemisphere:
+	if (tz < 0) {
+		if (az < 0) az = -PI - az;
+		else        az =  PI - az;
+	}
 }
 
 double
 Contact::Range(const Ship* observer, double limit) const
 {
-   double r = Point(loc - observer->Location()).length();
+	double r = Point(loc - observer->Location()).length();
 
-   // if passive only, return approximate range:
-   if (!ActLock()) {
-      const int chunk = 25000;
+	// if passive only, return approximate range:
+	if (!ActLock()) {
+		const int chunk = 25000;
 
-      if (!PasLock()) {
-         r = (int) limit;
-      }
+		if (!PasLock()) {
+			r = (int) limit;
+		}
 
-      else if (r <= chunk) {
-         r = chunk;
-      }
+		else if (r <= chunk) {
+			r = chunk;
+		}
 
-      else {
-         int r1 = (int) (r + chunk/2) / chunk;
-         r = r1 * chunk;
-      }
-   }
+		else {
+			int r1 = (int) (r + chunk/2) / chunk;
+			r = r1 * chunk;
+		}
+	}
 
-   return r;
+	return r;
 }
 
 // +----------------------------------------------------------------------+
@@ -224,69 +224,69 @@ Contact::Range(const Ship* observer, double limit) const
 bool
 Contact::InFront(const Ship* observer) const
 {
-   // translate:
-   Point targ_pt = loc - observer->Location();
+	// translate:
+	Point targ_pt = loc - observer->Location();
 
-   // rotate:
-   const Camera* cam = &observer->Cam();
-   double tz = targ_pt * cam->vpn();
+	// rotate:
+	const Camera* cam = &observer->Cam();
+	double tz = targ_pt * cam->vpn();
 
-   if (tz > 1.0)
-      return true;
+	if (tz > 1.0)
+	return true;
 
-   return false;
+	return false;
 }
 
 bool
 Contact::Threat(const Ship* observer) const
 {
-   bool threat = false;
+	bool threat = false;
 
-   if (observer && observer->Life() != 0) {
-      if (ship && ship->Life() != 0) {
-         threat = (ship->GetIFF() &&
-                   ship->GetIFF() != observer->GetIFF() &&
-                   ship->GetEMCON() > 2 &&
-                   ship->IsTracking((Ship*) observer) &&
-                   ship->Weapons().size() > 0);
+	if (observer && observer->Life() != 0) {
+		if (ship && ship->Life() != 0) {
+			threat = (ship->GetIFF() &&
+			ship->GetIFF() != observer->GetIFF() &&
+			ship->GetEMCON() > 2 &&
+			ship->IsTracking((Ship*) observer) &&
+			ship->Weapons().size() > 0);
 
-         if (threat && observer->GetIFF() == 0)
-            threat = ship->GetIFF() > 1;
-      }
+			if (threat && observer->GetIFF() == 0)
+			threat = ship->GetIFF() > 1;
+		}
 
-      else if (shot) {
-         threat = shot->IsTracking((Ship*) observer);
+		else if (shot) {
+			threat = shot->IsTracking((Ship*) observer);
 
-         if (!threat && shot->Design()->probe && shot->GetIFF() != observer->GetIFF()) {
-            Point  probe_pt = shot->Location() - observer->Location();
-            double prng     = probe_pt.length();
+			if (!threat && shot->Design()->probe && shot->GetIFF() != observer->GetIFF()) {
+				Point  probe_pt = shot->Location() - observer->Location();
+				double prng     = probe_pt.length();
 
-            threat = (prng < shot->Design()->lethal_radius);
-         }
-      }
-   }
+				threat = (prng < shot->Design()->lethal_radius);
+			}
+		}
+	}
 
-   return threat;
+	return threat;
 }
 
 bool
 Contact::Visible(const Ship* observer) const
 {
-   // translate:
-   Point targ_pt = loc - observer->Location();
-   double radius = 0;
-   
-   if (ship)
-      radius = ship->Radius();
+	// translate:
+	Point targ_pt = loc - observer->Location();
+	double radius = 0;
 
-   else if (shot)
-      radius = shot->Radius();
+	if (ship)
+	radius = ship->Radius();
 
-   // rotate:
-   const Camera* cam = &observer->Cam();
-   double        rng = targ_pt.length();
+	else if (shot)
+	radius = shot->Radius();
 
-   return radius/rng > 0.002;
+	// rotate:
+	const Camera* cam = &observer->Cam();
+	double        rng = targ_pt.length();
+
+	return radius/rng > 0.002;
 }
 
 // +----------------------------------------------------------------------+
@@ -294,63 +294,63 @@ Contact::Visible(const Ship* observer) const
 void
 Contact::Reset()
 {
-   if (Game::Paused()) return;
+	if (Game::Paused()) return;
 
-   float step_down = (float) (Game::FrameTime() / 10);
+	float step_down = (float) (Game::FrameTime() / 10);
 
-   if (d_pas > 0)
-      d_pas -= step_down;
+	if (d_pas > 0)
+	d_pas -= step_down;
 
-   if (d_act > 0)
-      d_act -= step_down;
+	if (d_act > 0)
+	d_act -= step_down;
 }
 
 void
 Contact::Merge(Contact* c)
 {
-   if (c->GetShip() == ship && c->GetShot() == shot) {
-      if (c->d_pas > d_pas)
-         d_pas = c->d_pas;
+	if (c->GetShip() == ship && c->GetShot() == shot) {
+		if (c->d_pas > d_pas)
+		d_pas = c->d_pas;
 
-      if (c->d_act > d_act)
-         d_act = c->d_act;
-   }
+		if (c->d_act > d_act)
+		d_act = c->d_act;
+	}
 }
 
 void
 Contact::ClearTrack()
 {
-   delete [] track;
-   track = 0;
-   ntrack = 0;
+	delete [] track;
+	track = 0;
+	ntrack = 0;
 }
 
 void
 Contact::UpdateTrack()
 {
-   time = Game::GameTime();
+	time = Game::GameTime();
 
-   if (shot || (ship && ship->IsGroundUnit()))
-      return;
+	if (shot || (ship && ship->IsGroundUnit()))
+	return;
 
-   if (!track) {
-      track = new(__FILE__,__LINE__) Point[DEFAULT_TRACK_LENGTH];
-      track[0] = loc;
-      ntrack   = 1;
-      track_time = time;
-   }
+	if (!track) {
+		track = new(__FILE__,__LINE__) Point[DEFAULT_TRACK_LENGTH];
+		track[0] = loc;
+		ntrack   = 1;
+		track_time = time;
+	}
 
-   else if (time - track_time > DEFAULT_TRACK_UPDATE) {
-      if (loc != track[0]) {
-         for (int i = DEFAULT_TRACK_LENGTH-2; i >= 0; i--)
-            track[i+1] = track[i];
+	else if (time - track_time > DEFAULT_TRACK_UPDATE) {
+		if (loc != track[0]) {
+			for (int i = DEFAULT_TRACK_LENGTH-2; i >= 0; i--)
+			track[i+1] = track[i];
 
-         track[0] = loc;
-         if (ntrack < DEFAULT_TRACK_LENGTH) ntrack++;
-      }
+			track[0] = loc;
+			if (ntrack < DEFAULT_TRACK_LENGTH) ntrack++;
+		}
 
-      track_time = time;
-   }
+		track_time = time;
+	}
 }
 
 // +----------------------------------------------------------------------+
@@ -358,8 +358,8 @@ Contact::UpdateTrack()
 Point
 Contact::TrackPoint(int i) const
 {
-   if (track && i < ntrack)
-      return track[i];
+	if (track && i < ntrack)
+	return track[i];
 
-   return Point();
+	return Point();
 }

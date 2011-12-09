@@ -1,17 +1,17 @@
 /*  Project Starshatter 4.5
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+	Destroyer Studios LLC
+	Copyright © 1997-2004. All Rights Reserved.
 
-    SUBSYSTEM:    Stars.exe
-    FILE:         CampaignSituationReport.h
-    AUTHOR:       John DiCamillo
+	SUBSYSTEM:    Stars.exe
+	FILE:         CampaignSituationReport.h
+	AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    CampaignSituationReport generates the situation report
-    portion of the briefing for a dynamically generated
-    mission in a dynamic campaign.
+	OVERVIEW
+	========
+	CampaignSituationReport generates the situation report
+	portion of the briefing for a dynamically generated
+	mission in a dynamic campaign.
 */
 
 #ifndef CampaignSituationReport_h
@@ -36,23 +36,23 @@ class MissionElement;
 class CampaignSituationReport
 {
 public:
-   static const char* TYPENAME() { return "CampaignSituationReport"; }
+	static const char* TYPENAME() { return "CampaignSituationReport"; }
 
-   CampaignSituationReport(Campaign* c, Mission* m);
-   virtual ~CampaignSituationReport();
-   
-   virtual void      GenerateSituationReport();
+	CampaignSituationReport(Campaign* c, Mission* m);
+	virtual ~CampaignSituationReport();
+
+	virtual void      GenerateSituationReport();
 
 protected:
-   virtual void      GlobalSituation();
-   virtual void      MissionSituation();
-   virtual MissionElement*
-                     FindEscort(MissionElement* elem);
-   virtual Text      GetThreatInfo();
+	virtual void      GlobalSituation();
+	virtual void      MissionSituation();
+	virtual MissionElement*
+	FindEscort(MissionElement* elem);
+	virtual Text      GetThreatInfo();
 
-   Campaign*         campaign;
-   Mission*          mission;
-   Text              sitrep;
+	Campaign*         campaign;
+	Mission*          mission;
+	Text              sitrep;
 };
 
 #endif CampaignSituationReport_h
