@@ -2104,7 +2104,7 @@ Surface::OptimizeMesh()
 
    // create target vertex set:
    VertexSet*  vset = new(__FILE__,__LINE__) VertexSet(used);
-   v = 0;
+   int v = 0;
 
    // compress verts:
    for (int i = 0; i < nverts; i++) {

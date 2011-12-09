@@ -266,7 +266,7 @@ Game::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
 		Panic("  D3D not available under WinNT 4");
 		status = INIT_FAILED;
 	} else if (MachineInfo::GetDirectXVersion() < MachineInfo::DX_9) {
-		Panic(" Insufficient DirectX detected (Dx9 IS REQUIRED)");
+		Panic("  Insufficient DirectX detected (Dx9 IS REQUIRED)");
 		status = INIT_FAILED;
 	}
 
