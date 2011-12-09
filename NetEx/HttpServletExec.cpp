@@ -55,7 +55,7 @@ public:
          ListIter<HttpParam> q_iter = request.GetQuery();
          while (++q_iter) {
             HttpParam* q = q_iter.value();
-            sprintf(buffer, "<b>%s:</b> <i>%s</i><br>\n", q->name.data(), q->value.data());
+            sprintf_s(buffer, "<b>%s:</b> <i>%s</i><br>\n", q->name.data(), q->value.data());
             content += buffer;
          }
       }
@@ -64,7 +64,7 @@ public:
       ListIter<HttpParam> h_iter = request.GetHeaders();
       while (++h_iter) {
          HttpParam* h = h_iter.value();
-         sprintf(buffer, "<b>%s:</b> <i>%s</i><br>\n", h->name.data(), h->value.data());
+         sprintf_s(buffer, "<b>%s:</b> <i>%s</i><br>\n", h->name.data(), h->value.data());
          content += buffer;
       }
 
@@ -73,7 +73,7 @@ public:
          ListIter<HttpParam> c_iter = request.GetCookies();
          while (++c_iter) {
             HttpParam* c = c_iter.value();
-            sprintf(buffer, "<b>%s:</b> <i>%s</i><br>\n", c->name.data(), c->value.data());
+            sprintf_s(buffer, "<b>%s:</b> <i>%s</i><br>\n", c->name.data(), c->value.data());
             content += buffer;
          }
       }
