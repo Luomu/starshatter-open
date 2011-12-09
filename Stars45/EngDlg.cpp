@@ -265,7 +265,7 @@ EngDlg::UpdateRouteTables()
 				while (++client) {
 					char abrv[64], num[20];
 					FormatNumber(num, client->GetPowerLevel());
-					strcpy(abrv, Game::GetText(client->Name()));
+					strcpy_s(abrv, Game::GetText(client->Name()));
 
 					clients[reactor_index]->AddItemWithData(Game::GetText(abrv), index);
 					clients[reactor_index]->SetItemText(index, 1, num);

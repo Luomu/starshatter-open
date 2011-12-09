@@ -35,7 +35,7 @@ zone_lock(0), respawns(0), count(0), rogue(false), playable(true), intel(0)
 {
 	if (!call_sign) {
 		char buf[32];
-		sprintf(buf, "Pkg %d", id);
+		sprintf_s(buf, "Pkg %d", id);
 		name = buf;
 	}
 

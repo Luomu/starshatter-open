@@ -61,7 +61,7 @@ const char*
 SimObserver::GetObserverName() const
 {
 	static char name[32];
-	sprintf(name, "SimObserver 0x%08x", (DWORD) this);
+	sprintf_s(name, "SimObserver 0x%08x", (DWORD) this);
 	return name;
 }
 

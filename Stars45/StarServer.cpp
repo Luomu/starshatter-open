@@ -427,7 +427,7 @@ StarServer::OnPaint()
 		txt_mode = Game::GetText("server.mode.lobby");
 
 		if (lobby_server) {
-			sprintf(buf, Game::GetText("server.users").data(), lobby_server->NumUsers());
+			sprintf_s(buf, Game::GetText("server.users").data(), lobby_server->NumUsers());
 			txt_users = buf;
 		}
 		break;
@@ -435,10 +435,10 @@ StarServer::OnPaint()
 	case PLAY_MODE:  
 		txt_mode = Game::GetText("server.mode.active");
 		if (lobby_server) {
-			sprintf(buf, Game::GetText("server.users-and-players").data(), lobby_server->NumUsers(), NetGame::NumPlayers());
+			sprintf_s(buf, Game::GetText("server.users-and-players").data(), lobby_server->NumUsers(), NetGame::NumPlayers());
 		}
 		else {
-			sprintf(buf, Game::GetText("server.players").data(), NetGame::NumPlayers());
+			sprintf_s(buf, Game::GetText("server.players").data(), NetGame::NumPlayers());
 		}
 		txt_users = buf;
 		break;
@@ -496,7 +496,7 @@ DWORD WINAPI StarServerRestartProc(LPVOID link)
 
 	if (stars) {
 		char cmdline[256];
-		strcpy(cmdline, "StarDemo -server");
+		strcpy_s(cmdline, "StarDemo -server");
 
 		STARTUPINFO s;
 		ZeroMemory(&s, sizeof(s));
@@ -514,7 +514,7 @@ DWORD WINAPI StarServerRestartProc(LPVOID link)
 
 	if (stars) {
 		char cmdline[256];
-		strcpy(cmdline, "stars -server");
+		strcpy_s(cmdline, "stars -server");
 
 		STARTUPINFO s;
 		ZeroMemory(&s, sizeof(s));

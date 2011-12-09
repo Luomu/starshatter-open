@@ -133,7 +133,7 @@ charge(1.0f), design(dsn), offset(1.0e5f), altitude_agl(-1.0e6f), hit_target(fal
 		Observe((SimObject*) owner);
 	}
 
-	sprintf(name, "Shot(%s)", design->name);
+	sprintf_s(name, "Shot(%s)", design->name);
 }
 
 // +--------------------------------------------------------------------+

@@ -173,12 +173,12 @@ bolt_hit_sound_resource(0), beam_hit_sound_resource(0), lod_levels(0)
 	ZeroMemory(display_name,   sizeof(display_name));
 	ZeroMemory(abrv,           sizeof(abrv));
 
-	strcpy(name, n);
+	strcpy_s(name, n);
 
 	if (!strstr(fname, ".def"))
-	sprintf(filename, "%s.def", fname);
+	sprintf_s(filename, "%s.def", fname);
 	else
-	strcpy(filename, fname);
+	strcpy_s(filename, fname);
 
 	for (int i = 0; i < 4; i++)
 	feature_size[i] = 0.0f;
@@ -248,9 +248,9 @@ bolt_hit_sound_resource(0), beam_hit_sound_resource(0), lod_levels(0)
 	if (!secret)
 	Print("Loading ShipDesign '%s'\n", name);
 
-	strcpy(path_name, p);
+	strcpy_s(path_name, p);
 	if (path_name[strlen(path_name)-1] != '/')
-	strcat(path_name, "/");
+	strcat_s(path_name, "/");
 
 	// Load Design File:
 	DataLoader* loader = DataLoader::GetLoader();
@@ -371,24 +371,24 @@ bolt_hit_sound_resource(0), beam_hit_sound_resource(0), lod_levels(0)
 
 	if (abrv[0] == 0) {
 		switch (type) {
-		case Ship::DRONE:       strcpy(abrv, "DR");     break;
-		case Ship::FIGHTER:     strcpy(abrv, "F");      break;
-		case Ship::ATTACK:      strcpy(abrv, "F/A");    break;
-		case Ship::LCA:         strcpy(abrv, "LCA");    break;
-		case Ship::CORVETTE:    strcpy(abrv, "FC");     break;
+		case Ship::DRONE:       strcpy_s(abrv, "DR");     break;
+		case Ship::FIGHTER:     strcpy_s(abrv, "F");      break;
+		case Ship::ATTACK:      strcpy_s(abrv, "F/A");    break;
+		case Ship::LCA:         strcpy_s(abrv, "LCA");    break;
+		case Ship::CORVETTE:    strcpy_s(abrv, "FC");     break;
 		case Ship::COURIER:
 		case Ship::CARGO:
-		case Ship::FREIGHTER:   strcpy(abrv, "MV");     break;
-		case Ship::FRIGATE:     strcpy(abrv, "FF");     break;
-		case Ship::DESTROYER:   strcpy(abrv, "DD");     break;
-		case Ship::CRUISER:     strcpy(abrv, "CA");     break;
-		case Ship::BATTLESHIP:  strcpy(abrv, "BB");     break;
-		case Ship::CARRIER:     strcpy(abrv, "CV");     break;
-		case Ship::DREADNAUGHT: strcpy(abrv, "DN");     break;
-		case Ship::MINE:        strcpy(abrv, "MINE");   break;
-		case Ship::COMSAT:      strcpy(abrv, "COMS");   break;
-		case Ship::DEFSAT:      strcpy(abrv, "DEFS");   break;
-		case Ship::SWACS:       strcpy(abrv, "SWAC");   break;
+		case Ship::FREIGHTER:   strcpy_s(abrv, "MV");     break;
+		case Ship::FRIGATE:     strcpy_s(abrv, "FF");     break;
+		case Ship::DESTROYER:   strcpy_s(abrv, "DD");     break;
+		case Ship::CRUISER:     strcpy_s(abrv, "CA");     break;
+		case Ship::BATTLESHIP:  strcpy_s(abrv, "BB");     break;
+		case Ship::CARRIER:     strcpy_s(abrv, "CV");     break;
+		case Ship::DREADNAUGHT: strcpy_s(abrv, "DN");     break;
+		case Ship::MINE:        strcpy_s(abrv, "MINE");   break;
+		case Ship::COMSAT:      strcpy_s(abrv, "COMS");   break;
+		case Ship::DEFSAT:      strcpy_s(abrv, "DEFS");   break;
+		case Ship::SWACS:       strcpy_s(abrv, "SWAC");   break;
 		default:                                        break;
 		}
 	}
@@ -609,7 +609,7 @@ ShipDesign::Initialize()
 
 		if (full_name.contains('/') && !full_name.contains("catalog")) {
 			char path[1024];
-			strcpy(path, full_name.data());
+			strcpy_s(path, full_name.data());
 
 			char* name = path + full_name.length();
 			while (*name != '/')
@@ -1052,7 +1052,7 @@ ShipDesign::ClassForName(const char* name)
 	return 0;
 
 	for (int i = 0; i < 32; i++) { 
-		if (!stricmp(name, ship_design_class_name[i])) {
+		if (!_stricmp(name, ship_design_class_name[i])) {
 			return 1 << i;
 		}
 	}
@@ -3532,7 +3532,7 @@ ShipDesign::ParseSquadron(TermStruct* val)
 	}
 
 	ShipSquadron* s = new(__FILE__,__LINE__) ShipSquadron;
-	strcpy(s->name, name);
+	strcpy_s(s->name, name);
 
 	s->design = Get(design);
 	s->count  = count;

@@ -195,7 +195,7 @@ MsnWepDlg::SetupControls()
 				ShipLoad* load = sl.value();
 				int item = loadout_list->AddItem(load->name) - 1;
 
-				sprintf(weight, "%d kg", (int) ((design->mass + load->mass) * 1000));
+				sprintf_s(weight, "%d kg", (int) ((design->mass + load->mass) * 1000));
 				loadout_list->SetItemText(item, 1, weight);
 				loadout_list->SetItemData(item, 1, (DWORD) (load->mass * 1000));
 
@@ -212,7 +212,7 @@ MsnWepDlg::SetupControls()
 		if (loaded_mass < 1)
 		loaded_mass = design->mass;
 
-		sprintf(weight, "%d kg", (int) (loaded_mass * 1000));
+		sprintf_s(weight, "%d kg", (int) (loaded_mass * 1000));
 		lbl_weight->SetText(weight);
 	}
 
@@ -224,9 +224,9 @@ MsnWepDlg::SetupControls()
 		char txt[256];
 
 		if (design->type <= Ship::ATTACK)
-		sprintf(txt, "%s %s", design->abrv, design->display_name);
+		sprintf_s(txt, "%s %s", design->abrv, design->display_name);
 		else
-		sprintf(txt, "%s %s", design->abrv, elem->Name().data());
+		sprintf_s(txt, "%s %s", design->abrv, elem->Name().data());
 
 		player_desc->SetText(txt);
 	}
@@ -294,7 +294,7 @@ MsnWepDlg::BuildLists()
 			if (msn_load->GetName().length()) {
 				ListIter<ShipLoad> sl = ((ShipDesign*) elem->GetDesign())->loadouts;
 				while (++sl) {
-					if (!stricmp(sl->name, msn_load->GetName()))
+					if (!_stricmp(sl->name, msn_load->GetName()))
 					loadout = sl->load;
 				}
 			}
@@ -431,7 +431,7 @@ MsnWepDlg::OnMount(AWEvent* event)
 		}
 
 		char weight[32];
-		sprintf(weight, "%d kg", (int) (mass * 1000));
+		sprintf_s(weight, "%d kg", (int) (mass * 1000));
 		lbl_weight->SetText(weight);
 	}
 }
@@ -461,7 +461,7 @@ MsnWepDlg::OnLoadout(AWEvent* event)
 
 		if (lbl_weight) {
 			char weight[32];
-			sprintf(weight, "%d kg", (int) ((design->mass + shipload->mass) * 1000));
+			sprintf_s(weight, "%d kg", (int) ((design->mass + shipload->mass) * 1000));
 			lbl_weight->SetText(weight);
 		}
 

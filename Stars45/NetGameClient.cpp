@@ -160,7 +160,7 @@ NetGameClient::DoJoinAnnounce(NetMsg* msg)
 		Ship* ship      = 0;
 		char  ship_name[128];
 
-		strcpy(ship_name, Game::GetText("NetGameClient.no-ship").data());
+		strcpy_s(ship_name, Game::GetText("NetGameClient.no-ship").data());
 
 		if (local_player && player_name == name) {
 			HUDView::Message(Game::GetText("NetGameClient.local-accept"), name.data(), local_player->Name());
@@ -191,9 +191,9 @@ NetGameClient::DoJoinAnnounce(NetMsg* msg)
 				remote_player->SetObjID(oid);
 
 				if (index > 0)
-				sprintf(ship_name, "%s %d", elem_name.data(), index);
+				sprintf_s(ship_name, "%s %d", elem_name.data(), index);
 				else
-				sprintf(ship_name, "%s", elem_name.data());
+				sprintf_s(ship_name, "%s", elem_name.data());
 			}
 			else {
 				Element* element = sim->FindElement(elem_name);
@@ -214,7 +214,7 @@ NetGameClient::DoJoinAnnounce(NetMsg* msg)
 					saved = true;
 				}
 				else {
-					strcpy(ship_name, ship->Name());
+					strcpy_s(ship_name, ship->Name());
 
 					SimRegion* rgn = ship->GetRegion();
 					if (rgn && region != rgn->Name()) {
@@ -275,7 +275,7 @@ NetGameClient::DoJoinBacklog(NetJoinAnnounce* join_ann)
 	Ship* ship      = 0;
 	char  ship_name[128];
 
-	strcpy(ship_name, Game::GetText("NetGameClient.no-ship").data());
+	strcpy_s(ship_name, Game::GetText("NetGameClient.no-ship").data());
 
 	if (nid && oid) {
 		NetPlayer* remote_player = FindPlayerByObjID(oid);
@@ -284,9 +284,9 @@ NetGameClient::DoJoinBacklog(NetJoinAnnounce* join_ann)
 			remote_player->SetObjID(oid);
 
 			if (index > 0)
-			sprintf(ship_name, "%s %d", elem_name.data(), index);
+			sprintf_s(ship_name, "%s %d", elem_name.data(), index);
 			else
-			sprintf(ship_name, "%s", elem_name.data());
+			sprintf_s(ship_name, "%s", elem_name.data());
 		}
 		else {
 			Element* element = sim->FindElement(elem_name);
@@ -296,7 +296,7 @@ NetGameClient::DoJoinBacklog(NetJoinAnnounce* join_ann)
 			}
 
 			if (ship) {
-				strcpy(ship_name, ship->Name());
+				strcpy_s(ship_name, ship->Name());
 
 				SimRegion* rgn = ship->GetRegion();
 				if (rgn && region != rgn->Name()) {

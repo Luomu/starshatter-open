@@ -98,11 +98,11 @@ Contact::GetObserverName() const
 	static char name[128];
 
 	if (ship)
-	sprintf(name, "Contact Ship='%s'", ship->Name());
+		sprintf_s(name, "Contact Ship='%s'", ship->Name());
 	else if (shot)
-	sprintf(name, "Contact Shot='%s' %s", shot->Name(), shot->DesignName());
+		sprintf_s(name, "Contact Shot='%s' %s", shot->Name(), shot->DesignName());
 	else
-	sprintf(name, "Contact (unknown)");
+		sprintf_s(name, "Contact (unknown)");
 
 	return name;
 }

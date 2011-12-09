@@ -671,7 +671,7 @@ Sim::CreateElements()
 						if (l->GetName().length()) {
 							ListIter<ShipLoad> sl = ((ShipDesign*) dsn)->loadouts;
 							while (++sl) {
-								if (!stricmp(sl->name, l->GetName()))
+								if (!_stricmp(sl->name, l->GetName()))
 								loadout = sl->load;
 							}
 						}
@@ -754,7 +754,7 @@ Sim::CreateElements()
 							if (l->GetName().length()) {
 								ListIter<ShipLoad> sl = ((ShipDesign*) msn_elem->GetDesign())->loadouts;
 								while (++sl) {
-									if (!stricmp(sl->name, l->GetName()))
+									if (!_stricmp(sl->name, l->GetName()))
 									loadout = sl->load;
 								}
 							}
@@ -879,7 +879,7 @@ Sim::CreateElements()
 							ShipStats* stats = ShipStats::Find(sname);
 							if (stats) {
 								char design[64];
-								sprintf(design, "%s %s", ship->Abbreviation(), ship->Design()->display_name);
+								sprintf_s(design, "%s %s", ship->Abbreviation(), ship->Design()->display_name);
 								stats->SetType(design);
 								stats->SetShipClass(ship->Class());
 								stats->SetRole(Mission::RoleName(msn_elem->MissionRole()));
@@ -3196,8 +3196,8 @@ SimRegion::DestroyShip(Ship* ship)
 
 	char        ship_name[64];
 	char        ship_reg[64];
-	strcpy(ship_name, ship->Name());
-	strcpy(ship_reg,  ship->Registry());
+	strcpy_s(ship_name, ship->Name());
+	strcpy_s(ship_reg,  ship->Registry());
 
 	ShipDesign* ship_design = (ShipDesign*) ship->Design();
 	int         ship_iff    = ship->GetIFF();
@@ -3372,7 +3372,7 @@ SimRegion::DockShips()
 			// then delete the ship:
 			int  player_docked = (player_ship == ship);
 			char ship_name[33];
-			strcpy(ship_name, ship->Name());
+			strcpy_s(ship_name, ship->Name());
 
 			selection.remove(ship);
 			dead_ships.insert(ship_iter.removeItem());
@@ -3802,9 +3802,9 @@ const char* FormatGameTime()
 	int e = ( t - h*3600000 - m*60000 - s*1000);
 
 	if (h > 0)
-	sprintf(txt, "%02d:%02d:%02d.%03d", h,m,s,e);
+	sprintf_s(txt, "%02d:%02d:%02d.%03d", h,m,s,e);
 	else
-	sprintf(txt, "%02d:%02d.%03d", m,s,e);
+	sprintf_s(txt, "%02d:%02d.%03d", m,s,e);
 
 	return txt;
 }

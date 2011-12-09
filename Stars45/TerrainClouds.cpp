@@ -73,14 +73,14 @@ TerrainClouds::BuildClouds()
 	Bitmap* cloud_texture = terrain->CloudTexture(type);
 	Bitmap* shade_texture = terrain->ShadeTexture(type);
 
-	strcpy(mtl_cloud.name, "cloud");
+	strcpy_s(mtl_cloud.name, "cloud");
 	mtl_cloud.Ka            = Color::White;
 	mtl_cloud.Kd            = Color::White;
 	mtl_cloud.luminous      = true;
 	mtl_cloud.blend         = Material::MTL_TRANSLUCENT;
 	mtl_cloud.tex_diffuse   = cloud_texture;
 
-	strcpy(mtl_shade.name, "shade");
+	strcpy_s(mtl_shade.name, "shade");
 	mtl_shade.Ka            = Color::White;
 	mtl_shade.Kd            = Color::White;
 	mtl_shade.luminous      = true;

@@ -341,77 +341,77 @@ Instruction::GetShortDescription() const
 	switch (action) {
 	case VECTOR:
 		if (farcast)
-		sprintf(desc, Game::GetText("instr.short.farcast").data(), rgn_name.data());
+		sprintf_s(desc, Game::GetText("instr.short.farcast").data(), rgn_name.data());
 		else
-		sprintf(desc, Game::GetText("instr.short.vector").data(), rgn_name.data());
+		sprintf_s(desc, Game::GetText("instr.short.vector").data(), rgn_name.data());
 		break;
 
 	case LAUNCH:
-		sprintf(desc, Game::GetText("instr.short.launch").data(), tgt_name.data());
+		sprintf_s(desc, Game::GetText("instr.short.launch").data(), tgt_name.data());
 		break;
 
 	case DOCK:
-		sprintf(desc, Game::GetText("instr.short.dock").data(), tgt_name.data());
+		sprintf_s(desc, Game::GetText("instr.short.dock").data(), tgt_name.data());
 		break;
 
 	case RTB:
-		sprintf(desc, Game::GetText("instr.short.return-to-base").data());
+		sprintf_s(desc, Game::GetText("instr.short.return-to-base").data());
 		break;
 
 	case DEFEND:
 		if (priority == PRIMARY) {
-			sprintf(desc, Game::GetText("instr.short.defend").data(), ActionName(action), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.short.defend").data(), ActionName(action), tgt_desc.data());
 		}
 		else {
-			sprintf(desc, Game::GetText("instr.short.protect").data(), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.short.protect").data(), tgt_desc.data());
 		}
 		break;
 
 	case ESCORT:
 		if (priority == PRIMARY) {
-			sprintf(desc, Game::GetText("instr.short.escort").data(), ActionName(action), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.short.escort").data(), ActionName(action), tgt_desc.data());
 		}
 		else {
-			sprintf(desc, Game::GetText("instr.short.protect").data(), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.short.protect").data(), tgt_desc.data());
 		}
 		break;
 
 	case PATROL:
-		sprintf(desc, Game::GetText("instr.short.patrol").data(),
+		sprintf_s(desc, Game::GetText("instr.short.patrol").data(),
 		tgt_desc.data(),
 		rgn_name.data());
 		break;
 
 	case SWEEP:
-		sprintf(desc, Game::GetText("instr.short.sweep").data(),
+		sprintf_s(desc, Game::GetText("instr.short.sweep").data(),
 		tgt_desc.data(),
 		rgn_name.data());
 		break;
 
 	case INTERCEPT:
-		sprintf(desc, Game::GetText("instr.short.intercept").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.short.intercept").data(), tgt_desc.data());
 		break;
 
 	case STRIKE:
-		sprintf(desc, Game::GetText("instr.short.strike").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.short.strike").data(), tgt_desc.data());
 		break;
 
 	case ASSAULT:
-		sprintf(desc, Game::GetText("instr.short.assault").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.short.assault").data(), tgt_desc.data());
 		break;
 
 	case RECON:
-		sprintf(desc, Game::GetText("instr.short.recon").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.short.recon").data(), tgt_desc.data());
 		break;
 
 	default:
-		sprintf(desc, "%s", ActionName(action));
+		sprintf_s(desc, "%s", ActionName(action));
 		break;
 	}
 
 	if (status != PENDING) {
-		strcat(desc, " - ");
-		strcat(desc, Game::GetText(StatusName(status)));
+		strcat_s(desc, " - ");
+		strcat_s(desc, Game::GetText(StatusName(status)));
 	}
 
 	return desc;
@@ -427,77 +427,77 @@ Instruction::GetDescription() const
 	switch (action) {
 	case VECTOR:
 		if (farcast)
-		sprintf(desc, Game::GetText("instr.long.farcast").data(), rgn_name.data());
+		sprintf_s(desc, Game::GetText("instr.long.farcast").data(), rgn_name.data());
 		else
-		sprintf(desc, Game::GetText("instr.long.vector").data(), rgn_name.data());
+		sprintf_s(desc, Game::GetText("instr.long.vector").data(), rgn_name.data());
 		break;
 
 	case LAUNCH:
-		sprintf(desc, Game::GetText("instr.long.launch").data(), tgt_name.data());
+		sprintf_s(desc, Game::GetText("instr.long.launch").data(), tgt_name.data());
 		break;
 
 	case DOCK:
-		sprintf(desc, Game::GetText("instr.long.dock").data(), tgt_name.data());
+		sprintf_s(desc, Game::GetText("instr.long.dock").data(), tgt_name.data());
 		break;
 
 	case RTB:
-		sprintf(desc, Game::GetText("instr.long.return-to-base").data());
+		sprintf_s(desc, Game::GetText("instr.long.return-to-base").data());
 		break;
 
 	case DEFEND:
 		if (priority == PRIMARY) {
-			sprintf(desc, Game::GetText("instr.long.defend").data(), ActionName(action), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.long.defend").data(), ActionName(action), tgt_desc.data());
 		}
 		else {
-			sprintf(desc, Game::GetText("instr.long.protect").data(), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.long.protect").data(), tgt_desc.data());
 		}
 		break;
 
 	case ESCORT:
 		if (priority == PRIMARY) {
-			sprintf(desc, Game::GetText("instr.long.escort").data(), ActionName(action), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.long.escort").data(), ActionName(action), tgt_desc.data());
 		}
 		else {
-			sprintf(desc, Game::GetText("instr.long.protect").data(), tgt_desc.data());
+			sprintf_s(desc, Game::GetText("instr.long.protect").data(), tgt_desc.data());
 		}
 		break;
 
 	case PATROL:
-		sprintf(desc, Game::GetText("instr.long.patrol").data(),
+		sprintf_s(desc, Game::GetText("instr.long.patrol").data(),
 		tgt_desc.data(),
 		rgn_name.data());
 		break;
 
 	case SWEEP:
-		sprintf(desc, Game::GetText("instr.long.sweep").data(),
+		sprintf_s(desc, Game::GetText("instr.long.sweep").data(),
 		tgt_desc.data(),
 		rgn_name.data());
 		break;
 
 	case INTERCEPT:
-		sprintf(desc, Game::GetText("instr.long.intercept").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.long.intercept").data(), tgt_desc.data());
 		break;
 
 	case STRIKE:
-		sprintf(desc, Game::GetText("instr.long.strike").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.long.strike").data(), tgt_desc.data());
 		break;
 
 	case ASSAULT:
-		sprintf(desc, Game::GetText("instr.long.assault").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.long.assault").data(), tgt_desc.data());
 		break;
 
 	case RECON:
-		sprintf(desc, Game::GetText("instr.long.recon").data(), tgt_desc.data());
+		sprintf_s(desc, Game::GetText("instr.long.recon").data(), tgt_desc.data());
 		break;
 
 	default:
-		sprintf(desc, "%s", ActionName(action));
+		sprintf_s(desc, "%s", ActionName(action));
 		break;
 	}
 
 	if (status != PENDING) {
-		strcat(desc, " - ");
-		strcat(desc, Game::GetText(StatusName(status)));
+		strcat_s(desc, " - ");
+		strcat_s(desc, Game::GetText(StatusName(status)));
 	}
 
 	return desc;

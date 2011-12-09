@@ -251,9 +251,9 @@ MsnObjDlg::Show()
 					char txt[256];
 
 					if (design->type <= Ship::ATTACK)
-					sprintf(txt, "%s %s", design->abrv, design->display_name);
+					sprintf_s(txt, "%s %s", design->abrv, design->display_name);
 					else
-					sprintf(txt, "%s %s", design->abrv, elem->Name().data());
+					sprintf_s(txt, "%s %s", design->abrv, elem->Name().data());
 
 					player_desc->SetText(txt);
 				}

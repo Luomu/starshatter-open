@@ -941,9 +941,10 @@ Player::Load()
 	int         blocklen = 0;
 
 	char        filename[64];
-	strcpy(filename, "player.cfg");
+	strcpy_s(filename, "player.cfg");
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		config_exists = true;
@@ -1139,7 +1140,8 @@ Player::Save()
 		}
 	}
 
-	FILE* f = fopen("player.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "player.cfg", "w");
 	if (f) {
 		fprintf(f, "PLAYER_CONFIG\n\n");
 
@@ -1219,7 +1221,7 @@ Player::EncodeStats()
 	ZeroMemory(stat_buf, 280);
 	ZeroMemory(code_buf, 280);
 
-	sprintf(stat_buf, "%-16s%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x",
+	sprintf_s(stat_buf, "%-16s%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x%08x",
 	pass.data(),
 	create_date,
 	points,
@@ -1282,41 +1284,41 @@ Player::DecodeStats(const char* stats)
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+16, 8);
-	sscanf(work, "%x", &create_date);
+	sscanf_s(work, "%x", &create_date);
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+24, 8);
-	sscanf(work, "%x", &points);
+	sscanf_s(work, "%x", &points);
 	if (points < 0) points = 0;
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+32, 8);
-	sscanf(work, "%x", &flight_time);
+	sscanf_s(work, "%x", &flight_time);
 	if (flight_time < 0) flight_time = 0;
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+40, 8);
-	sscanf(work, "%x", &missions);
+	sscanf_s(work, "%x", &missions);
 	if (missions < 0) missions = 0;
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+48, 8);
-	sscanf(work, "%x", &kills);
+	sscanf_s(work, "%x", &kills);
 	if (kills < 0) kills = 0;
 
 	ZeroMemory(work, 16);
 	CopyMemory(work, stat_buf+56, 8);
-	sscanf(work, "%x", &losses);
+	sscanf_s(work, "%x", &losses);
 	if (losses < 0) losses = 0;
 
 	if (plain.length() > 64) {
 		ZeroMemory(work, 16);
 		CopyMemory(work, stat_buf+64, 8);
-		sscanf(work, "%x", &medals);
+		sscanf_s(work, "%x", &medals);
 
 		ZeroMemory(work, 16);
 		CopyMemory(work, stat_buf+72, 8);
-		sscanf(work, "%x", &campaigns);
+		sscanf_s(work, "%x", &campaigns);
 	}
 
 	if (create_date == 0) {

@@ -69,10 +69,10 @@ CmpCompleteDlg::Show()
 		char           img_name[256];
 
 		if (event) {
-			strcpy(img_name, event->ImageFile());
+			strcpy_s(img_name, event->ImageFile());
 
 			if (!strstr(img_name, ".pcx")) {
-				strcat(img_name, ".pcx");
+				strcat_s(img_name, ".pcx");
 			}
 
 			if (loader) {

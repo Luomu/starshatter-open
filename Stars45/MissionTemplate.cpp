@@ -281,10 +281,10 @@ MissionTemplate::Load(const char* fname, const char* pname)
 	ok = false;
 
 	if (fname)
-	strcpy(filename, fname);
+	strcpy_s(filename, fname);
 
 	if (pname)
-	strcpy(path, pname);
+	strcpy_s(path, pname);
 
 	if (!filename[0]) {
 		Print("\nCan't Load Mission Template, script unspecified.\n");

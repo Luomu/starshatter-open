@@ -443,7 +443,7 @@ MsnSelectDlg::OnDel(AWEvent* event)
 	ConfirmDlg* confirm = manager->GetConfirmDlg();
 	if (confirm) {
 		char msg[256];
-		sprintf(msg, Game::GetText("MsnSelectDlg.are-you-sure").data(), m->Name());
+		sprintf_s(msg, Game::GetText("MsnSelectDlg.are-you-sure").data(), m->Name());
 		confirm->SetMessage(msg);
 		confirm->SetTitle(Game::GetText("MsnSelectDlg.confirm-delete"));
 		confirm->SetParentControl(btn_del);

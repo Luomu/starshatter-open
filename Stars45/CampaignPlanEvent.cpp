@@ -206,8 +206,7 @@ CampaignPlanEvent::ExecScriptedEvents()
 									found = true;
 
 									// don't announce the move unless it's for the player's team:
-									if (action->GetIFF() == campaign->GetPlayerIFF() &&
-											stricmp(action->GetText(), "do-not-display")) {
+									if (action->GetIFF() == campaign->GetPlayerIFF() && _stricmp(action->GetText(), "do-not-display")) {
 										CombatEvent* event = new(__FILE__,__LINE__)
 										CombatEvent(campaign,
 										CombatEvent::MOVE_TO,
@@ -217,7 +216,7 @@ CampaignPlanEvent::ExecScriptedEvents()
 										action->Region());
 
 										if (!event)
-										return false;
+											return false;
 
 										Text title = Text(g->Name()) + " Orders: Proceed to " + action->Region() + " Sector";
 										event->SetTitle(title);
@@ -292,8 +291,7 @@ CampaignPlanEvent::ExecScriptedEvents()
 									found = true;
 
 									// don't announce the move unless it's for the player's team:
-									if (action->GetIFF() == campaign->GetPlayerIFF() &&
-											stricmp(action->GetText(), "do-not-display")) {
+									if (action->GetIFF() == campaign->GetPlayerIFF() && _stricmp(action->GetText(), "do-not-display")) {
 										CombatEvent* event = new(__FILE__,__LINE__)
 										CombatEvent(campaign,
 										CombatEvent::MOVE_TO,
@@ -303,7 +301,7 @@ CampaignPlanEvent::ExecScriptedEvents()
 										action->Region());
 
 										if (!event)
-										return false;
+											return false;
 
 										Text title = Text(g->Name()) + " Orders: Proceed to " + action->System() + " System";
 										event->SetTitle(title);
@@ -778,31 +776,23 @@ CampaignPlanEvent::CreateEventFighterAssault(CombatAssignment* a)
 	if (them_count) {
 		if (friendly) {
 			if (them_count > 1)
-			sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-			them_count, tgt->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, tgt->Name().data());
 			else
-			sprintf(text, "ENEMY KILLED:\t %s destroyed\n",
-			tgt->Name().data());
-		}
-		else {
-			sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-			them_count, them->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %s destroyed\n", tgt->Name().data());
+		} else {
+			sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, them->Name().data());
 		}
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ENEMY KILLED:\t 0\n";
 	}
 
 	if (us_count) {
 		if (!friendly)
-		sprintf(text, "ALLIED LOSSES:\t %s destroyed\n",
-		tgt->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %s destroyed\n", tgt->Name().data());
 		else
-		sprintf(text, "ALLIED LOSSES:\t %d %s destroyed",
-		us_count,
-		us->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %d %s destroyed",	us_count, us->Name().data());
 
 		info += text;
 	}
@@ -928,36 +918,26 @@ CampaignPlanEvent::CreateEventFighterStrike(CombatAssignment* a)
 	if (them_count) {
 		if (friendly) {
 			if (them_count > 1)
-			sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-			them_count, tgt->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, tgt->Name().data());
 			else
-			sprintf(text, "ENEMY KILLED:\t %s destroyed\n",
-			tgt->Name().data());
-		}
-		else {
-			sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-			them_count,
-			them->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %s destroyed\n", tgt->Name().data());
+		} else {
+			sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, them->Name().data());
 		}
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ENEMY KILLED:\t 0\n";
 	}
 
 	if (us_count) {
 		if (!friendly)
-		sprintf(text, "ALLIED LOSSES:\t %s destroyed\n",
-		tgt->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %s destroyed\n", tgt->Name().data());
 		else
-		sprintf(text, "ALLIED LOSSES:\t %d %s destroyed",
-		us_count,
-		us->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %d %s destroyed", us_count, us->Name().data());
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ALLIED LOSSES:\t 0";
 	}
 
@@ -1093,23 +1073,17 @@ CampaignPlanEvent::CreateEventFighterSweep(CombatAssignment* a)
 	char text[256];
 
 	if (them_count) {
-		sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-		them_count,
-		them->Name().data());
+		sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, them->Name().data());
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ENEMY KILLED:\t 0\n";
 	}
 
 	if (us_count) {
-		sprintf(text, "ALLIED LOSSES:\t %d %s destroyed",
-		us_count,
-		us->Name().data());
+		sprintf_s(text, "ALLIED LOSSES:\t %d %s destroyed",	us_count, us->Name().data());
 		info += text;
-	}
-	else {
+	} else {
 		info += "ALLIED LOSSES:\t 0";
 	}
 
@@ -1221,44 +1195,31 @@ CampaignPlanEvent::CreateEventStarship(CombatAssignment* a)
 	if (them_count) {
 		if (friendly) {
 			if (tgt->Count() > 1) {
-				sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-				them_count,
-				tgt->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, tgt->Name().data());
+			} else {
+				sprintf_s(text, "ENEMY KILLED:\t %s destroyed\n", tgt->Name().data());
 			}
-			else {
-				sprintf(text, "ENEMY KILLED:\t %s destroyed\n",
-				tgt->Name().data());
-			}
-		}
-		else {
+		} else {
 			if (unit->Count() > 1) {
-				sprintf(text, "ENEMY KILLED:\t %d %s destroyed\n",
-				them_count,
-				unit->Name().data());
-			}
-			else {
-				sprintf(text, "ENEMY KILLED:\t %s destroyed\n",
-				unit->Name().data());
+				sprintf_s(text, "ENEMY KILLED:\t %d %s destroyed\n", them_count, unit->Name().data());
+			} else {
+				sprintf_s(text, "ENEMY KILLED:\t %s destroyed\n", unit->Name().data());
 			}
 		}
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ENEMY KILLED:\t 0\n";
 	}
 
 	if (us_count) {
 		if (!friendly)
-		sprintf(text, "ALLIED LOSSES:\t %s destroyed\n",
-		tgt->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %s destroyed\n", tgt->Name().data());
 		else
-		sprintf(text, "ALLIED LOSSES:\t %s destroyed",
-		unit->Name().data());
+			sprintf_s(text, "ALLIED LOSSES:\t %s destroyed", unit->Name().data());
 
 		info += text;
-	}
-	else {
+	} else {
 		info += "ALLIED LOSSES:\t 0";
 	}
 

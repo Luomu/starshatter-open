@@ -134,7 +134,7 @@ FltDlg::SetShip(Ship* s)
 
 					for (int i = 0; i < nsquadrons; i++) {
 						char filter[64];
-						sprintf(filter, "%s %s",
+						sprintf_s(filter, "%s %s",
 						hangar->SquadronDesign(i)->abrv,
 						hangar->SquadronName(i));
 
@@ -377,7 +377,7 @@ FltDlg::UpdateSelection()
 						last_index++;
 
 						char txt[32];
-						sprintf(txt, "%2d    ", last_index+1);
+						sprintf_s(txt, "%2d    ", last_index+1);
 						hangar_list->AddItemWithData(txt, last_index); // use data for sort
 
 						if (hangar->GetShip(s))
@@ -480,7 +480,7 @@ FltDlg::UpdateObjective()
 					FormatNumber(txt, r);
 				}
 				else {
-					strcpy(txt, Game::GetText("FltDlg.Unknown").data());
+					strcpy_s(txt, Game::GetText("FltDlg.Unknown").data());
 					r = 2e9;
 				}
 			}
@@ -534,7 +534,7 @@ FltDlg::OnFilter(AWEvent* event)
 
 		for (int i = 0; i < nslots; i++) {
 			char txt[32];
-			sprintf(txt, " %2d    ", i+1);
+			sprintf_s(txt, " %2d    ", i+1);
 
 			const HangarSlot* s = hangar->GetSlot(seln, i);
 			hangar_list->AddItemWithData(txt, i);
@@ -565,7 +565,7 @@ FltDlg::OnFilter(AWEvent* event)
 					int      slot     = -1;
 
 					char txt[32];
-					sprintf(txt, "%d-%d    ", f+1, i+1);
+					sprintf_s(txt, "%d-%d    ", f+1, i+1);
 
 					hangar_list->AddItemWithData(txt, item); // use data for sort
 
@@ -623,7 +623,7 @@ FltDlg::OnFilter(AWEvent* event)
 
 				if (hangar->GetState(s) >= Hangar::ACTIVE) {
 					char txt[32];
-					sprintf(txt, " %2d    ", item+1);
+					sprintf_s(txt, " %2d    ", item+1);
 
 					hangar_list->AddItemWithData(txt, item); // use data for sort
 
@@ -994,7 +994,7 @@ FltDlg::OnMissionType(AWEvent* event)
 					FormatNumber(txt, r);
 				}
 				else {
-					strcpy(txt, Game::GetText("FltDlg.Unknown").data());
+					strcpy_s(txt, Game::GetText("FltDlg.Unknown").data());
 					r = 2e9;
 				}
 			}
@@ -1064,7 +1064,7 @@ FltDlg::OnMissionType(AWEvent* event)
 				int item = loadout_list->AddItem(sl->name) - 1;
 
 				char weight[32];
-				sprintf(weight, "%d kg", (int) ((design->mass + sl->mass) * 1000));
+				sprintf_s(weight, "%d kg", (int) ((design->mass + sl->mass) * 1000));
 				loadout_list->SetItemText(item, 1, weight);
 				loadout_list->SetItemData(item, 1, (DWORD) (sl->mass * 1000));
 			}

@@ -92,7 +92,8 @@ static Text Digest(const char* salt, const char* file)
 	ZeroMemory(digest, sizeof(digest));
 
 	if (file) {
-		FILE* f = fopen(file, "rb");
+		FILE* f;
+		fopen_s(&f, file, "rb");
 
 		if (f) {
 			SHA1 sha1;
@@ -115,7 +116,7 @@ static Text Digest(const char* salt, const char* file)
 
 			unsigned result[5];
 			if (sha1.Result(result)) {
-				sprintf(digest, "SHA1_%08X_%08X_%08X_%08X_%08X",
+				sprintf_s(digest, "SHA1_%08X_%08X_%08X_%08X_%08X",
 				result[0], result[1], result[2], result[3], result[4]);
 			}
 		}
@@ -162,7 +163,7 @@ NetAuth::CreateAuthResponse(int level, const char* salt)
 		ListIter<ModInfo> mod_iter = mods;
 
 		char buffer[32];
-		sprintf(buffer, "num %d ", mods.size());
+		sprintf_s(buffer, "num %d ", mods.size());
 		response += buffer;
 
 		while (++mod_iter) {

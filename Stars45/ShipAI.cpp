@@ -203,7 +203,7 @@ const char*
 ShipAI::GetObserverName() const
 {
 	static char name[64];
-	sprintf(name, "ShipAI(%s)", self->Name());
+	sprintf_s(name, "ShipAI(%s)", self->Name());
 	return name;
 }
 

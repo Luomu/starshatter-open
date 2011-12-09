@@ -55,14 +55,14 @@ CombatAssignment::GetDescription() const
 	static char desc[256];
 
 	if (!resource)
-	sprintf(desc, "%s %s", 
-	(const char*) Mission::RoleName(type),
-	(const char*) objective->Name());
+		sprintf_s(desc, "%s %s", 
+			(const char*) Mission::RoleName(type),
+			(const char*) objective->Name());
 	else
-	sprintf(desc, "%s %s %s", 
-	(const char*) resource->Name(),
-	(const char*) Mission::RoleName(type),
-	(const char*) objective->Name());
+		sprintf_s(desc, "%s %s %s", 
+			(const char*) resource->Name(),
+			(const char*) Mission::RoleName(type),
+			(const char*) objective->Name());
 
 	return desc;
 }

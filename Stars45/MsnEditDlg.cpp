@@ -317,7 +317,7 @@ MsnEditDlg::DrawPackages()
 			while (++elem) {
 				char txt[256];
 
-				sprintf(txt, "%d", elem->Identity());
+				sprintf_s(txt, "%d", elem->Identity());
 
 				if (cleared) {
 					lst_elem->AddItemWithData(txt, elem->ElementID());
@@ -327,7 +327,7 @@ MsnEditDlg::DrawPackages()
 					lst_elem->SetItemData(i, elem->ElementID());
 				}
 
-				sprintf(txt, "%d", elem->GetIFF());
+				sprintf_s(txt, "%d", elem->GetIFF());
 				lst_elem->SetItemText(i, 1, txt);
 				lst_elem->SetItemText(i, 2, elem->Name());
 				lst_elem->SetItemText(i, 4, elem->RoleName());
@@ -337,12 +337,12 @@ MsnEditDlg::DrawPackages()
 
 				if (design) {
 					if (elem->Count() > 1)
-					sprintf(txt, "%d %s", elem->Count(), design->abrv);
+					sprintf_s(txt, "%d %s", elem->Count(), design->abrv);
 					else
-					sprintf(txt, "%s %s", design->abrv, design->name);
+					sprintf_s(txt, "%s %s", design->abrv, design->name);
 				}
 				else {
-					sprintf(txt, Game::GetText("MsnDlg.undefined").data());
+					sprintf_s(txt, Game::GetText("MsnDlg.undefined").data());
 				}
 
 				lst_elem->SetItemText(i, 3, txt);
@@ -382,7 +382,7 @@ MsnEditDlg::DrawPackages()
 			while (++event) {
 				char txt[256];
 
-				sprintf(txt, "%d", event->EventID());
+				sprintf_s(txt, "%d", event->EventID());
 				if (cleared) {
 					lst_event->AddItemWithData(txt, event->EventID());
 				}
@@ -400,7 +400,7 @@ MsnEditDlg::DrawPackages()
 					FormatTime(txt+2, event->Delay());
 				}
 				else {
-					strcpy(txt, " ");
+					strcpy_s(txt, " ");
 				}
 
 				lst_event->SetItemText(i, 1, txt);

@@ -336,7 +336,7 @@ public:
 
 	// GENERAL ACCESSORS:
 	const char*       Registry()        const    { return regnum;        }
-	void              SetName(const char* ident) { strcpy(name, ident);  }
+	void              SetName(const char* ident) { strcpy_s(name, ident);  }
 	const ShipDesign* Design()          const    { return design;        }
 	const char*       Abbreviation()    const;
 	const char*       DesignName()      const;

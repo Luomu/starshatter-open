@@ -146,7 +146,7 @@ StarSystem::Load()
 	DataLoader* loader = DataLoader::GetLoader();
 	datapath = loader->GetDataPath();
 
-	sprintf(filename, "%s/%s.def", (const char*) name, (const char*) name);
+	sprintf_s(filename, "%s/%s.def", (const char*) name, (const char*) name);
 
 	Print("Loading StarSystem: %s\n", filename);
 	loader->LoadBuffer(filename, block, true);
@@ -1611,34 +1611,34 @@ StarSystem::FindOrbital(const char* name)
 
 	ListIter<OrbitalBody> star = bodies;
 	while (++star) {
-		if (!stricmp(star->Name(), name))
+		if (!_stricmp(star->Name(), name))
 		return star.value();
 
 		ListIter<OrbitalRegion> star_rgn = star->Regions();
 		while (++star_rgn) {
-			if (!stricmp(star_rgn->Name(), name))
+			if (!_stricmp(star_rgn->Name(), name))
 			return star_rgn.value();
 		}
 
 		ListIter<OrbitalBody> planet = star->Satellites();
 		while (++planet) {
-			if (!stricmp(planet->Name(), name))
+			if (!_stricmp(planet->Name(), name))
 			return planet.value();
 
 			ListIter<OrbitalRegion> planet_rgn = planet->Regions();
 			while (++planet_rgn) {
-				if (!stricmp(planet_rgn->Name(), name))
+				if (!_stricmp(planet_rgn->Name(), name))
 				return planet_rgn.value();
 			}
 
 			ListIter<OrbitalBody> moon = planet->Satellites();
 			while (++moon) {
-				if (!stricmp(moon->Name(), name))
+				if (!_stricmp(moon->Name(), name))
 				return moon.value();
 
 				ListIter<OrbitalRegion> moon_rgn = moon->Regions();
 				while (++moon_rgn) {
-					if (!stricmp(moon_rgn->Name(), name))
+					if (!_stricmp(moon_rgn->Name(), name))
 					return moon_rgn.value();
 				}
 			}
@@ -1647,7 +1647,7 @@ StarSystem::FindOrbital(const char* name)
 
 	ListIter<OrbitalRegion> region = regions;
 	while (++region) {
-		if (!stricmp(region->Name(), name))
+		if (!_stricmp(region->Name(), name))
 		return region.value();
 	}
 
@@ -1664,7 +1664,7 @@ StarSystem::FindRegion(const char* name)
 
 	ListIter<OrbitalRegion> region = all_regions;
 	while (++region) {
-		if (!stricmp(region->Name(), name))
+		if (!_stricmp(region->Name(), name))
 		return region.value();
 	}
 

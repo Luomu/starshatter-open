@@ -62,7 +62,8 @@ static Text GetCDKeyFromIniFile()
 
 	ZeroMemory(cdbuf, sizeof(cdbuf));
 
-	FILE* f = fopen("maga.mg", "r");
+	FILE* f;
+	fopen_s(&f, "maga.mg", "r");
 	if (f) {
 		bool found_section = false;
 
@@ -162,7 +163,7 @@ int execRegistrationProgram()
 {
 	int  result = 999;
 	char cmdline[256];
-	strcpy(cmdline, "SS2rez");
+	strcpy_s(cmdline, "SS2rez");
 
 	STARTUPINFO s;
 	ZeroMemory(&s, sizeof(s));

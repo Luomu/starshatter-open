@@ -440,13 +440,13 @@ WeaponDesign::LoadDesign(const char* path, const char* filename, bool mod)
 									char typestr[32];
 									GetDefText(typestr, pdef, filename);
 
-									if (!stricmp(typestr, "normal"))
+									if (!_stricmp(typestr, "normal"))
 									design->damage_type = DMG_NORMAL;
 
-									else if (!stricmp(typestr, "emp"))
+									else if (!_stricmp(typestr, "emp"))
 									design->damage_type = DMG_EMP;
 
-									else if (!stricmp(typestr, "power"))
+									else if (!_stricmp(typestr, "power"))
 									design->damage_type = DMG_POWER;
 
 									else

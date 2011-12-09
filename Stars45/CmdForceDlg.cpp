@@ -265,11 +265,9 @@ CmdForceDlg::AddCombatGroup(CombatGroup* grp, bool last_child)
 			int         damage = (int) (100 * unit->GetSustainedDamage() / unit->GetDesign()->integrity);
 			
 			if (damage < 1 || unit->DeadCount() >= unit->Count()) {
-				sprintf(info, "%s%s%s", pipe_stack, prefix, unit->GetDescription());
-			}
-			else {
-				sprintf(info, "%s%s%s %d%% damage", pipe_stack, prefix, unit->GetDescription(),
-				damage);
+				sprintf_s(info, "%s%s%s", pipe_stack, prefix, unit->GetDescription());
+			} else {
+				sprintf_s(info, "%s%s%s %d%% damage", pipe_stack, prefix, unit->GetDescription(), damage);
 			}
 
 			int index = lst_combat->AddItemWithData(info, (DWORD) unit);
@@ -340,10 +338,10 @@ WepGroup* FindWepGroup(WepGroup* weapons, const char* name)
 
 	while (!group && w < 8) {
 		if (first < 0 && iter->name.length() == 0)
-		first = w;
+			first = w;
 
-		if (!stricmp(iter->name, name))
-		group = iter;
+		if (!_stricmp(iter->name, name))
+			group = iter;
 
 		iter++;
 		w++;
@@ -439,18 +437,18 @@ CmdForceDlg::OnCombat(AWEvent* event)
 					n = lst_desc->AddItem("Sorties:") - 1;
 
 					if (grp->Sorties() >= 0)
-					sprintf(txt, "%d", grp->Sorties());
+						sprintf_s(txt, "%d", grp->Sorties());
 					else
-					strcpy(txt, "Unavail");
+						strcpy_s(txt, "Unavail");
 
 					lst_desc->SetItemText(n, 1, txt);
 
 					n = lst_desc->AddItem("Kills:") - 1;
 
 					if (grp->Kills() >= 0)
-					sprintf(txt, "%d", grp->Kills());
+						sprintf_s(txt, "%d", grp->Kills());
 					else
-					strcpy(txt, "Unavail");
+						strcpy_s(txt, "Unavail");
 
 					lst_desc->SetItemText(n, 1, txt);
 
@@ -458,12 +456,11 @@ CmdForceDlg::OnCombat(AWEvent* event)
 
 					if (grp->Points() >= 0) {
 						if (grp->Sorties() > 0)
-						sprintf(txt, "%.1f", (double) grp->Points() / grp->Sorties());
+							sprintf_s(txt, "%.1f", (double) grp->Points() / grp->Sorties());
 						else
-						sprintf(txt, "%.1f", (double) grp->Points());
-					}
-					else {
-						strcpy(txt, "Unavail");
+							sprintf_s(txt, "%.1f", (double) grp->Points());
+					} else {
+						strcpy_s(txt, "Unavail");
 					}
 
 					lst_desc->SetItemText(n, 1, txt);
@@ -510,13 +507,13 @@ CmdForceDlg::OnCombat(AWEvent* event)
 					else
 					FormatNumber(txt, design->radius*2);
 
-					strcat(txt, " m");
+					strcat_s(txt, " m");
 
 					n = lst_desc->AddItem("Length:") - 1;
 					lst_desc->SetItemText(n, 1, txt);
 
 					FormatNumber(txt, design->mass);
-					strcat(txt, " T");
+					strcat_s(txt, " T");
 
 					n = lst_desc->AddItem("Mass:") - 1;
 					lst_desc->SetItemText(n, 1, txt);
@@ -541,9 +538,9 @@ CmdForceDlg::OnCombat(AWEvent* event)
 						for (int g = 0; g < 8; g++) {
 							WepGroup* group = &groups[g];
 							if (group && group->count) {
-								sprintf(txt, "%s (%d)", group->name.data(), group->count);
+								sprintf_s(txt, "%s (%d)", group->name.data(), group->count);
 								if (g > 0) n = lst_desc->AddItem(" ") - 1;
-								lst_desc->SetItemText(n, 1, txt);
+									lst_desc->SetItemText(n, 1, txt);
 							}
 						}
 					}
@@ -674,18 +671,18 @@ CmdForceDlg::OnTransfer(AWEvent* event)
 			if (current_unit) {
 				campaign->SetPlayerUnit(current_unit);
 
-				sprintf(transfer_info, "Your transfer request has been approved, %s %s.  You are now assigned to the %s.  Good luck.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
-				Player::RankName(player->Rank()),
-				player->Name().data(),
-				current_unit->GetDescription());
+				sprintf_s(transfer_info, "Your transfer request has been approved, %s %s.  You are now assigned to the %s.  Good luck.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
+					Player::RankName(player->Rank()),
+					player->Name().data(),
+					current_unit->GetDescription());
 			}
 			else {
 				campaign->SetPlayerGroup(current_group);
 
-				sprintf(transfer_info, "Your transfer request has been approved, %s %s.  You are now assigned to the %s.  Good luck.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
-				Player::RankName(player->Rank()),
-				player->Name().data(),
-				current_group->GetDescription());
+				sprintf_s(transfer_info, "Your transfer request has been approved, %s %s.  You are now assigned to the %s.  Good luck.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
+					Player::RankName(player->Rank()),
+					player->Name().data(),
+					current_group->GetDescription());
 			}
 
 			Button::PlaySound(Button::SND_ACCEPT);
@@ -701,11 +698,11 @@ CmdForceDlg::OnTransfer(AWEvent* event)
 		else {
 			Button::PlaySound(Button::SND_REJECT);
 
-			sprintf(transfer_info, "Your transfer request has been denied, %s %s.  The %s requires a command rank of %s.  Please return to your unit and your duties.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
-			Player::RankName(player->Rank()),
-			player->Name().data(),
-			current_group->GetDescription(),
-			Player::RankName(Player::CommandRankRequired(cmd_class)));
+			sprintf_s(transfer_info, "Your transfer request has been denied, %s %s.  The %s requires a command rank of %s.  Please return to your unit and your duties.\n\nFleet Admiral A. Evars FORCOM\nCommanding",
+				Player::RankName(player->Rank()),
+				player->Name().data(),
+				current_group->GetDescription(),
+				Player::RankName(Player::CommandRankRequired(cmd_class)));
 
 			CmdMsgDlg* msgdlg = manager->GetCmdMsgDlg();
 			msgdlg->Title()->SetText("Transfer Denied");

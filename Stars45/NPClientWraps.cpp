@@ -209,8 +209,8 @@ NPRESULT NPClient_Init( const char* csDLLPath )
 		SIGNATUREDATA pSignature;
 		SIGNATUREDATA verifySignature;
 		// init the signatures
-		strcpy(verifySignature.DllSignature, "precise head tracking\n put your head into the game\n now go look around\n\n Copyright EyeControl Technologies");
-		strcpy(verifySignature.AppSignature, "hardware camera\n software processing data\n track user movement\n\n Copyright EyeControl Technologies");
+		strcpy_s(verifySignature.DllSignature, "precise head tracking\n put your head into the game\n now go look around\n\n Copyright EyeControl Technologies");
+		strcpy_s(verifySignature.AppSignature, "hardware camera\n software processing data\n track user movement\n\n Copyright EyeControl Technologies");
 		// query the dll and compare the results
 		NPRESULT vresult = NP_GetSignature( &pSignature );
 		if( vresult == NP_OK )

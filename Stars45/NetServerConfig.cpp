@@ -90,9 +90,10 @@ NetServerConfig::Load()
 	int         port     = 0;
 
 	char        filename[64];
-	strcpy(filename, "server.cfg");
+	strcpy_s(filename, "server.cfg");
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		::fseek(f, 0, SEEK_END);
@@ -242,7 +243,8 @@ NetServerConfig::Load()
 void
 NetServerConfig::Save()
 {
-	FILE* f = fopen("server.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "server.cfg", "w");
 	if (f) {
 		fprintf(f, "SERVER_CONFIG\n\n");
 		fprintf(f, "name:            \"%s\"\n", instance->name.data());
@@ -333,9 +335,10 @@ NetServerConfig::LoadBanList()
 	int         port     = 0;
 
 	char        filename[64];
-	strcpy(filename, "banned.cfg");
+	strcpy_s(filename, "banned.cfg");
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		::fseek(f, 0, SEEK_END);
@@ -418,7 +421,8 @@ NetServerConfig::BanUser(NetUser* user)
 	banned_addrs.append(user_addr);
 	banned_names.append(user_name);
 
-	FILE* f = fopen("banned.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "banned.cfg", "w");
 	if (f) {
 		fprintf(f, "BANNED_CONFIG\n\n");
 

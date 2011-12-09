@@ -191,7 +191,7 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 		// orders to self?
 		if (dst_elem && dst_elem->NumShips() == 1 && dst_elem->GetShip(1) == sender) {
 			if (msg->Action() >= RadioMessage::CALL_ENGAGING) {
-				sprintf(src_buf, "%s", sender->Name());
+				sprintf_s(src_buf, "%s", sender->Name());
 
 				if (sender->IsStarship())
 				vox_channel = (sender->Identity()%3) + 5;
@@ -208,10 +208,10 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 			}
 
 			if (msg->Action() >= RadioMessage::CALL_ENGAGING) {
-				sprintf(src_buf, "%s", sender->Name());
+				sprintf_s(src_buf, "%s", sender->Name());
 			}
 			else {
-				sprintf(src_buf, "This is %s", sender->Name());
+				sprintf_s(src_buf, "This is %s", sender->Name());
 
 				if (dst_ship) {
 					// internal announcement
@@ -220,16 +220,16 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 						int index = sender->GetElementIndex();
 
 						if (index > 1 && dst_elem) {
-							sprintf(dst_buf, "%s Leader",     (const char*) dst_elem->Name());
-							sprintf(src_buf, "this is %s %d", (const char*) dst_elem->Name(), index);
+							sprintf_s(dst_buf, "%s Leader",     (const char*) dst_elem->Name());
+							sprintf_s(src_buf, "this is %s %d", (const char*) dst_elem->Name(), index);
 						}
 						else {
-							sprintf(src_buf, "this is %s leader", (const char*) dst_elem->Name());
+							sprintf_s(src_buf, "this is %s leader", (const char*) dst_elem->Name());
 						}
 					}
 
 					else {
-						strcpy(dst_buf, (const char*) dst_ship->Name());
+						strcpy_s(dst_buf, (const char*) dst_ship->Name());
 						src_buf[0] = tolower(src_buf[0]);
 					}
 				}
@@ -237,25 +237,25 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 				else if (dst_elem) {
 					// flight
 					if (dst_elem->NumShips() > 1) {
-						sprintf(dst_buf, "%s Flight", (const char*) dst_elem->Name());
+						sprintf_s(dst_buf, "%s Flight", (const char*) dst_elem->Name());
 
 						// internal announcement
 						if (sender->GetElement() == dst_elem) {
 							int index = sender->GetElementIndex();
 
 							if (index > 1) {
-								sprintf(dst_buf, "%s Leader",     (const char*) dst_elem->Name());
-								sprintf(src_buf, "this is %s %d", (const char*) dst_elem->Name(), index);
+								sprintf_s(dst_buf, "%s Leader",     (const char*) dst_elem->Name());
+								sprintf_s(src_buf, "this is %s %d", (const char*) dst_elem->Name(), index);
 							}
 							else {
-								sprintf(src_buf, "this is %s leader", (const char*) dst_elem->Name());
+								sprintf_s(src_buf, "this is %s leader", (const char*) dst_elem->Name());
 							}
 						}
 					}
 
 					// solo
 					else {
-						strcpy(dst_buf, (const char*) dst_elem->Name());
+						strcpy_s(dst_buf, (const char*) dst_elem->Name());
 						src_buf[0] = tolower(src_buf[0]);
 					}
 				}
@@ -267,7 +267,7 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 
 	SimObject* target = 0;
 
-	strcpy(act_buf, RadioMessage::ActionName(msg->Action()));
+	strcpy_s(act_buf, RadioMessage::ActionName(msg->Action()));
 
 	if (msg->TargetList().size() > 0)
 	target = msg->TargetList()[0];
@@ -280,90 +280,90 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 			dst_buf[0] = 0;
 
 			if (msg->Action() == RadioMessage::ACK)
-			sprintf(msg_buf, "%s.", TranslateVox("Acknowledged").data());
+			sprintf_s(msg_buf, "%s.", TranslateVox("Acknowledged").data());
 			else
-			sprintf(msg_buf, "%s.", TranslateVox("Unable").data());
+			sprintf_s(msg_buf, "%s.", TranslateVox("Unable").data());
 		}
 		else if (msg->Sender()) {
 			dst_buf[0] = 0;
 
 			if (msg->Info().length()) {
-				sprintf(msg_buf, "%s. %s", 
+				sprintf_s(msg_buf, "%s. %s", 
 				TranslateVox(act_buf).data(),
 				(const char*) msg->Info());
 			}
 			else {
-				sprintf(msg_buf, "%s.", TranslateVox(act_buf).data());
+				sprintf_s(msg_buf, "%s.", TranslateVox(act_buf).data());
 			}
 		}
 		else {
 			if (msg->Info().length()) {
-				sprintf(msg_buf, "%s. %s", 
+				sprintf_s(msg_buf, "%s. %s", 
 				TranslateVox(act_buf).data(),
 				(const char*) msg->Info());
 			}
 			else {
-				sprintf(msg_buf, "%s.", TranslateVox(act_buf).data());
+				sprintf_s(msg_buf, "%s.", TranslateVox(act_buf).data());
 			}
 		}
 	}
 
 	else if (msg->Action() == RadioMessage::MOVE_PATROL) {
-		sprintf(msg_buf, TranslateVox("Move patrol.").data());
+		sprintf_s(msg_buf, TranslateVox("Move patrol.").data());
 	}
 
 	else if (target && dst_ship && msg->Sender()) {
 		Contact* c = msg->Sender()->FindContact(target);
 
 		if (c && c->GetIFF(msg->Sender()) > 10) {
-			sprintf(msg_buf, "%s %s.", TranslateVox(act_buf).data(), TranslateVox("unknown contact").data());
+			sprintf_s(msg_buf, "%s %s.", TranslateVox(act_buf).data(), TranslateVox("unknown contact").data());
 		}
 
 		else {
-			sprintf(msg_buf, "%s %s.", 
+			sprintf_s(msg_buf, "%s %s.", 
 			TranslateVox(act_buf).data(),
 			target->Name());
 		}
 	}
 
 	else if (target) {
-		sprintf(msg_buf, "%s %s.", 
+		sprintf_s(msg_buf, "%s %s.", 
 		TranslateVox(act_buf).data(),
 		target->Name());
 	}
 
 	else if (msg->Info().length()) {
-		sprintf(msg_buf, "%s %s", 
+		sprintf_s(msg_buf, "%s %s", 
 		TranslateVox(act_buf).data(),
 		(const char*) msg->Info());
 	}
 
 	else {
-		strcpy(msg_buf, TranslateVox(act_buf).data());
+		strcpy_s(msg_buf, TranslateVox(act_buf).data());
 	}
 
 	char last_char = msg_buf[strlen(msg_buf)-1];
 	if (last_char != '!' && last_char != '.' && last_char != '?')
-	strcat(msg_buf, ".");
+	strcat_s(msg_buf, ".");
 
 	// final format:
 	if (dst_buf[0] && src_buf[0]) {
-		sprintf(txt_buf, "%s %s. %s", TranslateVox(dst_buf).data(), TranslateVox(src_buf).data(), msg_buf);
+		sprintf_s(txt_buf, "%s %s. %s", TranslateVox(dst_buf).data(), TranslateVox(src_buf).data(), msg_buf);
 		txt_buf[0] = toupper(txt_buf[0]);
 	}
 
 	else if (src_buf[0]) {
-		sprintf(txt_buf, "%s. %s", TranslateVox(src_buf).data(), msg_buf);
+		sprintf_s(txt_buf, "%s. %s", TranslateVox(src_buf).data(), msg_buf);
 		txt_buf[0] = toupper(txt_buf[0]);
 	}
 
 	else if (dst_buf[0]) {
-		sprintf(txt_buf, "%s %s", TranslateVox(dst_buf).data(), msg_buf);
+		sprintf_s(txt_buf, "%s %s", TranslateVox(dst_buf).data(), msg_buf);
 		txt_buf[0] = toupper(txt_buf[0]);
 	}
 
 	else {
-		strcpy(txt_buf, msg_buf);
+		strcpy_s(txt_buf, msg_buf);
 	}
 
 	// vox:

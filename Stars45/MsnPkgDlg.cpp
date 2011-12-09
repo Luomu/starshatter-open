@@ -125,12 +125,12 @@ MsnPkgDlg::DrawPackages()
 					char txt[256];
 
 					if (elem->Player() > 0) {
-						sprintf(txt, "==>");
+						sprintf_s(txt, "==>");
 						if (pkg_index < 0)
 						pkg_index = elem_index;
 					}
 					else {
-						strcpy(txt, " ");
+						strcpy_s(txt, " ");
 					}
 
 					pkg_list->AddItemWithData(txt, elem->ElementID());
@@ -140,9 +140,9 @@ MsnPkgDlg::DrawPackages()
 					const ShipDesign* design = elem->GetDesign();
 
 					if (elem->Count() > 1)
-					sprintf(txt, "%d %s", elem->Count(), design->abrv);
+					sprintf_s(txt, "%d %s", elem->Count(), design->abrv);
 					else
-					sprintf(txt, "%s %s", design->abrv, design->name);
+					sprintf_s(txt, "%s %s", design->abrv, design->name);
 					pkg_list->SetItemText(i, 3, txt);
 
 					i++;
@@ -173,7 +173,7 @@ MsnPkgDlg::DrawNavPlan()
 			ListIter<Instruction> navpt = element->NavList();
 			while (++navpt) {
 				char txt[256];
-				sprintf(txt, "%d", i + 1);
+				sprintf_s(txt, "%d", i + 1);
 
 				nav_list->AddItem(txt);
 				nav_list->SetItemText(i, 1, Instruction::ActionName(navpt->Action()));
@@ -183,7 +183,7 @@ MsnPkgDlg::DrawNavPlan()
 				FormatNumber(txt, dist);
 				nav_list->SetItemText(i, 3, txt);
 
-				sprintf(txt, "%d", navpt->Speed());
+				sprintf_s(txt, "%d", navpt->Speed());
 				nav_list->SetItemText(i, 4, txt);
 
 				loc = navpt->Location();
@@ -257,14 +257,14 @@ MsnPkgDlg::DrawThreats()
 					mission_role == Mission::INTERCEPT ||
 					mission_role == Mission::FLEET     ||
 					mission_role == Mission::BOMBARDMENT)
-			strcpy(role, Game::GetText("MsnDlg.ATTACK").data());
+			strcpy_s(role, Game::GetText("MsnDlg.ATTACK").data());
 			else
-			strcpy(role, Game::GetText("MsnDlg.PATROL").data());
+			strcpy_s(role, Game::GetText("MsnDlg.PATROL").data());
 
 			double dist = Point(base_loc - elem->Location()).length();
 			FormatNumber(rng, dist);
 
-			sprintf(txt, "%s - %d %s - %s",  role, 
+			sprintf_s(txt, "%s - %d %s - %s",  role, 
 			elem->Count(), 
 			elem->GetDesign()->abrv,
 			rng);

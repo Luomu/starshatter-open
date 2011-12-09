@@ -233,7 +233,8 @@ AudioConfig::Load()
 	int         blocklen = 0;
 	const char* filename = "audio.cfg";
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		::fseek(f, 0, SEEK_END);
@@ -363,7 +364,8 @@ AudioConfig::Load()
 void
 AudioConfig::Save()
 {
-	FILE* f = fopen("audio.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "audio.cfg", "w");
 	if (f) {
 		fprintf(f, "AUDIO\n\n");
 		fprintf(f, "menu_music: %3d\n",   menu_music);

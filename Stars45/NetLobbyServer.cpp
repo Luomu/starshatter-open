@@ -174,7 +174,8 @@ NetLobbyServer::LoadMOTD()
 {
 	motd.destroy();
 
-	FILE* f = fopen("motd.txt", "r");
+	FILE* f;
+	fopen_s(&f, "motd.txt", "r");
 
 	if (f) {
 		char line[256];
@@ -200,13 +201,13 @@ NetLobbyServer::SendMOTD(NetUser* user)
 	for (int i = 0; i < motd.size(); i++) {
 		Text* line = motd[i];
 
-		sprintf(buffer, "id %d user \" \" msg \"%s\"",
+		sprintf_s(buffer, "id %d user \" \" msg \"%s\"",
 		motd_index++, *line);
 
 		SendData(user, NET_LOBBY_CHAT, buffer);
 	}
 
-	sprintf(buffer, "id %d user \" \" msg \" \"", motd_index++);
+	sprintf_s(buffer, "id %d user \" \" msg \" \"", motd_index++);
 	SendData(user, NET_LOBBY_CHAT, buffer);
 }
 
@@ -223,7 +224,7 @@ NetLobbyServer::SendMods(NetUser* user)
 	for (int i = 0; i < mods.size(); i++) {
 		ModInfo* info = mods[i];
 
-		sprintf(buffer, "id %d user \"Enabled Mods:\" msg \"%d. '%s' ",
+		sprintf_s(buffer, "id %d user \"Enabled Mods:\" msg \"%d. '%s' ",
 		motd_index++, i+1, info->Name().data());
 
 		Text msg = buffer;
@@ -243,7 +244,7 @@ NetLobbyServer::SendMods(NetUser* user)
 		SendData(user, NET_LOBBY_CHAT, msg);
 	}
 
-	sprintf(buffer, "id %d user \" \" msg \" \"", motd_index++);
+	sprintf_s(buffer, "id %d user \" \" msg \" \"", motd_index++);
 	SendData(user, NET_LOBBY_CHAT, buffer);
 }
 
@@ -536,10 +537,10 @@ NetLobbyServer::AddChat(NetUser* user, const char* msg, bool route)
 				// results when using more than one in
 				// a function call...
 
-				strcpy(msg_buf, SafeQuotes(msg));
-				strcpy(usr_buf, SafeQuotes(user->Name()));
+				strcpy_s(msg_buf, SafeQuotes(msg));
+				strcpy_s(usr_buf, SafeQuotes(user->Name()));
 
-				sprintf(buffer, "id %d user \"%s\" msg \"%s\"",
+				sprintf_s(buffer, "id %d user \"%s\" msg \"%s\"",
 				entry->GetID(), usr_buf, msg_buf);
 
 				ListIter<NetUser> iter = users;
@@ -566,7 +567,8 @@ NetLobbyServer::ClearChat()
 void
 NetLobbyServer::SaveChat()
 {
-	FILE* f = fopen("chat.txt", "w");
+	FILE* f;
+	fopen_s(&f, "chat.txt", "w");
 	if (f) {
 		for (int i = 0; i < chat_log.size(); i++) {
 			NetChatEntry* c = chat_log[i];
@@ -592,7 +594,7 @@ NetLobbyServer::SelectMission(DWORD id)
 
 	// inform all users of the selection:
 	char buffer[32];
-	sprintf(buffer, "m_id 0x%08x", selected_mission);
+	sprintf_s(buffer, "m_id 0x%08x", selected_mission);
 
 	ListIter<NetUser> iter = users;
 	while (++iter) {
@@ -791,7 +793,7 @@ NetLobbyServer::GameOn()
 	const char*       password = "No";
 	char              address[32];
 
-	strcpy(address, "0");
+	strcpy_s(address, "0");
 
 	if (server_config) {
 		if (server_config->GetGameType() == NetServerConfig::NET_GAME_PRIVATE)
@@ -799,7 +801,7 @@ NetLobbyServer::GameOn()
 
 		if (server_config->GetGameType() == NetServerConfig::NET_GAME_LAN) {
 			type = "Starshatter-LAN";
-			sprintf(address, "%d.%d.%d.%d",
+			sprintf_s(address, "%d.%d.%d.%d",
 			host.Address().B1(),
 			host.Address().B2(),
 			host.Address().B3(),
@@ -807,7 +809,7 @@ NetLobbyServer::GameOn()
 		}
 		else {
 			type = "Starshatter";
-			sprintf(address, "0.0.0.0");
+			sprintf_s(address, "0.0.0.0");
 		}
 
 		if (server_config->GetGamePass().length() > 0)
@@ -842,7 +844,7 @@ NetLobbyServer::DoServerInfo(NetPeer* peer, Text s)
 		if (server_config)
 		gameport = server_config->GetGamePort();
 
-		sprintf(buffer, "info \"%s\" version \"%s\" mode %d users %d host %s port %d",
+		sprintf_s(buffer, "info \"%s\" version \"%s\" mode %d users %d host %s port %d",
 		MachineInfo::GetShortDescription(),
 		versionInfo,
 		GetStatus(),
@@ -864,7 +866,7 @@ NetLobbyServer::DoServerMods(NetPeer* peer, Text s)
 		ListIter<ModInfo> mod_iter = mods;
 
 		char buffer[32];
-		sprintf(buffer, "num %d ", mods.size());
+		sprintf_s(buffer, "num %d ", mods.size());
 		response += buffer;
 
 		while (++mod_iter) {
@@ -908,7 +910,7 @@ NetLobbyServer::DoLogin(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "name")
 		name = p->value;
@@ -1025,37 +1027,37 @@ NetLobbyServer::DoUserAuth(NetPeer* peer, Text msg)
 		if (!user->IsAuthOK()) {
 			char buffer[256];
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"**********\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"**********\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"*** Your game configuration does not match the server.\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** Your game configuration does not match the server.\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
 			if (server_mods.size() > 0) {
-				sprintf(buffer, "id %d user \"SERVER\" msg \"*** Please check that you have the proper mods deployed in\"", motd_index++);
+				sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** Please check that you have the proper mods deployed in\"", motd_index++);
 				SendData(user, NET_LOBBY_CHAT, buffer);
-				sprintf(buffer, "id %d user \"SERVER\" msg \"*** the order shown above.\"", motd_index++);
+				sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** the order shown above.\"", motd_index++);
 				SendData(user, NET_LOBBY_CHAT, buffer);
 			}
 
 			else {
-				sprintf(buffer, "id %d user \"SERVER\" msg \"*** Please verify that you have no mods deployed.\"", motd_index++);
+				sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** Please verify that you have no mods deployed.\"", motd_index++);
 				SendData(user, NET_LOBBY_CHAT, buffer);
 			}
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"*** You will not be permitted to join the game with an invalid\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** You will not be permitted to join the game with an invalid\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"*** configuration.  You may reconnect to this server after you\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** configuration.  You may reconnect to this server after you\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"*** have corrected your mod configuration.\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"*** have corrected your mod configuration.\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
-			sprintf(buffer, "id %d user \"SERVER\" msg \"**********\"", motd_index++);
+			sprintf_s(buffer, "id %d user \"SERVER\" msg \"**********\"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 
-			sprintf(buffer, "id %d user \" \" msg \" \"", motd_index++);
+			sprintf_s(buffer, "id %d user \" \" msg \" \"", motd_index++);
 			SendData(user, NET_LOBBY_CHAT, buffer);
 		}
 	}
@@ -1073,7 +1075,7 @@ NetLobbyServer::DoChat(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "msg") {
 			chat_msg = p->value;
@@ -1105,10 +1107,10 @@ NetLobbyServer::DoChat(NetPeer* peer, Text msg)
 				// results when using more than one in
 				// a function call...
 
-				strcpy(msg_buf, SafeQuotes(entry->GetMessage()));
-				strcpy(usr_buf, SafeQuotes(entry->GetUser()));
+				strcpy_s(msg_buf, SafeQuotes(entry->GetMessage()));
+				strcpy_s(usr_buf, SafeQuotes(entry->GetUser()));
 
-				sprintf(buffer, "id %d user \"%s\" msg \"%s\"",
+				sprintf_s(buffer, "id %d user \"%s\" msg \"%s\"",
 				entry->GetID(), usr_buf, msg_buf);
 
 				SendData(user, NET_LOBBY_CHAT, buffer);
@@ -1177,7 +1179,7 @@ NetLobbyServer::DoMissionList(NetPeer* peer, Text msg)
 			Campaign* c = c_iter.value();
 
 			if (c->GetCampaignId() >= Campaign::MULTIPLAYER_MISSIONS) {
-				sprintf(buffer, "c_id 0x%08x c_name \"%s\" ",
+				sprintf_s(buffer, "c_id 0x%08x c_name \"%s\" ",
 				c->GetCampaignId(),
 				SafeQuotes(c->Name()));
 
@@ -1198,7 +1200,7 @@ NetLobbyServer::DoMissionList(NetPeer* peer, Text msg)
 
 					int mission_id = (c->GetCampaignId() << NET_CAMPAIGN_SHIFT) + m->id;
 
-					sprintf(buffer, "m_id 0x%08x ", mission_id);
+					sprintf_s(buffer, "m_id 0x%08x ", mission_id);
 					reply += buffer;
 
 					reply += "m_name \"";
@@ -1241,7 +1243,7 @@ NetLobbyServer::DoMissionList(NetPeer* peer, Text msg)
 
 		SendData(user, NET_LOBBY_MISSION_LIST, reply);
 
-		sprintf(buffer, "m_id 0x%08x", selected_mission);
+		sprintf_s(buffer, "m_id 0x%08x", selected_mission);
 		SendData(user, NET_LOBBY_MISSION_SELECT, buffer);
 	}
 }
@@ -1262,7 +1264,7 @@ NetLobbyServer::DoMissionSelect(NetPeer* peer, Text msg)
 			NetLobbyParam* p = params[i];
 
 			int num = 0;
-			sscanf(p->value, "0x%x", &num);
+			sscanf_s(p->value, "0x%x", &num);
 
 			if (p->name == "m_id") {
 				SelectMission(num);
@@ -1325,7 +1327,7 @@ NetLobbyServer::DoMapUnit(NetPeer* peer, Text msg)
 			NetLobbyParam* p = params[i];
 
 			if (p->name == "id") {
-				sscanf(p->value, "%d", &id);
+				sscanf_s(p->value, "%d", &id);
 			}
 
 			else if (p->name == "user") {

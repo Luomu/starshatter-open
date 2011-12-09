@@ -220,25 +220,25 @@ MsnElemDlg::Show()
 
 	if (edt_name)  edt_name->SetText(elem->Name());
 
-	sprintf(buf, "%d", elem->Count());
+	sprintf_s(buf, "%d", elem->Count());
 	if (edt_size)  edt_size->SetText(buf);
 
-	sprintf(buf, "%d", elem->GetIFF());
+	sprintf_s(buf, "%d", elem->GetIFF());
 	if (edt_iff)   edt_iff->SetText(buf);
 
-	sprintf(buf, "%d", (int) elem->Location().x / 1000);
+	sprintf_s(buf, "%d", (int) elem->Location().x / 1000);
 	if (edt_loc_x) edt_loc_x->SetText(buf);
 
-	sprintf(buf, "%d", (int) elem->Location().y / 1000);
+	sprintf_s(buf, "%d", (int) elem->Location().y / 1000);
 	if (edt_loc_y) edt_loc_y->SetText(buf);
 
-	sprintf(buf, "%d", (int) elem->Location().z / 1000);
+	sprintf_s(buf, "%d", (int) elem->Location().z / 1000);
 	if (edt_loc_z) edt_loc_z->SetText(buf);
 
-	sprintf(buf, "%d", elem->RespawnCount());
+	sprintf_s(buf, "%d", elem->RespawnCount());
 	if (edt_respawns) edt_respawns->SetText(buf);
 
-	sprintf(buf, "%d", elem->HoldTime());
+	sprintf_s(buf, "%d", elem->HoldTime());
 	if (edt_hold_time) edt_hold_time->SetText(buf);
 
 	if (btn_player)      btn_player->SetButtonState(elem->Player() > 0 ? 1 : 0);
@@ -431,7 +431,7 @@ MsnElemDlg::OnClassSelect(AWEvent* event)
 			const char* dsn = designs[i]->data();
 			cmb_design->AddItem(dsn);
 
-			if (design && !stricmp(dsn, design->name)) {
+			if (design && !_stricmp(dsn, design->name)) {
 				cmb_design->SetSelection(i);
 				found = true;
 			}
@@ -547,7 +547,7 @@ MsnElemDlg::OnObjectiveSelect(AWEvent* event)
 				if (add) {
 					cmb_target->AddItem(e->Name());
 
-					if (instr && !stricmp(instr->TargetName(), e->Name()))
+					if (instr && !_stricmp(instr->TargetName(), e->Name()))
 					cmb_target->SetSelection(cmb_target->NumItems()-1);
 				}
 			}
@@ -562,7 +562,7 @@ MsnElemDlg::OnIFFChange(AWEvent* event)
 {
 	if (edt_iff && elem) {
 		int elem_iff = 0;
-		sscanf(edt_iff->GetText().data(), "%d", &elem_iff);
+		sscanf_s(edt_iff->GetText().data(), "%d", &elem_iff);
 
 		if (elem->GetIFF() == elem_iff)
 		return;
@@ -590,10 +590,10 @@ MsnElemDlg::OnAccept(AWEvent* event)
 		}
 
 		if (edt_size) {
-			strcpy(buf, edt_size->GetText());
+			strcpy_s(buf, edt_size->GetText());
 
 			if (isdigit(*buf))
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 1;
 
@@ -601,10 +601,10 @@ MsnElemDlg::OnAccept(AWEvent* event)
 		}
 
 		if (edt_iff) {
-			strcpy(buf, edt_iff->GetText());
+			strcpy_s(buf, edt_iff->GetText());
 
 			if (isdigit(*buf))
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 1;
 
@@ -614,28 +614,28 @@ MsnElemDlg::OnAccept(AWEvent* event)
 		if (edt_loc_x && edt_loc_y && edt_loc_z) {
 			Point loc;
 
-			strcpy(buf, edt_loc_x->GetText());
+			strcpy_s(buf, edt_loc_x->GetText());
 
 			if (isdigit(*buf) || *buf == '-')
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 0;
 
 			loc.x = val * 1000;
 
-			strcpy(buf, edt_loc_y->GetText());
+			strcpy_s(buf, edt_loc_y->GetText());
 
 			if (isdigit(*buf) || *buf == '-')
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 0;
 
 			loc.y = val * 1000;
 
-			strcpy(buf, edt_loc_z->GetText());
+			strcpy_s(buf, edt_loc_z->GetText());
 
 			if (isdigit(*buf) || *buf == '-')
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 0;
 
@@ -645,10 +645,10 @@ MsnElemDlg::OnAccept(AWEvent* event)
 		}
 
 		if (edt_respawns) {
-			strcpy(buf, edt_respawns->GetText());
+			strcpy_s(buf, edt_respawns->GetText());
 
 			if (isdigit(*buf))
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 0;
 
@@ -656,10 +656,10 @@ MsnElemDlg::OnAccept(AWEvent* event)
 		}
 
 		if (edt_hold_time) {
-			strcpy(buf, edt_hold_time->GetText());
+			strcpy_s(buf, edt_hold_time->GetText());
 
 			if (isdigit(*buf))
-			sscanf(buf, "%d", &val);
+			sscanf_s(buf, "%d", &val);
 			else
 			val = 0;
 

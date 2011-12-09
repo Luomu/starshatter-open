@@ -159,7 +159,7 @@ ModInfo::ParseModInfo(const char* block)
 							int  v = 0;
 							char buf[32];
 							GetDefNumber(v, def, filename);
-							sprintf(buf, "%d", v);
+							sprintf_s(buf, "%d", v);
 
 							version = buf;
 						}

@@ -70,10 +70,11 @@ NetWebServlet::DoGet(HttpRequest& request, HttpResponse& response)
 
 	if (name.length() > 4) {
 		char filename[256];
-		strcpy(filename, name.data() + 1);  // skip leading '/'
+		strcpy_s(filename, name.data() + 1);  // skip leading '/'
 
-		FILE* f = ::fopen(filename, "rb");
-
+		FILE* f;
+		::fopen_s(&f, filename, "rb");
+		
 		if (f) {
 			::fseek(f, 0, SEEK_END);
 			int len = ftell(f);

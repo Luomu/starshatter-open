@@ -156,14 +156,14 @@ Campaign::Initialize()
 
 	for (int i = 1; i < 100; i++) {
 		char path[256];
-		sprintf(path, "Campaigns/%02d/", i);
+		sprintf_s(path, "Campaigns/%02d/", i);
 
 		loader->UseFileSystem(true);
 		loader->SetDataPath(path);
 
 		if (loader->FindFile("campaign.def")) {
 			char txt[256];
-			sprintf(txt, "Dynamic Campaign %02d", i);
+			sprintf_s(txt, "Dynamic Campaign %02d", i);
 			c = new(__FILE__,__LINE__) Campaign(i, txt);
 
 			if (c) {
@@ -210,7 +210,7 @@ Campaign::SelectCampaign(const char* name)
 	ListIter<Campaign>   iter  = campaigns;
 
 	while (++iter && !c) {
-		if (!stricmp(iter->Name(), name))
+		if (!_stricmp(iter->Name(), name))
 		c = iter.value();
 	}
 
@@ -332,11 +332,10 @@ Campaign::Load()
 	if (!path[0]) {
 		// then load the campaign from files:
 		switch (campaign_id) {
-		case SINGLE_MISSIONS:      strcpy(path, "Missions/");       break;
-		case CUSTOM_MISSIONS:      strcpy(path, "Mods/Missions/");  break;
-		case MULTIPLAYER_MISSIONS: strcpy(path, "Multiplayer/");    break;
-		default:                   sprintf(path, "Campaigns/%02d/",
-			campaign_id);     break;
+		case SINGLE_MISSIONS:      strcpy_s(path, "Missions/");       break;
+		case CUSTOM_MISSIONS:      strcpy_s(path, "Mods/Missions/");  break;
+		case MULTIPLAYER_MISSIONS: strcpy_s(path, "Multiplayer/");    break;
+		default:                   sprintf_s(path, "Campaigns/%02d/",	campaign_id);     break;
 		}
 	}
 
@@ -1011,10 +1010,10 @@ Campaign::LoadMissionList(DataLoader* loader)
 						int   start = 0;
 						int   type = 0;
 
-						ZeroMemory(script,   sizeof(script));
+						ZeroMemory(script, sizeof(script));
 
-						strcpy(system, "Unknown");
-						strcpy(region, "Unknown");
+						strcpy_s(system, "Unknown");
+						strcpy_s(region, "Unknown");
 
 						for (int i = 0; i < val->elements()->size(); i++) {
 							TermDef* pdef = val->elements()->at(i)->isDef();
@@ -1173,7 +1172,7 @@ Campaign::LoadCustomMissions(DataLoader* loader)
 				loader->ReleaseBuffer(block);
 
 				if (strstr(filename, "custom") == filename) {
-					sscanf(filename+6, "%d", &msn_id);
+					sscanf_s(filename+6, "%d", &msn_id);
 
 					if (msn_id <= i)
 					msn_id = i+1;
@@ -1540,7 +1539,7 @@ Campaign::GetMission(int id)
 
 		if (IsDynamic()) {
 			if (info->mission) {
-				if (!stricmp(info->mission->Situation(), "Unknown")) {
+				if (!_stricmp(info->mission->Situation(), "Unknown")) {
 					::Print("Campaign::GetMission(%d) generating sitrep...\n", id);
 					CampaignSituationReport sitrep(this, info->mission);
 					sitrep.GenerateSituationReport();
@@ -1591,7 +1590,7 @@ Campaign::GetMissionByFile(const char* filename)
 
 		if (IsDynamic()) {
 			if (info->mission) {
-				if (!stricmp(info->mission->Situation(), "Unknown")) {
+				if (!_stricmp(info->mission->Situation(), "Unknown")) {
 					::Print("Campaign::GetMission(%d) generating sitrep...\n", id);
 					CampaignSituationReport sitrep(this, info->mission);
 					sitrep.GenerateSituationReport();
@@ -1639,7 +1638,7 @@ Campaign::CreateNewMission()
 	}
 
 	char filename[64];
-	sprintf(filename, "custom%03d.def", maxid+1);
+	sprintf_s(filename, "custom%03d.def", maxid+1);
 
 	info = new(__FILE__,__LINE__) MissionInfo;
 	if (info) {
@@ -1679,9 +1678,9 @@ Campaign::DeleteMission(int id)
 		char full_path[256];
 
 		if (path[strlen(path)-1] == '/')
-		sprintf(full_path, "%s%s",  path, m->script);
+			sprintf_s(full_path, "%s%s",  path, m->script);
 		else
-		sprintf(full_path, "%s/%s", path, m->script);
+			sprintf_s(full_path, "%s/%s", path, m->script);
 
 		DeleteFile(full_path);
 		Load();

@@ -71,9 +71,9 @@ NetClientConfig::AddServer(const char* name, const char* addr, WORD port, const 
 
 	char buffer[1024];
 	if (name && *name)
-	strcpy(buffer, name);
+	strcpy_s(buffer, name);
 	else
-	sprintf(buffer, "%s:%d", addr, port);
+	sprintf_s(buffer, "%s:%d", addr, port);
 
 	NetServerInfo* server = new(__FILE__,__LINE__) NetServerInfo;
 	server->name     = buffer;
@@ -146,9 +146,10 @@ NetClientConfig::Load()
 	int         blocklen = 0;
 
 	char        filename[64];
-	strcpy(filename, "client.cfg");
+	strcpy_s(filename, "client.cfg");
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		::fseek(f, 0, SEEK_END);
@@ -236,7 +237,8 @@ NetClientConfig::Load()
 void
 NetClientConfig::Save()
 {
-	FILE* f = fopen("client.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "client.cfg", "w");
 	if (f) {
 		fprintf(f, "CLIENT_CONFIG\n\n");
 

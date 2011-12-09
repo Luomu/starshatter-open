@@ -115,7 +115,7 @@ NetPassDlg::OnApply(AWEvent* event)
 
 		if (info && edt_pass->GetText().length() < 250) {
 			char buffer[256];
-			strcpy(buffer, edt_pass->GetText().data());
+			strcpy_s(buffer, edt_pass->GetText().data());
 
 			// trim from first occurrence of invalid character
 			char* p = strpbrk(buffer, "\n\r\t");

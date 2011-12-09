@@ -99,7 +99,7 @@ NetUser::GetDescription()
 	content += SafeQuotes(squadron);
 
 	char buffer[256];
-	sprintf(buffer, "\" rank %d time %d miss %d kill %d loss %d host %s ",
+	sprintf_s(buffer, "\" rank %d time %d miss %d kill %d loss %d host %s ",
 	rank, flight_time, missions, kills, losses,
 	host ? "true" : "false");
 

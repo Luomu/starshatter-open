@@ -50,7 +50,7 @@ const char* password)
 	if (broker.IPAddr() == 0)
 	return result;
 
-	sprintf(buffer, "%d", port);
+	sprintf_s(buffer, "%d", port);
 
 	msg = "GET http://";
 	msg += HOSTNAME;
@@ -168,7 +168,7 @@ NetBrokerClient::GameList(const char* type, List<NetServerInfo>& server_list)
 				while (*p && *p != '\n') *d++ = *p++;
 				if (*p) p++;
 
-				sscanf(buff, "%d", &port);
+				sscanf_s(buff, "%d", &port);
 			}
 			else if (!strncmp(p, "pass:", 5)) {
 				p += 5;

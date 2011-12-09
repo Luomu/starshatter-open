@@ -303,9 +303,9 @@ QuantumView::GetQuantumMenu(Ship* s)
 				char text[64];
 
 				if (rgn_system != current_system)
-				sprintf(text, "%d. %s/%s", n++, rgn_system->Name(), rgn->Name());
+				sprintf_s(text, "%d. %s/%s", n++, rgn_system->Name(), rgn->Name());
 				else
-				sprintf(text, "%d. %s", n++, rgn->Name());
+				sprintf_s(text, "%d. %s", n++, rgn->Name());
 
 				quantum_menu->AddItem(text, (DWORD) rgn);
 			}

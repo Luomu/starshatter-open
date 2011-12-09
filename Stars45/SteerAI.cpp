@@ -166,7 +166,7 @@ const char*
 SteerAI::GetObserverName() const
 {
 	static char name[64];
-	sprintf(name, "SteerAI(%s)", self->Name());
+	sprintf_s(name, "SteerAI(%s)", self->Name());
 	return name;
 }
 

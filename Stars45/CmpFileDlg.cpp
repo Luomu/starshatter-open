@@ -114,10 +114,10 @@ CmpFileDlg::Show()
 
 			FormatDay(day, campaign->GetTime());
 
-			sprintf(save_name, "%s %s (%s)",
-			op_name,
-			day,
-			group->GetRegion().data());
+			sprintf_s(save_name, "%s %s (%s)",
+				op_name,
+				day,
+				group->GetRegion().data());
 		}
 
 		edt_name->SetText(save_name);
@@ -155,7 +155,7 @@ CmpFileDlg::OnSave(AWEvent* event)
 		CampaignSaveGame save(campaign);
 
 		char filename[256];
-		strcpy(filename, edt_name->GetText());
+		strcpy_s(filename, edt_name->GetText());
 		char* newline = strchr(filename, '\n');
 		if (newline)
 		*newline = 0;

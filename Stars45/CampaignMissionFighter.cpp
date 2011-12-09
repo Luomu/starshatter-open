@@ -152,8 +152,9 @@ CampaignMissionFighter::CreateMission(CampaignMissionRequest* req)
 			Text script = mission->Serialize();
 			char fname[32];
 
-			sprintf(fname, "msn%03d.def", info->id);
-			FILE* f = fopen(fname, "w");
+			sprintf_s(fname, "msn%03d.def", info->id);
+			FILE* f;
+			fopen_s(&f, fname, "w");
 			if (f) {
 				fprintf(f, "%s\n", script.data());
 				fclose(f);
@@ -205,7 +206,7 @@ CampaignMissionFighter::GenerateMission(int id)
 	}
 
 	char name[64];
-	sprintf(name, "Fighter Mission %d", id);
+	sprintf_s(name, "Fighter Mission %d", id);
 
 	mission->SetName(name);
 	mission->SetTeam(squadron->GetIFF());
@@ -2101,25 +2102,22 @@ CampaignMissionFighter::DescribeMission()
 	char player_info[256];
 
 	if (mission_info && mission_info->name.length())
-	sprintf(name, "MSN-%03d %s", mission->Identity(), mission_info->name.data());
-
+		sprintf_s(name, "MSN-%03d %s", mission->Identity(), mission_info->name.data());
 	else if (ward)
-	sprintf(name, "MSN-%03d %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(), ward->Name().data());
-
+		sprintf_s(name, "MSN-%03d %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(), ward->Name().data());
 	else if (prime_target)
-	sprintf(name, "MSN-%03d %s %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(),
-	Ship::ClassName(prime_target->GetDesign()->type),
-	prime_target->Name().data());
-
+		sprintf_s(name, "MSN-%03d %s %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(),
+					Ship::ClassName(prime_target->GetDesign()->type),
+					prime_target->Name().data());
 	else
-	sprintf(name, "MSN-%03d %s", mission->Identity(), Game::GetText(mission->TypeName()).data());
+		sprintf_s(name, "MSN-%03d %s", mission->Identity(), Game::GetText(mission->TypeName()).data());
 
 	if (player_elem) {
-		sprintf(player_info, "%d x %s %s '%s'", 
-		player_elem->Count(), 
-		(const char*) player_elem->GetDesign()->abrv,
-		(const char*) player_elem->GetDesign()->name,
-		(const char*) player_elem->Name());
+		sprintf_s(player_info, "%d x %s %s '%s'", 
+			player_elem->Count(), 
+			(const char*) player_elem->GetDesign()->abrv,
+			(const char*) player_elem->GetDesign()->name,
+			(const char*) player_elem->Name());
 	}
 
 	MissionInfo* info = new(__FILE__,__LINE__) MissionInfo;

@@ -102,9 +102,7 @@ CmdDlg::ExecFrame()
 
 	if (txt_score) {
 		char score[32];
-		sprintf(score, "Team Score: %d", campaign->GetPlayerTeamScore());
-		txt_score->SetText(score);
-		txt_score->SetTextAlign(DT_RIGHT);
+		sprintf_s(score, "Team Score: %d", campaign->GetPlayerTeamScore()); txt_score->SetText(score); txt_score->SetTextAlign(DT_RIGHT);
 	}
 
 	if (txt_time) {
@@ -119,7 +117,7 @@ CmdDlg::ExecFrame()
 	if (btn_mode[MODE_INTEL]) {
 		if (unread > 0) {
 			char text[64];
-			sprintf(text, "INTEL (%d)", unread);
+			sprintf_s(text, "INTEL (%d)", unread); 
 			btn_mode[MODE_INTEL]->SetText(text);
 		}
 		else {

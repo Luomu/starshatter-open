@@ -72,7 +72,7 @@ Galaxy::Load()
 {
 	DataLoader* loader = DataLoader::GetLoader();
 	loader->SetDataPath("Galaxy/");
-	sprintf(filename, "%s.def", (const char*) name);
+	sprintf_s(filename, "%s.def", (const char*) name);
 	Load(filename);
 
 	// load mod galaxies:

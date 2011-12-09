@@ -40,7 +40,7 @@ decoy_type(0), iff_code(0)
 		decoy_type  = dsn->decoy_type;
 		probe       = dsn->probe;
 		integrity   = dsn->integrity;
-		sprintf(name, "Drone %04d", Identity());
+		sprintf_s(name, "Drone %04d", Identity());
 	}
 }
 

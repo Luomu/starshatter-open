@@ -123,16 +123,16 @@ friendly_fire_time(0), ward(0), net_observer_mode(false), orig_elem_index(-1)
 {
 	sim = Sim::GetSim();
 
-	strcpy(name,   ship_name);
+	strcpy_s(name,   ship_name);
 	if (reg_num && *reg_num)
-	strcpy(regnum, reg_num);
+	strcpy_s(regnum, reg_num);
 	else regnum[0] = 0;
 
 	design = ship_dsn;
 
 	if (!design) {
 		char msg[256];
-		sprintf(msg, "No ship design found for '%s'\n", ship_name);
+		sprintf_s(msg, "No ship design found for '%s'\n", ship_name);
 		Game::Panic(msg);
 	}
 
@@ -3818,7 +3818,7 @@ Ship::FindWeaponGroup(const char* name)
 
 	ListIter<WeaponGroup> iter = weapons;
 	while (!group && ++iter)
-	if (!stricmp(iter->Name(), name))
+	if (!_stricmp(iter->Name(), name))
 	group = iter.value();
 
 	if (!group) {

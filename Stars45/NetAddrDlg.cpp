@@ -115,11 +115,11 @@ NetAddrDlg::OnSave(AWEvent* event)
 		Text pass;
 		int  port;
 
-		sscanf(edt_port->GetText().data(), "%d", &port);
+		sscanf_s(edt_port->GetText().data(), "%d", &port);
 
 		if (edt_name && edt_name->GetText().length() < 250) {
 			char buffer[256];
-			strcpy(buffer, edt_name->GetText().data());
+			strcpy_s(buffer, edt_name->GetText().data());
 			char* p = strpbrk(buffer, "\n\r\t");
 			if (p) *p = 0;
 
@@ -128,7 +128,7 @@ NetAddrDlg::OnSave(AWEvent* event)
 
 		if (edt_pass && edt_pass->GetText().length() < 250) {
 			char buffer[256];
-			strcpy(buffer, edt_pass->GetText().data());
+			strcpy_s(buffer, edt_pass->GetText().data());
 			char* p = strpbrk(buffer, "\n\r\t");
 			if (p) *p = 0;
 
@@ -137,7 +137,7 @@ NetAddrDlg::OnSave(AWEvent* event)
 
 		if (edt_addr && edt_addr->GetText().length() < 250) {
 			char buffer[256];
-			strcpy(buffer, edt_addr->GetText().data());
+			strcpy_s(buffer, edt_addr->GetText().data());
 			char* p = strpbrk(buffer, "\n\r\t");
 			if (p) *p = 0;
 

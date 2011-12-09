@@ -90,7 +90,7 @@ shade(1.0)
 
 	radius = (float) length;
 	length = 0;
-	strcpy(name, "QuantumFlash");
+	strcpy_s(name, "QuantumFlash");
 }
 
 // +--------------------------------------------------------------------+

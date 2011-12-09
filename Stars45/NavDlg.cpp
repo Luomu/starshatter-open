@@ -359,18 +359,18 @@ NavDlg::ExecFrame()
 		FormatNumber(y,  ship->Location().z);
 		FormatNumber(z,  ship->Location().y);
 		
-		strcpy(loc_buf, Game::GetText("NavDlg.loc-labels").data());
+		strcpy_s(loc_buf, Game::GetText("NavDlg.loc-labels").data());
 		loc_labels->SetText(loc_buf);
 
 		if (sim->GetActiveRegion()) {
-			sprintf(loc_buf, "\n%s\n%s\n%s, %s, %s",
+			sprintf_s(loc_buf, "\n%s\n%s\n%s, %s, %s",
 			(const char*)  star_system->Name(),
 			(const char*)  sim->GetActiveRegion()->Name(),
 			x, y, z);
 
 		}
 		else {
-			sprintf(loc_buf, "\n%s\nPlanck Space?\n%s, %s, %s",
+			sprintf_s(loc_buf, "\n%s\nPlanck Space?\n%s, %s, %s",
 			(const char*)  star_system->Name(), x, y, z);
 		}
 
@@ -417,10 +417,10 @@ NavDlg::ExecFrame()
 				distance = Point(npt - ship->Location()).length();
 				FormatNumber(d, distance);
 				
-				strcpy(loc_buf, Game::GetText("NavDlg.dst-labels").data());
+				strcpy_s(loc_buf, Game::GetText("NavDlg.dst-labels").data());
 				dst_labels->SetText(loc_buf);
 
-				sprintf(loc_buf, "\n%s\n%s\n%s, %s, %s\n%s",
+				sprintf_s(loc_buf, "\n%s\n%s\n%s, %s, %s\n%s",
 				(const char*)  star_system->Name(),
 				(const char*)  navpt->Region()->Name(),
 				x, y, z, d);
@@ -702,23 +702,23 @@ NavDlg::UpdateSelection()
 			double p = s->Period();
 
 			if (p < 60) {
-				sprintf(units, " %s", Game::GetText("NavDlg.units.seconds").data());
+				sprintf_s(units, " %s", Game::GetText("NavDlg.units.seconds").data());
 			}
 			else if (p < 3600) {
 				p /= 60;
-				sprintf(units, " %s", Game::GetText("NavDlg.units.minutes").data());
+				sprintf_s(units, " %s", Game::GetText("NavDlg.units.minutes").data());
 			}
 			else if (p < 24 * 3600) {
 				p /= 3600;
-				sprintf(units, " %s", Game::GetText("NavDlg.units.hours").data());
+				sprintf_s(units, " %s", Game::GetText("NavDlg.units.hours").data());
 			}
 			else if (p < 365.25 * 24 * 3600) {
 				p /= 24*3600;
-				sprintf(units, " %s", Game::GetText("NavDlg.units.days").data());
+				sprintf_s(units, " %s", Game::GetText("NavDlg.units.days").data());
 			}
 			else {
 				p /= 365.25*24*3600;
-				sprintf(units, " %s", Game::GetText("NavDlg.units.years").data());
+				sprintf_s(units, " %s", Game::GetText("NavDlg.units.years").data());
 			}
 
 			FormatNumberExp(radius, s->Radius()/1000);
@@ -726,10 +726,10 @@ NavDlg::UpdateSelection()
 			FormatNumberExp(orbit,  s->Orbit()/1000);
 			FormatNumberExp(period, p);
 
-			strcat(radius, units_km.data());
-			strcat(mass,   units_tonnes.data());
-			strcat(orbit,  units_km.data());
-			strcat(period, units);
+			strcat_s(radius, units_km.data());
+			strcat_s(mass,   units_tonnes.data());
+			strcat_s(orbit,  units_km.data());
+			strcat_s(period, units);
 
 			if (seln_mode >= SELECT_SYSTEM) {
 				info_list->AddItem(Game::GetText(Text("NavDlg.filter.") + filter_name[seln_mode]));
@@ -763,13 +763,13 @@ NavDlg::UpdateSelection()
 			char hull[16];
 			char range[32];
 
-			sprintf(shield, "%03d", sel_ship->ShieldStrength());
-			sprintf(hull,   "%03d", sel_ship->HullStrength());
-			sprintf(range,  Game::GetText("NavDlg.not-avail").data());
+			sprintf_s(shield, "%03d", sel_ship->ShieldStrength());
+			sprintf_s(hull,   "%03d", sel_ship->HullStrength());
+			sprintf_s(range,  Game::GetText("NavDlg.not-avail").data());
 
 			if (ship) {
 				FormatNumberExp(range, Point(sel_ship->Location()-ship->Location()).length()/1000);
-				strcat(range, units_km.data());
+				strcat_s(range, units_km.data());
 			}
 
 			info_list->AddItem(Game::GetText("NavDlg.name"));
@@ -798,9 +798,9 @@ NavDlg::UpdateSelection()
 			if (self)
 			FormatNumberExp(range, Point(sel_elem->Location()-self->Location()).length()/1000);
 			else
-			strcpy(range, "0");
+			strcpy_s(range, "0");
 
-			strcat(range, units_km.data());
+			strcat_s(range, units_km.data());
 
 			info_list->AddItem(Game::GetText("NavDlg.name"));
 			info_list->AddItem(Game::GetText("NavDlg.class"));

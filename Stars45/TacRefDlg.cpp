@@ -193,7 +193,7 @@ TacRefDlg::SelectShip(const ShipDesign* design)
 
 		if (design) {
 			char txt[256];
-			sprintf(txt, "%s %s", design->abrv, design->DisplayName());
+			sprintf_s(txt, "%s %s", design->abrv, design->DisplayName());
 			txt_caption->SetText(txt);
 		}
 	}
@@ -205,10 +205,10 @@ TacRefDlg::SelectShip(const ShipDesign* design)
 			Text desc;
 			char txt[256];
 
-			sprintf(txt, "%s\t\t\t%s\n", Game::GetText("tacref.type").data(), Ship::ClassName(design->type));
+			sprintf_s(txt, "%s\t\t\t%s\n", Game::GetText("tacref.type").data(), Ship::ClassName(design->type));
 			desc += txt;
 
-			sprintf(txt, "%s\t\t\t%s\n", Game::GetText("tacref.class").data(), design->DisplayName());
+			sprintf_s(txt, "%s\t\t\t%s\n", Game::GetText("tacref.class").data(), design->DisplayName());
 			desc += txt;
 			desc += Game::GetText("tacref.length");
 			desc += "\t\t";
@@ -218,19 +218,19 @@ TacRefDlg::SelectShip(const ShipDesign* design)
 			else
 			FormatNumber(txt, design->radius*2);
 
-			strcat(txt, " m\n");
+			strcat_s(txt, " m\n");
 			desc += txt;
 			desc += Game::GetText("tacref.mass");
 			desc += "\t\t\t";
 
 			FormatNumber(txt, design->mass);
-			strcat(txt, " T\n");
+			strcat_s(txt, " T\n");
 			desc += txt;
 			desc += Game::GetText("tacref.hull");
 			desc += "\t\t\t";
 
 			FormatNumber(txt, design->integrity);
-			strcat(txt, "\n");
+			strcat_s(txt, "\n");
 			desc += txt;
 
 			if (design->weapons.size()) {
@@ -248,14 +248,14 @@ TacRefDlg::SelectShip(const ShipDesign* design)
 				for (int g = 0; g < 8; g++) {
 					WepGroup* group = &groups[g];
 					if (group && group->count) {
-						sprintf(txt, "\t\t%s (%d)\n\t\t", group->name.data(), group->count);
+						sprintf_s(txt, "\t\t%s (%d)\n\t\t", group->name.data(), group->count);
 						desc += txt;
 
 						for (int w = 0; w < design->weapons.size(); w++) {
 							Weapon* gun = design->weapons[w];
 
 							if (group->name == gun->Group()) {
-								sprintf(txt, "\t\t\t%s\n\t\t", (const char*) gun->Design()->name);
+								sprintf_s(txt, "\t\t\t%s\n\t\t", (const char*) gun->Design()->name);
 								desc += txt;
 							}
 						}
@@ -607,7 +607,7 @@ TacRefDlg::OnMode(AWEvent* event)
 
 					if (dsn) {
 						char txt[256];
-						sprintf(txt, "%s %s", dsn->abrv, dsn->DisplayName());
+						sprintf_s(txt, "%s %s", dsn->abrv, dsn->DisplayName());
 
 						lst_designs->AddItemWithData(txt, (DWORD) dsn);
 					}

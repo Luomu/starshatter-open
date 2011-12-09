@@ -226,7 +226,7 @@ Hangar::FinishPrep(HangarSlot* slot)
 			}
 
 			char name[64];
-			sprintf(name, "%s %d", 
+			sprintf_s(name, "%s %d", 
 			(const char*) slot->package->Name(), 
 			slot->ship->GetElementIndex());
 			slot->ship->SetName(name);
@@ -282,9 +282,9 @@ Hangar::GetObserverName() const
 {
 	static char name[64];
 	if (ship)
-	sprintf(name, "Hangar(%s)", ship->Name());
+	sprintf_s(name, "Hangar(%s)", ship->Name());
 	else
-	sprintf(name, "Hangar");
+	sprintf_s(name, "Hangar");
 	return name;
 }
 
@@ -368,7 +368,7 @@ Hangar::GotoActiveFlight(int squadron, int slot_index, Element* elem, int* loado
 				}
 
 				char name[64];
-				sprintf(name, "%s %d", 
+				sprintf_s(name, "%s %d", 
 				(const char*) elem->Name(), 
 				slot->ship->GetElementIndex());
 
@@ -778,7 +778,7 @@ Hangar::StatusName(const HangarSlot* s) const
 	case QUEUED:      {
 			Text state = Game::GetText("hangar.QUEUED");
 			char seq[8];
-			sprintf(seq, " %d", s->deck->Sequence(s->slot));
+			sprintf_s(seq, " %d", s->deck->Sequence(s->slot));
 			return state + seq;
 		}
 	case LOCKED:      return Game::GetText("hangar.LOCKED");
