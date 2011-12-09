@@ -625,7 +625,7 @@ static void DescribeDriversNT(const char* sType)
    HKEY  hkWin;
    char  sVideo[256] = "";
    char  sDriver[256] = "";
-   DWORD dwSize;
+   DWORD dwSize = NULL;
 
    // find the pointer to the video driver:
    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,

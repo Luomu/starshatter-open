@@ -136,7 +136,7 @@ Sound::CreateStream(const char* filename)
       }
    }
 
-   delete buf;
+   delete[] buf;
    return sound;
 }
 
