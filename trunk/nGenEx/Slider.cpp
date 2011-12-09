@@ -223,7 +223,7 @@ Slider::Draw()
       }
       else {
          if (nvalues < 2) {
-            int led_width  = w - 4;
+            led_width  = w - 4;
             int led_height = (int) ((double)(h-4) * FractionalValue());
 
             Color fc = ShadeColor(fill_color, 1);

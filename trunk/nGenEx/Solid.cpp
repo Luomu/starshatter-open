@@ -1046,7 +1046,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
    // read texture list:
    for (int i = 0; i < ntex; i++) {
-      Material*   mtl = new(__FILE__,__LINE__) Material;
+      mtl = new(__FILE__,__LINE__) Material;
       char        tname[32];
 
       if (mtl) {
@@ -1177,7 +1177,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
             // luminous
             if (dummy_flags & 2) {
-               Material* mtl = materials[mtl_num];
+               mtl = materials[mtl_num];
 
                mtl->Ka = ColorValue(0,0,0,0);
                mtl->Kd = ColorValue(0,0,0,0);
@@ -1218,7 +1218,7 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
          poly.nverts = poly_nverts;
          for (int vi = 0; vi < poly_nverts; vi++) {
-            int v = vert_index_buffer[vi];
+            v = vert_index_buffer[vi];
 
             if (vset->rw[v] > 0) {
                vset->CopyVertex(next_vert, v);
@@ -1231,13 +1231,13 @@ Model::LoadMag5(BYTE* block, int len, double scale)
       
          loader->fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tu's
          for (int vi = 0; vi < poly_nverts; vi++) {
-            int v = poly.verts[vi];
+            v = poly.verts[vi];
             vset->tu[v] = texture_index_buffer[vi];
          }
 
          loader->fread(texture_index_buffer, sizeof(float), poly_nverts, fp); // tv's
          for (int vi = 0; vi < poly_nverts; vi++) {
-            int v = poly.verts[vi];
+            v = poly.verts[vi];
             vset->tv[v] = texture_index_buffer[vi];
          }
 
@@ -1253,10 +1253,10 @@ Model::LoadMag5(BYTE* block, int len, double scale)
 
          // hack: retrieve flat shaded flag from unused visible byte
          if (poly.visible) {
-            int poly_nverts = poly.nverts;
+            poly_nverts = poly.nverts;
 
             for (int vi = 0; vi < poly_nverts; vi++) {
-               int v = poly.verts[vi];
+               v = poly.verts[vi];
                vset->nrm[v] = poly.plane.normal;
             }
          }
@@ -1333,7 +1333,6 @@ Model::LoadMag6(BYTE* block, int len, double scale)
 
    DataLoader*    loader = DataLoader::GetLoader();
    BYTE*          fp     = block + 4;
-   int            i      = 0;
    int            ntex   = 0;
    int            nmtls  = 0;
    int            nsurfs = 0;
@@ -1361,7 +1360,7 @@ Model::LoadMag6(BYTE* block, int len, double scale)
       delete [] buffer;
    }
 
-   for (i = 0; i < nmtls; i++) {
+   for (int i = 0; i < nmtls; i++) {
       MaterialMag6   m6;
       Material*      mtl = new(__FILE__,__LINE__) Material;
 
@@ -1408,7 +1407,7 @@ Model::LoadMag6(BYTE* block, int len, double scale)
       }
    }
 
-   for (i = 0; i < nsurfs; i++) {
+   for (int i = 0; i < nsurfs; i++) {
       int   nverts  = 0;
       int   npolys  = 0;
       BYTE  namelen = 0;
@@ -1769,10 +1768,10 @@ Model::DeletePrivateData()
       ListIter<Segment> seg_iter = s->GetSegments();
       while (++seg_iter) {
          Segment* segment = seg_iter.value();
-         VideoPrivateData* vpd = segment->video_data;
+         VideoPrivateData* vpdp = segment->video_data;
 
-         if (vpd) {
-            delete vpd;
+         if (vpdp) {
+            delete vpdp;
             segment->video_data = 0;
          }
       }
@@ -2078,7 +2077,6 @@ Surface::OptimizeMesh()
    if (!vertex_set || vertex_set->nverts < 3)
       return;
 
-   int i, j, n, v;
    int nverts = vertex_set->nverts;
    int used   = 0;
    int final  = 0;
@@ -2091,10 +2089,10 @@ Surface::OptimizeMesh()
    ZeroMemory(vert_dst, nverts * sizeof(WORD));
 
    // count used verts:
-   for (i = 0; i < npolys; i++) {
+   for (int i = 0; i < npolys; i++) {
       Poly* p = polys + i;
 
-      for (j = 0; j < p->nverts; j++) {
+      for (int j = 0; j < p->nverts; j++) {
          WORD vert  = p->verts[j];
 
          if (vert < nverts) {
@@ -2109,7 +2107,7 @@ Surface::OptimizeMesh()
    v = 0;
 
    // compress verts:
-   for (i = 0; i < nverts; i++) {
+   for (int i = 0; i < nverts; i++) {
       if (vert_map[i] == 0) continue;
 
       vert_dst[i]       = v;
@@ -2137,10 +2135,10 @@ Surface::OptimizeMesh()
    final = v;
 
    // remap polys:
-   for (n = 0; n < npolys; n++) {
+   for (int n = 0; n < npolys; n++) {
       Poly* p = polys + n;
       p->vertex_set = vset;
-      for (v = 0; v < p->nverts; v++) {
+      for (int v = 0; v < p->nverts; v++) {
          p->verts[v] = vert_dst[ p->verts[v] ];
       }
    }
