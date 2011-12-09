@@ -115,7 +115,7 @@ TerrainApron::BuildApron()
 	mtl->Ks = Color::Black;
 
 	mtl->tex_diffuse = terrain->ApronTexture();
-	strcpy(mtl->name, "Terrain Apron");
+	strcpy_s(mtl->name, "Terrain Apron");
 
 	model->GetMaterials().append(mtl);
 

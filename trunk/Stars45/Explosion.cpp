@@ -161,9 +161,9 @@ Explosion::GetObserverName() const
 {
 	static char name[128];
 	if (source)
-	sprintf(name, "Explosion(%s)", source->Name());
+		sprintf_s(name, "Explosion(%s)", source->Name());
 	else
-	sprintf(name, "Explosion");
+		sprintf_s(name, "Explosion");
 	return name;
 }
 
@@ -293,7 +293,7 @@ Explosion::Initialize()
 										};
 
 										for (int n = 0; n < 15; n++)
-										if (!stricmp(type_name, names[n]))
+										if (!_stricmp(type_name, names[n]))
 										type = n + 1;
 									}
 
@@ -422,7 +422,7 @@ Explosion::Initialize()
 								if (length > 1) {
 									for (int n = 0; n < length; n++) {
 										char img_name[64];
-										sprintf(img_name, "%s%02d.pcx", bitmap, n);
+										sprintf_s(img_name, "%s%02d.pcx", bitmap, n);
 										loader->LoadBitmap(img_name, bitmaps[type][n], Bitmap::BMP_TRANSLUCENT);
 									}
 								}
@@ -438,7 +438,7 @@ Explosion::Initialize()
 								if (part_nframes > 1) {
 									for (int i = 0; i < part_nframes; i++) {
 										char fname[64];
-										sprintf(fname, "%s%02d.pcx", particle_bitmap, i);
+										sprintf_s(fname, "%s%02d.pcx", particle_bitmap, i);
 										loader->LoadBitmap(fname, particle_bitmaps[type][i], Bitmap::BMP_TRANSLUCENT);
 										particle_bitmaps[type][i].MakeTexture();
 									}

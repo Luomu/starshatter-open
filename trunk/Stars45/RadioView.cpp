@@ -565,14 +565,14 @@ RadioView::GetRadioMenu(Ship* s)
 				if (ship->GetIFF() == elem->GetIFF() && ship->GetElement() != elem.value()) {
 					if (n >= page_offset && n < page_offset+PAGE_SIZE) {
 						char text[64];
-						sprintf(text, "%d. %s", n+1 - page_offset, (const char*) elem->Name());
+						sprintf_s(text, "%d. %s", n+1 - page_offset, (const char*) elem->Name());
 
 						if (elem->IsActive()) {
 							starship_menu->AddMenu(text, elem_menu, (DWORD) elem.value());
 						}
 						else {
-							strcat(text, " ");
-							strcat(text, Game::GetText("RadioView.item.not-avail").data());
+							strcat_s(text, " ");
+							strcat_s(text, Game::GetText("RadioView.item.not-avail").data());
 							starship_menu->AddItem(text, 0, false);
 						}
 					}
@@ -582,7 +582,7 @@ RadioView::GetRadioMenu(Ship* s)
 
 			if (num_pages > 1) {
 				char text[64];
-				sprintf(text, Game::GetText("RadioView.item.next-page").data(), starship_page + 1, num_pages);
+				sprintf_s(text, Game::GetText("RadioView.item.next-page").data(), starship_page + 1, num_pages);
 				starship_menu->AddItem(text); 
 			}
 

@@ -330,7 +330,7 @@ int KeyMap::GetKeyAction(const char* act_str)
 	int nactions = sizeof(key_action_table) / sizeof(KeyName);
 
 	for (int i = 0; i < nactions; i++)
-	if (!stricmp(act_str, key_action_table[i].name))
+	if (!_stricmp(act_str, key_action_table[i].name))
 	return key_action_table[i].key;
 
 	return -1;
@@ -357,14 +357,14 @@ int KeyMap::GetKeyKey(const char* key_str)
 
 	if (*key_str == '=') {
 		int value = 0;
-		sscanf(key_str, "=%d", &value);
+		sscanf_s(key_str, "=%d", &value);
 		return value;
 	}
 
 	int nkeys = sizeof(key_key_table) / sizeof(KeyName);
 
 	for (int i = 0; i < nkeys; i++)
-	if (!stricmp(key_str, key_key_table[i].name))
+	if (!_stricmp(key_str, key_key_table[i].name))
 	return key_key_table[i].key;
 
 	return 0;
@@ -575,7 +575,9 @@ KeyMap::Bind(int a, int k, int s)
 int 
 KeyMap::LoadKeyMap(const char* filename, int max_keys)
 {
-	FILE* f = fopen(filename, "r");
+	FILE* f;
+	fopen_s(&f, filename, "r");
+
 	if (!f) return nkeys;
 
 	char  line[256];
@@ -589,7 +591,7 @@ KeyMap::LoadKeyMap(const char* filename, int max_keys)
 		ZeroMemory(alt_str, sizeof(alt_str));
 		ZeroMemory(joy_str, sizeof(joy_str));
 
-		sscanf(line, "%s %s %s %s", act_str, key_str, alt_str, joy_str);
+		sscanf_s(line, "%s %s %s %s", act_str, key_str, alt_str, joy_str);
 
 		act = GetKeyAction(act_str);
 		key = GetKeyKey(key_str);
@@ -634,7 +636,8 @@ KeyMap::LoadKeyMap(const char* filename, int max_keys)
 int 
 KeyMap::SaveKeyMap(const char* filename, int max_keys)
 {
-	FILE* f = fopen(filename, "w");
+	FILE* f;
+	fopen_s(&f, filename, "w");
 	if (!f) return 0;
 
 	for (int i = 0; i < nkeys; i++) {
@@ -788,24 +791,24 @@ KeyMap::DescribeKey(int vk, int shift, int j)
 
 	if (key) {
 		if (alt) {
-			sprintf(key_desc, "%s+%s", alt, key);
+			sprintf_s(key_desc, "%s+%s", alt, key);
 		}
 		else {
-			strcpy(key_desc, key);
+			strcpy_s(key_desc, key);
 		}
 
 		if (joy) {
-			strcat(key_desc, ", ");
-			strcat(key_desc, joy);
+			strcat_s(key_desc, ", ");
+			strcat_s(key_desc, joy);
 		}
 	}
 
 	else if (joy) {
-		strcpy(key_desc, joy);
+		strcpy_s(key_desc, joy);
 	}
 
 	else {
-		sprintf(key_desc, "%d", vk);
+		sprintf_s(key_desc, "%d", vk);
 	}
 
 	return key_desc;

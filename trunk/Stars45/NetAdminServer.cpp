@@ -342,9 +342,9 @@ return confirm(\"Are you sure you want to ban this player?\");\n\
 				char addr_hex[16];
 				char user_stats[16];
 
-				sprintf(addr_dotted, "%d.%d.%d.%d", a.B1(), a.B2(), a.B3(), a.B4());
-				sprintf(addr_hex,    "%08x",        a.IPAddr());
-				sprintf(user_stats,  "%d / %d / %d", u->Missions(), u->Kills(), u->Losses());
+				sprintf_s(addr_dotted, "%d.%d.%d.%d", a.B1(), a.B2(), a.B3(), a.B4());
+				sprintf_s(addr_hex,    "%08x",        a.IPAddr());
+				sprintf_s(user_stats,  "%d / %d / %d", u->Missions(), u->Kills(), u->Losses());
 
 				content += "<tr>\n<td nowrap width=\"1%\">&nbsp;</td>\n\
 			<td nowrap valign=\"middle\" align=\"left\">";
@@ -751,7 +751,7 @@ NetAdminServlet::GetStatLine()
 			<span class=\"status\">&nbsp;&nbsp;Connected to <b>";
 
 	char buffer[256];
-	sprintf(buffer, "%s:%d", config->Name().data(), config->GetAdminPort());
+	sprintf_s(buffer, "%s:%d", config->Name().data(), config->GetAdminPort());
 	line += buffer;
 
 	line += "</b></span>\n\

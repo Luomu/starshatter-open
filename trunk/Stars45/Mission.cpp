@@ -43,14 +43,14 @@ current(0), degrees(false)
 	sitrep    = Game::GetText("Mission.unknown");
 
 	if (fname)
-	strcpy(filename, fname);
+	strcpy_s(filename, fname);
 	else
 	ZeroMemory(filename, sizeof(filename));
 
 	if (pname)
-	strcpy(path, pname);
+	strcpy_s(path, pname);
 	else
-	strcpy(path, "Missions/");
+	strcpy_s(path, "Missions/");
 }
 
 Mission::~Mission()
@@ -226,10 +226,10 @@ Mission::Load(const char* fname, const char* pname)
 	ok = false;
 
 	if (fname)
-	strcpy(filename, fname);
+	strcpy_s(filename, fname);
 
 	if (pname)
-	strcpy(path, pname);
+	strcpy_s(path, pname);
 
 	if (!filename[0]) {
 		Print("\nCan't Load Mission, script unspecified.\n");
@@ -273,14 +273,14 @@ Mission::ParseMission(const char* block)
 	char   err[256];
 
 	if (!term) {
-		sprintf(err, "ERROR: could not parse '%s'\n", filename);
+		sprintf_s(err, "ERROR: could not parse '%s'\n", filename);
 		AddError(err);
 		return ok;
 	}
 	else {
 		TermText* file_type = term->isText();
 		if (!file_type || file_type->value() != "MISSION") {
-			sprintf(err, "ERROR: invalid mission file '%s'\n", filename);
+			sprintf_s(err, "ERROR: invalid mission file '%s'\n", filename);
 			AddError(err);
 			term->print(10);
 			return ok;
@@ -385,7 +385,7 @@ Mission::ParseMission(const char* block)
 						(defname == "station")) {
 
 					if (!def->term() || !def->term()->isStruct()) {
-						sprintf(err, "ERROR: element struct missing in '%s'\n", filename);
+						sprintf_s(err, "ERROR: element struct missing in '%s'\n", filename);
 						AddError(err);
 					}
 					else {
@@ -397,7 +397,7 @@ Mission::ParseMission(const char* block)
 
 				else if (defname == "event") {
 					if (!def->term() || !def->term()->isStruct()) {
-						sprintf(err, "ERROR: event struct missing in '%s'\n", filename);
+						sprintf_s(err, "ERROR: event struct missing in '%s'\n", filename);
 						AddError(err);
 					}
 					else {
@@ -441,18 +441,19 @@ Mission::Save()
 		return ok;
 	}
 
-	if (!stricmp(path, "mods/missions/")) {
+	if (!_stricmp(path, "mods/missions/")) {
 		CreateDirectory("Mods",          0);
 		CreateDirectory("Mods/Missions", 0);
 	}
 
-	else if (!stricmp(path, "multiplayer/")) {
+	else if (!_stricmp(path, "multiplayer/")) {
 		CreateDirectory("Multiplayer",   0);
 	}
 
 	char fname[256];
-	sprintf(fname, "%s%s", path, filename);
-	FILE* f = fopen(fname, "w");
+	sprintf_s(fname, "%s%s", path, filename);
+	FILE* f;
+	fopen_s(&f, fname, "w");
 	if (f) {
 		fwrite(content.data(), content.length(), 1, f); 
 		fclose(f);
@@ -471,7 +472,7 @@ Mission::Validate()
 	ok = true;
 
 	if (elements.isEmpty()) {
-		sprintf(err, Game::GetText("Mission.error.no-elem").data(), filename);
+		sprintf_s(err, Game::GetText("Mission.error.no-elem").data(), filename);
 		AddError(err);
 	}
 	else {
@@ -481,7 +482,7 @@ Mission::Validate()
 			MissionElement* elem = elements.at(i);
 
 			if (elem->Name().length() < 1) {
-				sprintf(err, Game::GetText("Mission.error.unnamed-elem").data(), filename);
+				sprintf_s(err, Game::GetText("Mission.error.unnamed-elem").data(), filename);
 				AddError(err);
 			}
 
@@ -490,14 +491,14 @@ Mission::Validate()
 					found_player = true;
 
 					if (elem->Region() != GetRegion()) {
-						sprintf(err, Game::GetText("Mission.error.wrong-sector").data(),
+						sprintf_s(err, Game::GetText("Mission.error.wrong-sector").data(),
 						elem->Name().data(),
 						GetRegion());
 						AddError(err);
 					}
 				}
 				else {
-					sprintf(err, Game::GetText("Mission.error.extra-player").data(),
+					sprintf_s(err, Game::GetText("Mission.error.extra-player").data(),
 					elem->Name().data(),
 					filename);
 					AddError(err);
@@ -506,7 +507,7 @@ Mission::Validate()
 		}
 
 		if (!found_player) {
-			sprintf(err, Game::GetText("Mission.error.no-player").data(), filename);
+			sprintf_s(err, Game::GetText("Mission.error.no-player").data(), filename);
 			AddError(err);
 		}
 	}
@@ -523,7 +524,7 @@ Mission::AddError(Text err)
 
 // +--------------------------------------------------------------------+
 
-#define MSN_CHECK(x)   if (!stricmp(n, #x)) result = Mission::x;
+#define MSN_CHECK(x)   if (!_stricmp(n, #x)) result = Mission::x;
 
 int
 Mission::TypeFromName(const char* n)
@@ -557,7 +558,7 @@ Mission::TypeFromName(const char* n)
 
 	if (result < PATROL) {
 		for (int i = PATROL; i <= OTHER && result < PATROL; i++) {
-			if (!stricmp(n, RoleName(i))) {
+			if (!_stricmp(n, RoleName(i))) {
 				result = i;
 			}
 		}
@@ -611,14 +612,14 @@ Mission::ParseElement(TermStruct* val)
 				element->design = ShipDesign::Get(design, element->path);
 
 				if (!element->design) {
-					sprintf(err, Game::GetText("Mission.error.unknown-ship").data(), design.data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.unknown-ship").data(), design.data(), filename);
 					AddError(err);
 				}
 			}
 
 			else if (defname == "skin") {
 				if (!element->design) {
-					sprintf(err, Game::GetText("Mission.error.out-of-order").data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.out-of-order").data(), filename);
 					AddError(err);
 				}
 
@@ -628,7 +629,7 @@ Mission::ParseElement(TermStruct* val)
 				}
 
 				else if (pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.bad-skin").data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.bad-skin").data(), filename);
 					AddError(err);
 				}
 			}
@@ -724,7 +725,7 @@ Mission::ParseElement(TermStruct* val)
 
 			else if (defname == "objective") {
 				if (!pdef->term() || !pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.no-objective").data(), element->name.data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.no-objective").data(), element->name.data(), filename);
 					AddError(err);
 				}
 				else {
@@ -744,7 +745,7 @@ Mission::ParseElement(TermStruct* val)
 
 			else if (defname == "ship") {
 				if (!pdef->term() || !pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.no-ship").data(), element->name.data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.no-ship").data(), element->name.data(), filename);
 					AddError(err);
 				}
 				else {
@@ -759,7 +760,7 @@ Mission::ParseElement(TermStruct* val)
 
 			else if (defname == "order" || defname == "navpt") {
 				if (!pdef->term() || !pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.no-navpt").data(), element->name.data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.no-navpt").data(), element->name.data(), filename);
 					AddError(err);
 				}
 				else {
@@ -771,7 +772,7 @@ Mission::ParseElement(TermStruct* val)
 
 			else if (defname == "loadout") {
 				if (!pdef->term() || !pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.no-loadout").data(), element->name.data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.no-loadout").data(), element->name.data(), filename);
 					AddError(err);
 				}
 				else {
@@ -783,12 +784,12 @@ Mission::ParseElement(TermStruct* val)
 	}
 
 	if (element->name.length() < 1) {
-		sprintf(err, Game::GetText("Mission.error.unnamed-elem").data(), filename);
+		sprintf_s(err, Game::GetText("Mission.error.unnamed-elem").data(), filename);
 		AddError(err);
 	}
 
 	else if (element->design == 0) {
-		sprintf(err, Game::GetText("Mission.error.unknown-ship").data(), element->name.data(), filename);
+		sprintf_s(err, Game::GetText("Mission.error.unknown-ship").data(), element->name.data(), filename);
 		AddError(err);
 	}
 
@@ -948,7 +949,7 @@ Mission::ParseShip(TermStruct* val, MissionElement* element)
 
 			else if (defname == "skin") {
 				if (!element || !element->design) {
-					sprintf(err, Game::GetText("Mission.error.out-of-order").data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.out-of-order").data(), filename);
 					AddError(err);
 				}
 
@@ -958,7 +959,7 @@ Mission::ParseShip(TermStruct* val, MissionElement* element)
 				}
 
 				else if (pdef->term()->isStruct()) {
-					sprintf(err, Game::GetText("Mission.error.bad-skin").data(), filename);
+					sprintf_s(err, Game::GetText("Mission.error.bad-skin").data(), filename);
 					AddError(err);
 				}
 			}
@@ -1059,7 +1060,7 @@ Mission::ParseInstruction(TermStruct* val, MissionElement* element)
 				GetDefText(order_name, pdef, filename);
 				
 				for (int cmd = 0; cmd < Instruction::NUM_ACTIONS; cmd++)
-				if (!stricmp(order_name, Instruction::ActionName(cmd)))
+				if (!_stricmp(order_name, Instruction::ActionName(cmd)))
 				order = cmd;
 			}
 
@@ -1067,7 +1068,7 @@ Mission::ParseInstruction(TermStruct* val, MissionElement* element)
 				GetDefText(status_name, pdef, filename);
 				
 				for (int n = 0; n < Instruction::NUM_STATUS; n++)
-				if (!stricmp(status_name, Instruction::StatusName(n)))
+				if (!_stricmp(status_name, Instruction::StatusName(n)))
 				status = n;
 			}
 
@@ -1376,7 +1377,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 			MissionElement* e = iter.value();
 			if (e->Name() == player_elem) {
 				char buf[32];
-				sprintf(buf, "team: %d\n", e->GetIFF());
+				sprintf_s(buf, "team: %d\n", e->GetIFF());
 				s += buf;
 
 				s += "region: \"";
@@ -1471,31 +1472,31 @@ Mission::Serialize(const char* player_elem, int player_index)
 			s += "\"\n";
 		}
 
-		sprintf(buffer, "   count:     %d\n", elem->Count());
+		sprintf_s(buffer, "   count:     %d\n", elem->Count());
 		s += buffer;
 
 		if (elem->MaintCount()) {
-			sprintf(buffer, "   maint_count: %d\n", elem->MaintCount());
+			sprintf_s(buffer, "   maint_count: %d\n", elem->MaintCount());
 			s += buffer;
 		}
 
 		if (elem->DeadCount()) {
-			sprintf(buffer, "   dead_count:  %d\n", elem->DeadCount());
+			sprintf_s(buffer, "   dead_count:  %d\n", elem->DeadCount());
 			s += buffer;
 		}
 
 		if (elem->RespawnCount()) {
-			sprintf(buffer, "   respawn_count:  %d\n", elem->RespawnCount());
+			sprintf_s(buffer, "   respawn_count:  %d\n", elem->RespawnCount());
 			s += buffer;
 		}
 
 		if (elem->HoldTime()) {
-			sprintf(buffer, "   hold_time:  %d\n", elem->HoldTime());
+			sprintf_s(buffer, "   hold_time:  %d\n", elem->HoldTime());
 			s += buffer;
 		}
 
 		if (elem->ZoneLock()) {
-			sprintf(buffer, "   zone_lock:  %d\n", elem->ZoneLock());
+			sprintf_s(buffer, "   zone_lock:  %d\n", elem->ZoneLock());
 			s += buffer;
 		}
 
@@ -1504,11 +1505,11 @@ Mission::Serialize(const char* player_elem, int player_index)
 		}
 
 		if (!elem->IsSquadron()) {
-			sprintf(buffer, "   command_ai:%d\n", elem->CommandAI());
+			sprintf_s(buffer, "   command_ai:%d\n", elem->CommandAI());
 			s += buffer;
 		}
 
-		sprintf(buffer, "   iff:       %d\n", elem->GetIFF());
+		sprintf_s(buffer, "   iff:       %d\n", elem->GetIFF());
 		s += buffer;
 
 		if (player_elem) {
@@ -1516,14 +1517,14 @@ Mission::Serialize(const char* player_elem, int player_index)
 				if (player_index < 1)
 				player_index = 1;
 
-				sprintf(buffer, "   player:    %d\n", player_index);
+				sprintf_s(buffer, "   player:    %d\n", player_index);
 				s += buffer;
 			}
 		}
 
 		else {
 			if (elem->Player()) {
-				sprintf(buffer, "   player:    %d\n", elem->Player());
+				sprintf_s(buffer, "   player:    %d\n", elem->Player());
 				s += buffer;
 			}
 		}
@@ -1540,14 +1541,14 @@ Mission::Serialize(const char* player_elem, int player_index)
 		s += elem->Region();
 		s += "\"\n";
 
-		sprintf(buffer, "   loc:       (%.0f, %.0f, %.0f)\n",
+		sprintf_s(buffer, "   loc:       (%.0f, %.0f, %.0f)\n",
 		elem->Location().x,
 		elem->Location().y,
 		elem->Location().z);
 		s += buffer;
 
 		if (elem->Heading() != 0) {
-			sprintf(buffer, "   head:      %d\n", (int) (elem->Heading()/DEGREES));
+			sprintf_s(buffer, "   head:      %d\n", (int) (elem->Heading()/DEGREES));
 			s += buffer;
 		}
 
@@ -1558,7 +1559,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 			while (++load_iter) {
 				MissionLoad* load = load_iter.value();
 
-				sprintf(buffer, "   loadout:   { ship: %d, ", load->GetShip());
+				sprintf_s(buffer, "   loadout:   { ship: %d, ", load->GetShip());
 				s += buffer;
 
 				if (load->GetName().length()) {
@@ -1570,7 +1571,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 					s += "stations: (";
 
 					for (int i = 0; i < 16; i++) {
-						sprintf(buffer, "%d", load->GetStation(i));
+						sprintf_s(buffer, "%d", load->GetStation(i));
 						s += buffer;
 
 						if (i < 15)
@@ -1615,7 +1616,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 					s += "\"";
 				}
 
-				sprintf(buffer, ", loc: (%.0f, %.0f, %.0f), speed: %d",
+				sprintf_s(buffer, ", loc: (%.0f, %.0f, %.0f), speed: %d",
 				inst->Location().x,
 				inst->Location().y,
 				inst->Location().z,
@@ -1629,7 +1630,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 				}
 
 				if (inst->HoldTime()) {
-					sprintf(buffer, ", hold: %d", (int) inst->HoldTime());
+					sprintf_s(buffer, ", hold: %d", (int) inst->HoldTime());
 					s += buffer;
 				}
 
@@ -1638,12 +1639,12 @@ Mission::Serialize(const char* player_elem, int player_index)
 				}
 
 				if (inst->Formation() > Instruction::DIAMOND) {
-					sprintf(buffer, ", formation: %d", (int) inst->Formation());
+					sprintf_s(buffer, ", formation: %d", (int) inst->Formation());
 					s += buffer;
 				}
 
 				if (inst->Priority() > Instruction::PRIMARY) {
-					sprintf(buffer, ", priority: %d", (int) inst->Priority());
+					sprintf_s(buffer, ", priority: %d", (int) inst->Priority());
 					s += buffer;
 				}
 
@@ -1688,7 +1689,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 				}
 
 				if (fabs(ship->Location().x) < 1e9) {
-					sprintf(buffer, "      loc:       (%.0f, %.0f, %.0f),\n",
+					sprintf_s(buffer, "      loc:       (%.0f, %.0f, %.0f),\n",
 					ship->Location().x,
 					ship->Location().y,
 					ship->Location().z);
@@ -1696,7 +1697,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 				}
 
 				if (fabs(ship->Velocity().x) < 1e9) {
-					sprintf(buffer, "      velocity:  (%.1f, %.1f, %.1f),\n",
+					sprintf_s(buffer, "      velocity:  (%.1f, %.1f, %.1f),\n",
 					ship->Velocity().x,
 					ship->Velocity().y,
 					ship->Velocity().z);
@@ -1704,27 +1705,27 @@ Mission::Serialize(const char* player_elem, int player_index)
 				}
 
 				if (ship->Respawns() > -1) {
-					sprintf(buffer, "      respawns:  %d,\n", ship->Respawns());
+					sprintf_s(buffer, "      respawns:  %d,\n", ship->Respawns());
 					s += buffer;
 				}
 
 				if (ship->Heading() > -1e9) {
-					sprintf(buffer, "      heading:   %d,\n", (int) (ship->Heading()/DEGREES));
+					sprintf_s(buffer, "      heading:   %d,\n", (int) (ship->Heading()/DEGREES));
 					s += buffer;
 				}
 
 				if (ship->Integrity() > -1) {
-					sprintf(buffer, "      integrity: %d,\n", (int) ship->Integrity());
+					sprintf_s(buffer, "      integrity: %d,\n", (int) ship->Integrity());
 					s += buffer;
 				}
 
 				if (ship->Decoys() > -1) {
-					sprintf(buffer, "      decoys:    %d,\n", ship->Decoys());
+					sprintf_s(buffer, "      decoys:    %d,\n", ship->Decoys());
 					s += buffer;
 				}
 
 				if (ship->Probes() > -1) {
-					sprintf(buffer, "      probes:    %d,\n", ship->Probes());
+					sprintf_s(buffer, "      probes:    %d,\n", ship->Probes());
 					s += buffer;
 				}
 
@@ -1732,7 +1733,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 					s += "\n      ammo: (";
 
 					for (int i = 0; i < 16; i++) {
-						sprintf(buffer, "%d", ship->Ammo()[i]);
+						sprintf_s(buffer, "%d", ship->Ammo()[i]);
 						s += buffer;
 
 						if (i < 15)
@@ -1746,7 +1747,7 @@ Mission::Serialize(const char* player_elem, int player_index)
 					s += "\n      fuel: (";
 
 					for (int i = 0; i < 4; i++) {
-						sprintf(buffer, "%d", ship->Fuel()[i]);
+						sprintf_s(buffer, "%d", ship->Fuel()[i]);
 						s += buffer;
 
 						if (i < 3)
@@ -1770,13 +1771,13 @@ Mission::Serialize(const char* player_elem, int player_index)
 		s += "event: {\n";
 
 		s += "   id:              ";
-		sprintf(buffer, "%d", event->EventID());
+		sprintf_s(buffer, "%d", event->EventID());
 		s += buffer;
 		s += ",\n   time:            ";
-		sprintf(buffer, "%.1f", event->Time());
+		sprintf_s(buffer, "%.1f", event->Time());
 		s += buffer;
 		s += ",\n   delay:           ";
-		sprintf(buffer, "%.1f", event->Delay());
+		sprintf_s(buffer, "%.1f", event->Delay());
 		s += buffer;
 		s += ",\n   event:           ";
 		s += event->EventName();
@@ -1813,14 +1814,14 @@ Mission::Serialize(const char* player_elem, int player_index)
 		}
 
 		if (event->EventParam()) {
-			sprintf(buffer, "%d", event->EventParam());
+			sprintf_s(buffer, "%d", event->EventParam());
 			s += "   event_param:     ";
 			s += buffer;
 			s += "\n";
 		}
 
 		if (event->EventChance()) {
-			sprintf(buffer, "%d", event->EventChance());
+			sprintf_s(buffer, "%d", event->EventChance());
 			s += "   event_chance:    ";
 			s += buffer;
 			s += "\n";
@@ -1895,7 +1896,7 @@ MissionElement::GetShipName(int index) const
 	if (index < 0 || index >= ships.size()) {
 		if (count > 1) {
 			char sname[256];
-			sprintf(sname, "%s %d", (const char*) name, index+1);
+			sprintf_s(sname, "%s %d", (const char*) name, index+1);
 			return sname;
 		}
 		else {

@@ -69,7 +69,7 @@ int
 CombatEvent::SourceFromName(const char* n)
 {
 	for (int i = FORCOM; i <= NEWS; i++)
-	if (!stricmp(n, SourceName(i)))
+	if (!_stricmp(n, SourceName(i)))
 	return i;
 
 	return -1;
@@ -99,7 +99,7 @@ int
 CombatEvent::TypeFromName(const char* n)
 {
 	for (int i = ATTACK; i <= CAMPAIGN_FAIL; i++)
-	if (!stricmp(n, TypeName(i)))
+	if (!_stricmp(n, TypeName(i)))
 	return i;
 
 	return -1;

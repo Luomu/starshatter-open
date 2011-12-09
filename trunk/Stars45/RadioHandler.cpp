@@ -398,7 +398,7 @@ RadioHandler::Inbound(RadioMessage* msg, Ship* ship)
 
 		else if (!same_rgn) {
 			char info[256];
-			sprintf(info, Game::GetText("RadioHandler.too-far-away").data(), ship->GetRegion()->Name());
+			sprintf_s(info, Game::GetText("RadioHandler.too-far-away").data(), ship->GetRegion()->Name());
 			wave_off->SetInfo(info);
 		}
 
@@ -426,12 +426,12 @@ RadioHandler::Inbound(RadioMessage* msg, Ship* ship)
 
 	if (inbound_slot->Cleared()) {
 		char info[256];
-		sprintf(info, Game::GetText("RadioHandler.cleared").data(), deck->Name());
+		sprintf_s(info, Game::GetText("RadioHandler.cleared").data(), deck->Name());
 		approach->SetInfo(info);
 	}
 	else if (sequence) {
 		char info[256];
-		sprintf(info, Game::GetText("RadioHandler.sequenced").data(), sequence, deck->Name());
+		sprintf_s(info, Game::GetText("RadioHandler.sequenced").data(), sequence, deck->Name());
 		approach->SetInfo(info);
 	}
 

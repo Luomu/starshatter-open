@@ -331,12 +331,12 @@ NetLobby::FindUserByAddr(const NetAddr& addr)
 NetUser*
 NetLobby::FindUserByName(const char* name)
 {
-	if (local_user && !stricmp(local_user->Name(), name))
+	if (local_user && !_stricmp(local_user->Name(), name))
 	return local_user;
 
 	for (int i = 0; i < users.size(); i++) {
 		NetUser* u = users[i];
-		if (!stricmp(u->Name(), name))
+		if (!_stricmp(u->Name(), name))
 		return u;
 	}
 
@@ -603,7 +603,7 @@ NetUnitEntry::GetDescription() const
 	if (elem) {
 		static char buffer[1024];
 
-		sprintf(buffer, "name \"%s\" index %d design \"%s\" iff %d user \"%s\" lives %d hull %d role %d lock %d ",
+		sprintf_s(buffer, "name \"%s\" index %d design \"%s\" iff %d user \"%s\" lives %d hull %d role %d lock %d ",
 		elem.data(),
 		index,
 		design.data(),

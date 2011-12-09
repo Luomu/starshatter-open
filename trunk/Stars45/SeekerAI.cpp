@@ -251,7 +251,7 @@ const char*
 SeekerAI::GetObserverName() const
 {
 	static char name[64];
-	sprintf(name, "SeekerAI(%s)", self->Name());
+	sprintf_s(name, "SeekerAI(%s)", self->Name());
 	return name;
 }
 

@@ -440,27 +440,28 @@ CombatGroup::GetOrdinal() const
 	int last_two_digits = id % 100;
 
 	if (last_two_digits > 10 && last_two_digits < 20) {
-		sprintf(ordinal, "ordinal.%d", last_two_digits);
+		sprintf_s(ordinal, "ordinal.%d", last_two_digits);
 		Text suffix = Game::GetText(ordinal);
+		
 		if (suffix != ordinal)
-		sprintf(ordinal, "%d%s", id, suffix.data());
+			sprintf_s(ordinal, "%d%s", id, suffix.data());
 		else
-		sprintf(ordinal, "%dth", id);
+			sprintf_s(ordinal, "%dth", id);
 	}
 	else {
 		int last_digit = last_two_digits % 10;
-		sprintf(ordinal, "ordinal.%d", last_digit);
+		sprintf_s(ordinal, "ordinal.%d", last_digit);
 		Text suffix = Game::GetText(ordinal);
 		if (suffix != ordinal)
-		sprintf(ordinal, "%d%s", id, suffix.data());
+			sprintf_s(ordinal, "%d%s", id, suffix.data());
 		else if (last_digit == 1)
-		sprintf(ordinal, "%dst", id);
+			sprintf_s(ordinal, "%dst", id);
 		else if (last_digit == 2)
-		sprintf(ordinal, "%dnd", id);
+			sprintf_s(ordinal, "%dnd", id);
 		else if (last_digit == 3)
-		sprintf(ordinal, "%drd", id);
+			sprintf_s(ordinal, "%drd", id);
 		else
-		sprintf(ordinal, "%dth", id);
+			sprintf_s(ordinal, "%dth", id);
 	}
 
 	return ordinal;
@@ -473,48 +474,48 @@ CombatGroup::GetDescription() const
 	static char name_desc[256];
 
 	if (name.length())
-	sprintf(name_desc, " \"%s\"", (const char*) name);
+		sprintf_s(name_desc, " \"%s\"", (const char*) name);
 	else
-	name_desc[0] = 0;
+		name_desc[0] = 0;
 
 	switch (type) {
-	case FORCE:                strcpy(desc, (const char*) name); break;
+	case FORCE:                strcpy_s(desc, (const char*) name); break;
 
-	case FLEET:                sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FLEET").data(), name_desc); break;
-	case CARRIER_GROUP:        sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.CARRIER_GROUP").data(), name_desc); break;
-	case BATTLE_GROUP:         sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTLE_GROUP").data(), name_desc); break;
-	case DESTROYER_SQUADRON:   sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.DESTROYER_SQUADRON").data(), name_desc); break;
+	case FLEET:                sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FLEET").data(), name_desc); break;
+	case CARRIER_GROUP:        sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.CARRIER_GROUP").data(), name_desc); break;
+	case BATTLE_GROUP:         sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTLE_GROUP").data(), name_desc); break;
+	case DESTROYER_SQUADRON:   sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.DESTROYER_SQUADRON").data(), name_desc); break;
 
-	case WING:                 sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.WING").data(), name_desc); break;
-	case ATTACK_SQUADRON:      sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.ATTACK_SQUADRON").data(), name_desc); break;
-	case FIGHTER_SQUADRON:     sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FIGHTER_SQUADRON").data(), name_desc); break;
-	case INTERCEPT_SQUADRON:   sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.INTERCEPT_SQUADRON").data(), name_desc); break;
-	case LCA_SQUADRON:         sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.LCA_SQUADRON").data(), name_desc); break;
+	case WING:                 sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.WING").data(), name_desc); break;
+	case ATTACK_SQUADRON:      sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.ATTACK_SQUADRON").data(), name_desc); break;
+	case FIGHTER_SQUADRON:     sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FIGHTER_SQUADRON").data(), name_desc); break;
+	case INTERCEPT_SQUADRON:   sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.INTERCEPT_SQUADRON").data(), name_desc); break;
+	case LCA_SQUADRON:         sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.LCA_SQUADRON").data(), name_desc); break;
 
-	case BATTALION:            sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTALION").data(), name_desc); break;
-	case STATION:              sprintf(desc, "%s %s", Game::GetText("CombatGroup.STATION").data(), name); break;
-	case STARBASE:             sprintf(desc, "%s %d%s", Game::GetText("CombatGroup.STARBASE").data(), id, name_desc); break;
-	case MINEFIELD:            sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MINEFIELD").data(), name_desc); break;
-	case BATTERY:              sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTERY").data(), name_desc); break;
-	case MISSILE:              sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MISSILE").data(), name_desc); break;
+	case BATTALION:            sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTALION").data(), name_desc); break;
+	case STATION:              sprintf_s(desc, "%s %s", Game::GetText("CombatGroup.STATION").data(), name); break;
+	case STARBASE:             sprintf_s(desc, "%s %d%s", Game::GetText("CombatGroup.STARBASE").data(), id, name_desc); break;
+	case MINEFIELD:            sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MINEFIELD").data(), name_desc); break;
+	case BATTERY:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTERY").data(), name_desc); break;
+	case MISSILE:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MISSILE").data(), name_desc); break;
 
-	case C3I:                  sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.C3I").data(), name_desc); break;
-	case COMM_RELAY:           sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.COMM_RELAY").data(), name_desc); break;
-	case EARLY_WARNING:        sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.EARLY_WARNING").data(), name_desc); break;
-	case FWD_CONTROL_CTR:      sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FWD_CONTROL_CTR").data(), name_desc); break;
-	case ECM:                  sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.ECM").data(), name_desc); break;
+	case C3I:                  sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.C3I").data(), name_desc); break;
+	case COMM_RELAY:           sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.COMM_RELAY").data(), name_desc); break;
+	case EARLY_WARNING:        sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.EARLY_WARNING").data(), name_desc); break;
+	case FWD_CONTROL_CTR:      sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.FWD_CONTROL_CTR").data(), name_desc); break;
+	case ECM:                  sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.ECM").data(), name_desc); break;
 
-	case SUPPORT:              sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.SUPPORT").data(), name_desc); break;
-	case COURIER:              sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.COURIER").data(), name_desc); break;
-	case SUPPLY:               sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.SUPPLY").data(), name_desc); break;
-	case REPAIR:               sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.REPAIR").data(), name_desc); break;
-	case MEDICAL:              sprintf(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MEDICAL").data(), name_desc); break;
+	case SUPPORT:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.SUPPORT").data(), name_desc); break;
+	case COURIER:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.COURIER").data(), name_desc); break;
+	case SUPPLY:               sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.SUPPLY").data(), name_desc); break;
+	case REPAIR:               sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.REPAIR").data(), name_desc); break;
+	case MEDICAL:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MEDICAL").data(), name_desc); break;
 
 	case CIVILIAN:
 	case WAR_PRODUCTION:       
 	case FACTORY:
 	case REFINERY:
-	case RESOURCE:             strcpy(desc, (const char*) name); break;
+	case RESOURCE:             strcpy_s(desc, (const char*) name); break;
 
 	case INFRASTRUCTURE:
 	case TRANSPORT:
@@ -523,9 +524,9 @@ CombatGroup::GetDescription() const
 	case STORAGE:
 	case FREIGHT:
 	case PASSENGER:
-	case PRIVATE:              strcpy(desc, (const char*) name); break;
+	case PRIVATE:              strcpy_s(desc, (const char*) name); break;
 
-	default:                   sprintf(desc, "%s%s", Game::GetText("CombatGroup.default").data(), name_desc); break;
+	default:                   sprintf_s(desc, "%s%s", Game::GetText("CombatGroup.default").data(), name_desc); break;
 	}
 
 	return desc;
@@ -537,42 +538,42 @@ CombatGroup::GetShortDescription() const
 	static char desc[256];
 
 	switch (type) {
-	case FORCE:                strcpy(desc, (const char*) name); break;
+	case FORCE:                strcpy_s(desc, (const char*) name); break;
 
-	case FLEET:                sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FLEET").data()); break;
-	case CARRIER_GROUP:        sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.CARRIER_GROUP").data()); break;
-	case BATTLE_GROUP:         sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTLE_GROUP").data()); break;
-	case DESTROYER_SQUADRON:   sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.DESTROYER_SQUADRON").data()); break;
+	case FLEET:                sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FLEET").data()); break;
+	case CARRIER_GROUP:        sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.CARRIER_GROUP").data()); break;
+	case BATTLE_GROUP:         sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTLE_GROUP").data()); break;
+	case DESTROYER_SQUADRON:   sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.DESTROYER_SQUADRON").data()); break;
 
-	case WING:                 sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.WING").data()); break;
-	case ATTACK_SQUADRON:      sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.ATTACK_SQUADRON").data()); break;
-	case FIGHTER_SQUADRON:     sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FIGHTER_SQUADRON").data()); break;
-	case INTERCEPT_SQUADRON:   sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.INTERCEPT_SQUADRON").data()); break;
-	case LCA_SQUADRON:         sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.LCA_SQUADRON").data()); break;
+	case WING:                 sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.WING").data()); break;
+	case ATTACK_SQUADRON:      sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.ATTACK_SQUADRON").data()); break;
+	case FIGHTER_SQUADRON:     sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FIGHTER_SQUADRON").data()); break;
+	case INTERCEPT_SQUADRON:   sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.INTERCEPT_SQUADRON").data()); break;
+	case LCA_SQUADRON:         sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.LCA_SQUADRON").data()); break;
 
-	case BATTALION:            sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTALION").data()); break;
-	case STATION:              sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.STATION").data()); break;
-	case STARBASE:             sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.STARBASE").data()); break;
-	case MINEFIELD:            sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.MINEFIELD").data()); break;
-	case BATTERY:              sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTERY").data()); break;
+	case BATTALION:            sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTALION").data()); break;
+	case STATION:              sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.STATION").data()); break;
+	case STARBASE:             sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.STARBASE").data()); break;
+	case MINEFIELD:            sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.MINEFIELD").data()); break;
+	case BATTERY:              sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.BATTERY").data()); break;
 
-	case C3I:                  sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.C3I").data()); break;
-	case COMM_RELAY:           sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.COMM_RELAY").data()); break;
-	case EARLY_WARNING:        sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.EARLY_WARNING").data()); break;
-	case FWD_CONTROL_CTR:      sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FWD_CONTROL_CTR").data()); break;
-	case ECM:                  sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.ECM").data()); break;
+	case C3I:                  sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.C3I").data()); break;
+	case COMM_RELAY:           sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.COMM_RELAY").data()); break;
+	case EARLY_WARNING:        sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.EARLY_WARNING").data()); break;
+	case FWD_CONTROL_CTR:      sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.FWD_CONTROL_CTR").data()); break;
+	case ECM:                  sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.ECM").data()); break;
 
-	case SUPPORT:              sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.SUPPORT").data()); break;
-	case COURIER:              sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.COURIER").data()); break;
-	case MEDICAL:              sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.MEDICAL").data()); break;
-	case SUPPLY:               sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.SUPPLY").data()); break;
-	case REPAIR:               sprintf(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.REPAIR").data()); break;
+	case SUPPORT:              sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.SUPPORT").data()); break;
+	case COURIER:              sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.COURIER").data()); break;
+	case MEDICAL:              sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.MEDICAL").data()); break;
+	case SUPPLY:               sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.SUPPLY").data()); break;
+	case REPAIR:               sprintf_s(desc, "%s %s", GetOrdinal(), Game::GetText("CombatGroup.abrv.REPAIR").data()); break;
 
 	case CIVILIAN:
 	case WAR_PRODUCTION:       
 	case FACTORY:
 	case REFINERY:
-	case RESOURCE:             strcpy(desc, (const char*) name); break;
+	case RESOURCE:             strcpy_s(desc, (const char*) name); break;
 
 	case INFRASTRUCTURE:
 	case TRANSPORT:
@@ -581,9 +582,9 @@ CombatGroup::GetShortDescription() const
 	case STORAGE:
 	case FREIGHT:
 	case PASSENGER:
-	case PRIVATE:              strcpy(desc, (const char*) name); break;
+	case PRIVATE:              strcpy_s(desc, (const char*) name); break;
 
-	default:                   sprintf(desc, "%s", Game::GetText("CombatGroup.abrv.default").data()); break;
+	default:                   sprintf_s(desc, "%s", Game::GetText("CombatGroup.abrv.default").data()); break;
 	}
 
 	return desc;
@@ -935,7 +936,7 @@ int
 CombatGroup::TypeFromName(const char* type_name)
 {
 	for (int i = FORCE; i < PRIVATE; i++)
-	if (!stricmp(type_name, group_name[i]))
+	if (!_stricmp(type_name, group_name[i]))
 	return i;
 
 	return 0;
@@ -1034,7 +1035,7 @@ CombatGroup::LoadOrderOfBattle(const char* filename, int team, Combatant* combat
 						*unit_design   = 0;
 						*unit_skin     = 0;
 
-						strcpy(intel, "KNOWN");
+						strcpy_s(intel, "KNOWN");
 
 						// all groups in this OOB default to the IFF of the main force
 						if (force)
@@ -1279,7 +1280,7 @@ CombatGroup::MergeOrderOfBattle(BYTE* block, const char* filename, int team, Com
 						*unit_regnum   = 0;
 						*unit_design   = 0;
 
-						strcpy(intel, "KNOWN");
+						strcpy_s(intel, "KNOWN");
 
 						// all groups in this OOB default to the IFF of the main force
 						if (force)
@@ -1377,7 +1378,7 @@ CombatGroup::MergeOrderOfBattle(BYTE* block, const char* filename, int team, Com
 
 						if (iff >= 0 && (iff == team || team < 0)) {
 							// have we found the force group we are looking for yet?
-							if (!force && !stricmp(name, combatant->Name())) {
+							if (!force && !_stricmp(name, combatant->Name())) {
 								force = combatant->GetForce();
 							}
 
@@ -1472,15 +1473,15 @@ Text FormatNumber(double n)
 	char buffer[64];
 
 	if (fabs(n) < 1000)
-	sprintf(buffer, "%d", (int) n);
+	sprintf_s(buffer, "%d", (int) n);
 
 	else if (fabs(n) < 1e6) {
 		int nn = (int) n / 1000;
-		sprintf(buffer, "%de3", nn);
+		sprintf_s(buffer, "%de3", nn);
 	}
 
 	else
-	sprintf(buffer, "%g", n);
+	sprintf_s(buffer, "%g", n);
 
 	return buffer;
 }
@@ -1579,7 +1580,8 @@ SaveCombatGroup(FILE* f, CombatGroup* g)
 void
 CombatGroup::SaveOrderOfBattle(const char* filename, CombatGroup* force)
 {
-	FILE* f = ::fopen(filename, "a+");
+	FILE* f;
+	::fopen_s(&f, filename, "a+");
 
 	if (f) {
 		SaveCombatGroup(f, force);

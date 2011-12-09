@@ -192,7 +192,7 @@ double         sea_level)
 	mtl->power       = 30.0f;
 	mtl->shadow      = false;
 	mtl->tex_diffuse = terrain->WaterTexture();
-	//strcpy(mtl->shader, "WaterReflections");
+	//strcpy_s(mtl->shader, "WaterReflections");
 	materials.append(mtl);
 
 	water = terrain->GetWater(1);

@@ -347,27 +347,27 @@ TacticalView::DrawSelectionInfo(Ship* seln)
 	if (shield_val < 0) shield_val = 0;
 	if (hull_val   < 0) hull_val   = 0;
 
-	sprintf(name,     "%s",     seln->Name());
+	sprintf_s(name,     "%s",     seln->Name());
 
 	if (show_labels) {
-		sprintf(shield,   "%s %03d", Game::GetText("HUDView.symbol.shield").data(), shield_val);
-		sprintf(hull,     "%s %03d", Game::GetText("HUDView.symbol.hull").data(),   hull_val);
+		sprintf_s(shield,   "%s %03d", Game::GetText("HUDView.symbol.shield").data(), shield_val);
+		sprintf_s(hull,     "%s %03d", Game::GetText("HUDView.symbol.hull").data(),   hull_val);
 	}
 	else {
-		sprintf(shield,   "%03d", shield_val);
-		sprintf(hull,     "%03d", hull_val);
+		sprintf_s(shield,   "%03d", shield_val);
+		sprintf_s(hull,     "%03d", hull_val);
 	}
 
 	FormatNumberExp(range, Point(seln->Location()-ship->Location()).length()/1000);
-	strcat(range,     " km");
-	sprintf(heading,  "%03d %s", (int) (seln->CompassHeading() / DEGREES), Game::GetText("HUDView.symbol.degrees").data());
+	strcat_s(range,     " km");
+	sprintf_s(heading,  "%03d %s", (int) (seln->CompassHeading() / DEGREES), Game::GetText("HUDView.symbol.degrees").data());
 
 	double ss = seln->Velocity().length();
 	if (seln->Velocity() * seln->Heading() < 0)
 	ss = -ss;
 
 	FormatNumberExp(speed, ss);
-	strcat(speed,     " m/s");
+	strcat_s(speed,     " m/s");
 
 	Contact* contact = 0;
 
@@ -378,7 +378,7 @@ TacticalView::DrawSelectionInfo(Ship* seln)
 			if (c->GetShip() == seln) {
 				contact = c.value();
 				if (c->GetIFF(ship) > seln->GetIFF()) {
-					sprintf(name, "%s %04d", Game::GetText("TacView.contact").data(), seln->GetContactID());
+					sprintf_s(name, "%s %04d", Game::GetText("TacView.contact").data(), seln->GetContactID());
 					full_info = false;
 				}
 
@@ -424,7 +424,7 @@ TacticalView::DrawSelectionInfo(Ship* seln)
 	info_rect.y += 10;
 
 	if (full_info) {
-		sprintf(design, "%s %s", seln->Abbreviation(), seln->Design()->display_name);
+		sprintf_s(design, "%s %s", seln->Abbreviation(), seln->Design()->display_name);
 		font->DrawText(design, 0, info_rect, DT_LEFT);
 		info_rect.y += 10;
 	}
@@ -458,11 +458,11 @@ TacticalView::DrawSelectionInfo(Ship* seln)
 		if (seln->GetIFF() == ship->GetIFF()) {
 			Instruction* instr = seln->GetRadioOrders();
 			if (instr && instr->Action()) {
-				strcpy(orders, RadioMessage::ActionName(instr->Action()));
+				strcpy_s(orders, RadioMessage::ActionName(instr->Action()));
 
 				if (instr->Action() == RadioMessage::QUANTUM_TO) {
-					strcat(orders, " ");
-					strcat(orders, instr->RegionName());
+					strcat_s(orders, " ");
+					strcat_s(orders, instr->RegionName());
 				}
 			}
 			else {
@@ -481,11 +481,11 @@ TacticalView::DrawSelectionInfo(Ship* seln)
 		}
 	}
 	else {
-		sprintf(psv, "%03d", (int) (contact->PasReturn() * 100.0));
-		sprintf(act, "%03d", (int) (contact->ActReturn() * 100.0));
+		sprintf_s(psv, "%03d", (int) (contact->PasReturn() * 100.0));
+		sprintf_s(act, "%03d", (int) (contact->ActReturn() * 100.0));
 
 		if (contact->Threat(ship))
-		strcat(psv, " !");
+		strcat_s(psv, " !");
 
 		font->DrawText(psv, 0, info_rect, DT_LEFT);
 		info_rect.y += 10;
@@ -509,7 +509,7 @@ TacticalView::DrawSelectionList(ListIter<Ship> seln)
 
 	while (++seln) {
 		char name[64];
-		sprintf(name, "%s", seln->Name());
+		sprintf_s(name, "%s", seln->Name());
 
 		// always recognize ownside:
 		if (seln->GetIFF() != ship->GetIFF()) {
@@ -517,7 +517,7 @@ TacticalView::DrawSelectionList(ListIter<Ship> seln)
 			while (++c) {
 				if (c->GetShip() == seln.value()) {
 					if (c->GetIFF(ship) > seln->GetIFF()) {
-						sprintf(name, "%s %04d", Game::GetText("TacView.contact").data(), seln->GetContactID());
+						sprintf_s(name, "%s %04d", Game::GetText("TacView.contact").data(), seln->GetContactID());
 					}
 
 					break;

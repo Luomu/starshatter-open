@@ -39,7 +39,7 @@ int
 Intel::IntelFromName(const char* type_name)
 {
 	for (int i = RESERVE; i <= TRACKED; i++)
-	if (!stricmp(type_name, intel_name[i]))
+	if (!_stricmp(type_name, intel_name[i]))
 	return i;
 
 	return 0;

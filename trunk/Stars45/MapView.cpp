@@ -892,7 +892,7 @@ MapView::SetSelection(int index)
 				if (selected_elem && regions.size()) {
 					ListIter<Orbital> rgn = regions;
 					while (++rgn) {
-						if (!stricmp(selected_elem->Region(), rgn->Name())) {
+						if (!_stricmp(selected_elem->Region(), rgn->Name())) {
 							Orbital* elem_region = rgn.value();
 							current_region = regions.index(elem_region);
 						}
@@ -948,7 +948,7 @@ MapView::SetSelection(int index)
 				if (selected_elem && regions.size()) {
 					ListIter<Orbital> rgn = regions;
 					while (++rgn) {
-						if (!stricmp(selected_elem->Region(), rgn->Name())) {
+						if (!_stricmp(selected_elem->Region(), rgn->Name())) {
 							Orbital* elem_region = rgn.value();
 							current_region = regions.index(elem_region);
 						}
@@ -1004,7 +1004,7 @@ MapView::SetSelection(int index)
 				if (selected_elem && regions.size()) {
 					ListIter<Orbital> rgn = regions;
 					while (++rgn) {
-						if (!stricmp(selected_elem->Region(), rgn->Name())) {
+						if (!_stricmp(selected_elem->Region(), rgn->Name())) {
 							Orbital* elem_region = rgn.value();
 							current_region = regions.index(elem_region);
 						}
@@ -1387,7 +1387,7 @@ MapView::SelectAt(int x, int y)
 					while (++navpt) {
 						Instruction* n = navpt.value();
 
-						if (!stricmp(n->RegionName(), rgn->Name())) {
+						if (!_stricmp(n->RegionName(), rgn->Name())) {
 							Point nloc = n->Location();
 							double dx = nloc.x - test_x;
 							double dy = nloc.y - test_y;
@@ -1456,7 +1456,7 @@ MapView::SelectAt(int x, int y)
 							while (++navpt) {
 								Instruction* n = navpt.value();
 
-								if (!stricmp(n->RegionName(), rgn->Name())) {
+								if (!_stricmp(n->RegionName(), rgn->Name())) {
 									Point nloc = n->Location();
 									double dx = nloc.x - test_x;
 									double dy = nloc.y - test_y;
@@ -1884,7 +1884,7 @@ MapView::DrawSystem()
 	char r_txt[32];
 	FormatNumber(r_txt, system->Radius() * zoom);
 	char resolution[64];
-	sprintf(resolution, "%s: %s", Game::GetText("MapView.info.Resolution").data(), r_txt);
+	sprintf_s(resolution, "%s: %s", Game::GetText("MapView.info.Resolution").data(), r_txt);
 
 	active_window->SetFont(font);
 	active_window->DrawText(resolution, -1, Rect(4, 4, rect.w-8, 24), DT_SINGLELINE|DT_RIGHT);
@@ -2057,7 +2057,7 @@ MapView::DrawRegion()
 	char r_txt[32];
 	FormatNumber(r_txt, r*2);
 	char resolution[64];
-	sprintf(resolution, "%s: %s", Game::GetText("MapView.info.Resolution").data(), r_txt);
+	sprintf_s(resolution, "%s: %s", Game::GetText("MapView.info.Resolution").data(), r_txt);
 
 	active_window->SetFont(font);
 	active_window->DrawText(resolution, -1, Rect(4, 4, rect.w-8, 24), DT_SINGLELINE|DT_RIGHT);
@@ -2434,7 +2434,7 @@ MapView::DrawElem(MissionElement& s, bool current, int rep)
 	window->SetFont(font);
 
 	// draw ship icon:
-	if (!stricmp(s.Region(), rgn->Name())) {
+	if (!_stricmp(s.Region(), rgn->Name())) {
 		double sx = (s.Location().x + rlx) * scale;
 		double sy = (s.Location().y + rly) * scale;
 
@@ -2504,9 +2504,9 @@ MapView::DrawElem(MissionElement& s, bool current, int rep)
 				char label[64];
 
 				if (s.Count() > 1)
-				sprintf(label, "%s x %d", (const char*) s.Name(), s.Count());
+				sprintf_s(label, "%s x %d", (const char*) s.Name(), s.Count());
 				else
-				strcpy(label, (const char*) s.Name());
+				strcpy_s(label, (const char*) s.Name());
 
 				window->Print(shiploc.x-sprite_width, shiploc.y+sprite_width+2, label);
 			}
@@ -2582,7 +2582,7 @@ MissionElement*      elem)
 	for (int i = 0; i < s_route.size(); i++) {
 		Instruction* navpt = s_route[i];
 
-		if (!stricmp(navpt->RegionName(), rgn->Name())) {
+		if (!_stricmp(navpt->RegionName(), rgn->Name())) {
 			double nav_x = navpt->Location().x * scale;
 			double nav_y = navpt->Location().y * scale;
 
@@ -2645,31 +2645,31 @@ MissionElement*      elem)
 				window->DrawRect(x1-2, y1-2, x2+2, y2+2, c);
 
 				char buf[256];
-				sprintf(buf, "%d", i+1);
+				sprintf_s(buf, "%d", i+1);
 				window->SetFont(font);
 				window->Print(x2+3, y1, buf);
 
 				if (navpt == current_navpt) {
 					if (navpt->TargetName() && strlen(navpt->TargetName())) {
-						sprintf(buf, "%s %s", Game::GetText(Text("MapView.item.") + Instruction::ActionName(navpt->Action())).data(), navpt->TargetName());
+						sprintf_s(buf, "%s %s", Game::GetText(Text("MapView.item.") + Instruction::ActionName(navpt->Action())).data(), navpt->TargetName());
 						window->Print(x2+3, y1+10, buf);
 					}
 					else {
-						sprintf(buf, "%s", Game::GetText(Text("MapView.item.") + Instruction::ActionName(navpt->Action())).data());
+						sprintf_s(buf, "%s", Game::GetText(Text("MapView.item.") + Instruction::ActionName(navpt->Action())).data());
 						window->Print(x2+3, y1+10, buf);
 					}
 
-					sprintf(buf, "%s", Game::GetText(Text("MapView.item.") + Instruction::FormationName(navpt->Formation())).data());
+					sprintf_s(buf, "%s", Game::GetText(Text("MapView.item.") + Instruction::FormationName(navpt->Formation())).data());
 					window->Print(x2+3, y1+20, buf);
 
-					sprintf(buf, "%d", navpt->Speed());
+					sprintf_s(buf, "%d", navpt->Speed());
 					window->Print(x2+3, y1+30, buf);
 
 					if (navpt->HoldTime()) {
 						char hold_time[32];
 						FormatTime(hold_time, navpt->HoldTime());
 
-						sprintf(buf, "%s %s", Game::GetText("MapView.item.Hold").data(), hold_time);
+						sprintf_s(buf, "%s %s", Game::GetText("MapView.item.Hold").data(), hold_time);
 						window->Print(x2+3, y1+40, buf);
 					}
 				}
@@ -2798,7 +2798,7 @@ MapView::DrawCombatGroupSystem(CombatGroup* group, Orbital* rgn, int x1, int x2,
 		case CombatGroup::CARRIER_GROUP:
 		case CombatGroup::BATTLE_GROUP:
 		case CombatGroup::DESTROYER_SQUADRON:
-			sprintf(txt, "%s '%s'", group->GetShortDescription(), group->Name().data());
+			sprintf_s(txt, "%s '%s'", group->GetShortDescription(), group->Name().data());
 			active_window->SetFont(font);
 			active_window->DrawText(txt, 0, Rect(x1, y, x2-x1, 12), a);
 			y += 10;
@@ -2900,7 +2900,7 @@ MapView::DrawCombatGroup(CombatGroup* group, int rep)
 					sprite_width = 2;
 
 					char buf[256];
-					sprintf(buf, "%s", unit->Name().data());
+					sprintf_s(buf, "%s", unit->Name().data());
 					window->SetFont(font);
 					window->Print(shiploc.x-sprite_width, shiploc.y+sprite_width+2, buf);
 				}
@@ -2947,7 +2947,7 @@ MapView::DrawCombatGroup(CombatGroup* group, int rep)
 					}
 
 					char label[128];
-					strcpy(label, unit->GetDescription());
+					strcpy_s(label, unit->GetDescription());
 					window->SetFont(font);
 					window->Print(shiploc.x-sprite_width, shiploc.y+sprite_width+2, label);
 				}
@@ -3089,7 +3089,7 @@ MapView::IsCrowded(MissionElement& test)
 		while (++s) {
 			MissionElement* ref = s.value();
 
-			if (ref && ref != &test && !stricmp(ref->Region(), rgn->Name())) {
+			if (ref && ref != &test && !_stricmp(ref->Region(), rgn->Name())) {
 				GetElemLoc(*ref, refloc);
 
 				double dx = testloc.x - refloc.x;
@@ -3139,7 +3139,7 @@ MapView::GetElemLoc(MissionElement& s, POINT& shiploc)
 	}
 
 	if (view_mode == VIEW_SYSTEM || 
-			(view_mode == VIEW_REGION && !stricmp(s.Region(), rgn->Name()))) {
+			(view_mode == VIEW_REGION && !_stricmp(s.Region(), rgn->Name()))) {
 		double sx = (s.Location().x + rlx) * scale;
 		double sy = (s.Location().y + rly) * scale;
 		

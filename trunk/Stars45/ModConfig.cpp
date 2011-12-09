@@ -83,9 +83,10 @@ ModConfig::Load()
 	int         blocklen = 0;
 
 	char        filename[64];
-	strcpy(filename, "mod.cfg");
+	strcpy_s(filename, "mod.cfg");
 
-	FILE* f = ::fopen(filename, "rb");
+	FILE* f;
+	::fopen_s(&f, filename, "rb");
 
 	if (f) {
 		::fseek(f, 0, SEEK_END);
@@ -141,7 +142,8 @@ ModConfig::Load()
 void
 ModConfig::Save()
 {
-	FILE* f = fopen("mod.cfg", "w");
+	FILE* f;
+	fopen_s(&f, "mod.cfg", "w");
 	if (f) {
 		fprintf(f, "MOD_CONFIG\n\n");
 

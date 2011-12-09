@@ -94,12 +94,12 @@ NetServerDlg::Show()
 		cmb_type->SetSelection(config->GetGameType());
 
 		if (edt_game_port) {
-			sprintf(buff, "%d", config->GetLobbyPort());
+			sprintf_s(buff, "%d", config->GetLobbyPort());
 			edt_game_port->SetText(buff);
 		}
 
 		if (edt_admin_port) {
-			sprintf(buff, "%d", config->GetAdminPort());
+			sprintf_s(buff, "%d", config->GetAdminPort());
 			edt_admin_port->SetText(buff);
 		}
 
@@ -135,14 +135,14 @@ NetServerDlg::OnApply(AWEvent* event)
 
 		if (edt_game_port) {
 			int port = 0;
-			sscanf(edt_game_port->GetText(), "%d", &port);
+			sscanf_s(edt_game_port->GetText(), "%d", &port);
 			config->SetLobbyPort((WORD) port);
 			config->SetGamePort((WORD) port+1);
 		}
 
 		if (edt_admin_port) {
 			int port = 0;
-			sscanf(edt_admin_port->GetText(), "%d", &port);
+			sscanf_s(edt_admin_port->GetText(), "%d", &port);
 			config->SetAdminPort((WORD) port);
 		}
 

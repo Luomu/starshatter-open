@@ -101,7 +101,7 @@ const char*
 GroundAI::GetObserverName() const
 {
 	static char name[64];
-	sprintf(name, "GroundAI(%s)", ship->Name());
+	sprintf_s(name, "GroundAI(%s)", ship->Name());
 	return name;
 }
 

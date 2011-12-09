@@ -151,7 +151,7 @@ NetLobbyClient::Login(bool host_req)
 
 	char buffer[256];
 
-	sprintf(buffer, "host %s rank %d time %d miss %d kill %d loss %d ", 
+	sprintf_s(buffer, "host %s rank %d time %d miss %d kill %d loss %d ", 
 	host ? "true" : "false",
 	player->Rank(),
 	player->FlightTime(),
@@ -294,7 +294,7 @@ NetLobbyClient::AddChat(NetUser* user, const char* msg, bool route)
 	if (!msg || !*msg) return;
 
 	char buffer[280];
-	sprintf(buffer, "msg \"%s\"", SafeQuotes(msg));
+	sprintf_s(buffer, "msg \"%s\"", SafeQuotes(msg));
 
 	SendData(NET_LOBBY_CHAT, buffer);
 	ExecFrame();
@@ -370,7 +370,7 @@ void
 NetLobbyClient::BanUser(NetUser* user)
 {
 	char buffer[512];
-	sprintf(buffer, "user \"%s\"", SafeQuotes(user->Name()));
+	sprintf_s(buffer, "user \"%s\"", SafeQuotes(user->Name()));
 	SendData(NET_LOBBY_BAN_USER, buffer);
 }
 
@@ -380,7 +380,7 @@ void
 NetLobbyClient::SelectMission(DWORD id)
 {
 	char buffer[32];
-	sprintf(buffer, "m_id 0x%08x", id);
+	sprintf_s(buffer, "m_id 0x%08x", id);
 	SendData(NET_LOBBY_MISSION_SELECT, buffer);
 }
 
@@ -391,7 +391,7 @@ NetLobbyClient::MapUnit(int n, const char* user, bool lock)
 	return;
 
 	char buffer[512];
-	sprintf(buffer, "id %d user \"%s\" lock %s",
+	sprintf_s(buffer, "id %d user \"%s\" lock %s",
 	n, SafeQuotes(user), lock ? "true" : "false");
 	SendData(NET_LOBBY_MAP_UNIT, buffer);
 }
@@ -429,7 +429,7 @@ NetLobbyClient::DoAuthUser(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "level") {
 			level = num;
@@ -455,7 +455,7 @@ NetLobbyClient::DoServerInfo(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "info") {
 			server_info.machine_info = p->value;
@@ -499,7 +499,7 @@ NetLobbyClient::DoChat(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "id")
 		id = num;
@@ -581,7 +581,7 @@ NetLobbyClient::DoUserList(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "%d", &num);
+		sscanf_s(p->value, "%d", &num);
 
 		if (p->name == "name")
 		user_name = p->value;
@@ -644,7 +644,7 @@ NetLobbyClient::DoMissionList(NetPeer* peer, Text msg)
 
 			if (p->name == "c_id") {
 				c = new(__FILE__,__LINE__) NetCampaignInfo;
-				sscanf(p->value, "0x%x", &c->id);
+				sscanf_s(p->value, "0x%x", &c->id);
 				campaigns.append(c);
 
 				m = 0;
@@ -656,7 +656,7 @@ NetLobbyClient::DoMissionList(NetPeer* peer, Text msg)
 
 			else if (p->name == "m_id") {
 				int id = 0;
-				sscanf(p->value, "0x%x", &id);
+				sscanf_s(p->value, "0x%x", &id);
 
 				int m_id = id &  NET_MISSION_MASK;
 				int c_id = id >> NET_CAMPAIGN_SHIFT;
@@ -696,7 +696,7 @@ NetLobbyClient::DoMissionSelect(NetPeer* peer, Text msg)
 		NetLobbyParam* p = params[i];
 
 		int num = 0;
-		sscanf(p->value, "0x%x", &num);
+		sscanf_s(p->value, "0x%x", &num);
 
 		if (p->name == "m_id") {
 			if (selected_mission != (DWORD) num) {
@@ -720,7 +720,8 @@ NetLobbyClient::DoMissionData(NetPeer* peer, Text msg)
 	}
 
 	if (msg.length()) {
-		FILE* f = ::fopen("multi_mission_recv.def", "w");
+		FILE* f;
+		::fopen_s(&f, "multi_mission_recv.def", "w");
 		if (f) {
 			::fwrite(msg.data(), msg.length(), 1, f);
 			::fclose(f);
@@ -760,22 +761,22 @@ NetLobbyClient::DoUnitList(NetPeer* peer, Text msg)
 				user_name = p->value;
 			}
 			else if (p->name == "index") {
-				sscanf(p->value, "%d", &index);
+				sscanf_s(p->value, "%d", &index);
 			}
 			else if (p->name == "iff") {
-				sscanf(p->value, "%d", &iff);
+				sscanf_s(p->value, "%d", &iff);
 			}
 			else if (p->name == "lives") {
-				sscanf(p->value, "%d", &lives);
+				sscanf_s(p->value, "%d", &lives);
 			}
 			else if (p->name == "hull") {
-				sscanf(p->value, "%d", &hull);
+				sscanf_s(p->value, "%d", &hull);
 			}
 			else if (p->name == "role") {
-				sscanf(p->value, "%d", &role);
+				sscanf_s(p->value, "%d", &role);
 			}
 			else if (p->name == "lock") {
-				sscanf(p->value, "%d", &lock);
+				sscanf_s(p->value, "%d", &lock);
 
 				NetUnitEntry* entry = new(__FILE__,__LINE__) NetUnitEntry(elem_name, design, iff, index);
 				entry->SetUserName(user_name);

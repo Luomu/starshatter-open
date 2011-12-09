@@ -111,25 +111,25 @@ MsnEventDlg::Show()
 
 	char buf[64];
 
-	sprintf(buf, "%d", event->EventID());
+	sprintf_s(buf, "%d", event->EventID());
 	if (lbl_id) lbl_id->SetText(buf);
 
 	if (edt_time) {
-		sprintf(buf, "%.1f", event->Time());
+		sprintf_s(buf, "%.1f", event->Time());
 		edt_time->SetText(buf);
 	}
 
 	if (edt_delay) {
-		sprintf(buf, "%.1f", event->Delay());
+		sprintf_s(buf, "%.1f", event->Delay());
 		edt_delay->SetText(buf);
 	}
 
 	if (edt_event_chance) {
-		sprintf(buf, "%d", event->EventChance());
+		sprintf_s(buf, "%d", event->EventChance());
 		edt_event_chance->SetText(buf);
 	}
 
-	sprintf(buf, "%d", event->EventParam());
+	sprintf_s(buf, "%d", event->EventParam());
 	if (edt_event_param)  edt_event_param->SetText(buf);
 
 	if (edt_trigger_param) 
@@ -195,10 +195,10 @@ MsnEventDlg::FillShipList(ComboBox* cmb, const char* seln)
 			char ship_name[256];
 
 			for (int n = 0; n < elem->Count(); n++) {
-				sprintf(ship_name, "%s %d", elem->Name().data(), n+1);
+				sprintf_s(ship_name, "%s %d", elem->Name().data(), n+1);
 				cmb->AddItem(ship_name);
 
-				if (!stricmp(ship_name, seln))
+				if (!_stricmp(ship_name, seln))
 				selected_index = index;
 
 				index++;
@@ -286,28 +286,28 @@ MsnEventDlg::OnAccept(AWEvent* e)
 		int  val;
 
 		if (edt_time) {
-			strcpy(buf, edt_time->GetText());
+			strcpy_s(buf, edt_time->GetText());
 
 			float t = 0;
-			sscanf(buf, "%f", &t);
+			sscanf_s(buf, "%f", &t);
 
 			event->time = t;
 		}
 
 		if (edt_delay) {
-			strcpy(buf, edt_delay->GetText());
+			strcpy_s(buf, edt_delay->GetText());
 
 			float t = 0;
-			sscanf(buf, "%f", &t);
+			sscanf_s(buf, "%f", &t);
 
 			event->delay = t;
 		}
 
 		if (edt_event_param) {
-			strcpy(buf, edt_event_param->GetText());
+			strcpy_s(buf, edt_event_param->GetText());
 
 			if (isdigit(*buf)) {
-				sscanf(buf, "%d", &val);
+				sscanf_s(buf, "%d", &val);
 				event->event_param[0] = val;
 				event->event_nparams = 1;
 			}
@@ -333,10 +333,10 @@ MsnEventDlg::OnAccept(AWEvent* e)
 		}
 
 		if (edt_event_chance) {
-			strcpy(buf, edt_event_chance->GetText());
+			strcpy_s(buf, edt_event_chance->GetText());
 
 			if (isdigit(*buf)) {
-				sscanf(buf, "%d", &val);
+				sscanf_s(buf, "%d", &val);
 			}
 			else {
 				val = 0;
@@ -352,12 +352,12 @@ MsnEventDlg::OnAccept(AWEvent* e)
 		event->event_sound = edt_event_sound->GetText();
 
 		if (edt_trigger_param) {
-			strcpy(buf, edt_trigger_param->GetText());
+			strcpy_s(buf, edt_trigger_param->GetText());
 
 			ZeroMemory(event->trigger_param, sizeof(event->trigger_param));
 
 			if (isdigit(*buf)) {
-				sscanf(buf, "%d", &val);
+				sscanf_s(buf, "%d", &val);
 				event->trigger_param[0] = val;
 				event->trigger_nparams = 1;
 			}

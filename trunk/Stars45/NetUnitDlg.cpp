@@ -403,11 +403,11 @@ NetUnitDlg::GetUnits()
 				char team[16];
 
 				if (e->GetIndex())
-				sprintf(name, "%s %d", e->GetElemName().data(), e->GetIndex());
+				sprintf_s(name, "%s %d", e->GetElemName().data(), e->GetIndex());
 				else
-				strcpy(name, e->GetElemName().data());
+				strcpy_s(name, e->GetElemName().data());
 
-				sprintf(team, "%d", e->GetIFF());
+				sprintf_s(team, "%d", e->GetIFF());
 
 				Text user_name = e->GetUserName();
 
@@ -581,7 +581,7 @@ NetUnitDlg::OnBan(AWEvent* event)
 		ConfirmDlg* confirm = manager->GetConfirmDlg();
 		if (confirm) {
 			char msg[512];
-			sprintf(msg, Game::GetText("NetUnitDlg.are-you-sure").data(), u->Name());
+			sprintf_s(msg, Game::GetText("NetUnitDlg.are-you-sure").data(), u->Name());
 			confirm->SetMessage(msg);
 			confirm->SetTitle(Game::GetText("NetUnitDlg.confirm-ban"));
 			confirm->SetParentControl(btn_ban);

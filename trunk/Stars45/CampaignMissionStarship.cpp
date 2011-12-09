@@ -114,8 +114,9 @@ CampaignMissionStarship::CreateMission(CampaignMissionRequest* req)
 			Text script = mission->Serialize();
 			char fname[32];
 
-			sprintf(fname, "msn%03d.def", info->id);
-			FILE* f = fopen(fname, "w");
+			sprintf_s(fname, "msn%03d.def", info->id);
+			FILE* f;
+			fopen_s(&f, fname, "w");
 			if (f) {
 				fprintf(f, "%s\n", script.data());
 				fclose(f);
@@ -169,7 +170,7 @@ CampaignMissionStarship::GenerateMission(int id)
 	}
 
 	char name[64];
-	sprintf(name, "Starship Mission %d", id);
+	sprintf_s(name, "Starship Mission %d", id);
 
 	mission->SetName(name);
 	mission->SetTeam(player_group->GetIFF());
@@ -1356,21 +1357,18 @@ CampaignMissionStarship::DescribeMission()
 	char player_info[256];
 
 	if (mission_info && mission_info->name.length())
-	sprintf(name, "MSN-%03d %s", mission->Identity(), mission_info->name.data());
-
+		sprintf_s(name, "MSN-%03d %s", mission->Identity(), mission_info->name.data());
 	else if (ward)
-	sprintf(name, "MSN-%03d %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(), ward->Name().data());
-
+		sprintf_s(name, "MSN-%03d %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(), ward->Name().data());
 	else if (prime_target)
-	sprintf(name, "MSN-%03d %s %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(),
-	Ship::ClassName(prime_target->GetDesign()->type),
-	prime_target->Name().data());
-
+		sprintf_s(name, "MSN-%03d %s %s %s", mission->Identity(), Game::GetText(mission->TypeName()).data(),
+			Ship::ClassName(prime_target->GetDesign()->type),
+			prime_target->Name().data());
 	else
-	sprintf(name, "MSN-%03d %s", mission->Identity(), Game::GetText(mission->TypeName()).data());
+		sprintf_s(name, "MSN-%03d %s", mission->Identity(), Game::GetText(mission->TypeName()).data());
 
 	if (player) {
-		strcpy(player_info, player->GetCombatGroup()->GetDescription());
+		strcpy_s(player_info, player->GetCombatGroup()->GetDescription());
 	}
 
 	MissionInfo* info = new(__FILE__,__LINE__) MissionInfo;

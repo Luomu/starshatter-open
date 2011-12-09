@@ -327,12 +327,12 @@ MFD::DrawSensorLabels(const char* mfd_mode)
 	int      scan_y      = rect.y;
 
 	switch (sensor->GetMode()) {
-	case Sensor::PAS:    strcpy(mode_buf, Game::GetText("MFD.mode.passive").data()); break;
-	case Sensor::STD:    strcpy(mode_buf, Game::GetText("MFD.mode.standard").data()); break;
-	case Sensor::ACM:    strcpy(mode_buf, Game::GetText("MFD.mode.auto-combat").data()); break;
-	case Sensor::GM:     strcpy(mode_buf, Game::GetText("MFD.mode.ground").data()); break;
-	case Sensor::PST:    strcpy(mode_buf, Game::GetText("MFD.mode.passive").data()); break;
-	case Sensor::CST:    strcpy(mode_buf, Game::GetText("MFD.mode.combined").data()); break;
+	case Sensor::PAS:    strcpy_s(mode_buf, Game::GetText("MFD.mode.passive").data()); break;
+	case Sensor::STD:    strcpy_s(mode_buf, Game::GetText("MFD.mode.standard").data()); break;
+	case Sensor::ACM:    strcpy_s(mode_buf, Game::GetText("MFD.mode.auto-combat").data()); break;
+	case Sensor::GM:     strcpy_s(mode_buf, Game::GetText("MFD.mode.ground").data()); break;
+	case Sensor::PST:    strcpy_s(mode_buf, Game::GetText("MFD.mode.passive").data()); break;
+	case Sensor::CST:    strcpy_s(mode_buf, Game::GetText("MFD.mode.combined").data()); break;
 	default:             break;
 	}
 
@@ -342,9 +342,9 @@ MFD::DrawSensorLabels(const char* mfd_mode)
 	char range_txt[12];
 	double beam_range = sensor->GetBeamRange() + 1;
 	if (beam_range >= 1e6)
-	sprintf(range_txt, "-%dM+", (int) (beam_range / 1e6));
+	sprintf_s(range_txt, "-%dM+", (int) (beam_range / 1e6));
 	else
-	sprintf(range_txt, "-%3d+", (int) (beam_range / 1e3));
+	sprintf_s(range_txt, "-%3d+", (int) (beam_range / 1e3));
 
 	Rect range_rect(scan_x+2, scan_y+scan_r-12, 40, 12);
 	DrawMFDText(1, range_txt, range_rect, DT_LEFT);
@@ -356,7 +356,7 @@ MFD::DrawSensorLabels(const char* mfd_mode)
 
 	if (ship->GetProbeLauncher()) {
 		char probes[32];
-		sprintf(probes, "%s %02d", Game::GetText("MFD.probe").data(), ship->GetProbeLauncher()->Ammo());
+		sprintf_s(probes, "%s %02d", Game::GetText("MFD.probe").data(), ship->GetProbeLauncher()->Ammo());
 		DrawMFDText(3, probes, probe_rect, DT_RIGHT);
 	}
 	else {
@@ -451,7 +451,7 @@ MFD::DrawSensorMFD()
 	}
 	else {
 		char az_txt[8];
-		sprintf(az_txt, "%d", (int) (sensor->GetBeamLimit() / DEGREES));
+		sprintf_s(az_txt, "%d", (int) (sensor->GetBeamLimit() / DEGREES));
 
 		Rect az_rect(scan_x+2, scan_y+scan_r-12, 32, 12);
 		DrawMFDText(1, az_txt, az_rect, DT_LEFT);
@@ -1086,14 +1086,14 @@ MFD::DrawGameMFD()
 	int t = 0;
 
 	if (!HUDView::IsArcade() && HUDView::ShowFPS()) {
-		sprintf(txt, "FPS: %6.2f", Game::FrameRate());
+		sprintf_s(txt, "FPS: %6.2f", Game::FrameRate());
 		DrawMFDText(t++, txt, txt_rect, DT_LEFT); 
 		txt_rect.y += 10;
 
 		if (lines <= 1) return;
 
 		Starshatter* game = Starshatter::GetInstance();
-		sprintf(txt, "Polys: %d", game->GetPolyStats().npolys);
+		sprintf_s(txt, "Polys: %d", game->GetPolyStats().npolys);
 		DrawMFDText(t++, txt, txt_rect, DT_LEFT); 
 		txt_rect.y += 10;
 	}
@@ -1118,9 +1118,9 @@ MFD::DrawGameMFD()
 	}
 
 	if (Game::TimeCompression() > 1)
-	sprintf(txt, "%02d:%02d:%02d x%d", hours, minutes, seconds, Game::TimeCompression());
+	sprintf_s(txt, "%02d:%02d:%02d x%d", hours, minutes, seconds, Game::TimeCompression());
 	else
-	sprintf(txt, "%02d:%02d:%02d", hours, minutes, seconds);
+	sprintf_s(txt, "%02d:%02d:%02d", hours, minutes, seconds);
 
 	DrawMFDText(t++, txt, txt_rect, DT_LEFT);
 	txt_rect.y += 10;
@@ -1229,9 +1229,9 @@ MFD::DrawStatusMFD()
 					char ammo[8];
 
 					if (ship->GetSecondaryGroup() == w)
-					sprintf(ammo, "%d *", w->Ammo());
+					sprintf_s(ammo, "%d *", w->Ammo());
 					else
-					sprintf(ammo, "%d", w->Ammo());
+					sprintf_s(ammo, "%d", w->Ammo());
 
 					DrawMFDText(row++, (const char*) w->GetDesign()->name, status_rect, DT_LEFT);
 					status_rect.x += 70;
@@ -1243,7 +1243,7 @@ MFD::DrawStatusMFD()
 
 			if (ship->GetDecoy()) {
 				char ammo[8];
-				sprintf(ammo, "%d", ship->GetDecoy()->Ammo());
+				sprintf_s(ammo, "%d", ship->GetDecoy()->Ammo());
 				DrawMFDText(row++, Game::GetText("MFD.status.DECOY").data(), status_rect, DT_LEFT);
 				status_rect.x += 70;
 				DrawMFDText(row++, ammo, status_rect, DT_LEFT);
@@ -1253,7 +1253,7 @@ MFD::DrawStatusMFD()
 
 			if (NetGame::GetInstance()) {
 				char lives[8];
-				sprintf(lives, "%d", ship->RespawnCount() + 1);
+				sprintf_s(lives, "%d", ship->RespawnCount() + 1);
 				DrawMFDText(row++, Game::GetText("MFD.status.LIVES").data(), status_rect, DT_LEFT);
 				status_rect.x += 70;
 				DrawMFDText(row++, lives, status_rect, DT_LEFT);
@@ -1278,11 +1278,11 @@ MFD::DrawStatusMFD()
 				DrawMFDText(row++, Game::GetText("MFD.status.EMCON").data(), status_rect, DT_LEFT);
 				status_rect.x += 70;
 
-				sprintf(txt, "%s %d", Game::GetText("MFD.status.MODE").data(), ship->GetEMCON());
+				sprintf_s(txt, "%s %d", Game::GetText("MFD.status.MODE").data(), ship->GetEMCON());
 
 				if (!sensor->IsPowerOn() || sensor->GetEnergy() == 0) {
 					if (!Game::Paused() && (Game::RealTime()/1000) & 2)
-					strcpy(txt, Game::GetText("MFD.status.SENSOR-OFF").data());
+					strcpy_s(txt, Game::GetText("MFD.status.SENSOR-OFF").data());
 				}
 
 				DrawMFDText(row++, txt, status_rect, DT_LEFT);
@@ -1299,7 +1299,7 @@ MFD::DrawStatusMFD()
 
 		if (NetGame::GetInstance()) {
 			char lives[8];
-			sprintf(lives, "%d", ship->RespawnCount() + 1);
+			sprintf_s(lives, "%d", ship->RespawnCount() + 1);
 			status_rect.x -= 70;
 			status_rect.y += 10;
 			DrawMFDText(row++, Game::GetText("MFD.status.LIVES").data(), status_rect, DT_LEFT);

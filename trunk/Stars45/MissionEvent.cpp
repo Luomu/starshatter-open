@@ -731,7 +731,7 @@ MissionEvent::TriggerParamStr() const
 	}
 
 	else if (trigger_param[1] == 0) {
-		sprintf(buffer, "%d", trigger_param[0]);
+		sprintf_s(buffer, "%d", trigger_param[0]);
 		result = buffer;
 	}
 
@@ -743,9 +743,9 @@ MissionEvent::TriggerParamStr() const
 			break;
 
 			if (i < 7 && trigger_param[i+1] != 0)
-			sprintf(buffer, "%d, ", trigger_param[i]);
+			sprintf_s(buffer, "%d, ", trigger_param[i]);
 			else
-			sprintf(buffer, "%d", trigger_param[i]);
+			sprintf_s(buffer, "%d", trigger_param[i]);
 
 			result += buffer;
 		}
@@ -845,7 +845,7 @@ int
 MissionEvent::EventForName(const char* n)
 {
 	for (int i = 0; i < NUM_EVENTS; i++)
-	if (!stricmp(n, event_names[i]))
+	if (!_stricmp(n, event_names[i]))
 	return i;
 
 	return 0;
@@ -867,7 +867,7 @@ int
 MissionEvent::TriggerForName(const char* n)
 {
 	for (int i = 0; i < NUM_TRIGGERS; i++)
-	if (!stricmp(n, trigger_names[i]))
+	if (!_stricmp(n, trigger_names[i]))
 	return i;
 
 	return 0;

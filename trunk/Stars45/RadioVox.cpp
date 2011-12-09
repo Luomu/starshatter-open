@@ -176,8 +176,8 @@ RadioVox::AddPhrase(const char* key)
 		char datapath[256];
 		char filename[256];
 
-		sprintf(datapath, "Vox/%s/", path.data());
-		sprintf(filename, "%s.wav",   key);
+		sprintf_s(datapath, "Vox/%s/", path.data());
+		sprintf_s(filename, "%s.wav",   key);
 
 		bool        use_fs = loader->IsFileSystemEnabled();
 		Sound*      sound  = 0;

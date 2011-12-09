@@ -188,15 +188,13 @@ DebriefDlg::Show()
 					stats->Summarize();
 
 					Player* player = Player::GetCurrentPlayer();
-					int     points = stats->GetPoints() +
-					stats->GetCommandPoints();
+					int     points = stats->GetPoints() + stats->GetCommandPoints();
 
 					if (player && sim)
-					points = player->GetMissionPoints(stats, sim->StartTime()) +
-					stats->GetCommandPoints();
+						points = player->GetMissionPoints(stats, sim->StartTime()) + stats->GetCommandPoints();
 
 					char score[32];
-					sprintf(score, "%d %s", points, Game::GetText("DebriefDlg.points").data());
+					sprintf_s(score, "%d %s", points, Game::GetText("DebriefDlg.points").data());
 					mission_score->SetText(score);
 					break;
 				}
@@ -282,15 +280,15 @@ DebriefDlg::OnUnit(AWEvent* event)
 		char txt[64];
 		int i = 0;
 
-		sprintf(txt, "%d", stats->GetGunShots());
+		sprintf_s(txt, "%d", stats->GetGunShots());
 		summary_list->AddItem("Guns Fired: ");
 		summary_list->SetItemText(i++, 1, txt);
 
-		sprintf(txt, "%d", stats->GetGunHits());
+		sprintf_s(txt, "%d", stats->GetGunHits());
 		summary_list->AddItem("Gun Hits: ");
 		summary_list->SetItemText(i++, 1, txt);
 
-		sprintf(txt, "%d", stats->GetGunKills());
+		sprintf_s(txt, "%d", stats->GetGunKills());
 		summary_list->AddItem("Gun Kills: ");
 		summary_list->SetItemText(i++, 1, txt);
 
@@ -298,15 +296,15 @@ DebriefDlg::OnUnit(AWEvent* event)
 		summary_list->AddItem(" ");
 		i++;
 
-		sprintf(txt, "%d", stats->GetMissileShots());
+		sprintf_s(txt, "%d", stats->GetMissileShots());
 		summary_list->AddItem("Missiles Fired: ");
 		summary_list->SetItemText(i++, 1, txt);
 
-		sprintf(txt, "%d", stats->GetMissileHits());
+		sprintf_s(txt, "%d", stats->GetMissileHits());
 		summary_list->AddItem("Missile Hits: ");
 		summary_list->SetItemText(i++, 1, txt);
 
-		sprintf(txt, "%d", stats->GetMissileKills());
+		sprintf_s(txt, "%d", stats->GetMissileKills());
 		summary_list->AddItem("Missile Kills: ");
 		summary_list->SetItemText(i++, 1, txt);
 

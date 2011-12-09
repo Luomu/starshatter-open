@@ -49,7 +49,7 @@ Stars::Stars(int nstars)
 		vset->specular[i] = 0;
 	}
 
-	strcpy(name, "Stars");
+	strcpy_s(name, "Stars");
 }
 
 Stars::~Stars()
@@ -97,7 +97,7 @@ Dust::Dust(int ndust, bool b)
 	vset     = new(__FILE__,__LINE__) VertexSet(ndust);
 
 	Reset(Point(0, 0, 0));
-	strcpy(name, "Dust");
+	strcpy_s(name, "Dust");
 }
 
 // +--------------------------------------------------------------------+
@@ -270,10 +270,10 @@ Color atmos, const char* gloss_name)
 
 	if (bmp_spec && Video::GetInstance()->IsSpecMapEnabled()) {
 		if (glow_name && strstr(glow_name, "light"))
-		strcpy(mtl_surf->shader, "SimplePix/PlanetSurfNightLight");
+		strcpy_s(mtl_surf->shader, "SimplePix/PlanetSurfNightLight");
 
 		else if (glow_name)
-		strcpy(mtl_surf->shader, "SimplePix/PlanetSurf");
+		strcpy_s(mtl_surf->shader, "SimplePix/PlanetSurf");
 	}
 
 	if (atmosphere != Color::Black) {
@@ -281,7 +281,7 @@ Color atmos, const char* gloss_name)
 
 		mtl_limb->Ka = atmosphere;
 
-		strcpy(mtl_limb->shader, "PlanetLimb");
+		strcpy_s(mtl_limb->shader, "PlanetLimb");
 
 		Print("   loading atmospheric limb texture PlanetLimb.pcx\n");
 		loader->LoadTexture("PlanetLimb.pcx", bmp_limb, Bitmap::BMP_TRANSLUCENT, true);

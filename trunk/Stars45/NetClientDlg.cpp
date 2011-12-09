@@ -204,7 +204,7 @@ NetClientDlg::UpdateServers()
 
 		if (info->ping_time > 0 && info->ping_time < 10000) {
 			char buffer[32];
-			sprintf(buffer, "%d ms", info->ping_time);
+			sprintf_s(buffer, "%d ms", info->ping_time);
 			lst_servers->SetItemText(i, 5, buffer);
 
 			switch (info->status) {
@@ -224,7 +224,7 @@ NetClientDlg::UpdateServers()
 		lst_servers->SetItemText(i, 3, status);
 
 		char num_users[16];
-		sprintf(num_users, "%d", info->nplayers);
+		sprintf_s(num_users, "%d", info->nplayers);
 		lst_servers->SetItemText(i, 4, num_users);
 	}
 }

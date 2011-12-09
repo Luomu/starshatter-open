@@ -89,22 +89,22 @@ CombatUnit::GetDescription() const
 	static char desc[256];
 
 	if (!design) {
-		strcpy(desc, Game::GetText("[unknown]").data());
+		strcpy_s(desc, Game::GetText("[unknown]").data());
 	}
 
 	else if (count > 1) {
-		sprintf(desc, "%dx %s %s", LiveCount(), design->abrv, design->DisplayName());
+		sprintf_s(desc, "%dx %s %s", LiveCount(), design->abrv, design->DisplayName());
 	}
 
 	else {
 		if (regnum.length() > 0)
-		sprintf(desc, "%s-%s %s", design->abrv, (const char*) regnum, (const char*) name);
+		sprintf_s(desc, "%s-%s %s", design->abrv, (const char*) regnum, (const char*) name);
 		else
-		sprintf(desc, "%s %s", design->abrv, (const char*) name);
+		sprintf_s(desc, "%s %s", design->abrv, (const char*) name);
 
 		if (dead_count > 0) {
-			strcat(desc, " ");
-			strcat(desc, Game::GetText("killed.in.action"));
+			strcat_s(desc, " ");
+			strcat_s(desc, Game::GetText("killed.in.action"));
 		}
 	}
 

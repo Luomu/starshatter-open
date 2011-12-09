@@ -236,9 +236,9 @@ CmpnScreen::ExecFrame()
 				if (player->Trained() >= all_missions && player->Trained() < 255) {
 					player->SetTrained(255);
 					cmd_msg_dlg->Title()->SetText(Game::GetText("CmpnScreen.training"));
-					sprintf(msg_info, Game::GetText("CmpnScreen.congrats"),
-					Player::RankName(player->Rank()),
-					player->Name().data());
+					sprintf_s(msg_info, Game::GetText("CmpnScreen.congrats"),
+						Player::RankName(player->Rank()),
+						player->Name().data());
 
 					cmd_msg_dlg->Message()->SetText(msg_info);
 					cmd_msg_dlg->Message()->SetTextAlign(DT_LEFT);

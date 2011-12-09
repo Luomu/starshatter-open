@@ -230,59 +230,59 @@ CombatAction::TypeFromName(const char* n)
 {
 	int type = 0;
 
-	if (!stricmp(n, "NO_ACTION"))
-	type = NO_ACTION;
+	if (!_stricmp(n, "NO_ACTION"))
+		type = NO_ACTION;
 
-	else if (!stricmp(n, "MARKER"))
-	type = NO_ACTION;
+	else if (!_stricmp(n, "MARKER"))
+		type = NO_ACTION;
 
-	else if (!stricmp(n, "STRATEGIC_DIRECTIVE"))
-	type = STRATEGIC_DIRECTIVE;
+	else if (!_stricmp(n, "STRATEGIC_DIRECTIVE"))
+		type = STRATEGIC_DIRECTIVE;
 
-	else if (!stricmp(n, "STRATEGIC"))
-	type = STRATEGIC_DIRECTIVE;
+	else if (!_stricmp(n, "STRATEGIC"))
+		type = STRATEGIC_DIRECTIVE;
 
-	else if (!stricmp(n, "ZONE_ASSIGNMENT"))
-	type = ZONE_ASSIGNMENT;
+	else if (!_stricmp(n, "ZONE_ASSIGNMENT"))
+		type = ZONE_ASSIGNMENT;
 
-	else if (!stricmp(n, "ZONE"))
-	type = ZONE_ASSIGNMENT;
+	else if (!_stricmp(n, "ZONE"))
+		type = ZONE_ASSIGNMENT;
 
-	else if (!stricmp(n, "SYSTEM_ASSIGNMENT"))
-	type = SYSTEM_ASSIGNMENT;
+	else if (!_stricmp(n, "SYSTEM_ASSIGNMENT"))
+		type = SYSTEM_ASSIGNMENT;
 
-	else if (!stricmp(n, "SYSTEM"))
-	type = SYSTEM_ASSIGNMENT;
+	else if (!_stricmp(n, "SYSTEM"))
+		type = SYSTEM_ASSIGNMENT;
 
-	else if (!stricmp(n, "MISSION_TEMPLATE"))
-	type = MISSION_TEMPLATE;
+	else if (!_stricmp(n, "MISSION_TEMPLATE"))
+		type = MISSION_TEMPLATE;
 
-	else if (!stricmp(n, "MISSION"))
-	type = MISSION_TEMPLATE;
+	else if (!_stricmp(n, "MISSION"))
+		type = MISSION_TEMPLATE;
 
-	else if (!stricmp(n, "COMBAT_EVENT"))
-	type = COMBAT_EVENT;
+	else if (!_stricmp(n, "COMBAT_EVENT"))
+		type = COMBAT_EVENT;
 
-	else if (!stricmp(n, "EVENT"))
-	type = COMBAT_EVENT;
+	else if (!_stricmp(n, "EVENT"))
+		type = COMBAT_EVENT;
 
-	else if (!stricmp(n, "INTEL_EVENT"))
-	type = INTEL_EVENT;
+	else if (!_stricmp(n, "INTEL_EVENT"))
+		type = INTEL_EVENT;
 
-	else if (!stricmp(n, "INTEL"))
-	type = INTEL_EVENT;
+	else if (!_stricmp(n, "INTEL"))
+		type = INTEL_EVENT;
 
-	else if (!stricmp(n, "CAMPAIGN_SITUATION"))
-	type = CAMPAIGN_SITUATION;
+	else if (!_stricmp(n, "CAMPAIGN_SITUATION"))
+		type = CAMPAIGN_SITUATION;
 
-	else if (!stricmp(n, "SITREP"))
-	type = CAMPAIGN_SITUATION;
+	else if (!_stricmp(n, "SITREP"))
+		type = CAMPAIGN_SITUATION;
 
-	else if (!stricmp(n, "CAMPAIGN_ORDERS"))
-	type = CAMPAIGN_ORDERS;
+	else if (!_stricmp(n, "CAMPAIGN_ORDERS"))
+		type = CAMPAIGN_ORDERS;
 
-	else if (!stricmp(n, "ORDERS"))
-	type = CAMPAIGN_ORDERS;
+	else if (!_stricmp(n, "ORDERS"))
+		type = CAMPAIGN_ORDERS;
 
 	return type;
 }
@@ -292,19 +292,19 @@ CombatAction::StatusFromName(const char* n)
 {
 	int stat = 0;
 
-	if (!stricmp(n, "PENDING"))
+	if (!_stricmp(n, "PENDING"))
 	stat = PENDING;
 
-	else if (!stricmp(n, "ACTIVE"))
+	else if (!_stricmp(n, "ACTIVE"))
 	stat = ACTIVE;
 
-	else if (!stricmp(n, "SKIPPED"))
+	else if (!_stricmp(n, "SKIPPED"))
 	stat = SKIPPED;
 
-	else if (!stricmp(n, "FAILED"))
+	else if (!_stricmp(n, "FAILED"))
 	stat = FAILED;
 
-	else if (!stricmp(n, "COMPLETE"))
+	else if (!_stricmp(n, "COMPLETE"))
 	stat = COMPLETE;
 
 	return stat;
@@ -318,34 +318,34 @@ CombatActionReq::CompFromName(const char* n)
 {
 	int comp = 0;
 
-	if (!stricmp(n, "LT"))
+	if (!_stricmp(n, "LT"))
 	comp = LT;
 
-	else if (!stricmp(n, "LE"))
+	else if (!_stricmp(n, "LE"))
 	comp = LE;
 
-	else if (!stricmp(n, "GT"))
+	else if (!_stricmp(n, "GT"))
 	comp = GT;
 
-	else if (!stricmp(n, "GE"))
+	else if (!_stricmp(n, "GE"))
 	comp = GE;
 
-	else if (!stricmp(n, "EQ"))
+	else if (!_stricmp(n, "EQ"))
 	comp = EQ;
 
-	else if (!stricmp(n, "RLT"))
+	else if (!_stricmp(n, "RLT"))
 	comp = RLT;
 
-	else if (!stricmp(n, "RLE"))
+	else if (!_stricmp(n, "RLE"))
 	comp = RLE;
 
-	else if (!stricmp(n, "RGT"))
+	else if (!_stricmp(n, "RGT"))
 	comp = RGT;
 
-	else if (!stricmp(n, "RGE"))
+	else if (!_stricmp(n, "RGE"))
 	comp = RGE;
 
-	else if (!stricmp(n, "REQ"))
+	else if (!_stricmp(n, "REQ"))
 	comp = REQ;
 
 	return comp;

@@ -89,7 +89,7 @@ FirstTimeDlg::OnApply(AWEvent* event)
 	if (player) {
 		if (edt_name) {
 			char password[16];
-			sprintf(password, "%08x", (DWORD) Random(0, 2e9));
+			sprintf_s(password, "%08x", (DWORD) Random(0, 2e9));
 
 			player->SetName(edt_name->GetText());
 			player->SetPassword(password);

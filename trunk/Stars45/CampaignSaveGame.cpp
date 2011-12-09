@@ -58,7 +58,7 @@ CampaignSaveGame::GetSaveDirectory(Player* player)
 {
 	if (player) {
 		char save_dir[32];
-		sprintf(save_dir, "%s/%02d", SAVE_DIR, player->Identity());
+		sprintf_s(save_dir, "%s/%02d", SAVE_DIR, player->Identity());
 
 		return save_dir;
 	}
@@ -563,7 +563,9 @@ CampaignSaveGame::Save(const char* name)
 
 	Text s = GetSaveDirectory() + Text("/") + Text(name);
 
-	FILE* f = fopen(s, "w");
+	FILE* f;
+	fopen_s(&f, s, "w");
+
 	if (f) {
 		char timestr[32];
 		FormatDayTime(timestr, campaign->GetTime());
@@ -704,7 +706,9 @@ Text
 CampaignSaveGame::GetResumeFile()
 {
 	// check for auto save game:
-	FILE* f = ::fopen(GetSaveDirectory() + "/AutoSave", "r");
+	FILE* f;
+	::fopen_s(&f, GetSaveDirectory() + "/AutoSave", "r");
+	
 	if (f) {
 		::fclose(f);
 

@@ -71,7 +71,7 @@ public:
 
 	void           SetAuthLevel(int n)        { auth_level = n; }
 	void           SetAuthState(int n)        { auth_state = n; }
-	void           SetSalt(const char* s)     { strcpy(salt, s);}
+	void           SetSalt(const char* s)     { strcpy_s(salt, s);}
 
 	void           SetSquadron(const char* s) { squadron = s;   }
 	void           SetSignature(const char* s){ signature = s;  }

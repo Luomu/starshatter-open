@@ -1089,7 +1089,7 @@ HUDView::DrawContact(Contact* contact, int index)
 				Rect contact_rect(x+8, y-4, 120, 12);
 
 				if (range == 0) {
-					sprintf(contact_buf, "%c *", code);
+					sprintf_s(contact_buf, "%c *", code);
 				}
 				else {
 					bool mega = false;
@@ -1105,11 +1105,11 @@ HUDView::DrawContact(Contact* contact, int index)
 
 					if (arcade) {
 						if (c_ship)
-						strcpy(contact_buf, c_ship->Name());
+						strcpy_s(contact_buf, c_ship->Name());
 						else if (!mega)
-						sprintf(contact_buf, "%c %d", code, (int) range);
+						sprintf_s(contact_buf, "%c %d", code, (int) range);
 						else
-						sprintf(contact_buf, "%c %.1f M", code, range);
+						sprintf_s(contact_buf, "%c %.1f M", code, range);
 					}
 					else {
 						char  closing = '+';
@@ -1124,9 +1124,9 @@ HUDView::DrawContact(Contact* contact, int index)
 						closing = '-';
 
 						if (!mega)
-						sprintf(contact_buf, "%c %d%c", code, (int) range, closing);
+						sprintf_s(contact_buf, "%c %d%c", code, (int) range, closing);
 						else
-						sprintf(contact_buf, "%c %.1f M", code, range);
+						sprintf_s(contact_buf, "%c %.1f M", code, range);
 					}
 				}
 
@@ -1362,7 +1362,7 @@ HUDView::DrawBars()
 			double alt_agl = ship->AltitudeAGL();
 
 			if (alt_agl <= 1000)
-			sprintf(txt, "R %4d", (int) alt_agl);
+			sprintf_s(txt, "R %4d", (int) alt_agl);
 			else
 			FormatNumber(txt, alt_msl);
 
@@ -1370,7 +1370,7 @@ HUDView::DrawBars()
 
 			if (arcade) {
 				char arcade_txt[32];
-				sprintf(arcade_txt, "%s %s", Game::GetText("HUDView.altitude").data(), txt);
+				sprintf_s(arcade_txt, "%s %s", Game::GetText("HUDView.altitude").data(), txt);
 				align = (tactical) ? DT_LEFT : DT_RIGHT;
 				DrawHUDText(TXT_ALTITUDE, arcade_txt, speed_rect, align);
 			}
@@ -1380,7 +1380,7 @@ HUDView::DrawBars()
 			}
 
 			if (!arcade) {
-				sprintf(txt, "%.1f G", ship->GForce());
+				sprintf_s(txt, "%.1f G", ship->GForce());
 				speed_rect.y -= 20;
 
 				align = (tactical) ? DT_LEFT : DT_RIGHT;
@@ -1392,7 +1392,7 @@ HUDView::DrawBars()
 
 		// upper left hud quadrant (starships)
 		else if (ship->IsStarship() && ship->GetFLCSMode() == Ship::FLCS_HELM && !arcade) {
-			sprintf(txt, "%s: %.1f", Game::GetText("HUDView.Pitch").data(), ship->GetHelmPitch()/DEGREES);
+			sprintf_s(txt, "%s: %.1f", Game::GetText("HUDView.Pitch").data(), ship->GetHelmPitch()/DEGREES);
 			speed_rect.y -= 50;
 
 			align = (tactical) ? DT_LEFT : DT_RIGHT;
@@ -1401,7 +1401,7 @@ HUDView::DrawBars()
 			speed_rect.y -= 10;
 			int  heading_degrees = (int) (ship->GetHelmHeading()/DEGREES);
 			if (heading_degrees < 0) heading_degrees += 360;
-			sprintf(txt, "%s: %03d", Game::GetText("HUDView.Heading").data(), heading_degrees);
+			sprintf_s(txt, "%s: %03d", Game::GetText("HUDView.Heading").data(), heading_degrees);
 			DrawHUDText(TXT_HEADING, txt, speed_rect, align);
 
 			speed_rect.y += 60;
@@ -1412,14 +1412,14 @@ HUDView::DrawBars()
 			Rect heading_rect(l, t+5, bar_width, 12);
 			int  heading_degrees = (int) (ship->CompassHeading()/DEGREES);
 			if (heading_degrees < 0) heading_degrees += 360;
-			sprintf(txt, "%d", heading_degrees);
+			sprintf_s(txt, "%d", heading_degrees);
 			DrawHUDText(TXT_COMPASS, txt, heading_rect, DT_CENTER);
 		}
 
 		switch (mode) {
-		case HUD_MODE_TAC: strcpy(txt, Game::GetText("HUDView.mode.tactical").data());   break;
-		case HUD_MODE_NAV: strcpy(txt, Game::GetText("HUDView.mode.navigation").data()); break;
-		case HUD_MODE_ILS: strcpy(txt, Game::GetText("HUDView.mode.landing").data());    break;
+		case HUD_MODE_TAC: strcpy_s(txt, Game::GetText("HUDView.mode.tactical").data());   break;
+		case HUD_MODE_NAV: strcpy_s(txt, Game::GetText("HUDView.mode.navigation").data()); break;
+		case HUD_MODE_ILS: strcpy_s(txt, Game::GetText("HUDView.mode.landing").data());    break;
 		}
 
 		if (tactical) {
@@ -1450,7 +1450,7 @@ HUDView::DrawBars()
 
 			if (quantum && quantum->JumpTime() > 0) {
 				static char buf[64];
-				sprintf(buf, "%s: %d", Game::GetText("HUDView.quantum-jump").data(), (int) quantum->JumpTime());
+				sprintf_s(buf, "%s: %d", Game::GetText("HUDView.quantum-jump").data(), (int) quantum->JumpTime());
 				threat_warn = buf;
 			}
 
@@ -1498,7 +1498,7 @@ HUDView::DrawBars()
 			if (missile && missile->Ammo() > 0 && !ship->IsNetObserver()) {
 				if (!arcade) {
 					speed_rect.y = cy-5 +30;
-					sprintf(txt, "%s %d", missile->Name(), missile->Ammo());
+					sprintf_s(txt, "%s %d", missile->Name(), missile->Ammo());
 					DrawHUDText(TXT_SECONDARY_WEP, txt, speed_rect, align);
 				}
 
@@ -1512,12 +1512,12 @@ HUDView::DrawBars()
 			if (!arcade && !ship->IsNetObserver()) {
 				if (ship->GetShield()) {
 					speed_rect.y = cy-5+40;
-					sprintf(txt, "%s - %03d +", Game::GetText("HUDView.SHIELD").data(), ship->ShieldStrength());
+					sprintf_s(txt, "%s - %03d +", Game::GetText("HUDView.SHIELD").data(), ship->ShieldStrength());
 					DrawHUDText(TXT_SHIELD, txt, speed_rect, align);
 				}
 				else if (ship->GetDecoy()) {
 					speed_rect.y = cy-5+40;
-					sprintf(txt, "%s %d", Game::GetText("HUDView.DECOY").data(), ship->GetDecoy()->Ammo());
+					sprintf_s(txt, "%s %d", Game::GetText("HUDView.DECOY").data(), ship->GetDecoy()->Ammo());
 					DrawHUDText(TXT_DECOY, txt, speed_rect, align);
 				}
 
@@ -1539,7 +1539,7 @@ HUDView::DrawBars()
 						int seconds = (eta   ) % 60;
 
 						char eta_buf[16];
-						sprintf(eta_buf, "T %d:%02d", minutes, seconds);
+						sprintf_s(eta_buf, "T %d:%02d", minutes, seconds);
 						DrawHUDText(TXT_MISSILE_T1+i, eta_buf, eta_rect, align);
 						eta_rect.y += 10;
 					}
@@ -2052,7 +2052,7 @@ HUDView::DrawTarget()
 			distance = contact->Range(ship, limit);
 
 			if (!contact->ActLock() && !contact->PasLock()) {
-				strcpy(txt, Game::GetText("HUDView.No-Range").data());
+				strcpy_s(txt, Game::GetText("HUDView.No-Range").data());
 				speed = 0;
 			}
 			else {
@@ -2097,12 +2097,12 @@ HUDView::DrawTarget()
 			if (mode != HUD_MODE_ILS) {
 				if (tgt_ship->IsStarship()) {
 					range_rect.y += 10;
-					sprintf(txt, "%s %03d", Game::GetText("HUDView.symbol.shield").data(), (int) tgt_ship->ShieldStrength());
+					sprintf_s(txt, "%s %03d", Game::GetText("HUDView.symbol.shield").data(), (int) tgt_ship->ShieldStrength());
 					DrawHUDText(TXT_TARGET_SHIELD, txt, range_rect, DT_RIGHT);
 				}
 
 				range_rect.y += 10;
-				sprintf(txt, "%s %03d", Game::GetText("HUDView.symbol.hull").data(), (int) (tgt_ship->Integrity() / tgt_ship->Design()->integrity * 100));
+				sprintf_s(txt, "%s %03d", Game::GetText("HUDView.symbol.hull").data(), (int) (tgt_ship->Integrity() / tgt_ship->Design()->integrity * 100));
 				DrawHUDText(TXT_TARGET_HULL, txt, range_rect, DT_RIGHT);
 
 				System* sys = ship->GetSubTarget();
@@ -2111,7 +2111,7 @@ HUDView::DrawTarget()
 					static DWORD   blink = Game::RealTime();
 
 					int blink_delta = Game::RealTime() - blink;
-					sprintf(txt, "%s %03d", sys->Abbreviation(), (int) sys->Availability());
+					sprintf_s(txt, "%s %03d", sys->Abbreviation(), (int) sys->Availability());
 
 					switch (sys->Status()) {
 					case System::DEGRADED:  stat = Color(255,255,  0);  break;
@@ -2146,7 +2146,7 @@ HUDView::DrawTarget()
 				int seconds = (eta   ) % 60;
 
 				char eta_buf[16];
-				sprintf(eta_buf, "T %d:%02d", minutes, seconds);
+				sprintf_s(eta_buf, "T %d:%02d", minutes, seconds);
 				DrawHUDText(TXT_TARGET_ETA, eta_buf, range_rect, DT_RIGHT);
 			}
 		}
@@ -2204,9 +2204,9 @@ HUDView::DrawNavInfo()
 		info_rect.x = width - info_rect.w - 8;
 
 		if (ship->IsAutoNavEngaged())
-		sprintf(txt, "%s %d", Game::GetText("HUDView.Auto-Nav").data(), index);
+		sprintf_s(txt, "%s %d", Game::GetText("HUDView.Auto-Nav").data(), index);
 		else
-		sprintf(txt, "%s %d", Game::GetText("HUDView.Nav").data(),      index);
+		sprintf_s(txt, "%s %d", Game::GetText("HUDView.Nav").data(),      index);
 		DrawHUDText(TXT_NAV_INDEX, txt, info_rect, DT_RIGHT);
 
 		info_rect.y += 10;
@@ -2219,7 +2219,7 @@ HUDView::DrawNavInfo()
 
 		if (etr > 3600) {
 			info_rect.y += 10;
-			sprintf(txt, "%s XX:XX", Game::GetText("HUDView.time-enroute").data());
+			sprintf_s(txt, "%s XX:XX", Game::GetText("HUDView.time-enroute").data());
 			DrawHUDText(TXT_NAV_ETR, txt, info_rect, DT_RIGHT);
 		}
 		else if (etr > 0) {
@@ -2227,7 +2227,7 @@ HUDView::DrawNavInfo()
 
 			int minutes = (etr/60) % 60;
 			int seconds = (etr   ) % 60;
-			sprintf(txt, "%s %2d:%02d", Game::GetText("HUDView.time-enroute").data(), minutes, seconds);
+			sprintf_s(txt, "%s %2d:%02d", Game::GetText("HUDView.time-enroute").data(), minutes, seconds);
 			DrawHUDText(TXT_NAV_ETR, txt, info_rect, DT_RIGHT);
 		}
 
@@ -2237,7 +2237,7 @@ HUDView::DrawNavInfo()
 			int hold    = (int) navpt->HoldTime();
 			int minutes = (hold/60) % 60;
 			int seconds = (hold   ) % 60;
-			sprintf(txt, "%s %2d:%02d", Game::GetText("HUDView.HOLD").data(), minutes, seconds);
+			sprintf_s(txt, "%s %2d:%02d", Game::GetText("HUDView.HOLD").data(), minutes, seconds);
 			DrawHUDText(TXT_NAV_HOLD, txt, info_rect, DT_RIGHT);
 		}
 	}
@@ -2785,7 +2785,7 @@ HUDView::DrawInstructions()
 		}
 
 		char page[32];
-		sprintf(page, "%d / %d", inst_page+1, npages);
+		sprintf_s(page, "%d / %d", inst_page+1, npages);
 		r = Rect(width/2 + 40, height-16, 110, 16);
 		DrawHUDText(TXT_INSTR_PAGE, page, r, DT_CENTER, HUD_MIXED_CASE);
 	}
@@ -2795,7 +2795,7 @@ HUDView::DrawInstructions()
 
 		for (int i = 0; i < nobj; i++) {
 			char desc[256];
-			sprintf(desc, "* %s", elem->GetObjective(i)->GetShortDescription());
+			sprintf_s(desc, "* %s", elem->GetObjective(i)->GetShortDescription());
 			hud_text[n].color = standard_txt_colors[color];
 			DrawHUDText(n++, desc, r, DT_LEFT, HUD_MIXED_CASE);
 			r.y += 14;
@@ -3143,10 +3143,10 @@ HUDView::DrawNavPoint(Instruction& navpt, int index, int next)
 				if (navpt.Status() == Instruction::COMPLETE && navpt.HoldTime() > 0) {
 					char hold_time[32];
 					FormatTime(hold_time, navpt.HoldTime());
-					sprintf(npt_buf, "%d %s", index, hold_time);
+					sprintf_s(npt_buf, "%d %s", index, hold_time);
 				}
 				else {
-					sprintf(npt_buf, "%d", index);
+					sprintf_s(npt_buf, "%d", index);
 				}
 
 				DrawHUDText(TXT_NAV_PT + index, npt_buf, npt_rect, DT_LEFT);

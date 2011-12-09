@@ -159,10 +159,10 @@ PlayerDlg::ShowPlayer()
 
 		char flight_time[64], missions[16], kills[16], losses[16], points[16];
 		FormatTime(flight_time, p->FlightTime());
-		sprintf(missions, "%d", p->Missions());
-		sprintf(kills,    "%d", p->Kills());
-		sprintf(losses,   "%d", p->Losses());
-		sprintf(points,   "%d", p->Points());
+		sprintf_s(missions, "%d", p->Missions());
+		sprintf_s(kills,    "%d", p->Kills());
+		sprintf_s(losses,   "%d", p->Losses());
+		sprintf_s(points,   "%d", p->Points());
 
 		if (lbl_createdate)  lbl_createdate->SetText(FormatTimeString(p->CreateDate()));
 		if (lbl_rank)        lbl_rank->SetText(Player::RankName(p->Rank()));
@@ -295,7 +295,7 @@ PlayerDlg::OnDel(AWEvent* event)
 	ConfirmDlg* confirm = manager->GetConfirmDlg();
 	if (confirm) {
 		char msg[256];
-		sprintf(msg, Game::GetText("PlayerDlg.are-you-sure").data(),
+		sprintf_s(msg, Game::GetText("PlayerDlg.are-you-sure").data(),
 		Player::GetCurrentPlayer()->Name().data());
 		confirm->SetMessage(msg);
 		confirm->SetTitle(Game::GetText("PlayerDlg.confirm-delete"));

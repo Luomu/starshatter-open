@@ -151,7 +151,7 @@ CmpSelectDlg::ExecFrame()
 					double t = campaign->GetLoadTime() - campaign->GetStartTime();
 					FormatDayTime(time_buf, t);
 
-					sprintf(score_buf, "%d", campaign->GetPlayerTeamScore());
+					sprintf_s(score_buf, "%d", campaign->GetPlayerTeamScore());
 
 					Text desc = Text("<font Limerick12><color ffffff>") + 
 					campaign->Name() + 
@@ -471,9 +471,9 @@ CmpSelectDlg::OnDelete(AWEvent* event)
 		ConfirmDlg* confirm = manager->GetConfirmDlg();
 		if (confirm) {
 			char msg[256];
-			sprintf(msg, Game::GetText("CmpSelectDlg.are-you-sure"), load_file.data());
-			confirm->SetMessage(msg);
-			confirm->SetTitle(Game::GetText("CmpSelectDlg.confirm"));
+			sprintf_s(msg, Game::GetText("CmpSelectDlg.are-you-sure"), load_file.data());
+				confirm->SetMessage(msg);
+				confirm->SetTitle(Game::GetText("CmpSelectDlg.confirm"));
 
 			manager->ShowConfirmDlg();
 		}

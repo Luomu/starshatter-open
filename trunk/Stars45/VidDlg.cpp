@@ -379,9 +379,9 @@ VidDlg::Apply()
 	FILE* f = 0;
 
 	if (video_change)
-	f = fopen("video2.cfg", "w");
+		fopen_s(&f, "video2.cfg", "w");
 	else
-	f = fopen("video.cfg", "w");
+		fopen_s(&f, "video.cfg", "w");
 
 	if (gamma) {
 		g = gamma->GetValue();
@@ -480,32 +480,32 @@ VidDlg::BuildModeList()
 
 	if (stars && video) {
 		switch (video->Width()) {
-		case  800:  strcpy(mode_desc, "800 x 600 x ");     break;
+		case  800:  strcpy_s(mode_desc, "800 x 600 x ");     break;
 		default:
-		case 1024:  strcpy(mode_desc, "1024 x 768 x ");    break;
-		case 1152:  strcpy(mode_desc, "1152 x 864 x ");    break;
+		case 1024:  strcpy_s(mode_desc, "1024 x 768 x ");    break;
+		case 1152:  strcpy_s(mode_desc, "1152 x 864 x ");    break;
 		case 1280:
 			if (video->Height() < 900)
-			strcpy(mode_desc, "1280 x 800 x ");
+			strcpy_s(mode_desc, "1280 x 800 x ");
 			if (video->Height() < 1000)
-			strcpy(mode_desc, "1280 x 960 x ");
+			strcpy_s(mode_desc, "1280 x 960 x ");
 			else
-			strcpy(mode_desc, "1280 x 1024 x ");
+			strcpy_s(mode_desc, "1280 x 1024 x ");
 			break;
-		case 1440:  strcpy(mode_desc, "1440 x 900 x ");    break;
+		case 1440:  strcpy_s(mode_desc, "1440 x 900 x ");    break;
 		case 1600:
 			if (video->Height() < 1000)
-			strcpy(mode_desc, "1600 x 900 x ");
+			strcpy_s(mode_desc, "1600 x 900 x ");
 			else
-			strcpy(mode_desc, "1600 x 1200 x ");
+			strcpy_s(mode_desc, "1600 x 1200 x ");
 			break;
 		}
 
 		switch (video->Depth()) {
 		default:
-		case 8:     strcat(mode_desc, "8");                break;
-		case 16:    strcat(mode_desc, "16");               break;
-		case 32:    strcat(mode_desc, "32");               break;
+		case 8:     strcat_s(mode_desc, "8");                break;
+		case 16:    strcat_s(mode_desc, "16");               break;
+		case 32:    strcat_s(mode_desc, "32");               break;
 		}
 
 		for (int i = 0; i < mode->GetCount(); i++) {
