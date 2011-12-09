@@ -34,7 +34,7 @@ Graphic::Graphic()
    screen_rect.h = 0;
 
    ZeroMemory(name, sizeof(name));
-   strcpy(name, "Graphic");
+   strcpy_s(name, "Graphic");
 }
 
 // +--------------------------------------------------------------------+

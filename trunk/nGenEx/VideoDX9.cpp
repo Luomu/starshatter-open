@@ -656,7 +656,8 @@ VideoDX9::CreateBuffers()
             magic_fx_code_len = loader->LoadBuffer("magic.fx", magic_fx_code, true, true);
          }
          else {
-            FILE* f = ::fopen("magic.fx", "rb");
+            FILE* f;
+			::fopen_s(&f, "magic.fx", "rb");
 
             if (f) {
                ::fseek(f, 0, SEEK_END);

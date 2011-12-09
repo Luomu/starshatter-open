@@ -91,7 +91,9 @@ DataLoader::EnableDatafile(const char* name)
 {
    int status = DATAFILE_NOTEXIST;
    
-   FILE* f = fopen(name, "rb");
+   FILE* f;
+   fopen_s(&f, name, "rb");
+
    if (f) {
       ::fclose(f);
 
@@ -162,12 +164,13 @@ DataLoader::FindFile(const char* name)
 {
    // assemble file name:
    char filename[1024];
-   strcpy(filename, datapath);
-   strcat(filename, name);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name);
 
    // first check current directory:
    if (use_file_system) {
-      FILE* f = ::fopen(filename, "rb");
+      FILE* f;
+	  ::fopen_s(&f, filename, "rb");
 
       if (f) {
          ::fclose(f);
@@ -217,7 +220,7 @@ DataLoader::ListArchiveFiles(const char* archive_name, const char* filter, List<
       for (int i = 0; i < narchives && !a; i++) {
          a = archives[narchives-1-i];
 
-         if (stricmp(a->Name(), archive_name))
+         if (_stricmp(a->Name(), archive_name))
             a = 0;
       }
    }
@@ -295,12 +298,12 @@ DataLoader::ListFileSystem(const char* filter, List<Text>& list, Text base_path,
 
       // assemble win32 find filter:
       char win32_filter[1024];
-      strcpy(win32_filter, datapath);
+      strcpy_s(win32_filter, datapath);
 
       if (recurse)
-         strcat(win32_filter, "*.*");
+         strcat_s(win32_filter, "*.*");
       else
-         strcat(win32_filter, filter);
+         strcat_s(win32_filter, filter);
 
       // first check current directory:
       WIN32_FIND_DATA data;
@@ -345,12 +348,13 @@ DataLoader::LoadBuffer(const char* name, BYTE*& buf, bool null_terminate, bool o
 
    // assemble file name:
    char filename[1024];
-   strcpy(filename, datapath);
-   strcat(filename, name);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name);
 
    if (use_file_system) {
       // first check current directory:
-      FILE* f = ::fopen(filename, "rb");
+      FILE* f;
+	  ::fopen_s(&f, filename, "rb");
 
       if (f) {
          ::fseek(f, 0, SEEK_END);
@@ -413,11 +417,12 @@ DataLoader::LoadPartialFile(const char* name, BYTE*& buf, int max_load, bool opt
 
    // assemble file name:
    char filename[1024];
-   strcpy(filename, datapath);
-   strcat(filename, name);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name);
 
    // first check current directory:
-   FILE* f = ::fopen(filename, "rb");
+   FILE* f; 
+   ::fopen_s(&f, filename, "rb");
 
    if (f) {
       ::fseek(f, 0, SEEK_END);
@@ -522,8 +527,8 @@ DataLoader::LoadTexture(const char* name, Bitmap*& bitmap, int type, bool preloa
 
    // assemble file name:
    char filename[256];
-   strcpy(filename, datapath);
-   strcat(filename, name);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name);
 
    // search cache:
    bitmap = Bitmap::CheckCache(filename);
@@ -575,8 +580,8 @@ DataLoader::LoadIndexed(const char* name, Bitmap& bitmap, int type)
 
    // assemble file name:
    char filename[256];
-   strcpy(filename, datapath);
-   strcat(filename, name);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name);
 
    // first try to load from current directory:
    bool loaded = false;
@@ -659,7 +664,7 @@ DataLoader::LoadHiColor(const char* name, Bitmap& bitmap, int type)
    // check for a matching high color bitmap:
    char filename[256];
    char name2[256];
-   strcpy(name2, name);
+   strcpy_s(name2, name);
 
    char* dot = strrchr(name2, '.');
    if (dot && pcx_file)
@@ -671,8 +676,8 @@ DataLoader::LoadHiColor(const char* name, Bitmap& bitmap, int type)
    else
       return result;
 
-   strcpy(filename, datapath);
-   strcat(filename, name2);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name2);
 
    // first try to load from current directory:
    bool loaded = false;
@@ -741,7 +746,7 @@ DataLoader::LoadAlpha(const char* name, Bitmap& bitmap, int type)
    // check for an associated alpha-only (grayscale) bitmap:
    char filename[256];
    char name2[256];
-   strcpy(name2, name);
+   strcpy_s(name2, name);
    char* dot = strrchr(name2, '.');
    if (dot && pcx_file)
       strcpy(dot, "@.pcx");
@@ -754,8 +759,8 @@ DataLoader::LoadAlpha(const char* name, Bitmap& bitmap, int type)
    else
       return 0;
 
-   strcpy(filename, datapath);
-   strcat(filename, name2);
+   strcpy_s(filename, datapath);
+   strcat_s(filename, name2);
 
    // first try to load from current directory:
    bool loaded = false;
@@ -987,8 +992,8 @@ DataLoader::LoadStream(const char* name, Sound*& snd, bool optional)
          if (snd) {
             // assemble file name:
             char filename[1024];
-            strcpy(filename, datapath);
-            strcat(filename, name);
+            strcpy_s(filename, datapath);
+            strcat_s(filename, name);
 
             snd->StreamFile(filename, p - buf);
 

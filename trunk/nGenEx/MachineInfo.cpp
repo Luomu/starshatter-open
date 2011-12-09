@@ -74,7 +74,7 @@ MachineInfo::GetShortDescription()
    if (os_index < 0)      os_index = 0;
    else if (os_index > 5) os_index = 5;
 
-   sprintf(desc, "%s %d MHz %d MB RAM %s",
+   sprintf_s(desc, "%s %d MHz %d MB RAM %s",
       cpu_names[cpu_index],
       GetCpuSpeed(),
       GetTotalRam(),
@@ -233,7 +233,7 @@ MachineInfo::GetPlatform()
       default:
       case VER_PLATFORM_WIN32s: {
          char msg[256];
-         sprintf(msg, "Invalid Operating System Platform: %d\n", os_ver.dwPlatformId);
+         sprintf_s(msg, "Invalid Operating System Platform: %d\n", os_ver.dwPlatformId);
          Print(msg);
          }
          break;
@@ -293,7 +293,7 @@ MachineInfo::DescribeMachine()
 
    switch (platform) {
    case OS_WIN95:
-      sprintf(txt, "Windows 95  version %d.%d.%d %s",
+      sprintf_s(txt, "Windows 95  version %d.%d.%d %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               LOWORD(os_ver.dwBuildNumber),
@@ -301,7 +301,7 @@ MachineInfo::DescribeMachine()
       break;
 
    case OS_WIN98:
-      sprintf(txt, "Windows 98  version %d.%d.%d %s",
+      sprintf_s(txt, "Windows 98  version %d.%d.%d %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               LOWORD(os_ver.dwBuildNumber),
@@ -309,7 +309,7 @@ MachineInfo::DescribeMachine()
       break;
 
    case OS_WINNT:
-      sprintf(txt, "Windows NT %d.%d (Build %d) %s",
+      sprintf_s(txt, "Windows NT %d.%d (Build %d) %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               os_ver.dwBuildNumber,
@@ -317,14 +317,14 @@ MachineInfo::DescribeMachine()
       break;
 
    case OS_WIN2K:
-      sprintf(txt, "Windows 2000 %d.%d (Build %d) %s",
+      sprintf_s(txt, "Windows 2000 %d.%d (Build %d) %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               os_ver.dwBuildNumber,
               os_ver.szCSDVersion);
 
    case OS_WINXP:
-      sprintf(txt, "Windows XP %d.%d (Build %d) %s",
+      sprintf_s(txt, "Windows XP %d.%d (Build %d) %s",
               os_ver.dwMajorVersion,
               os_ver.dwMinorVersion,
               os_ver.dwBuildNumber,
@@ -332,7 +332,7 @@ MachineInfo::DescribeMachine()
       break;
 
    default:
-      sprintf(txt, "Unknown Operating System Platform");
+      sprintf_s(txt, "Unknown Operating System Platform");
       break;
    }
 
@@ -344,7 +344,7 @@ MachineInfo::DescribeMachine()
    else
       DescribeOwnerNT();
 
-   sprintf(txt, "CPUs Detected: %d    CPU Level: %d.%d.%d    CPU Speed: %d",
+   sprintf_s(txt, "CPUs Detected: %d    CPU Level: %d.%d.%d    CPU Speed: %d",
            cpu_info.dwNumberOfProcessors,
            cpu_info.wProcessorLevel,
            cpu_info.wProcessorRevision >> 8,
@@ -359,7 +359,7 @@ MachineInfo::DescribeMachine()
    int swap_max   = (int) (mem_info.dwTotalPageFile/(1024*1024));
    int swap_avail = (int) (mem_info.dwAvailPageFile/(1024*1024));
 
-   sprintf(txt, "%d MB RAM    %d MB Max Swap    %d MB Avail Swap", 
+   sprintf_s(txt, "%d MB RAM    %d MB Max Swap    %d MB Avail Swap", 
       total_ram, swap_max, swap_avail);
 
 
@@ -482,7 +482,7 @@ static void DescribeOwner95()
 
    if (sRegisteredOwner[0]) {
       char  txt[256];
-      sprintf(txt, "Registered Owner: %s, %s", sRegisteredOwner, sRegisteredOrganization);
+      sprintf_s(txt, "Registered Owner: %s, %s", sRegisteredOwner, sRegisteredOrganization);
       Print("| %-66s |\n", txt);
       Print("|                                                                    |\n");
    }
@@ -525,7 +525,7 @@ static void DescribeOwnerNT()
 
    if (sRegisteredOwner[0]) {
       char  txt[256];
-      sprintf(txt, "Registered Owner: %s, %s", sRegisteredOwner, sRegisteredOrganization);
+      sprintf_s(txt, "Registered Owner: %s, %s", sRegisteredOwner, sRegisteredOrganization);
       Print("| %-66s |\n", txt);
       Print("|                                                                    |\n");
    }
@@ -548,8 +548,8 @@ static void DescribeDrivers95(const char* sType)
    do {
       worked = 0;
 
-      sprintf(sKey, "System\\CurrentControlSet\\Services\\Class\\%s\\%04X", sType, nKey);
-      sprintf(sSub, "System\\CurrentControlSet\\Services\\Class\\%s\\%04X\\DEFAULT", sType, nKey);
+      sprintf_s(sKey, "System\\CurrentControlSet\\Services\\Class\\%s\\%04X", sType, nKey);
+      sprintf_s(sSub, "System\\CurrentControlSet\\Services\\Class\\%s\\%04X\\DEFAULT", sType, nKey);
 
       if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                        sKey,
@@ -566,7 +566,7 @@ static void DescribeDrivers95(const char* sType)
                          &dwSize);
 
          if (sDriver[0]) {
-            sprintf(txt, "*  %s", sDriver);
+            sprintf_s(txt, "*  %s", sDriver);
             Print("| %-66s |\n", txt);
             worked = 1;
          }
@@ -650,7 +650,7 @@ static void DescribeDriversNT(const char* sType)
       const char* sLeader = "\\REGISTRY\\Machine\\";
       int         nLeader = strlen(sLeader);
 
-      if (strnicmp(sVideo, sLeader, nLeader) == 0) {
+      if (_strnicmp(sVideo, sLeader, nLeader) == 0) {
          if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                           sVideo + nLeader,
                           0,
@@ -689,7 +689,7 @@ static void GetTranslation(const LPBYTE pBlock)
                      (LPVOID*) &sData, &lenData)) {
 
       if (lenData && sData) {
-         sprintf(sTranslation, "%02X%02X%02X%02X", sData[1], sData[0], sData[3], sData[2]);
+         sprintf_s(sTranslation, "%02X%02X%02X%02X", sData[1], sData[0], sData[3], sData[2]);
       }
    }
 }
@@ -699,7 +699,7 @@ void DisplayVersionString(const LPBYTE pBlock, LPTSTR sSection)
    char     txt[256];
    char     sFullSection[256];
 
-   sprintf(sFullSection, "\\StringFileInfo\\%s\\%s", sTranslation, sSection);
+   sprintf_s(sFullSection, "\\StringFileInfo\\%s\\%s", sTranslation, sSection);
 
    LPBYTE  sData = NULL;
    UINT    lenData = 0;
@@ -707,7 +707,7 @@ void DisplayVersionString(const LPBYTE pBlock, LPTSTR sSection)
 
    if (VerQueryValue(pBlock, sFullSection, (LPVOID*) &sData, &lenData)) {
       if (lenData && sData) {
-         sprintf(txt, "%-16s %s", sSection, sData);
+         sprintf_s(txt, "%-16s %s", sSection, sData);
          Print("|       %-60s |\n", txt);
       }
    }
@@ -718,14 +718,14 @@ static void DescribeDriverVersion(const char* file)
    DWORD dwHandle = 0;
    TCHAR szFile[512];
 
-   strcpy(szFile, file);
+   strcpy_s(szFile, file);
 
    int nBytes = GetFileVersionInfoSize(szFile, &dwHandle);
 
    if (nBytes <= 0) {
       char  szWinDir[256];
       GetSystemDirectory(szWinDir, 256);
-      sprintf(szFile, "%s\\%s", szWinDir, file);
+      sprintf_s(szFile, "%s\\%s", szWinDir, file);
 
       nBytes = GetFileVersionInfoSize(szFile, &dwHandle);
 
@@ -762,7 +762,7 @@ static void DescribeDXVersion(const char* component)
 
    GetSystemDirectory(szWinDir, 512);
 
-   sprintf(szFile, "%s\\%s.dll", szWinDir, component);
+   sprintf_s(szFile, "%s\\%s.dll", szWinDir, component);
 
    int nBytes = GetFileVersionInfoSize(szFile, &dwHandle);
 
@@ -781,11 +781,11 @@ static void DescribeDXVersion(const char* component)
       UINT     lenData = 0;
       DWORD    dwErr = 0;
 
-      sprintf(sFullSection, "\\StringFileInfo\\%s\\FileVersion", sTranslation);
+      sprintf_s(sFullSection, "\\StringFileInfo\\%s\\FileVersion", sTranslation);
 
       if (VerQueryValue(pBlock, sFullSection, (LPVOID*) &sData, &lenData)) {
          if (lenData && sData) {
-            sprintf(txt, "%-8s%s", component, sData);
+            sprintf_s(txt, "%-8s%s", component, sData);
             Print("|   %-64s |\n", txt);
          }
       }

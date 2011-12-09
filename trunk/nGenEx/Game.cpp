@@ -790,7 +790,7 @@ Game::LoadPalette(PALETTEENTRY* pal, BYTE* inv)
    DataLoader* loader = DataLoader::GetLoader();
    BYTE* block;
    char fname[256];
-   sprintf(fname, "%s.pal", palette_name);
+   sprintf_s(fname, "%s.pal", palette_name);
    
    if (!loader->LoadBuffer(fname, block)) {
       Print("  Could not open file '%s'\n", fname);
@@ -806,7 +806,7 @@ Game::LoadPalette(PALETTEENTRY* pal, BYTE* inv)
    
    loader->ReleaseBuffer(block);
    
-   sprintf(fname, "%s.ipl", palette_name);
+   sprintf_s(fname, "%s.ipl", palette_name);
    int size = loader->LoadBuffer(fname, block);
    if (size < 32768) {
       Print("  Could not open file '%s'\n", fname);
@@ -866,7 +866,7 @@ Game::Panic(const char* msg)
    else     Print("*** PANIC! ***\n");
    
    if (!msg) msg = "Unspecified fatal error.";
-   sprintf(panicbuf, "%s\nThis game will now terminate.", msg);
+   sprintf_s(panicbuf, "%s\nThis game will now terminate.", msg);
 
    if (game) {
       game->status = PANIC;
@@ -1116,7 +1116,7 @@ Game::ScreenCapture(const char* name)
          Text* s = shot_list[i];
          int   n = 0;
 
-         sscanf(s->data()+1, "%d", &n);
+         sscanf_s(s->data()+1, "%d", &n);
          if (shot_num <= (DWORD) n)
             shot_num = n+1;
       }
@@ -1125,9 +1125,9 @@ Game::ScreenCapture(const char* name)
    }
 
    if (name)
-      strcpy(filename, name);
+      strcpy_s(filename, name);
    else
-      sprintf(filename, "A%d.PCX", shot_num++);
+      sprintf_s(filename, "A%d.PCX", shot_num++);
 
    Bitmap bmp;
 
@@ -1165,7 +1165,7 @@ Game::AVICapture(const char* name)
             Text* s = avi_list[i];
             int   n = 0;
 
-            sscanf(s->data()+1, "%d", &n);
+            sscanf_s(s->data()+1, "%d", &n);
             if (avi_num <= (DWORD) n)
                avi_num = n+1;
          }
@@ -1174,9 +1174,9 @@ Game::AVICapture(const char* name)
       }
 
       if (name)
-         strcpy(filename, name);
+         strcpy_s(filename, name);
       else
-         sprintf(filename, "A%d.avi", avi_num);
+         sprintf_s(filename, "A%d.avi", avi_num);
 
       if (video && video->Capture(bmp)) {
          //bmp.ScaleTo(bmp.Width()/2, bmp.Height()/2);
@@ -1517,7 +1517,7 @@ GetKeyPlus(int& key, int& shift)
 void Print(const char* fmt, ...)
 {
    if (ErrLog) {
-      vsprintf(ErrBuf, fmt, (char *)(&fmt+1));
+      vsprintf_s(ErrBuf, fmt, (char *)(&fmt+1));
 
       fprintf(ErrLog, ErrBuf);
       fflush(ErrLog);

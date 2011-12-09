@@ -565,11 +565,11 @@ static char path_name[64];
 void
 FormDef::Load(const char* fname)
 {
-   sprintf(filename, "%s.frm", fname);
+   sprintf_s(filename, "%s.frm", fname);
 
    Print("Loading Form '%s'\n", fname);
 
-   sprintf(path_name, "Screens/");
+   sprintf_s(path_name, "Screens/");
 
    // Load Design File:
    DataLoader* loader = DataLoader::GetLoader();
@@ -686,7 +686,7 @@ FormDef::Load(const char* fname)
                            GetDefText(buf, pdef, filename);
 
                            if (*buf && !strchr(buf, '.'))
-                              strcat(buf, ".pcx");
+                              strcat_s(buf, ".pcx");
 
                            form->SetTexture(buf);
                         }
@@ -708,11 +708,11 @@ FormDef::Load(const char* fname)
                            DWORD a = DT_LEFT;
 
                            if (GetDefText(buf, pdef, filename)) {
-                              if (!stricmp(buf, "left"))
+                              if (!_stricmp(buf, "left"))
                                  a = DT_LEFT;
-                              else if (!stricmp(buf, "right"))
+                              else if (!_stricmp(buf, "right"))
                                  a = DT_RIGHT;
-                              else if (!stricmp(buf, "center"))
+                              else if (!_stricmp(buf, "center"))
                                  a = DT_CENTER;
                            }
                            
@@ -1052,11 +1052,11 @@ void FormDef::ParseCtrlDef(CtrlDef* ctrl, TermStruct* val)
             DWORD a = DT_LEFT;
 
             if (GetDefText(buf, pdef, filename)) {
-               if (!stricmp(buf, "left"))
+               if (!_stricmp(buf, "left"))
                   a = DT_LEFT;
-               else if (!stricmp(buf, "right"))
+               else if (!_stricmp(buf, "right"))
                   a = DT_RIGHT;
-               else if (!stricmp(buf, "center"))
+               else if (!_stricmp(buf, "center"))
                   a = DT_CENTER;
             }
          
@@ -1194,11 +1194,11 @@ void FormDef::ParseColumnDef(CtrlDef* ctrl, TermStruct* val)
             align = DT_LEFT;
 
             if (GetDefText(buf, pdef, filename)) {
-               if (!stricmp(buf, "left"))
+               if (!_stricmp(buf, "left"))
                   align = DT_LEFT;
-               else if (!stricmp(buf, "right"))
+               else if (!_stricmp(buf, "right"))
                   align = DT_RIGHT;
-               else if (!stricmp(buf, "center"))
+               else if (!_stricmp(buf, "center"))
                   align = DT_CENTER;
             }
             

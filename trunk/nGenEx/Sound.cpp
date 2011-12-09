@@ -59,7 +59,8 @@ Sound::CreateStream(const char* filename)
    LPBYTE         p     = 0;
    int            len   = 0;
 
-   FILE* f = ::fopen(filename, "rb");
+   FILE* f;
+   ::fopen_s(&f, filename, "rb");
 
    if (f) {
       fseek(f, 0, SEEK_END);
@@ -157,7 +158,8 @@ Sound::CreateOggStream(const char* filename)
    WAVEFORMATEX wfex;
    ZeroMemory(&wfex, sizeof(wfex));
 
-   FILE* f = ::fopen(filename, "rb");
+   FILE* f;
+   ::fopen_s(&f, filename, "rb");
 
    if (f) {
       OggVorbis_File* povf = new(__FILE__,__LINE__) OggVorbis_File;

@@ -39,7 +39,7 @@ EditBox::EditBox(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
    selected_color    = Color::Yellow;
 
    char buf[32];
-   sprintf(buf, "EditBox %d", id);
+   sprintf_s(buf, "EditBox %d", id);
    desc = buf;
 }
 
@@ -54,7 +54,7 @@ EditBox::EditBox(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
    selected_color    = Color::Yellow;
 
    char buf[32];
-   sprintf(buf, "EditBox %d", id);
+   sprintf_s(buf, "EditBox %d", id);
    desc = buf;
 }
 

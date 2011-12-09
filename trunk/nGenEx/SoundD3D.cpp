@@ -835,8 +835,10 @@ SoundD3D::StreamFile(const char* name, DWORD offset)
    min_safety     = safety_zone;
    read_size      = buf_size;
 
+   fopen_s(&stream, name, "rb");
+
    // open the stream:
-   if ((stream = fopen(name, "rb")) == 0) {
+   if (stream == 0) {
       SoundD3DError("StreamFile: could not open stream", E_FAIL);
       return E_FAIL;
    }

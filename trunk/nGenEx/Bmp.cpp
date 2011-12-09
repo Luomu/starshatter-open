@@ -69,7 +69,7 @@ int BmpImage::Load(char *filename)
    int   status = BMP_INVALID;
    FILE* f;
 
-   f = fopen(filename,"rb");
+   fopen_s(&f, filename,"rb");
    if (f == NULL)
       return BMP_NOFILE;
 
@@ -214,7 +214,7 @@ int BmpImage::Save(char *filename)
    int   status = BMP_INVALID;
    FILE* f;
 
-   f = fopen(filename,"wb");
+   fopen_s(&f, filename,"wb");
    if (f == NULL)
       return BMP_NOFILE;
 

@@ -71,7 +71,7 @@ Bolt::Bolt(double len, double wid, Bitmap* tex, int share)
    radius = (float) ((length>width) ? (length) : (width*2));
 
    if (texture) {
-      strncpy(name, texture->GetFilename(), 31);
+      strncpy_s(name, texture->GetFilename(), 31);
       name[31] = 0;
    }
 }

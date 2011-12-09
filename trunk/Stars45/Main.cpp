@@ -41,7 +41,7 @@ int          dump_missions = 0;
 #ifdef STARSHATTER_DEMO_RELEASE
 const char*  versionInfo = "5.0 DEMO";
 #else
-const char*  versionInfo = "5.0.4";
+const char*  versionInfo = "5.0.5";
 #endif
 
 static void PrintLogHeader()

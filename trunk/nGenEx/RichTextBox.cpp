@@ -31,7 +31,7 @@ RichTextBox::RichTextBox(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD 
    leading           = 2;
 
    char buf[32];
-   sprintf(buf, "RichTextBox %d", id);
+   sprintf_s(buf, "RichTextBox %d", id);
    desc = buf;
 }
 

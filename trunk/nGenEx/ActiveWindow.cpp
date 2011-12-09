@@ -61,7 +61,7 @@ ActiveWindow::ActiveWindow(Screen* screen, int ax, int ay, int aw, int ah,
    Show();
 
    char buf[32];
-   sprintf(buf, "ActiveWindow %d", id);
+   sprintf_s(buf, "ActiveWindow %d", id);
    desc = buf;
 }
 
