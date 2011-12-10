@@ -647,28 +647,26 @@ VideoDX9::CreateBuffers()
 		hr = d3ddevice->CreateVertexDeclaration(videoDX9NormalVertexElements,
 		&vertex_declaration);
 
-		if (video_settings.use_effects && !magic_fx_code) {
-			if (loader) {
+		// The E - We want to load our shader from the standard filesystem by default, to allow for better modding.
+		if (video_settings.use_effects && !magic_fx_code)  {
+			FILE* f;
+			::fopen_s(&f, "magic.fx", "rb");
+
+			if (f) {
+				::fseek(f, 0, SEEK_END);
+				magic_fx_code_len = ftell(f);
+				::fseek(f, 0, SEEK_SET);
+
+				magic_fx_code = new(__FILE__,__LINE__) BYTE[magic_fx_code_len+1];
+				if (magic_fx_code) {
+					::fread(magic_fx_code, magic_fx_code_len, 1, f);
+					magic_fx_code[magic_fx_code_len] = 0;
+				}
+			} else if (loader) {
 				magic_fx_code_len = loader->LoadBuffer("magic.fx", magic_fx_code, true, true);
 			}
-			else {
-				FILE* f;
-				::fopen_s(&f, "magic.fx", "rb");
 
-				if (f) {
-					::fseek(f, 0, SEEK_END);
-					magic_fx_code_len = ftell(f);
-					::fseek(f, 0, SEEK_SET);
-
-					magic_fx_code = new(__FILE__,__LINE__) BYTE[magic_fx_code_len+1];
-					if (magic_fx_code) {
-						::fread(magic_fx_code, magic_fx_code_len, 1, f);
-						magic_fx_code[magic_fx_code_len] = 0;
-					}
-
-					::fclose(f);
-				}
-			}
+			::fclose(f);
 		}
 
 		if (video_settings.use_effects && magic_fx_code && magic_fx_code_len) {
