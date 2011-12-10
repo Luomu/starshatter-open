@@ -591,7 +591,7 @@ KeyMap::LoadKeyMap(const char* filename, int max_keys)
 		ZeroMemory(alt_str, sizeof(alt_str));
 		ZeroMemory(joy_str, sizeof(joy_str));
 
-		sscanf_s(line, "%s %s %s %s", act_str, key_str, alt_str, joy_str);
+		sscanf(line, "%s %s %s %s", act_str, key_str, alt_str, joy_str);
 
 		act = GetKeyAction(act_str);
 		key = GetKeyKey(key_str);
