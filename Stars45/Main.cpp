@@ -64,9 +64,9 @@ LPSTR lpCmdLine, int nCmdShow)
 	int   do_server = 0;
 
 	if (strstr(lpCmdLine, "-server"))
-	ErrLog = fopen("serverlog.txt", "w");
+		ErrLog = fopen("serverlog.txt", "w");
 	else
-	ErrLog = fopen("errlog.txt", "w");
+		ErrLog = fopen("errlog.txt", "w");
 
 	PrintLogHeader();
 

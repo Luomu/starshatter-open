@@ -377,12 +377,6 @@ Starshatter::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
 		if (video_settings) {
 			video_settings->is_windowed   = true;
 
-			/***
-		// XXX temporary for video capture
-		video_settings->window_width  = 720; //800;
-		video_settings->window_height = 386; //431; // 450 - 19
-		/***/
-
 			Print("   STARSHATTER RUNNING IN WINDOW MODE\n");
 		}
 	}

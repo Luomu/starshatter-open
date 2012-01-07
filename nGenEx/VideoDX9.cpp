@@ -2233,23 +2233,16 @@ VideoDX9::DrawSegment(Segment* segment)
 					hr = d3ddevice->SetFVF(VideoDX9SolidVertex::FVF);
 				}
 
-				bool would_bump = !IsBumpMapEnabled()        &&
-				mtl->bump > 0.5;
+				bool would_bump = !IsBumpMapEnabled() && mtl->bump > 0.5;
 
-				bool will_bump  = IsBumpMapEnabled()         &&
-				surface_has_tangent_data   &&
-				shaders_ok                 &&
-				camera;
+				bool will_bump  = IsBumpMapEnabled() &&	surface_has_tangent_data &&	shaders_ok && camera;
 
 				bool do_pix     = will_bump && render_state[LIGHTING_PASS] == 0;
 				bool do_bump    = will_bump && render_state[LIGHTING_PASS] >  0;
 
 				D3DXMATRIX matrixWVP = matrixWorld * matrixView * matrixProj;
 
-				D3DXVECTOR4 eyePos(  (float) camera->Pos().x,
-				(float) camera->Pos().y,
-				(float) camera->Pos().z,
-				1.0f);
+				D3DXVECTOR4 eyePos( (float) camera->Pos().x, (float) camera->Pos().y, (float) camera->Pos().z,	1.0f);
 
 				D3DXVECTOR4 eyeObj;
 				D3DXVec4Transform(&eyeObj, &eyePos, &matrixWorldInverse);
@@ -2268,7 +2261,7 @@ VideoDX9::DrawSegment(Segment* segment)
 					lightPos.z = (float) main_light->Location().z;
 
 					if (mtl->tex_bumpmap && do_bump)
-					D3DXVec4Transform(&lightPos, &lightPos, &matrixWorldInverse);
+						D3DXVec4Transform(&lightPos, &lightPos, &matrixWorldInverse);
 
 					lightColor.x = main_light->GetColor().fRed()   * main_light->Intensity();
 					lightColor.y = main_light->GetColor().fGreen() * main_light->Intensity();
@@ -2303,12 +2296,12 @@ VideoDX9::DrawSegment(Segment* segment)
 				magic_fx->SetVector("eyeObj",       &eyeObj);
 
 				FLOAT base_bias = (FLOAT) (DW2I(render_state[Z_BIAS]) / -10000.0);
-				magic_fx->SetFloat("bias",          base_bias + video_settings.depth_bias);
+				magic_fx->SetFloat("bias", base_bias + video_settings.depth_bias);
 
 				ColorValue orig_ks = mtl->Ks;
 
 				if (would_bump && mtl->specular_value >= 0.5)
-				mtl->Ks = mtl->Ks * 0.3;
+					mtl->Ks = mtl->Ks * 0.3;
 
 				magic_fx->SetValue("Ka", &mtl->Ka, sizeof(ColorValue));
 				magic_fx->SetValue("Kd", &mtl->Kd, sizeof(ColorValue));
@@ -2317,29 +2310,26 @@ VideoDX9::DrawSegment(Segment* segment)
 				magic_fx->SetFloat("Ns", mtl->power);
 
 				if (would_bump && mtl->specular_value >= 0.5)
-				mtl->Ks = orig_ks;
+					mtl->Ks = orig_ks;
 
 				if (mtl->tex_diffuse) {
 					IDirect3DTexture9* texture = texcache->FindTexture(mtl->tex_diffuse);
 					magic_fx->SetTexture("tex_d", texture);
-				}
-				else {
+				} else {
 					magic_fx->SetTexture("tex_d", 0);
 				}
 
 				if (mtl->tex_emissive) {
 					IDirect3DTexture9* texture = texcache->FindTexture(mtl->tex_emissive);
 					magic_fx->SetTexture("tex_e", texture);
-				}
-				else {
+				} else {
 					magic_fx->SetTexture("tex_e", 0);
 				}
 
 				if (mtl->tex_specular && IsSpecMapEnabled()) {
 					IDirect3DTexture9* texture = texcache->FindTexture(mtl->tex_specular);
 					magic_fx->SetTexture("tex_s", texture);
-				}
-				else {
+				} else {
 					magic_fx->SetTexture("tex_s", 0);
 				}
 
@@ -2347,13 +2337,10 @@ VideoDX9::DrawSegment(Segment* segment)
 					IDirect3DTexture9* texture = texcache->FindNormalMap(mtl->tex_bumpmap, mtl->bump);
 					magic_fx->SetTexture("tex_n", texture);
 					magic_fx->SetFloat("offsetAmp", mtl->bump / mtl->tex_bumpmap->Height());
-				}
-
-				else if (mtl->tex_bumpmap && !do_bump) {
+				} else if (mtl->tex_bumpmap && !do_bump) {
 					IDirect3DTexture9* texture = texcache->FindTexture(mtl->tex_bumpmap);
 					magic_fx->SetTexture("tex_x", texture);
-				}
-				else {
+				} else {
 					magic_fx->SetTexture("tex_x", 0);
 				}
 
@@ -2362,55 +2349,48 @@ VideoDX9::DrawSegment(Segment* segment)
 
 				if (mtl_shader) {
 					if (!strcmp(mtl_shader, "null"))
-					return true;
+						return true;
 
 					hnd_shader = magic_fx->GetTechniqueByName(mtl_shader);
 				}
 
 				if (hnd_shader) {
 					hr = magic_fx->SetTechnique(hnd_shader);
-				}
-				else {
+				} else {
 					if (will_bump) {
 						if (mtl->tex_specular && IsSpecMapEnabled()) {
 							if (mtl->tex_bumpmap && do_bump) {
 								if (ps_version >= D3DPS_VERSION(2,0))
-								hr = magic_fx->SetTechnique("BumpSpecMapPix");
+									hr = magic_fx->SetTechnique("BumpSpecMapPix");
 								else
-								hr = magic_fx->SetTechnique("BumpSpecMap");
-							}
-							else if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
+									hr = magic_fx->SetTechnique("BumpSpecMap");
+							} else if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
 								if (ps_version >= D3DPS_VERSION(2,0))
-								hr = magic_fx->SetTechnique("EmissiveSpecMapPix");
+									hr = magic_fx->SetTechnique("EmissiveSpecMapPix");
 								else
-								hr = magic_fx->SetTechnique("EmissiveSpecularTexture");
-							}
-							else {
+									hr = magic_fx->SetTechnique("EmissiveSpecularTexture");
+							} else {
 								if (ps_version >= D3DPS_VERSION(2,0))
 								hr = magic_fx->SetTechnique("SpecMapPix");
 								else
 								hr = magic_fx->SetTechnique("SpecularTexture");
 							}
-						}
-
-						else {
+						} else {
 							if (mtl->tex_bumpmap && do_bump) {
 								if (ps_version >= D3DPS_VERSION(2,0))
-								hr = magic_fx->SetTechnique("BumpMapPix");
+									hr = magic_fx->SetTechnique("BumpMapPix");
 								else
-								hr = magic_fx->SetTechnique("BumpMap");
-							}
-							else if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
+									hr = magic_fx->SetTechnique("BumpMap");
+							} else if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
 								if (ps_version >= D3DPS_VERSION(2,0))
-								hr = magic_fx->SetTechnique("EmissivePix");
+									hr = magic_fx->SetTechnique("EmissivePix");
 								else
-								hr = magic_fx->SetTechnique("EmissiveTexture");
-							}
-							else {
+									hr = magic_fx->SetTechnique("EmissiveTexture");
+							} else {
 								if (ps_version >= D3DPS_VERSION(2,0))
-								hr = magic_fx->SetTechnique("SimplePix");
+									hr = magic_fx->SetTechnique("SimplePix");
 								else
-								hr = magic_fx->SetTechnique("SimpleTexture");
+									hr = magic_fx->SetTechnique("SimpleTexture");
 							}
 						}
 					}
@@ -2419,8 +2399,7 @@ VideoDX9::DrawSegment(Segment* segment)
 						if (mtl->tex_specular && IsSpecMapEnabled()) {
 							if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
 								hr = magic_fx->SetTechnique("EmissiveSpecularTexture");
-							}
-							else {
+							} else {
 								hr = magic_fx->SetTechnique("SpecularTexture");
 							}
 						}
@@ -2428,30 +2407,19 @@ VideoDX9::DrawSegment(Segment* segment)
 						else {
 							if (mtl->tex_emissive && render_state[LIGHTING_PASS] == 0) {
 								hr = magic_fx->SetTechnique("EmissiveTexture");
-							}
-							else {
+							} else {
 								hr = magic_fx->SetTechnique("SimpleTexture");
 							}
 						}
-					}
-
-					else {
+					} else {
 						hr = magic_fx->SetTechnique("SimpleMaterial");
 					}
 				}
 
 				if (environment_cube != 0 && magic_fx->IsParameterUsed("env_cube", hnd_shader)) {
-					/*
-			D3DXMATRIX matP;
-			D3DXMatrixInverse(&matP, NULL, &matrixView);
-			matP._41 = matP._42 = matP._43 = 0.0f;
-			*/
-
 					D3DXMATRIX env_matrix;
 					D3DXMatrixIdentity(&env_matrix);
-					//D3DXMatrixScaling(&env_matrix, 1.0f, 1.0f, -1.0f);
 
-					//D3DXMatrixMultiply(&env_matrix, &matP, &env_matrix);
 					magic_fx->SetMatrix("env_matrix", &env_matrix);
 					magic_fx->SetTexture("env_cube", environment_cube->GetTexture());
 				}
@@ -2460,8 +2428,7 @@ VideoDX9::DrawSegment(Segment* segment)
 					d3ddevice->SetRenderState(D3DRS_STENCILENABLE,  TRUE);
 					d3ddevice->SetRenderState(D3DRS_STENCILREF,     0x01);
 					d3ddevice->SetRenderState(D3DRS_STENCILFUNC,    D3DCMP_GREATER);
-				}
-				else {
+				} else {
 					d3ddevice->SetRenderState(D3DRS_STENCILENABLE,  FALSE);
 				}
 
@@ -2469,8 +2436,7 @@ VideoDX9::DrawSegment(Segment* segment)
 					current_blend_state = 100;
 					SetBlendType(BLEND_ADDITIVE);
 					SetRenderState(Z_WRITE_ENABLE, FALSE);
-				}
-				else {
+				} else {
 					current_blend_state = 100;
 					SetBlendType(mtl->blend);
 				}
@@ -2494,9 +2460,7 @@ VideoDX9::DrawSegment(Segment* segment)
 				}
 
 				hr = magic_fx->End();
-			}
-
-			else {
+			} else {
 				for (int pass = 0; pass < passes; pass++) {
 					SetupPass(pass);
 
@@ -2511,19 +2475,13 @@ VideoDX9::DrawSegment(Segment* segment)
 					if (detail) {
 						hr = d3ddevice->SetVertexShader(NULL);
 						hr = d3ddevice->SetFVF(VideoDX9DetailVertex::FVF);
-					}
-
-					else if (luminous) {
+					} else if (luminous) {
 						hr = d3ddevice->SetVertexShader(NULL);
 						hr = d3ddevice->SetFVF(VideoDX9LuminousVertex::FVF);
-					}
-
-					else if (surface_has_tangent_data && vertex_declaration) {
+					} else if (surface_has_tangent_data && vertex_declaration) {
 						hr = d3ddevice->SetVertexShader(NULL);
 						hr = d3ddevice->SetVertexDeclaration(vertex_declaration);
-					}
-
-					else {
+					} else {
 						hr = d3ddevice->SetVertexShader(NULL);
 						hr = d3ddevice->SetFVF(VideoDX9SolidVertex::FVF);
 					}
@@ -2534,9 +2492,8 @@ VideoDX9::DrawSegment(Segment* segment)
 		if (FAILED(hr)) {
 			static int report = 10;
 			if (report-- > 0)
-			VideoDX9Error("Could not draw solid polys.", hr);
-		}
-		else {
+				VideoDX9Error("Could not draw solid polys.", hr);
+		} else {
 			stats.nverts += num_verts;
 			stats.npolys += num_tris;
 			result = true;
