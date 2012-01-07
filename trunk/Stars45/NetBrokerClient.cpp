@@ -26,7 +26,7 @@ extern const char* versionInfo;
 const char* HOSTNAME = "www.starshatter.com";
 const WORD  HTTPPORT = 80;
 
-bool NetBrokerClient::broker_available = true;
+bool NetBrokerClient::broker_available = false;
 bool NetBrokerClient::broker_found     = false;
 
 // +--------------------------------------------------------------------+
