@@ -48,7 +48,7 @@ protected:  // control bar embedded members
 protected:
 	//{{AFX_MSG(MainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnActivateApp(BOOL bActive, HTASK hTask);
+	afx_msg void OnActivateApp(BOOL bActive, DWORD dwThreadID);
 	afx_msg void OnRender();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

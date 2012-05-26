@@ -13,7 +13,7 @@
 */
 
 #include "MemDebug.h"
-#include "Locale.h"
+#include "Locale_ss.h"
 
 void  Print(const char* fmt, ...);
 
