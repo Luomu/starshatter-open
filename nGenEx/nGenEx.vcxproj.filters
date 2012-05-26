@@ -119,9 +119,6 @@
     <ClCompile Include="ListBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Locale.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MachineInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -257,6 +254,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Locale_ss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActiveWindow.h">
@@ -377,9 +377,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ListBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Locale.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MachineInfo.h">
@@ -536,6 +533,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Locale_ss.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

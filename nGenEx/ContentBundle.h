@@ -18,7 +18,7 @@
 #include "Types.h"
 #include "Dictionary.h"
 #include "Text.h"
-#include "Locale.h"
+#include "Locale_ss.h"
 
 // +--------------------------------------------------------------------+
 

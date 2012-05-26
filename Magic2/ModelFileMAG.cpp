@@ -78,7 +78,7 @@ ModelFileMAG::Load(Model* m, double scale)
       }
 
       ZeroMemory(pname, 64);
-      strncpy_s(pname, filename, 63);
+      strncpy(pname, filename, 63);
 
       char file_id[5];
       fread(file_id, 4, 1, fp);

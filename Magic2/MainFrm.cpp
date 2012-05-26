@@ -139,7 +139,7 @@ void MainFrame::Dump(CDumpContext& dc) const
 // MainFrame message handlers
 
 
-void MainFrame::OnActivateApp(BOOL bActive, HTASK hTask) 
+void MainFrame::OnActivateApp(BOOL bActive, DWORD dwThreadID) 
 {
     ((Magic*)AfxGetApp())->SetAppActivated(bActive ? true : false);
 }

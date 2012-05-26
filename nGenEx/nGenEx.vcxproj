@@ -373,7 +373,7 @@
     <ClCompile Include="Layout.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="ListBox.cpp" />
-    <ClCompile Include="Locale.cpp" />
+    <ClCompile Include="Locale_ss.cpp" />
     <ClCompile Include="MachineInfo.cpp" />
     <ClCompile Include="MCIWave.cpp" />
     <ClCompile Include="..\FoundationEx\MemDebug.cpp" />
@@ -461,7 +461,7 @@
     <ClInclude Include="Layout.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ListBox.h" />
-    <ClInclude Include="Locale.h" />
+    <ClInclude Include="Locale_ss.h" />
     <ClInclude Include="MachineInfo.h" />
     <ClInclude Include="MCIWave.h" />
     <ClInclude Include="..\FoundationEx\MemDebug.h" />
