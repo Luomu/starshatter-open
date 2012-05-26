@@ -394,6 +394,7 @@
     <ClCompile Include="..\nGenEx\D3DXImage.cpp" />
     <ClCompile Include="..\nGenEx\DataLoader.cpp" />
     <ClCompile Include="..\nGenEx\EditBox.cpp" />
+    <ClCompile Include="ContentBundle.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="..\nGenEx\Encrypt.cpp" />
     <ClCompile Include="..\nGenEx\EventDispatch.cpp" />
@@ -418,6 +419,7 @@
     <ClCompile Include="..\nGenEx\Light.cpp" />
     <ClCompile Include="..\nGenEx\ListBox.cpp" />
     <ClCompile Include="..\nGenEx\MachineInfo.cpp" />
+    <ClCompile Include="Locale_ss.cpp" />
     <ClCompile Include="Magic.cpp" />
     <ClCompile Include="MagicDoc.cpp" />
     <ClCompile Include="MagicView.cpp" />
@@ -475,6 +477,7 @@
     <ClCompile Include="..\Parser\Term.cpp" />
     <ClCompile Include="..\nGenEx\TexDX9.cpp" />
     <ClCompile Include="..\FoundationEx\Text.cpp" />
+    <ClCompile Include="TexCubeDX9.cpp" />
     <ClCompile Include="TextureMapDialog.cpp" />
     <ClCompile Include="Thumbnail.cpp" />
     <ClCompile Include="..\Parser\Token.cpp" />
@@ -493,10 +496,12 @@
   <ItemGroup>
     <ClInclude Include="..\nGenEx\AviFile.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="ContentBundle.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridProps.h" />
     <ClInclude Include="l3ds.h" />
+    <ClInclude Include="Locale_ss.h" />
     <ClInclude Include="Magic.h" />
     <ClInclude Include="MagicDoc.h" />
     <ClInclude Include="MagicView.h" />
@@ -511,9 +516,11 @@
     <ClInclude Include="Selector.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="SurfacePropertiesDialog.h" />
+    <ClInclude Include="TexCubeDX9.h" />
     <ClInclude Include="TextureMapDialog.h" />
     <ClInclude Include="Thumbnail.h" />
     <ClInclude Include="UVMapView.h" />
+    <ClInclude Include="VideoDX9.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\Magic.ico" />
