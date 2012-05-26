@@ -256,6 +256,11 @@ ModelFileOBJ::Load(Model* m, double scale)
 
       FILE* fp = fopen(filename, "rb");
 
+	  if (fp == NULL) {
+         ::MessageBox(0, "Wavefront/OBJ Import Failed: Unable to open file", "ERROR", MB_OK);
+         return false;
+      }
+
       // ok, now start reading the data:
       int ntex   = 0;
       int nverts = 0;
