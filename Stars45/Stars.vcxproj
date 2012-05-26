@@ -214,13 +214,13 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName)_D.exe</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\Starshatter_D.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\Debug\Opcode_D.lib;..\ngenex\debug\ngenex.lib;..\netex\debug\netex.lib;..\zlib\debug\zlib.lib;..\libpng\debug\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <CustomBuildStep>
-      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)$(TargetFileName)"</Command>
       <Message>Copying build...</Message>
       <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -312,7 +312,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\Starshatter.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\Release\Opcode.lib;..\ngenex\release\ngenex.lib;..\netex\release\netex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -362,7 +362,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\Starshatter.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\Release\Opcode.lib;..\ngenex\release\ngenex.lib;..\netex\release\netex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;Vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -479,6 +479,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'">
     <Link>
       <OutputFile>$(SolutionDir)$(Configuration)\$(SolutionName).exe</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug x64|Win32'">
+    <Link>
+      <OutputFile>$(SolutionDir)$(Configuration)\Starshatter_D.exe</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
