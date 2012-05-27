@@ -1438,6 +1438,7 @@ png_do_read_transformations(png_structp png_ptr)
 #ifdef PNG_CONSOLE_IO_SUPPORTED
       char msg[50];
 
+#pragma warning(suppress: 6340)
       png_snprintf2(msg, 50,
           "NULL row buffer for row %ld, pass %d", (long)png_ptr->row_number,
           png_ptr->pass);

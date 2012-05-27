@@ -125,11 +125,13 @@ static char* ParseMultiLine(const char* s)
 			s++;
 			if (*s == 'n') {
 				*p++ = '\n';
+#pragma warning(suppress: 6269)
 				*s++;
 				i--;
 			}
 			else if (*s == '"') {
 				*p++ = '"';
+#pragma warning(suppress: 6269)
 				*s++;
 				i--;
 			}

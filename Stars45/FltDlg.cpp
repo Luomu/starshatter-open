@@ -228,7 +228,7 @@ FltDlg::UpdateSelection()
 				hangar_list->SetItemText(item, 4, txt);
 			}
 
-			else if (hangar->GetState(s) || Hangar::MAINT ||
+			else if (hangar->GetState(s) == Hangar::MAINT ||
 					hangar->GetState(s) >  Hangar::STORAGE) {
 				FormatTime(txt, hangar->TimeRemaining(s));
 				hangar_list->SetItemText(item, 4, txt);

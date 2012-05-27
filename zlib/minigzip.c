@@ -97,6 +97,7 @@ void error(msg)
  * Compress input to output then close both files.
  */
 
+#pragma warning(suppress: 6262)
 void gz_compress(in, out)
     FILE   *in;
     gzFile out;
@@ -119,6 +120,7 @@ void gz_compress(in, out)
         }
         if (len == 0) break;
 
+#pragma warning(suppress: 6029)
         if (gzwrite(out, buf, (unsigned)len) != len) error(gzerror(out, &err));
     }
     fclose(in);
@@ -165,6 +167,7 @@ int gz_compress_mmap(in, out)
 /* ===========================================================================
  * Uncompress input to output then close both files.
  */
+#pragma warning(suppress: 6262)
 void gz_uncompress(in, out)
     gzFile in;
     FILE   *out;
@@ -298,7 +301,9 @@ int main(argc, argv)
       argc--, argv++;
     }
     if (argc == 0) {
+#pragma warning(suppress: 6031)
         SET_BINARY_MODE(stdin);
+#pragma warning(suppress: 6031)
         SET_BINARY_MODE(stdout);
         if (uncompr) {
             file = gzdopen(fileno(stdin), "rb");
