@@ -525,6 +525,8 @@ DWORD WINAPI StarServerRestartProc(LPVOID link)
 
 		CreateProcess("stars.exe", cmdline, 0, 0, 0, 0, 0, 0, &s, &pi);
 		stars->Exit();
+		CloseHandle( pi.hProcess );
+		CloseHandle( pi.hThread );
 		return 0;
 	}
 

@@ -231,6 +231,7 @@ Bitmap::BitBlt(int x, int y, const Bitmap& srcBmp, int sx, int sy, int w, int h,
 			Color* src    = srcBmp.HiPixels() + (sy*spitch) + sx;
 
 			for (int i = 0; i < h; i++) {
+#pragma warning(suppress: 28183)
 				memcpy(dst, src, rowlen);
 				dst += dpitch;
 				src += spitch;

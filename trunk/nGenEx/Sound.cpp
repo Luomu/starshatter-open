@@ -113,7 +113,7 @@ Sound::CreateStream(const char* filename)
 					break;
 
 				default:
-					delete buf;
+					delete[] buf;
 					return sound;
 				}
 			}

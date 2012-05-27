@@ -410,7 +410,7 @@ const char*
 Weapon::GetObserverName() const
 {
 	static char name[256];
-	sprintf_s(name, "Weapon %s", design->name);
+	sprintf_s(name, "Weapon %s", design->name.data());
 	return name;
 }
 

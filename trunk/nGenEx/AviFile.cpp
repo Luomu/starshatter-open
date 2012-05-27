@@ -151,6 +151,7 @@ AviFile::AddFrame(const Bitmap& bmp)
 			}
 		}
 
+#pragma warning(suppress: 6001)
 		hr = AVIStreamWrite(ps_comp, nframe, 1, buffer, frame_size, AVIIF_KEYFRAME, 0, 0);
 		
 		if (SUCCEEDED(hr)) {

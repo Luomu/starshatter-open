@@ -223,6 +223,7 @@ void DataArchive::LoadDatafile(const char* name)
 			fread(dirbuf, header.dir_size_comp, 1, f);
 
 			int err = uncompress((BYTE*) directory, &len,
+#pragma warning(suppress: 6029)
 			dirbuf, header.dir_size_comp);
 			if (err != Z_OK)
 			ZeroMemory(directory, sizeof(DataEntry) * dirsize);

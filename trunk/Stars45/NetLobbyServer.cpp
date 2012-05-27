@@ -202,7 +202,7 @@ NetLobbyServer::SendMOTD(NetUser* user)
 		Text* line = motd[i];
 
 		sprintf_s(buffer, "id %d user \" \" msg \"%s\"",
-		motd_index++, *line);
+			motd_index++, line->data());
 
 		SendData(user, NET_LOBBY_CHAT, buffer);
 	}

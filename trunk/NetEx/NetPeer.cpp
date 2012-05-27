@@ -253,7 +253,7 @@ NetPeer::ComposeGram()
                hist_indx = 0;
 
             g = new(__FILE__,__LINE__) NetGram(addr, user_data, retries);
-            delete buffer;
+            delete[] buffer;
          }
       }
 

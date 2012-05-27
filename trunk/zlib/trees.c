@@ -535,6 +535,7 @@ local void gen_bitlen(s, desc)
     /* Find the first bit length which could increase: */
     do {
         bits = max_length-1;
+#pragma warning(suppress: 6385)
         while (s->bl_count[bits] == 0) bits--;
         s->bl_count[bits]--;      /* move one leaf down the tree */
         s->bl_count[bits+1] += 2; /* move one overflow item as its brother */
@@ -551,6 +552,7 @@ local void gen_bitlen(s, desc)
      * from 'ar' written by Haruhiko Okumura.)
      */
     for (bits = max_length; bits != 0; bits--) {
+#pragma warning(suppress: 6385)
         n = s->bl_count[bits];
         while (n != 0) {
             m = s->heap[--h];
