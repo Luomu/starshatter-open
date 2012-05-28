@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
 #include <math.h>
 #include <time.h>
 #include <windows.h>
@@ -24,6 +25,7 @@ void insertFile(DataArchive& a, const char* sPath, WIN32_FIND_DATA* find)
 {
    char     sFile[256];
    char     sFlat[256];
+   char		sTemp[256];
    DWORD    find_attrib_forbidden =
                         FILE_ATTRIBUTE_DIRECTORY |
                         FILE_ATTRIBUTE_HIDDEN    |
@@ -32,8 +34,10 @@ void insertFile(DataArchive& a, const char* sPath, WIN32_FIND_DATA* find)
 
    if (sPath && *sPath)
       sprintf(sFile, "%s/%s", sPath, find->cFileName);
-   else
-      strcpy(sFile, find->cFileName);
+   else {
+	   sprintf(sTemp, "%s", find->cFileName);
+	   strcpy(sFile, sTemp); 
+   }
 
    if (find->dwFileAttributes & find_attrib_forbidden) {
       printf("   Skipping:  %-48s \n", sFile);
@@ -103,7 +107,8 @@ void ins(DataArchive& a, int argc, char* argv[])
             sPath[0] = 0;
 
          WIN32_FIND_DATA   find;
-         HANDLE h = FindFirstFile(argv[i], &find);
+		 LPCWSTR tmp = (LPCWSTR)argv[i];
+         HANDLE h = FindFirstFile(tmp, &find);
          if (h != INVALID_HANDLE_VALUE) {
             insertFile(a, sPath, &find);
 
@@ -144,6 +149,14 @@ void buildFile(DataArchive& a, const char* sPath, WIN32_FIND_DATA& find)
    }
 }
 
+std::wstring ToWideString(const std::string& str)
+{
+	int stringLength = MultiByteToWideChar(CP_ACP, 0, str.data(), str.length(), 0, 0);
+	std::wstring wstr(stringLength, 0);
+	MultiByteToWideChar(CP_ACP, 0,  str.data(), str.length(), &wstr[0], stringLength);
+	return wstr;
+}
+
 void build(DataArchive& a, const char* sBasePath)
 {
    char  sPath[256];
@@ -159,7 +172,10 @@ void build(DataArchive& a, const char* sBasePath)
    }
 
    WIN32_FIND_DATA   find;
-   HANDLE h = FindFirstFile(sFind, &find);
+	std::wstring sTemp;
+	std::string sStd = sFind;
+	sTemp = ToWideString(sStd);
+	HANDLE h = FindFirstFile(sTemp.c_str(), &find);
    if (h != INVALID_HANDLE_VALUE) {
       do 
          buildFile(a, sPath, find);
@@ -196,7 +212,7 @@ int match(const char* sFile, const char* sPattern)
          }
          else {
             nPatternType = PATTERN_STAR_DOT_EXT;
-            sExt = strchr(sPattern, '.');
+            sExt = const_cast<char*>(strchr(sPattern, '.'));
          }
       }
 
