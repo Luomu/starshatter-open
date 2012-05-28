@@ -38,17 +38,20 @@
     <SccProjectName />
     <SccLocalPath />
     <Keyword>MFCProj</Keyword>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release x64|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -64,11 +67,15 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug x64|Win32'">
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -176,6 +183,7 @@
       <OutputFile>.\Debug\Magic.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\Debug\Opcode_D.lib;..\zlib\debug\zlib.lib;..\libpng\debug\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -257,6 +265,7 @@
       <OutputFile>.\Release\Magic.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\Release\Opcode.lib;..\ngenex\release\ngenex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;..\DirectX\lib\dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86\;..\oggvorbis\lib;</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release x64|Win32'">
@@ -296,6 +305,7 @@
       <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <OutputFile>.\Release\Magic.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\OpcodeLib\Release\OpcodeLib.lib;..\ngenex\release\ngenex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -372,6 +382,11 @@
       <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <OutputFile>.\Release\Magic.exe</OutputFile>
       <AdditionalDependencies>..\Opcode\OpcodeLib\Release\OpcodeLib.lib;..\ngenex\release\ngenex.lib;..\zlib\release\zlib.lib;..\libpng\release\libpng.lib;wsock32.lib;dinput.lib;dsound.lib;d3d9.lib;d3dx9.lib;dxguid.lib;winmm.lib;version.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug x64|Win32'">
+    <Link>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
