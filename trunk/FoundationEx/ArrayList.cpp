@@ -14,6 +14,7 @@
 
 #include "MemDebug.h"
 #include "ArrayList.h"
+#include <algorithm>
 
 // +-------------------------------------------------------------------+
 
@@ -22,40 +23,27 @@ void Print(const char* fmt, ...);
 // +-------------------------------------------------------------------+
 
 ArrayList::ArrayList(const ArrayList& l)
-  : items(l.items), extent(l.extent)
 {
-#ifdef MEM_DEBUG
-   array = new(__FILE__,__LINE__) DWORD[extent];
-#else
-   array = new DWORD[extent];
-#endif
+	for (auto ali = l.array.begin(); ali != l.array.end(); ++ali)
+		array.push_back(*ali);
 
-   memcpy(array, l.array, extent*sizeof(DWORD));
 }
 
 void ArrayList::clear()
 {
-   delete [] array;
-   items    = 0;
-   extent   = 0;
-   array    = 0;
+   array.clear();
 }
 
 // +-------------------------------------------------------------------+
 
 bool ArrayList::check(int& index) const
 {
-   if (index < 0) {
+	if (index > array.size()) {
       Print("Bounds error in ArrayList(%08x) index=%d min=0\n", (int)this, index);
       index = 0;
    }
 
-   else if (index >= items) {
-      Print("Bounds error in ArrayList(%08x) index=%d max=%d\n", (int)this,index, items-1);
-      index = items-1;
-   }
-
-   return (index >= 0 && index < items);
+   return (index >= 0 && index < array.size());
 }
 
 // +-------------------------------------------------------------------+
@@ -94,90 +82,52 @@ DWORD& ArrayList::at(int index)
 
 void ArrayList::resize(int newsize)
 {
-   if (newsize > extent) {
-      extent = 16 * (newsize/16 + 1);
-
-#ifdef MEM_DEBUG
-      DWORD* v = new(__FILE__,__LINE__) DWORD[extent];
-#else
-      DWORD* v = new DWORD[extent];
-#endif
-	  int i;
-      for (i = 0; i < items; i++)
-         v[i] = array[i];
-
-      for (; i < extent; i++)
-         v[i] = 0;
-
-      delete [] array;   
-      array = v;
-   }
+	array.resize(newsize);
 }
 
 // +-------------------------------------------------------------------+
 
 void ArrayList::append(DWORD item)
 {
-   if (items+1 > extent)
-      resize(items+1);
-
-   array[items++] = item;
+	array.push_back(item);
 }
 
 void ArrayList::append(const ArrayList& list)
 {
-   if (&list != this && list.items > 0) {
-      int need = items + list.items;
-      if (need > extent)
-         resize(need);
-
-      for (int i = 0; i < list.items; i++)
-         array[items++] = list.array[i];
-   }
+	for (auto li = list.array.begin(); li != list.array.end(); ++li)
+		array.push_back(*li);
 }
 
 // +-------------------------------------------------------------------+
 
 void ArrayList::insert(DWORD item, int index)
 {
-   if (index >= 0 && index <= items) {
-      if (items+1 > extent)
-         resize(items+1);
-
-      // slide right:
-      for (int i = items; i > index; i--)
-         array[i] = array[i-1];
-
-      array[index] = item;
-      items++;
-   }
+	auto it = array.begin();
+	array.insert(it + index, item);
 }
 
 // +-------------------------------------------------------------------+
 
 void ArrayList::insertSort(DWORD item)
 {
-	int i;
-   for (i = 0; i < items; i++) {
-      if (item < array[i])
-         break;
-   }
-
-   insert(item, i);
+	for (auto arrit = array.begin(); arrit != array.end(); arrit++) {
+		if (*arrit < item) {
+			array.insert(arrit, item);
+			return;
+		}
+	}
 }
 
 // +-------------------------------------------------------------------+
 
 void ArrayList::remove(DWORD item)
 {
-   if (items < 1)
+   if (array.size() < 1)
       return;
 
-   for (int i = 0; i < items; i++) {
-      if (array[i] == item) {
-         removeIndex(i);
-         return;
-      }
+   for (auto it = array.begin(); it != array.end(); ++it) {
+	   if (*it == item)
+		   array.erase(it);
    }
 }
 
@@ -185,25 +135,18 @@ void ArrayList::remove(DWORD item)
 
 void ArrayList::removeIndex(int index)
 {
-   if (items < 1 || !check(index))
+   if (array.size() < 1 || !check(index))
       return;
 
-   // slide left:
-   for (int i = index; i < items-1; i++)
-      array[i] = array[i+1];
-
-   // blank out the hole we just created:
-   array[items-1] = 0;
-
-   items--;
+	array.erase(array.begin()+index);
 }
 
 // +-------------------------------------------------------------------+
 
 bool ArrayList::contains(DWORD val) const
 {
-   for (int i = 0; i < items; i++) {
-      if (array[i] == val)
+   for (auto it = array.begin(); it != array.end(); ++it) {
+      if (*it == val)
          return true;
    }
 
@@ -216,8 +159,8 @@ int ArrayList::count(DWORD val) const
 {
    int c = 0;
 
-   for (int i = 0; i < items; i++) {
-      if (array[i] == val)
+   for (auto it = array.begin(); it != array.end(); ++it) {
+      if (*it == val)
          c++;
    }
 
@@ -228,7 +171,7 @@ int ArrayList::count(DWORD val) const
 
 int ArrayList::index(DWORD val) const
 {
-   for (int i = 0; i < items; i++) {
+   for (size_t i = 0; i < array.size(); i++) {
       if (array[i] == val)
          return i;
    }
@@ -238,73 +181,32 @@ int ArrayList::index(DWORD val) const
 
 // +-------------------------------------------------------------------+
 
-void ArrayList::swap(DWORD* a, int i, int j)
+void ArrayList::swap(int i, int j)
 {
-   if (i >= 0 && i < items && j >= 0 && j < items && i != j) {
-      DWORD t = a[i];
-      a[i] = a[j];
-      a[j] = t;
+   if (i >= 0 && i < array.size() && j >= 0 && j < array.size() && i != j) {
+      DWORD t = array[i];
+      array[i] = array[j];
+      array[j] = t;
    }
-}
-
-void ArrayList::qsort(DWORD* a, int lo0, int hi0)
-{
-   int lo = lo0;
-   int hi = hi0;
-
-   // zero or one element list, nothing to do:
-   if (lo >= hi) {
-      return;
-   }
-
-   // two element list, swap if needed:
-   else if (lo == hi-1) {
-      if (a[hi] < a[lo]) {
-         swap(a, lo, hi);
-      }
-      return;
-   }
-
-   // pick a pivot, and move it out of the way:
-   int   mid   = (lo+hi)/2;
-   DWORD pivot = a[mid];
-   a[mid]      = a[hi];
-   a[hi]       = pivot;
-
-   while (lo < hi) {
-      while ((a[lo] <= pivot) && lo < hi) lo++;
-      while ((pivot <= a[hi]) && lo < hi) hi--;
-
-      if (lo < hi) {
-         swap(a, lo, hi);
-      }
-   }
-
-   // Put the pivot into its final location:
-   a[hi0] = a[hi];
-   a[hi] = pivot;
-
-	qsort(a, lo0, lo-1);
-	qsort(a, hi+1, hi0);
 }
 
 void ArrayList::sort()
 {
-   if (items < 2)
+   if (array.size() < 2)
       return;
 
-   qsort(array, 0, items-1);
+   std::sort(array.begin(), array.end());
 }
 
 void ArrayList::shuffle()
 {
-   if (items < 3)
+   if (array.size() < 3)
       return;
 
    for (int s = 0; s < 5; s++) {
-      for (int i = 0; i < items; i++) {
-         int j = (rand()>>4) % items;
-         swap(array, i, j);
+      for (int i = 0; i < array.size(); i++) {
+         int j = (rand()>>4) % array.size();
+         swap(i, j);
       }
    }
 }
@@ -314,7 +216,7 @@ void ArrayList::shuffle()
 
 DWORD ArrayListIter::value()
 {
-   if (list && step >= 0 && step < list->items)
+   if (list && step >= 0)
       return list->array[step];
 
    return 0;
@@ -324,7 +226,7 @@ DWORD ArrayListIter::value()
 
 void ArrayListIter::removeItem()
 {
-   if (list && step >= 0 && step < list->items)
+   if (list && step >= 0)
       list->removeIndex(step--);
 }
 
@@ -332,7 +234,7 @@ void ArrayListIter::removeItem()
 
 DWORD ArrayListIter::next()
 {
-   if (list && step >= -1 && step < list->items-1)
+   if (list && step >= -1)
       return list->array[++step];
 
    return 0;
@@ -340,7 +242,7 @@ DWORD ArrayListIter::next()
 
 DWORD ArrayListIter::prev()
 {
-   if (list && step > 0 && step < list->items)
+   if (list && step > 0)
       return list->array[--step];
 
    return 0;
@@ -359,7 +261,7 @@ void ArrayListIter::attach(ArrayList& l)
 int ArrayListIter::size()
 {
    if (!list) return 0;
-   return list->items;
+   return list->size();
 }
 
 // +-------------------------------------------------------------------+
@@ -377,43 +279,10 @@ ArrayList& ArrayListIter::container()
 // +-------------------------------------------------------------------+
 
 FloatList::FloatList(const FloatList& l)
-  : items(l.items), extent(l.extent)
 {
-#ifdef MEM_DEBUG
-   array = new(__FILE__,__LINE__) float[extent];
-#else
-   array = new float[extent];
-#endif
-
-   memcpy(array, l.array, extent*sizeof(float));
+	for (auto lit = l.array.begin(); lit != l.array.end(); lit++)
+		array.push_back(*lit);
 }
-
-void FloatList::clear()
-{
-   delete [] array;
-   items    = 0;
-   extent   = 0;
-   array    = 0;
-}
-
-// +-------------------------------------------------------------------+
-
-bool FloatList::check(int& index) const
-{
-   if (index < 0) {
-      Print("Bounds error in FloatList(%08x) index=%d min=0\n", (int)this, index);
-      index = 0;
-   }
-
-   else if (index >= items) {
-      Print("Bounds error in FloatList(%08x) index=%d max=%d\n", (int)this,index, items-1);
-      index = items-1;
-   }
-
-   return (index >= 0 && index < items);
-}
-
-// +-------------------------------------------------------------------+
 
 float FloatList::operator[](int index) const
 {
@@ -445,120 +314,88 @@ float& FloatList::at(int index)
    return array[0];
 }
 
-// +-------------------------------------------------------------------+
-
-void FloatList::resize(int newsize)
-{
-   if (newsize > extent) {
-      extent = 16 * (newsize/16 + 1);
-
-#ifdef MEM_DEBUG
-      float* v = new(__FILE__,__LINE__) float[extent];
-#else
-      float* v = new float[extent];
-#endif
-	  int i;
-      for (i = 0; i < items; i++)
-         v[i] = array[i];
-
-      for (; i < extent; i++)
-         v[i] = 0;
-
-      delete [] array;   
-      array = v;
-   }
-}
-
-// +-------------------------------------------------------------------+
-
-void FloatList::append(float item)
-{
-   if (items+1 > extent)
-      resize(items+1);
-
-   array[items++] = item;
+void FloatList::append(float value) {
+	array.push_back(value);
 }
 
 void FloatList::append(const FloatList& list)
 {
-   if (&list != this && list.items > 0) {
-      int need = items + list.items;
-      if (need > extent)
-         resize(need);
-
-      for (int i = 0; i < list.items; i++)
-         array[items++] = list.array[i];
-   }
+	for (auto li = list.array.begin(); li != list.array.end(); ++li)
+		array.push_back(*li);
 }
 
-// +-------------------------------------------------------------------+
 
 void FloatList::insert(float item, int index)
 {
-   if (index >= 0 && index <= items) {
-      if (items+1 > extent)
-         resize(items+1);
-
-      // slide right:
-      for (int i = items; i > index; i--)
-         array[i] = array[i-1];
-
-      array[index] = item;
-      items++;
-   }
+	auto it = array.begin();
+	array.insert(it + index, item);
 }
 
 // +-------------------------------------------------------------------+
 
 void FloatList::insertSort(float item)
 {
-	int i;
-   for (i = 0; i < items; i++) {
-      if (item < array[i])
-         break;
-   }
-
-   insert(item, i);
+	for (auto arrit = array.begin(); arrit != array.end(); arrit++) {
+		if (*arrit < item) {
+			array.insert(arrit, item);
+			return;
+		}
+	}
 }
 
 // +-------------------------------------------------------------------+
 
 void FloatList::remove(float item)
 {
-   if (items < 1)
+   if (array.size() < 1)
       return;
 
-   for (int i = 0; i < items; i++) {
-      if (array[i] == item) {
-         removeIndex(i);
-         return;
-      }
+   for (auto it = array.begin(); it != array.end(); ++it) {
+	   if (*it == item)
+		   array.erase(it);
    }
 }
 
-// +-------------------------------------------------------------------+
+// +===================================================================+
 
-void FloatList::removeIndex(int index)
+float FloatListIter::value()
 {
-   if (items < 1 || !check(index))
-      return;
+   if (list && step >= 0)
+      return list->array[step];
 
-   // slide left:
-   for (int i = index; i < items-1; i++)
-      array[i] = array[i+1];
-
-   // blank out the hole we just created:
-   array[items-1] = 0;
-
-   items--;
+   return 0;
 }
 
 // +-------------------------------------------------------------------+
 
+void FloatListIter::removeItem()
+{
+   if (list && step >= 0)
+      list->removeIndex(step--);
+}
+
+// +-------------------------------------------------------------------+
+
+float FloatListIter::next()
+{
+   if (list && step >= -1)
+      return list->array[++step];
+
+   return 0;
+}
+
+float FloatListIter::prev()
+{
+   if (list && step > 0)
+      return list->array[--step];
+
+   return 0;
+}
+
 bool FloatList::contains(float val) const
 {
-   for (int i = 0; i < items; i++) {
-      if (array[i] == val)
+   for (auto it = array.begin(); it != array.end(); ++it) {
+      if (*it == val)
          return true;
    }
 
@@ -571,8 +408,8 @@ int FloatList::count(float val) const
 {
    int c = 0;
 
-   for (int i = 0; i < items; i++) {
-      if (array[i] == val)
+   for (auto it = array.begin(); it != array.end(); ++it) {
+      if (*it == val)
          c++;
    }
 
@@ -583,122 +420,12 @@ int FloatList::count(float val) const
 
 int FloatList::index(float val) const
 {
-   for (int i = 0; i < items; i++) {
+   for (size_t i = 0; i < array.size(); i++) {
       if (array[i] == val)
          return i;
    }
 
    return -1;
-}
-
-// +-------------------------------------------------------------------+
-
-void FloatList::swap(float* a, int i, int j)
-{
-   if (i >= 0 && i < items && j >= 0 && j < items && i != j) {
-      float t = a[i];
-      a[i] = a[j];
-      a[j] = t;
-   }
-}
-
-void FloatList::qsort(float* a, int lo0, int hi0)
-{
-   int lo = lo0;
-   int hi = hi0;
-
-   // zero or one element list, nothing to do:
-   if (lo >= hi) {
-      return;
-   }
-
-   // two element list, swap if needed:
-   else if (lo == hi-1) {
-      if (a[hi] < a[lo]) {
-         swap(a, lo, hi);
-      }
-      return;
-   }
-
-   // pick a pivot, and move it out of the way:
-   int   mid   = (lo+hi)/2;
-   float pivot = a[mid];
-   a[mid]      = a[hi];
-   a[hi]       = pivot;
-
-   while (lo < hi) {
-      while ((a[lo] <= pivot) && lo < hi) lo++;
-      while ((pivot <= a[hi]) && lo < hi) hi--;
-
-      if (lo < hi) {
-         swap(a, lo, hi);
-      }
-   }
-
-   // Put the pivot into its final location:
-   a[hi0] = a[hi];
-   a[hi] = pivot;
-
-	qsort(a, lo0, lo-1);
-	qsort(a, hi+1, hi0);
-}
-
-void FloatList::sort()
-{
-   if (items < 2)
-      return;
-
-   qsort(array, 0, items-1);
-}
-
-void FloatList::shuffle()
-{
-   if (items < 3)
-      return;
-
-   for (int s = 0; s < 5; s++) {
-      for (int i = 0; i < items; i++) {
-         int j = (rand()>>4) % items;
-         swap(array, i, j);
-      }
-   }
-}
-
-
-// +===================================================================+
-
-float FloatListIter::value()
-{
-   if (list && step >= 0 && step < list->items)
-      return list->array[step];
-
-   return 0;
-}
-
-// +-------------------------------------------------------------------+
-
-void FloatListIter::removeItem()
-{
-   if (list && step >= 0 && step < list->items)
-      list->removeIndex(step--);
-}
-
-// +-------------------------------------------------------------------+
-
-float FloatListIter::next()
-{
-   if (list && step >= -1 && step < list->items-1)
-      return list->array[++step];
-
-   return 0;
-}
-
-float FloatListIter::prev()
-{
-   if (list && step > 0 && step < list->items)
-      return list->array[--step];
-
-   return 0;
 }
 
 // +-------------------------------------------------------------------+
@@ -714,7 +441,7 @@ void FloatListIter::attach(FloatList& l)
 int FloatListIter::size()
 {
    if (!list) return 0;
-   return list->items;
+   return list->size();
 }
 
 // +-------------------------------------------------------------------+
