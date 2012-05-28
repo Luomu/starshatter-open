@@ -258,13 +258,13 @@ VideoDX9Enum::Enumerate()
 		Print("----------------------------------------\n\n");
 	}
 
-	allowed_adapter_format_list.append(D3DFMT_X8R8G8B8);
-	allowed_adapter_format_list.append(D3DFMT_X1R5G5B5);
-	allowed_adapter_format_list.append(D3DFMT_R5G6B5);
-	allowed_adapter_format_list.append(D3DFMT_A2R10G10B10);
+	allowed_adapter_format_list.push_back(D3DFMT_X8R8G8B8);
+	allowed_adapter_format_list.push_back(D3DFMT_X1R5G5B5);
+	allowed_adapter_format_list.push_back(D3DFMT_R5G6B5);
+	allowed_adapter_format_list.push_back(D3DFMT_A2R10G10B10);
 
 	VideoDX9AdapterInfo* adapter_info = 0;
-	ArrayList            adapter_format_list;
+	std::vector<D3DFORMAT> adapter_format_list;
 	UINT                 num_adapters = d3d->GetAdapterCount();
 
 	for (UINT ordinal = 0; ordinal < num_adapters; ordinal++) {
@@ -279,8 +279,8 @@ VideoDX9Enum::Enumerate()
 		// Also build a temporary list of all display adapter formats.
 		adapter_format_list.clear();
 
-		for (int iaaf = 0; iaaf < allowed_adapter_format_list.size(); iaaf++) {
-			D3DFORMAT allowed_adapter_format = (D3DFORMAT) allowed_adapter_format_list[iaaf];
+		for (size_t iaaf = 0; iaaf < allowed_adapter_format_list.size(); iaaf++) {
+			D3DFORMAT allowed_adapter_format = allowed_adapter_format_list[iaaf];
 			UINT      num_adapter_modes      = d3d->GetAdapterModeCount(ordinal, allowed_adapter_format);
 			
 			for (UINT mode = 0; mode < num_adapter_modes; mode++) {
@@ -302,8 +302,16 @@ VideoDX9Enum::Enumerate()
 
 				adapter_info->display_mode_list.append(dx9_display_mode);
 
-				if (!adapter_format_list.contains(display_mode.Format))
-				adapter_format_list.append(display_mode.Format);
+				bool contains_display_mode = false;
+				for (auto afli = adapter_format_list.begin(); afli != adapter_format_list.end(); ++afli) {
+					if (*afli == display_mode.Format) {
+						contains_display_mode = true;
+						break;
+					}
+				}
+				if (!contains_display_mode)
+					adapter_format_list.push_back(display_mode.Format);
+				
 			}
 		}
 
@@ -350,7 +358,7 @@ VideoDX9Enum::Enumerate()
 // +--------------------------------------------------------------------+
 
 HRESULT  
-VideoDX9Enum::EnumerateDevices(VideoDX9AdapterInfo* adapter_info, ArrayList& adapter_format_list)
+VideoDX9Enum::EnumerateDevices(VideoDX9AdapterInfo* adapter_info, std::vector<D3DFORMAT>& adapter_format_list)
 {
 	HRESULT              hr          = E_FAIL;
 	const D3DDEVTYPE     dtypes[3]   = { D3DDEVTYPE_HAL, D3DDEVTYPE_SW, D3DDEVTYPE_REF };
@@ -399,7 +407,7 @@ VideoDX9Enum::EnumerateDevices(VideoDX9AdapterInfo* adapter_info, ArrayList& ada
 // +--------------------------------------------------------------------+
 
 HRESULT  
-VideoDX9Enum::EnumerateDeviceCombos(VideoDX9DeviceInfo* device_info, ArrayList& adapter_format_list)
+VideoDX9Enum::EnumerateDeviceCombos(VideoDX9DeviceInfo* device_info, std::vector<D3DFORMAT>& adapter_format_list)
 {
 	const D3DFORMAT back_buffer_formats[] = {
 		D3DFMT_A8R8G8B8,
@@ -414,8 +422,8 @@ VideoDX9Enum::EnumerateDeviceCombos(VideoDX9DeviceInfo* device_info, ArrayList& 
 
 	// See which adapter formats are supported by this device
 	D3DFORMAT a_fmt;
-	for (int i = 0; i < adapter_format_list.size(); i++) {
-		a_fmt = (D3DFORMAT) adapter_format_list[i];
+	for (size_t i = 0; i < adapter_format_list.size(); i++) {
+		a_fmt = adapter_format_list[i];
 		
 		D3DFORMAT b_fmt;
 		for (int n = 0; n < 6; n++) {
@@ -524,7 +532,7 @@ VideoDX9Enum::BuildDepthStencilFormatList(VideoDX9DeviceCombo* device_combo)
 							device_combo->back_buffer_format,
 							fmt))) {
 
-				device_combo->depth_stencil_fmt_list.append(fmt);
+				device_combo->depth_stencil_fmt_list.push_back(fmt);
 			}
 		}
 	}
@@ -564,8 +572,8 @@ VideoDX9Enum::BuildMultiSampleTypeList(VideoDX9DeviceCombo* device_combo)
 						multisample_type,
 						&multisample_qual))) {
 
-			device_combo->multisample_type_list.append(multisample_type);
-			device_combo->multisample_qual_list.append(multisample_qual);
+			device_combo->multisample_type_list.push_back(multisample_type);
+			device_combo->multisample_qual_list.push_back(multisample_qual);
 		}
 	}
 }
@@ -573,10 +581,10 @@ VideoDX9Enum::BuildMultiSampleTypeList(VideoDX9DeviceCombo* device_combo)
 void  
 VideoDX9Enum::BuildDSMSConflictList(VideoDX9DeviceCombo* device_combo)
 {
-	for (int i = 0; i < device_combo->depth_stencil_fmt_list.size(); i++) {
+	for (size_t i = 0; i < device_combo->depth_stencil_fmt_list.size(); i++) {
 		D3DFORMAT depth_format = (D3DFORMAT) device_combo->depth_stencil_fmt_list[i];
 
-		for (int n = 0; n < device_combo->multisample_type_list.size(); n++) {
+		for (size_t n = 0; n < device_combo->multisample_type_list.size(); n++) {
 			D3DMULTISAMPLE_TYPE multisample_type = (D3DMULTISAMPLE_TYPE) device_combo->multisample_type_list[n];
 
 			if (FAILED(d3d->CheckDeviceMultiSampleType(device_combo->adapter_ordinal,
@@ -602,17 +610,17 @@ VideoDX9Enum::BuildVertexProcessingTypeList(VideoDX9DeviceInfo* device_info, Vid
 {
 	if ((device_info->caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) != 0) {
 		if ((device_info->caps.DevCaps & D3DDEVCAPS_PUREDEVICE) != 0) {
-			device_combo->vertex_processing_list.append(PURE_HARDWARE_VP);
+			device_combo->vertex_processing_list.push_back(PURE_HARDWARE_VP);
 		}
 
-		device_combo->vertex_processing_list.append(HARDWARE_VP);
+		device_combo->vertex_processing_list.push_back(HARDWARE_VP);
 
 		if (uses_mixed_vp) {
-			device_combo->vertex_processing_list.append(MIXED_VP);
+			device_combo->vertex_processing_list.push_back(MIXED_VP);
 		}
 	}
 
-	device_combo->vertex_processing_list.append(SOFTWARE_VP);
+	device_combo->vertex_processing_list.push_back(SOFTWARE_VP);
 }
 
 void  
@@ -641,7 +649,7 @@ VideoDX9Enum::BuildPresentIntervalList(VideoDX9DeviceInfo* device_info, VideoDX9
 		if (interval == D3DPRESENT_INTERVAL_DEFAULT ||
 				(device_info->caps.PresentationIntervals & interval)) {
 
-			device_combo->present_interval_list.append(interval);
+			device_combo->present_interval_list.push_back(interval);
 		}
 	}
 }

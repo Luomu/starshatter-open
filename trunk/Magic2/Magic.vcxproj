@@ -394,7 +394,6 @@
     <ClCompile Include="AlphaInverse.cpp" />
     <ClCompile Include="AlphaPalette.cpp" />
     <ClCompile Include="..\nGenEx\Archive.cpp" />
-    <ClCompile Include="..\FoundationEx\ArrayList.cpp" />
     <ClCompile Include="..\nGenEx\AviFile.cpp" />
     <ClCompile Include="..\nGenEx\Bitmap.cpp" />
     <ClCompile Include="..\nGenEx\Bmp.cpp" />

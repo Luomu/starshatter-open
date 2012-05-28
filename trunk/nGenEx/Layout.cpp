@@ -34,8 +34,8 @@ Layout::DoLayout(ActiveWindow* panel)
 	if (cols.size() < 1 || rows.size() < 1)
 	return false;
 
-	ArrayList   cell_x;
-	ArrayList   cell_y;
+	std::vector<DWORD>   cell_x;
+	std::vector<DWORD>   cell_y;
 
 	ScaleWeights();
 	CalcCells(panel->Width(), panel->Height(), cell_x, cell_y);
@@ -94,31 +94,30 @@ Layout::DoLayout(ActiveWindow* panel)
 void
 Layout::ScaleWeights()
 {
-	int   i;
 	float total = 0;
 
-	for (i = 0; i < col_weights.size(); i++)
-	total += col_weights[i];
+	for (auto cwi = col_weights.begin(); cwi != col_weights.end(); ++cwi)
+		total += *cwi;
 
 	if (total > 0) {
-		for (i = 0; i < col_weights.size(); i++)
-		col_weights[i] = col_weights[i] / total;
+		for (auto cwi = col_weights.begin(); cwi != col_weights.end(); ++cwi)
+			*cwi = *cwi / total;
 	}
 
 	total = 0;
-	for (i = 0; i < row_weights.size(); i++)
-	total += row_weights[i];
+	for (auto rwi = row_weights.begin(); rwi != row_weights.end(); ++rwi)
+		total += *rwi;
 
 	if (total > 0) {
-		for (i = 0; i < row_weights.size(); i++)
-		row_weights[i] = row_weights[i] / total;
+		for (auto rwi = row_weights.begin(); rwi != row_weights.end(); ++rwi)
+			*rwi = *rwi / total;
 	}
 }
 
 // +--------------------------------------------------------------------+
 
 void
-Layout::CalcCells(DWORD w, DWORD h, ArrayList& cell_x, ArrayList& cell_y)
+	Layout::CalcCells(DWORD w, DWORD h, std::vector<DWORD>& cell_x, std::vector<DWORD>& cell_y)
 {
 	DWORD       x     = 0;
 	DWORD       y     = 0;
@@ -126,30 +125,29 @@ Layout::CalcCells(DWORD w, DWORD h, ArrayList& cell_x, ArrayList& cell_y)
 	DWORD       min_y = 0;
 	DWORD       ext_x = 0;
 	DWORD       ext_y = 0;
-	int         i;
 
-	for (i = 0; i < cols.size(); i++)
-	min_x += cols[i];
+	for (auto cit = cols.begin(); cit != cols.end(); ++cit)
+		min_x += *cit;
 
-	for (i = 0; i < rows.size(); i++)
-	min_y += rows[i];
+	for (auto rit = rows.begin(); rit != rows.end(); ++rit)
+		min_y += *rit;
 
 	if (min_x < w)
-	ext_x = w - min_x;
+		ext_x = w - min_x;
 
 	if (min_y < h)
-	ext_y = h - min_y;
+		ext_y = h - min_y;
 
-	cell_x.append(x);
-	for (i = 0; i < cols.size(); i++) {
-		x += cols[i] + (DWORD) (ext_x * col_weights[i]);
-		cell_x.append(x);
+	cell_x.push_back(x);
+	for (auto cit = cols.begin(); cit != cols.end(); ++cit) {
+		x += *cit + (DWORD) (ext_x * col_weights[cit - cols.begin()]);
+		cell_x.push_back(x);
 	}
 
-	cell_y.append(y);
-	for (i = 0; i < rows.size(); i++) {
-		y += rows[i] + (DWORD) (ext_y * row_weights[i]);
-		cell_y.append(y);
+	cell_y.push_back(y);
+	for (auto rit = rows.begin(); rit != rows.end(); ++rit) {
+		y += *rit + (DWORD) (ext_y * row_weights[rit - rows.begin()]);
+		cell_y.push_back(y);
 	}
 }
 
@@ -168,55 +166,62 @@ Layout::Clear()
 void
 Layout::AddCol(DWORD min_width, float col_factor)
 {
-	cols.append(min_width);
-	col_weights.append(col_factor);
+	cols.push_back(min_width);
+	col_weights.push_back(col_factor);
 }
 
 void
 Layout::AddRow(DWORD min_height, float row_factor)
 {
-	rows.append(min_height);
-	row_weights.append(row_factor);
+	rows.push_back(min_height);
+	row_weights.push_back(row_factor);
 }
 
 void
-Layout::SetConstraints(const ArrayList& min_x,
-const ArrayList& min_y,
-const FloatList& weight_x,
-const FloatList& weight_y)
+Layout::SetConstraints(const std::vector<DWORD>& min_x,
+const std::vector<DWORD>& min_y,
+const std::vector<float>& weight_x,
+const std::vector<float>& weight_y)
 {
 	Clear();
 
-	if (min_x.size() == weight_x.size() && 
-			min_y.size() == weight_y.size()) {
+	if (min_x.size() == weight_x.size() && min_y.size() == weight_y.size()) {
+		for (auto iter = min_x.begin(); iter != min_x.end(); ++iter)
+			cols.push_back(*iter);
 
-		cols.append(min_x);
-		rows.append(min_y);
+		for (auto iter = min_y.begin(); iter != min_y.end(); ++iter)
+			rows.push_back(*iter);
 
-		col_weights.append(weight_x);
-		row_weights.append(weight_y);
+		for (auto iter = weight_x.begin(); iter != weight_x.end(); ++iter)
+			col_weights.push_back(*iter);
+
+		for (auto iter = weight_y.begin(); iter != weight_y.end(); ++iter)
+			row_weights.push_back(*iter);
 	}
 }
 
 void
-Layout::SetConstraints(const FloatList& min_x,
-const FloatList& min_y,
-const FloatList& weight_x,
-const FloatList& weight_y)
+Layout::SetConstraints(const std::vector<float>& min_x,
+const std::vector<float>& min_y,
+const std::vector<float>& weight_x,
+const std::vector<float>& weight_y)
 {
 	Clear();
 
 	if (min_x.size() == weight_x.size() && 
 			min_y.size() == weight_y.size()) {
 
-		for (int i = 0; i < min_x.size(); i++)
-		cols.append((DWORD) min_x[i]);
+		for (auto iter = min_x.begin(); iter != min_x.begin(); ++iter)
+			cols.push_back((DWORD) *iter);
 
-		for (int i = 0; i < min_y.size(); i++)
-		rows.append((DWORD) min_y[i]);
+		for (auto iter = min_y.begin(); iter != min_y.begin(); ++iter)
+			rows.push_back((DWORD) *iter);
 
-		col_weights.append(weight_x);
-		row_weights.append(weight_y);
+		for (auto iter = weight_x.begin(); iter != weight_x.end(); ++iter)
+			col_weights.push_back(*iter);
+
+		for (auto iter = weight_y.begin(); iter != weight_y.end(); ++iter)
+			row_weights.push_back(*iter);
 	}
 }
 
@@ -234,13 +239,13 @@ const float*   weight_y)
 		int i = 0;
 
 		for (i = 0; i < ncols; i++) {
-			cols.append(min_x[i]);
-			col_weights.append(weight_x[i]);
+			cols.push_back(min_x[i]);
+			col_weights.push_back(weight_x[i]);
 		}
 
 		for (i = 0; i < nrows; i++) {
-			rows.append(min_y[i]);
-			row_weights.append(weight_y[i]);
+			rows.push_back(min_y[i]);
+			row_weights.push_back(weight_y[i]);
 		}
 	}
 }

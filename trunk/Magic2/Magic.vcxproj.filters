@@ -27,9 +27,6 @@
     <ClCompile Include="..\nGenEx\Archive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\FoundationEx\ArrayList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\nGenEx\AviFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

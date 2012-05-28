@@ -232,7 +232,7 @@ Selector::SelectAll(int select_mode)
 
          for (int i = 0; i < s->NumVerts(); i++) {
             DWORD value = (iter.index() << 16) | i;
-            selection->GetVerts().append(value);
+			selection->GetVerts().push_back(value);
          }
       }
    }
