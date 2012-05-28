@@ -10,6 +10,9 @@
     OVERVIEW
     ========
     Simple untyped array list
+
+	The E: That is going to be removed very very soon. For now, it has been aliased to std::vector<DWORD>
+	(or std::vector<float> for FloatList). Full conversion to std::vector is still needed.
 */
 
 #ifndef ArrayList_h
@@ -20,14 +23,16 @@
 #include <windowsx.h>
 #endif
 
+#include <vector>
+
 // +-------------------------------------------------------------------+
 
 class ArrayList
 {
 public:
-   ArrayList() : items(0), extent(0), array(0) { }
+   ArrayList() { array.clear(); }
    ArrayList(const ArrayList& l);
-   ~ArrayList()  { delete [] array; }
+   ~ArrayList()  { }
 
    DWORD    operator[](int i) const;
    DWORD&   operator[](int i);
@@ -39,15 +44,15 @@ public:
    void     insert(const DWORD val, int index=0);
    void     insertSort(DWORD val);
 
-   DWORD    first()   const      { return operator[](0);       }
-   DWORD    last()    const      { return operator[](items-1); }
+   DWORD    first()   const      { return *array.begin();       }
+   DWORD    last()    const      { return array.back(); }
    void     remove(DWORD val);
    void     removeIndex(int index);
 
    void     clear();
 
-   int      size()    const      { return items;  }
-   bool     isEmpty() const      { return !items; }
+   int      size()    const      { return array.size();  }
+   bool     isEmpty() const      { return array.size() == 0; }
 
    bool     contains(DWORD val) const;
    int      count(DWORD val)    const;
@@ -56,15 +61,14 @@ public:
    void     sort();
    void     shuffle();
 
-private:
-   void     qsort(DWORD* a, int lo, int hi);
-   void     swap(DWORD* a, int i, int j);
-   void     resize(int newsize);
    bool     check(int& index) const;
 
-   int      items;
-   int      extent;
-   DWORD*   array;
+private:
+   void     swap(int i, int j);
+   void     resize(int newsize);
+   
+
+   std::vector<DWORD>   array;
 
    friend class ArrayListIter;
 };
@@ -102,49 +106,34 @@ private:
 // +-------------------------------------------------------------------+
 // +-------------------------------------------------------------------+
 
-class FloatList
+class FloatList : public ArrayList
 {
 public:
-   FloatList() : items(0), extent(0), array(0) { }
+   FloatList() { array.clear(); }
    FloatList(const FloatList& l);
-   ~FloatList()  { delete [] array; }
+   ~FloatList()  {}
 
    float    operator[](int i) const;
    float&   operator[](int i);
    float    at(int i) const;
    float&   at(int i);
 
-   void     append(const FloatList& list);
    void     append(const float val);
+   void		append(const FloatList& list);
    void     insert(const float val, int index=0);
    void     insertSort(float val);
 
-   float    first()   const      { return operator[](0);       }
-   float    last()    const      { return operator[](items-1); }
+   float    first()   const      { return *array.begin();       }
+   float    last()    const      { return array.back(); }
    void     remove(float val);
-   void     removeIndex(int index);
 
-   void     clear();
-
-   int      size()    const      { return items;  }
-   bool     isEmpty() const      { return !items; }
-
-   bool     contains(float val) const;
+    bool     contains(float val) const;
    int      count(float val)    const;
    int      index(float val)    const;
-
-   void     sort();
-   void     shuffle();
-
+  
 private:
-   void     qsort(float* a, int lo, int hi);
-   void     swap(float* a, int i, int j);
-   void     resize(int newsize);
-   bool     check(int& index) const;
 
-   int      items;
-   int      extent;
-   float*   array;
+   std::vector<float>   array;
 
    friend class FloatListIter;
 };
