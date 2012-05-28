@@ -16,7 +16,6 @@
 #define Layout_h
 
 #include "ActiveWindow.h"
-#include "ArrayList.h"
 
 // +--------------------------------------------------------------------+
 
@@ -34,15 +33,15 @@ public:
 	virtual void   AddCol(DWORD min_width,  float col_factor);
 	virtual void   AddRow(DWORD min_height, float row_factor);
 
-	virtual void   SetConstraints(const ArrayList& min_x,
-	const ArrayList& min_y,
-	const FloatList& weight_x,
-	const FloatList& weight_y);
+	virtual void   SetConstraints(const std::vector<DWORD>& min_x,
+	const std::vector<DWORD>& min_y,
+	const std::vector<float>& weight_x,
+	const std::vector<float>& weight_y);
 
-	virtual void   SetConstraints(const FloatList& min_x,
-	const FloatList& min_y,
-	const FloatList& weight_x,
-	const FloatList& weight_y);
+	virtual void   SetConstraints(const std::vector<float>& min_x,
+	const std::vector<float>& min_y,
+	const std::vector<float>& weight_x,
+	const std::vector<float>& weight_y);
 
 	virtual void   SetConstraints(int            ncols,
 	int            nrows,
@@ -54,12 +53,12 @@ public:
 
 protected:
 	virtual void   ScaleWeights();
-	virtual void   CalcCells(DWORD w, DWORD h, ArrayList& cell_x, ArrayList& cell_y);
+	virtual void   CalcCells(DWORD w, DWORD h, std::vector<DWORD>& cell_x, std::vector<DWORD>& cell_y);
 
-	ArrayList   cols;
-	ArrayList   rows;
-	FloatList   col_weights;
-	FloatList   row_weights;
+	std::vector<DWORD>   cols;
+	std::vector<DWORD>   rows;
+	std::vector<float>   col_weights;
+	std::vector<float>   row_weights;
 };
 
 #endif Layout_h

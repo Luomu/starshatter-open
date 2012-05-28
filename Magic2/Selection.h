@@ -15,11 +15,11 @@
 #ifndef Selection_h
 #define Selection_h
 
+#include <vector>
 #include "Polygon.h"
 #include "Graphic.h"
 #include "Video.h"
 #include "List.h"
-#include "ArrayList.h"
 
 // +--------------------------------------------------------------------+
 
@@ -49,7 +49,7 @@ public:
    void           UseView(ModelView* v){ model_view = v; }
    Model*         GetModel()     const { return model;   }
    List<Poly>&    GetPolys()           { return polys;   }
-   ArrayList&     GetVerts()           { return verts;   }
+   std::vector<DWORD>&     GetVerts()  { return verts;   }
 
    virtual void   Clear()              { polys.clear(); 
                                          verts.clear();  }
@@ -65,7 +65,7 @@ protected:
    Model*         model;
    ModelView*     model_view;
    List<Poly>     polys;
-   ArrayList      verts;
+   std::vector<DWORD> verts;
 };
 
 // +--------------------------------------------------------------------+

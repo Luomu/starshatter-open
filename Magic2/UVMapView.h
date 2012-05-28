@@ -16,10 +16,10 @@
 #ifndef UVMapView_h
 #define UVMapView_h
 
+#include <vector>
 #include "View.h"
 #include "Polygon.h"
 #include "List.h"
-#include "ArrayList.h"
 
 // +--------------------------------------------------------------------+
 
@@ -74,7 +74,7 @@ protected:
    int         select_mode;
    bool        active;
 
-   ArrayList   selverts;
+   std::vector<DWORD>   selverts;
 };
 
 // +--------------------------------------------------------------------+

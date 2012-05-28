@@ -182,8 +182,8 @@ UVMapView::DragBy(double dx, double dy)
    float    du  = (float) (dx/w);
    float    dv  = (float) (dy/h);
 
-   for (int i = 0; i < selverts.size(); i++) {
-      DWORD value = selverts[i];
+   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+      DWORD value = *svi;
       DWORD p     = value >> 16;
       DWORD n     = value & 0xffff;
 
@@ -266,10 +266,21 @@ UVMapView::End()
                DWORD value   = (p_index << 16) | i;
 
                if (select_mode == SELECT_REMOVE) {
-                  selverts.remove(value);
+				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+					   if (*svi == value) {
+						   selverts.erase(svi);
+					   }
+				   }
                }
-               else if (!selverts.contains(value)) {
-                  selverts.append(value);
+               else {
+				   bool contains = false;
+				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+					   if (*svi == value) {
+							contains = true;
+					   }
+				   }
+				   if (!contains)
+					   selverts.push_back(value);
                }
             }
          }
@@ -302,10 +313,19 @@ UVMapView::End()
                DWORD value   = (p_index << 16) | i;
 
                if (select_mode == SELECT_REMOVE) {
-                  selverts.remove(value);
+				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+					   if (*svi == value)
+						   selverts.erase(svi);
+				   }
                }
-               else if (!selverts.contains(value)) {
-                  selverts.append(value);
+               else {
+				   bool contains = false;
+				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+					   if (*svi == value)
+						   contains = true;
+				   }
+				   if (!contains)
+					   selverts.push_back(value);
                }
             }
          }
@@ -332,7 +352,7 @@ UVMapView::SelectAll()
       for (int i = 0; i < p->nverts; i++) {
          WORD  p_index = iter.index();
          DWORD value   = (p_index << 16) | i;
-         selverts.append(value);
+		 selverts.push_back(value);
       }
    }
 }
@@ -357,10 +377,17 @@ UVMapView::SelectInverse()
          WORD  p_index = iter.index();
          DWORD value   = (p_index << 16) | i;
 
-         if (selverts.contains(value))
-            selverts.remove(value);
+		 bool contains = false;
+		 auto svi = selverts.begin();
+		 for (; svi != selverts.end(); ++svi) {
+			 if (*svi == value) contains = true;
+			 break;
+		 }
+
+         if (contains)
+            selverts.erase(svi);
          else
-            selverts.append(value);
+			 selverts.push_back(value);
       }
    }
 }
@@ -371,7 +398,13 @@ UVMapView::IsSelected(Poly* poly, WORD v)
    WORD p = polys.index(poly);
    DWORD value = (p << 16) | v;
 
-   return selverts.contains(value);
+   bool contains = false;
+	
+	for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+		return true;
+	}
+
+   return false;
 }
 
 bool

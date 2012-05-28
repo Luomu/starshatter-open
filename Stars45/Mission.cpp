@@ -841,7 +841,7 @@ Mission::ParseEvent(TermStruct* val)
 				}
 
 				else if (pdef->term()->isArray()) {
-					FloatList plist;
+					std::vector<float> plist;
 					GetDefArray(plist, pdef, filename);
 
 					for (int i = 0; i < 10 && i < plist.size(); i++) {
@@ -861,7 +861,7 @@ Mission::ParseEvent(TermStruct* val)
 				}
 
 				else if (pdef->term()->isArray()) {
-					FloatList plist;
+					std::vector<float> plist;
 					GetDefArray(plist, pdef, filename);
 
 					for (int i = 0; i < 10 && i < plist.size(); i++) {

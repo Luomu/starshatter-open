@@ -63,7 +63,7 @@ Selection::Render(Video* video, DWORD flags)
       }
 
       if (model) {
-         for (int i = 0; i < verts.size(); i++) {
+         for (size_t i = 0; i < verts.size(); i++) {
             DWORD value = verts[i];
             WORD  index = (WORD) (value >> 16);
             WORD  vert  = (WORD) (value & 0xffff);
@@ -152,20 +152,41 @@ Selection::AddVert(WORD s, WORD v)
 {
    DWORD value = (s << 16) | v;
 
-   if (!verts.contains(value))
-      verts.append(value);
+   bool contains = false;
+   for (auto vi = verts.begin(); vi != verts.end(); ++vi) {
+	   if (*vi == value) {
+		   contains = true;
+		   break;
+	   }
+   }
+
+   if (!contains)
+      verts.push_back(value);
 }
 
 void
 Selection::RemoveVert(WORD s, WORD v)
 {
    DWORD value = (s << 16) | v;
-   verts.remove(value);
+   
+   for (auto vi = verts.begin(); vi != verts.end(); ++vi) {
+	   if (*vi == value) {
+		   verts.erase(vi);
+		   return;
+	   }
+   }
 }
 
 bool
 Selection::Contains(WORD s, WORD v) const
 {
-   DWORD value = (s << 16) | v;
-   return verts.contains(value);
+	DWORD value = (s << 16) | v;
+
+	for (auto vi = verts.begin(); vi != verts.end(); ++vi) {
+		if (*vi == value) {
+			return true;
+		}
+	}
+
+	return false;
 }

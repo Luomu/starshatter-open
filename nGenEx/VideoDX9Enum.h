@@ -18,8 +18,8 @@
 #include <d3d9.h>
 
 #include "Video.h"
-#include "ArrayList.h"
 #include "List.h"
+#include <vector>
 
 // +--------------------------------------------------------------------+
 
@@ -72,8 +72,8 @@ public:
 	bool     req_fullscreen;
 
 private:
-	HRESULT  EnumerateDevices(VideoDX9AdapterInfo* adapter_info, ArrayList& adapter_format_list);
-	HRESULT  EnumerateDeviceCombos(VideoDX9DeviceInfo* device_info, ArrayList& adapter_format_list);
+	HRESULT  EnumerateDevices(VideoDX9AdapterInfo* adapter_info, std::vector<D3DFORMAT>& adapter_format_list);
+	HRESULT  EnumerateDeviceCombos(VideoDX9DeviceInfo* device_info, std::vector<D3DFORMAT>& adapter_format_list);
 
 	void     BuildDepthStencilFormatList(VideoDX9DeviceCombo* device_combo);
 	void     BuildMultiSampleTypeList(VideoDX9DeviceCombo* device_combo);
@@ -82,7 +82,7 @@ private:
 	void     BuildPresentIntervalList(VideoDX9DeviceInfo* device_info, VideoDX9DeviceCombo* device_combo);
 
 	IDirect3D9*                d3d;
-	ArrayList                  allowed_adapter_format_list;
+	std::vector<D3DFORMAT>     allowed_adapter_format_list;
 
 	List<VideoDX9AdapterInfo>  adapter_info_list;
 	int                        adapter_index;
@@ -170,11 +170,11 @@ struct VideoDX9DeviceCombo
 	D3DFORMAT            back_buffer_format;
 	bool                 is_windowed;
 
-	ArrayList            vertex_processing_list;
-	ArrayList            depth_stencil_fmt_list;
-	ArrayList            multisample_type_list;
-	ArrayList            multisample_qual_list;
-	ArrayList            present_interval_list;
+	std::vector<int>					vertex_processing_list;
+	std::vector<D3DFORMAT>				depth_stencil_fmt_list;
+	std::vector<D3DMULTISAMPLE_TYPE>	multisample_type_list;
+	std::vector<DWORD>					multisample_qual_list;
+	std::vector<DWORD>					present_interval_list;
 
 	List<VideoDX9FormatConflict> conflict_list;
 };

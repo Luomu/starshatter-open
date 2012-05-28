@@ -15,10 +15,10 @@
 #ifndef ParseUtil_h
 #define ParseUtil_h
 
+#include <vector>
 #include "Types.h"
 #include "Geometry.h"
 #include "Color.h"
-#include "ArrayList.h"
 
 #include "Text.h"
 #include "Parser.h"
@@ -44,8 +44,8 @@ bool GetDefTime(int& dst, TermDef* def, const char* file);
 bool GetDefArray(int*    dst, int size, TermDef* def, const char* file);
 bool GetDefArray(float*  dst, int size, TermDef* def, const char* file);
 bool GetDefArray(double* dst, int size, TermDef* def, const char* file);
-bool GetDefArray(ArrayList& array,      TermDef* def, const char* file);
-bool GetDefArray(FloatList& array,      TermDef* def, const char* file);
+bool GetDefArray(std::vector<DWORD>& array,      TermDef* def, const char* file);
+bool GetDefArray(std::vector<float>& array,      TermDef* def, const char* file);
 
 // +--------------------------------------------------------------------+
 

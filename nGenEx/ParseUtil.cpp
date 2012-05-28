@@ -390,7 +390,7 @@ bool GetDefArray(double* dst, int size, TermDef* def, const char* file)
 
 // +--------------------------------------------------------------------+
 
-bool GetDefArray(ArrayList& array, TermDef* def, const char* file)
+bool GetDefArray(std::vector<DWORD>& array, TermDef* def, const char* file)
 {
 	if (!def || !def->term()) {
 		Print("WARNING: missing ARRAY TermDef in '%s'\n", file);
@@ -404,7 +404,7 @@ bool GetDefArray(ArrayList& array, TermDef* def, const char* file)
 		array.clear();
 
 		for (int i = 0; i < nelem; i++)
-		array.append((DWORD) (val->elements()->at(i)->isNumber()->value()));
+			array.push_back((DWORD) (val->elements()->at(i)->isNumber()->value()));
 
 		return true;
 	}
@@ -415,7 +415,7 @@ bool GetDefArray(ArrayList& array, TermDef* def, const char* file)
 	return false;
 }
 
-bool GetDefArray(FloatList& array, TermDef* def, const char* file)
+bool GetDefArray(std::vector<float>& array, TermDef* def, const char* file)
 {
 	if (!def || !def->term()) {
 		Print("WARNING: missing ARRAY TermDef in '%s'\n", file);
@@ -429,7 +429,7 @@ bool GetDefArray(FloatList& array, TermDef* def, const char* file)
 		array.clear();
 
 		for (int i = 0; i < nelem; i++)
-		array.append((float) (val->elements()->at(i)->isNumber()->value()));
+			array.push_back((float) (val->elements()->at(i)->isNumber()->value()));
 
 		return true;
 	}

@@ -15,11 +15,11 @@
 #ifndef FormDef_h
 #define FormDef_h
 
+#include <vector>
 #include "Types.h"
 #include "Geometry.h"
 #include "Color.h"
 #include "Text.h"
-#include "ArrayList.h"
 #include "List.h"
 
 // +--------------------------------------------------------------------+
@@ -66,10 +66,10 @@ class LayoutDef
 public:
 	static const char* TYPENAME() { return "LayoutDef"; }
 
-	ArrayList   x_mins;
-	ArrayList   y_mins;
-	FloatList   x_weights;
-	FloatList   y_weights;
+	std::vector<DWORD>   x_mins;
+	std::vector<DWORD>   y_mins;
+	std::vector<float>   x_weights;
+	std::vector<float>   y_weights;
 };
 
 // +--------------------------------------------------------------------+

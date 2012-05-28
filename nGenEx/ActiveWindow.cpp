@@ -12,6 +12,7 @@
 	Window class
 */
 
+#include <vector>
 #include "MemDebug.h"
 #include "ActiveWindow.h"
 #include "EventDispatch.h"
@@ -174,10 +175,10 @@ ActiveWindow::DoLayout()
 // +--------------------------------------------------------------------+
 
 void
-ActiveWindow::UseLayout(const ArrayList& min_x,
-const ArrayList& min_y,
-const FloatList& weight_x,
-const FloatList& weight_y)
+ActiveWindow::UseLayout(const std::vector<DWORD>& min_x,
+const std::vector<DWORD>& min_y,
+const std::vector<float>& weight_x,
+const std::vector<float>& weight_y)
 {
 	if (!layout)
 	layout = new(__FILE__,__LINE__) Layout;
@@ -187,10 +188,10 @@ const FloatList& weight_y)
 }
 
 void
-ActiveWindow::UseLayout(const FloatList& min_x,
-const FloatList& min_y,
-const FloatList& weight_x,
-const FloatList& weight_y)
+ActiveWindow::UseLayout(const std::vector<float>& min_x,
+const std::vector<float>& min_y,
+const std::vector<float>& weight_x,
+const std::vector<float>& weight_y)
 {
 	if (!layout)
 	layout = new(__FILE__,__LINE__) Layout;

@@ -346,7 +346,6 @@
   <ItemGroup>
     <ClCompile Include="ActiveWindow.cpp" />
     <ClCompile Include="Archive.cpp" />
-    <ClCompile Include="..\FoundationEx\ArrayList.cpp" />
     <ClCompile Include="AviFile.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Bmp.cpp" />
@@ -430,7 +429,6 @@
   <ItemGroup>
     <ClInclude Include="ActiveWindow.h" />
     <ClInclude Include="Archive.h" />
-    <ClInclude Include="..\FoundationEx\ArrayList.h" />
     <ClInclude Include="AviFile.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Bmp.h" />
