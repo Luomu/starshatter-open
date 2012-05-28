@@ -15,7 +15,7 @@
 
 #define VERSION      0x0010
 #define BLOCK_SIZE   1024
-#define MAX_FILES    4096
+#define MAX_FILES    8192
 #define FILE_BLOCK   1024
 #define NAMELEN      64
 
@@ -79,5 +79,8 @@ private:
    DWORD*      block_map;
    DWORD       nblocks;
 };
+
+extern std::wstring ToWideString(const std::string& str);
+
 
 #endif

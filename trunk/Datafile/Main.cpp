@@ -25,19 +25,23 @@ void insertFile(DataArchive& a, const char* sPath, WIN32_FIND_DATA* find)
 {
 	char	sFile[256];
 	char	sFlat[256];
-	char	sTemp[256];
+	std::string	sTemp;
 	DWORD	find_attrib_forbidden =
 		FILE_ATTRIBUTE_DIRECTORY |
 		FILE_ATTRIBUTE_HIDDEN    |
 		FILE_ATTRIBUTE_SYSTEM    |
 		FILE_ATTRIBUTE_OFFLINE;
 
-		if (sPath && *sPath)
-			sprintf(sFile, "%s/%s", sPath, find->cFileName);
-		else {
-			sprintf(sTemp, "%s", find->cFileName);
-		strcpy(sFile, sTemp); 
-	}
+		if (sPath && *sPath) {
+			sTemp = sPath;
+			sTemp += '/';
+			WideCharToMultiByte(CP_ACP,0,find->cFileName,-1, sFile,260, NULL, NULL);
+			sTemp += sFile;
+			strcpy(sFile, sTemp.c_str());
+		} else {
+			WideCharToMultiByte(CP_ACP,0,find->cFileName,-1, sFile,260, NULL, NULL);
+		}
+
 
 	if (find->dwFileAttributes & find_attrib_forbidden) {
 		printf("   Skipping:  %-48s \n", sFile);
@@ -132,23 +136,21 @@ void buildFile(DataArchive& a, const char* sPath, WIN32_FIND_DATA& find)
 	if (find.cFileName[0] == '.') {
 	} else if (find.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
 		char subdir[256];
-		if (sPath && *sPath)
-			sprintf(subdir, "%s/%s", sPath, find.cFileName);
+		std::string sTemp;
+		if (sPath && *sPath) {
+			sTemp = sPath;
+			sTemp += '/';
+			WideCharToMultiByte(CP_ACP,0,find.cFileName,-1, subdir,260, NULL, NULL);
+			sTemp += subdir;
+			strcpy(subdir, sTemp.c_str());
+		}
 		else
-			sprintf(subdir, "%s", find.cFileName);
+			WideCharToMultiByte(CP_ACP,0,find.cFileName,-1, subdir,256, NULL, NULL);
 
 		build(a, subdir);
 	} else {
 		insertFile(a, sPath, &find);
 	}
-}
-
-std::wstring ToWideString(const std::string& str)
-{
-	int stringLength = MultiByteToWideChar(CP_ACP, 0, str.data(), str.length(), 0, 0);
-	std::wstring wstr(stringLength, 0);
-	MultiByteToWideChar(CP_ACP, 0,  str.data(), str.length(), &wstr[0], stringLength);
-	return wstr;
 }
 
 void build(DataArchive& a, const char* sBasePath)

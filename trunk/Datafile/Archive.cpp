@@ -8,6 +8,7 @@
 
 */
 
+#include <string>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/types.h>
@@ -384,6 +385,14 @@ void DataArchive::Insert(const char* name)
 
 // +--------------------------------------------------------------------+
 
+std::wstring ToWideString(const std::string& str)
+{
+	int stringLength = MultiByteToWideChar(CP_ACP, 0, str.data(), str.length(), 0, 0);
+	std::wstring wstr(stringLength, 0);
+	MultiByteToWideChar(CP_ACP, 0,  str.data(), str.length(), &wstr[0], stringLength);
+	return wstr;
+}
+
 void DataArchive::Extract(const char* name)
 {
    int index = FindEntry(name);
@@ -396,6 +405,17 @@ void DataArchive::Extract(const char* name)
    BYTE* buf;
    ExpandEntry(index, buf);
    
+   std::string dirname = directory[index].name;
+   std::wstring wdirname = ToWideString(dirname.substr(0, dirname.find_first_of('/')));
+   CreateDirectory(wdirname.c_str(), NULL);
+   size_t offset = wdirname.length();
+   while (dirname.find_first_of('/', offset + 1) != std::string::npos) {
+	   wdirname.push_back('/');
+	   wdirname += ToWideString(dirname.substr(offset + 1, dirname.find_first_of('/', offset + 1) - offset - 1));
+	   CreateDirectory(wdirname.c_str(), NULL);
+	   offset = wdirname.length();
+   }
+
    FILE* f = fopen(directory[index].name, "wb");
    if (f) {
       fwrite(buf, directory[index].size_orig, 1, f);
