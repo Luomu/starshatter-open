@@ -32,6 +32,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "..\libpng\libpng.
 		{0F2DDC75-EE37-902B-0247-63A8EB8CD687} = {0F2DDC75-EE37-902B-0247-63A8EB8CD687}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Datafile", "..\Datafile\Datafile.vcxproj", "{ADBA4106-AFE3-43D2-88D9-308A7D75E372}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug x64|Win32 = Debug x64|Win32
@@ -108,6 +110,18 @@ Global
 		{86C01EAC-2406-40A7-B744-AA858B7607A9}.Release|Win32.Build.0 = Release|Win32
 		{86C01EAC-2406-40A7-B744-AA858B7607A9}.Release|x64.ActiveCfg = Release|x64
 		{86C01EAC-2406-40A7-B744-AA858B7607A9}.Release|x64.Build.0 = Release|x64
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug x64|Win32.ActiveCfg = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug x64|Win32.Build.0 = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug x64|x64.ActiveCfg = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug|Win32.Build.0 = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Debug|x64.ActiveCfg = Debug|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release x64|Win32.ActiveCfg = Release|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release x64|Win32.Build.0 = Release|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release x64|x64.ActiveCfg = Release|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release|Win32.ActiveCfg = Release|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release|Win32.Build.0 = Release|Win32
+		{ADBA4106-AFE3-43D2-88D9-308A7D75E372}.Release|x64.ActiveCfg = Release|Win32
 		{CADEA3B5-84A7-C4F6-9F8E-093FD371A4A1}.Debug x64|Win32.ActiveCfg = Debug x64|Win32
 		{CADEA3B5-84A7-C4F6-9F8E-093FD371A4A1}.Debug x64|Win32.Build.0 = Debug x64|Win32
 		{CADEA3B5-84A7-C4F6-9F8E-093FD371A4A1}.Debug x64|x64.ActiveCfg = Template|x64
