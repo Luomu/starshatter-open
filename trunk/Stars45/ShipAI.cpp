@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         ShipAI.cpp
@@ -104,7 +104,8 @@ ShipAI::SetWard(Ship* s)
 	if (s == ship->GetWard())
 	return;
 
-	ship->SetWard(s);
+    if (ship)
+        ship->SetWard(s);
 
 	Point form = RandomDirection();
 	form.SwapYZ();

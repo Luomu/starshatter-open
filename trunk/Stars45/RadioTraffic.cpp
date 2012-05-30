@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         RadioTraffic.cpp
@@ -371,14 +371,16 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 
 	RadioVox* vox = new(__FILE__,__LINE__) RadioVox(vox_channel, path[vox_channel], txt_buf);
 
-	vox->AddPhrase(dst_buf);
-	vox->AddPhrase(src_buf);
-	vox->AddPhrase(act_buf);
+    if (vox) {
+        vox->AddPhrase(dst_buf);
+        vox->AddPhrase(src_buf);
+        vox->AddPhrase(act_buf);
 
-	if (vox && !vox->Start()) {
-		RadioView::Message(txt_buf);
-		delete vox;
-	}
+        if (!vox->Start()) {
+            RadioView::Message(txt_buf);
+            delete vox;
+        }
+    }
 }
 
 // +----------------------------------------------------------------------+

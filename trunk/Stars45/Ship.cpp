@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         Ship.cpp
@@ -2119,12 +2119,15 @@ Ship::CommandMode()
 	if (!dir || dir->Type() != ShipCtrl::DIR_TYPE) {
 		const char* msg = "Captain on the bridge";
 		RadioVox*   vox = new(__FILE__,__LINE__) RadioVox(0, "1", msg);
-		vox->AddPhrase(msg);
+		
+        if (vox) {
+            vox->AddPhrase(msg);
 
-		if (vox && !vox->Start()) {
-			RadioView::Message( RadioTraffic::TranslateVox(msg) );
-			delete vox;
-		}
+            if (!vox->Start()) {
+                RadioView::Message( RadioTraffic::TranslateVox(msg) );
+                delete vox;
+            }
+        }
 
 		SetControls(sim->GetControls());
 	}
@@ -2132,12 +2135,15 @@ Ship::CommandMode()
 	else {
 		const char* msg = "Exec, you have the conn";
 		RadioVox*   vox = new(__FILE__,__LINE__) RadioVox(0, "1", msg);
-		vox->AddPhrase(msg);
+		
+        if (vox) {
+            vox->AddPhrase(msg);
 
-		if (vox && !vox->Start()) {
-			RadioView::Message( RadioTraffic::TranslateVox(msg) );
-			delete vox;
-		}
+            if (!vox->Start()) {
+                RadioView::Message( RadioTraffic::TranslateVox(msg) );
+                delete vox;
+            }
+        }
 
 		SetControls(0);
 	}

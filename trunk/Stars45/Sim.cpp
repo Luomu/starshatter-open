@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         Sim.cpp
@@ -2733,11 +2733,14 @@ SimRegion::DamageShips()
 					// then delete the ship:
 					if (ship_destroyed) {
 						NetUtil::SendObjKill(ship, owner, shot->IsMissile() ? NetObjKill::KILL_SECONDARY : NetObjKill::KILL_PRIMARY);
-
+                        Director* director;
+                        
 						Print("    %s Killed %s (%s)\n", owner_name, ship->Name(), FormatGameTime());
 
-						// alert the killer
-						Director* director = owner->GetDirector();
+						if (owner)
+                            director = owner->GetDirector();
+                        
+                        // alert the killer
 						if (director && director->Type() > SteerAI::SEEKER && director->Type() < SteerAI::GROUND) {
 							ShipAI* shipAI = (ShipAI*) director;
 							shipAI->Splash(ship);

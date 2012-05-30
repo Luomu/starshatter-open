@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         Joystick.cpp
@@ -542,7 +542,7 @@ Joystick::Acquire()
 			if (ndev < 1)
 			EnumerateDevices();
 
-			if (CreateDevice(select))
+			if (CreateDevice(select) && pdev)
 			pdev->Acquire();
 		}
 

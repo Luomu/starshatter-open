@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         HUDView.cpp
@@ -1116,9 +1116,9 @@ HUDView::DrawContact(Contact* contact, int index)
 						Point delta_v;
 
 						if (c_ship)
-						delta_v = ship->Velocity() - c_ship->Velocity();
-						else
-						delta_v = ship->Velocity() - c_shot->Velocity();
+                            delta_v = ship->Velocity() - c_ship->Velocity();
+						else if (c_shot)
+                            delta_v = ship->Velocity() - c_shot->Velocity();
 
 						if (delta_v * ship->Velocity() < 0)    // losing ground
 						closing = '-';

@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         TacticalAI.cpp
@@ -194,7 +194,8 @@ TacticalAI::CheckObjectives()
 bool
 TacticalAI::ProcessOrders()
 {
-	ship_ai->ClearPatrol();
+	if (ship_ai)
+        ship_ai->ClearPatrol();
 
 	if (orders && orders->EMCON() > 0) {
 		int desired_emcon = orders->EMCON();

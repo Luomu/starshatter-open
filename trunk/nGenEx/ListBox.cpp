@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright ï¿½ 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         ListBox.cpp
@@ -83,10 +83,10 @@ public:
 
 int ListBoxItem::operator < (const ListBoxItem& item) const
 {
-	int sort_column   = listbox->GetSortColumn() - 1;
-	int sort_criteria = listbox->GetSortCriteria();
+    if (listbox && listbox == item.listbox) {
+        int sort_column   = listbox->GetSortColumn() - 1;
+        int sort_criteria = listbox->GetSortCriteria();
 
-	if (listbox && listbox == item.listbox) {
 		if (sort_column == -1) {
 			switch (sort_criteria) {
 			case ListBox::LIST_SORT_NUMERIC_DESCENDING:
@@ -130,10 +130,10 @@ int ListBoxItem::operator < (const ListBoxItem& item) const
 
 int ListBoxItem::operator <=(const ListBoxItem& item) const
 {
-	int sort_column   = listbox->GetSortColumn() - 1;
-	int sort_criteria = listbox->GetSortCriteria();
-
 	if (listbox && listbox == item.listbox) {
+    	int sort_column   = listbox->GetSortColumn() - 1;
+        int sort_criteria = listbox->GetSortCriteria();
+        
 		if (sort_column == -1) {
 			switch (sort_criteria) {
 			case ListBox::LIST_SORT_NUMERIC_DESCENDING:
@@ -177,10 +177,10 @@ int ListBoxItem::operator <=(const ListBoxItem& item) const
 
 int ListBoxItem::operator == (const ListBoxItem& item) const
 {
-	int sort_column   = listbox->GetSortColumn() - 1;
-	int sort_criteria = listbox->GetSortCriteria();
-
 	if (listbox && listbox == item.listbox) {
+        int sort_column   = listbox->GetSortColumn() - 1;
+        int sort_criteria = listbox->GetSortCriteria();
+        
 		if (sort_column == -1) {
 			switch (sort_criteria) {
 			case ListBox::LIST_SORT_NUMERIC_DESCENDING:
