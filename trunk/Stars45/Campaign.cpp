@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2006. All Rights Reserved.
+	Copyright (C) 1997-2006. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         Campaign.cpp
@@ -1678,9 +1678,9 @@ Campaign::DeleteMission(int id)
 		char full_path[256];
 
 		if (path[strlen(path)-1] == '/')
-			sprintf_s(full_path, "%s%s",  path, m->script);
+			sprintf_s(full_path, "%s%s",  path, m->script.data());
 		else
-			sprintf_s(full_path, "%s/%s", path, m->script);
+			sprintf_s(full_path, "%s/%s", path, m->script.data());
 
 		DeleteFile(full_path);
 		Load();

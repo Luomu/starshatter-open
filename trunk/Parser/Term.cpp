@@ -1,6 +1,6 @@
 /*  Project STARS
     John DiCamillo Software Consulting
-    Copyright © 1997-2000. All Rights Reserved.
+    Copyright (C) 1997-2000. All Rights Reserved.
 
     SUBSYSTEM:    Stars
     FILE:         Term.cpp
@@ -34,7 +34,7 @@ error(char* s1, char* s2)
 
 void TermBool::print(int level)  { if (level > 0) Print(val? "true" : "false"); else Print("..."); }
 void TermNumber::print(int level){ if (level > 0) Print("%g", val);     else Print("..."); }
-void TermText::print(int level)  { if (level > 0) Print("\"%s\"", val); else Print("..."); }
+void TermText::print(int level)  { if (level > 0) Print("\"%s\"", val.data()); else Print("..."); }
 
 // +-------------------------------------------------------------------+
 

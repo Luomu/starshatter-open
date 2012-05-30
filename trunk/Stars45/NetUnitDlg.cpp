@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         NetUnitDlg.cpp
@@ -581,7 +581,7 @@ NetUnitDlg::OnBan(AWEvent* event)
 		ConfirmDlg* confirm = manager->GetConfirmDlg();
 		if (confirm) {
 			char msg[512];
-			sprintf_s(msg, Game::GetText("NetUnitDlg.are-you-sure").data(), u->Name());
+			sprintf_s(msg, Game::GetText("NetUnitDlg.are-you-sure").data(), u->Name().data());
 			confirm->SetMessage(msg);
 			confirm->SetTitle(Game::GetText("NetUnitDlg.confirm-ban"));
 			confirm->SetParentControl(btn_ban);

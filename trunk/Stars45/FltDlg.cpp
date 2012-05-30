@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         FltDlg.cpp
@@ -136,7 +136,7 @@ FltDlg::SetShip(Ship* s)
 						char filter[64];
 						sprintf_s(filter, "%s %s",
 						hangar->SquadronDesign(i)->abrv,
-						hangar->SquadronName(i));
+						hangar->SquadronName(i).data());
 
 						filter_list->AddItem(filter);
 					}

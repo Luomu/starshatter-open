@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         CombatGroup.cpp
@@ -493,7 +493,7 @@ CombatGroup::GetDescription() const
 	case LCA_SQUADRON:         sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.LCA_SQUADRON").data(), name_desc); break;
 
 	case BATTALION:            sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTALION").data(), name_desc); break;
-	case STATION:              sprintf_s(desc, "%s %s", Game::GetText("CombatGroup.STATION").data(), name); break;
+	case STATION:              sprintf_s(desc, "%s %s", Game::GetText("CombatGroup.STATION").data(), name.data()); break;
 	case STARBASE:             sprintf_s(desc, "%s %d%s", Game::GetText("CombatGroup.STARBASE").data(), id, name_desc); break;
 	case MINEFIELD:            sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.MINEFIELD").data(), name_desc); break;
 	case BATTERY:              sprintf_s(desc, "%s %s%s", GetOrdinal(), Game::GetText("CombatGroup.BATTERY").data(), name_desc); break;
@@ -1199,7 +1199,7 @@ CombatGroup::LoadOrderOfBattle(const char* filename, int team, Combatant* combat
 	while (term);
 
 	loader->ReleaseBuffer(block);
-	Print("Order of Battle Loaded (%s).\n", force ? force->Name() : "unknown force");
+	Print("Order of Battle Loaded (%s).\n", force ? force->Name().data() : "unknown force");
 
 	if (force)
 	force->CalcValue();
@@ -1460,7 +1460,7 @@ CombatGroup::MergeOrderOfBattle(BYTE* block, const char* filename, int team, Com
 	}
 	while (term);
 
-	Print("Order of Battle Loaded (%s).\n", force ? force->Name() : "unknown force");
+	Print("Order of Battle Loaded (%s).\n", force ? force->Name().data() : "unknown force");
 
 	if (force)
 	force->CalcValue();
@@ -1528,13 +1528,13 @@ SaveCombatGroup(FILE* f, CombatGroup* g)
 	fprintf(f, "group: {");
 	fprintf(f, " type: %s,",       CombatGroup::NameFromType(g->Type()));
 	fprintf(f, " id: %d,",         g->GetID());
-	fprintf(f, " name: \"%s\",",   g->Name());
+	fprintf(f, " name: \"%s\",",   g->Name().data());
 	fprintf(f, " intel: %s,",      Intel::NameFromIntel(g->IntelLevel()));
 	fprintf(f, " iff: %d,",        g->GetIFF());
 	fprintf(f, " unit_index: %d,", g->UnitIndex());
 
 	if (g->GetRegion().length()) {
-		fprintf(f, " region:\"%s\",", g->GetRegion());
+		fprintf(f, " region:\"%s\",", g->GetRegion().data());
 	}
 
 	if (g->GetAssignedSystem().length()) {

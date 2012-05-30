@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         NetGameClient.cpp
@@ -72,7 +72,7 @@ NetGameClient::NetGameClient()
 	}
 
 	if (server_name.length() && port > 0) {
-		Print("  '%s' is a client of '%s'\n", me.Name(), server_name);
+		Print("  '%s' is a client of '%s'\n", me.Name(), server_name.data());
 		link = new(__FILE__,__LINE__) NetLink;
 		server_id = link->AddPeer(NetAddr(server_name, port));
 		SendJoinRequest();

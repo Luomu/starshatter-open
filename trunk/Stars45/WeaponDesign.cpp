@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         WeaponDesign.cpp
@@ -696,7 +696,7 @@ WeaponDesign::FindModDesign(const char* name)
 		WeaponDesign* d = mod_catalog.at(i);
 
 		if (d->name == name) {
-			Print("WeaponDesign: found mod weapon '%s'\n", d->name);
+			Print("WeaponDesign: found mod weapon '%s'\n", d->name.data());
 			return d;
 		}
 	}

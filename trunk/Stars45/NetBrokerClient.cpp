@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         NetBrokerClient.cpp
@@ -83,7 +83,7 @@ const char* password)
 
 		if (response) {
 			::Print("  Response Status:  %d\n", response->Status());
-			::Print("  Response Content: %s\n", response->Content());
+			::Print("  Response Content: %s\n", response->Content().data());
 		}
 		else {
 			::Print("  No response.\n");
