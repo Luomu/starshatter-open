@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         Shot.cpp
@@ -133,7 +133,7 @@ charge(1.0f), design(dsn), offset(1.0e5f), altitude_agl(-1.0e6f), hit_target(fal
 		Observe((SimObject*) owner);
 	}
 
-	sprintf_s(name, "Shot(%s)", design->name);
+	sprintf_s(name, "Shot(%s)", design->name.data());
 }
 
 // +--------------------------------------------------------------------+

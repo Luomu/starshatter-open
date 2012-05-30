@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         ShipDesign.cpp
@@ -532,14 +532,14 @@ void AddModCatalogEntry(const char* design_name, const char* design_path)
 	Term*  term = parser.ParseTerm();
 
 	if (!term) {
-		Print("ERROR: could not parse '%s'\n", file);
+		Print("ERROR: could not parse '%s'\n", file.data());
 		delete block;
 		return;
 	}
 	else {
 		TermText* file_type = term->isText();
 		if (!file_type || file_type->value() != "SHIP") {
-			Print("ERROR: invalid ship design file '%s'\n", file);
+			Print("ERROR: invalid ship design file '%s'\n", file.data());
 			delete block;
 			return;
 		}
@@ -560,20 +560,20 @@ void AddModCatalogEntry(const char* design_name, const char* design_path)
 
 				if (defname == "class") {
 					if (!GetDefText(type, def, file)) {
-						Print("WARNING: invalid or missing ship class in '%s'\n", file);
+						Print("WARNING: invalid or missing ship class in '%s'\n", file.data());
 						valid = false;
 					}
 				}
 
 				else if (defname == "name") {
 					if (!GetDefText(name, def, file)) {
-						Print("WARNING: invalid or missing ship name in '%s'\n", file);
+						Print("WARNING: invalid or missing ship name in '%s'\n", file.data());
 						valid = false;
 					}
 				}
 			}
 			else {
-				Print("WARNING: term ignored in '%s'\n", file);
+				Print("WARNING: term ignored in '%s'\n", file.data());
 				term->print();
 			}
 		}
@@ -777,13 +777,13 @@ ShipDesign::LoadSkins(const char* path, const char* archive)
 		ShipDesign* design = 0;
 
 		if (!term) {
-			Print("ERROR: could not parse '%s'\n", filename);
+			Print("ERROR: could not parse '%s'\n", filename.data());
 			return;
 		}
 		else {
 			TermText* file_type = term->isText();
 			if (!file_type || file_type->value() != "SKIN") {
-				Print("ERROR: invalid skin file '%s'\n", filename);
+				Print("ERROR: invalid skin file '%s'\n", filename.data());
 				return;
 			}
 		}
@@ -807,7 +807,7 @@ ShipDesign::LoadSkins(const char* path, const char* archive)
 
 					else if (defname == "skin" && design != 0) {
 						if (!def->term() || !def->term()->isStruct()) {
-							Print("WARNING: skin struct missing in '%s'\n", filename);
+							Print("WARNING: skin struct missing in '%s'\n", filename.data());
 						}
 						else {
 							TermStruct* val = def->term()->isStruct();
@@ -3215,7 +3215,7 @@ ShipDesign::ParseShield(TermStruct* val)
 			if (model_name.length()) {
 				shield_model = new(__FILE__,__LINE__) Model;
 				if (!shield_model->Load(model_name, scale)) {
-					Print("ERROR: Could not load shield model '%s'\n", model_name);
+					Print("ERROR: Could not load shield model '%s'\n", model_name.data());
 					delete shield_model;
 					shield_model = 0;
 					valid = false;
@@ -3314,7 +3314,7 @@ ShipDesign::ParseDeathSpiral(TermStruct* val)
 					GetDefText(model_name, def, filename);
 					Model* model = new(__FILE__,__LINE__) Model;
 					if (!model->Load(model_name, scale)) {
-						Print("Could not load debris model '%s'\n", model_name);
+						Print("Could not load debris model '%s'\n", model_name.data());
 						delete model;
 						return;
 					}

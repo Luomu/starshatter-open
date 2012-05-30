@@ -1,6 +1,6 @@
 /*  Project STARS
     John DiCamillo Software Consulting
-    Copyright © 1997-2000. All Rights Reserved.
+    Copyright (C) 1997-2000. All Rights Reserved.
 
     SUBSYSTEM:    obelisk
     FILE:         reader.cpp
@@ -63,7 +63,7 @@ FileReader::more()
    std::fstream fin(filename, std::fstream::in);
 
    if (!fin) {
-      Print("ERROR(Parse): Could not open file '%s'\n", filename);
+      Print("ERROR(Parse): Could not open file '%s'\n", filename.data());
       return Text();
    }
 
