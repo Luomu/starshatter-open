@@ -17,8 +17,8 @@
 #include "SoundCard.h"
 #include "Wave.h"
 
-#include <vorbis/codec.h>
-#include <vorbis/vorbisfile.h>
+#include "vorbis/codec.h"
+#include "vorbis/vorbisfile.h"
 
 // +--------------------------------------------------------------------+
 
