@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         Mission.cpp
@@ -844,7 +844,7 @@ Mission::ParseEvent(TermStruct* val)
 					std::vector<float> plist;
 					GetDefArray(plist, pdef, filename);
 
-					for (int i = 0; i < 10 && i < plist.size(); i++) {
+					for (int i = 0; i < 10 && i < (int)plist.size(); i++) {
 						float f = plist[i];
 						event->event_param[i] = (int) f;
 						event->event_nparams  = i + 1;
@@ -864,7 +864,7 @@ Mission::ParseEvent(TermStruct* val)
 					std::vector<float> plist;
 					GetDefArray(plist, pdef, filename);
 
-					for (int i = 0; i < 10 && i < plist.size(); i++) {
+					for (int i = 0; i < 10 && i < (int)plist.size(); i++) {
 						float f = plist[i];
 						event->trigger_param[i] = (int) f;
 						event->trigger_nparams  = i + 1;
