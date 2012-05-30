@@ -1,6 +1,6 @@
 /*  Project Starshatter 4.5
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         MsnWepDlg.cpp
@@ -208,7 +208,7 @@ MsnWepDlg::SetupControls()
 		}
 	}
 
-	if (lbl_weight) {
+	if (lbl_weight && design) {
 		if (loaded_mass < 1)
 		loaded_mass = design->mass;
 

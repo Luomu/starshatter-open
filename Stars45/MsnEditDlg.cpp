@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         MsnEditDlg.cpp
@@ -478,10 +478,10 @@ MsnEditDlg::ScrapeForm()
 		Galaxy*     galaxy = Galaxy::GetInstance();
 		StarSystem* system = 0;
 
-		if (galaxy)
+		if (galaxy && cmb_system)
 		system = galaxy->GetSystem(cmb_system->GetSelectedItem());
 
-		if (cmb_system && system) {
+		if (system) {
 			mission->ClearSystemList();
 			mission->SetStarSystem(system);
 

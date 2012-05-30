@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         MsnPkgDlg.cpp
@@ -205,12 +205,12 @@ MsnPkgDlg::DrawThreats()
 	if (!mission) return;
 
 	MissionElement* player = mission->GetPlayer();
+    
+    if (!player) return;
+    
 	Text            rgn0   = player->Region();
 	Text            rgn1;
 	int             iff    = player->GetIFF();
-
-	if (!player)
-	return;
 
 	ListIter<Instruction> nav = player->NavList();
 	while (++nav) {

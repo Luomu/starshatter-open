@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         MFD.cpp
@@ -1156,10 +1156,10 @@ MFD::DrawStatusMFD()
 	int   row = 0;
 	char  txt[32];
 
-	if (status_rect.y > 320 && !ship->IsStarship())
-	status_rect.y += 32;
+    if (ship) {
+        if (status_rect.y > 320 && !ship->IsStarship())
+            status_rect.y += 32;
 
-	if (ship) {
 		Drive* drive = ship->GetDrive();
 		if (drive) {
 			DrawMFDText(row++, Game::GetText("MFD.status.THRUST").data(), status_rect, DT_LEFT);

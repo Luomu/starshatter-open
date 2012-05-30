@@ -784,12 +784,17 @@ CampaignMissionFighter::CreatePatrols()
 
 			StarSystem*    system      = mission->GetStarSystem();
 			CombatGroup*   base        = squadron->FindCarrier();
+            
+            if (!base)
+                continue;
+            
 			OrbitalRegion* region      = system->FindRegion(base->GetRegion());
+            
+            if (!region)
+                continue;
+            
 			int            patrol_type = Mission::PATROL;
 			Point          base_loc;
-
-			if (!base || !region)
-			continue;
 
 			if (region->Type() == Orbital::TERRAIN) {
 				patrol_type = Mission::AIR_PATROL;

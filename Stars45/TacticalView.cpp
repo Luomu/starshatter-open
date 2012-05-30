@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         TacticalView.cpp
@@ -261,13 +261,13 @@ TacticalView::DrawMouseRect()
 void
 TacticalView::DrawSelection(Ship* seln)
 {
+    if (!seln)
+        return;
+    
 	Graphic* g = seln->Rep();
 	Rect r = g->ScreenRect();
-
-	Point mark_pt;
-
-	if (seln)
-	mark_pt = seln->Location();
+    
+	Point mark_pt = seln->Location();
 
 	projector->Transform(mark_pt);
 
