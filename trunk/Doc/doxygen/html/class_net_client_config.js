@@ -1,0 +1,25 @@
+var class_net_client_config =
+[
+    [ "NetClientConfig", "class_net_client_config.html#a810bbc796da052d07322c5c7fe9959f5", null ],
+    [ "~NetClientConfig", "class_net_client_config.html#af57ce7eea9b99898a7ea5b09c67c77be", null ],
+    [ "AddServer", "class_net_client_config.html#ab99ef535e3914b91e57467cffb17dc2a", null ],
+    [ "Close", "class_net_client_config.html#ae438241c0389ad7344aae4073c395b9b", null ],
+    [ "CreateConnection", "class_net_client_config.html#a05e7b49c3404db979f6182b49eaac7de", null ],
+    [ "DelServer", "class_net_client_config.html#a02421098ce25cf3b0505725f7098a9a7", null ],
+    [ "Download", "class_net_client_config.html#af682b2cc3564176ff3eeb98d3a311d03", null ],
+    [ "DropConnection", "class_net_client_config.html#a924f477780fff9d4267dda1f36c33d5e", null ],
+    [ "GetConnection", "class_net_client_config.html#aa28fb9d190c9e50c39820580c43cd0c4", null ],
+    [ "GetHostRequest", "class_net_client_config.html#ae03872a3035b67bb2edeb9f139bf522b", null ],
+    [ "GetInstance", "class_net_client_config.html#a4d0ea1f095cff30ec51a26d13dedf21f", null ],
+    [ "GetSelectedServer", "class_net_client_config.html#acba48962374ef3ef829c46b6edac73e6", null ],
+    [ "GetServerIndex", "class_net_client_config.html#af9fe93eaeee2e7fb9034340ba5cd3d1f", null ],
+    [ "GetServerInfo", "class_net_client_config.html#abc45351cdb413cb8a1f0d58873d39702", null ],
+    [ "GetServerList", "class_net_client_config.html#aece1eb3105240ffca57aaf6cdfdb14b5", null ],
+    [ "Initialize", "class_net_client_config.html#ae2896fdf0678b1c31b75ecb62dc26cb8", null ],
+    [ "Load", "class_net_client_config.html#ab222f9b1e92e757aa4fed87748096d65", null ],
+    [ "Login", "class_net_client_config.html#afe0fa71e9e25295e6bf1fd4e6ac36ce5", null ],
+    [ "Logout", "class_net_client_config.html#a5ec619e1206151d1ffbf9dcdd767def8", null ],
+    [ "Save", "class_net_client_config.html#a54564d6df52729461bff241c2e81fbf5", null ],
+    [ "SetHostRequest", "class_net_client_config.html#af9b508340a17c6c224d0440fa02c2410", null ],
+    [ "SetServerIndex", "class_net_client_config.html#ab5001deab8dd109c17b520a17b862a75", null ]
+];

@@ -1,0 +1,25 @@
+var _joystick_8cpp =
+[
+    [ "DIRECTINPUT_VERSION", "_joystick_8cpp.html#a1d7ab29fdefabdb4e7e7cd27ac4c9934", null ],
+    [ "JOY_POVDNLEFT", "_joystick_8cpp.html#a537897864e3af07b74ee9dbfdcfb0b50", null ],
+    [ "JOY_POVDNRIGHT", "_joystick_8cpp.html#a7fdc5e917645d802d7726af7944ad9b2", null ],
+    [ "JOY_POVUPLEFT", "_joystick_8cpp.html#a3daac44b714cfbbe234563a98446150b", null ],
+    [ "JOY_POVUPRIGHT", "_joystick_8cpp.html#ae754b4163d8910c04a7909753ead3449", null ],
+    [ "CreateDevice", "_joystick_8cpp.html#a6286036193c5090b7c84cfd449daa635", null ],
+    [ "DIErrStr", "_joystick_8cpp.html#a5cb3b7475ff21c5810ab68655ae42aab", null ],
+    [ "DirectInputError", "_joystick_8cpp.html#a0819986574e27fff4e5bdcf9acbfa9fd", null ],
+    [ "EnumJoystick", "_joystick_8cpp.html#ae017060f53a6485d9129519aea34c195", null ],
+    [ "ReleaseDirectInput", "_joystick_8cpp.html#aa057e5a6af06c56f91d250e290c03db1", null ],
+    [ "sqr", "_joystick_8cpp.html#aa00b475751caa9d2d644055f601776d7", null ],
+    [ "devices", "_joystick_8cpp.html#abde8fa139519cd0eaaad14415923a402", null ],
+    [ "errstrbuf", "_joystick_8cpp.html#ad57f8b0a7a139dbcf396e2c9295a9c5d", null ],
+    [ "idev", "_joystick_8cpp.html#a674164df13ff6d5170ec9772bed97a25", null ],
+    [ "joyinfo", "_joystick_8cpp.html#a1bb2197bb0814d36a2cf5db5d7797821", null ],
+    [ "joystate", "_joystick_8cpp.html#a4f4e85162ddc9f8004f3682babca5d3d", null ],
+    [ "joystick", "_joystick_8cpp.html#a1438f30b941eb2a8e03b78b47cd91eb0", null ],
+    [ "MAX_DEVICES", "_joystick_8cpp.html#af48027a968bd368128d157374cf69b5e", null ],
+    [ "ndev", "_joystick_8cpp.html#ac98aaabbb95581f993237a452311e049", null ],
+    [ "pdev", "_joystick_8cpp.html#a60347fed9279df93a87727bd1e0fa618", null ],
+    [ "pdi", "_joystick_8cpp.html#ad9b15fd49efeac27f6ea5d8c403f289d", null ],
+    [ "strikes", "_joystick_8cpp.html#a41ca0a6613179ff4ca3a0750ae5e36aa", null ]
+];

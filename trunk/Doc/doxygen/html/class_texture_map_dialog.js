@@ -1,0 +1,25 @@
+var class_texture_map_dialog =
+[
+    [ "TextureMapDialog", "class_texture_map_dialog.html#ae55b89df312ed065674bd3db52082ca8", null ],
+    [ "~TextureMapDialog", "class_texture_map_dialog.html#a594eec10d6ef4ad02b4aa3459ed6c884", null ],
+    [ "DoDataExchange", "class_texture_map_dialog.html#a49bff4412441c363c3b12e0f8d84a7f3", null ],
+    [ "OnAlign", "class_texture_map_dialog.html#aaae51fbcf284037bceefe3457a158296", null ],
+    [ "OnInitDialog", "class_texture_map_dialog.html#a417b7e6dfc92813c816fceeaef44efef", null ],
+    [ "OnPaint", "class_texture_map_dialog.html#a254a4a5ebdd25a57ba5402f8cfbdc3da", null ],
+    [ "OnSelectMaterial", "class_texture_map_dialog.html#a6314f532a5fe7191c0f547fa49b7b0b1", null ],
+    [ "blank", "class_texture_map_dialog.html#ae8776ce9a7532b72ec06c5f189ccc252", null ],
+    [ "doc", "class_texture_map_dialog.html#a1f8feb236a3288832b4fc27ced69cec9", null ],
+    [ "material", "class_texture_map_dialog.html#aa8049cf70bbca2d40b61f9eab2e1c360", null ],
+    [ "mAxis", "class_texture_map_dialog.html#a5a62c0b39a40c23162f0642aeabbf20f", null ],
+    [ "mFlip", "class_texture_map_dialog.html#a66933a0a362e66a94f8b8f9d3802201a", null ],
+    [ "mMapping", "class_texture_map_dialog.html#abb436db219cb91d0afd442dc29c4880d", null ],
+    [ "mMapType", "class_texture_map_dialog.html#aaf09e11798b34cf655df0f84f3715e10", null ],
+    [ "mMaterialIndex", "class_texture_map_dialog.html#a4c0aa434fa6cc81bd8c234f8f1ecc4c2", null ],
+    [ "mMaterialList", "class_texture_map_dialog.html#a8966d823d2a3ff6e86eb5e09f707fbda", null ],
+    [ "mMaterialThumb", "class_texture_map_dialog.html#a73cb219b3cdb346a191d0f98caa892f2", null ],
+    [ "mMirror", "class_texture_map_dialog.html#a2fc50abaf31f1215e296ea34c8a80a0f", null ],
+    [ "model", "class_texture_map_dialog.html#a77da6ede1a00b87f2649e1aed70c34a1", null ],
+    [ "mRotate", "class_texture_map_dialog.html#aa329298ab5ec9ebc53fa9ff6374f945a", null ],
+    [ "mScaleU", "class_texture_map_dialog.html#ac8b44438c4d8ee3ad7d6f46a7a0846d4", null ],
+    [ "mScaleV", "class_texture_map_dialog.html#ae90ea1a1454f76d7aabf11da800bb393", null ]
+];

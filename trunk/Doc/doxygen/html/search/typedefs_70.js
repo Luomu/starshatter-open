@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['pf_5fnotifycallback',['PF_NOTIFYCALLBACK',['../_n_p_client_8h.html#a68527c5feea6b179f80907cdd0e00f4f',1,'NPClient.h']]],
+  ['pf_5fnp_5fgetdata',['PF_NP_GETDATA',['../_n_p_client_8h.html#a873f99d559a7e6e0b7df908288c5cafc',1,'NPClient.h']]],
+  ['pf_5fnp_5fgetsignature',['PF_NP_GETSIGNATURE',['../_n_p_client_8h.html#a09e8c04eed2eec4849768db058ff0006',1,'NPClient.h']]],
+  ['pf_5fnp_5fqueryversion',['PF_NP_QUERYVERSION',['../_n_p_client_8h.html#a66588669df669b6e1aebb7676eaf019f',1,'NPClient.h']]],
+  ['pf_5fnp_5frecenter',['PF_NP_RECENTER',['../_n_p_client_8h.html#a8352e347a70f6ed2198d4bd383a6f43f',1,'NPClient.h']]],
+  ['pf_5fnp_5fregisternotify',['PF_NP_REGISTERNOTIFY',['../_n_p_client_8h.html#ab98150fe5bd587913521ff89900dbc6f',1,'NPClient.h']]],
+  ['pf_5fnp_5fregisterprogramprofileid',['PF_NP_REGISTERPROGRAMPROFILEID',['../_n_p_client_8h.html#a70d7a471151756477bcdc8889210d57c',1,'NPClient.h']]],
+  ['pf_5fnp_5fregisterwindowhandle',['PF_NP_REGISTERWINDOWHANDLE',['../_n_p_client_8h.html#a7cf0c3e3372b538632dd44827a56278b',1,'NPClient.h']]],
+  ['pf_5fnp_5frequestdata',['PF_NP_REQUESTDATA',['../_n_p_client_8h.html#a9e4dfe9bf3c3f2d92121d2f2c41ce38d',1,'NPClient.h']]],
+  ['pf_5fnp_5fstartcursor',['PF_NP_STARTCURSOR',['../_n_p_client_8h.html#ab0e1dd5e2e257f65ca650b6c1dacc6f6',1,'NPClient.h']]],
+  ['pf_5fnp_5fstartdatatransmission',['PF_NP_STARTDATATRANSMISSION',['../_n_p_client_8h.html#aff0333adec30b53d590c80c23af46a9e',1,'NPClient.h']]],
+  ['pf_5fnp_5fstopcursor',['PF_NP_STOPCURSOR',['../_n_p_client_8h.html#a37ab184c6dfb05450573a1c72e699184',1,'NPClient.h']]],
+  ['pf_5fnp_5fstopdatatransmission',['PF_NP_STOPDATATRANSMISSION',['../_n_p_client_8h.html#a96d880d8909e58573f65edddd985576a',1,'NPClient.h']]],
+  ['pf_5fnp_5funregisternotify',['PF_NP_UNREGISTERNOTIFY',['../_n_p_client_8h.html#a13e3fa7af444b6a940d43555dc8abee1',1,'NPClient.h']]],
+  ['pf_5fnp_5funregisterwindowhandle',['PF_NP_UNREGISTERWINDOWHANDLE',['../_n_p_client_8h.html#a3cb9d6f89f887a24925ee64d79455900',1,'NPClient.h']]],
+  ['pfvawe',['PFVAWE',['../_active_window_8h.html#a51a9b02cfd470a4ecbb0e48c111617f7',1,'ActiveWindow.h']]]
+];

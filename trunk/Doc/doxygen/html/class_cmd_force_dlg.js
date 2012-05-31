@@ -1,0 +1,27 @@
+var class_cmd_force_dlg =
+[
+    [ "CmdForceDlg", "class_cmd_force_dlg.html#a1fb28415b78246b32a2db7506d9b6836", null ],
+    [ "~CmdForceDlg", "class_cmd_force_dlg.html#a5a887cc20dff5b9dc0eecbf881d2e22f", null ],
+    [ "AddCombatGroup", "class_cmd_force_dlg.html#a5a443f6a9a6ae3a52d1746bb3bbe2821", null ],
+    [ "CanTransfer", "class_cmd_force_dlg.html#a1a4dfc415525406c0a5428e7b5110abe", null ],
+    [ "ExecFrame", "class_cmd_force_dlg.html#a156d3122a8ead0e10f70f229feea802c", null ],
+    [ "IsVisible", "class_cmd_force_dlg.html#a325fdd5f2406a06eb37b1bd452f9f6da", null ],
+    [ "OnCombat", "class_cmd_force_dlg.html#a5f00e73abd10bbb2a02fc017a1ac4a06", null ],
+    [ "OnExit", "class_cmd_force_dlg.html#a9b648151f3b2bcde34ccda4bbc97b604", null ],
+    [ "OnForces", "class_cmd_force_dlg.html#a8fbfdd6f3089a4ef93f3ad6ac48de649", null ],
+    [ "OnMode", "class_cmd_force_dlg.html#a8f3c970ad713ebd645ecb1601a23a301", null ],
+    [ "OnSave", "class_cmd_force_dlg.html#a5173bbdaab7dd09d94448cf7754338ea", null ],
+    [ "OnTransfer", "class_cmd_force_dlg.html#a2d675913ea93dacfc0b69f0a1f25570c", null ],
+    [ "RegisterControls", "class_cmd_force_dlg.html#a554523028bb0016b2d556cc2ded5eff4", null ],
+    [ "Show", "class_cmd_force_dlg.html#add6f3241eb55472b80b931ce51ef8b80", null ],
+    [ "ShowCombatant", "class_cmd_force_dlg.html#a6deca3c501fd2b56ff1e1476fd665d87", null ],
+    [ "btn_transfer", "class_cmd_force_dlg.html#a610058e3e2cbd1844535b3404bd5abc1", null ],
+    [ "campaign", "class_cmd_force_dlg.html#a3221907aa9aeb4d755e85673771bd803", null ],
+    [ "cmb_forces", "class_cmd_force_dlg.html#a06358adf0d1bbfea4de6a778c6e077f8", null ],
+    [ "current_group", "class_cmd_force_dlg.html#a317df3cc0499df6a220298e4aa0f4bbe", null ],
+    [ "current_unit", "class_cmd_force_dlg.html#af697df5fb1b4ed26d9cf89a1380d0692", null ],
+    [ "lst_combat", "class_cmd_force_dlg.html#ab4a5a9610311b478604302e75a77867d", null ],
+    [ "lst_desc", "class_cmd_force_dlg.html#a1829c8a45fd4936cb6b272fcbf448ea0", null ],
+    [ "manager", "class_cmd_force_dlg.html#aed1038f9c61995efb8e8001ec6293605", null ],
+    [ "stars", "class_cmd_force_dlg.html#ae76fe9d60b2f6cdba44d86ee52420079", null ]
+];

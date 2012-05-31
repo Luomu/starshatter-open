@@ -1,0 +1,25 @@
+var class_video_d_x9_enum =
+[
+    [ "VP_TYPE", "class_video_d_x9_enum.html#a1af42083573d82c9dd1838be6e50473e", null ],
+    [ "VideoDX9Enum", "class_video_d_x9_enum.html#ab6ca829652c83e2b800d80d30ef6cd5e", null ],
+    [ "~VideoDX9Enum", "class_video_d_x9_enum.html#a661ce241be8af3494de630700200b2ae", null ],
+    [ "Enumerate", "class_video_d_x9_enum.html#a5e35d7ed41f475439901ed375f64a8af", null ],
+    [ "GetAdapterInfo", "class_video_d_x9_enum.html#abc03012e991ad2f43f75ea3eee0bd43c", null ],
+    [ "GetDeviceInfo", "class_video_d_x9_enum.html#af61cd79901fd429901b24b95e7c43a0b", null ],
+    [ "IsModeSupported", "class_video_d_x9_enum.html#a919985f4630fb3622f3ebe293df31bfc", null ],
+    [ "NumAdapters", "class_video_d_x9_enum.html#a4450799e24620c668a50fb898049678a", null ],
+    [ "SelectAdapter", "class_video_d_x9_enum.html#aef818528f96f958fc6f807ef3d4df9bc", null ],
+    [ "SetDirect3D9", "class_video_d_x9_enum.html#a84d0eafba822a9dce0e096be4675990e", null ],
+    [ "SuggestFullscreenSettings", "class_video_d_x9_enum.html#aed14fab179c3377ceece6ef17df835d1", null ],
+    [ "SuggestWindowSettings", "class_video_d_x9_enum.html#a02012517f41c3ef76b411db820ec8a7f", null ],
+    [ "min_alpha_bits", "class_video_d_x9_enum.html#a6d082f073fd3075b3816b0327da0ca76", null ],
+    [ "min_color_bits", "class_video_d_x9_enum.html#ab2bcc5515a6bf9b1cfbef2d5937d25bf", null ],
+    [ "min_depth_bits", "class_video_d_x9_enum.html#a159dfb9ce66c6e47d897719191131cdd", null ],
+    [ "min_height", "class_video_d_x9_enum.html#a98b72254f4c8676d1bc2a69a9e7eafe1", null ],
+    [ "min_stencil_bits", "class_video_d_x9_enum.html#a4e0447f5767fd017879eba2f5b3c93df", null ],
+    [ "min_width", "class_video_d_x9_enum.html#a02525bcc2aeb3e6548a85159cd29aae1", null ],
+    [ "req_fullscreen", "class_video_d_x9_enum.html#a5435c984a81aa6e0d96b6fe8226fff30", null ],
+    [ "req_windowed", "class_video_d_x9_enum.html#a9663056c1ff74368119ad76a65908fa0", null ],
+    [ "uses_depth_buffer", "class_video_d_x9_enum.html#ae13effc07d4ead44b9757f72707b8031", null ],
+    [ "uses_mixed_vp", "class_video_d_x9_enum.html#aa095bd5962a6979f0e15cc4463b0b825", null ]
+];

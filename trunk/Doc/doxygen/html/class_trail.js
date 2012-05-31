@@ -1,0 +1,26 @@
+var class_trail =
+[
+    [ "Trail", "class_trail.html#ab2ed02e75236789f55094b4c29796696", null ],
+    [ "~Trail", "class_trail.html#a7b1e7ac4ba01eaf865dbcc15f99af913", null ],
+    [ "AddPoint", "class_trail.html#adb3cc66dce3422f3e0b905bf38541ff2", null ],
+    [ "AverageLength", "class_trail.html#af557b6f91726af0b552f3988d67912da", null ],
+    [ "Render", "class_trail.html#a0f8fae51c90678432ead5d146d584637", null ],
+    [ "SetDim", "class_trail.html#ad02248bdcb5cbfa2b0aca1a956f255cd", null ],
+    [ "SetWidth", "class_trail.html#a90ce7c7dfe88c45c53dad893c10ef5da", null ],
+    [ "UpdateVerts", "class_trail.html#ac3958c4337dc5421904460ad84a3c007", null ],
+    [ "dim", "class_trail.html#a40880cb9a88f374e025a6301f570632e", null ],
+    [ "last_point_time", "class_trail.html#aea3673578a0851ce5909b4d54c6a8831", null ],
+    [ "length", "class_trail.html#a55dfb3d71388d714fde95ba722c81b29", null ],
+    [ "length0", "class_trail.html#a2ea871efe5cc9b36a5db5d15cd5742f1", null ],
+    [ "length1", "class_trail.html#a06d7c2aeb4364cc2151b62220ac6c636", null ],
+    [ "maxtrail", "class_trail.html#a0dd0e83c336b41d11ca109805dfe654a", null ],
+    [ "mtl", "class_trail.html#a568eec3bdda0eedc8b8c33929d28b9fd", null ],
+    [ "npolys", "class_trail.html#a8f3e290383b9c62d12ed3829d594a33d", null ],
+    [ "ntrail", "class_trail.html#afc3727f527a9452bd83ab512992b754f", null ],
+    [ "nverts", "class_trail.html#a4f16ad6ca35063b608a6d5037e192338", null ],
+    [ "polys", "class_trail.html#af0cdbd1485142592272d6ee001e0051b", null ],
+    [ "texture", "class_trail.html#ab7c42abf957f746127921ea7e5d7e65a", null ],
+    [ "trail", "class_trail.html#a41b8b28e9f5b88b8b73d2acc89c16be9", null ],
+    [ "verts", "class_trail.html#a73c33d85200685ffe0cd7a5d5ba66970", null ],
+    [ "width", "class_trail.html#a3dd5e9e5b8eaf75dc83582e1ab957c18", null ]
+];

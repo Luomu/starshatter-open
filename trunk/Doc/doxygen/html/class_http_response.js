@@ -1,0 +1,25 @@
+var class_http_response =
+[
+    [ "STATUS", "class_http_response.html#af85063c460600fc79b1f0de3456d08dd", null ],
+    [ "HttpResponse", "class_http_response.html#a42c5a3fb904532a4f85f3e9cdbb3f0a4", null ],
+    [ "HttpResponse", "class_http_response.html#ac3504b8ec1b81dfa1ab50c1375b54d96", null ],
+    [ "~HttpResponse", "class_http_response.html#a7dc8102dcf63b07b9bf3c3dfed468857", null ],
+    [ "AddContent", "class_http_response.html#ad531f9da5c688b1f9b108e3e15154b6c", null ],
+    [ "AddCookie", "class_http_response.html#a0d83788eff92618c5c5573347c552238", null ],
+    [ "AddHeader", "class_http_response.html#ab4591f1266190343237ff1c5021d36d5", null ],
+    [ "Content", "class_http_response.html#a45d2ac71a2034ba5b48af01f5d71dc94", null ],
+    [ "GetCookie", "class_http_response.html#aa431b618fea7af0ae3a74a7828f8cd27", null ],
+    [ "GetCookies", "class_http_response.html#a1bfcbb62fa971e984796bcf4e43ea415", null ],
+    [ "GetHeader", "class_http_response.html#abcdf5a98b746b0e484c4996b178c1bd1", null ],
+    [ "GetHeaders", "class_http_response.html#a67f180b5707527911cc954e13a42c686", null ],
+    [ "operator Text", "class_http_response.html#a53690d6a4851950b24bb21920ba232d9", null ],
+    [ "ParseCookie", "class_http_response.html#a2b43bd2c316a2cecc9b8d57a904f9bde", null ],
+    [ "ParseResponse", "class_http_response.html#acdc45fea33a3aaf9ed2f6c40f7a2a964", null ],
+    [ "SendRedirect", "class_http_response.html#ad613fd2bccaba1803022126f0682a2c0", null ],
+    [ "SetContent", "class_http_response.html#a588f65eb7c3dd58560777745ace6bdb3", null ],
+    [ "SetCookie", "class_http_response.html#a4003e35e0cf1a110897e5e3fb99f22b3", null ],
+    [ "SetHeader", "class_http_response.html#a713d293f7f2ca2ab04e405ea0c271ff3", null ],
+    [ "SetStatus", "class_http_response.html#a7d9c6e88914c855f0ad8eec94db55fea", null ],
+    [ "Status", "class_http_response.html#a8e501d786ee6d9d423337086f0ba764d", null ],
+    [ "TYPENAME", "class_http_response.html#abed2ba65184c23d1b9841668684d58a6", null ]
+];

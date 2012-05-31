@@ -1,0 +1,26 @@
+var _machine_info_8cpp =
+[
+    [ "DIRECTINPUT_VERSION", "_machine_info_8cpp.html#a1d7ab29fdefabdb4e7e7cd27ac4c9934", null ],
+    [ "CalcCpuSpeed", "_machine_info_8cpp.html#a575d598553b37c4a4de8c0a5784cedff", null ],
+    [ "DescribeCpuMake", "_machine_info_8cpp.html#a0e1fd62656025f17ef4568895051bb9b", null ],
+    [ "DescribeDrivers95", "_machine_info_8cpp.html#af8d3c488b306f10a3da7e3ce84979fdf", null ],
+    [ "DescribeDriversNT", "_machine_info_8cpp.html#adf800515d4e8bb7893ffcc3f2e4e773a", null ],
+    [ "DescribeDriverVersion", "_machine_info_8cpp.html#a2c3993625bee0d35fc7c74ec74487ba4", null ],
+    [ "DescribeDXVersion", "_machine_info_8cpp.html#a165f9055ef1575e098db3cc5c3e3e64c", null ],
+    [ "DescribeOwner95", "_machine_info_8cpp.html#a7a4cbff679a4ec621772f82cb14c49ce", null ],
+    [ "DescribeOwnerNT", "_machine_info_8cpp.html#a3d4f475127a71d9b28bd11790cfeddc4", null ],
+    [ "DisplayVersionString", "_machine_info_8cpp.html#ad2a38ae7ce60615bd242e81dbbb3aa1b", null ],
+    [ "GetDXVersion", "_machine_info_8cpp.html#abb458b8e506e54cbe2fa61ac3cf5e71f", null ],
+    [ "GetTranslation", "_machine_info_8cpp.html#a26b67ba1d96ea3ca79fdc0c7cc190c04", null ],
+    [ "Print", "_machine_info_8cpp.html#a76779b0ba1af4da2cfb8cf309b39372b", null ],
+    [ "SpinWait", "_machine_info_8cpp.html#a995442c139f084063d99944317e187cb", null ],
+    [ "cpu_class", "_machine_info_8cpp.html#a0cd14935105ef3944abf6f3d4116fa64", null ],
+    [ "cpu_info", "_machine_info_8cpp.html#acb9bc79fe39bde08d54fe04242808898", null ],
+    [ "cpu_speed", "_machine_info_8cpp.html#a3ef2f2a1a4a77f6028b8750cc9098f5b", null ],
+    [ "dx_version", "_machine_info_8cpp.html#a714307da4ab4e5335103404f0051e72e", null ],
+    [ "mem_info", "_machine_info_8cpp.html#a463f6d474bb5e8dfddf4399f8e922f59", null ],
+    [ "os_ver", "_machine_info_8cpp.html#a9bb4f78c80bb25831cf580b38d5666da", null ],
+    [ "platform", "_machine_info_8cpp.html#aa3699ecef31274e99d0ddececb89598e", null ],
+    [ "sTranslation", "_machine_info_8cpp.html#a64d7e9d815203735ab60bd7deafc07b0", null ],
+    [ "total_ram", "_machine_info_8cpp.html#a0121762861228234c9072fd39069ebd6", null ]
+];

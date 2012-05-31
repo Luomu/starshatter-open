@@ -1,0 +1,25 @@
+var class_galaxy =
+[
+    [ "Galaxy", "class_galaxy.html#abf629ddd1c4fb5b2f76aaec710eb289a", null ],
+    [ "~Galaxy", "class_galaxy.html#a4b82609ee64e4e6c65633c1f840bd517", null ],
+    [ "Close", "class_galaxy.html#a832a41b876a78525d1eb79149a7e6e26", null ],
+    [ "Description", "class_galaxy.html#a9b21a64c7dfde4ea2e86e4e80fbe7de0", null ],
+    [ "ExecFrame", "class_galaxy.html#afb297f99f7f56fe6a1e34142555545f4", null ],
+    [ "FindSystemByRegion", "class_galaxy.html#ae6e15df2ac3d66f1e591d131a73375f3", null ],
+    [ "GetInstance", "class_galaxy.html#a22b90adcae5e071ee54fcb344cdedc6a", null ],
+    [ "GetSystem", "class_galaxy.html#a32a1711e697dc4d98f1aa7d4c6cf945d", null ],
+    [ "GetSystemList", "class_galaxy.html#a8cfd2b19d7d2e798491132d862630055", null ],
+    [ "Initialize", "class_galaxy.html#a99481a6870a846f0189f8a840e65bb84", null ],
+    [ "Load", "class_galaxy.html#a6ea048ddf7ddc5c6145f944d55e59cff", null ],
+    [ "Load", "class_galaxy.html#a018df38072232060e66cc111a1ad0eae", null ],
+    [ "Name", "class_galaxy.html#abe743f89b2ab3dd7f78064454ede6b91", null ],
+    [ "operator==", "class_galaxy.html#a8c51a2e904165e718a0ef68eaff79d49", null ],
+    [ "Radius", "class_galaxy.html#adab81568488d2fa78c653c8cfe4e577a", null ],
+    [ "Stars", "class_galaxy.html#ae38f9f4daad62701bcf32c1aa74f684d", null ],
+    [ "description", "class_galaxy.html#a24b629cc9ce29d3d979db92f04ef0619", null ],
+    [ "filename", "class_galaxy.html#a3f52816a2f9ed1d5e8815934bba83641", null ],
+    [ "name", "class_galaxy.html#ace0222b03a0929de05365e498f250105", null ],
+    [ "radius", "class_galaxy.html#afae2a6bc6a268eee4f6a792ff2724438", null ],
+    [ "stars", "class_galaxy.html#aac1894a980835555a76c76e6c033cf63", null ],
+    [ "systems", "class_galaxy.html#aa4a207e54b6ad51809982555debf1cce", null ]
+];

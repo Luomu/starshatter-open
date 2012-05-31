@@ -1,0 +1,26 @@
+var class_quantum_view =
+[
+    [ "QuantumView", "class_quantum_view.html#ab81c6f99f7bb9d94d3dda1bd61c549a1", null ],
+    [ "~QuantumView", "class_quantum_view.html#aa1aae97273b1dc060ae5a7cce75725aa", null ],
+    [ "Close", "class_quantum_view.html#a364c574139094558e65f39363e0db84c", null ],
+    [ "CloseMenu", "class_quantum_view.html#aa352aea46040a4e292459397d57f53ef", null ],
+    [ "ExecFrame", "class_quantum_view.html#a900d2dc3be3a03a1304a75d9750b6660", null ],
+    [ "GetInstance", "class_quantum_view.html#a58dba07849bb439dad364878dec23b76", null ],
+    [ "GetObserverName", "class_quantum_view.html#a9b1a970c0d2848d4b48ba3ec06ee3064", null ],
+    [ "GetQuantumMenu", "class_quantum_view.html#abc09687d9f331636bda5640ead43e343", null ],
+    [ "Initialize", "class_quantum_view.html#a4f5c25c98ff5538be25735a3718d2a3e", null ],
+    [ "IsMenuShown", "class_quantum_view.html#a46dc9b8553d00fac6b7d008d652dbae7", null ],
+    [ "OnWindowMove", "class_quantum_view.html#a1960e32ddb19feaf753a0ebc03ffdf0f", null ],
+    [ "Refresh", "class_quantum_view.html#a286e5b0e60a83503f2dde00771d60d36", null ],
+    [ "SetColor", "class_quantum_view.html#aef3a8114aef13b3754d39e2c7518d445", null ],
+    [ "ShowMenu", "class_quantum_view.html#aa466d6da44e71def505b4442eff5b9cd", null ],
+    [ "Update", "class_quantum_view.html#a839430c4b0e5a416ac5603808bc188fc", null ],
+    [ "font", "class_quantum_view.html#aa79c838189ead6a2993e870ba22b327d", null ],
+    [ "height", "class_quantum_view.html#aea2fd2e38f9703312929bb95e678a5b1", null ],
+    [ "quantum_view", "class_quantum_view.html#a08850b2a78d60eb90465bc31494a8d71", null ],
+    [ "ship", "class_quantum_view.html#ae8017935e703ef266741074197153557", null ],
+    [ "sim", "class_quantum_view.html#ac2821623969b81058854873389191835", null ],
+    [ "width", "class_quantum_view.html#a84c4fd38f07e1e36ff4c1b7b9a4c2fdc", null ],
+    [ "xcenter", "class_quantum_view.html#aab04d21b553c09087a66d0153f573a18", null ],
+    [ "ycenter", "class_quantum_view.html#afc5bbe2c241aafc9e48272b0ee802d0b", null ]
+];
