@@ -1,6 +1,6 @@
 /*  Project Starshatter 5.0
 	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+	Copyright (C) 1997-2007. All Rights Reserved.
 
 	SUBSYSTEM:    Stars.exe
 	FILE:         ModConfig.cpp
@@ -198,7 +198,7 @@ ModConfig::GetModInfo(const char* filename)
 		return mod_info;
 	}
 
-	return false;
+	return NULL;
 }
 
 // +-------------------------------------------------------------------+
