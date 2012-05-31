@@ -1,0 +1,25 @@
+var class_key_dlg =
+[
+    [ "KeyDlg", "class_key_dlg.html#a9313c0fe2e7ef47d990e82b9b69af212", null ],
+    [ "~KeyDlg", "class_key_dlg.html#a973cb4499d1efca0da7ca5c96ab13476", null ],
+    [ "ExecFrame", "class_key_dlg.html#a2a62e902f802f1b27ebec61843b6eb58", null ],
+    [ "GetKeyMapIndex", "class_key_dlg.html#a51ae4e37a663a03675b36b3c9d3c3214", null ],
+    [ "OnApply", "class_key_dlg.html#ace0666780d73cb7b663e0e6278748d9d", null ],
+    [ "OnCancel", "class_key_dlg.html#a1ab3ef4af3f06f0780d521b84beb8cfe", null ],
+    [ "OnClear", "class_key_dlg.html#a3f8a1cf1cd456b7e93c76b8af87c7a21", null ],
+    [ "RegisterControls", "class_key_dlg.html#a321b7cdd503f53ada44013511c0a6bc4", null ],
+    [ "SetKeyMapIndex", "class_key_dlg.html#aa78cb66ff0f63ca253717dcd555d35d8", null ],
+    [ "Show", "class_key_dlg.html#a605cfc20a3cb0feabffb1a94aecdf248", null ],
+    [ "apply", "class_key_dlg.html#a8c50d8f96874a071db0857e16ad8e659", null ],
+    [ "cancel", "class_key_dlg.html#a090479efe801c686f3af6c1c022ebc1e", null ],
+    [ "clear", "class_key_dlg.html#a32cec50dc331abc34d067d3c1a92cc0c", null ],
+    [ "command", "class_key_dlg.html#a5667ce5d8de855388be6c526baa37b6f", null ],
+    [ "current_key", "class_key_dlg.html#aa8ca7f8f5eeff14fd20cbd0915d666a8", null ],
+    [ "key_clear", "class_key_dlg.html#a7eeba3c19e5d999659db648e31cb7845", null ],
+    [ "key_index", "class_key_dlg.html#aed7cac6f9f6a1c0c55da67c29bc7ebe0", null ],
+    [ "key_joy", "class_key_dlg.html#ac968adfa5a8f2aa8eb4f3f46e9c0041b", null ],
+    [ "key_key", "class_key_dlg.html#a2bb5181c9541fa6d90d7b99c148433b3", null ],
+    [ "key_shift", "class_key_dlg.html#ab4320deb91db26077283b4f5255300f1", null ],
+    [ "manager", "class_key_dlg.html#a42f0f3d7505a54b88103828ab0cfb970", null ],
+    [ "new_key", "class_key_dlg.html#a467c25e9beb0cc4dccf3c7a4e88d1fdc", null ]
+];

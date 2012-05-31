@@ -1,0 +1,28 @@
+var class_detail_set =
+[
+    [ "DetailSet", "class_detail_set.html#a268cc7b6ed5304b6341756e226d1bfd7", null ],
+    [ "~DetailSet", "class_detail_set.html#a1020cfd31c3b2bd3ab2c438fb04c119a", null ],
+    [ "AddToLevel", "class_detail_set.html#a926a60f9969afba1fcec18157985c172", null ],
+    [ "DefineLevel", "class_detail_set.html#ad2ca800772764f19f5e65da6d53c0adf", null ],
+    [ "Destroy", "class_detail_set.html#a1c1e03d6cec01025b0f6063485a842bf", null ],
+    [ "ExecFrame", "class_detail_set.html#a98e1f687a2ab642fd8050decbe338dd1", null ],
+    [ "GetDetailLevel", "class_detail_set.html#a2bf80ee54d2b7784bed42fe423384a6c", null ],
+    [ "GetOffset", "class_detail_set.html#a209dae29a727aaa5794741af03aea6ce", null ],
+    [ "GetRep", "class_detail_set.html#af039682ea65f323df5862c36f6b1ad6a", null ],
+    [ "GetSpin", "class_detail_set.html#a7b70553902aaed1272ad2cbf64de1d3b", null ],
+    [ "NumLevels", "class_detail_set.html#ae552a1c9407d8bb85cfb428ff9c2c965", null ],
+    [ "NumModels", "class_detail_set.html#a6e58d06c944328b1292414fea65c4d6e", null ],
+    [ "SetLocation", "class_detail_set.html#a909e034593abc0724beadb7ccd5ea5b7", null ],
+    [ "SetReference", "class_detail_set.html#ac85dfb1f0cf0be2552c79f0815eba629", null ],
+    [ "index", "class_detail_set.html#a4e7af524d9ef63801bfff93ae4c62b11", null ],
+    [ "levels", "class_detail_set.html#ac67e40fa16e543ef5bf7d194058aec0f", null ],
+    [ "loc", "class_detail_set.html#a6deefa542b49de836e15bfc59c124fdb", null ],
+    [ "off", "class_detail_set.html#a4b0e933db21333b8a13c1fc3faffd79d", null ],
+    [ "rad", "class_detail_set.html#a4f631c13be9c0cfbf46b719b53e5936e", null ],
+    [ "rate", "class_detail_set.html#a604d21ccedbededa10ca5941ba62b12c", null ],
+    [ "ref_loc", "class_detail_set.html#a1a424324eec59499a6f420120b922008", null ],
+    [ "ref_rgn", "class_detail_set.html#a273bfe685072a947a1e4d2e412f82fbb", null ],
+    [ "rep", "class_detail_set.html#a270b5418f3ea72da1981101361374c4f", null ],
+    [ "rgn", "class_detail_set.html#af6c612c493fd7b63d0ab22295803e040", null ],
+    [ "spin", "class_detail_set.html#a49bc53847b4de196bf9598df41944cad", null ]
+];

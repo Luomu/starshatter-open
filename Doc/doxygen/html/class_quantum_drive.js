@@ -1,0 +1,28 @@
+var class_quantum_drive =
+[
+    [ "ACTIVE_STATES", "class_quantum_drive.html#a74cee8848f1a03ef937a6ca15c634a2b", null ],
+    [ "SUBTYPE", "class_quantum_drive.html#abda65cdda95de2fd0a692cc3f4f24497", null ],
+    [ "QuantumDrive", "class_quantum_drive.html#ae27a08f5af306f3af80e808a8ba2fc53", null ],
+    [ "QuantumDrive", "class_quantum_drive.html#a582de661a57dd4cb15d36fb47527cb39", null ],
+    [ "~QuantumDrive", "class_quantum_drive.html#a073cc02666b2bbd3db72b9694fbf5f88", null ],
+    [ "AbortJump", "class_quantum_drive.html#aab775f4f3effb0d5759eaaa126ed5efb", null ],
+    [ "ActiveState", "class_quantum_drive.html#ab86875d46c36dc9cbb5b62c03d2fe2f1", null ],
+    [ "Engage", "class_quantum_drive.html#aab5b274e408fad677cd2f18d55e87cdd", null ],
+    [ "ExecFrame", "class_quantum_drive.html#af08128bdf640e4e08ec8b01bddc53ab6", null ],
+    [ "GetCountdown", "class_quantum_drive.html#a05739d172a1e638bd78a6e6c87f4b481", null ],
+    [ "GetShip", "class_quantum_drive.html#a7429160dace7137a040cc3694070c2da", null ],
+    [ "Jump", "class_quantum_drive.html#a1dc59296514dedd92305621fe1553671", null ],
+    [ "JumpTime", "class_quantum_drive.html#aeda4132cd58ff7a91871dbd04a3becfb", null ],
+    [ "PowerOff", "class_quantum_drive.html#a28a96aa70144d5cfcbd2e7242043063b", null ],
+    [ "SetCountdown", "class_quantum_drive.html#ac3055296eef3306c725145da84e8653a", null ],
+    [ "SetDestination", "class_quantum_drive.html#aea07c4f55589b1f03439b2364ec518c4", null ],
+    [ "SetShip", "class_quantum_drive.html#a1a7cf975f7eb7b411133751c96957556", null ],
+    [ "WarpFactor", "class_quantum_drive.html#ad1d5ab2264b4b602c447c68e4a9552dd", null ],
+    [ "active_state", "class_quantum_drive.html#a8892812e7d15c92044dad2086e3f85e4", null ],
+    [ "countdown", "class_quantum_drive.html#a3eef7fe2026a15a7b238913a7f6c641e", null ],
+    [ "dst_loc", "class_quantum_drive.html#ae561d6ce8d94d81671af89d5cc66afb2", null ],
+    [ "dst_rgn", "class_quantum_drive.html#aa40663bd642fa5eaaba0f300bcb8e7a7", null ],
+    [ "jump_time", "class_quantum_drive.html#a83c5dd75fc8cf69e9a8534ca21e5cea7", null ],
+    [ "ship", "class_quantum_drive.html#a385e116bcb52b09074368d88f824bd91", null ],
+    [ "warp_fov", "class_quantum_drive.html#a34a1509590b682902a57ce9b685e4ca7", null ]
+];
