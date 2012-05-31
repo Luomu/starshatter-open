@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         Layout.cpp
@@ -48,11 +48,11 @@ Layout::DoLayout(ActiveWindow* panel)
 		Rect          rp = panel->GetRect();
 
 		if (c.x < 0)                     c.x = 0;
-		else if (c.x >= cell_x.size())   c.x = cell_x.size() - 1;
+		else if (c.x >= (int)cell_x.size())   c.x = cell_x.size() - 1;
 		if (c.y < 0)                     c.y = 0;
-		else if (c.y >= cell_y.size())   c.y = cell_y.size() - 1;
-		if (c.x+c.w  >= cell_x.size())   c.w = cell_x.size() - c.x - 1;
-		if (c.y+c.h  >= cell_y.size())   c.h = cell_y.size() - c.y - 1;
+		else if (c.y >= (int)cell_y.size())   c.y = cell_y.size() - 1;
+		if (c.x+c.w  >= (int)cell_x.size())   c.w = cell_x.size() - c.x - 1;
+		if (c.y+c.h  >= (int)cell_y.size())   c.h = cell_y.size() - c.y - 1;
 
 		r.x = cell_x[c.x]     + w->GetCellInsets().left;
 		r.y = cell_y[c.y]     + w->GetCellInsets().top;
