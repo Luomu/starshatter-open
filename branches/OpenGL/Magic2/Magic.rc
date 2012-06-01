@@ -1,0 +1,1065 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Magic.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Magic.ico"
+IDR_MAGICTYPE           ICON    DISCARDABLE     "res\\MagicDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_EDIT_UNDO
+    BUTTON      ID_EDIT_REDO
+    SEPARATOR
+    BUTTON      ID_VIEW_ZOOM_IN
+    BUTTON      ID_VIEW_ZOOM_OUT
+    SEPARATOR
+    BUTTON      ID_CREATE_CUBE
+    BUTTON      ID_CREATE_CONE
+    BUTTON      ID_CREATE_CYLINDER
+    BUTTON      ID_CREATE_SPHERE
+    SEPARATOR
+    BUTTON      ID_MODIFY_DRAG_VERTS
+    BUTTON      ID_MODIFY_SCALE_VERTS
+    BUTTON      ID_MODIFY_ROTATE
+    SEPARATOR
+    BUTTON      ID_MODIFY_SCALE_X
+    BUTTON      ID_MODIFY_SCALE_Y
+    BUTTON      ID_MODIFY_SCALE_Z
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Import...",                   ID_FILE_IMPORT
+        MENUITEM "Export...",                   ID_FILE_EXPORT
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE2, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "Red&o\tCtrl+Y",               ID_EDIT_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Clone\tCtrl+C",              ID_EDIT_CLONE
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM "&Delete\tDelete",             ID_EDIT_DELETE
+        MENUITEM "Select &All\tCtrl+A",         ID_EDIT_SELECT_ALL
+        MENUITEM "Select &None\tCtrl+D",        ID_EDIT_SELECT_NONE
+        MENUITEM "Select &Inverse\tCtrl+Shift+I", ID_EDIT_SELECT_INVERSE
+        MENUITEM SEPARATOR
+        MENUITEM "&Flip Normal\tShift+F",       ID_EDIT_FLIP_NORMAL
+        MENUITEM "&Remove Poly",                ID_EDIT_REMOVE_POLY
+        MENUITEM "&Mirror Selection",           ID_EDIT_MIRROR
+        MENUITEM "S&eal Selection\tShift+S",    ID_EDIT_SEAL
+        MENUITEM "&Reduce Verts...\tCtrl+R",    ID_VERTS_REDUCE
+        MENUITEM SEPARATOR
+        MENUITEM "Flatten &X",                  ID_MODIFY_FLATTEN_X
+        MENUITEM "Flatten &Y",                  ID_MODIFY_FLATTEN_Y
+        MENUITEM "Flatten &Z",                  ID_MODIFY_FLATTEN_Z
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "Mode"
+        BEGIN
+            MENUITEM "Wireframe",                   ID_VIEW_MODE_WIREFRAME
+            MENUITEM "Solid",                       ID_VIEW_MODE_SOLID
+            MENUITEM "Textured",                    ID_VIEW_MODE_TEXTURED
+        END
+        POPUP "Zoom"
+        BEGIN
+            MENUITEM "Zoom &In",                    ID_VIEW_ZOOM_IN
+            MENUITEM "Zoom &Out",                   ID_VIEW_ZOOM_OUT
+            MENUITEM "Zoom &Normal",                ID_VIEW_ZOOM_NORMAL
+        END
+        MENUITEM "Background &Color...",        ID_VIEW_BACK_COLOR
+        MENUITEM "&Grid...",                    ID_PROP_GRID
+        MENUITEM SEPARATOR
+        MENUITEM "All",                         ID_VIEW_ALL
+        MENUITEM "Front",                       ID_VIEW_FRONT
+        MENUITEM "Side",                        ID_VIEW_SIDE
+        MENUITEM "Top",                         ID_VIEW_TOP
+        MENUITEM "Perspective",                 ID_VIEW_PERSPECTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Bumpmaps",                    ID_VIEW_BUMPMAPS
+        MENUITEM "Shadows",                     ID_VIEW_SHADOWS
+        MENUITEM "Animate Light",               ID_VIEW_ANIMATELIGHT
+        MENUITEM "Vertex Shader",               ID_VIEW_VERTEXSHADER
+        MENUITEM "Pixel Shader",                ID_VIEW_PIXELSHADER
+        MENUITEM "Visible Shadows",             ID_VIEW_VISIBLESHADOWS
+    END
+    POPUP "&Surface"
+    BEGIN
+        MENUITEM "&Properties...",              ID_PROP_SURFACE
+        MENUITEM "&Optimize Mesh",              ID_SURFACE_OPTIMIZE
+        MENUITEM "&Explode Mesh",               ID_SURFACE_EXPLODE
+    END
+    POPUP "&Primatives"
+    BEGIN
+        MENUITEM "&Poly...",                    ID_CREATE_POLY
+        MENUITEM "&Cube...",                    ID_CREATE_CUBE
+        MENUITEM "C&one...",                    ID_CREATE_CONE
+        MENUITEM "C&ylinder...",                ID_CREATE_CYLINDER
+        MENUITEM "&Sphere...",                  ID_CREATE_SPHERE
+    END
+    POPUP "&Modify"
+    BEGIN
+        MENUITEM "&Polygon...",                 ID_MODIFY_POLY
+        MENUITEM "&Material...",                ID_MODIFY_MATERIAL
+        MENUITEM "&Texture Mapping...",         ID_MODIFY_TEXTURE_MAP
+        MENUITEM "&UV Mapping...",              ID_MODIFY_UV_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Extrude",                    ID_MODIFY_EXTRUDE
+        MENUITEM "&Bevel",                      ID_MODIFY_BEVEL
+        MENUITEM "&Stud",                       ID_MODIFY_STUD
+        MENUITEM SEPARATOR
+        MENUITEM "Sub&divide",                  ID_MODIFY_SUBDIVIDE
+        MENUITEM "Split &1",                    ID_MODIFY_SPLIT1
+        MENUITEM "Split &2",                    ID_MODIFY_SPLIT2
+        MENUITEM SEPARATOR
+        MENUITEM "&Reduce Verts...\tCtrl+R",    ID_VERTS_REDUCE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Magic...",             ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_CLONE,          VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_EDIT_SELECT_NONE,    VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FLIP_NORMAL,    VIRTKEY, SHIFT, NOINVERT
+    "G",            ID_GRID_SNAP,           VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_GRID_SHOW,           VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "I",            ID_EDIT_SELECT_INVERSE, VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_VERTS_REDUCE,        VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_EDIT_SEAL,           VIRTKEY, SHIFT, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         ID_VIEW_ZOOM_IN,        VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_DELETE,         VIRTKEY, NOINVERT
+    VK_DOWN,        ID_NUDGE_DOWN,          VIRTKEY, NOINVERT
+    VK_DOWN,        ID_STEP_DOWN,           VIRTKEY, SHIFT, NOINVERT
+    VK_F2,          ID_MODIFY_DRAG_VERTS,   VIRTKEY, NOINVERT
+    VK_F3,          ID_MODIFY_SCALE_VERTS,  VIRTKEY, NOINVERT
+    VK_F4,          ID_MODIFY_ROTATE,       VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_LEFT,        ID_NUDGE_LEFT,          VIRTKEY, NOINVERT
+    VK_LEFT,        ID_STEP_LEFT,           VIRTKEY, SHIFT, NOINVERT
+    VK_RIGHT,       ID_NUDGE_RIGHT,         VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_STEP_RIGHT,          VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_VIEW_ZOOM_OUT,       VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_FILE_MRU_FILE2,      VIRTKEY, CONTROL, NOINVERT
+    VK_UP,          ID_NUDGE_UP,            VIRTKEY, NOINVERT
+    VK_UP,          ID_STEP_UP,             VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_MODIFY_SCALE_X,      VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_MODIFY_FLATTEN_X,    VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_MODIFY_SCALE_Y,      VIRTKEY, SHIFT, NOINVERT
+    "Y",            ID_MODIFY_FLATTEN_Y,    VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_MODIFY_SCALE_Z,      VIRTKEY, SHIFT, NOINVERT
+    "Z",            ID_MODIFY_FLATTEN_Z,    VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 117
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Magic 2.0"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,13,20,20
+    LTEXT           "Magic 2.0.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright © 1997-2004\nDestroyer Studios LLC",
+                    IDC_STATIC,40,25,146,19
+    DEFPUSHBUTTON   "OK",IDOK,178,7,32,14,WS_GROUP
+    LTEXT           "Magic is a 3D low-poly modeling tool for the game Starshatter by Destroyer Studios.\n\nhttp://www.starshatter.com\n\n3DS File Loader Copyright © 2001 Lev Povalahev",
+                    IDC_STATIC,40,51,170,59
+END
+
+IDD_GRIDPROPS DIALOG DISCARDABLE  0, 0, 248, 174
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Grid Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,185,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,185,26,50,14
+    CONTROL         "Snap",IDC_GRID_SNAP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,47,41,33,10
+    GROUPBOX        "Properties",IDC_STATIC,7,8,155,69
+    CONTROL         "Show",IDC_GRID_SHOW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,47,56,34,10
+    GROUPBOX        "Reference Images",IDC_STATIC,7,91,223,74
+    LTEXT           "Plan:",IDC_STATIC,19,108,17,8
+    LTEXT           "Side:",IDC_STATIC,19,127,17,8
+    LTEXT           "Front:",IDC_STATIC,19,146,19,8
+    EDITTEXT        IDC_REFERENCE_PLAN,47,105,138,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REFERENCE_SIDE,47,124,138,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REFERENCE_FRONT,47,143,138,14,ES_AUTOHSCROLL
+    LTEXT           "Size:",IDC_STATIC,18,24,16,8
+    EDITTEXT        IDC_GRID_SIZE,47,21,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_FILE_PLAN,197,105,15,14
+    PUSHBUTTON      "...",IDC_FILE_SIDE,197,124,15,14
+    PUSHBUTTON      "...",IDC_FILE_FRONT,197,143,15,14
+END
+
+IDD_SURFACE_PROPS DIALOG DISCARDABLE  0, 0, 265, 122
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Surface Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,208,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,208,24,50,14
+    LTEXT           "Surface:",IDC_STATIC,7,11,28,8
+    COMBOBOX        IDC_SURFACE_NAME,42,7,112,56,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Verts:",IDC_STATIC,7,26,19,8
+    LTEXT           "Polys:",IDC_STATIC,7,40,20,8
+    LTEXT           "00000",IDC_SURFACE_NVERTS,43,26,21,8
+    LTEXT           "00000",IDC_SURFACE_NPOLYS,43,40,21,8
+    LTEXT           "Radius:",IDC_STATIC,7,54,25,8
+    LTEXT           "Length:",IDC_STATIC,7,68,25,8
+    LTEXT           "Width:",IDC_STATIC,7,82,22,8
+    LTEXT           "Height:",IDC_STATIC,7,96,24,8
+    LTEXT           "0",IDC_SURFACE_RADIUS,43,54,138,8
+    LTEXT           "0",IDC_SURFACE_LENGTH,43,68,138,8
+    LTEXT           "0",IDC_SURFACE_WIDTH,43,82,138,8
+    LTEXT           "0",IDC_SURFACE_HEIGHT,43,96,138,8
+END
+
+IDD_VERTS_REDUCE DIALOG DISCARDABLE  0, 0, 175, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Reduce Verts"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,29,50,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,99,50,50,14
+    LTEXT           "Distance Threshold:",IDC_STATIC,53,7,64,8
+    EDITTEXT        IDC_THRESHOLD,53,18,66,14,ES_AUTOHSCROLL
+END
+
+IDD_MODIFY_POLY DIALOG DISCARDABLE  0, 0, 268, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Modify Polygon"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,211,7,50,14
+    LTEXT           "Verts:",IDC_STATIC,7,7,19,8
+    LTEXT           "4",IDC_POLY_VERTS,79,7,64,8
+    LTEXT           "Curvature:",IDC_STATIC,7,125,34,8
+    LTEXT           "Surface:",IDC_STATIC,7,141,28,8
+    LTEXT           "Texture:",IDC_STATIC,7,157,27,8
+    LTEXT           "0.0000",IDC_POLY_CURVE,77,125,65,8
+    LTEXT           "default",IDC_POLY_SURF,77,141,65,8
+    LTEXT           "(none)",IDC_POLY_TEX,77,157,62,8
+    PUSHBUTTON      "Flatten",IDC_FLATTEN,211,47,50,14
+    PUSHBUTTON      "Flip Normal",IDC_FLIP_NORM,211,67,50,14
+    PUSHBUTTON      "Double Side",IDC_DOUBLE_SIDE,211,87,50,14
+    PUSHBUTTON      "Triangulate",IDC_TRIANGULATE,211,27,50,14
+    PUSHBUTTON      "Remove",IDC_REMOVE,211,108,50,14
+    CONTROL         "Flat Shaded",IDC_FLAG_FLAT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,77,23,54,10
+    CONTROL         "Luminous",IDC_FLAG_LUMINOUS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,77,37,46,10
+    CONTROL         "Translucent",IDC_FLAG_TRANSLUCENT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,77,51,53,10
+    LTEXT           "Flags:",IDC_STATIC,7,23,20,8
+    CONTROL         "Transparent",IDC_FLAG_TRANSPARENT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,77,66,53,10
+    CONTROL         "Specular 1",IDC_FLAG_SPECULAR1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,77,80,53,10
+    RTEXT           "0",IDC_POLY_INDEX,213,158,48,10
+    CONTROL         "Specular 2",IDC_FLAG_SPECULAR2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,77,94,53,10
+    CONTROL         "Texture Clamp",IDC_FLAG_TEXCLAMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,77,109,79,10
+END
+
+IDD_CREATE_CUBE DIALOG DISCARDABLE  0, 0, 307, 117
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Cube"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,250,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,250,24,50,14
+    GROUPBOX        "Location",IDC_STATIC,7,7,94,87
+    GROUPBOX        "Size",IDC_STATIC,122,7,94,87
+    LTEXT           "X:",IDC_STATIC,15,22,8,8
+    LTEXT           "Y:",IDC_STATIC,15,45,8,8
+    LTEXT           "Z:",IDC_STATIC,15,68,8,8
+    EDITTEXT        IDC_LOC_X,42,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Y,42,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Z,42,65,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_X,157,20,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Y,157,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Z,157,66,40,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,130,22,8,8
+    LTEXT           "Y:",IDC_STATIC,130,45,8,8
+    LTEXT           "Z:",IDC_STATIC,130,68,8,8
+END
+
+IDD_CREATE_CYLINDER DIALOG DISCARDABLE  0, 0, 309, 145
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Cylinder"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,252,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,24,50,14
+    GROUPBOX        "Location",IDC_STATIC,7,7,94,87
+    GROUPBOX        "Size",IDC_STATIC,122,7,94,87
+    LTEXT           "X:",IDC_STATIC,15,22,8,8
+    LTEXT           "Y:",IDC_STATIC,15,45,8,8
+    LTEXT           "Z:",IDC_STATIC,15,68,8,8
+    EDITTEXT        IDC_LOC_X,42,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Y,42,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Z,42,65,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_X,157,20,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Y,157,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Z,157,66,40,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,130,22,8,8
+    LTEXT           "Y:",IDC_STATIC,130,45,8,8
+    LTEXT           "Z:",IDC_STATIC,130,68,8,8
+    LTEXT           "Faces:",IDC_STATIC,7,108,22,8
+    EDITTEXT        IDC_SECTORS,42,106,40,14,ES_AUTOHSCROLL
+END
+
+IDD_CREATE_SPHERE DIALOG DISCARDABLE  0, 0, 311, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Sphere"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,254,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,254,24,50,14
+    GROUPBOX        "Location",IDC_STATIC,7,7,94,87
+    GROUPBOX        "Size",IDC_STATIC,122,7,94,87
+    LTEXT           "X:",IDC_STATIC,15,22,8,8
+    LTEXT           "Y:",IDC_STATIC,15,45,8,8
+    LTEXT           "Z:",IDC_STATIC,15,68,8,8
+    EDITTEXT        IDC_LOC_X,42,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Y,42,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Z,42,65,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_X,157,20,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Y,157,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SIZE_Z,157,66,40,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,130,22,8,8
+    LTEXT           "Y:",IDC_STATIC,130,45,8,8
+    LTEXT           "Z:",IDC_STATIC,130,68,8,8
+    LTEXT           "Sectors:",IDC_STATIC,7,108,27,8
+    EDITTEXT        IDC_SECTORS,42,106,40,14,ES_AUTOHSCROLL
+    LTEXT           "Rings:",IDC_STATIC,127,108,21,8
+    EDITTEXT        IDC_RINGS,157,106,40,14,ES_AUTOHSCROLL
+END
+
+IDD_MODIFY_TEXTURE DIALOG DISCARDABLE  0, 0, 338, 215
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Texture Mapping"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,281,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,281,27,50,14
+    LTEXT           "Material:",IDC_STATIC,7,7,28,8
+    LTEXT           "Mapping:",IDC_STATIC,7,30,30,8
+    COMBOBOX        IDC_MATERIAL,57,7,77,69,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MAPPING,57,29,78,74,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Align",IDC_STATIC,7,52,127,61
+    GROUPBOX        "Scale",IDC_STATIC,159,127,128,65
+    CONTROL         "X Axis",IDC_ALIGN_X,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,56,65,35,10
+    CONTROL         "Y Axis",IDC_ALIGN_Y,"Button",BS_AUTORADIOBUTTON,56,79,
+                    35,10
+    CONTROL         "Z Axis",IDC_ALIGN_Z,"Button",BS_AUTORADIOBUTTON,56,93,
+                    35,10
+    EDITTEXT        IDC_SCALE_U,207,142,53,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SCALE_V,207,161,53,14,ES_AUTOHSCROLL
+    LTEXT           "U:",IDC_STATIC,177,145,8,8
+    LTEXT           "V:",IDC_STATIC,177,163,8,8
+    LTEXT           "Preview:",IDC_STATIC,160,7,28,8
+    GROUPBOX        "Reflect",IDC_STATIC,7,127,127,65
+    CONTROL         "Flip",IDC_ALIGN_FLIP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,56,140,27,10
+    CONTROL         "Mirror",IDC_ALIGN_MIRROR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,56,155,33,10
+    CONTROL         "Rotate",IDC_ALIGN_ROTATE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,56,170,37,10
+    CONTROL         "",IDC_TEXTURE_PREVIEW,"Static",SS_BLACKFRAME | 
+                    SS_SUNKEN,159,18,88,81
+END
+
+IDD_MODIFY_POLYS DIALOG DISCARDABLE  0, 0, 300, 162
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Modify Multiple Polygons"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,243,7,50,14
+    LTEXT           "Polys:",IDC_STATIC,7,7,19,8
+    LTEXT           "4",IDC_POLY_VERTS,79,7,64,8
+    LTEXT           "Surface:",IDC_STATIC,7,125,28,8
+    LTEXT           "Texture:",IDC_STATIC,7,141,27,8
+    LTEXT           "default",IDC_POLY_SURF,77,125,65,8
+    LTEXT           "(none)",IDC_POLY_TEX,77,141,62,8
+    CONTROL         "Flat Shaded",IDC_FLAG_FLAT,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,77,23,54,10
+    CONTROL         "Luminous",IDC_FLAG_LUMINOUS,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,77,37,46,10
+    CONTROL         "Translucent",IDC_FLAG_TRANSLUCENT,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,77,51,53,10
+    LTEXT           "Flags:",IDC_STATIC,7,23,20,8
+    CONTROL         "Transparent",IDC_FLAG_TRANSPARENT,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,77,65,53,10
+    CONTROL         "Specular 1",IDC_FLAG_SPECULAR1,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,77,79,53,10
+    CONTROL         "Flat Shaded",IDC_FLAG_FLAT2,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,160,23,54,10
+    CONTROL         "Luminous",IDC_FLAG_LUMINOUS2,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,160,37,46,10
+    CONTROL         "Translucent",IDC_FLAG_TRANSLUCENT2,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,160,51,53,10
+    CONTROL         "Transparent",IDC_FLAG_TRANSPARENT2,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,160,65,53,10
+    CONTROL         "Specular 1",IDC_FLAG_SPECULAR12,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,160,79,53,10
+    PUSHBUTTON      "Flatten",IDC_FLATTEN,243,46,50,14
+    PUSHBUTTON      "Flip Normal",IDC_FLIP_NORM,243,66,50,14
+    PUSHBUTTON      "Triangulate",IDC_TRIANGULATE,243,26,50,14
+    CONTROL         "Specular 2",IDC_FLAG_SPECULAR2,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,77,93,53,10
+    CONTROL         "Specular 2",IDC_FLAG_SPECULAR22,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,159,93,53,10
+    CONTROL         "Texture Clamp",IDC_FLAG_TEXCLAMP,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,77,107,61,10
+    CONTROL         "Texture Clamp",IDC_FLAG_TEXCLAMP2,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,159,107,60,10
+END
+
+IDD_CREATE_POLY DIALOG DISCARDABLE  0, 0, 307, 116
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Poly"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,250,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,250,24,50,14
+    GROUPBOX        "Location",IDC_STATIC,7,7,94,87
+    LTEXT           "X:",IDC_STATIC,15,22,8,8
+    LTEXT           "Y:",IDC_STATIC,15,45,8,8
+    LTEXT           "Z:",IDC_STATIC,15,68,8,8
+    EDITTEXT        IDC_LOC_X,42,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Y,42,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_Z,42,65,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_NSIDES,121,19,86,73,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Number of Sides:",IDC_STATIC,121,7,55,8
+END
+
+IDD_EXTRUSION_PROPS DIALOG DISCARDABLE  0, 0, 183, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Extrusion"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,50,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,97,50,50,14
+    LTEXT           "Distance:",IDC_STATIC,53,7,64,8
+    EDITTEXT        IDC_DISTANCE,53,18,66,14,ES_AUTOHSCROLL
+END
+
+IDD_MODIFY_MATERIAL DIALOG DISCARDABLE  0, 0, 428, 198
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Material Editor"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,371,177,50,14
+    CONTROL         "",IDC_MATERIAL_PREVIEW,"Static",SS_BLACKFRAME | 
+                    SS_SUNKEN,333,7,88,81
+    LISTBOX         IDC_MATERIAL_LIST,7,18,75,86,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Materials:",IDC_STATIC,7,7,31,8
+    PUSHBUTTON      "New Material",IDC_NEW_MATERIAL,7,113,76,14
+    PUSHBUTTON      "Delete Material",IDC_DEL_MATERIAL,7,133,76,14
+    EDITTEXT        IDC_MATERIAL_NAME,140,7,68,14,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,101,7,22,8
+    LTEXT           "Ambient:",IDC_STATIC,101,35,28,8
+    LTEXT           "Diffuse:",IDC_STATIC,101,55,25,8
+    LTEXT           "Specular:",IDC_STATIC,101,75,31,8
+    LTEXT           "Emissive:",IDC_STATIC,101,95,30,8
+    LTEXT           "Bump:",IDC_STATIC,101,115,21,8
+    LTEXT           "Power:",IDC_STATIC,101,135,23,8
+    LTEXT           "Brilliance:",IDC_STATIC,101,155,31,8
+    LTEXT           "Blend:",IDC_STATIC,215,141,21,8
+    EDITTEXT        IDC_DIFFUSE_TEXTURE,215,52,72,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SPECULAR_TEXTURE,215,73,72,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EMISSIVE_TEXTURE,215,92,72,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BUMP_TEXTURE,215,112,72,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AMBIENT_VALUE,140,33,32,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_AMBIENT_COLOR,"Static",SS_OWNERDRAW | SS_NOTIFY | 
+                    SS_SUNKEN,183,33,18,14
+    EDITTEXT        IDC_DIFFUSE_VALUE,140,52,32,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_DIFFUSE_COLOR,"Static",SS_OWNERDRAW | SS_NOTIFY | 
+                    SS_SUNKEN,183,52,18,14
+    EDITTEXT        IDC_SPECULAR_VALUE,140,73,32,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPECULAR_COLOR,"Static",SS_OWNERDRAW | SS_NOTIFY | 
+                    SS_SUNKEN,183,73,18,14
+    EDITTEXT        IDC_EMISSIVE_VALUE,140,92,32,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_EMISSIVE_COLOR,"Static",SS_OWNERDRAW | SS_NOTIFY | 
+                    SS_SUNKEN,183,92,18,14
+    EDITTEXT        IDC_BUMP_VALUE,140,112,32,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_POWER_VALUE,140,131,32,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BRILLIANCE_VALUE,140,152,32,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_BLEND_MODE,215,153,51,42,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "...",IDC_FILE_DIFFUSE,296,52,15,14
+    PUSHBUTTON      "...",IDC_FILE_SPECULAR,296,74,15,14
+    PUSHBUTTON      "...",IDC_FILE_EMISSIVE,296,93,15,14
+    PUSHBUTTON      "...",IDC_FILE_BUMP,296,112,15,14
+    GROUPBOX        "Textures",IDC_STATIC,208,40,116,95
+    PUSHBUTTON      "Select Polys",IDC_SELECT_POLYS,7,153,76,14
+    LTEXT           "Shadow:",IDC_STATIC,273,141,29,8
+    COMBOBOX        IDC_SHADOW,273,153,42,42,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_MATERIAL_SHADER,333,152,68,14,ES_AUTOHSCROLL
+    LTEXT           "Shader:",IDC_STATIC,334,141,26,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,1
+ PRODUCTVERSION 2,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Magic 3D Modeling Application\0"
+            VALUE "FileVersion", "2, 0, 0, 1\0"
+            VALUE "InternalName", "Magic\0"
+            VALUE "LegalCopyright", "Copyright © 2004\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Magic.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Magic Application\0"
+            VALUE "ProductVersion", "2, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 110
+    END
+
+    IDD_SURFACE_PROPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 115
+    END
+
+    IDD_VERTS_REDUCE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 168
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_MODIFY_POLY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 261
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_CREATE_CUBE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 300
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 110
+    END
+
+    IDD_CREATE_CYLINDER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    IDD_CREATE_SPHERE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 304
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
+    END
+
+    IDD_MODIFY_TEXTURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 331
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 208
+    END
+
+    IDD_MODIFY_POLYS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_CREATE_POLY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 300
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 109
+    END
+
+    IDD_EXTRUSION_PROPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_MODIFY_MATERIAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 421
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 191
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_MODIFY_TEXTURE DLGINIT
+BEGIN
+    IDC_MAPPING, 0x403, 5, 0
+0x6f4e, 0x656e, "\000" 
+    IDC_MAPPING, 0x403, 7, 0
+0x6c50, 0x6e61, 0x7261, "\000" 
+    IDC_MAPPING, 0x403, 12, 0
+0x7943, 0x696c, 0x646e, 0x6972, 0x6163, 0x006c, 
+    IDC_MAPPING, 0x403, 10, 0
+0x7053, 0x6568, 0x6972, 0x6163, 0x006c, 
+    IDC_MAPPING, 0x403, 8, 0
+0x7453, 0x6572, 0x6374, 0x0068, 
+    0
+END
+
+IDD_CREATE_POLY DLGINIT
+BEGIN
+    IDC_NSIDES, 0x403, 2, 0
+0x0033, 
+    IDC_NSIDES, 0x403, 2, 0
+0x0034, 
+    0
+END
+
+IDD_MODIFY_MATERIAL DLGINIT
+BEGIN
+    IDC_BLEND_MODE, 0x403, 6, 0
+0x6f53, 0x696c, 0x0064, 
+    IDC_BLEND_MODE, 0x403, 6, 0
+0x6c41, 0x6870, 0x0061, 
+    IDC_BLEND_MODE, 0x403, 9, 0
+0x6441, 0x6964, 0x6974, 0x6576, "\000" 
+    IDC_SHADOW, 0x403, 8, 0
+0x6944, 0x6173, 0x6c62, 0x0065, 
+    IDC_SHADOW, 0x403, 7, 0
+0x6e45, 0x6261, 0x656c, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "Magic 2.0\n\nMagic\nMagic Files (*.mag)\n.mag\nMagic.Document\nMagic Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Magic"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_ZOOM_IN         "Increase the magnification\nZoom In"
+    ID_VIEW_ZOOM_OUT        "Decrease the magnification\nZoom Out"
+    ID_VIEW_ZOOM_NORMAL     "Set the magnification to 100%\nZoom Normal"
+    ID_VIEW_CENTER          "Center the view on the world origin\nCenter View"
+    ID_SURFACE_CREATE       "Modify surface parameters or create a new surface\nModify Surface"
+    ID_MODIFY_DRAG_VERTS    "Drag the selected verts using the mouse\nDrag Verts"
+    ID_CREATE_CUBE          "Create a cube primitive\nCreate Cube"
+    ID_CREATE_TETRA         "Create a tetrahedron primitive\nCreate Pyramid"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MODIFY_EXTRUDE       "Extrude new polygons from the current selection\nExtrude"
+    ID_MODIFY_BEVEL         "Extrude a bevel from the current selection\nBevel"
+    ID_MODIFY_STUD          "Extrude a stud from the current selection\nStud"
+    ID_MODIFY_SUBDIVIDE     "Subdivide all selected polys\nSubdivide"
+    ID_PROP_SURFACE         "Display surface properties dialog\nSurface Properties"
+    ID_PROP_CAMERA          "Display camera properties dialog\nCamera Properties"
+    ID_EDIT_FLIP_NORMAL     "Reverse the direction of the normal for the current polygon\nFlip Normal"
+    ID_EDIT_REMOVE_POLY     "Remove the currently selected polys\nRemove Poly"
+    ID_EDIT_MERGE_POLY      "Merge the selected polys into a single poly\nMerge Polys"
+    ID_MODIFY_TEXTURE       "Apply a texture to the current selection\nTexture"
+    ID_OPTIONS_VERTEX_NORMALS 
+                            "Show the normal vector for each selected vertex\nVertex Normals"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_PROP_GRID            "Modify the grid properties\nGrid Properties"
+    ID_EDIT_DELETE          "Delete the currently selected polys and verts\nDelete"
+    ID_CREATE_POLY          "Create a new poly\nCreate Poly"
+    ID_CREATE_VERT          "Create a new vert\nCreate Vert"
+    ID_CREATE_CYLINDER      "Create a cylinder primitive\nCreate Cylinder"
+    ID_CREATE_SPHERE        "Create a sphere primitive\nCreate Sphere"
+    ID_FILE_IMPORT          "Import a surface from a MAG file\nFile Import"
+    ID_FILE_EXPORT          "Export the selected surface into a MAG file\nFile Export"
+    ID_MODIFY_POLY          "Modify selected polys\nModify Polygon"
+    ID_MODIFY_VERTS         "Modify selected verts\nModify Verts"
+    ID_VERTS_REDUCE         "Combine nearby verts\nReduce Verts"
+    ID_VERTS_SNAP           "Snap selected verts to grid points\nSnap Verts"
+    ID_MODIFY_SCALE_VERTS   "Scale the current selection by moving the mouse\nScale Verts"
+    ID_MODIFY_ROTATE        "Rotate the current selection about its centroid\nRotate Selection"
+    ID_CREATE_CONE          "Create a conic primitive\nCreate Cone"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MODIFY_SCALE_X       "Scale the current selection along the X axis\nScale X"
+    ID_MODIFY_SCALE_Z       "Scale the current selection along the Z axis\nScale Z"
+    ID_MODIFY_SCALE_Y       "Scale the current selection along the Y axis\nScale Y"
+    ID_MODIFY_SPLIT1        "Split all selected polys\nSplit 1"
+    ID_MODIFY_SPLIT2        "Split all selected polys\nSplit 2"
+    ID_EDIT_MIRROR          "Mirror selected polys from left to right\nMirror Selection"
+    ID_EDIT_SEAL            "Create a polygon connecting the selected vertices\nSeal"
+    ID_EDIT_CLONE           "Clone the selection\tClone"
+    ID_GRID_SNAP            "Toggle Grid Snap\tGrid Snap"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_SELECT_NONE     "Drop the entire selection\nSelect None"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_BACK_COLOR      "Select a background color for the current view\nBack Color"
+    ID_EDIT_SELECT_INVERSE  "Drop selected polys and select unselected polys\nSelect Inverse"
+    ID_MODIFY_UV_MAP        "Edit UV coords for selected polys\nUV Mapping"
+    ID_VIEW_SHADOWS         "Enable or disable volume shadow rendering"
+    ID_VIEW_BUMPMAPS        "Enable or disable bumpmapping"
+    ID_VIEW_VERTEXSHADER    "Enable or disable vertex shaders"
+    ID_VIEW_PIXELSHADER     "Enable or disable pixel shader"
+    ID_SURFACE_OPTIMIZE     "Optimize the mesh by combining similar vertices.\nOptimize Mesh"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SURFACE_EXPLODE      "Explode the mesh by creating distinct vertices for each poly.\nExplode Mesh"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Magic.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
