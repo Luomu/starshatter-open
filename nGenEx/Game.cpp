@@ -32,7 +32,7 @@
 
 FILE*    ErrLog         = 0;
 int      ErrLine        = 0;
-char     ErrBuf[256];
+char     ErrBuf[1024];
 
 Game*    game           = 0;
 
