@@ -94,10 +94,8 @@ admin_server(0), lobby_server(0)
 		exit(-1);
 	}
 
-#ifndef STARSHATTER_DEMO_RELEASE
 	if (loader->FindFile("start.dat"))
 	loader->EnableDatafile("start.dat");
-#endif
 
 	// no images or sounds in server mode:
 	loader->EnableMedia(false);
@@ -492,26 +490,6 @@ DWORD WINAPI StarServerRestartProc(LPVOID link)
 
 	Sleep(3000);
 
-#ifdef STARSHATTER_DEMO_RELEASE
-
-	if (stars) {
-		char cmdline[256];
-		strcpy_s(cmdline, "StarDemo -server");
-
-		STARTUPINFO s;
-		ZeroMemory(&s, sizeof(s));
-		s.cb = sizeof(s);
-
-		PROCESS_INFORMATION pi;
-		ZeroMemory(&pi, sizeof(pi));
-
-		CreateProcess("StarDemo.exe", cmdline, 0, 0, 0, 0, 0, 0, &s, &pi);
-		stars->Exit();
-		return 0;
-	}
-
-#else
-
 	if (stars) {
 		char cmdline[256];
 		strcpy_s(cmdline, "stars -server");
@@ -529,8 +507,6 @@ DWORD WINAPI StarServerRestartProc(LPVOID link)
 		CloseHandle( pi.hThread );
 		return 0;
 	}
-
-#endif
 
 	return (DWORD) E_POINTER;
 }

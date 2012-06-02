@@ -226,9 +226,6 @@ ModConfig::Deploy()
 	if (enabled.size() < 1)
 	return;
 
-#ifdef STARSHATTER_DEMO_RELEASE
-	Print("\nPACKAGED MODS ARE NOT SUPPORTED IN THIS DEMO\n");
-#else
 	Print("\nDEPLOYING MODS\n--------------\n");
 
 	int i = 1;
@@ -259,7 +256,6 @@ ModConfig::Deploy()
 
 	Print("\n");
 	Game::UseLocale(0);
-#endif
 }
 
 void
@@ -288,10 +284,6 @@ ModConfig::Redeploy()
 void
 ModConfig::EnableMod(const char* name)
 {
-#ifdef STARSHATTER_DEMO_RELEASE
-	DisableMod(name);
-#else
-
 	if (!name || !*name)
 	return;
 
@@ -319,7 +311,6 @@ ModConfig::EnableMod(const char* name)
 			}
 		}
 	}
-#endif
 }
 
 void

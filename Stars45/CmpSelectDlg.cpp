@@ -248,14 +248,6 @@ CmpSelectDlg::ShowNewCampaigns()
 
 				// if campaign is not available, show the grayed-out image
 
-#ifdef STARSHATTER_DEMO_RELEASE
-				// DEMO VERSION (only one campaign):
-				if (c->GetCampaignId() > 2) {
-					images[n]->CopyBitmap(*c->GetImage(2));
-					lst_campaigns->SetItemImage(n, images[n]);
-				}
-
-#else
 				// FULL GAME CRITERIA (based on player record):
 				if (c->GetCampaignId() > 2 && c->GetCampaignId() < 10 && 
 						!player->HasCompletedCampaign(c->GetCampaignId()-1)) {
@@ -273,7 +265,6 @@ CmpSelectDlg::ShowNewCampaigns()
 				}
 
 				// NOTE: Campaigns 10, 20, and 30-99 are always enabled if they exist!
-#endif
 			}
 		}
 	}
@@ -363,15 +354,9 @@ CmpSelectDlg::OnCampaignSelect(AWEvent* event)
 				Campaign* c = list[i];
 
 				// is campaign available?
-
-#ifdef STARSHATTER_DEMO_RELEASE
-				// DEMO VERSION (only one campaign):
-				if (c->GetCampaignId() <= 2)
-#else
 				// FULL GAME CRITERIA (based on player record):
 				if (c->GetCampaignId() <= 2 || 
 						player->HasCompletedCampaign(c->GetCampaignId()-1))
-#endif
 				{
 
 					if (lst_campaigns->IsSelected(i)) {

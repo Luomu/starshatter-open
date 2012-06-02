@@ -234,15 +234,9 @@ ModDlg::OnSelectEnabled(AWEvent* event)
 void
 ModDlg::OnSelectDisabled(AWEvent* event)
 {
-#ifdef STARSHATTER_DEMO_RELEASE
-	if (btn_enable) {
-		btn_enable->SetEnabled(false);
-	}
-#else
 	if (btn_enable && lst_disabled) {
 		btn_enable->SetEnabled(lst_disabled->GetSelCount() == 1);
 	}
-#endif
 }
 
 void
