@@ -290,15 +290,6 @@ CmpnScreen::ExecFrame()
 				}
 			}
 
-#ifdef STARSHATTER_DEMO_RELEASE
-			if (!campaign->IsTraining()) {
-				Mouse::Show(false);
-				MusicDirector::SetMode(MusicDirector::MENU);
-				stars->SetGameMode(Starshatter::MENU_MODE);
-				return;
-			}
-#endif
-
 			// continue on to the next available campaign:
 			if (campaign->GetCampaignId() < Campaign::GetLastCampaignId()) {
 				stars->StartOrResumeGame();

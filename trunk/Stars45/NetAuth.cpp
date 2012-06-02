@@ -134,20 +134,9 @@ NetAuth::CreateAuthResponse(int level, const char* salt)
 	ModConfig*  config = ModConfig::GetInstance();
 
 	if (level == NET_AUTH_SECURE) {
-
-#ifdef STARSHATTER_DEMO_RELEASE
-
-		response += "exe ";
-		response += Digest(salt, "StarDemo.exe"); // XXX should look up name of this exe
-		response += " ";
-
-#else
-
 		response += "exe ";
 		response += Digest(salt, "stars.exe");    // XXX should look up name of this exe
 		response += " ";
-
-#endif
 
 		response += "dat ";
 		response += Digest(salt, "shatter.dat");
