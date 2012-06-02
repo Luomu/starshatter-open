@@ -662,11 +662,10 @@ VideoDX9::CreateBuffers()
 					::fread(magic_fx_code, magic_fx_code_len, 1, f);
 					magic_fx_code[magic_fx_code_len] = 0;
 				}
+				::fclose(f);
 			} else if (loader) {
 				magic_fx_code_len = loader->LoadBuffer("magic.fx", magic_fx_code, true, true);
 			}
-
-			::fclose(f);
 		}
 
 		if (video_settings.use_effects && magic_fx_code && magic_fx_code_len) {
