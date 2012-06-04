@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         ActiveWindow.h
@@ -315,7 +315,7 @@ protected:
 	void Map##cname##fname(ActiveWindow* client, AWEvent* event) \
 	{ cname* c = (cname*) client; c->fname(event); }
 
-#define REGISTER_CLIENT(eid, ctrl, cname, fname)\
+#define REGISTER_CLIENT(eid, ctrl, cname, fname)\ //-V571
 	if (ctrl) ctrl->RegisterClient(eid, this, Map##cname##fname);
 
 #define UNREGISTER_CLIENT(eid, ctrl, cname)\
