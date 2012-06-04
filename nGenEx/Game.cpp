@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         Game.cpp
@@ -72,7 +72,7 @@ status(Game::OK), exit_code(0), window_style(0), avi_file(0)
 	if (!game) {
 		panicbuf[0] = 0;
 		game = this;
-		ZeroMemory(ErrBuf, 256);
+		ZeroMemory(ErrBuf, 1024);
 
 		video_settings = new(__FILE__,__LINE__) VideoSettings;
 
