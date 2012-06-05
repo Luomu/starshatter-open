@@ -187,10 +187,8 @@ chat_mode(0), exit_time(1.2), cutscene(0)
 	if (loader->FindFile("vox.dat"))
 	loader->EnableDatafile("vox.dat");
 
-#ifndef STARSHATTER_DEMO_RELEASE
 	if (loader->FindFile("start.dat"))
 	loader->EnableDatafile("start.dat");
-#endif
 
 	loadstat = loader->EnableDatafile("content.dat");
 

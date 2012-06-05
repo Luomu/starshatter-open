@@ -30,7 +30,7 @@ struct VideoMode
 		FMT_X8R8G8B8   = 22
 	};
 
-	VideoMode()                                : width(0), height(0), refresh(0), format(0) { }
+	VideoMode()                                : width(0), height(0), refresh(0), format(VideoMode::FMT_NONE) { }
 	VideoMode(int w, int h, Format f, int r=0) : width(w), height(h), refresh(r), format(f) { }
 
 	int operator == (const VideoMode& m)  const { return m.width  == width  &&
@@ -45,7 +45,7 @@ struct VideoMode
 	int               width;
 	int               height;
 	int               refresh;
-	int               format;
+	VideoMode::Format format;
 };
 
 // +--------------------------------------------------------------------+
@@ -90,6 +90,7 @@ public:
 	int               GetWidth()              const;
 	int               GetHeight()             const;
 	int               GetDepth()              const;
+	VideoMode::Format GetPixelFormat()		  const;
 	int               GetPixSize()            const;
 	int               GetRefreshRate()        const;
 

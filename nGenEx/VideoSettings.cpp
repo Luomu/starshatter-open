@@ -78,6 +78,14 @@ VideoSettings::GetHeight() const
 	return fullscreen_mode.height;
 }
 
+VideoMode::Format
+VideoSettings::GetPixelFormat() const {
+	if (is_windowed)
+	return windowed_mode.format;
+	else
+	return fullscreen_mode.format;
+}
+
 int
 VideoSettings::GetDepth() const
 {
