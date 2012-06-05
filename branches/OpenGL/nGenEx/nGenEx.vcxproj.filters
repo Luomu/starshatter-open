@@ -254,6 +254,9 @@
     <ClCompile Include="Locale_ss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VideoOGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActiveWindow.h">
@@ -530,6 +533,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Locale_ss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoOGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

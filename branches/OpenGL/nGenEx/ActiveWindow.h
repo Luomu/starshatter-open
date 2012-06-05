@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         ActiveWindow.h
