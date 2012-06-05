@@ -1,6 +1,6 @@
 /*  Project nGenEx
 	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+	Copyright (C) 1997-2004. All Rights Reserved.
 
 	SUBSYSTEM:    nGenEx.lib
 	FILE:         Graphic.h
@@ -21,7 +21,7 @@
 
 // +--------------------------------------------------------------------+
 
-#define GRAPHIC_DESTROY(x) if (x) { x->Destroy(); x = 0; }
+#define GRAPHIC_DESTROY(x) if (x) { x->Destroy(); x = 0; } //-V571
 
 // +--------------------------------------------------------------------+
 
