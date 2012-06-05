@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('_mod_config_8cpp.html','');});
 <div class="contents">
 <a href="_mod_config_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*  Project Starshatter 5.0</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">        Destroyer Studios LLC</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">        Copyright © 1997-2007. All Rights Reserved.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">        Copyright (C) 1997-2007. All Rights Reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">        SUBSYSTEM:    Stars.exe</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">        FILE:         ModConfig.cpp</span></div>
@@ -302,7 +302,7 @@ $(document).ready(function(){initNavTree('_mod_config_8cpp.html','');});
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                <span class="keywordflow">return</span> mod_info;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        }</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">// +-------------------------------------------------------------------+</span></div>
@@ -330,168 +330,159 @@ $(document).ready(function(){initNavTree('_mod_config_8cpp.html','');});
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> (enabled.<a class="code" href="class_list.html#a802e2aa9aaef248591140fa032d20d61">size</a>() &lt; 1)</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="preprocessor">#ifdef STARSHATTER_DEMO_RELEASE</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor"></span>        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;\nPACKAGED MODS ARE NOT SUPPORTED IN THIS DEMO\n&quot;</span>);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="preprocessor"></span>        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;\nDEPLOYING MODS\n--------------\n&quot;</span>);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordtype">int</span> i = 1;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = enabled;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <a class="code" href="class_text.html">Text</a>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a> = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="class_mod_config.html#a725cb31107f387fee657244606c2f32d">IsDeployed</a>(name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>())) {</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;  %d. %s is already deployed (skipping)\n&quot;</span>, i++, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;  %d. %s\n&quot;</span>, i++, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = <span class="keyword">new</span>(__FILE__,__LINE__) <a class="code" href="class_mod_info.html">ModInfo</a>;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <span class="keywordflow">if</span> (mod_info-&gt;Load(name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>()) &amp;&amp; mod_info-&gt;Enable()) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                        mods.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_info);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                }</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;     Could not deploy &#39;%s&#39; - disabling\n&quot;</span>, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                        <span class="keyword">delete</span> mod_info;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                        disabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(name);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <a class="code" href="class_game.html#a67befaf65090ea45a670e3f30e78709d">Game::UseLocale</a>(0);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno"><a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">  266</a></span>&#160;<a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">ModConfig::Undeploy</a>()</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;{</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;UNDEPLOYING MODS\n&quot;</span>);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        mods.<a class="code" href="class_list.html#a2c39145db843e6fc3fe5e835cd52b68d">destroy</a>();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;\nDEPLOYING MODS\n--------------\n&quot;</span>);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordtype">int</span> i = 1;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = enabled;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <a class="code" href="class_text.html">Text</a>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a> = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="class_mod_config.html#a725cb31107f387fee657244606c2f32d">IsDeployed</a>(name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>())) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;  %d. %s is already deployed (skipping)\n&quot;</span>, i++, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;  %d. %s\n&quot;</span>, i++, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = <span class="keyword">new</span>(__FILE__,__LINE__) <a class="code" href="class_mod_info.html">ModInfo</a>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                <span class="keywordflow">if</span> (mod_info-&gt;Load(name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>()) &amp;&amp; mod_info-&gt;Enable()) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                        mods.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_info);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;     Could not deploy &#39;%s&#39; - disabling\n&quot;</span>, name-&gt;<a class="code" href="class_text.html#aae848844d712fd439b42fe6fb8d89bd6">data</a>());</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                        <span class="keyword">delete</span> mod_info;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                        disabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(name);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <a class="code" href="class_game.html#a67befaf65090ea45a670e3f30e78709d">Game::UseLocale</a>(0);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;}</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno"><a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">  262</a></span>&#160;<a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">ModConfig::Undeploy</a>()</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;{</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="stringliteral">&quot;UNDEPLOYING MODS\n&quot;</span>);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        mods.<a class="code" href="class_list.html#a2c39145db843e6fc3fe5e835cd52b68d">destroy</a>();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <a class="code" href="class_ship_design.html#a12429d4bb309603fa84f27291ffddbb3">ShipDesign::ClearModCatalog</a>();</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <a class="code" href="class_weapon_design.html#a8fc87da9507be7ce6956da264cf7c4e5">WeaponDesign::ClearModCatalog</a>();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <a class="code" href="class_ship_design.html#a12429d4bb309603fa84f27291ffddbb3">ShipDesign::ClearModCatalog</a>();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <a class="code" href="class_weapon_design.html#a8fc87da9507be7ce6956da264cf7c4e5">WeaponDesign::ClearModCatalog</a>();</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno"><a class="code" href="class_mod_config.html#af604f28559bc71190d16b86441748351">  276</a></span>&#160;<a class="code" href="class_mod_config.html#af604f28559bc71190d16b86441748351">ModConfig::Redeploy</a>()</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;{</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">Undeploy</a>();</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <a class="code" href="class_mod_config.html#a32ebfbca72e40fd457a5bbbe7dcc8587">Deploy</a>();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <a class="code" href="class_mod_config.html#acc9705c80c605fb350c78f2956b10209">Campaign::Close</a>();</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <a class="code" href="class_mod_config.html#a57edcb997ca46974c040fb053ea8d0bf">Campaign::Initialize</a>();</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <a class="code" href="class_campaign.html#a28419b1934262dbf74e04c762c8ab3f2">Campaign::SelectCampaign</a>(<span class="stringliteral">&quot;Single Missions&quot;</span>);</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;}</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">// +-------------------------------------------------------------------+</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno"><a class="code" href="class_mod_config.html#a87b7380620368ff5e507169706420335">  289</a></span>&#160;<a class="code" href="class_mod_config.html#a87b7380620368ff5e507169706420335">ModConfig::EnableMod</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a>)</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;{</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">#ifdef STARSHATTER_DEMO_RELEASE</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor"></span>        <a class="code" href="class_mod_config.html#a5f5abc2753b4b117b41374c5307c09ad">DisableMod</a>(name);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordflow">if</span> (!name || !*name)</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <a class="code" href="class_text.html">Text</a>* mod_name;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = disabled;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                <a class="code" href="class_text.html">Text</a>* t = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                <span class="keywordflow">if</span> (*t == name) {</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                        mod_name = t;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                }</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">if</span> (mod_name) {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                enabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_name);</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                <span class="keywordflow">if</span> (!<a class="code" href="class_mod_config.html#a725cb31107f387fee657244606c2f32d">IsDeployed</a>(*mod_name)) {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                        <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = <span class="keyword">new</span>(__FILE__,__LINE__) <a class="code" href="class_mod_info.html">ModInfo</a>;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                        </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                        <span class="keywordflow">if</span> (mod_info-&gt;<a class="code" href="class_mod_info.html#a81cbd7b48ff5d4e467a2d47cc36f553a">Load</a>(*mod_name) &amp;&amp; mod_info-&gt;<a class="code" href="class_mod_info.html#a0e71a47576196f045986591363d63482">Enable</a>()) {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                                mods.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_info);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                        }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                }</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        }</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno"><a class="code" href="class_mod_config.html#a5f5abc2753b4b117b41374c5307c09ad">  326</a></span>&#160;<a class="code" href="class_mod_config.html#a5f5abc2753b4b117b41374c5307c09ad">ModConfig::DisableMod</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a>)</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;{</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keywordflow">if</span> (!name || !*name)</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <a class="code" href="class_text.html">Text</a>* mod_name;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = enabled;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <a class="code" href="class_text.html">Text</a>* t = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                <span class="keywordflow">if</span> (*t == name) {</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                        mod_name = t;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                }</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordflow">if</span> (mod_name) {</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                disabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_name);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                <a class="code" href="class_list_iter.html">ListIter&lt;ModInfo&gt;</a> iter = mods;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                <span class="keywordflow">while</span> (++iter) {</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                        <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                        <span class="keywordflow">if</span> (mod_info-&gt;<a class="code" href="class_mod_info.html#a9fcceb924604ecd57ad3ca38db41b536">Name</a>() == *mod_name) {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                                <span class="keyword">delete</span> iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                        }</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        }</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;}</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="code" href="class_mod_config.html#af604f28559bc71190d16b86441748351">  272</a></span>&#160;<a class="code" href="class_mod_config.html#af604f28559bc71190d16b86441748351">ModConfig::Redeploy</a>()</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;{</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <a class="code" href="class_mod_config.html#a26b0f8e11db7e56e2e75ba5b56742cd0">Undeploy</a>();</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <a class="code" href="class_mod_config.html#a32ebfbca72e40fd457a5bbbe7dcc8587">Deploy</a>();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <a class="code" href="class_mod_config.html#acc9705c80c605fb350c78f2956b10209">Campaign::Close</a>();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="class_mod_config.html#a57edcb997ca46974c040fb053ea8d0bf">Campaign::Initialize</a>();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <a class="code" href="class_campaign.html#a28419b1934262dbf74e04c762c8ab3f2">Campaign::SelectCampaign</a>(<span class="stringliteral">&quot;Single Missions&quot;</span>);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">// +-------------------------------------------------------------------+</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="code" href="class_mod_config.html#a87b7380620368ff5e507169706420335">  285</a></span>&#160;<a class="code" href="class_mod_config.html#a87b7380620368ff5e507169706420335">ModConfig::EnableMod</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a>)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;{</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">if</span> (!name || !*name)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <a class="code" href="class_text.html">Text</a>* mod_name;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = disabled;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                <a class="code" href="class_text.html">Text</a>* t = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                <span class="keywordflow">if</span> (*t == name) {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                        mod_name = t;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">if</span> (mod_name) {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                enabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_name);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="keywordflow">if</span> (!<a class="code" href="class_mod_config.html#a725cb31107f387fee657244606c2f32d">IsDeployed</a>(*mod_name)) {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                        <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = <span class="keyword">new</span>(__FILE__,__LINE__) <a class="code" href="class_mod_info.html">ModInfo</a>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                        </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                        <span class="keywordflow">if</span> (mod_info-&gt;<a class="code" href="class_mod_info.html#a81cbd7b48ff5d4e467a2d47cc36f553a">Load</a>(*mod_name) &amp;&amp; mod_info-&gt;<a class="code" href="class_mod_info.html#a0e71a47576196f045986591363d63482">Enable</a>()) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                                mods.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_info);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                        }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;}</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno"><a class="code" href="class_mod_config.html#a5f5abc2753b4b117b41374c5307c09ad">  317</a></span>&#160;<a class="code" href="class_mod_config.html#a5f5abc2753b4b117b41374c5307c09ad">ModConfig::DisableMod</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_mission.html#abb3177fce8a7cd3e5ba9e0574572ca9a">name</a>)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;{</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">if</span> (!name || !*name)</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <a class="code" href="class_text.html">Text</a>* mod_name;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <a class="code" href="class_list_iter.html">ListIter&lt;Text&gt;</a> iter = enabled;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">while</span> (++iter) {</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <a class="code" href="class_text.html">Text</a>* t = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                <span class="keywordflow">if</span> (*t == name) {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        mod_name = t;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        }</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordflow">if</span> (mod_name) {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                disabled.<a class="code" href="class_list.html#ab3180edb4da02be2a4b62320071755b8">append</a>(mod_name);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <a class="code" href="class_list_iter.html">ListIter&lt;ModInfo&gt;</a> iter = mods;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                <span class="keywordflow">while</span> (++iter) {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                        <a class="code" href="class_mod_info.html">ModInfo</a>* mod_info = iter.<a class="code" href="class_list_iter.html#a70cb1260924c01a38c4a68552120a5e0">value</a>();</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                        <span class="keywordflow">if</span> (mod_info-&gt;<a class="code" href="class_mod_info.html#a9fcceb924604ecd57ad3ca38db41b536">Name</a>() == *mod_name) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                                <span class="keyword">delete</span> iter.<a class="code" href="class_list_iter.html#ac39b155d0727d18bd89815c1a03d3a5b">removeItem</a>();</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                        }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                }</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;}</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">// +-------------------------------------------------------------------+</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno"><a class="code" href="class_mod_config.html#a4bb65f0512dc0bda6d26bdf1a1049f6c">  352</a></span>&#160;<a class="code" href="class_mod_config.html#a4bb65f0512dc0bda6d26bdf1a1049f6c">ModConfig::IncreaseModPriority</a>(<span class="keywordtype">int</span> mod_index)</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;{</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">if</span> (mod_index &gt; 0 &amp;&amp; mod_index &lt; enabled.<a class="code" href="class_list.html#a802e2aa9aaef248591140fa032d20d61">size</a>()) {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod1 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index-1);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod2 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index);</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">// +-------------------------------------------------------------------+</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno"><a class="code" href="class_mod_config.html#a4bb65f0512dc0bda6d26bdf1a1049f6c">  361</a></span>&#160;<a class="code" href="class_mod_config.html#a4bb65f0512dc0bda6d26bdf1a1049f6c">ModConfig::IncreaseModPriority</a>(<span class="keywordtype">int</span> mod_index)</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;{</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keywordflow">if</span> (mod_index &gt; 0 &amp;&amp; mod_index &lt; enabled.<a class="code" href="class_list.html#a802e2aa9aaef248591140fa032d20d61">size</a>()) {</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod1 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index-1);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod2 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index-1) = mod2;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index)   = mod1;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno"><a class="code" href="class_mod_config.html#ab7bd3d99b184f76088da56d70f961244">  373</a></span>&#160;<a class="code" href="class_mod_config.html#ab7bd3d99b184f76088da56d70f961244">ModConfig::DecreaseModPriority</a>(<span class="keywordtype">int</span> mod_index)</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;{</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordflow">if</span> (mod_index &gt;= 0 &amp;&amp; mod_index &lt; enabled.<a class="code" href="class_list.html#a802e2aa9aaef248591140fa032d20d61">size</a>()-1) {</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod1 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index);</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod2 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index+1);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index)   = mod2;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index+1) = mod1;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        }</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;}</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index-1) = mod2;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index)   = mod1;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno"><a class="code" href="class_mod_config.html#ab7bd3d99b184f76088da56d70f961244">  364</a></span>&#160;<a class="code" href="class_mod_config.html#ab7bd3d99b184f76088da56d70f961244">ModConfig::DecreaseModPriority</a>(<span class="keywordtype">int</span> mod_index)</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;{</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">if</span> (mod_index &gt;= 0 &amp;&amp; mod_index &lt; enabled.<a class="code" href="class_list.html#a802e2aa9aaef248591140fa032d20d61">size</a>()-1) {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod1 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                <a class="code" href="class_text.html">Text</a>* mod2 = enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index+1);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index)   = mod2;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                enabled.<a class="code" href="class_list.html#a92f41ba1f2810b54d6b47ce727ff9835">at</a>(mod_index+1) = mod1;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        }</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;}</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_ea1b58c809a5070716d7c602998a95b0.html">Stars45</a></li><li class="navelem"><a class="el" href="_mod_config_8cpp.html">ModConfig.cpp</a></li>
-    <li class="footer">Generated on Thu May 31 2012 16:31:10 for Starshatter_Open by
+    <li class="footer">Generated on Tue Jun 5 2012 20:46:58 for Starshatter_Open by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.1 </li>
   </ul>
