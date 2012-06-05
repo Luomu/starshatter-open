@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('_game_8cpp.html','');});
 <div class="contents">
 <a href="_game_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*  Project nGenEx</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">        Destroyer Studios LLC</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">        Copyright © 1997-2004. All Rights Reserved.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">        Copyright (C) 1997-2004. All Rights Reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">        SUBSYSTEM:    nGenEx.lib</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">        FILE:         Game.cpp</span></div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('_game_8cpp.html','');});
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="_main_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">   33</a></span>&#160;FILE*    <a class="code" href="_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">ErrLog</a>         = 0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="_game_8cpp.html#a9150df14edb9b71f5b52fb7723889230">   34</a></span>&#160;<span class="keywordtype">int</span>      <a class="code" href="_game_8cpp.html#a9150df14edb9b71f5b52fb7723889230">ErrLine</a>        = 0;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="_game_8cpp.html#ae1d30da6133dba888f0df7218e825474">   35</a></span>&#160;<span class="keywordtype">char</span>     <a class="code" href="_game_8cpp.html#ae1d30da6133dba888f0df7218e825474">ErrBuf</a>[256];</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8">   35</a></span>&#160;<span class="keywordtype">char</span>     <a class="code" href="_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8">ErrBuf</a>[1024];</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="_game_8cpp.html#a58bdb5643d0814ac4e697a1564b79b70">   37</a></span>&#160;<a class="code" href="class_game.html">Game</a>*    <a class="code" href="_game_8cpp.html#a58bdb5643d0814ac4e697a1564b79b70">game</a>           = 0;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('_game_8cpp.html','');});
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (!game) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <a class="code" href="class_game.html#a21f1b35e2bd6105e7ccb8a7115e7a01f">panicbuf</a>[0] = 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                game = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                ZeroMemory(<a class="code" href="_game_8cpp.html#ae1d30da6133dba888f0df7218e825474">ErrBuf</a>, 256);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                ZeroMemory(<a class="code" href="_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8">ErrBuf</a>, 1024);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <a class="code" href="class_game.html#a4a886c1e931ac33821cb1ab30ce7ff92">video_settings</a> = <span class="keyword">new</span>(__FILE__,__LINE__) <a class="code" href="class_video_settings.html">VideoSettings</a>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
@@ -1624,9 +1624,9 @@ $(document).ready(function(){initNavTree('_game_8cpp.html','');});
 <div class="line"><a name="l01520"></a><span class="lineno"><a class="code" href="_sky_8cpp.html#af90200fd2fbff173d1e7997394dc50c6"> 1520</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="_list_8inl.html#a76779b0ba1af4da2cfb8cf309b39372b">Print</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fmt, ...)</div>
 <div class="line"><a name="l01521"></a><span class="lineno"> 1521</span>&#160;{</div>
 <div class="line"><a name="l01522"></a><span class="lineno"> 1522</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">ErrLog</a>) {</div>
-<div class="line"><a name="l01523"></a><span class="lineno"> 1523</span>&#160;                vsprintf_s(<a class="code" href="_game_8cpp.html#ae1d30da6133dba888f0df7218e825474">ErrBuf</a>, fmt, (<span class="keywordtype">char</span> *)(&amp;fmt+1));</div>
+<div class="line"><a name="l01523"></a><span class="lineno"> 1523</span>&#160;                vsprintf_s(<a class="code" href="_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8">ErrBuf</a>, fmt, (<span class="keywordtype">char</span> *)(&amp;fmt+1));</div>
 <div class="line"><a name="l01524"></a><span class="lineno"> 1524</span>&#160;</div>
-<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;                fprintf(<a class="code" href="_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">ErrLog</a>, <a class="code" href="_game_8cpp.html#ae1d30da6133dba888f0df7218e825474">ErrBuf</a>);</div>
+<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;                fprintf(<a class="code" href="_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">ErrLog</a>, <a class="code" href="_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8">ErrBuf</a>);</div>
 <div class="line"><a name="l01526"></a><span class="lineno"> 1526</span>&#160;                fflush(<a class="code" href="_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0">ErrLog</a>);</div>
 <div class="line"><a name="l01527"></a><span class="lineno"> 1527</span>&#160;        }</div>
 <div class="line"><a name="l01528"></a><span class="lineno"> 1528</span>&#160;}</div>
@@ -1683,7 +1683,7 @@ $(document).ready(function(){initNavTree('_game_8cpp.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d6625d0f3efd9eb70ff961583505095b.html">nGenEx</a></li><li class="navelem"><a class="el" href="_game_8cpp.html">Game.cpp</a></li>
-    <li class="footer">Generated on Thu May 31 2012 16:30:54 for Starshatter_Open by
+    <li class="footer">Generated on Tue Jun 5 2012 20:46:23 for Starshatter_Open by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.1 </li>
   </ul>

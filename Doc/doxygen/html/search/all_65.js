@@ -195,7 +195,7 @@ var searchData=
   ['err_5ftoomanyrefs',['ERR_TOOMANYREFS',['../class_net_client.html#a8f011d02f49d559d984850e1c1c5dbeca15daf5ec077a9dc68aefb766e8972498',1,'NetClient']]],
   ['err_5fusers',['ERR_USERS',['../class_net_client.html#a8f011d02f49d559d984850e1c1c5dbecaa786f9593225dfbe172cdbe2428513b8',1,'NetClient']]],
   ['err_5fwouldblock',['ERR_WOULDBLOCK',['../class_net_client.html#a8f011d02f49d559d984850e1c1c5dbeca5f51842e7fe98d46d570d8eec1c8912d',1,'NetClient']]],
-  ['errbuf',['ErrBuf',['../_game_8cpp.html#ae1d30da6133dba888f0df7218e825474',1,'Game.cpp']]],
+  ['errbuf',['ErrBuf',['../_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8',1,'Game.cpp']]],
   ['errline',['ErrLine',['../_game_8cpp.html#a9150df14edb9b71f5b52fb7723889230',1,'Game.cpp']]],
   ['errlog',['ErrLog',['../_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp'],['../_game_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp'],['../_main_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp']]],
   ['errmsg',['errmsg',['../class_mission.html#aa1fa02f2ed10df0f9c9239a953b2cc4c',1,'Mission']]],

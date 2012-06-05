@@ -76,7 +76,7 @@ var searchData=
   ['eos_5fwritten',['eos_written',['../class_sound_d3_d.html#a76d3510a825ce952cd32bd4d1b5548a6',1,'SoundD3D']]],
   ['epoch',['epoch',['../_star_system_8cpp.html#af1e3d68741b01acf62112b24c644a768',1,'StarSystem.cpp']]],
   ['err',['err',['../class_net_client.html#a54887bb8ad8fc4d0fd0ba90e37313e77',1,'NetClient::err()'],['../class_net_server.html#ac0279d738389b99aa92be63714bc2552',1,'NetServer::err()'],['../_archive_8cpp.html#a6ce68847c12434f60d1b2654a3dc3409',1,'err():&#160;Archive.cpp']]],
-  ['errbuf',['ErrBuf',['../_game_8cpp.html#ae1d30da6133dba888f0df7218e825474',1,'Game.cpp']]],
+  ['errbuf',['ErrBuf',['../_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8',1,'Game.cpp']]],
   ['errline',['ErrLine',['../_game_8cpp.html#a9150df14edb9b71f5b52fb7723889230',1,'Game.cpp']]],
   ['errlog',['ErrLog',['../_magic_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp'],['../_game_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp'],['../_main_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0',1,'ErrLog():&#160;Game.cpp']]],
   ['errmsg',['errmsg',['../class_mission.html#aa1fa02f2ed10df0f9c9239a953b2cc4c',1,'Mission']]],

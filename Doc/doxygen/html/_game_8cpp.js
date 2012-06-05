@@ -9,7 +9,7 @@ var _game_8cpp =
     [ "Print", "_game_8cpp.html#a76779b0ba1af4da2cfb8cf309b39372b", null ],
     [ "ProfileGameLoop", "_game_8cpp.html#aa0963f9c47c5123cc63e341d5f0d86b5", null ],
     [ "WndProc", "_game_8cpp.html#a9121da3e7064865fe23ec02664e338bd", null ],
-    [ "ErrBuf", "_game_8cpp.html#ae1d30da6133dba888f0df7218e825474", null ],
+    [ "ErrBuf", "_game_8cpp.html#abcea224109ce7b834e15fcb1e4c771e8", null ],
     [ "ErrLine", "_game_8cpp.html#a9150df14edb9b71f5b52fb7723889230", null ],
     [ "ErrLog", "_game_8cpp.html#adbfd2ba1643c81e121d6e229045e81c0", null ],
     [ "game", "_game_8cpp.html#a58bdb5643d0814ac4e697a1564b79b70", null ],
