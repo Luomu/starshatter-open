@@ -12,8 +12,7 @@
 	D3DX image file loader
 */
 
-#include <string>
-#include "afxdlgs.h"
+
 #include "MemDebug.h"
 #include "D3DXImage.h"
 #include "VideoDX9.h"
@@ -54,14 +53,8 @@ bool D3DXImage::Load(char *filename)
 	FILE* f;
 
 	fopen_s(&f, filename,"rb");
-	if (f == NULL) {
-		std::string errstring = "Magic was unable to locate the following texture: ";
-		errstring += filename;
-		errstring += "\nPlease locate the texture, and copy it to the same directory the Magic executable is in.";
-
-		MessageBox(NULL, errstring.c_str(), "Help!", MB_ICONWARNING | MB_OK);
-		return success;
-	}
+	if (f == NULL)
+	return success;
 
 	int   len = 0;
 	BYTE* buf = 0;

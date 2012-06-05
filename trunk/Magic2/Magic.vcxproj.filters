@@ -288,6 +288,9 @@
     <ClCompile Include="..\nGenEx\Video.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\nGenEx\VideoDX9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\nGenEx\VideoDX9Enum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -310,9 +313,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Locale_ss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoDX9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
