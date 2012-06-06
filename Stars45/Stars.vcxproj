@@ -316,9 +316,10 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
-      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)$(TargetFileName)"</Command>
-      <Message>Copying build...</Message>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+      <Message>Copying Build...</Message>
       <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+      <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug VS2012|Win32'">
@@ -368,9 +369,10 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
-      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)$(TargetFileName)"</Command>
-      <Message>Copying build...</Message>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+      <Message>Copying Build...</Message>
       <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+      <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -517,8 +519,9 @@
     </Link>
     <CustomBuildStep>
       <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
-      <Message>Copying build...</Message>
+      <Message>Copying Build...</Message>
       <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+      <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release VS2012|Win32'">
@@ -569,8 +572,9 @@
     </Link>
     <CustomBuildStep>
       <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
-      <Message>Copying build...</Message>
+      <Message>Copying Build...</Message>
       <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+      <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release x64|Win32'">

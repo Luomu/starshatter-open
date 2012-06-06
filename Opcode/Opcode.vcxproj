@@ -190,6 +190,7 @@
     <IntDir>.\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>..\Opcode;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)_D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\Debug\</OutDir>
@@ -277,6 +278,18 @@
       <OutputFile>Debug\Opcode_D.dll</OutputFile>
       <ImportLibrary>.\Debug\Opcode_D.lib</ImportLibrary>
     </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying Build...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>$(TargetFileName)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug VS2012|Win32'">
     <ClCompile>
@@ -322,6 +335,18 @@
       <OutputFile>Debug\Opcode_D.dll</OutputFile>
       <ImportLibrary>.\Debug\Opcode_D.lib</ImportLibrary>
     </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying Build...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>$(TargetFileName)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -451,6 +476,18 @@
       <OutputFile>.\Release\Opcode.dll</OutputFile>
       <ImportLibrary>.\Release\Opcode.lib</ImportLibrary>
     </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying Build...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>$(TargetFileName)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release VS2012|Win32'">
     <ClCompile>
@@ -494,6 +531,18 @@
       <OutputFile>.\Release\Opcode.dll</OutputFile>
       <ImportLibrary>.\Release\Opcode.lib</ImportLibrary>
     </Link>
+    <CustomBuildStep>
+      <Command>copy /y "$(TargetPath)" "$(STARSHATTERPATH)\$(TargetFileName)"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying Build...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(STARSHATTERPATH)\$(TargetFileName);%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>$(TargetFileName)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release x64|Win32'">
     <ClCompile>
