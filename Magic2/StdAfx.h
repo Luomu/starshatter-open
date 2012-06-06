@@ -13,7 +13,11 @@
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 #define WIN32_LEAN_AND_MEAN
 
+#if _MSC_VER <= 1600
 #define _WIN32_WINNT 0x0502 // XP is the lowest supported OS
+#else
+#define _WIN32_WINNT 0x0600 // VS2012 does not support XP, 0x0600 is Vista
+#endif
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
