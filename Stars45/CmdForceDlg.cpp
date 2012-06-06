@@ -294,7 +294,10 @@ CmdForceDlg::AddCombatGroup(CombatGroup* grp, bool last_child)
 		}
 	}
 
-	pipe_stack[stacklen-1] = 0;
+	if (stacklen > 1)
+		pipe_stack[stacklen-1] = 0;
+	else
+		pipe_stack[0] = 0;
 }
 
 // +--------------------------------------------------------------------+
