@@ -315,10 +315,10 @@ protected:
 	void Map##cname##fname(ActiveWindow* client, AWEvent* event) \
 	{ cname* c = (cname*) client; c->fname(event); }
 
-#define REGISTER_CLIENT(eid, ctrl, cname, fname)\
+#define REGISTER_CLIENT(eid, ctrl, cname, fname)\ //-V571
 	if (ctrl) ctrl->RegisterClient(eid, this, Map##cname##fname);
 
-#define UNREGISTER_CLIENT(eid, ctrl, cname)\
+#define UNREGISTER_CLIENT(eid, ctrl, cname)\ //-V571
 	if (ctrl) ctrl->UnregisterClient(eid, this);
 
 #endif ActiveWindow_h
