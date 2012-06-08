@@ -406,8 +406,10 @@ void DataArchive::Extract(const char* name)
    ExpandEntry(index, buf);
    
    std::string dirname = directory[index].name;
+   bool create_subdir = (dirname.find_first_of('/', 0) != std::string::npos);
    std::wstring wdirname = ToWideString(dirname.substr(0, dirname.find_first_of('/')));
-   CreateDirectory(wdirname.c_str(), NULL);
+   if (create_subdir)
+	  CreateDirectory(wdirname.c_str(), NULL);
    size_t offset = wdirname.length();
    while (dirname.find_first_of('/', offset + 1) != std::string::npos) {
 	   wdirname.push_back('/');
@@ -416,7 +418,7 @@ void DataArchive::Extract(const char* name)
 	   offset = wdirname.length();
    }
 
-   FILE* f = fopen(directory[index].name, "wb");
+   FILE* f = fopen(directory[index].name, "w+b");
    if (f) {
       fwrite(buf, directory[index].size_orig, 1, f);
       fclose(f);
