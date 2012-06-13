@@ -103,29 +103,6 @@ LPSTR lpCmdLine, int nCmdShow)
 		VD3D_describe_things = 0;
 	}
 
-
-	// FREE VERSION - AUTHORIZATION DISABLED
-	/*
-::Print("  Checking authorization codes...\n");
-if (!Authorization::IsUserAuthorized()) {
-	if (!DataLoader::GetLoader()) {
-		DataLoader::Initialize();
-		DataLoader::GetLoader()->EnableDatafile("content.dat");
-	}
-
-	Game* game = new Game();
-	game->InitContent();
-
-	MessageBox(0, FormatTextEscape(Game::GetText("main.auth-invalid")).data(), 
-					Game::GetText("main.title.error").data(), MB_OK);
-	::Print("  Not authorized.\n");
-
-	delete game;
-	DataLoader::Close();
-}
-else {
-	::Print("  Authorized\n");
-	*/
 	try {
 		NetLayer net;
 
