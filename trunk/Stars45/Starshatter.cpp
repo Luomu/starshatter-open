@@ -190,18 +190,19 @@ chat_mode(0), exit_time(1.2), cutscene(0)
 	if (loader->FindFile("start.dat"))
 	loader->EnableDatafile("start.dat");
 
-	loadstat = loader->EnableDatafile("content.dat");
+	if (loader->FindFile("content.dat"))
+	loader->EnableDatafile("content.dat");
 
-	if (loadstat != DataLoader::DATAFILE_OK) {
-		const char* err_msg = loadstat == DataLoader::DATAFILE_INVALID ?
-		"The file 'content.dat' appears to have been damaged.  Please re-install the latest Starshatter update." :
-		"Starshatter cannot open the file 'content.dat'.  Please re-install the latest Starshatter update.";
+	//if (loadstat != DataLoader::DATAFILE_OK) {
+	//	const char* err_msg = loadstat == DataLoader::DATAFILE_INVALID ?
+	//	"The file 'content.dat' appears to have been damaged.  Please re-install the latest Starshatter update." :
+	//	"Starshatter cannot open the file 'content.dat'.  Please re-install the latest Starshatter update.";
 
-		::MessageBox(hwnd, err_msg, "Starshatter - Error", MB_OK);
-		::Print(err_msg);
-		::Print("\n\nFATAL ERROR: EXIT.");
-		exit(-1);
-	}
+	//	::MessageBox(hwnd, err_msg, "Starshatter - Error", MB_OK);
+	//	::Print(err_msg);
+	//	::Print("\n\nFATAL ERROR: EXIT.");
+	//	exit(-1);
+	//}
 
 	LoadVideoConfig("video.cfg");
 
