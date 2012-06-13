@@ -408,7 +408,8 @@ Sim::CreateRegions()
 	const char* active_region_name = 0;
 
 	if (mission)
-	active_region_name = mission->GetRegion();
+		active_region_name = mission->GetRegion();
+	else return;
 
 	ListIter<StarSystem> iter = mission->GetSystemList();
 	while (++iter) {
