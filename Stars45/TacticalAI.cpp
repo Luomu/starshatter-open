@@ -630,7 +630,7 @@ TacticalAI::SelectTargetOpportunity()
 			if (rogue || tgt_ok) {
 				if (c_ship && c_ship != ship && !c_ship->InTransition()) {
 					if (c_ship->Class() <  Ship::DESTROYER || 
-							(c_ship->Class() >= Ship::MINE && c_ship->Class() <= Ship::SWACS)) {
+							(c_ship->Class() >= Ship::MINE && c_ship->Class() <= Ship::DEFSAT)) {
 						// found an enemy, check distance:
 						double dist = (ship->Location() - c_ship->Location()).length();
 
@@ -736,7 +736,7 @@ TacticalAI::SelectTargetOpportunity()
 		}
 	}
 
-	if (ship->Class() != Ship::CARRIER)
+	if (ship->Class() != Ship::CARRIER || ship->Class() != Ship::SWACS)
 	ship_ai->SetTarget(potential_target);
 }
 
