@@ -145,6 +145,7 @@ MsnElemDlg::Show()
 		cmb_class->AddItem(Ship::ClassName(Ship::CRUISER));
 		cmb_class->AddItem(Ship::ClassName(Ship::BATTLESHIP));
 		cmb_class->AddItem(Ship::ClassName(Ship::CARRIER));
+		cmb_class->AddItem(Ship::ClassName(Ship::SWACS));
 		cmb_class->AddItem(Ship::ClassName(Ship::DREADNAUGHT));
 		cmb_class->AddItem(Ship::ClassName(Ship::STATION));
 		cmb_class->AddItem(Ship::ClassName(Ship::FARCASTER));
@@ -152,7 +153,6 @@ MsnElemDlg::Show()
 		cmb_class->AddItem(Ship::ClassName(Ship::MINE));
 		cmb_class->AddItem(Ship::ClassName(Ship::COMSAT));
 		cmb_class->AddItem(Ship::ClassName(Ship::DEFSAT));
-		cmb_class->AddItem(Ship::ClassName(Ship::SWACS));
 
 		cmb_class->AddItem(Ship::ClassName(Ship::BUILDING));
 		cmb_class->AddItem(Ship::ClassName(Ship::FACTORY));

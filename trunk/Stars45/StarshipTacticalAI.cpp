@@ -202,7 +202,7 @@ void
 StarshipTacticalAI::CheckBugOut(Ship* c_ship, double rng)
 {
 	// see if carrier should bug out...
-	if (!ship || !c_ship || ship->Class() != Ship::CARRIER)
+	if (!ship || !c_ship || ship->Class() != Ship::CARRIER || ship->Class() != Ship::SWACS)
 	return;
 
 	if (bugout)

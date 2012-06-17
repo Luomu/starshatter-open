@@ -114,26 +114,6 @@ CombatUnit::GetDescription() const
 // +----------------------------------------------------------------------+
 
 bool
-CombatUnit::CanAssign() const
-{
-	bool result = false;
-
-	switch (type) {
-	case Ship::FIGHTER:
-	case Ship::ATTACK:
-	case Ship::CORVETTE:
-	case Ship::FRIGATE:
-	case Ship::DESTROYER:
-	case Ship::CRUISER:
-	case Ship::CARRIER:  result = true; break;
-	}
-
-	return result;
-}
-
-// +----------------------------------------------------------------------+
-
-bool
 CombatUnit::CanLaunch() const
 {
 	bool result = false;
@@ -260,6 +240,9 @@ double CombatUnit::PowerVersus(CombatUnit* tgt) const
 		return 0;
 	}
 	else if (type == Ship::CARRIER) {
+		return 0;
+	}
+	else if (type == Ship::SWACS) {
 		return 0;
 	}
 	else if (type == Ship::CRUISER) {

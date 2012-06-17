@@ -5261,6 +5261,7 @@ Ship::Value(int type)
 	case CRUISER:     value =  800; break;
 	case BATTLESHIP:  value = 1000; break;
 	case CARRIER:     value = 1500; break;
+	case SWACS:       value =  500; break;
 	case DREADNAUGHT: value = 1500; break;
 
 	case STATION:     value = 2500; break;
@@ -5269,7 +5270,6 @@ Ship::Value(int type)
 	case MINE:        value =   20; break;
 	case COMSAT:      value =  200; break;
 	case DEFSAT:      value =  300; break;
-	case SWACS:       value =  500; break;
 
 	case BUILDING:    value =  100; break;
 	case FACTORY:     value =  250; break;

@@ -43,7 +43,6 @@ public:
 	int            GetValue()                    const;
 	int            GetSingleValue()              const;
 	bool           CanDefend(CombatUnit* unit)   const;
-	bool           CanAssign()                   const;
 	bool           CanLaunch()                   const;
 	double         PowerVersus(CombatUnit* tgt)  const;
 	int            AssignMission();

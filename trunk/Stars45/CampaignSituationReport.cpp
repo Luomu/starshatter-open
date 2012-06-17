@@ -371,7 +371,7 @@ CampaignSituationReport::GetThreatInfo()
 						mission_role == Mission::TRANSPORT)
 				continue;
 
-				if (elem->GetDesign()->type >= Ship::MINE && elem->GetDesign()->type <= Ship::SWACS)
+				if (elem->GetDesign()->type >= Ship::MINE && elem->GetDesign()->type <= Ship::DEFSAT)
 				enemy_sites += elem->Count();
 
 				else if (elem->IsDropship())

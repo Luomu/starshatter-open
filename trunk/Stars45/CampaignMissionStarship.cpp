@@ -811,6 +811,7 @@ CampaignMissionStarship::CreateTargetsAssault()
 						case Ship::CRUISER:     extra = 50e3;           break;
 						case Ship::BATTLESHIP:  extra = 70e3;           break;
 						case Ship::DREADNAUGHT: extra = 80e3;           break;
+						case Ship::SWACS:		extra = 30e3;			break;
 						case Ship::CARRIER:     extra = 90e3;           break;
 						}
 					}
