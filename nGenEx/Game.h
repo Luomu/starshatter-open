@@ -25,6 +25,7 @@ void              FlushKeys();
 void              BufferKey(int vkey);
 int               GetKey();
 int               GetKeyPlus(int& key, int& shift);
+void			  ProcessKeyMessage();
 
 extern "C" bool   ProfileGameLoop(void);
 

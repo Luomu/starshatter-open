@@ -101,6 +101,8 @@ ShipAI::GetWard() const
 void
 ShipAI::SetWard(Ship* s)
 {
+	if (ship == nullptr)
+	return;
 	if (s == ship->GetWard())
 	return;
 

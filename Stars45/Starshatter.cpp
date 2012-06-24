@@ -425,6 +425,7 @@ Starshatter::InitGame()
 	input = new(__FILE__,__LINE__) MultiController;
 	Keyboard* k = new(__FILE__,__LINE__) Keyboard;
 	input->AddController(k);
+	ActivateKeyboardLayout(GetKeyboardLayout(0), 0);
 
 	mouse_input = new(__FILE__,__LINE__) MouseController;
 	input->AddController(mouse_input);

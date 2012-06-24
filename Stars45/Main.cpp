@@ -38,7 +38,7 @@ extern FILE* ErrLog;
 extern int   VD3D_describe_things;
 int          dump_missions = 0;
 
-const char*  versionInfo = "5.1.66";
+const char*  versionInfo = "5.1.87 EX";
 
 static void PrintLogHeader()
 {

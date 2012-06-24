@@ -1604,20 +1604,22 @@ FighterAI::EvadeThreat()
 
 			else {
 				evading = true;
-
-				if (target == threat) {
-					if (target->Type() == SimObject::SIM_SHIP) {
-						Ship* tgt_ship = (Ship*) target;
-						if (tgt_ship->GetTrigger(0)) {
-							SetTarget(0);
-							drop_time = 3;
+				
+				if (target != nullptr) {
+					if (target == threat) {
+						if (target->Type() == SimObject::SIM_SHIP) {
+							Ship* tgt_ship = (Ship*) target;
+							if (tgt_ship->GetTrigger(0)) {
+								SetTarget(0);
+								drop_time = 3;
+							}
 						}
 					}
-				}
 
-				else if (target && threat_dist < threat_range / 2) {
-					SetTarget(0);
-					drop_time = 3;
+					else if (target && threat_dist < threat_range / 2) {
+						SetTarget(0);
+						drop_time = 3;
+					}
 				}
 
 				if (target)

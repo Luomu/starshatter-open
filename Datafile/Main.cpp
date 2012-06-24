@@ -216,7 +216,7 @@ int match(const char* sFile, const char* sPattern)
 	switch (nPatternType) {
 		case PATTERN_NOWILD:
 		default:
-			file_matches_pattern = (stricmp(sFile, sPattern) == 0);
+			file_matches_pattern = (_stricmp(sFile, sPattern) == 0);
 		break;
 		
 		case PATTERN_STAR:
@@ -266,7 +266,7 @@ void ext(DataArchive& a, int argc, char* argv[])
 						// if we are extracting from a sub-directory,
 						if (nPath) {
 							// and this file is in the sub-directory,
-							if (strnicmp(pde->name, sPath, nPath) == 0) {
+							if (_strnicmp(pde->name, sPath, nPath) == 0) {
 								// and this file matches the pattern:
 								if (match(pde->name+nPath+1, sPatt)) {
 									char sName[256];
@@ -294,7 +294,7 @@ void ext(DataArchive& a, int argc, char* argv[])
 					DataEntry* pde = a.GetFile(j);
 
 					if (pde) {
-						if (stricmp(pde->name, argv[i]) == 0) {
+						if (_stricmp(pde->name, argv[i]) == 0) {
 							a.Extract(argv[i]);
 						}
 					}
@@ -340,7 +340,7 @@ void del(DataArchive& a, int argc, char* argv[])
 					// if we are deleting from a sub-directory,
 					if (nPath) {
 						// and this file is in the sub-directory,
-						if (strnicmp(pde->name, sPath, nPath) == 0) {
+						if (_strnicmp(pde->name, sPath, nPath) == 0) {
 							// and this file matches the pattern:
 							if (match(pde->name+nPath+1, sPatt)) {
 								char sName[256];
@@ -400,11 +400,11 @@ int main(int argc, char* argv[])
 	DataArchive a(argv[1]);
 	int option = OPT_NONE;
 
-	if      (!stricmp(argv[2], "-ins"))    option = OPT_INS;
-	else if (!stricmp(argv[2], "-ext"))    option = OPT_EXT;
-	else if (!stricmp(argv[2], "-del"))    option = OPT_DEL;
-	else if (!stricmp(argv[2], "-mak"))    option = OPT_MAK;
-	else if (!stricmp(argv[2], "-list"))   option = OPT_LIST;
+	if      (!_stricmp(argv[2], "-ins"))    option = OPT_INS;
+	else if (!_stricmp(argv[2], "-ext"))    option = OPT_EXT;
+	else if (!_stricmp(argv[2], "-del"))    option = OPT_DEL;
+	else if (!_stricmp(argv[2], "-mak"))    option = OPT_MAK;
+	else if (!_stricmp(argv[2], "-list"))   option = OPT_LIST;
 
 	argc -= 3;
 	argv += 3;
