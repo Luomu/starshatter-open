@@ -959,6 +959,10 @@ HUDView::DrawContactMarkers()
 	// draw life bars on targeted ship:
 	if (target && target->Type() == SimObject::SIM_SHIP && target->Rep()) {
 		Ship*       tgt_ship = (Ship*) target;
+		if (tgt_ship == nullptr) {
+			Print("   Null Pointer in HUDView::DrawContactMarkers(). Please investigate.");
+			return;
+		}
 		Graphic*    g        = tgt_ship->Rep();
 		Rect        r        = g->ScreenRect();
 

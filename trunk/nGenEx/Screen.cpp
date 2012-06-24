@@ -107,11 +107,12 @@ Screen::Resize(int w, int h)
 	ListIter<Window> iter = window_list;
 	while (++iter) {
 		Window* win = iter.value();
+		Rect tmprect = win->GetRect();
 
-		double  w_x = win->GetRect().x / (double) width;
-		double  w_y = win->GetRect().y / (double) height;
-		double  w_w = win->GetRect().w / (double) width;
-		double  w_h = win->GetRect().h / (double) height;
+		double  w_x = tmprect.x / (double) width;
+		double  w_y = tmprect.y / (double) height;
+		double  w_w = tmprect.w / (double) width;
+		double  w_h = tmprect.h / (double) height;
 
 		Rect    r;
 

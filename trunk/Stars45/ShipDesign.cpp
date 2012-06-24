@@ -3590,6 +3590,8 @@ void
 ShipDesign::ParseSkinMtl(TermStruct* val, Skin* skin)
 {
 	Material* mtl = new(__FILE__,__LINE__) Material;
+	if (mtl == nullptr)
+		return;
 
 	for (int i = 0; i < val->elements()->size(); i++) {
 		TermDef* def = val->elements()->at(i)->isDef();
@@ -3675,6 +3677,7 @@ ShipDesign::ParseSkinMtl(TermStruct* val, Skin* skin)
 				Print("WARNING: invalid or missing tex_emissive in '%s'\n", filename);
 
 				DataLoader* loader = DataLoader::GetLoader();
+
 				loader->LoadTexture(tex_name, mtl->tex_emissive);
 			}
 		}

@@ -1345,9 +1345,10 @@ VideoDX9::SetLights(const List<Light>& lights)
 				d3d_light.Type = (D3DLIGHTTYPE) light->Type();
 
 				if (light->Type() == Light::LIGHT_DIRECTIONAL) {
-					d3d_light.Direction.x = (float) (-light->Location().x);
-					d3d_light.Direction.y = (float) (-light->Location().y);
-					d3d_light.Direction.z = (float) (-light->Location().z);
+					Point light_location = light->Location();
+					d3d_light.Direction.x = (float) (-light_location.x);
+					d3d_light.Direction.y = (float) (-light_location.y);
+					d3d_light.Direction.z = (float) (-light_location.z);
 
 					if (d3d_light.Direction.x == 0 &&
 							d3d_light.Direction.y == 0 &&

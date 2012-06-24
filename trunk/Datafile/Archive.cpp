@@ -217,7 +217,7 @@ int DataArchive::FindEntry(const char* req_name)
    int entry = -1;
 
    for (DWORD i = 0; i < header.nfiles; i++)
-      if (!stricmp(directory[i].name, req_name))
+      if (!_stricmp(directory[i].name, req_name))
          return i;
    
    return entry;

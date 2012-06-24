@@ -665,15 +665,12 @@ Material::GetThumbColor(int i, int j, int size)
 			int   tu = (int) (u * tex_bumpmap->Width());
 			int   tv = (int) (v * tex_bumpmap->Height());
 
-			double   du1 = tex_bumpmap->GetColor(tu,tv).Red() - 
-			tex_bumpmap->GetColor(tu-1,tv).Red();
-			double   du2 = tex_bumpmap->GetColor(tu+1,tv).Red() - 
-			tex_bumpmap->GetColor(tu,tv).Red();
+			DWORD tmpred = tex_bumpmap->GetColor(tu,tv).Red();
+			double   du1 = tmpred -	tex_bumpmap->GetColor(tu-1,tv).Red();
+			double   du2 = tex_bumpmap->GetColor(tu+1,tv).Red() - tmpred;
 
-			double   dv1 = tex_bumpmap->GetColor(tu,tv).Red() - 
-			tex_bumpmap->GetColor(tu,tv-1).Red();
-			double   dv2 = tex_bumpmap->GetColor(tu,tv+1).Red() - 
-			tex_bumpmap->GetColor(tu,tv).Red();
+			double   dv1 = tmpred - tex_bumpmap->GetColor(tu,tv-1).Red();
+			double   dv2 = tex_bumpmap->GetColor(tu,tv+1).Red() - tmpred;
 
 			double   du  = (du1 + du2) / 512 * 1e-8;
 			double   dv  = (dv1 + dv2) / 512 * 1e-8;
