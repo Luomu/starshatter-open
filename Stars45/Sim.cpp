@@ -3233,9 +3233,11 @@ SimRegion::DestroyShip(Ship* ship)
 		if (sim->netgame && respawn)
 		sim->netgame->Respawn(ship->GetObjID(), spawn);
 
-		int n = strlen(ship_name);
-		if (ship_name[n-2] == ' ' && isdigit(ship_name[n-1]))
-		ship_name[n-2] = 0;
+		int n = strlen(ship_name); 
+		if (n > 2) {
+			if (ship_name[n-2] == ' ' && isdigit(ship_name[n-1]))
+				ship_name[n-2] = 0;
+		}
 
 		Element* elem = sim->FindElement(ship_name);
 		if (elem)
