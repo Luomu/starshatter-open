@@ -162,13 +162,12 @@ NetPeer::ComposeGram()
          nmsg      = 0;
 
          if (send_list.size() > 0) {
-            NetMsg* msg = 0;
 
             // if there is regular traffic, and multipart traffic
             if (multi_send_list.size()) {
                // just send one multipart message in this packet
                multi_msg = multi_send_list.removeIndex(0);
-               limit -= msg->Length();
+               limit -= multi_msg->Length();
                reliable = true;
                is_multi = true;
             }
