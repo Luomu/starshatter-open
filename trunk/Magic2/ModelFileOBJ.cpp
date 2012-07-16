@@ -320,8 +320,10 @@ ModelFileOBJ::Load(Model* m, double scale)
             strcpy(libpath, root_path);
             strcat(libpath, libname);
             int n = strlen(libpath);
-            char* p = &libpath[n-1];
-            while (isspace(*p)) *p-- = 0;
+			if (n > 0) {
+				char* p = &libpath[n-1];
+				while (isspace(*p)) *p-- = 0;
+			}
 
             int nmatls = LoadMatls(libpath, model);
          }
