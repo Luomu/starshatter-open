@@ -1200,7 +1200,7 @@ Mission::ParseRLoc(TermStruct* val)
 	double   dex      = 0;
 	double   dex_var  = 5e3;
 	double   az       = 0;
-	double   az_var   = 3.1415;
+	double   az_var   = PI;
 	double   el       = 0;
 	double   el_var   = 0.1;
 
