@@ -46,7 +46,7 @@ Slider::Slider(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
 	marker[1]      = -1;
 
 	char buf[32];
-	sprintf_s(buf, "Slider %d", id);
+	sprintf_s(buf, "Slider %d", id); //-V576
 	desc = buf;
 }
 
@@ -77,7 +77,7 @@ Slider::Slider(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
 	marker[1]      = -1;
 
 	char buf[32];
-	sprintf_s(buf, "Slider %d", id);
+	sprintf_s(buf, "Slider %d", id); //-V576
 	desc = buf;
 }
 

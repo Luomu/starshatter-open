@@ -43,7 +43,7 @@ ComboBox::ComboBox(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
 	bevel_width    = 5;
 
 	char buf[32];
-	sprintf_s(buf, "ComboBox %d", id);
+	sprintf_s(buf, "ComboBox %d", id); //-V576
 	desc = buf;
 }
 
@@ -61,7 +61,7 @@ ComboBox::ComboBox(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
 	bevel_width    = 5;
 
 	char buf[32];
-	sprintf_s(buf, "ComboBox %d", id);
+	sprintf_s(buf, "ComboBox %d", id); //-V576
 	desc = buf;
 }
 

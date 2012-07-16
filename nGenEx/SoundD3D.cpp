@@ -769,7 +769,7 @@ SoundD3D::Localize()
 			hr = buffer->SetFrequency(f_shift);
 			if (!SUCCEEDED(hr)) {
 				char warn[512];
-				sprintf_s(warn, "Warning: could not set Doppler frequency on buffer to %d", f_shift);
+				sprintf_s(warn, "Warning: could not set Doppler frequency on buffer to %d", f_shift); //-V576
 				SoundD3DError(warn, hr);
 			}
 		}

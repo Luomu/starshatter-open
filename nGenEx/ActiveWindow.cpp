@@ -62,7 +62,7 @@ fixed_width(0), fixed_height(0), hide_partial(true)
 	Show();
 
 	char buf[32];
-	sprintf_s(buf, "ActiveWindow %d", id);
+	sprintf_s(buf, "ActiveWindow %d", id); //-V576
 	desc = buf;
 }
 

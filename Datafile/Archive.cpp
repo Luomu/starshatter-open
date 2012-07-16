@@ -174,7 +174,7 @@ void DataArchive::LoadDatafile(const char* name)
       fread(&header, sizeof(DataHeader), 1, f);
       
       if (header.version != VERSION) {
-         printf("ERROR: datafile '%s' invalid version '%d'\n",
+         printf("ERROR: datafile '%s' invalid version '%d'\n", //-V576
                   datafile, header.version);
          fclose(f);
          exit(-2);
@@ -376,7 +376,7 @@ void DataArchive::Insert(const char* name)
       
       if (verbose) {
          int    ratio = (int) (100.0 * (double) e.size_comp / (double) e.size_orig);
-         printf("%9d => %9d (%2d%%)\n", e.size_orig, e.size_comp, ratio);
+         printf("%9d => %9d (%2d%%)\n", e.size_orig, e.size_comp, ratio); //-V576
       }
    }
    else if (added)
@@ -456,7 +456,7 @@ void DataArchive::List()
    int total_comp = 0;
 
    printf("DATAFILE: %s\n", datafile);
-   printf("Files:    %d\n", header.nfiles);
+   printf("Files:    %d\n", header.nfiles); //-V576
    printf("\n");
    printf("Index  Orig Size  Comp Size  Ratio  Name\n");
    printf("-----  ---------  ---------  -----  ----------------\n");
@@ -465,7 +465,7 @@ void DataArchive::List()
       DataEntry& e = directory[i];
       int    ratio = (int) (100.0 * (double) e.size_comp / (double) e.size_orig);
       
-      printf("%5d  %9d  %9d   %2d%%   %s\n", i+1, e.size_orig, e.size_comp, ratio, e.name);
+      printf("%5d  %9d  %9d   %2d%%   %s\n", i+1, e.size_orig, e.size_comp, ratio, e.name); //-V576
       
       total_orig += e.size_orig;
       total_comp += e.size_comp;

@@ -34,7 +34,7 @@ DWORD aid, DWORD s, ActiveWindow* pParent)
 : ActiveWindow(screen, ax, ay, aw, ah, aid, s, pParent)
 {
 	char buf[32];
-	sprintf_s(buf, "Form %d", id);
+	sprintf_s(buf, "Form %d", id); //-V576
 	desc = buf;
 }
 
