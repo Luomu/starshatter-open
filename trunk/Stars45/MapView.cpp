@@ -2912,8 +2912,8 @@ MapView::DrawCombatGroup(CombatGroup* group, int rep)
 					nsprites = unit->GetDesign()->map_sprites.size();
 
 					if (nsprites) {
-						if (sprite_index < 0 || sprite_index >= nsprites)
-						sprite_index = sprite_index % nsprites;
+						if (sprite_index >= nsprites)
+							sprite_index = sprite_index % nsprites;
 
 						Bitmap* map_sprite = unit->GetDesign()->map_sprites[sprite_index];
 
