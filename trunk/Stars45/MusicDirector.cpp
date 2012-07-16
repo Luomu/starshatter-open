@@ -407,7 +407,7 @@ MusicDirector::GetNextTrack(int index)
 
 				::Print("MusicDirector: INTRO mode complete, switching to MENU\n");
 
-				if (!tracks || !tracks->size())
+				if (!tracks->size())
 				return;
 			}
 		}
