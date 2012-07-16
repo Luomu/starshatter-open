@@ -930,14 +930,14 @@ ActiveWindow::GetCapture()
 
 // +--------------------------------------------------------------------+
 
-int
+bool
 ActiveWindow::SetCapture()
 {
 	EventDispatch* dispatch = EventDispatch::GetInstance();
 	if (dispatch)
-	return dispatch->CaptureMouse(this);
+		return dispatch->CaptureMouse(this) == 1;
 
-	return 0;
+	return false;
 }
 
 // +--------------------------------------------------------------------+

@@ -104,7 +104,7 @@ protected:
 	Color          active_color;
 	Color          border_color;
 
-	int            captured;
+	bool           captured;
 	int            pre_state;
 	short          bevel_width;
 	short          button_state;

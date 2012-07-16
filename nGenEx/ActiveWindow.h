@@ -172,7 +172,7 @@ public:
 	virtual Rect      TargetRect() const;
 
 	virtual ActiveWindow* GetCapture();
-	virtual int       SetCapture();
+	virtual bool       SetCapture();
 	virtual int       ReleaseCapture();
 
 	// Property accessors:
