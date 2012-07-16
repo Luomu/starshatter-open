@@ -309,7 +309,7 @@ RadioTraffic::DisplayMessage(RadioMessage* msg)
 	}
 
 	else if (msg->Action() == RadioMessage::MOVE_PATROL) {
-		sprintf_s(msg_buf, TranslateVox("Move patrol.").data());
+		sprintf_s(msg_buf, "%s.", TranslateVox("Move patrol.").data());
 	}
 
 	else if (target && dst_ship && msg->Sender()) {
