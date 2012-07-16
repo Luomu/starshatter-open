@@ -736,7 +736,7 @@ TacticalAI::SelectTargetOpportunity()
 		}
 	}
 
-	if (ship->Class() != Ship::CARRIER || ship->Class() != Ship::SWACS)
+	if (ship->Class() != Ship::CARRIER && ship->Class() != Ship::SWACS)
 	ship_ai->SetTarget(potential_target);
 }
 
