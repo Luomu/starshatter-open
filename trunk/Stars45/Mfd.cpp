@@ -1118,7 +1118,7 @@ MFD::DrawGameMFD()
 	}
 
 	if (Game::TimeCompression() > 1)
-	sprintf_s(txt, "%02d:%02d:%02d x%d", hours, minutes, seconds, Game::TimeCompression());
+	sprintf_s(txt, "%02d:%02d:%02d x%d", hours, minutes, seconds, Game::TimeCompression()); //-V576
 	else
 	sprintf_s(txt, "%02d:%02d:%02d", hours, minutes, seconds);
 

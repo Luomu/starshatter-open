@@ -59,7 +59,7 @@ static void heapdump()
          avail += hinfo._size;
    }
 
-   sprintf_s(report, "------\nUsed Blocks:  %d\nAvail Blocks: %d\nTotal Blocks: %d\n", used, avail, used+avail);
+   sprintf_s(report, "------\nUsed Blocks:  %d\nAvail Blocks: %d\nTotal Blocks: %d\n", used, avail, used+avail); //-V576
    _RPT0(_CRT_WARN, report);
 
    switch (heapstatus) {

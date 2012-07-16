@@ -28,7 +28,7 @@ ImageBox::ImageBox(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
 	text_align     = DT_CENTER;
 
 	char buf[32];
-	sprintf_s(buf, "ImageBox %d", id);
+	sprintf_s(buf, "ImageBox %d", id); //-V576
 	desc = buf;
 }
 
@@ -39,7 +39,7 @@ ImageBox::ImageBox(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
 	text_align     = DT_CENTER;
 
 	char buf[32];
-	sprintf_s(buf, "ImageBox %d", id);
+	sprintf_s(buf, "ImageBox %d", id); //-V576
 	desc = buf;
 }
 

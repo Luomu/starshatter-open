@@ -1130,7 +1130,7 @@ Game::ScreenCapture(const char* name)
 	if (name)
 	strcpy_s(filename, name);
 	else
-	sprintf_s(filename, "A%d.PCX", shot_num++);
+	sprintf_s(filename, "A%d.PCX", shot_num++); //-V576
 
 	Bitmap bmp;
 
@@ -1179,7 +1179,7 @@ Game::AVICapture(const char* name)
 		if (name)
 		strcpy_s(filename, name);
 		else
-		sprintf_s(filename, "A%d.avi", avi_num);
+		sprintf_s(filename, "A%d.avi", avi_num); //-V576
 
 		if (video && video->Capture(bmp)) {
 			//bmp.ScaleTo(bmp.Width()/2, bmp.Height()/2);

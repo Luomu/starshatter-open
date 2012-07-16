@@ -237,7 +237,7 @@ MachineInfo::GetPlatform()
 		case VER_PLATFORM_WIN32s:
 		case VER_PLATFORM_WIN32_WINDOWS: {
 				char msg[256];
-				sprintf_s(msg, "Invalid Operating System Platform: %d\n", os_ver.dwPlatformId);
+				sprintf_s(msg, "Invalid Operating System Platform: %d\n", os_ver.dwPlatformId); //-V576
 				Print(msg);
 			}
 			break;
@@ -298,7 +298,7 @@ MachineInfo::DescribeMachine()
 
 	switch (platform) {
 	case OS_WIN95:
-		sprintf_s(txt, "Windows 95  version %d.%d.%d %s",
+		sprintf_s(txt, "Windows 95  version %d.%d.%d %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		LOWORD(os_ver.dwBuildNumber),
@@ -306,7 +306,7 @@ MachineInfo::DescribeMachine()
 		break;
 
 	case OS_WIN98:
-		sprintf_s(txt, "Windows 98  version %d.%d.%d %s",
+		sprintf_s(txt, "Windows 98  version %d.%d.%d %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		LOWORD(os_ver.dwBuildNumber),
@@ -314,7 +314,7 @@ MachineInfo::DescribeMachine()
 		break;
 
 	case OS_WINNT:
-		sprintf_s(txt, "Windows NT %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows NT %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
@@ -322,42 +322,42 @@ MachineInfo::DescribeMachine()
 		break;
 
 	case OS_WIN2K:
-		sprintf_s(txt, "Windows 2000 %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows 2000 %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
 		os_ver.szCSDVersion);
 
 	case OS_WINXP:
-		sprintf_s(txt, "Windows XP %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows XP %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
 		os_ver.szCSDVersion);
 		break;
 	case OS_WINXP64:
-		sprintf_s(txt, "Windows XP x64 %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows XP x64 %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
 		os_ver.szCSDVersion);
 		break;
 	case OS_WINVISTA:
-		sprintf_s(txt, "Windows Vista %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows Vista %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
 		os_ver.szCSDVersion);
 		break;
 	case OS_WINSEVEN:
-		sprintf_s(txt, "Windows 7 %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows 7 %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
 		os_ver.szCSDVersion);
 		break;
 	case OS_WINFUTURE:
-		sprintf_s(txt, "Windows from the future %d.%d (Build %d) %s",
+		sprintf_s(txt, "Windows from the future %d.%d (Build %d) %s", //-V576
 		os_ver.dwMajorVersion,
 		os_ver.dwMinorVersion,
 		os_ver.dwBuildNumber,
@@ -377,7 +377,7 @@ MachineInfo::DescribeMachine()
 	else
 	DescribeOwnerNT();
 
-	sprintf_s(txt, "CPUs Detected: %d    CPU Level: %d.%d.%d    CPU Speed: %d",
+	sprintf_s(txt, "CPUs Detected: %d    CPU Level: %d.%d.%d    CPU Speed: %d", //-V576
 	cpu_info.dwNumberOfProcessors,
 	cpu_info.wProcessorLevel,
 	cpu_info.wProcessorRevision >> 8,

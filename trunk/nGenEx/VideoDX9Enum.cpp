@@ -938,7 +938,7 @@ VideoDX9DisplayMode::GetDescription() const
 {
 	static char desc[32];
 
-	sprintf_s(desc, "%4d x %4d %-12s %d Hz",
+	sprintf_s(desc, "%4d x %4d %-12s %d Hz", //-V576
 	width,
 	height,
 	D3DFormatToString(format),
