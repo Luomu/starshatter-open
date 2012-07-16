@@ -211,10 +211,10 @@ const std::vector<float>& weight_y)
 	if (min_x.size() == weight_x.size() && 
 			min_y.size() == weight_y.size()) {
 
-		for (auto iter = min_x.begin(); iter != min_x.begin(); ++iter)
+		for (auto iter = min_x.begin(); iter != min_x.end(); ++iter)
 			cols.push_back((DWORD) *iter);
 
-		for (auto iter = min_y.begin(); iter != min_y.begin(); ++iter)
+		for (auto iter = min_y.begin(); iter != min_y.end(); ++iter)
 			rows.push_back((DWORD) *iter);
 
 		for (auto iter = weight_x.begin(); iter != weight_x.end(); ++iter)
