@@ -227,7 +227,7 @@ MissionTemplate::FindCombatGroup(int iff, const ShipDesign* d)
 
 	if (campaign) {
 		ListIter<Combatant> combatant = campaign->GetCombatants();
-		while (++combatant && !result) {
+		while (++combatant) {
 			if (combatant->GetIFF() == iff) {
 				::SelectCombatGroups(combatant->GetForce(), d, group_list);
 			}
