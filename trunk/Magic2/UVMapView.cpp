@@ -380,8 +380,10 @@ UVMapView::SelectInverse()
 		 bool contains = false;
 		 auto svi = selverts.begin();
 		 for (; svi != selverts.end(); ++svi) {
-			 if (*svi == value) contains = true;
-			 break;
+			 if (*svi == value) {
+				 contains = true;
+				 break;
+			 }
 		 }
 
          if (contains)
@@ -401,7 +403,8 @@ UVMapView::IsSelected(Poly* poly, WORD v)
    bool contains = false;
 	
 	for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-		return true;
+		if (*svi == value)
+			return true;
 	}
 
    return false;
