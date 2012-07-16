@@ -55,7 +55,7 @@ Button::Button(Screen* s, int ax, int ay, int aw, int ah, DWORD aid)
 	drop_shadow    = false;
 	sticky         = false;
 	picture_loc    = 1;
-	captured       = 0;
+	captured       = false;
 	pre_state      = 0;
 	text_align     = DT_CENTER;
 
@@ -78,7 +78,7 @@ Button::Button(ActiveWindow* p, int ax, int ay, int aw, int ah, DWORD aid)
 	drop_shadow    = false;
 	sticky         = false;
 	picture_loc    = 1;
-	captured       = 0;
+	captured       = false;
 	pre_state      = 0;
 	text_align     = DT_CENTER;
 
@@ -475,7 +475,7 @@ int Button::OnLButtonUp(int x, int y)
 {
 	if (captured) {
 		ReleaseCapture();
-		captured = 0;
+		captured = false;
 	}
 
 	button_state = pre_state;
