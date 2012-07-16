@@ -342,7 +342,7 @@ MsnEditDlg::DrawPackages()
 					sprintf_s(txt, "%s %s", design->abrv, design->name);
 				}
 				else {
-					sprintf_s(txt, Game::GetText("MsnDlg.undefined").data());
+					sprintf_s(txt, "%s", Game::GetText("MsnDlg.undefined").data());
 				}
 
 				lst_elem->SetItemText(i, 3, txt);

@@ -765,7 +765,7 @@ NavDlg::UpdateSelection()
 
 			sprintf_s(shield, "%03d", sel_ship->ShieldStrength());
 			sprintf_s(hull,   "%03d", sel_ship->HullStrength());
-			sprintf_s(range,  Game::GetText("NavDlg.not-avail").data());
+			sprintf_s(range,  "%s",  Game::GetText("NavDlg.not-avail").data());
 
 			if (ship) {
 				FormatNumberExp(range, Point(sel_ship->Location()-ship->Location()).length()/1000);
