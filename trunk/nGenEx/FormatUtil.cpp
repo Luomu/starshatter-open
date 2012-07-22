@@ -64,7 +64,7 @@ void FormatTime(char* txt, double time)
 
 	int h = (t                  / HOUR);
 	int m = ((t - h*HOUR)       / MINUTE);
-	int s = ((t - h*HOUR - m*MINUTE));
+	int s = (t - h*HOUR - m*MINUTE);
 
 	if (h > 0)
 	sprintf(txt, "%02d:%02d:%02d", h,m,s);
@@ -85,7 +85,7 @@ void FormatTimeOfDay(char* txt, double time)
 
 	int h = (t                  / HOUR);
 	int m = ((t - h*HOUR)       / MINUTE);
-	int s = ((t - h*HOUR - m*MINUTE));
+	int s = (t - h*HOUR - m*MINUTE);
 
 	sprintf(txt, "%02d:%02d:%02d", h,m,s);
 }
