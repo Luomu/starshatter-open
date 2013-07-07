@@ -1,15 +1,39 @@
-/*  Project nGenEx
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    nGenEx.lib
-	FILE:         VideoFac.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    nGenEx.lib
+    FILE:         VideoFac.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Video and Polygon Renderer Factory class
+    OVERVIEW
+    ========
+    Video and Polygon Renderer Factory class
 */
 
 #include "MemDebug.h"
@@ -32,16 +56,16 @@ VideoFactory::~VideoFactory()
 Video*
 VideoFactory::CreateVideo(VideoSettings* vs)
 {
-	if (!video) {
-		video = (Video*) new(__FILE__,__LINE__) VideoDX9(hwnd, vs);
-		
-		if (!video) {
-			delete video;
-			video = 0;
-		}
-	}
+    if (!video) {
+        video = (Video*) new(__FILE__,__LINE__) VideoDX9(hwnd, vs);
+        
+        if (!video) {
+            delete video;
+            video = 0;
+        }
+    }
 
-	return video;
+    return video;
 }
 
 // +--------------------------------------------------------------------+
@@ -49,10 +73,10 @@ VideoFactory::CreateVideo(VideoSettings* vs)
 void
 VideoFactory::DestroyVideo(Video* v)
 {
-	if (v == video) {
-		delete video;
-		video = 0;
-	}
+    if (v == video) {
+        delete video;
+        video = 0;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -60,12 +84,12 @@ VideoFactory::DestroyVideo(Video* v)
 SoundCard*
 VideoFactory::CreateSoundCard()
 {
-	if (!audio) {
-		audio = new(__FILE__,__LINE__) SoundCardD3D(hwnd);
-		Sound::UseSoundCard(audio);
-	}
+    if (!audio) {
+        audio = new(__FILE__,__LINE__) SoundCardD3D(hwnd);
+        Sound::UseSoundCard(audio);
+    }
 
-	return audio;
+    return audio;
 }
 
 
