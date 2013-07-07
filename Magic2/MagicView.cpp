@@ -1,6 +1,30 @@
-/*  Project Magic 2.0
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
 
     SUBSYSTEM:    Magic.exe
     FILE:         MagicView.cpp
@@ -58,73 +82,73 @@ extern BYTE         inverse_palette[32768];
 IMPLEMENT_DYNCREATE(MagicView, CView)
 
 BEGIN_MESSAGE_MAP(MagicView, CView)
-	//{{AFX_MSG_MAP(MagicView)
-	ON_WM_SIZE()
-	ON_COMMAND(ID_VIEW_RENDER, OnRender)
-	ON_WM_PAINT()
-	ON_COMMAND(ID_VIEW_ALL, OnViewAll)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_ALL, OnUpdateViewAll)
-	ON_COMMAND(ID_VIEW_FRONT, OnViewFront)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_FRONT, OnUpdateViewFront)
-	ON_COMMAND(ID_VIEW_PERSPECTIVE, OnViewPerspective)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_PERSPECTIVE, OnUpdateViewPerspective)
-	ON_COMMAND(ID_VIEW_SIDE, OnViewSide)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_SIDE, OnUpdateViewSide)
-	ON_COMMAND(ID_VIEW_TOP, OnViewTop)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_TOP, OnUpdateViewTop)
-	ON_COMMAND(ID_MODIFY_TEXTURE_MAP, OnTextureMap)
-	ON_COMMAND(ID_MODIFY_MATERIAL, OnModifyMaterial)
-	ON_WM_LBUTTONDOWN()
-	ON_WM_LBUTTONUP()
-	ON_WM_LBUTTONDBLCLK()
-	ON_WM_RBUTTONDOWN()
-	ON_WM_RBUTTONUP()
-	ON_WM_MOUSEMOVE()
-	ON_WM_MOUSEWHEEL()
-	ON_COMMAND(ID_VIEW_ZOOM_NORMAL, OnViewZoomNormal)
-	ON_COMMAND(ID_VIEW_ZOOM_IN, OnViewZoomIn)
-	ON_COMMAND(ID_VIEW_ZOOM_OUT, OnViewZoomOut)
-	ON_COMMAND(ID_VIEW_MODE_WIREFRAME, OnViewModeWireframe)
-	ON_COMMAND(ID_VIEW_MODE_SOLID, OnViewModeSolid)
-	ON_COMMAND(ID_VIEW_MODE_TEXTURED, OnViewModeTextured)
-	ON_WM_RBUTTONDBLCLK()
-	ON_COMMAND(ID_PROP_GRID, OnGridProperties)
-	ON_COMMAND(ID_GRID_SHOW, OnGridShow)
-	ON_COMMAND(ID_GRID_SNAP, OnGridSnap)
-	ON_UPDATE_COMMAND_UI(ID_GRID_SNAP, OnUpdateGridSnap)
-	ON_COMMAND(ID_VIEW_BACK_COLOR, OnViewBackColor)
-	ON_COMMAND(ID_FILE_IMPORT, OnFileImport)
-	ON_COMMAND(ID_FILE_EXPORT, OnFileExport)
-	ON_COMMAND(ID_EDIT_SELECT_ALL, OnSelectAll)
-	ON_COMMAND(ID_EDIT_SELECT_NONE, OnSelectNone)
-	ON_UPDATE_COMMAND_UI(ID_MODIFY_TEXTURE_MAP, OnUpdateTextureMap)
-	ON_UPDATE_COMMAND_UI(ID_MODIFY_MATERIAL, OnUpdateModifyMaterial)
-	ON_COMMAND(ID_EDIT_SELECT_INVERSE, OnSelectInverse)
-	ON_COMMAND(ID_MODIFY_UV_MAP, OnModifyUVMap)
-	ON_UPDATE_COMMAND_UI(ID_MODIFY_UV_MAP, OnUpdateModifyUVMap)
-	ON_COMMAND(ID_VIEW_SHADOWS, OnViewShadows)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_SHADOWS, OnUpdateViewShadows)
-	ON_COMMAND(ID_VIEW_ANIMATELIGHT, OnViewAnimatelight)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_ANIMATELIGHT, OnUpdateViewAnimatelight)
-	ON_COMMAND(ID_VIEW_BUMPMAPS, OnViewBumpmaps)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_BUMPMAPS, OnUpdateViewBumpmaps)
-	ON_COMMAND(ID_VIEW_VERTEXSHADER, OnViewVertexshader)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_VERTEXSHADER, OnUpdateViewVertexshader)
-	ON_COMMAND(ID_VIEW_PIXELSHADER, OnViewPixelshader)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_PIXELSHADER, OnUpdateViewPixelshader)
-	ON_COMMAND(ID_VIEW_VISIBLESHADOWS, OnViewVisibleshadows)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_VISIBLESHADOWS, OnUpdateViewVisibleshadows)
-	ON_COMMAND(ID_EDIT_UNDO, OnEditUndo)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, OnUpdateEditUndo)
-	ON_COMMAND(ID_EDIT_REDO, OnEditRedo)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, OnUpdateEditRedo)
-	ON_COMMAND(ID_PROP_SURFACE, OnSurfaceProperties)
-	ON_UPDATE_COMMAND_UI(ID_PROP_SURFACE, OnUpdateSurfaceProperties)
-	//}}AFX_MSG_MAP
-	// Standard printing commands
-	ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_DIRECT, CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_PREVIEW, CView::OnFilePrintPreview)
+    //{{AFX_MSG_MAP(MagicView)
+    ON_WM_SIZE()
+    ON_COMMAND(ID_VIEW_RENDER, OnRender)
+    ON_WM_PAINT()
+    ON_COMMAND(ID_VIEW_ALL, OnViewAll)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_ALL, OnUpdateViewAll)
+    ON_COMMAND(ID_VIEW_FRONT, OnViewFront)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_FRONT, OnUpdateViewFront)
+    ON_COMMAND(ID_VIEW_PERSPECTIVE, OnViewPerspective)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_PERSPECTIVE, OnUpdateViewPerspective)
+    ON_COMMAND(ID_VIEW_SIDE, OnViewSide)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_SIDE, OnUpdateViewSide)
+    ON_COMMAND(ID_VIEW_TOP, OnViewTop)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_TOP, OnUpdateViewTop)
+    ON_COMMAND(ID_MODIFY_TEXTURE_MAP, OnTextureMap)
+    ON_COMMAND(ID_MODIFY_MATERIAL, OnModifyMaterial)
+    ON_WM_LBUTTONDOWN()
+    ON_WM_LBUTTONUP()
+    ON_WM_LBUTTONDBLCLK()
+    ON_WM_RBUTTONDOWN()
+    ON_WM_RBUTTONUP()
+    ON_WM_MOUSEMOVE()
+    ON_WM_MOUSEWHEEL()
+    ON_COMMAND(ID_VIEW_ZOOM_NORMAL, OnViewZoomNormal)
+    ON_COMMAND(ID_VIEW_ZOOM_IN, OnViewZoomIn)
+    ON_COMMAND(ID_VIEW_ZOOM_OUT, OnViewZoomOut)
+    ON_COMMAND(ID_VIEW_MODE_WIREFRAME, OnViewModeWireframe)
+    ON_COMMAND(ID_VIEW_MODE_SOLID, OnViewModeSolid)
+    ON_COMMAND(ID_VIEW_MODE_TEXTURED, OnViewModeTextured)
+    ON_WM_RBUTTONDBLCLK()
+    ON_COMMAND(ID_PROP_GRID, OnGridProperties)
+    ON_COMMAND(ID_GRID_SHOW, OnGridShow)
+    ON_COMMAND(ID_GRID_SNAP, OnGridSnap)
+    ON_UPDATE_COMMAND_UI(ID_GRID_SNAP, OnUpdateGridSnap)
+    ON_COMMAND(ID_VIEW_BACK_COLOR, OnViewBackColor)
+    ON_COMMAND(ID_FILE_IMPORT, OnFileImport)
+    ON_COMMAND(ID_FILE_EXPORT, OnFileExport)
+    ON_COMMAND(ID_EDIT_SELECT_ALL, OnSelectAll)
+    ON_COMMAND(ID_EDIT_SELECT_NONE, OnSelectNone)
+    ON_UPDATE_COMMAND_UI(ID_MODIFY_TEXTURE_MAP, OnUpdateTextureMap)
+    ON_UPDATE_COMMAND_UI(ID_MODIFY_MATERIAL, OnUpdateModifyMaterial)
+    ON_COMMAND(ID_EDIT_SELECT_INVERSE, OnSelectInverse)
+    ON_COMMAND(ID_MODIFY_UV_MAP, OnModifyUVMap)
+    ON_UPDATE_COMMAND_UI(ID_MODIFY_UV_MAP, OnUpdateModifyUVMap)
+    ON_COMMAND(ID_VIEW_SHADOWS, OnViewShadows)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_SHADOWS, OnUpdateViewShadows)
+    ON_COMMAND(ID_VIEW_ANIMATELIGHT, OnViewAnimatelight)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_ANIMATELIGHT, OnUpdateViewAnimatelight)
+    ON_COMMAND(ID_VIEW_BUMPMAPS, OnViewBumpmaps)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_BUMPMAPS, OnUpdateViewBumpmaps)
+    ON_COMMAND(ID_VIEW_VERTEXSHADER, OnViewVertexshader)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_VERTEXSHADER, OnUpdateViewVertexshader)
+    ON_COMMAND(ID_VIEW_PIXELSHADER, OnViewPixelshader)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_PIXELSHADER, OnUpdateViewPixelshader)
+    ON_COMMAND(ID_VIEW_VISIBLESHADOWS, OnViewVisibleshadows)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_VISIBLESHADOWS, OnUpdateViewVisibleshadows)
+    ON_COMMAND(ID_EDIT_UNDO, OnEditUndo)
+    ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, OnUpdateEditUndo)
+    ON_COMMAND(ID_EDIT_REDO, OnEditRedo)
+    ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, OnUpdateEditRedo)
+    ON_COMMAND(ID_PROP_SURFACE, OnSurfaceProperties)
+    ON_UPDATE_COMMAND_UI(ID_PROP_SURFACE, OnUpdateSurfaceProperties)
+    //}}AFX_MSG_MAP
+    // Standard printing commands
+    ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
+    ON_COMMAND(ID_FILE_PRINT_DIRECT, CView::OnFilePrint)
+    ON_COMMAND(ID_FILE_PRINT_PREVIEW, CView::OnFilePrintPreview)
 END_MESSAGE_MAP()
 
 // +--------------------------------------------------------------------+
@@ -186,7 +210,7 @@ MagicView* MagicView::GetInstance()
 
 BOOL MagicView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	return CView::PreCreateWindow(cs);
+    return CView::PreCreateWindow(cs);
 }
 
 // +--------------------------------------------------------------------+
@@ -196,18 +220,18 @@ BOOL MagicView::PreCreateWindow(CREATESTRUCT& cs)
 #ifdef _DEBUG
 void MagicView::AssertValid() const
 {
-	CView::AssertValid();
+    CView::AssertValid();
 }
 
 void MagicView::Dump(CDumpContext& dc) const
 {
-	CView::Dump(dc);
+    CView::Dump(dc);
 }
 
 MagicDoc* MagicView::GetDocument() // non-debug version is inline
 {
-	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(MagicDoc)));
-	return (MagicDoc*)m_pDocument;
+    ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(MagicDoc)));
+    return (MagicDoc*)m_pDocument;
 }
 #endif //_DEBUG
 
@@ -216,7 +240,7 @@ MagicDoc* MagicView::GetDocument() // non-debug version is inline
 
 void MagicView::OnInitialUpdate() 
 {
-	CView::OnInitialUpdate();
+    CView::OnInitialUpdate();
    Color::SetPalette(standard_palette, 256, inverse_palette);
 
    if (!video_settings)
@@ -509,7 +533,7 @@ MagicView::GetModelViewByIndex(int index)
 
 void MagicView::OnPaint() 
 {
-	ValidateRect(0);
+    ValidateRect(0);
    OnRender();
 }
 
@@ -616,7 +640,7 @@ void MagicView::OnExitSizeMove()
 
 void MagicView::OnSize(UINT nType, int cx, int cy) 
 {
-	CView::OnSize(nType, cx, cy);
+    CView::OnSize(nType, cx, cy);
 
    window_style = GetWindowLong(m_hWnd, GWL_STYLE);
 
@@ -790,7 +814,7 @@ void MagicView::OnFileImport()
    sprintf_s(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
 
    MagicDoc*   pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
+    ASSERT_VALID(pDoc);
 
    if (pDoc->ImportFile(mag_name)) {
       Invalidate();
@@ -817,7 +841,7 @@ void MagicView::OnFileExport()
    sprintf_s(mag_name, "%s", ofd.GetFileName().GetBuffer(0));
 
    MagicDoc*   pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
+    ASSERT_VALID(pDoc);
 
    if (pDoc->ExportFile(mag_name)) {
       pDoc->SetModifiedFlag(FALSE);
@@ -945,7 +969,7 @@ void MagicView::OnUpdateGridSnap(CCmdUI* pCmdUI)
 
 void MagicView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
-	CView::OnLButtonDown(nFlags, point);
+    CView::OnLButtonDown(nFlags, point);
    SetCapture();
 
    // set focus to the view that was clicked:
@@ -986,7 +1010,7 @@ void MagicView::OnLButtonDown(UINT nFlags, CPoint point)
 
 void MagicView::OnLButtonUp(UINT nFlags, CPoint point) 
 {
-	CView::OnLButtonUp(nFlags, point);
+    CView::OnLButtonUp(nFlags, point);
    ReleaseCapture();
 
    drag_left = false;
@@ -1003,7 +1027,7 @@ void MagicView::OnLButtonUp(UINT nFlags, CPoint point)
 
 void MagicView::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
-	CView::OnLButtonDblClk(nFlags, point);
+    CView::OnLButtonDblClk(nFlags, point);
 
    drag_left = false;
 
@@ -1019,7 +1043,7 @@ void MagicView::OnLButtonDblClk(UINT nFlags, CPoint point)
 
 void MagicView::OnRButtonDown(UINT nFlags, CPoint point) 
 {
-	CView::OnRButtonDown(nFlags, point);
+    CView::OnRButtonDown(nFlags, point);
    SetCapture();
 
    // set focus to the view that was clicked:
@@ -1033,7 +1057,7 @@ void MagicView::OnRButtonDown(UINT nFlags, CPoint point)
 
 void MagicView::OnRButtonUp(UINT nFlags, CPoint point) 
 {
-	CView::OnRButtonUp(nFlags, point);
+    CView::OnRButtonUp(nFlags, point);
    ReleaseCapture();
 
    drag_right = false;
@@ -1041,7 +1065,7 @@ void MagicView::OnRButtonUp(UINT nFlags, CPoint point)
 
 void MagicView::OnRButtonDblClk(UINT nFlags, CPoint point) 
 {
-	CView::OnRButtonDblClk(nFlags, point);
+    CView::OnRButtonDblClk(nFlags, point);
    ReleaseCapture();
 
    drag_right = false;
@@ -1121,7 +1145,7 @@ void MagicView::OnMouseMove(UINT nFlags, CPoint point)
       MainFrame::StatusXY(xy);
    }
 
-	CView::OnMouseMove(nFlags, point);
+    CView::OnMouseMove(nFlags, point);
 }
 
 BOOL MagicView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) 
@@ -1321,7 +1345,7 @@ void MagicView::OnUpdateViewAnimatelight(CCmdUI* pCmdUI)
 
 void MagicView::OnViewBumpmaps() 
 {
-	view_bumpmaps = !view_bumpmaps;
+    view_bumpmaps = !view_bumpmaps;
 
    if (video)
       video->SetBumpMapEnabled(view_bumpmaps);
@@ -1373,7 +1397,7 @@ void MagicView::OnUpdateViewVisibleshadows(CCmdUI* pCmdUI)
 void MagicView::OnEditUndo() 
 {
    MagicDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
+    ASSERT_VALID(pDoc);
    pDoc->Undo();
 
    Solid*      solid    = GetDocument()->GetSolid();
@@ -1406,7 +1430,7 @@ void MagicView::OnUpdateEditUndo(CCmdUI* pCmdUI)
 void MagicView::OnEditRedo() 
 {
    MagicDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
+    ASSERT_VALID(pDoc);
    pDoc->Redo();
 
    Solid*      solid    = GetDocument()->GetSolid();

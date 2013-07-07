@@ -1,5 +1,31 @@
-// MainFrm.cpp : implementation of the MainFrame class
-//
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #include "stdafx.h"
 #include "Magic.h"
@@ -21,20 +47,20 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNCREATE(MainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(MainFrame, CFrameWnd)
-	//{{AFX_MSG_MAP(MainFrame)
-	ON_WM_CREATE()
-	ON_WM_ACTIVATEAPP()
-	ON_COMMAND(ID_VIEW_RENDER, OnRender)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(MainFrame)
+    ON_WM_CREATE()
+    ON_WM_ACTIVATEAPP()
+    ON_COMMAND(ID_VIEW_RENDER, OnRender)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // status line indicator
-	ID_SEPARATOR,           // xy indicator
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+    ID_SEPARATOR,           // status line indicator
+    ID_SEPARATOR,           // xy indicator
+    ID_INDICATOR_CAPS,
+    ID_INDICATOR_NUM,
+    ID_INDICATOR_SCRL,
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -46,7 +72,7 @@ MainFrame* MainFrame::statframe;
 MainFrame::MainFrame()
 {
    statframe = this;
-	
+    
 }
 
 MainFrame::~MainFrame()
@@ -73,45 +99,45 @@ BOOL MainFrame::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pR
 
 int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
-		return -1;
-	
-	if (!m_wndToolBar.Create(this) ||
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-	{
-		TRACE0("Failed to create toolbar\n");
-		return -1;      // fail to create
-	}
+    if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
+        return -1;
+    
+    if (!m_wndToolBar.Create(this) ||
+        !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+    {
+        TRACE0("Failed to create toolbar\n");
+        return -1;      // fail to create
+    }
 
-	if (!m_wndStatusBar.Create(this) ||
-		!m_wndStatusBar.SetIndicators(indicators,
-		  sizeof(indicators)/sizeof(UINT)))
-	{
-		TRACE0("Failed to create status bar\n");
-		return -1;      // fail to create
-	}
+    if (!m_wndStatusBar.Create(this) ||
+        !m_wndStatusBar.SetIndicators(indicators,
+          sizeof(indicators)/sizeof(UINT)))
+    {
+        TRACE0("Failed to create status bar\n");
+        return -1;      // fail to create
+    }
 
-	// TODO: Remove this if you don't want tool tips or a resizeable toolbar
-	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
-		CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
+    // TODO: Remove this if you don't want tool tips or a resizeable toolbar
+    m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
+        CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
 
-	// TODO: Delete these three lines if you don't want the toolbar to
-	//  be dockable
-	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
-	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndToolBar);
+    // TODO: Delete these three lines if you don't want the toolbar to
+    //  be dockable
+    m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+    EnableDocking(CBRS_ALIGN_ANY);
+    DockControlBar(&m_wndToolBar);
 
-	return 0;
+    return 0;
 }
 
 BOOL MainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
-	if( !CFrameWnd::PreCreateWindow(cs) )
-		return FALSE;
-	// TODO: Modify the Window class or styles here by modifying
-	//  the CREATESTRUCT cs
+    if( !CFrameWnd::PreCreateWindow(cs) )
+        return FALSE;
+    // TODO: Modify the Window class or styles here by modifying
+    //  the CREATESTRUCT cs
 
-	return TRUE;
+    return TRUE;
 }
 
 void MainFrame::StatusXY(const char* xy)
@@ -125,12 +151,12 @@ void MainFrame::StatusXY(const char* xy)
 #ifdef _DEBUG
 void MainFrame::AssertValid() const
 {
-	CFrameWnd::AssertValid();
+    CFrameWnd::AssertValid();
 }
 
 void MainFrame::Dump(CDumpContext& dc) const
 {
-	CFrameWnd::Dump(dc);
+    CFrameWnd::Dump(dc);
 }
 
 #endif //_DEBUG

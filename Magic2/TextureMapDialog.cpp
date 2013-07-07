@@ -1,6 +1,30 @@
-/*  Project Magic 2.0
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
 
     SUBSYSTEM:    Magic.exe
     FILE:         TextureMapDialog.cpp
@@ -37,18 +61,18 @@ static char THIS_FILE[] = __FILE__;
 // +--------------------------------------------------------------------+
 
 TextureMapDialog::TextureMapDialog(MagicView* pParent)
-	: CDialog(TextureMapDialog::IDD, pParent), doc(0), material(0), model(0), blank(0)
+    : CDialog(TextureMapDialog::IDD, pParent), doc(0), material(0), model(0), blank(0)
 {
-	//{{AFX_DATA_INIT(TextureMapDialog)
-	mMaterialIndex = -1;
-	mFlip = FALSE;
-	mMirror = FALSE;
-	mRotate = FALSE;
-	mScaleV = 0.0;
-	mAxis = -1;
-	mScaleU = 0.0;
-	mMapType = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(TextureMapDialog)
+    mMaterialIndex = -1;
+    mFlip = FALSE;
+    mMirror = FALSE;
+    mRotate = FALSE;
+    mScaleV = 0.0;
+    mAxis = -1;
+    mScaleU = 0.0;
+    mMapType = -1;
+    //}}AFX_DATA_INIT
 
    Color gray = Color::LightGray;
    blank = new Bitmap(1,1,&gray);
@@ -79,20 +103,20 @@ TextureMapDialog::~TextureMapDialog()
 
 void TextureMapDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(TextureMapDialog)
-	DDX_Control(pDX, IDC_MAPPING, mMapping);
-	DDX_Control(pDX, IDC_MATERIAL, mMaterialList);
-	DDX_Control(pDX, IDC_TEXTURE_PREVIEW, mMaterialThumb);
-	DDX_CBIndex(pDX, IDC_MATERIAL, mMaterialIndex);
-	DDX_Check(pDX, IDC_ALIGN_FLIP, mFlip);
-	DDX_Check(pDX, IDC_ALIGN_MIRROR, mMirror);
-	DDX_Check(pDX, IDC_ALIGN_ROTATE, mRotate);
-	DDX_Text(pDX, IDC_SCALE_V, mScaleV);
-	DDX_Radio(pDX, IDC_ALIGN_X, mAxis);
-	DDX_Text(pDX, IDC_SCALE_U, mScaleU);
-	DDX_CBIndex(pDX, IDC_MAPPING, mMapType);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(TextureMapDialog)
+    DDX_Control(pDX, IDC_MAPPING, mMapping);
+    DDX_Control(pDX, IDC_MATERIAL, mMaterialList);
+    DDX_Control(pDX, IDC_TEXTURE_PREVIEW, mMaterialThumb);
+    DDX_CBIndex(pDX, IDC_MATERIAL, mMaterialIndex);
+    DDX_Check(pDX, IDC_ALIGN_FLIP, mFlip);
+    DDX_Check(pDX, IDC_ALIGN_MIRROR, mMirror);
+    DDX_Check(pDX, IDC_ALIGN_ROTATE, mRotate);
+    DDX_Text(pDX, IDC_SCALE_V, mScaleV);
+    DDX_Radio(pDX, IDC_ALIGN_X, mAxis);
+    DDX_Text(pDX, IDC_SCALE_U, mScaleU);
+    DDX_CBIndex(pDX, IDC_MAPPING, mMapType);
+    //}}AFX_DATA_MAP
 
    if (pDX->m_bSaveAndValidate) {
       mMaterialIndex = mMaterialList.GetCurSel()-1;
@@ -101,13 +125,13 @@ void TextureMapDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(TextureMapDialog, CDialog)
-	//{{AFX_MSG_MAP(TextureMapDialog)
-	ON_WM_PAINT()
-	ON_CBN_SELCHANGE(IDC_MATERIAL, OnSelectMaterial)
-	ON_BN_CLICKED(IDC_ALIGN_X, OnAlign)
-	ON_BN_CLICKED(IDC_ALIGN_Y, OnAlign)
-	ON_BN_CLICKED(IDC_ALIGN_Z, OnAlign)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(TextureMapDialog)
+    ON_WM_PAINT()
+    ON_CBN_SELCHANGE(IDC_MATERIAL, OnSelectMaterial)
+    ON_BN_CLICKED(IDC_ALIGN_X, OnAlign)
+    ON_BN_CLICKED(IDC_ALIGN_Y, OnAlign)
+    ON_BN_CLICKED(IDC_ALIGN_Z, OnAlign)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 // +--------------------------------------------------------------------+
@@ -116,7 +140,7 @@ END_MESSAGE_MAP()
 
 BOOL TextureMapDialog::OnInitDialog() 
 {
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
    mMaterialList.AddString("<none>");
 
@@ -136,14 +160,14 @@ BOOL TextureMapDialog::OnInitDialog()
       ThumbPreview(mMaterialThumb.GetSafeHwnd(), material->thumbnail);
    }
 
-	return TRUE;
+    return TRUE;
 }
 
 // +--------------------------------------------------------------------+
 
 void TextureMapDialog::OnPaint() 
 {
-	CPaintDC dc(this); // device context for painting
+    CPaintDC dc(this); // device context for painting
 
    if (material && material->thumbnail) {
       ThumbPreview(mMaterialThumb.GetSafeHwnd(), material->thumbnail);
