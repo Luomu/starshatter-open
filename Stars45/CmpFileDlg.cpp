@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         CmpFileDlg.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         CmpFileDlg.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Mission Select Dialog Active Window class
+    OVERVIEW
+    ========
+    Mission Select Dialog Active Window class
 */
 
 #include "MemDebug.h"
@@ -45,7 +69,7 @@ CmpFileDlg::CmpFileDlg(Screen* s, FormDef& def, CmpnScreen* mgr)
 : FormWindow(s, 0, 0, s->Width(), s->Height()), manager(mgr),
 exit_latch(false), btn_save(0), btn_cancel(0), edt_name(0), lst_campaigns(0)
 {
-	Init(def);
+    Init(def);
 }
 
 CmpFileDlg::~CmpFileDlg()
@@ -57,24 +81,24 @@ CmpFileDlg::~CmpFileDlg()
 void
 CmpFileDlg::RegisterControls()
 {
-	btn_save    = (Button*) FindControl(1);
-	btn_cancel  = (Button*) FindControl(2);
+    btn_save    = (Button*) FindControl(1);
+    btn_cancel  = (Button*) FindControl(2);
 
-	if (btn_save)
-	REGISTER_CLIENT(EID_CLICK, btn_save,   CmpFileDlg, OnSave);
+    if (btn_save)
+    REGISTER_CLIENT(EID_CLICK, btn_save,   CmpFileDlg, OnSave);
 
-	if (btn_cancel)
-	REGISTER_CLIENT(EID_CLICK, btn_cancel, CmpFileDlg, OnCancel);
+    if (btn_cancel)
+    REGISTER_CLIENT(EID_CLICK, btn_cancel, CmpFileDlg, OnCancel);
 
-	edt_name    = (EditBox*) FindControl(200);
+    edt_name    = (EditBox*) FindControl(200);
 
-	if (edt_name)
-	edt_name->SetText("");
+    if (edt_name)
+    edt_name->SetText("");
 
-	lst_campaigns = (ListBox*) FindControl(201);
+    lst_campaigns = (ListBox*) FindControl(201);
 
-	if (lst_campaigns)
-	REGISTER_CLIENT(EID_SELECT, lst_campaigns, CmpFileDlg, OnCampaign);
+    if (lst_campaigns)
+    REGISTER_CLIENT(EID_SELECT, lst_campaigns, CmpFileDlg, OnCampaign);
 }
 
 // +--------------------------------------------------------------------+
@@ -82,47 +106,47 @@ CmpFileDlg::RegisterControls()
 void
 CmpFileDlg::Show()
 {
-	FormWindow::Show();
+    FormWindow::Show();
 
-	if (lst_campaigns) {
-		lst_campaigns->ClearItems();
-		lst_campaigns->SetLineHeight(12);
+    if (lst_campaigns) {
+        lst_campaigns->ClearItems();
+        lst_campaigns->SetLineHeight(12);
 
-		List<Text>  save_list;
+        List<Text>  save_list;
 
-		CampaignSaveGame::GetSaveGameList(save_list);
-		save_list.sort();
+        CampaignSaveGame::GetSaveGameList(save_list);
+        save_list.sort();
 
-		for (int i = 0; i < save_list.size(); i++)
-		lst_campaigns->AddItem(*save_list[i]);
+        for (int i = 0; i < save_list.size(); i++)
+        lst_campaigns->AddItem(*save_list[i]);
 
-		save_list.destroy();
-	}
+        save_list.destroy();
+    }
 
-	if (edt_name) {
-		char save_name[256];
-		save_name[0] = 0;
+    if (edt_name) {
+        char save_name[256];
+        save_name[0] = 0;
 
-		campaign = Campaign::GetCampaign();
-		if (campaign && campaign->GetPlayerGroup()) {
-			const char*  op_name = campaign->Name();
-			char         day[32];
-			CombatGroup* group   = campaign->GetPlayerGroup();
+        campaign = Campaign::GetCampaign();
+        if (campaign && campaign->GetPlayerGroup()) {
+            const char*  op_name = campaign->Name();
+            char         day[32];
+            CombatGroup* group   = campaign->GetPlayerGroup();
 
-			if (strstr(op_name, "Operation "))
-			op_name += 10;
+            if (strstr(op_name, "Operation "))
+            op_name += 10;
 
-			FormatDay(day, campaign->GetTime());
+            FormatDay(day, campaign->GetTime());
 
-			sprintf_s(save_name, "%s %s (%s)",
-				op_name,
-				day,
-				group->GetRegion().data());
-		}
+            sprintf_s(save_name, "%s %s (%s)",
+                op_name,
+                day,
+                group->GetRegion().data());
+        }
 
-		edt_name->SetText(save_name);
-		edt_name->SetFocus();
-	}
+        edt_name->SetText(save_name);
+        edt_name->SetFocus();
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -130,19 +154,19 @@ CmpFileDlg::Show()
 void
 CmpFileDlg::ExecFrame()
 {
-	if (Keyboard::KeyDown(VK_RETURN)) {
-		OnSave(0);
-	}
+    if (Keyboard::KeyDown(VK_RETURN)) {
+        OnSave(0);
+    }
 
-	if (Keyboard::KeyDown(VK_ESCAPE)) {
-		if (!exit_latch)
-		OnCancel(0);
+    if (Keyboard::KeyDown(VK_ESCAPE)) {
+        if (!exit_latch)
+        OnCancel(0);
 
-		exit_latch = true;
-	}
-	else {
-		exit_latch = false;
-	}
+        exit_latch = true;
+    }
+    else {
+        exit_latch = false;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -150,29 +174,29 @@ CmpFileDlg::ExecFrame()
 void
 CmpFileDlg::OnSave(AWEvent* event)
 {
-	if (edt_name && edt_name->GetText().length() > 0) {
-		campaign = Campaign::GetCampaign();
-		CampaignSaveGame save(campaign);
+    if (edt_name && edt_name->GetText().length() > 0) {
+        campaign = Campaign::GetCampaign();
+        CampaignSaveGame save(campaign);
 
-		char filename[256];
-		strcpy_s(filename, edt_name->GetText());
-		char* newline = strchr(filename, '\n');
-		if (newline)
-		*newline = 0;
+        char filename[256];
+        strcpy_s(filename, edt_name->GetText());
+        char* newline = strchr(filename, '\n');
+        if (newline)
+        *newline = 0;
 
-		save.Save(filename);
-		save.SaveAuto();
+        save.Save(filename);
+        save.SaveAuto();
 
-		if (manager)
-		manager->HideCmpFileDlg();
-	}
+        if (manager)
+        manager->HideCmpFileDlg();
+    }
 }
 
 void
 CmpFileDlg::OnCancel(AWEvent* event)
 {
-	if (manager)
-	manager->HideCmpFileDlg();
+    if (manager)
+    manager->HideCmpFileDlg();
 }
 
 // +--------------------------------------------------------------------+
@@ -180,12 +204,12 @@ CmpFileDlg::OnCancel(AWEvent* event)
 void
 CmpFileDlg::OnCampaign(AWEvent* event)
 {
-	int n = lst_campaigns->GetSelection();
+    int n = lst_campaigns->GetSelection();
 
-	if (n >= 0) {
-		Text cmpn = lst_campaigns->GetItemText(n);
+    if (n >= 0) {
+        Text cmpn = lst_campaigns->GetItemText(n);
 
-		if (edt_name)
-		edt_name->SetText(cmpn);
-	}
+        if (edt_name)
+        edt_name->SetText(cmpn);
+    }
 }

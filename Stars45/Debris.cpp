@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         Debris.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         Debris.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Debris Sprite animation class
+    OVERVIEW
+    ========
+    Debris Sprite animation class
 */
 
 #include "MemDebug.h"
@@ -31,34 +55,34 @@
 Debris::Debris(Model* model, const Vec3& pos, const Vec3& vel, double m)
 : SimObject("Debris", SimObject::SIM_DEBRIS) 
 {
-	MoveTo(pos);
+    MoveTo(pos);
 
-	velocity  = vel;
-	mass      = (float) m;
-	integrity = mass * 10.0f;
-	life      = 300;
+    velocity  = vel;
+    mass      = (float) m;
+    integrity = mass * 10.0f;
+    life      = 300;
 
-	Solid* solid = new(__FILE__,__LINE__) Solid;
+    Solid* solid = new(__FILE__,__LINE__) Solid;
 
-	if (solid) {
-		solid->UseModel(model);
-		solid->MoveTo(pos);
+    if (solid) {
+        solid->UseModel(model);
+        solid->MoveTo(pos);
 
-		rep = solid;
+        rep = solid;
 
-		radius = solid->Radius();
-	}
+        radius = solid->Radius();
+    }
 
-	Point torque = RandomVector(Mass()/2);
+    Point torque = RandomVector(Mass()/2);
 
-	if (Mass() < 10)
-	torque *= (rand() / 3200);
-	else if (Mass() > 10e3)
-	torque *= 0.25;
-	else if (Mass() > 10e6)
-	torque *= 0.005;
+    if (Mass() < 10)
+    torque *= (rand() / 3200);
+    else if (Mass() > 10e3)
+    torque *= 0.25;
+    else if (Mass() > 10e6)
+    torque *= 0.005;
 
-	ApplyTorque(torque);
+    ApplyTorque(torque);
 }
 
 // +--------------------------------------------------------------------+
@@ -66,100 +90,100 @@ Debris::Debris(Model* model, const Vec3& pos, const Vec3& vel, double m)
 int
 Debris::HitBy(Shot* shot, Point& impact)
 {
-	if (!shot->IsArmed()) return 0;
+    if (!shot->IsArmed()) return 0;
 
-	const int HIT_NOTHING   = 0;
-	const int HIT_HULL      = 1;
+    const int HIT_NOTHING   = 0;
+    const int HIT_HULL      = 1;
 
-	Point    hull_impact;
-	int      hit_type = HIT_NOTHING;
-	bool     hit_hull = true;
-	Point    shot_loc = shot->Location();
-	Point    delta    = shot_loc - Location();
-	double   dlen     = delta.length();
-	double   dscale   = 1;
-	float    scale    = 1.0f;
-	Sim*     sim      = Sim::GetSim();
+    Point    hull_impact;
+    int      hit_type = HIT_NOTHING;
+    bool     hit_hull = true;
+    Point    shot_loc = shot->Location();
+    Point    delta    = shot_loc - Location();
+    double   dlen     = delta.length();
+    double   dscale   = 1;
+    float    scale    = 1.0f;
+    Sim*     sim      = Sim::GetSim();
 
-	// MISSILE PROCESSING ------------------------------------------------
+    // MISSILE PROCESSING ------------------------------------------------
 
-	if (shot->IsMissile()) {
-		if (dlen < Radius()) {
-			hull_impact = impact = shot_loc;
-			sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH,   0.3f * scale, scale, region, this);
-			sim->CreateExplosion(impact, Point(),    Explosion::SHOT_BLAST,   2.0f,         scale, region);
-			hit_type = HIT_HULL;
-		}
-	}
+    if (shot->IsMissile()) {
+        if (dlen < Radius()) {
+            hull_impact = impact = shot_loc;
+            sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH,   0.3f * scale, scale, region, this);
+            sim->CreateExplosion(impact, Point(),    Explosion::SHOT_BLAST,   2.0f,         scale, region);
+            hit_type = HIT_HULL;
+        }
+    }
 
-	// ENERGY WEP PROCESSING ---------------------------------------------
+    // ENERGY WEP PROCESSING ---------------------------------------------
 
-	else {
+    else {
 
-		Solid* solid = (Solid*) rep;
+        Solid* solid = (Solid*) rep;
 
-		Point  shot_loc = shot->Location();
-		Point  shot_vpn = shot_loc - shot->Origin();
-		double shot_len = shot_vpn.Normalize();
-		if (shot_len == 0) shot_len = 1000;
+        Point  shot_loc = shot->Location();
+        Point  shot_vpn = shot_loc - shot->Origin();
+        double shot_len = shot_vpn.Normalize();
+        if (shot_len == 0) shot_len = 1000;
 
-		// impact:
-		if (solid) {
-			if (solid->CheckRayIntersection(shot->Origin(), shot_vpn, shot_len, impact)) {
-				// trim beam shots to impact point:
-				if (shot->IsBeam())
-				shot->SetBeamPoints(shot->Origin(), impact);
+        // impact:
+        if (solid) {
+            if (solid->CheckRayIntersection(shot->Origin(), shot_vpn, shot_len, impact)) {
+                // trim beam shots to impact point:
+                if (shot->IsBeam())
+                shot->SetBeamPoints(shot->Origin(), impact);
 
-				hull_impact = impact;
+                hull_impact = impact;
 
-				if (shot->IsBeam())
-				sim->CreateExplosion(impact, Velocity(), Explosion::BEAM_FLASH, 0.30f * scale, scale, region, this);
-				else
-				sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH, 0.30f * scale, scale, region, this);
+                if (shot->IsBeam())
+                sim->CreateExplosion(impact, Velocity(), Explosion::BEAM_FLASH, 0.30f * scale, scale, region, this);
+                else
+                sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH, 0.30f * scale, scale, region, this);
 
-				Point burst_vel = hull_impact - Location();
-				burst_vel.Normalize();
-				burst_vel *= Radius() * 0.5;
-				burst_vel += Velocity();
+                Point burst_vel = hull_impact - Location();
+                burst_vel.Normalize();
+                burst_vel *= Radius() * 0.5;
+                burst_vel += Velocity();
 
-				sim->CreateExplosion(hull_impact, burst_vel, Explosion::HULL_BURST, 0.50f * scale, scale, region, this);
+                sim->CreateExplosion(hull_impact, burst_vel, Explosion::HULL_BURST, 0.50f * scale, scale, region, this);
 
-				hit_type = HIT_HULL;
-				hit_hull = true;
-			}
-		}
+                hit_type = HIT_HULL;
+                hit_hull = true;
+            }
+        }
 
-		else {
-			if (dlen < Radius()) {
-				hull_impact = impact = shot_loc;
+        else {
+            if (dlen < Radius()) {
+                hull_impact = impact = shot_loc;
 
-				if (shot->IsBeam())
-				sim->CreateExplosion(impact, Velocity(), Explosion::BEAM_FLASH, 0.30f * scale, scale, region, this);
-				else
-				sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH, 0.30f * scale, scale, region, this);
+                if (shot->IsBeam())
+                sim->CreateExplosion(impact, Velocity(), Explosion::BEAM_FLASH, 0.30f * scale, scale, region, this);
+                else
+                sim->CreateExplosion(impact, Velocity(), Explosion::HULL_FLASH, 0.30f * scale, scale, region, this);
 
-				hit_type = HIT_HULL;
-			}
-		}
-	}
+                hit_type = HIT_HULL;
+            }
+        }
+    }
 
-	// DAMAGE RESOLUTION -------------------------------------------------
+    // DAMAGE RESOLUTION -------------------------------------------------
 
-	if (hit_type != HIT_NOTHING) {
-		double effective_damage = shot->Damage() * dscale;
+    if (hit_type != HIT_NOTHING) {
+        double effective_damage = shot->Damage() * dscale;
 
-		if (shot->IsBeam()) {
-			effective_damage *= Game::FrameTime();
-		}
-		else {
-			ApplyTorque(shot->Velocity() * (float) effective_damage * 1e-6f);
-		}
+        if (shot->IsBeam()) {
+            effective_damage *= Game::FrameTime();
+        }
+        else {
+            ApplyTorque(shot->Velocity() * (float) effective_damage * 1e-6f);
+        }
 
-		if (effective_damage > 0)
-		Physical::InflictDamage(effective_damage);
-	}
+        if (effective_damage > 0)
+        Physical::InflictDamage(effective_damage);
+    }
 
-	return hit_type;
+    return hit_type;
 }
 
 // +--------------------------------------------------------------------+
@@ -167,37 +191,37 @@ Debris::HitBy(Shot* shot, Point& impact)
 void
 Debris::ExecFrame(double seconds)
 {
-	if (GetRegion()->Type() == SimRegion::AIR_SPACE) {
-		if (AltitudeAGL() < Radius()) {
-			velocity          = Point();
-			arcade_velocity   = Point();
+    if (GetRegion()->Type() == SimRegion::AIR_SPACE) {
+        if (AltitudeAGL() < Radius()) {
+            velocity          = Point();
+            arcade_velocity   = Point();
 
-			Terrain* terrain  = region->GetTerrain();
+            Terrain* terrain  = region->GetTerrain();
 
-			if (terrain) {
-				Point loc = Location();
-				MoveTo(Point(loc.x, terrain->Height(loc.x, loc.z), loc.z));
-			}
-		}
-		else {
-			if (mass > 100) {
-				Orbital* primary = GetRegion()->GetOrbitalRegion()->Primary();
+            if (terrain) {
+                Point loc = Location();
+                MoveTo(Point(loc.x, terrain->Height(loc.x, loc.z), loc.z));
+            }
+        }
+        else {
+            if (mass > 100) {
+                Orbital* primary = GetRegion()->GetOrbitalRegion()->Primary();
 
-				const double   GRAV = 6.673e-11;
-				double         m0   = primary->Mass();
-				double         r    = primary->Radius();
+                const double   GRAV = 6.673e-11;
+                double         m0   = primary->Mass();
+                double         r    = primary->Radius();
 
-				SetDrag(0.001);
-				SetGravity(6 * GRAV * m0 / (r*r));  // accentuate gravity
-				SetBaseDensity(1.0f);
-			}
+                SetDrag(0.001);
+                SetGravity(6 * GRAV * m0 / (r*r));  // accentuate gravity
+                SetBaseDensity(1.0f);
+            }
 
-			AeroFrame(seconds);
-		}
-	}
-	else {
-		Physical::ExecFrame(seconds);
-	}
+            AeroFrame(seconds);
+        }
+    }
+    else {
+        Physical::ExecFrame(seconds);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -205,16 +229,16 @@ Debris::ExecFrame(double seconds)
 double
 Debris::AltitudeAGL() const
 {
-	Point    loc          = Location();
-	double   altitude_agl = loc.y;
+    Point    loc          = Location();
+    double   altitude_agl = loc.y;
 
-	Terrain* terrain      = region->GetTerrain();
+    Terrain* terrain      = region->GetTerrain();
 
-	if (terrain)
-	altitude_agl -= terrain->Height(loc.x, loc.z);
+    if (terrain)
+    altitude_agl -= terrain->Height(loc.x, loc.z);
 
-	if (!_finite(altitude_agl))
-	altitude_agl = 0;
+    if (!_finite(altitude_agl))
+    altitude_agl = 0;
 
-	return altitude_agl;
+    return altitude_agl;
 }

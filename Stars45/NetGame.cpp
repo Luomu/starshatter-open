@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         NetGame.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         NetGame.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Network Game Manager class
+    OVERVIEW
+    ========
+    Network Game Manager class
 */
 
 #include "MemDebug.h"
@@ -55,49 +79,49 @@ static long    start_time  = 0;
 NetGame::NetGame()
 : objid(0), netid(0), link(0), local_player(0), last_send_time(0), active(true)
 {
-	netgame = this;
-	sim = Sim::GetSim();
+    netgame = this;
+    sim = Sim::GetSim();
 
-	ship_id_key = SHIP_ID_START;
-	shot_id_key = SHOT_ID_START;
+    ship_id_key = SHIP_ID_START;
+    shot_id_key = SHOT_ID_START;
 
-	if (sim)
-	local_player = sim->GetPlayerShip();
+    if (sim)
+    local_player = sim->GetPlayerShip();
 
-	Player* player = Player::GetCurrentPlayer();
-	if (player) {
-		player_name = player->Name();
-		player_pass = player->Password();
-	}
+    Player* player = Player::GetCurrentPlayer();
+    if (player) {
+        player_name = player->Name();
+        player_pass = player->Password();
+    }
 
-	start_time = NetLayer::GetUTC();
+    start_time = NetLayer::GetUTC();
 }
 
 NetGame::~NetGame()
 {
-	netgame      = 0;
-	local_player = 0;
-	players.destroy();
+    netgame      = 0;
+    local_player = 0;
+    players.destroy();
 
-	if (link) {
-		double delta     = fabs((double)(NetLayer::GetUTC() - start_time));
-		double bandwidth = 10.0 * (link->GetBytesSent() + link->GetBytesRecv()) / delta;
-		double recvrate  = link->GetPacketsRecv() / delta;
+    if (link) {
+        double delta     = fabs((double)(NetLayer::GetUTC() - start_time));
+        double bandwidth = 10.0 * (link->GetBytesSent() + link->GetBytesRecv()) / delta;
+        double recvrate  = link->GetPacketsRecv() / delta;
 
-		Print("NetGame Stats\n-------------\n");
-		Print("  packets sent %d\n",          link->GetPacketsSent());
-		Print("  packets recv %d\n",          link->GetPacketsRecv());
-		Print("  bytes sent   %d\n",          link->GetBytesSent());
-		Print("  bytes recv   %d\n",          link->GetBytesRecv());
-		Print("  retries      %d\n",          link->GetRetries());
-		Print("  drops        %d\n",          link->GetDrops());
-		Print("  avg lag      %d msec\n",     link->GetLag());
-		Print("  time         %d sec\n",      (int) delta);
-		Print("  bandwidth    %d bps\n",      (int) bandwidth);
-		Print("  packet rate  %d pps in\n\n", (int) recvrate);
+        Print("NetGame Stats\n-------------\n");
+        Print("  packets sent %d\n",          link->GetPacketsSent());
+        Print("  packets recv %d\n",          link->GetPacketsRecv());
+        Print("  bytes sent   %d\n",          link->GetBytesSent());
+        Print("  bytes recv   %d\n",          link->GetBytesRecv());
+        Print("  retries      %d\n",          link->GetRetries());
+        Print("  drops        %d\n",          link->GetDrops());
+        Print("  avg lag      %d msec\n",     link->GetLag());
+        Print("  time         %d sec\n",      (int) delta);
+        Print("  bandwidth    %d bps\n",      (int) bandwidth);
+        Print("  packet rate  %d pps in\n\n", (int) recvrate);
 
-		delete link;
-	}
+        delete link;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -105,50 +129,50 @@ NetGame::~NetGame()
 NetGame*
 NetGame::Create()
 {
-	if (!netgame) {
-		if (NetServerConfig::GetInstance())
-		netgame = new(__FILE__,__LINE__) NetGameServer;
+    if (!netgame) {
+        if (NetServerConfig::GetInstance())
+        netgame = new(__FILE__,__LINE__) NetGameServer;
 
-		else if (NetClientConfig::GetInstance() && NetClientConfig::GetInstance()->GetSelectedServer())
-		netgame = new(__FILE__,__LINE__) NetGameClient;
-	}
+        else if (NetClientConfig::GetInstance() && NetClientConfig::GetInstance()->GetSelectedServer())
+        netgame = new(__FILE__,__LINE__) NetGameClient;
+    }
 
-	return netgame;
+    return netgame;
 }
 
 NetGame*
 NetGame::GetInstance()
 {
-	return netgame;
+    return netgame;
 }
 
 DWORD
 NetGame::GetObjID() const
 {
-	if (local_player)
-	return local_player->GetObjID();
+    if (local_player)
+    return local_player->GetObjID();
 
-	return 0;
+    return 0;
 }
 
 DWORD
 NetGame::GetNextObjID(int type)
 {
-	if (type == SHIP) {
-		if (ship_id_key >= SHOT_ID_START)
-		ship_id_key = SHIP_ID_START;
+    if (type == SHIP) {
+        if (ship_id_key >= SHOT_ID_START)
+        ship_id_key = SHIP_ID_START;
 
-		return ship_id_key++;
-	}
+        return ship_id_key++;
+    }
 
-	else if (type == SHOT) {
-		if (shot_id_key >= 0xFFFE)
-		shot_id_key = SHOT_ID_START;
+    else if (type == SHOT) {
+        if (shot_id_key >= 0xFFFE)
+        shot_id_key = SHOT_ID_START;
 
-		return shot_id_key++;
-	}
+        return shot_id_key++;
+    }
 
-	return 0;
+    return 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -156,57 +180,57 @@ NetGame::GetNextObjID(int type)
 void
 NetGame::ExecFrame()
 {
-	Send();
-	Recv();
+    Send();
+    Recv();
 }
 
 void
 NetGame::Recv()
 {
-	NetMsg* msg = link->GetMessage();
+    NetMsg* msg = link->GetMessage();
 
-	while (msg) {
-		if (active) {
-			// For Debug Convenience:
-			// NetPlayer* player = FindPlayerByNetID(msg->NetID());
+    while (msg) {
+        if (active) {
+            // For Debug Convenience:
+            // NetPlayer* player = FindPlayerByNetID(msg->NetID());
 
-			switch (msg->Type()) {
-			case NET_JOIN_REQUEST:     DoJoinRequest(msg);     break;
-			case NET_JOIN_ANNOUNCE:    DoJoinAnnounce(msg);    break;
-			case NET_QUIT_REQUEST:     DoQuitRequest(msg);     break;
-			case NET_QUIT_ANNOUNCE:    DoQuitAnnounce(msg);    break;
-			case NET_GAME_OVER:        DoGameOver(msg);        break;
-			case NET_DISCONNECT:       DoDisconnect(msg);      break;
+            switch (msg->Type()) {
+            case NET_JOIN_REQUEST:     DoJoinRequest(msg);     break;
+            case NET_JOIN_ANNOUNCE:    DoJoinAnnounce(msg);    break;
+            case NET_QUIT_REQUEST:     DoQuitRequest(msg);     break;
+            case NET_QUIT_ANNOUNCE:    DoQuitAnnounce(msg);    break;
+            case NET_GAME_OVER:        DoGameOver(msg);        break;
+            case NET_DISCONNECT:       DoDisconnect(msg);      break;
 
-			case NET_OBJ_LOC:          DoObjLoc(msg);          break;
-			case NET_OBJ_DAMAGE:       DoObjDamage(msg);       break;
-			case NET_OBJ_KILL:         DoObjKill(msg);         break;
-			case NET_OBJ_SPAWN:        DoObjSpawn(msg);        break;
-			case NET_OBJ_HYPER:        DoObjHyper(msg);        break;
-			case NET_OBJ_TARGET:       DoObjTarget(msg);       break;
-			case NET_OBJ_EMCON:        DoObjEmcon(msg);        break;
-			case NET_SYS_DAMAGE:       DoSysDamage(msg);       break;
-			case NET_SYS_STATUS:       DoSysStatus(msg);       break;
+            case NET_OBJ_LOC:          DoObjLoc(msg);          break;
+            case NET_OBJ_DAMAGE:       DoObjDamage(msg);       break;
+            case NET_OBJ_KILL:         DoObjKill(msg);         break;
+            case NET_OBJ_SPAWN:        DoObjSpawn(msg);        break;
+            case NET_OBJ_HYPER:        DoObjHyper(msg);        break;
+            case NET_OBJ_TARGET:       DoObjTarget(msg);       break;
+            case NET_OBJ_EMCON:        DoObjEmcon(msg);        break;
+            case NET_SYS_DAMAGE:       DoSysDamage(msg);       break;
+            case NET_SYS_STATUS:       DoSysStatus(msg);       break;
 
-			case NET_ELEM_CREATE:      DoElemCreate(msg);      break;
-			case NET_ELEM_REQUEST:     DoElemRequest(msg);     break;
-			case NET_SHIP_LAUNCH:      DoShipLaunch(msg);      break;
-			case NET_NAV_DATA:         DoNavData(msg);         break;
-			case NET_NAV_DELETE:       DoNavDelete(msg);       break;
+            case NET_ELEM_CREATE:      DoElemCreate(msg);      break;
+            case NET_ELEM_REQUEST:     DoElemRequest(msg);     break;
+            case NET_SHIP_LAUNCH:      DoShipLaunch(msg);      break;
+            case NET_NAV_DATA:         DoNavData(msg);         break;
+            case NET_NAV_DELETE:       DoNavDelete(msg);       break;
 
-			case NET_WEP_TRIGGER:      DoWepTrigger(msg);      break;
-			case NET_WEP_RELEASE:      DoWepRelease(msg);      break;
-			case NET_WEP_DESTROY:      DoWepDestroy(msg);      break;
+            case NET_WEP_TRIGGER:      DoWepTrigger(msg);      break;
+            case NET_WEP_RELEASE:      DoWepRelease(msg);      break;
+            case NET_WEP_DESTROY:      DoWepDestroy(msg);      break;
 
-			case NET_COMM_MESSAGE:     DoCommMsg(msg);         break;
-			case NET_CHAT_MESSAGE:     DoChatMsg(msg);         break;
-			case NET_SELF_DESTRUCT:    DoSelfDestruct(msg);    break;
-			}
-		}
+            case NET_COMM_MESSAGE:     DoCommMsg(msg);         break;
+            case NET_CHAT_MESSAGE:     DoChatMsg(msg);         break;
+            case NET_SELF_DESTRUCT:    DoSelfDestruct(msg);    break;
+            }
+        }
 
-		delete msg;
-		msg = link->GetMessage();
-	}
+        delete msg;
+        msg = link->GetMessage();
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -219,83 +243,83 @@ NetGame::Send()
 int
 NetGame::NumPlayers()
 {
-	if (netgame) {
-		int num_players = netgame->players.size();
+    if (netgame) {
+        int num_players = netgame->players.size();
 
-		if (netgame->local_player)
-		num_players++;
+        if (netgame->local_player)
+        num_players++;
 
-		return num_players;
-	}
+        return num_players;
+    }
 
-	return 0;
+    return 0;
 }
 
 NetPlayer*
 NetGame::FindPlayerByName(const char* name)
 {
-	for (int i = 0; i < players.size(); i++) {
-		NetPlayer* p = players[i];
+    for (int i = 0; i < players.size(); i++) {
+        NetPlayer* p = players[i];
 
-		if (!strcmp(p->Name(), name))
-		return p;
-	}
+        if (!strcmp(p->Name(), name))
+        return p;
+    }
 
-	return 0;
+    return 0;
 }
 
 NetPlayer*
 NetGame::FindPlayerByNetID(DWORD netid)
 {
-	for (int i = 0; i < players.size(); i++) {
-		NetPlayer* p = players[i];
+    for (int i = 0; i < players.size(); i++) {
+        NetPlayer* p = players[i];
 
-		if (p->GetNetID() == netid)
-		return p;
-	}
+        if (p->GetNetID() == netid)
+        return p;
+    }
 
-	return 0;
+    return 0;
 }
 
 NetPlayer*
 NetGame::FindPlayerByObjID(DWORD objid)
 {
-	for (int i = 0; i < players.size(); i++) {
-		NetPlayer* p = players[i];
+    for (int i = 0; i < players.size(); i++) {
+        NetPlayer* p = players[i];
 
-		if (p->GetObjID() == objid)
-		return p;
-	}
+        if (p->GetObjID() == objid)
+        return p;
+    }
 
-	return 0;
+    return 0;
 }
 
 Ship*
 NetGame::FindShipByObjID(DWORD objid)
 {
-	if (sim)
-	return sim->FindShipByObjID(objid);
+    if (sim)
+    return sim->FindShipByObjID(objid);
 
-	return 0;
+    return 0;
 }
 
 Shot*
 NetGame::FindShotByObjID(DWORD objid)
 {
-	if (sim)
-	return sim->FindShotByObjID(objid);
+    if (sim)
+    return sim->FindShotByObjID(objid);
 
-	return 0;
+    return 0;
 }
 
 NetPeer*
 NetGame::GetPeer(NetPlayer* player)
 {
-	if (player && link) {
-		return link->FindPeer(player->GetNetID());
-	}
+    if (player && link) {
+        return link->FindPeer(player->GetNetID());
+    }
 
-	return 0;
+    return 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -310,21 +334,21 @@ NetGame::Respawn(DWORD objid, Ship* spawn)
 bool
 NetGame::IsNetGame()
 {
-	return netgame != 0;
+    return netgame != 0;
 }
 
 bool
 NetGame::IsNetGameClient()
 {
-	if (netgame)
-	return netgame->IsClient();
-	return false;
+    if (netgame)
+    return netgame->IsClient();
+    return false;
 }
 
 bool
 NetGame::IsNetGameServer()
 {
-	if (netgame)
-	return netgame->IsServer();
-	return false;
+    if (netgame)
+    return netgame->IsServer();
+    return false;
 }

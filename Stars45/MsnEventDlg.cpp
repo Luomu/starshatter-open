@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         MsnEventDlg.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         MsnEventDlg.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Mod Config Dialog Active Window class
+    OVERVIEW
+    ========
+    Mod Config Dialog Active Window class
 */
 
 #include "MemDebug.h"
@@ -48,7 +72,7 @@ MsnEventDlg::MsnEventDlg(Screen* s, FormDef& def, MenuScreen* mgr)
 : FormWindow(s,  0,  0, s->Width(), s->Height()), manager(mgr),
 btn_accept(0), btn_cancel(0), mission(0), event(0)
 {
-	Init(def);
+    Init(def);
 }
 
 MsnEventDlg::~MsnEventDlg()
@@ -60,33 +84,33 @@ MsnEventDlg::~MsnEventDlg()
 void
 MsnEventDlg::RegisterControls()
 {
-	btn_accept     = (Button*) FindControl(  1);
-	if (btn_accept)
-	REGISTER_CLIENT(EID_CLICK,    btn_accept,    MsnEventDlg, OnAccept);
+    btn_accept     = (Button*) FindControl(  1);
+    if (btn_accept)
+    REGISTER_CLIENT(EID_CLICK,    btn_accept,    MsnEventDlg, OnAccept);
 
-	btn_cancel     = (Button*) FindControl(  2);
-	if (btn_accept)
-	REGISTER_CLIENT(EID_CLICK,    btn_cancel,    MsnEventDlg, OnCancel);
+    btn_cancel     = (Button*) FindControl(  2);
+    if (btn_accept)
+    REGISTER_CLIENT(EID_CLICK,    btn_cancel,    MsnEventDlg, OnCancel);
 
-	lbl_id             =              FindControl(201);
-	edt_time           = (EditBox*)   FindControl(202);
-	edt_delay          = (EditBox*)   FindControl(203);
-	cmb_event          = (ComboBox*)  FindControl(204);
-	cmb_event_ship     = (ComboBox*)  FindControl(205);
-	cmb_event_source   = (ComboBox*)  FindControl(206);
-	cmb_event_target   = (ComboBox*)  FindControl(207);
-	edt_event_param    = (EditBox*)   FindControl(208);
-	edt_event_chance   = (EditBox*)   FindControl(220);
-	edt_event_sound    = (EditBox*)   FindControl(209);
-	edt_event_message  = (EditBox*)   FindControl(210);
+    lbl_id             =              FindControl(201);
+    edt_time           = (EditBox*)   FindControl(202);
+    edt_delay          = (EditBox*)   FindControl(203);
+    cmb_event          = (ComboBox*)  FindControl(204);
+    cmb_event_ship     = (ComboBox*)  FindControl(205);
+    cmb_event_source   = (ComboBox*)  FindControl(206);
+    cmb_event_target   = (ComboBox*)  FindControl(207);
+    edt_event_param    = (EditBox*)   FindControl(208);
+    edt_event_chance   = (EditBox*)   FindControl(220);
+    edt_event_sound    = (EditBox*)   FindControl(209);
+    edt_event_message  = (EditBox*)   FindControl(210);
 
-	cmb_trigger        = (ComboBox*)  FindControl(221);
-	cmb_trigger_ship   = (ComboBox*)  FindControl(222);
-	cmb_trigger_target = (ComboBox*)  FindControl(223);
-	edt_trigger_param  = (EditBox*)   FindControl(224);
+    cmb_trigger        = (ComboBox*)  FindControl(221);
+    cmb_trigger_ship   = (ComboBox*)  FindControl(222);
+    cmb_trigger_target = (ComboBox*)  FindControl(223);
+    edt_trigger_param  = (EditBox*)   FindControl(224);
 
-	if (cmb_event)
-	REGISTER_CLIENT(EID_SELECT, cmb_event, MsnEventDlg, OnEventSelect);
+    if (cmb_event)
+    REGISTER_CLIENT(EID_SELECT, cmb_event, MsnEventDlg, OnEventSelect);
 }
 
 // +--------------------------------------------------------------------+
@@ -94,72 +118,72 @@ MsnEventDlg::RegisterControls()
 void
 MsnEventDlg::Show()
 {
-	FormWindow::Show();
+    FormWindow::Show();
 
-	if (!event) return;
+    if (!event) return;
 
-	FillShipList(cmb_event_ship,     event->EventShip());
-	FillShipList(cmb_event_source,   event->EventSource());
+    FillShipList(cmb_event_ship,     event->EventShip());
+    FillShipList(cmb_event_source,   event->EventSource());
 
-	if (event->Event() == MissionEvent::JUMP)
-	FillRgnList(cmb_event_target, event->EventTarget());
-	else
-	FillShipList(cmb_event_target,event->EventTarget());
+    if (event->Event() == MissionEvent::JUMP)
+    FillRgnList(cmb_event_target, event->EventTarget());
+    else
+    FillShipList(cmb_event_target,event->EventTarget());
 
-	FillShipList(cmb_trigger_ship,   event->TriggerShip());
-	FillShipList(cmb_trigger_target, event->TriggerTarget());
+    FillShipList(cmb_trigger_ship,   event->TriggerShip());
+    FillShipList(cmb_trigger_target, event->TriggerTarget());
 
-	char buf[64];
+    char buf[64];
 
-	sprintf_s(buf, "%d", event->EventID());
-	if (lbl_id) lbl_id->SetText(buf);
+    sprintf_s(buf, "%d", event->EventID());
+    if (lbl_id) lbl_id->SetText(buf);
 
-	if (edt_time) {
-		sprintf_s(buf, "%.1f", event->Time());
-		edt_time->SetText(buf);
-	}
+    if (edt_time) {
+        sprintf_s(buf, "%.1f", event->Time());
+        edt_time->SetText(buf);
+    }
 
-	if (edt_delay) {
-		sprintf_s(buf, "%.1f", event->Delay());
-		edt_delay->SetText(buf);
-	}
+    if (edt_delay) {
+        sprintf_s(buf, "%.1f", event->Delay());
+        edt_delay->SetText(buf);
+    }
 
-	if (edt_event_chance) {
-		sprintf_s(buf, "%d", event->EventChance());
-		edt_event_chance->SetText(buf);
-	}
+    if (edt_event_chance) {
+        sprintf_s(buf, "%d", event->EventChance());
+        edt_event_chance->SetText(buf);
+    }
 
-	sprintf_s(buf, "%d", event->EventParam());
-	if (edt_event_param)  edt_event_param->SetText(buf);
+    sprintf_s(buf, "%d", event->EventParam());
+    if (edt_event_param)  edt_event_param->SetText(buf);
 
-	if (edt_trigger_param) 
-	edt_trigger_param->SetText(event->TriggerParamStr());
+    if (edt_trigger_param) 
+    edt_trigger_param->SetText(event->TriggerParamStr());
 
-	if (edt_event_message)
-	edt_event_message->SetText(event->EventMessage());
+    if (edt_event_message)
+    edt_event_message->SetText(event->EventMessage());
 
-	if (edt_event_sound)
-	edt_event_sound->SetText(event->EventSound());
+    if (edt_event_sound)
+    edt_event_sound->SetText(event->EventSound());
 
-	if (cmb_event) {
-		cmb_event->ClearItems();
+    if (cmb_event) {
+        cmb_event->ClearItems();
 
-		for (int i = 0; i < MissionEvent::NUM_EVENTS; i++) {
-			cmb_event->AddItem(MissionEvent::EventName(i));
-		}
+        for (int i = 0; i < MissionEvent::NUM_EVENTS; i++) {
+            cmb_event->AddItem(MissionEvent::EventName(i));
+        }
 
-		cmb_event->SetSelection(event->Event());
-	}
+        cmb_event->SetSelection(event->Event());
+    }
 
-	if (cmb_trigger) {
-		cmb_trigger->ClearItems();
+    if (cmb_trigger) {
+        cmb_trigger->ClearItems();
 
-		for (int i = 0; i < MissionEvent::NUM_TRIGGERS; i++) {
-			cmb_trigger->AddItem(MissionEvent::TriggerName(i));
-		}
+        for (int i = 0; i < MissionEvent::NUM_TRIGGERS; i++) {
+            cmb_trigger->AddItem(MissionEvent::TriggerName(i));
+        }
 
-		cmb_trigger->SetSelection(event->Trigger());
-	}
+        cmb_trigger->SetSelection(event->Trigger());
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -167,76 +191,76 @@ MsnEventDlg::Show()
 void
 MsnEventDlg::FillShipList(ComboBox* cmb, const char* seln)
 {
-	if (!cmb) return;
-	cmb->ClearItems();
+    if (!cmb) return;
+    cmb->ClearItems();
 
-	if (!mission) return;
+    if (!mission) return;
 
-	int index          = 1;
-	int selected_index = 0;
-	cmb->AddItem("");
+    int index          = 1;
+    int selected_index = 0;
+    cmb->AddItem("");
 
-	List<MissionElement>& list = mission->GetElements();
-	for (int i = 0; i < list.size(); i++) {
-		MissionElement* elem = list[i];
+    List<MissionElement>& list = mission->GetElements();
+    for (int i = 0; i < list.size(); i++) {
+        MissionElement* elem = list[i];
 
-		if (elem->IsSquadron())
-		continue;
+        if (elem->IsSquadron())
+        continue;
 
-		if (elem->Count() == 1) {
-			cmb->AddItem(elem->Name());
+        if (elem->Count() == 1) {
+            cmb->AddItem(elem->Name());
 
-			if (elem->Name() == seln)
-			selected_index = index;
+            if (elem->Name() == seln)
+            selected_index = index;
 
-			index++;
-		}
-		else {
-			char ship_name[256];
+            index++;
+        }
+        else {
+            char ship_name[256];
 
-			for (int n = 0; n < elem->Count(); n++) {
-				sprintf_s(ship_name, "%s %d", elem->Name().data(), n+1);
-				cmb->AddItem(ship_name);
+            for (int n = 0; n < elem->Count(); n++) {
+                sprintf_s(ship_name, "%s %d", elem->Name().data(), n+1);
+                cmb->AddItem(ship_name);
 
-				if (!_stricmp(ship_name, seln))
-				selected_index = index;
+                if (!_stricmp(ship_name, seln))
+                selected_index = index;
 
-				index++;
-			}
-		}
-	}
+                index++;
+            }
+        }
+    }
 
-	cmb->SetSelection(selected_index);
+    cmb->SetSelection(selected_index);
 }
 
 void
 MsnEventDlg::FillRgnList(ComboBox* cmb, const char* seln)
 {
-	if (!cmb) return;
-	cmb->ClearItems();
+    if (!cmb) return;
+    cmb->ClearItems();
 
-	if (!mission) return;
+    if (!mission) return;
 
-	int selected_index = 0;
-	int i              = 0;
+    int selected_index = 0;
+    int i              = 0;
 
-	ListIter<StarSystem> iter = mission->GetSystemList();
-	while (++iter) {
-		StarSystem* sys = iter.value();
+    ListIter<StarSystem> iter = mission->GetSystemList();
+    while (++iter) {
+        StarSystem* sys = iter.value();
 
-		ListIter<OrbitalRegion> iter2 = sys->AllRegions();
-		while (++iter2) {
-			OrbitalRegion* region = iter2.value();
+        ListIter<OrbitalRegion> iter2 = sys->AllRegions();
+        while (++iter2) {
+            OrbitalRegion* region = iter2.value();
 
-			if (!strcmp(region->Name(), seln))
-			selected_index = i;
+            if (!strcmp(region->Name(), seln))
+            selected_index = i;
 
-			cmb->AddItem(region->Name());
-			i++;
-		}
-	}
+            cmb->AddItem(region->Name());
+            i++;
+        }
+    }
 
-	cmb->SetSelection(selected_index);
+    cmb->SetSelection(selected_index);
 }
 
 // +--------------------------------------------------------------------+
@@ -244,10 +268,10 @@ MsnEventDlg::FillRgnList(ComboBox* cmb, const char* seln)
 void
 MsnEventDlg::ExecFrame()
 {
-	if (Keyboard::KeyDown(VK_RETURN)) {
-		if (btn_accept && btn_accept->IsEnabled())
-		OnAccept(0);
-	}
+    if (Keyboard::KeyDown(VK_RETURN)) {
+        if (btn_accept && btn_accept->IsEnabled())
+        OnAccept(0);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -255,13 +279,13 @@ MsnEventDlg::ExecFrame()
 void
 MsnEventDlg::SetMission(Mission* m)
 {
-	mission = m;
+    mission = m;
 }
 
 void
 MsnEventDlg::SetMissionEvent(MissionEvent* e)
 {
-	event = e;
+    event = e;
 }
 
 // +--------------------------------------------------------------------+
@@ -269,11 +293,11 @@ MsnEventDlg::SetMissionEvent(MissionEvent* e)
 void
 MsnEventDlg::OnEventSelect(AWEvent* e)
 {
-	if (cmb_event->GetSelectedIndex() == MissionEvent::JUMP)
-	FillRgnList(cmb_event_target, event->EventTarget());
+    if (cmb_event->GetSelectedIndex() == MissionEvent::JUMP)
+    FillRgnList(cmb_event_target, event->EventTarget());
 
-	else
-	FillShipList(cmb_event_target, event->EventTarget());
+    else
+    FillShipList(cmb_event_target, event->EventTarget());
 }
 
 // +--------------------------------------------------------------------+
@@ -281,136 +305,136 @@ MsnEventDlg::OnEventSelect(AWEvent* e)
 void
 MsnEventDlg::OnAccept(AWEvent* e)
 {
-	if (mission && event) {
-		char buf[64];
-		int  val;
+    if (mission && event) {
+        char buf[64];
+        int  val;
 
-		if (edt_time) {
-			strcpy_s(buf, edt_time->GetText());
+        if (edt_time) {
+            strcpy_s(buf, edt_time->GetText());
 
-			float t = 0;
-			sscanf_s(buf, "%f", &t);
+            float t = 0;
+            sscanf_s(buf, "%f", &t);
 
-			event->time = t;
-		}
+            event->time = t;
+        }
 
-		if (edt_delay) {
-			strcpy_s(buf, edt_delay->GetText());
+        if (edt_delay) {
+            strcpy_s(buf, edt_delay->GetText());
 
-			float t = 0;
-			sscanf_s(buf, "%f", &t);
+            float t = 0;
+            sscanf_s(buf, "%f", &t);
 
-			event->delay = t;
-		}
+            event->delay = t;
+        }
 
-		if (edt_event_param) {
-			strcpy_s(buf, edt_event_param->GetText());
+        if (edt_event_param) {
+            strcpy_s(buf, edt_event_param->GetText());
 
-			if (isdigit(*buf)) {
-				sscanf_s(buf, "%d", &val);
-				event->event_param[0] = val;
-				event->event_nparams = 1;
-			}
-			else if (*buf == '(') {
-				Parser parser(new(__FILE__,__LINE__) BlockReader(buf));
-				Term*  term = parser.ParseTerm();
+            if (isdigit(*buf)) {
+                sscanf_s(buf, "%d", &val);
+                event->event_param[0] = val;
+                event->event_nparams = 1;
+            }
+            else if (*buf == '(') {
+                Parser parser(new(__FILE__,__LINE__) BlockReader(buf));
+                Term*  term = parser.ParseTerm();
 
-				if (term && term->isArray()) {
-					TermArray* val = term->isArray();
-					if (val) {
-						int nelem = val->elements()->size();
+                if (term && term->isArray()) {
+                    TermArray* val = term->isArray();
+                    if (val) {
+                        int nelem = val->elements()->size();
 
-						if (nelem > 10)
-						nelem = 10;
+                        if (nelem > 10)
+                        nelem = 10;
 
-						for (int i = 0; i < nelem; i++)
-						event->event_param[i] = (int) (val->elements()->at(i)->isNumber()->value());
+                        for (int i = 0; i < nelem; i++)
+                        event->event_param[i] = (int) (val->elements()->at(i)->isNumber()->value());
 
-						event->event_nparams = nelem;
-					}
-				}
-			}
-		}
+                        event->event_nparams = nelem;
+                    }
+                }
+            }
+        }
 
-		if (edt_event_chance) {
-			strcpy_s(buf, edt_event_chance->GetText());
+        if (edt_event_chance) {
+            strcpy_s(buf, edt_event_chance->GetText());
 
-			if (isdigit(*buf)) {
-				sscanf_s(buf, "%d", &val);
-			}
-			else {
-				val = 0;
-			}
+            if (isdigit(*buf)) {
+                sscanf_s(buf, "%d", &val);
+            }
+            else {
+                val = 0;
+            }
 
-			event->event_chance = val;
-		}
+            event->event_chance = val;
+        }
 
-		if (edt_event_message)
-		event->event_message = edt_event_message->GetText();
+        if (edt_event_message)
+        event->event_message = edt_event_message->GetText();
 
-		if (edt_event_sound)
-		event->event_sound = edt_event_sound->GetText();
+        if (edt_event_sound)
+        event->event_sound = edt_event_sound->GetText();
 
-		if (edt_trigger_param) {
-			strcpy_s(buf, edt_trigger_param->GetText());
+        if (edt_trigger_param) {
+            strcpy_s(buf, edt_trigger_param->GetText());
 
-			ZeroMemory(event->trigger_param, sizeof(event->trigger_param));
+            ZeroMemory(event->trigger_param, sizeof(event->trigger_param));
 
-			if (isdigit(*buf)) {
-				sscanf_s(buf, "%d", &val);
-				event->trigger_param[0] = val;
-				event->trigger_nparams = 1;
-			}
+            if (isdigit(*buf)) {
+                sscanf_s(buf, "%d", &val);
+                event->trigger_param[0] = val;
+                event->trigger_nparams = 1;
+            }
 
-			else if (*buf == '(') {
-				Parser parser(new(__FILE__,__LINE__) BlockReader(buf));
-				Term*  term = parser.ParseTerm();
+            else if (*buf == '(') {
+                Parser parser(new(__FILE__,__LINE__) BlockReader(buf));
+                Term*  term = parser.ParseTerm();
 
-				if (term && term->isArray()) {
-					TermArray* val = term->isArray();
-					if (val) {
-						int nelem = val->elements()->size();
+                if (term && term->isArray()) {
+                    TermArray* val = term->isArray();
+                    if (val) {
+                        int nelem = val->elements()->size();
 
-						if (nelem > 10)
-						nelem = 10;
+                        if (nelem > 10)
+                        nelem = 10;
 
-						for (int i = 0; i < nelem; i++)
-						event->trigger_param[i] = (int) (val->elements()->at(i)->isNumber()->value());
+                        for (int i = 0; i < nelem; i++)
+                        event->trigger_param[i] = (int) (val->elements()->at(i)->isNumber()->value());
 
-						event->trigger_nparams = nelem;
-					}
-				}
-			}
+                        event->trigger_nparams = nelem;
+                    }
+                }
+            }
 
-		}
+        }
 
-		if (cmb_event)
-		event->event = cmb_event->GetSelectedIndex();
+        if (cmb_event)
+        event->event = cmb_event->GetSelectedIndex();
 
-		if (cmb_event_ship)
-		event->event_ship = cmb_event_ship->GetSelectedItem();
+        if (cmb_event_ship)
+        event->event_ship = cmb_event_ship->GetSelectedItem();
 
-		if (cmb_event_source)
-		event->event_source = cmb_event_source->GetSelectedItem();
+        if (cmb_event_source)
+        event->event_source = cmb_event_source->GetSelectedItem();
 
-		if (cmb_event_target)
-		event->event_target = cmb_event_target->GetSelectedItem();
+        if (cmb_event_target)
+        event->event_target = cmb_event_target->GetSelectedItem();
 
-		if (cmb_trigger)
-		event->trigger = cmb_trigger->GetSelectedIndex();
+        if (cmb_trigger)
+        event->trigger = cmb_trigger->GetSelectedIndex();
 
-		if (cmb_trigger_ship)
-		event->trigger_ship = cmb_trigger_ship->GetSelectedItem();
+        if (cmb_trigger_ship)
+        event->trigger_ship = cmb_trigger_ship->GetSelectedItem();
 
-		if (cmb_trigger_target)
-		event->trigger_target = cmb_trigger_target->GetSelectedItem();
-	}
+        if (cmb_trigger_target)
+        event->trigger_target = cmb_trigger_target->GetSelectedItem();
+    }
 
-	manager->ShowMsnEditDlg();
+    manager->ShowMsnEditDlg();
 }
 
 void
 MsnEventDlg::OnCancel(AWEvent* event)
 {
-	manager->ShowMsnEditDlg();
+    manager->ShowMsnEditDlg();
 }

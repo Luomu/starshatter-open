@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         AudioConfig.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         AudioConfig.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Audio Configuration class
+    OVERVIEW
+    ========
+    Audio Configuration class
 */
 
 #include "MemDebug.h"
@@ -27,22 +51,22 @@ static AudioConfig* audio_config = 0;
 // +--------------------------------------------------------------------+
 
 AudioConfig::AudioConfig()
-: menu_music(90),
-game_music(90),
-efx_volume(90),
-gui_volume(90),
-wrn_volume(90),
-vox_volume(90),
-training(false)
+    : menu_music(90),
+      game_music(90),
+      efx_volume(90),
+      gui_volume(90),
+      wrn_volume(90),
+      vox_volume(90),
+      training(false)
 {
-	if (!audio_config)
-	audio_config = this;
+    if (!audio_config)
+    audio_config = this;
 }
 
 AudioConfig::~AudioConfig()
 {
-	if (audio_config == this)
-	audio_config = 0;
+    if (audio_config == this)
+    audio_config = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -50,22 +74,22 @@ AudioConfig::~AudioConfig()
 void
 AudioConfig::Initialize()
 {
-	audio_config = new(__FILE__,__LINE__) AudioConfig;
-	if (audio_config)
-	audio_config->Load();
+    audio_config = new(__FILE__,__LINE__) AudioConfig;
+    if (audio_config)
+    audio_config->Load();
 }
 
 void
 AudioConfig::Close()
 {
-	delete audio_config;
-	audio_config = 0;
+    delete audio_config;
+    audio_config = 0;
 }
 
 AudioConfig*
 AudioConfig::GetInstance()
 {
-	return audio_config;
+    return audio_config;
 }
 
 // +--------------------------------------------------------------------+
@@ -73,92 +97,92 @@ AudioConfig::GetInstance()
 int
 AudioConfig::MenuMusic()
 {
-	if (audio_config)
-	return -50 * (100 - audio_config->menu_music);
+    if (audio_config)
+    return -50 * (100 - audio_config->menu_music);
 
-	return 0;
+    return 0;
 }
 
 int
 AudioConfig::GameMusic()
 {
-	int vol = 0;
+    int vol = 0;
 
-	if (audio_config) {
-		vol = -50 * (100 - audio_config->game_music);
+    if (audio_config) {
+        vol = -50 * (100 - audio_config->game_music);
 
-		if (audio_config->training)
-		vol -= 2000;
-	}
+        if (audio_config->training)
+        vol -= 2000;
+    }
 
-	return vol;
+    return vol;
 }
 
 int
 AudioConfig::EfxVolume()
 {
-	int vol = 0;
+    int vol = 0;
 
-	if (audio_config) {
-		vol = -50 * (100 - audio_config->efx_volume);
+    if (audio_config) {
+        vol = -50 * (100 - audio_config->efx_volume);
 
-		if (audio_config->training)
-		vol -= 2000;
-	}
+        if (audio_config->training)
+        vol -= 2000;
+    }
 
-	return vol;
+    return vol;
 }
 
 int
 AudioConfig::GuiVolume()
 {
-	if (audio_config)
-	return -50 * (100 - audio_config->gui_volume);
+    if (audio_config)
+    return -50 * (100 - audio_config->gui_volume);
 
-	return 0;
+    return 0;
 }
 
 int
 AudioConfig::WrnVolume()
 {
-	int vol = 0;
+    int vol = 0;
 
-	if (audio_config) {
-		vol = -50 * (100 - audio_config->wrn_volume);
+    if (audio_config) {
+        vol = -50 * (100 - audio_config->wrn_volume);
 
-		if (audio_config->training)
-		vol -= 2000;
-	}
+        if (audio_config->training)
+        vol -= 2000;
+    }
 
-	return vol;
+    return vol;
 }
 
 int
 AudioConfig::VoxVolume()
 {
-	int vol = 0;
+    int vol = 0;
 
-	if (audio_config) {
-		vol = -50 * (100 - audio_config->vox_volume);
+    if (audio_config) {
+        vol = -50 * (100 - audio_config->vox_volume);
 
-		if (audio_config->training && vol < -750)
-		vol = -750;
-	}
+        if (audio_config->training && vol < -750)
+        vol = -750;
+    }
 
-	return vol;
+    return vol;
 }
 
 int
 AudioConfig::Silence()
 {
-	return -5000;
+    return -5000;
 }
 
 void
 AudioConfig::SetTraining(bool t)
 {
-	if (audio_config)
-	audio_config->training = t;
+    if (audio_config)
+    audio_config->training = t;
 }
 
 // +--------------------------------------------------------------------+
@@ -166,57 +190,57 @@ AudioConfig::SetTraining(bool t)
 void
 AudioConfig::SetMenuMusic(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	menu_music = v;
+    menu_music = v;
 }
 
 void
 AudioConfig::SetGameMusic(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	game_music = v;
+    game_music = v;
 }
 
 void
 AudioConfig::SetEfxVolume(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	efx_volume = v;
+    efx_volume = v;
 }
 
 void
 AudioConfig::SetGuiVolume(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	gui_volume = v;
-	Button::SetVolume(-50 * (100 - gui_volume));
+    gui_volume = v;
+    Button::SetVolume(-50 * (100 - gui_volume));
 }
 
 void
 AudioConfig::SetWrnVolume(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	wrn_volume = v;
-	Button::SetVolume(-50 * (100 - wrn_volume));
+    wrn_volume = v;
+    Button::SetVolume(-50 * (100 - wrn_volume));
 }
 
 void
 AudioConfig::SetVoxVolume(int v)
 {
-	if (v < 0)        v = 0;
-	else if (v > 100) v = 100;
+    if (v < 0)        v = 0;
+    else if (v > 100) v = 100;
 
-	vox_volume = v;
+    vox_volume = v;
 }
 
 // +--------------------------------------------------------------------+
@@ -224,158 +248,158 @@ AudioConfig::SetVoxVolume(int v)
 void
 AudioConfig::Load()
 {
-	DataLoader* loader = DataLoader::GetLoader();
-	Text old_path = loader->GetDataPath();
-	loader->SetDataPath(0);
+    DataLoader* loader = DataLoader::GetLoader();
+    Text old_path = loader->GetDataPath();
+    loader->SetDataPath(0);
 
-	// read the config file:
-	BYTE*       block    = 0;
-	int         blocklen = 0;
-	const char* filename = "audio.cfg";
+    // read the config file:
+    BYTE*       block    = 0;
+    int         blocklen = 0;
+    const char* filename = "audio.cfg";
 
-	FILE* f;
-	::fopen_s(&f, filename, "rb");
+    FILE* f;
+    ::fopen_s(&f, filename, "rb");
 
-	if (f) {
-		::fseek(f, 0, SEEK_END);
-		blocklen = ftell(f);
-		::fseek(f, 0, SEEK_SET);
+    if (f) {
+        ::fseek(f, 0, SEEK_END);
+        blocklen = ftell(f);
+        ::fseek(f, 0, SEEK_SET);
 
-		block = new(__FILE__,__LINE__) BYTE[blocklen+1];
-		block[blocklen] = 0;
+        block = new(__FILE__,__LINE__) BYTE[blocklen+1];
+        block[blocklen] = 0;
 
-		::fread(block, blocklen, 1, f);
-		::fclose(f);
-	}
+        ::fread(block, blocklen, 1, f);
+        ::fclose(f);
+    }
 
-	if (blocklen == 0)
-	return;
+    if (blocklen == 0)
+    return;
 
-	Parser parser(new(__FILE__,__LINE__) BlockReader((const char*) block, blocklen));
-	Term*  term = parser.ParseTerm();
+    Parser parser(new(__FILE__,__LINE__) BlockReader((const char*) block, blocklen));
+    Term*  term = parser.ParseTerm();
 
-	if (!term) {
-		Print("ERROR: could not parse '%s'.\n", filename);
-		exit(-3);
-	}
-	else {
-		TermText* file_type = term->isText();
-		if (!file_type || file_type->value() != "AUDIO") {
-			Print("WARNING: invalid %s file.  Using defaults\n", filename);
-			return;
-		}
-	}
+    if (!term) {
+        Print("ERROR: could not parse '%s'.\n", filename);
+        exit(-3);
+    }
+    else {
+        TermText* file_type = term->isText();
+        if (!file_type || file_type->value() != "AUDIO") {
+            Print("WARNING: invalid %s file.  Using defaults\n", filename);
+            return;
+        }
+    }
 
-	do {
-		delete term;
+    do {
+        delete term;
 
-		term = parser.ParseTerm();
-		
-		if (term) {
-			int      v   = 0;
-			TermDef* def = term->isDef();
+        term = parser.ParseTerm();
+        
+        if (term) {
+            int      v   = 0;
+            TermDef* def = term->isDef();
 
-			if (def) {
-				if (def->name()->value() == "menu_music") {
-					GetDefNumber(v, def, filename);
+            if (def) {
+                if (def->name()->value() == "menu_music") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid menu_music (%d) in '%s'\n", v, filename);
-					}
-					else {
-						menu_music = v;
-					}
-				}
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid menu_music (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        menu_music = v;
+                    }
+                }
 
-				else if (def->name()->value() == "game_music") {
-					GetDefNumber(v, def, filename);
+                else if (def->name()->value() == "game_music") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid game_music (%d) in '%s'\n", v, filename);
-					}
-					else {
-						game_music = v;
-					}
-				}
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid game_music (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        game_music = v;
+                    }
+                }
 
-				else if (def->name()->value() == "efx_volume") {
-					GetDefNumber(v, def, filename);
+                else if (def->name()->value() == "efx_volume") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid efx_volume (%d) in '%s'\n", v, filename);
-					}
-					else {
-						efx_volume = v;
-					}
-				}
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid efx_volume (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        efx_volume = v;
+                    }
+                }
 
-				else if (def->name()->value() == "gui_volume") {
-					GetDefNumber(v, def, filename);
+                else if (def->name()->value() == "gui_volume") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid gui_volume (%d) in '%s'\n", v, filename);
-					}
-					else {
-						gui_volume = v;
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid gui_volume (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        gui_volume = v;
 
-						Button::SetVolume(-50 * (100 - gui_volume));
-					}
-				}
+                        Button::SetVolume(-50 * (100 - gui_volume));
+                    }
+                }
 
-				else if (def->name()->value() == "wrn_volume") {
-					GetDefNumber(v, def, filename);
+                else if (def->name()->value() == "wrn_volume") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid wrn_volume (%d) in '%s'\n", v, filename);
-					}
-					else {
-						wrn_volume = v;
-					}
-				}
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid wrn_volume (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        wrn_volume = v;
+                    }
+                }
 
-				else if (def->name()->value() == "vox_volume") {
-					GetDefNumber(v, def, filename);
+                else if (def->name()->value() == "vox_volume") {
+                    GetDefNumber(v, def, filename);
 
-					if (v < 0 || v > 100) {
-						Print("WARNING: Invalid vox_volume (%d) in '%s'\n", v, filename);
-					}
-					else {
-						vox_volume = v;
-					}
-				}
+                    if (v < 0 || v > 100) {
+                        Print("WARNING: Invalid vox_volume (%d) in '%s'\n", v, filename);
+                    }
+                    else {
+                        vox_volume = v;
+                    }
+                }
 
-				else
-				Print("WARNING: unknown label '%s' in '%s'\n",
-				def->name()->value().data(), filename);
-			}
-			else {
-				Print("WARNING: term ignored in '%s'\n", filename);
-				term->print();
-				Print("\n");
-			}
-		}
-	}
-	while (term);
+                else
+                Print("WARNING: unknown label '%s' in '%s'\n",
+                def->name()->value().data(), filename);
+            }
+            else {
+                Print("WARNING: term ignored in '%s'\n", filename);
+                term->print();
+                Print("\n");
+            }
+        }
+    }
+    while (term);
 
-	loader->ReleaseBuffer(block);
-	loader->SetDataPath(old_path);
+    loader->ReleaseBuffer(block);
+    loader->SetDataPath(old_path);
 }
 
 void
 AudioConfig::Save()
 {
-	FILE* f;
-	fopen_s(&f, "audio.cfg", "w");
-	if (f) {
-		fprintf(f, "AUDIO\n\n");
-		fprintf(f, "menu_music: %3d\n",   menu_music);
-		fprintf(f, "game_music: %3d\n\n", game_music);
-		fprintf(f, "efx_volume: %3d\n",   efx_volume);
-		fprintf(f, "gui_volume: %3d\n",   gui_volume);
-		fprintf(f, "wrn_volume: %3d\n",   wrn_volume);
-		fprintf(f, "vox_volume: %3d\n",   vox_volume);
-		fclose(f);
-	}
+    FILE* f;
+    fopen_s(&f, "audio.cfg", "w");
+    if (f) {
+        fprintf(f, "AUDIO\n\n");
+        fprintf(f, "menu_music: %3d\n",   menu_music);
+        fprintf(f, "game_music: %3d\n\n", game_music);
+        fprintf(f, "efx_volume: %3d\n",   efx_volume);
+        fprintf(f, "gui_volume: %3d\n",   gui_volume);
+        fprintf(f, "wrn_volume: %3d\n",   wrn_volume);
+        fprintf(f, "vox_volume: %3d\n",   vox_volume);
+        fclose(f);
+    }
 }
 
 // +--------------------------------------------------------------------+

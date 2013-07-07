@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright (C) 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         Shot.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         Shot.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Laser and Missile class
+    OVERVIEW
+    ========
+    Laser and Missile class
 */
 
 #include "MemDebug.h"
@@ -40,114 +64,114 @@ Shot::Shot(const Point& pos, const Camera& shot_cam, WeaponDesign* dsn, const Sh
 : first_frame(true), owner(ship), flash(0), flare(0), trail(0), sound(0), eta(0),
 charge(1.0f), design(dsn), offset(1.0e5f), altitude_agl(-1.0e6f), hit_target(false)
 {
-	obj_type    = SimObject::SIM_SHOT;
-	type        = design->type;
-	primary     = design->primary;
-	beam        = design->beam;
-	base_damage = design->damage;
-	armed       = false;
+    obj_type    = SimObject::SIM_SHOT;
+    type        = design->type;
+    primary     = design->primary;
+    beam        = design->beam;
+    base_damage = design->damage;
+    armed       = false;
 
-	radius      = 10.0f;
+    radius      = 10.0f;
 
-	if (primary || design->decoy_type || !design->guided) {
-		straight = true;
-		armed    = true;
-	}
+    if (primary || design->decoy_type || !design->guided) {
+        straight = true;
+        armed    = true;
+    }
 
-	cam.Clone(shot_cam);
+    cam.Clone(shot_cam);
 
-	life     = design->life;
-	velocity = cam.vpn() * (double) design->speed;
+    life     = design->life;
+    velocity = cam.vpn() * (double) design->speed;
 
-	MoveTo(pos);
+    MoveTo(pos);
 
-	if (beam)
-	origin = pos + (shot_cam.vpn() * -design->length);
+    if (beam)
+    origin = pos + (shot_cam.vpn() * -design->length);
 
-	switch (design->graphic_type) {
-	case Graphic::BOLT: {
-			Bolt* s = new(__FILE__,__LINE__) Bolt(design->length, design->width, design->shot_img, 1);
-			s->SetDirection(cam.vpn());
-			rep = s;
-		}
-		break;
+    switch (design->graphic_type) {
+    case Graphic::BOLT: {
+            Bolt* s = new(__FILE__,__LINE__) Bolt(design->length, design->width, design->shot_img, 1);
+            s->SetDirection(cam.vpn());
+            rep = s;
+        }
+        break;
 
-	case Graphic::SPRITE: {
-			Sprite* s = 0;
-			
-			if (design->animation)
-			s = new(__FILE__,__LINE__) DriveSprite(design->animation, design->anim_length);
-			else
-			s = new(__FILE__,__LINE__) DriveSprite(design->shot_img);
+    case Graphic::SPRITE: {
+            Sprite* s = 0;
+            
+            if (design->animation)
+            s = new(__FILE__,__LINE__) DriveSprite(design->animation, design->anim_length);
+            else
+            s = new(__FILE__,__LINE__) DriveSprite(design->shot_img);
 
-			s->Scale((double) design->scale);
-			rep = s;
-		}
-		break;
+            s->Scale((double) design->scale);
+            rep = s;
+        }
+        break;
 
-	case Graphic::SOLID: {
-			Solid* s = new(__FILE__,__LINE__) Solid;
-			s->UseModel(design->shot_model);
-			rep = s;
+    case Graphic::SOLID: {
+            Solid* s = new(__FILE__,__LINE__) Solid;
+            s->UseModel(design->shot_model);
+            rep = s;
 
-			radius = rep->Radius();
-		}
-		break;
-	}
+            radius = rep->Radius();
+        }
+        break;
+    }
 
-	if (rep)
-	rep->MoveTo(pos);
+    if (rep)
+    rep->MoveTo(pos);
 
-	light = 0;
+    light = 0;
 
-	if (design->light > 0) {
-		light = new(__FILE__,__LINE__) Light(design->light);
-		light->SetColor(design->light_color);
-	}
+    if (design->light > 0) {
+        light = new(__FILE__,__LINE__) Light(design->light);
+        light->SetColor(design->light_color);
+    }
 
-	mass   = design->mass;
-	drag   = design->drag;
-	thrust = 0.0f;
+    mass   = design->mass;
+    drag   = design->drag;
+    thrust = 0.0f;
 
-	dr_drg = design->roll_drag;
-	dp_drg = design->pitch_drag;
-	dy_drg = design->yaw_drag;
+    dr_drg = design->roll_drag;
+    dp_drg = design->pitch_drag;
+    dy_drg = design->yaw_drag;
 
-	SetAngularRates((float) design->roll_rate, (float) design->pitch_rate, (float) design->yaw_rate);
+    SetAngularRates((float) design->roll_rate, (float) design->pitch_rate, (float) design->yaw_rate);
 
-	if (design->flash_img != 0) {
-		flash = new(__FILE__,__LINE__) Sprite(design->flash_img);
-		flash->Scale((double) design->flash_scale);
-		flash->MoveTo(pos - cam.vpn() * design->length);
-		flash->SetLuminous(true);
-	}
+    if (design->flash_img != 0) {
+        flash = new(__FILE__,__LINE__) Sprite(design->flash_img);
+        flash->Scale((double) design->flash_scale);
+        flash->MoveTo(pos - cam.vpn() * design->length);
+        flash->SetLuminous(true);
+    }
 
-	if (design->flare_img != 0) {
-		flare = new(__FILE__,__LINE__) DriveSprite(design->flare_img);
-		flare->Scale((double) design->flare_scale);
-		flare->MoveTo(pos);
-	}
+    if (design->flare_img != 0) {
+        flare = new(__FILE__,__LINE__) DriveSprite(design->flare_img);
+        flare->Scale((double) design->flare_scale);
+        flare->MoveTo(pos);
+    }
 
-	if (owner) {
-		iff_code = (BYTE) owner->GetIFF();
-		Observe((SimObject*) owner);
-	}
+    if (owner) {
+        iff_code = (BYTE) owner->GetIFF();
+        Observe((SimObject*) owner);
+    }
 
-	sprintf_s(name, "Shot(%s)", design->name.data());
+    sprintf_s(name, "Shot(%s)", design->name.data());
 }
 
 // +--------------------------------------------------------------------+
 
 Shot::~Shot()
 {
-	GRAPHIC_DESTROY(flash);
-	GRAPHIC_DESTROY(flare);
-	GRAPHIC_DESTROY(trail);
+    GRAPHIC_DESTROY(flash);
+    GRAPHIC_DESTROY(flare);
+    GRAPHIC_DESTROY(trail);
 
-	if (sound) {
-		sound->Stop();
-		sound->Release();
-	}
+    if (sound) {
+        sound->Stop();
+        sound->Release();
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -155,7 +179,7 @@ Shot::~Shot()
 const char*
 Shot::DesignName() const
 {
-	return design->name;
+    return design->name;
 }
 
 // +--------------------------------------------------------------------+
@@ -163,18 +187,18 @@ Shot::DesignName() const
 void
 Shot::SetCharge(float c)
 {
-	charge = c;
+    charge = c;
 
-	// trim beam life to amount of energy available:
-	if (beam)
-	life = design->life * charge / design->charge;
+    // trim beam life to amount of energy available:
+    if (beam)
+    life = design->life * charge / design->charge;
 }
 
 void
 Shot::SetFuse(double seconds)
 {
-	if (seconds > 0 && !beam)
-	life = seconds;
+    if (seconds > 0 && !beam)
+    life = seconds;
 }
 
 // +--------------------------------------------------------------------+
@@ -182,57 +206,57 @@ Shot::SetFuse(double seconds)
 void
 Shot::SeekTarget(SimObject* target, System* sub)
 {
-	if (dir && !primary) {
-		SeekerAI*  seeker = (SeekerAI*) dir;
-		SimObject* old_target = seeker->GetTarget();
+    if (dir && !primary) {
+        SeekerAI*  seeker = (SeekerAI*) dir;
+        SimObject* old_target = seeker->GetTarget();
 
-		if (old_target->Type()==SimObject::SIM_SHIP) {
-			Ship* tgt_ship = (Ship*) old_target;
-			tgt_ship->DropThreat(this);
-		}
-	}
+        if (old_target->Type()==SimObject::SIM_SHIP) {
+            Ship* tgt_ship = (Ship*) old_target;
+            tgt_ship->DropThreat(this);
+        }
+    }
 
-	delete dir;
-	dir = 0;
+    delete dir;
+    dir = 0;
 
-	if (target) {
-		SeekerAI* seeker = new(__FILE__,__LINE__) SeekerAI(this);
-		seeker->SetTarget(target, sub);
-		seeker->SetPursuit(design->guided);
-		seeker->SetDelay(1);
+    if (target) {
+        SeekerAI* seeker = new(__FILE__,__LINE__) SeekerAI(this);
+        seeker->SetTarget(target, sub);
+        seeker->SetPursuit(design->guided);
+        seeker->SetDelay(1);
 
-		dir = seeker;
+        dir = seeker;
 
-		if (!primary && target->Type()==SimObject::SIM_SHIP) {
-			Ship* tgt_ship = (Ship*) target;
-			tgt_ship->AddThreat(this);
-		}
-	}
+        if (!primary && target->Type()==SimObject::SIM_SHIP) {
+            Ship* tgt_ship = (Ship*) target;
+            tgt_ship->AddThreat(this);
+        }
+    }
 }
 
 bool
 Shot::IsTracking(Ship* tgt) const
 {
-	return tgt && (GetTarget() == tgt);
+    return tgt && (GetTarget() == tgt);
 }
 
 SimObject*
 Shot::GetTarget() const
 {
-	if (dir) {
-		SeekerAI* seeker = (SeekerAI*) dir;
+    if (dir) {
+        SeekerAI* seeker = (SeekerAI*) dir;
 
-		if (seeker->GetDelay() <= 0)
-		return seeker->GetTarget();
-	}
+        if (seeker->GetDelay() <= 0)
+        return seeker->GetTarget();
+    }
 
-	return 0;
+    return 0;
 }
 
 bool
 Shot::IsFlak() const
 {
-	return design && design->flak;
+    return design && design->flak;
 }
 
 // +--------------------------------------------------------------------+
@@ -240,26 +264,26 @@ Shot::IsFlak() const
 bool
 Shot::IsHostileTo(const SimObject* o) const
 {
-	if (o) {
-		if (o->Type() == SIM_SHIP) {
-			Ship* s = (Ship*) o;
+    if (o) {
+        if (o->Type() == SIM_SHIP) {
+            Ship* s = (Ship*) o;
 
-			if (s->IsRogue())
-			return true;
+            if (s->IsRogue())
+            return true;
 
-			if (s->GetIFF() > 0 && s->GetIFF() != GetIFF())
-			return true;
-		}
+            if (s->GetIFF() > 0 && s->GetIFF() != GetIFF())
+            return true;
+        }
 
-		else if (o->Type() == SIM_SHOT || o->Type() == SIM_DRONE) {
-			Shot* s = (Shot*) o;
+        else if (o->Type() == SIM_SHOT || o->Type() == SIM_DRONE) {
+            Shot* s = (Shot*) o;
 
-			if (s->GetIFF() > 0 && s->GetIFF() != GetIFF())
-			return true;
-		}
-	}
+            if (s->GetIFF() > 0 && s->GetIFF() != GetIFF())
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 // +--------------------------------------------------------------------+
@@ -267,134 +291,134 @@ Shot::IsHostileTo(const SimObject* o) const
 void
 Shot::ExecFrame(double seconds)
 {
-	altitude_agl = -1.0e6f;
+    altitude_agl = -1.0e6f;
 
-	// add random flickering effect:
-	double flicker = 0.75 + (double) rand() / 8e4;
-	if (flicker > 1) flicker = 1;
+    // add random flickering effect:
+    double flicker = 0.75 + (double) rand() / 8e4;
+    if (flicker > 1) flicker = 1;
 
-	if (flare) {
-		flare->SetShade(flicker);
-	}
-	else if (beam) {
-		Bolt* blob = (Bolt*) rep;
-		blob->SetShade(flicker);
-		offset -= (float) (seconds * 10);
-	}
+    if (flare) {
+        flare->SetShade(flicker);
+    }
+    else if (beam) {
+        Bolt* blob = (Bolt*) rep;
+        blob->SetShade(flicker);
+        offset -= (float) (seconds * 10);
+    }
 
-	if (Game::Paused())
-	return;
+    if (Game::Paused())
+    return;
 
-	if (beam) {
-		if (!first_frame) {
-			if (life > 0) {
-				life -= seconds;
+    if (beam) {
+        if (!first_frame) {
+            if (life > 0) {
+                life -= seconds;
 
-				if (life < 0)
-				life = 0;
-			}
-		}
-	}
-	else {
-		origin = Location();
+                if (life < 0)
+                life = 0;
+            }
+        }
+    }
+    else {
+        origin = Location();
 
-		if (!first_frame)
-		Physical::ExecFrame(seconds);
-		else
-		Physical::ExecFrame(0);
+        if (!first_frame)
+        Physical::ExecFrame(seconds);
+        else
+        Physical::ExecFrame(0);
 
-		double len = design->length;
-		if (len < 50) len = 50;
+        double len = design->length;
+        if (len < 50) len = 50;
 
-		if (!trail && life > 0 && design->life - life > 0.2) {
-			if (design->trail.length()) {
-				trail = new(__FILE__,__LINE__) Trail(design->trail_img, design->trail_length);
+        if (!trail && life > 0 && design->life - life > 0.2) {
+            if (design->trail.length()) {
+                trail = new(__FILE__,__LINE__) Trail(design->trail_img, design->trail_length);
 
-				if (design->trail_width > 0)
-				trail->SetWidth(design->trail_width);
+                if (design->trail_width > 0)
+                trail->SetWidth(design->trail_width);
 
-				if (design->trail_dim > 0)
-				trail->SetDim(design->trail_dim);
+                if (design->trail_dim > 0)
+                trail->SetDim(design->trail_dim);
 
-				trail->AddPoint(Location() + Heading() * -100);
+                trail->AddPoint(Location() + Heading() * -100);
 
-				Scene* scene = 0;
+                Scene* scene = 0;
 
-				if (rep)
-				scene = rep->GetScene();
+                if (rep)
+                scene = rep->GetScene();
 
-				if (scene)
-				scene->AddGraphic(trail);
-			}
-		}
+                if (scene)
+                scene->AddGraphic(trail);
+            }
+        }
 
-		if (trail)
-		trail->AddPoint(Location());
+        if (trail)
+        trail->AddPoint(Location());
 
-		if (!armed) {
-			SeekerAI* seeker = (SeekerAI*) dir;
+        if (!armed) {
+            SeekerAI* seeker = (SeekerAI*) dir;
 
-			if (seeker && seeker->GetDelay() <= 0)
-			armed = true;
-		}
+            if (seeker && seeker->GetDelay() <= 0)
+            armed = true;
+        }
 
-		// handle submunitions:
-		else if (design->det_range > 0 && design->det_count > 0) {
-			if (dir && !primary) {
-				SeekerAI*  seeker = (SeekerAI*) dir;
-				SimObject* target = seeker->GetTarget();
+        // handle submunitions:
+        else if (design->det_range > 0 && design->det_count > 0) {
+            if (dir && !primary) {
+                SeekerAI*  seeker = (SeekerAI*) dir;
+                SimObject* target = seeker->GetTarget();
 
-				if (target) {
-					double range = Point(Location() - target->Location()).length();
+                if (target) {
+                    double range = Point(Location() - target->Location()).length();
 
-					if (range < design->det_range) {
-						life = 0;
+                    if (range < design->det_range) {
+                        life = 0;
 
-						Sim*           sim          = Sim::GetSim();
-						WeaponDesign*  child_design = WeaponDesign::Find(design->det_child);
+                        Sim*           sim          = Sim::GetSim();
+                        WeaponDesign*  child_design = WeaponDesign::Find(design->det_child);
 
-						if (sim && child_design) {
-							double spread = design->det_spread;
+                        if (sim && child_design) {
+                            double spread = design->det_spread;
 
-							Camera aim_cam;
-							aim_cam.Clone(Cam());
-							aim_cam.LookAt(target->Location());
+                            Camera aim_cam;
+                            aim_cam.Clone(Cam());
+                            aim_cam.LookAt(target->Location());
 
-							for (int i = 0; i < design->det_count; i++) {
-								Shot* child = sim->CreateShot(Location(), aim_cam, child_design,
-								owner, owner->GetRegion());
+                            for (int i = 0; i < design->det_count; i++) {
+                                Shot* child = sim->CreateShot(Location(), aim_cam, child_design,
+                                owner, owner->GetRegion());
 
-								child->SetCharge(child_design->charge);
+                                child->SetCharge(child_design->charge);
 
-								if (child_design->guided)
-								child->SeekTarget(target, seeker->GetSubTarget());
+                                if (child_design->guided)
+                                child->SeekTarget(target, seeker->GetSubTarget());
 
-								if (child_design->beam)
-								child->SetBeamPoints(Location(), target->Location());
+                                if (child_design->beam)
+                                child->SetBeamPoints(Location(), target->Location());
 
-								if (i) aim_cam.LookAt(target->Location());
-								aim_cam.Pitch(Random(-spread, spread));
-								aim_cam.Yaw(Random(-spread, spread));
-							}
-						}
-					}
-				}
-			}
-		}
+                                if (i) aim_cam.LookAt(target->Location());
+                                aim_cam.Pitch(Random(-spread, spread));
+                                aim_cam.Yaw(Random(-spread, spread));
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		if (flash && !first_frame)
-		GRAPHIC_DESTROY(flash);
+        if (flash && !first_frame)
+        GRAPHIC_DESTROY(flash);
 
-		if (thrust < design->thrust)
-		thrust += (float) (seconds * 5.0e3);
-		else
-		thrust = design->thrust;
-	}
+        if (thrust < design->thrust)
+        thrust += (float) (seconds * 5.0e3);
+        else
+        thrust = design->thrust;
+    }
 
-	first_frame = 0;   
+    first_frame = 0;   
 
-	if (flare)
-	flare->MoveTo(Location());
+    if (flare)
+    flare->MoveTo(Location());
 }
 
 // +--------------------------------------------------------------------+
@@ -402,17 +426,17 @@ Shot::ExecFrame(double seconds)
 void
 Shot::Disarm()
 {
-	if (armed && !primary) {
-		armed = false;
-		delete dir;
-		dir = 0;
-	}
+    if (armed && !primary) {
+        armed = false;
+        delete dir;
+        dir = 0;
+    }
 }
 
 void
 Shot::Destroy()
 {
-	life = 0;
+    life = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -420,26 +444,26 @@ Shot::Destroy()
 void
 Shot::SetBeamPoints(const Point& from, const Point& to)
 {
-	if (beam) {
-		MoveTo(to);
-		origin = from;
+    if (beam) {
+        MoveTo(to);
+        origin = from;
 
-		if (sound) {
-			sound->SetLocation(from);
-		}
+        if (sound) {
+            sound->SetLocation(from);
+        }
 
-		if (rep) {
-			Bolt* s = (Bolt*) rep;
-			s->SetEndPoints(from, to);
+        if (rep) {
+            Bolt* s = (Bolt*) rep;
+            s->SetEndPoints(from, to);
 
-			double len = Point(to - from).length() / 500;
-			s->SetTextureOffset(offset, offset + len);
-		}
-	}
+            double len = Point(to - from).length() / 500;
+            s->SetTextureOffset(offset, offset + len);
+        }
+    }
 
-	if (flash) {
-		flash->MoveTo(origin);
-	}
+    if (flash) {
+        flash->MoveTo(origin);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -447,29 +471,29 @@ Shot::SetBeamPoints(const Point& from, const Point& to)
 double
 Shot::AltitudeMSL() const
 {
-	return Location().y;
+    return Location().y;
 }
 
 double
 Shot::AltitudeAGL() const
 {
-	if (altitude_agl < -1000) {
-		Shot*    pThis   = (Shot*) this; // cast-away const
-		Point    loc     = Location();
-		Terrain* terrain = region->GetTerrain();
+    if (altitude_agl < -1000) {
+        Shot*    pThis   = (Shot*) this; // cast-away const
+        Point    loc     = Location();
+        Terrain* terrain = region->GetTerrain();
 
-		if (terrain)
-		pThis->altitude_agl = (float) (loc.y - terrain->Height(loc.x, loc.z));
+        if (terrain)
+        pThis->altitude_agl = (float) (loc.y - terrain->Height(loc.x, loc.z));
 
-		else
-		pThis->altitude_agl = (float) loc.y;
+        else
+        pThis->altitude_agl = (float) loc.y;
 
-		if (!_finite(altitude_agl)) {
-			pThis->altitude_agl = 0.0f;
-		}
-	}
+        if (!_finite(altitude_agl)) {
+            pThis->altitude_agl = 0.0f;
+        }
+    }
 
-	return altitude_agl;
+    return altitude_agl;
 }
 
 // +--------------------------------------------------------------------+
@@ -491,43 +515,43 @@ Shot::Close()
 double
 Shot::Damage() const
 {
-	double damage = 0;
+    double damage = 0;
 
-	// beam damage based on length:
-	if (beam) {
-		double fade = 1;
+    // beam damage based on length:
+    if (beam) {
+        double fade = 1;
 
-		if (design) {
-			// linear fade with distance:
-			double len  = Point(origin - Location()).length();
+        if (design) {
+            // linear fade with distance:
+            double len  = Point(origin - Location()).length();
 
-			if (len > design->min_range)
-			fade = (design->length - len) / (design->length - design->min_range);
-		}
+            if (len > design->min_range)
+            fade = (design->length - len) / (design->length - design->min_range);
+        }
 
-		damage = base_damage * charge * fade * Game::FrameTime();
-	}
+        damage = base_damage * charge * fade * Game::FrameTime();
+    }
 
-	// energy wep damage based on time:
-	else if (primary) {
-		damage = base_damage * charge * life;
-	}
+    // energy wep damage based on time:
+    else if (primary) {
+        damage = base_damage * charge * life;
+    }
 
-	// missile damage is constant:
-	else {
-		damage = base_damage * charge;
-	}
+    // missile damage is constant:
+    else {
+        damage = base_damage * charge;
+    }
 
-	return damage;
+    return damage;
 }
 
 double
 Shot::Length() const
 {
-	if (design)
-	return design->length;
+    if (design)
+    return design->length;
 
-	return 500;
+    return 500;
 }   
 
 // +--------------------------------------------------------------------+
@@ -535,42 +559,42 @@ Shot::Length() const
 void
 Shot::Activate(Scene& scene)
 {
-	SimObject::Activate(scene);
+    SimObject::Activate(scene);
 
-	if (trail)
-	scene.AddGraphic(trail);
+    if (trail)
+    scene.AddGraphic(trail);
 
-	if (flash)
-	scene.AddGraphic(flash);
+    if (flash)
+    scene.AddGraphic(flash);
 
-	if (flare)
-	scene.AddGraphic(flare);
+    if (flare)
+    scene.AddGraphic(flare);
 
-	if (first_frame) {
-		if (design->sound_resource) {
-			sound = design->sound_resource->Duplicate();
+    if (first_frame) {
+        if (design->sound_resource) {
+            sound = design->sound_resource->Duplicate();
 
-			if (sound) {
-				long max_vol = AudioConfig::EfxVolume();
-				long volume  = -1000;
+            if (sound) {
+                long max_vol = AudioConfig::EfxVolume();
+                long volume  = -1000;
 
-				if (volume > max_vol)
-				volume = max_vol;
+                if (volume > max_vol)
+                volume = max_vol;
 
-				if (beam) {
-					sound->SetLocation(origin);
-					sound->SetVolume(volume);
-					sound->Play();
-				}
-				else {
-					sound->SetLocation(Location());
-					sound->SetVolume(volume);
-					sound->Play();
-					sound = 0;  // fire and forget:
-				}
-			}
-		}
-	}
+                if (beam) {
+                    sound->SetLocation(origin);
+                    sound->SetVolume(volume);
+                    sound->Play();
+                }
+                else {
+                    sound->SetLocation(Location());
+                    sound->SetVolume(volume);
+                    sound->Play();
+                    sound = 0;  // fire and forget:
+                }
+            }
+        }
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -578,16 +602,16 @@ Shot::Activate(Scene& scene)
 void
 Shot::Deactivate(Scene& scene)
 {
-	SimObject::Deactivate(scene);
+    SimObject::Deactivate(scene);
 
-	if (trail)
-	scene.DelGraphic(trail);
+    if (trail)
+    scene.DelGraphic(trail);
 
-	if (flash)
-	scene.DelGraphic(flash);
+    if (flash)
+    scene.DelGraphic(flash);
 
-	if (flare)
-	scene.DelGraphic(flare);
+    if (flare)
+    scene.DelGraphic(flare);
 }
 
 // +--------------------------------------------------------------------+
@@ -595,7 +619,7 @@ Shot::Deactivate(Scene& scene)
 int
 Shot::GetIFF() const
 {
-	return iff_code;
+    return iff_code;
 }
 
 // +--------------------------------------------------------------------+
@@ -603,7 +627,7 @@ Shot::GetIFF() const
 Color
 Shot::MarkerColor() const
 {
-	return Ship::IFFColor(GetIFF());
+    return Ship::IFFColor(GetIFF());
 }
 
 // +--------------------------------------------------------------------+
@@ -611,7 +635,7 @@ Shot::MarkerColor() const
 const char*
 Shot::GetObserverName() const
 {
-	return name;
+    return name;
 }
 
 // +--------------------------------------------------------------------+
@@ -619,8 +643,8 @@ Shot::GetObserverName() const
 bool
 Shot::Update(SimObject* obj)
 {
-	if (obj == (SimObject*) owner)
-	owner = 0;
+    if (obj == (SimObject*) owner)
+    owner = 0;
 
-	return SimObserver::Update(obj);
+    return SimObserver::Update(obj);
 }

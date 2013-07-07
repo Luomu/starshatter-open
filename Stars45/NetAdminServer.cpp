@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         NetAdminServer.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         NetAdminServer.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	HTTP Servlet Engine for Multiplayer Admin
+    OVERVIEW
+    ========
+    HTTP Servlet Engine for Multiplayer Admin
 */
 
 
@@ -39,112 +63,112 @@ extern const char* versionInfo;
 class NetAdminLogin : public NetAdminServlet
 {
 public:
-	NetAdminLogin()           { }
-	virtual ~NetAdminLogin()  { }
+    NetAdminLogin()           { }
+    virtual ~NetAdminLogin()  { }
 
-	virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
-		NetServerConfig* config = NetServerConfig::GetInstance();
+    virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
+        NetServerConfig* config = NetServerConfig::GetInstance();
 
-		Text admin_name = "system";
-		Text admin_pass = "manager";
+        Text admin_name = "system";
+        Text admin_pass = "manager";
 
-		if (config) {
-			admin_name = config->GetAdminName();
-			admin_pass = config->GetAdminPass();
-		}
+        if (config) {
+            admin_name = config->GetAdminName();
+            admin_pass = config->GetAdminPass();
+        }
 
-		Text name  = request.GetParam("user");
-		Text pass  = request.GetParam("pass");
+        Text name  = request.GetParam("user");
+        Text pass  = request.GetParam("pass");
 
-		Sleep(500);
+        Sleep(500);
 
-		if (CheckUser(request, response)) {
-			response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/html");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
-			response.SetHeader("Location",      "/home");
+        if (CheckUser(request, response)) {
+            response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/html");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
+            response.SetHeader("Location",      "/home");
 
-			response.SetContent(GetHead("Login") +
-			"<body><br>You are already logged in.<br>" +
-			GetBodyClose());
-		}
+            response.SetContent(GetHead("Login") +
+            "<body><br>You are already logged in.<br>" +
+            GetBodyClose());
+        }
 
-		else if (name == admin_name && pass == admin_pass) {
-			user = new(__FILE__,__LINE__) NetUser(name);
-			user->SetAddress(request.GetClientAddr());
+        else if (name == admin_name && pass == admin_pass) {
+            user = new(__FILE__,__LINE__) NetUser(name);
+            user->SetAddress(request.GetClientAddr());
 
-			if (session)
-			user->SetSessionID(session->GetID());
+            if (session)
+            user->SetSessionID(session->GetID());
 
-			admin->AddUser(user);
+            admin->AddUser(user);
 
-			response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/html");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
-			response.SetHeader("Location",      "/home");
+            response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/html");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
+            response.SetHeader("Location",      "/home");
 
-			response.SetContent(GetHead("Login") +
-			"<body><br>You have successfully logged in.<br>" +
-			GetBodyClose());
-		}
+            response.SetContent(GetHead("Login") +
+            "<body><br>You have successfully logged in.<br>" +
+            GetBodyClose());
+        }
 
-		else {
-			response.SetStatus(HttpResponse::SC_OK);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/html");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
+        else {
+            response.SetStatus(HttpResponse::SC_OK);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/html");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
 
-			response.SetContent(GetHead("Login") +
-			GetTitleBar(0, "onLoad=\"self.focus();document.loginForm.user.focus();\"") +
-			GetContent()     +
-			GetBodyClose());
-		}
+            response.SetContent(GetHead("Login") +
+            GetTitleBar(0, "onLoad=\"self.focus();document.loginForm.user.focus();\"") +
+            GetContent()     +
+            GetBodyClose());
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	virtual Text GetContent() { Text content =
-		"  <table border=\"0\" cellspacing=\"0\" cellpadding=\"4\" align=\"left\" width =\"100%\">\n\
-	<tr>\n\
-	<td width=\"100\">&nbsp;&nbsp;</td>\n\
-	<td valign=\"top\" align=\"left\" width=\"400\"><br><br>\n\
-		<span class=\"subhead\">Welcome to the Starshatter Server!</span><br><br>\n\
-		<span class=\"std\">Login to access the server <b>";
+    virtual Text GetContent() { Text content =
+        "  <table border=\"0\" cellspacing=\"0\" cellpadding=\"4\" align=\"left\" width =\"100%\">\n\
+    <tr>\n\
+    <td width=\"100\">&nbsp;&nbsp;</td>\n\
+    <td valign=\"top\" align=\"left\" width=\"400\"><br><br>\n\
+        <span class=\"subhead\">Welcome to the Starshatter Server!</span><br><br>\n\
+        <span class=\"std\">Login to access the server <b>";
 
-		NetServerConfig* config = NetServerConfig::GetInstance();
-		if (config)
-		content += config->Name();
-		else
-		content += "server";
+        NetServerConfig* config = NetServerConfig::GetInstance();
+        if (config)
+        content += config->Name();
+        else
+        content += "server";
 
-		content += "</b></span><br>\n\
-		<form name=\"loginForm\" method=\"get\" action=\"/login\">\n\
-		<table border=\"0\" cellspacing=\"0\" cellpadding=\"4\" width=\"100\">\n\
-			<tr>\n\
-			<td align=\"left\" valign=\"middle\" width=\"80\"><span class=\"std\">Username:</span></td>\n\
-			<td align=\"left\" valign=\"middle\"><input type=\"text\" name=\"user\" size=\"25\"></td>\n\
-			</tr>\n\
-			<tr>\n\
-			<td align=\"left\" valign=\"middle\" width=\"80\"><span class=\"std\">Password:</span></td>\n\
-			<td align=\"left\" valign=\"middle\"><input type=\"password\" name=\"pass\" size=\"25\"></td>\n\
-			</tr>\n\
-			<tr>\n\
-			<td>&nbsp;</td>\n\
-			<td align=\"right\"><input type=\"submit\" value=\"Login\"></td>\n\
-			</tr>\n\
-		</table>\n\
-		</form>\n\
-	<td>&nbsp;</td>\n\
-	</tr>\n\
+        content += "</b></span><br>\n\
+        <form name=\"loginForm\" method=\"get\" action=\"/login\">\n\
+        <table border=\"0\" cellspacing=\"0\" cellpadding=\"4\" width=\"100\">\n\
+            <tr>\n\
+            <td align=\"left\" valign=\"middle\" width=\"80\"><span class=\"std\">Username:</span></td>\n\
+            <td align=\"left\" valign=\"middle\"><input type=\"text\" name=\"user\" size=\"25\"></td>\n\
+            </tr>\n\
+            <tr>\n\
+            <td align=\"left\" valign=\"middle\" width=\"80\"><span class=\"std\">Password:</span></td>\n\
+            <td align=\"left\" valign=\"middle\"><input type=\"password\" name=\"pass\" size=\"25\"></td>\n\
+            </tr>\n\
+            <tr>\n\
+            <td>&nbsp;</td>\n\
+            <td align=\"right\"><input type=\"submit\" value=\"Login\"></td>\n\
+            </tr>\n\
+        </table>\n\
+        </form>\n\
+    <td>&nbsp;</td>\n\
+    </tr>\n\
 </table>\n";
 
-		return content;
-	}
+        return content;
+    }
 };
 
 // +-------------------------------------------------------------------+
@@ -154,72 +178,72 @@ public:
 class NetAdminServerMgr : public NetAdminServlet
 {
 public:
-	NetAdminServerMgr()           { }
-	virtual ~NetAdminServerMgr()  { }
+    NetAdminServerMgr()           { }
+    virtual ~NetAdminServerMgr()  { }
 
-	virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
-		if (CheckUser(request, response)) {
-			Text action = request.GetParam("action");
-			action.setSensitive(false);
+    virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
+        if (CheckUser(request, response)) {
+            Text action = request.GetParam("action");
+            action.setSensitive(false);
 
-			bool completed = false;
+            bool completed = false;
 
-			if (action == "restart") {
-				StarServer* svr = StarServer::GetInstance();
+            if (action == "restart") {
+                StarServer* svr = StarServer::GetInstance();
 
-				if (svr) {
-					svr->Shutdown(true);
-					completed = true;
+                if (svr) {
+                    svr->Shutdown(true);
+                    completed = true;
 
-					response.SetStatus(HttpResponse::SC_OK);
-					response.SetHeader("MIME-Version",  "1.0");
-					response.SetHeader("Content-Type",  "text/html");
-					response.SetHeader("Cache-Control", "no-cache");
-					response.SetHeader("Expires",       "-1");
+                    response.SetStatus(HttpResponse::SC_OK);
+                    response.SetHeader("MIME-Version",  "1.0");
+                    response.SetHeader("Content-Type",  "text/html");
+                    response.SetHeader("Cache-Control", "no-cache");
+                    response.SetHeader("Expires",       "-1");
 
-					response.SetContent(GetHead("Restart") +
-					GetTitleBar() +
-					"<div class=\"content\"><b>The Starshatter Server will restart in three (3) seconds.</b><br></div>" +
-					GetBodyClose());
-				}
-			}
+                    response.SetContent(GetHead("Restart") +
+                    GetTitleBar() +
+                    "<div class=\"content\"><b>The Starshatter Server will restart in three (3) seconds.</b><br></div>" +
+                    GetBodyClose());
+                }
+            }
 
-			else if (action == "shutdown") {
-				StarServer* svr = StarServer::GetInstance();
+            else if (action == "shutdown") {
+                StarServer* svr = StarServer::GetInstance();
 
-				if (svr) {
-					svr->Shutdown(false);
-					completed = true;
+                if (svr) {
+                    svr->Shutdown(false);
+                    completed = true;
 
-					response.SetStatus(HttpResponse::SC_OK);
-					response.SetHeader("MIME-Version",  "1.0");
-					response.SetHeader("Content-Type",  "text/html");
-					response.SetHeader("Cache-Control", "no-cache");
-					response.SetHeader("Expires",       "-1");
+                    response.SetStatus(HttpResponse::SC_OK);
+                    response.SetHeader("MIME-Version",  "1.0");
+                    response.SetHeader("Content-Type",  "text/html");
+                    response.SetHeader("Cache-Control", "no-cache");
+                    response.SetHeader("Expires",       "-1");
 
-					response.SetContent(GetHead("Restart") +
-					GetTitleBar() +
-					"<div class=\"content\"><b>The Starshatter Server will shutdown in three (3) seconds.</b><br></div>" +
-					GetBodyClose());
-				}
-			}
+                    response.SetContent(GetHead("Restart") +
+                    GetTitleBar() +
+                    "<div class=\"content\"><b>The Starshatter Server will shutdown in three (3) seconds.</b><br></div>" +
+                    GetBodyClose());
+                }
+            }
 
-			if (!completed) {
-				response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
-				response.SetHeader("MIME-Version",  "1.0");
-				response.SetHeader("Content-Type",  "text/html");
-				response.SetHeader("Cache-Control", "no-cache");
-				response.SetHeader("Expires",       "-1");
-				response.SetHeader("Location",      "/home");
+            if (!completed) {
+                response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+                response.SetHeader("MIME-Version",  "1.0");
+                response.SetHeader("Content-Type",  "text/html");
+                response.SetHeader("Cache-Control", "no-cache");
+                response.SetHeader("Expires",       "-1");
+                response.SetHeader("Location",      "/home");
 
-				response.SetContent(GetHead("Login") +
-				"<body><br>Unknown Action.<br>" +
-				GetBodyClose());
-			}
-		}
+                response.SetContent(GetHead("Login") +
+                "<body><br>Unknown Action.<br>" +
+                GetBodyClose());
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 };
 
 // +-------------------------------------------------------------------+
@@ -229,47 +253,47 @@ public:
 class NetAdminFile : public NetAdminServlet
 {
 public:
-	NetAdminFile()           { }
-	virtual ~NetAdminFile()  { }
+    NetAdminFile()           { }
+    virtual ~NetAdminFile()  { }
 
-	virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
-		if (!CheckUser(request, response))
-		return true;
+    virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
+        if (!CheckUser(request, response))
+        return true;
 
-		Text content;
-		Text path = request.GetParam("path");
-		Text name = request.GetParam("name");
+        Text content;
+        Text path = request.GetParam("path");
+        Text name = request.GetParam("name");
 
-		if (name.length()) {
-			BYTE*       buffer = 0;
-			DataLoader* loader = DataLoader::GetLoader();
+        if (name.length()) {
+            BYTE*       buffer = 0;
+            DataLoader* loader = DataLoader::GetLoader();
 
-			if (loader) {
-				bool use_file_system = loader->IsFileSystemEnabled();
+            if (loader) {
+                bool use_file_system = loader->IsFileSystemEnabled();
 
-				loader->UseFileSystem(true);
-				loader->SetDataPath(path);
-				int len = loader->LoadBuffer(name, buffer);
+                loader->UseFileSystem(true);
+                loader->SetDataPath(path);
+                int len = loader->LoadBuffer(name, buffer);
 
-				if (len) {
-					content = Text((const char*) buffer, len);
-				}
+                if (len) {
+                    content = Text((const char*) buffer, len);
+                }
 
-				loader->ReleaseBuffer(buffer);
-				loader->SetDataPath(0);
-				loader->UseFileSystem(use_file_system);
-			}
-		}
+                loader->ReleaseBuffer(buffer);
+                loader->SetDataPath(0);
+                loader->UseFileSystem(use_file_system);
+            }
+        }
 
-		response.SetStatus(HttpResponse::SC_OK);
-		response.AddHeader("MIME-Version",  "1.0");
-		response.AddHeader("Cache-Control", "no-cache");
-		response.AddHeader("Expires",       "-1");
-		response.AddHeader("Content-Type",  "text/plain");
-		response.SetContent(content);
+        response.SetStatus(HttpResponse::SC_OK);
+        response.AddHeader("MIME-Version",  "1.0");
+        response.AddHeader("Cache-Control", "no-cache");
+        response.AddHeader("Expires",       "-1");
+        response.AddHeader("Content-Type",  "text/plain");
+        response.SetContent(content);
 
-		return true;
-	}
+        return true;
+    }
 };
 
 // +-------------------------------------------------------------------+
@@ -279,29 +303,29 @@ public:
 class NetAdminUserList : public NetAdminServlet
 {
 public:
-	NetAdminUserList()           { }
-	virtual ~NetAdminUserList()  { }
+    NetAdminUserList()           { }
+    virtual ~NetAdminUserList()  { }
 
-	virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
-		if (CheckUser(request, response)) {
-			response.SetStatus(HttpResponse::SC_OK);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/html");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
+    virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
+        if (CheckUser(request, response)) {
+            response.SetStatus(HttpResponse::SC_OK);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/html");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
 
-			response.SetContent(GetHead("User List") +
-			GetTitleBar() +
-			GetContent() +
-			GetBodyClose());
-		}
+            response.SetContent(GetHead("User List") +
+            GetTitleBar() +
+            GetContent() +
+            GetBodyClose());
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	virtual Text GetContent() {
-		Text content =
-		"<script LANGUAGE=\"JavaScript\">\n\
+    virtual Text GetContent() {
+        Text content =
+        "<script LANGUAGE=\"JavaScript\">\n\
 <!--\n\
 function doConfirm() {\n\
 return confirm(\"Are you sure you want to ban this player?\");\n\
@@ -310,68 +334,68 @@ return confirm(\"Are you sure you want to ban this player?\");\n\
 </script>\n\
 <div class=\"content\">\n\
 <table border=\"0\"  width=\"95%\">\n\
-	<tr class=\"heading\">\n\
-	<td nowrap valign=\"middle\" align=\"left\">\n\
-		<span class=\"heading\">&nbsp;User List</span>\n\
-	</td>\n\
-	</tr>\n\
+    <tr class=\"heading\">\n\
+    <td nowrap valign=\"middle\" align=\"left\">\n\
+        <span class=\"heading\">&nbsp;User List</span>\n\
+    </td>\n\
+    </tr>\n\
 </table>\n\n";
 
-		content +=
-		"  <table border=\"0\"  width=\"95%\" class=\"std\">\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"20%\" valign=\"middle\" align=\"left\"><b>Name</b></td>\n\
-	<td nowrap width=\"10%\" valign=\"middle\" align=\"left\"><b>Address</b></td>\n\
-	<td nowrap width=\"10%\" valign=\"middle\" align=\"center\"><b>Is Host</b></td>\n\
-	<td nowrap width=\"20%\" valign=\"middle\" align=\"left\"><b>Squadron</b></td>\n\
-	<td nowrap width=\"20%\" valign=\"middle\" align=\"center\"><b>Stats</b></td>\n\
-	<td nowrap width=\"19%\" valign=\"middle\" align=\"center\"><b>Ban</b></td>\n\
-	<td></td>\n\
+        content +=
+        "  <table border=\"0\"  width=\"95%\" class=\"std\">\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"20%\" valign=\"middle\" align=\"left\"><b>Name</b></td>\n\
+    <td nowrap width=\"10%\" valign=\"middle\" align=\"left\"><b>Address</b></td>\n\
+    <td nowrap width=\"10%\" valign=\"middle\" align=\"center\"><b>Is Host</b></td>\n\
+    <td nowrap width=\"20%\" valign=\"middle\" align=\"left\"><b>Squadron</b></td>\n\
+    <td nowrap width=\"20%\" valign=\"middle\" align=\"center\"><b>Stats</b></td>\n\
+    <td nowrap width=\"19%\" valign=\"middle\" align=\"center\"><b>Ban</b></td>\n\
+    <td></td>\n\
 </tr>\n";
 
-		NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+        NetLobbyServer* lobby = NetLobbyServer::GetInstance();
 
-		if (lobby) {
-			ListIter<NetUser> u_iter = lobby->GetUsers();
-			while (++u_iter) {
-				NetUser* u = u_iter.value();
-				NetAddr  a = u->GetAddress();
+        if (lobby) {
+            ListIter<NetUser> u_iter = lobby->GetUsers();
+            while (++u_iter) {
+                NetUser* u = u_iter.value();
+                NetAddr  a = u->GetAddress();
 
-				char addr_dotted[32];
-				char addr_hex[16];
-				char user_stats[16];
+                char addr_dotted[32];
+                char addr_hex[16];
+                char user_stats[16];
 
-				sprintf_s(addr_dotted, "%d.%d.%d.%d", a.B1(), a.B2(), a.B3(), a.B4());
-				sprintf_s(addr_hex,    "%08x",        a.IPAddr());
-				sprintf_s(user_stats,  "%d / %d / %d", u->Missions(), u->Kills(), u->Losses());
+                sprintf_s(addr_dotted, "%d.%d.%d.%d", a.B1(), a.B2(), a.B3(), a.B4());
+                sprintf_s(addr_hex,    "%08x",        a.IPAddr());
+                sprintf_s(user_stats,  "%d / %d / %d", u->Missions(), u->Kills(), u->Losses());
 
-				content += "<tr>\n<td nowrap width=\"1%\">&nbsp;</td>\n\
-			<td nowrap valign=\"middle\" align=\"left\">";
-				content += u->Name();
-				content += "</td><td nowrap valign=\"middle\" align=\"left\">";
-				content += addr_dotted;
-				content += "</td><td nowrap valign=\"middle\" align=\"center\">";
-				content += u->IsHost() ? "*" : "&nbsp;";
-				content += "</td><td nowrap valign=\"middle\" align=\"left\">";
-				content += u->Squadron();
-				content += "</td><td nowrap valign=\"middle\" align=\"center\">";
-				content += user_stats;
-				content += "</td><td nowrap valign=\"middle\" align=\"center\">";
-				content += "<a onclick=\"return doConfirm()\" href=\"/ban?name=";
-				content += HttpRequest::EncodeParam(u->Name());
-				content += "&addr=";
-				content += addr_hex;
-				content += "\">BAN</a></td></tr>\n";
-			}
-		}
+                content += "<tr>\n<td nowrap width=\"1%\">&nbsp;</td>\n\
+            <td nowrap valign=\"middle\" align=\"left\">";
+                content += u->Name();
+                content += "</td><td nowrap valign=\"middle\" align=\"left\">";
+                content += addr_dotted;
+                content += "</td><td nowrap valign=\"middle\" align=\"center\">";
+                content += u->IsHost() ? "*" : "&nbsp;";
+                content += "</td><td nowrap valign=\"middle\" align=\"left\">";
+                content += u->Squadron();
+                content += "</td><td nowrap valign=\"middle\" align=\"center\">";
+                content += user_stats;
+                content += "</td><td nowrap valign=\"middle\" align=\"center\">";
+                content += "<a onclick=\"return doConfirm()\" href=\"/ban?name=";
+                content += HttpRequest::EncodeParam(u->Name());
+                content += "&addr=";
+                content += addr_hex;
+                content += "\">BAN</a></td></tr>\n";
+            }
+        }
 
-		content += "  </table>\n\n";
+        content += "  </table>\n\n";
 
-		content += "</div>\n\n";
-		content += GetCopyright();
-		return content;
-	}
+        content += "</div>\n\n";
+        content += GetCopyright();
+        return content;
+    }
 };
 
 // +-------------------------------------------------------------------+
@@ -381,47 +405,47 @@ return confirm(\"Are you sure you want to ban this player?\");\n\
 class NetAdminBanUser : public NetAdminServlet
 {
 public:
-	NetAdminBanUser()           { }
-	virtual ~NetAdminBanUser()  { }
+    NetAdminBanUser()           { }
+    virtual ~NetAdminBanUser()  { }
 
-	virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
-		if (CheckUser(request, response)) {
-			Text name = request.GetParam("name");
-			bool completed = false;
+    virtual bool DoGet(HttpRequest& request, HttpResponse& response) {
+        if (CheckUser(request, response)) {
+            Text name = request.GetParam("name");
+            bool completed = false;
 
-			NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+            NetLobbyServer* lobby = NetLobbyServer::GetInstance();
 
-			if (lobby) {
-				ListIter<NetUser> u_iter = lobby->GetUsers();
-				while (++u_iter && !completed) {
-					NetUser* u = u_iter.value();
+            if (lobby) {
+                ListIter<NetUser> u_iter = lobby->GetUsers();
+                while (++u_iter && !completed) {
+                    NetUser* u = u_iter.value();
 
-					if (u->Name() == name) {
-						NetLobbyServer* nls = NetLobbyServer::GetInstance();
+                    if (u->Name() == name) {
+                        NetLobbyServer* nls = NetLobbyServer::GetInstance();
 
-						if (nls) {
-							nls->BanUser(u);
-							completed = true;
-						}
-					}
-				}
-			}
+                        if (nls) {
+                            nls->BanUser(u);
+                            completed = true;
+                        }
+                    }
+                }
+            }
 
-			response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/html");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
-			response.SetHeader("Location",      "/users");
+            response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/html");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
+            response.SetHeader("Location",      "/users");
 
-			response.SetContent(GetHead("User List") +
-			GetTitleBar() +
-			"<div class=\"content\">User Banned.<br></div>" +
-			GetBodyClose());
-		}
+            response.SetContent(GetHead("User List") +
+            GetTitleBar() +
+            "<div class=\"content\">User Banned.<br></div>" +
+            GetBodyClose());
+        }
 
-		return true;
-	}
+        return true;
+    }
 };
 
 // +-------------------------------------------------------------------+
@@ -433,22 +457,22 @@ static NetAdminServer*  net_Admin_server = 0;
 NetAdminServer*
 NetAdminServer::GetInstance(WORD port)
 {
-	if (!net_Admin_server && port > 0)
-	net_Admin_server = new(__FILE__,__LINE__) NetAdminServer(port);
+    if (!net_Admin_server && port > 0)
+    net_Admin_server = new(__FILE__,__LINE__) NetAdminServer(port);
 
-	return net_Admin_server;
+    return net_Admin_server;
 }
 
 NetAdminServer::NetAdminServer(WORD port)
 : HttpServletExec(port)
 {
-	http_server_name = Text("Starshatter NetAdminServer ") + versionInfo;
+    http_server_name = Text("Starshatter NetAdminServer ") + versionInfo;
 }
 
 NetAdminServer::~NetAdminServer()
 {
-	if (net_Admin_server == this)
-	net_Admin_server = 0;
+    if (net_Admin_server == this)
+    net_Admin_server = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -456,28 +480,28 @@ NetAdminServer::~NetAdminServer()
 HttpServlet*
 NetAdminServer::GetServlet(HttpRequest& request)
 {
-	Text path = request.URI();
-	path.setSensitive(false);
+    Text path = request.URI();
+    path.setSensitive(false);
 
-	if (path.indexOf("/login") == 0)
-	return new(__FILE__,__LINE__) NetAdminLogin;
+    if (path.indexOf("/login") == 0)
+    return new(__FILE__,__LINE__) NetAdminLogin;
 
-	if (path.indexOf("/chat") == 0)
-	return new(__FILE__,__LINE__) NetAdminChat;
+    if (path.indexOf("/chat") == 0)
+    return new(__FILE__,__LINE__) NetAdminChat;
 
-	if (path.indexOf("/server") == 0)
-	return new(__FILE__,__LINE__) NetAdminServerMgr;
+    if (path.indexOf("/server") == 0)
+    return new(__FILE__,__LINE__) NetAdminServerMgr;
 
-	if (path.indexOf("/file") == 0)
-	return new(__FILE__,__LINE__) NetAdminFile;
+    if (path.indexOf("/file") == 0)
+    return new(__FILE__,__LINE__) NetAdminFile;
 
-	if (path.indexOf("/user") == 0)
-	return new(__FILE__,__LINE__) NetAdminUserList;
+    if (path.indexOf("/user") == 0)
+    return new(__FILE__,__LINE__) NetAdminUserList;
 
-	if (path.indexOf("/ban") == 0)
-	return new(__FILE__,__LINE__) NetAdminBanUser;
+    if (path.indexOf("/ban") == 0)
+    return new(__FILE__,__LINE__) NetAdminBanUser;
 
-	return new(__FILE__,__LINE__) NetAdminServlet;
+    return new(__FILE__,__LINE__) NetAdminServlet;
 }
 
 // +-------------------------------------------------------------------+
@@ -485,24 +509,24 @@ NetAdminServer::GetServlet(HttpRequest& request)
 void
 NetAdminServer::AddChat(NetUser* user, const char* msg)
 {
-	if (user && msg && *msg) {
-		NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+    if (user && msg && *msg) {
+        NetLobbyServer* lobby = NetLobbyServer::GetInstance();
 
-		if (lobby)
-		lobby->AddChat(user, msg);
-	}
+        if (lobby)
+        lobby->AddChat(user, msg);
+    }
 }
 
 ListIter<NetChatEntry>
 NetAdminServer::GetChat()
 {
-	NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+    NetLobbyServer* lobby = NetLobbyServer::GetInstance();
 
-	if (lobby)
-	return lobby->GetChat();
+    if (lobby)
+    return lobby->GetChat();
 
-	static List<NetChatEntry> idle_chatter;
-	return idle_chatter;
+    static List<NetChatEntry> idle_chatter;
+    return idle_chatter;
 }
 
 // +-------------------------------------------------------------------+
@@ -510,78 +534,78 @@ NetAdminServer::GetChat()
 void
 NetAdminServer::AddUser(NetUser* user)
 {
-	if (user && !admin_users.contains(user))
-	admin_users.append(user);
+    if (user && !admin_users.contains(user))
+    admin_users.append(user);
 }
 
 void
 NetAdminServer::DelUser(NetUser* user)
 {
-	if (user) {
-		admin_users.remove(user);
-		delete user;
-	}
+    if (user) {
+        admin_users.remove(user);
+        delete user;
+    }
 }
 
 int
 NetAdminServer::NumUsers()
 {
-	return admin_users.size();
+    return admin_users.size();
 }
 
 
 List<NetUser>&
 NetAdminServer::GetUsers()
 {
-	return admin_users;
+    return admin_users;
 }
 
 bool
 NetAdminServer::HasHost()
 {
-	bool result = false;
+    bool result = false;
 
-	NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+    NetLobbyServer* lobby = NetLobbyServer::GetInstance();
 
-	if (lobby)
-	result = lobby->HasHost();
+    if (lobby)
+    result = lobby->HasHost();
 
-	return result;
+    return result;
 }
 
 NetUser*
 NetAdminServer::FindUserBySession(Text id)
 {
-	ListIter<NetUser> iter = admin_users;
-	while (++iter) {
-		NetUser* u = iter.value();
-		if (u->GetSessionID() == id)
-		return u;
-	}
+    ListIter<NetUser> iter = admin_users;
+    while (++iter) {
+        NetUser* u = iter.value();
+        if (u->GetSessionID() == id)
+        return u;
+    }
 
-	return 0;
+    return 0;
 }
 
 void
 NetAdminServer::DoSyncedCheck()
 {
-	ListIter<NetUser> iter = admin_users;
-	while (++iter) {
-		NetUser* u = iter.value();
+    ListIter<NetUser> iter = admin_users;
+    while (++iter) {
+        NetUser* u = iter.value();
 
-		bool found = false;
+        bool found = false;
 
-		ListIter<HttpSession> s_iter = sessions;
-		while (++s_iter && !found) {
-			HttpSession* s = s_iter.value();
+        ListIter<HttpSession> s_iter = sessions;
+        while (++s_iter && !found) {
+            HttpSession* s = s_iter.value();
 
-			if (s->GetID() == u->GetSessionID())
-			found = true;
-		}
+            if (s->GetID() == u->GetSessionID())
+            found = true;
+        }
 
-		if (!found)
-		delete iter.removeItem();
-	}
+        if (!found)
+        delete iter.removeItem();
+    }
 }
 
 
@@ -591,8 +615,8 @@ NetAdminServer::DoSyncedCheck()
 
 NetAdminServlet::NetAdminServlet()
 {
-	admin = NetAdminServer::GetInstance();
-	user  = 0;
+    admin = NetAdminServer::GetInstance();
+    user  = 0;
 }
 
 // +-------------------------------------------------------------------+
@@ -600,26 +624,26 @@ NetAdminServlet::NetAdminServlet()
 bool
 NetAdminServlet::DoGet(HttpRequest& request, HttpResponse& response)
 {
-	if (CheckUser(request, response)) {
+    if (CheckUser(request, response)) {
 
-		if (request.URI() == "/home")
-		response.SetStatus(HttpResponse::SC_OK);
-		else
-		response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+        if (request.URI() == "/home")
+        response.SetStatus(HttpResponse::SC_OK);
+        else
+        response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
 
-		response.SetHeader("MIME-Version",  "1.0");
-		response.SetHeader("Content-Type",  "text/html");
-		response.SetHeader("Cache-Control", "no-cache");
-		response.SetHeader("Expires",       "-1");
-		response.SetHeader("Location",      "/home");
+        response.SetHeader("MIME-Version",  "1.0");
+        response.SetHeader("Content-Type",  "text/html");
+        response.SetHeader("Cache-Control", "no-cache");
+        response.SetHeader("Expires",       "-1");
+        response.SetHeader("Location",      "/home");
 
-		response.SetContent(GetHead() +
-		GetTitleBar(GetStatLine()) +
-		GetContent() +
-		GetBodyClose());
-	}
+        response.SetContent(GetHead() +
+        GetTitleBar(GetStatLine()) +
+        GetContent() +
+        GetBodyClose());
+    }
 
-	return true;
+    return true;
 }
 
 // +-------------------------------------------------------------------+
@@ -627,22 +651,22 @@ NetAdminServlet::DoGet(HttpRequest& request, HttpResponse& response)
 bool
 NetAdminServlet::CheckUser(HttpRequest& request, HttpResponse& response)
 {
-	if (!user) {
-		if (session)
-		user = admin->FindUserBySession(session->GetID());
+    if (!user) {
+        if (session)
+        user = admin->FindUserBySession(session->GetID());
 
-		if (!user) {
-			response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
-			response.SetHeader("MIME-Version",  "1.0");
-			response.SetHeader("Content-Type",  "text/plain");
-			response.SetHeader("Cache-Control", "no-cache");
-			response.SetHeader("Expires",       "-1");
-			response.SetHeader("Location",      "/login");
-			response.SetContent("You are not logged in.");
-		}
-	}
+        if (!user) {
+            response.SetStatus(HttpResponse::SC_TEMPORARY_REDIRECT);
+            response.SetHeader("MIME-Version",  "1.0");
+            response.SetHeader("Content-Type",  "text/plain");
+            response.SetHeader("Cache-Control", "no-cache");
+            response.SetHeader("Expires",       "-1");
+            response.SetHeader("Location",      "/login");
+            response.SetContent("You are not logged in.");
+        }
+    }
 
-	return user != 0;
+    return user != 0;
 }
 
 // +-------------------------------------------------------------------+
@@ -650,9 +674,9 @@ NetAdminServlet::CheckUser(HttpRequest& request, HttpResponse& response)
 Text
 NetAdminServlet::GetCSS()
 {
-	return
+    return
 
-	"body      { font-family:arial,helvetica,sans-serif; color:black; background-color:white }\n\
+    "body      { font-family:arial,helvetica,sans-serif; color:black; background-color:white }\n\
 a:link    { text-decoration:none; font-weight:normal; font-size:10pt; color:black }\n\
 a:visited { text-decoration:none; font-weight:normal; font-size:10pt; color:black }\n\
 a:hover   { text-decoration:underline; font-weight:normal; font-size:10pt; color:black }\n\
@@ -672,129 +696,129 @@ a:hover   { text-decoration:underline; font-weight:normal; font-size:10pt; color
 Text
 NetAdminServlet::GetHead(const char* title)
 {
-	Text head = "<html>\n<head>\n<title>Starshatter Server";
+    Text head = "<html>\n<head>\n<title>Starshatter Server";
 
-	if (title && *title) {
-		head += " - ";
-		head += title;
-	}
+    if (title && *title) {
+        head += " - ";
+        head += title;
+    }
 
-	head += "</title>\n<style type=\"text/css\" media=\"screen\">\n";
-	head += GetCSS();
-	head += "</style>\n</head>\n";
+    head += "</title>\n<style type=\"text/css\" media=\"screen\">\n";
+    head += GetCSS();
+    head += "</style>\n</head>\n";
 
-	return head;
+    return head;
 }
 
 Text
 NetAdminServlet::GetBody()
 {
-	return GetTitleBar(GetStatLine()) +
-	GetContent()  +
-	GetBodyClose();
+    return GetTitleBar(GetStatLine()) +
+    GetContent()  +
+    GetBodyClose();
 }
 
 Text
 NetAdminServlet::GetTitleBar(const char* statline, const char* onload)
 {
-	Text bar = "<body ";
+    Text bar = "<body ";
 
-	if (onload && *onload)
-	bar += onload;
+    if (onload && *onload)
+    bar += onload;
 
-	bar += " leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\n\
+    bar += " leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\n\
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"top-bar\">\n\
-	<tr height=\"50\">\n\
-	<td>&nbsp;</td>\n\
-	<td valign=\"middle\" align=\"left\">\n\
-		<span class=\"topbarsmall\">Administration Console</span><br>\n";
+    <tr height=\"50\">\n\
+    <td>&nbsp;</td>\n\
+    <td valign=\"middle\" align=\"left\">\n\
+        <span class=\"topbarsmall\">Administration Console</span><br>\n";
 
-	if (statline) {
-		bar += "<a href=\"/home\">";
-	}
+    if (statline) {
+        bar += "<a href=\"/home\">";
+    }
 
-	bar += "<span class=\"topbarbig\">Starshatter Server ";
-	bar += versionInfo;
-	bar += "</span>";
+    bar += "<span class=\"topbarbig\">Starshatter Server ";
+    bar += versionInfo;
+    bar += "</span>";
 
-	if (statline) {
-		bar += "</a>";
-	}
+    if (statline) {
+        bar += "</a>";
+    }
 
-	bar += "\n\
-	</td>\n\
-	</tr>\n\
-	<tr class=\"top-line\">\n\
-	<td colspan=\"2\">";
+    bar += "\n\
+    </td>\n\
+    </tr>\n\
+    <tr class=\"top-line\">\n\
+    <td colspan=\"2\">";
 
-	if (statline && *statline)
-	bar += statline;
-	else
-	bar += "&nbsp;";
+    if (statline && *statline)
+    bar += statline;
+    else
+    bar += "&nbsp;";
 
-	bar += "</td>\n\
-	</tr>\n\
+    bar += "</td>\n\
+    </tr>\n\
 </table>\n\n";
 
-	return bar;
+    return bar;
 }
 
 Text
 NetAdminServlet::GetStatLine()
 {
-	NetServerConfig* config = NetServerConfig::GetInstance();
+    NetServerConfig* config = NetServerConfig::GetInstance();
 
-	Text line =
-	"      <table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\">\n\
-		<tr>\n\
-		<td nowrap width=\"33%\" class=\"top-line\" align=\"left\">\n\
-			<span class=\"status\">&nbsp;&nbsp;Connected to <b>";
+    Text line =
+    "      <table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\">\n\
+        <tr>\n\
+        <td nowrap width=\"33%\" class=\"top-line\" align=\"left\">\n\
+            <span class=\"status\">&nbsp;&nbsp;Connected to <b>";
 
-	char buffer[256];
-	sprintf_s(buffer, "%s:%d", config->Name().data(), config->GetAdminPort());
-	line += buffer;
+    char buffer[256];
+    sprintf_s(buffer, "%s:%d", config->Name().data(), config->GetAdminPort());
+    line += buffer;
 
-	line += "</b></span>\n\
-		</td>\n\
-		<td nowrap width=\"34%\" class=\"top-line\" align=\"center\">\n\
-			<span class=\"status\">Server Mode: <b>";
+    line += "</b></span>\n\
+        </td>\n\
+        <td nowrap width=\"34%\" class=\"top-line\" align=\"center\">\n\
+            <span class=\"status\">Server Mode: <b>";
 
-	NetLobbyServer* lobby = NetLobbyServer::GetInstance();
-	if (lobby) {
-		switch (lobby->GetStatus()) {
-		default:
-		case NetServerInfo::OFFLINE:     line += "Offline";      break;
-		case NetServerInfo::LOBBY:       line += "Lobby";        break;
-		case NetServerInfo::BRIEFING:    line += "Briefing";     break;
-		case NetServerInfo::ACTIVE:      line += "Active";       break;
-		case NetServerInfo::DEBRIEFING:  line += "Debriefing";   break;
-		case NetServerInfo::PERSISTENT:  line += "PERSISTENT";   break;
-		}
-	}
-	else {
-		line += "Unknown";
-	}
+    NetLobbyServer* lobby = NetLobbyServer::GetInstance();
+    if (lobby) {
+        switch (lobby->GetStatus()) {
+        default:
+        case NetServerInfo::OFFLINE:     line += "Offline";      break;
+        case NetServerInfo::LOBBY:       line += "Lobby";        break;
+        case NetServerInfo::BRIEFING:    line += "Briefing";     break;
+        case NetServerInfo::ACTIVE:      line += "Active";       break;
+        case NetServerInfo::DEBRIEFING:  line += "Debriefing";   break;
+        case NetServerInfo::PERSISTENT:  line += "PERSISTENT";   break;
+        }
+    }
+    else {
+        line += "Unknown";
+    }
 
-	line += "</b></span>\n\
-		</td>\n\
-		<td nowrap width=\"33%\" class=\"top-line\" align=\"right\">\n\
-			<span class=\"status\">";
+    line += "</b></span>\n\
+        </td>\n\
+        <td nowrap width=\"33%\" class=\"top-line\" align=\"right\">\n\
+            <span class=\"status\">";
 
-	line += FormatTimeString();
-	
-	line += "&nbsp;&nbsp;</span>\n\
-		</td>\n\
-		</tr>\n\
-	</table>\n";
+    line += FormatTimeString();
+    
+    line += "&nbsp;&nbsp;</span>\n\
+        </td>\n\
+        </tr>\n\
+    </table>\n";
 
-	return line;
+    return line;
 }
 
 Text
 NetAdminServlet::GetContent()
 {
-	Text content =
-	"<script LANGUAGE=\"JavaScript\">\n\
+    Text content =
+    "<script LANGUAGE=\"JavaScript\">\n\
 <!--\n\
 function doConfirm() {\n\
 return confirm(\"Are you sure you want to do this?\");\n\
@@ -803,85 +827,85 @@ return confirm(\"Are you sure you want to do this?\");\n\
 </script>\n\
 <div class=\"content\">\n\
 <table border=\"0\"  width=\"95%\">\n\
-	<tr class=\"heading\">\n\
-	<td nowrap valign=\"middle\" align=\"left\">\n\
-		<span class=\"heading\">&nbsp;Game Admin Functions</span>\n\
-	</td>\n\
-	</tr>\n\
+    <tr class=\"heading\">\n\
+    <td nowrap valign=\"middle\" align=\"left\">\n\
+        <span class=\"heading\">&nbsp;Game Admin Functions</span>\n\
+    </td>\n\
+    </tr>\n\
 </table>\n\n\
 <table border=\"0\" width=\"95%\">\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/chat\">Lobby Chat</a>\n\
-	</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/home\">Mission List</a>\n\
-	</td>\n\
-	<td></td>\n\
-	</tr>\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/file?name=errlog.txt\">View Error Log</a>\n\
-	</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/users\">Player List</a>\n\
-	</td>\n\
-	<td></td>\n\
-	</tr>\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/file?name=serverlog.txt\">View Server Log</a>\n\
-	</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a href=\"/home\">Ban List</a>\n\
-	</td>\n\
-	<td></td>\n\
-	</tr>\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\"></td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\"></td>\n\
-	<td></td>\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/chat\">Lobby Chat</a>\n\
+    </td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/home\">Mission List</a>\n\
+    </td>\n\
+    <td></td>\n\
+    </tr>\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/file?name=errlog.txt\">View Error Log</a>\n\
+    </td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/users\">Player List</a>\n\
+    </td>\n\
+    <td></td>\n\
+    </tr>\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/file?name=serverlog.txt\">View Server Log</a>\n\
+    </td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a href=\"/home\">Ban List</a>\n\
+    </td>\n\
+    <td></td>\n\
+    </tr>\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\"></td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\"></td>\n\
+    <td></td>\n\
 </tr>\n\
 </table>\n\n";
 
-	content +=
-	"  <table border=\"0\"  width=\"95%\">\n\
-	<tr class=\"heading\">\n\
-	<td nowrap valign=\"middle\" align=\"left\">\n\
-		<span class=\"heading\">&nbsp;Server Admin Functions</span>\n\
-	</td>\n\
-	</tr>\n\
+    content +=
+    "  <table border=\"0\"  width=\"95%\">\n\
+    <tr class=\"heading\">\n\
+    <td nowrap valign=\"middle\" align=\"left\">\n\
+        <span class=\"heading\">&nbsp;Server Admin Functions</span>\n\
+    </td>\n\
+    </tr>\n\
 </table>\n\n\
 <table border=\"0\" width=\"95%\">\n\
-	<tr>\n\
-	<td nowrap width=\"1%\">&nbsp;</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a onclick=\"return doConfirm()\" href=\"/server?action=restart\">Restart Server</a>\n\
-	</td>\n\
-	<td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
-		<a onclick=\"return doConfirm()\" href=\"/server?action=shutdown\">Shutdown Server</a>\n\
-	</td>\n\
-	<td></td>\n\
+    <tr>\n\
+    <td nowrap width=\"1%\">&nbsp;</td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a onclick=\"return doConfirm()\" href=\"/server?action=restart\">Restart Server</a>\n\
+    </td>\n\
+    <td nowrap width=\"33%\" valign=\"middle\" align=\"left\">\n\
+        <a onclick=\"return doConfirm()\" href=\"/server?action=shutdown\">Shutdown Server</a>\n\
+    </td>\n\
+    <td></td>\n\
 </tr>\n\
 </table>\n\n";
 
-	content += "</div>\n\n";
-	content += GetCopyright();
-	return content;
+    content += "</div>\n\n";
+    content += GetCopyright();
+    return content;
 }
 
 Text
 NetAdminServlet::GetBodyClose()
 {
-	return "\n\n</body>\n</html>\n";
+    return "\n\n</body>\n</html>\n";
 }
 
 Text
 NetAdminServlet::GetCopyright()
 {
-	return "<br><span class=\"copy\">&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy; 1997-2004 Destroyer Studios.  All rights reserved.</span><br>";
+    return "<br><span class=\"copy\">&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy; 1997-2004 Destroyer Studios.  All rights reserved.</span><br>";
 }
