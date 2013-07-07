@@ -1,6 +1,30 @@
-/*  Project Magic 2.0
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
 
     SUBSYSTEM:    Magic.exe
     FILE:         MaterialDialog.h
@@ -61,23 +85,23 @@ inline int SelectionToBlendMode(int sel)
 static Material emergency_material;
 
 MaterialDialog::MaterialDialog(MagicView* pParent /*=NULL*/)
-	: CDialog(MaterialDialog::IDD, pParent), solid(0), material(0), doc(0)
+    : CDialog(MaterialDialog::IDD, pParent), solid(0), material(0), doc(0)
 {
-	//{{AFX_DATA_INIT(MaterialDialog)
-	mAmbientValue = 0.0;
-	mBrillianceValue = 0.0;
-	mBumpValue = 0.0;
-	mDiffuseValue = 0.0;
-	mEmissiveValue = 0.0;
-	mMaterialName = _T("");
-	mPowerValue = 0.0;
-	mSpecularValue = 0.0;
-	mSpecularTexture = _T("");
-	mDiffuseTexture = _T("");
-	mBumpTexture = _T("");
-	mEmissiveTexture = _T("");
-	mMaterialShader = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(MaterialDialog)
+    mAmbientValue = 0.0;
+    mBrillianceValue = 0.0;
+    mBumpValue = 0.0;
+    mDiffuseValue = 0.0;
+    mEmissiveValue = 0.0;
+    mMaterialName = _T("");
+    mPowerValue = 0.0;
+    mSpecularValue = 0.0;
+    mSpecularTexture = _T("");
+    mDiffuseTexture = _T("");
+    mBumpTexture = _T("");
+    mEmissiveTexture = _T("");
+    mMaterialShader = _T("");
+    //}}AFX_DATA_INIT
 
    doc = pParent->GetDocument();
 
@@ -99,30 +123,30 @@ MaterialDialog::~MaterialDialog()
 
 void MaterialDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(MaterialDialog)
-	DDX_Control(pDX, IDC_SHADOW, mShadowList);
-	DDX_Control(pDX, IDC_BLEND_MODE, mBlendModeList);
-	DDX_Control(pDX, IDC_MATERIAL_LIST, mMaterialList);
-	DDX_Control(pDX, IDC_MATERIAL_PREVIEW, mMaterialThumb);
-	DDX_Control(pDX, IDC_SPECULAR_COLOR, mSpecularColor);
-	DDX_Control(pDX, IDC_EMISSIVE_COLOR, mEmissiveColor);
-	DDX_Control(pDX, IDC_DIFFUSE_COLOR, mDiffuseColor);
-	DDX_Control(pDX, IDC_AMBIENT_COLOR, mAmbientColor);
-	DDX_Text(pDX, IDC_AMBIENT_VALUE, mAmbientValue);
-	DDX_Text(pDX, IDC_BRILLIANCE_VALUE, mBrillianceValue);
-	DDX_Text(pDX, IDC_BUMP_VALUE, mBumpValue);
-	DDX_Text(pDX, IDC_DIFFUSE_VALUE, mDiffuseValue);
-	DDX_Text(pDX, IDC_EMISSIVE_VALUE, mEmissiveValue);
-	DDX_Text(pDX, IDC_MATERIAL_NAME, mMaterialName);
-	DDX_Text(pDX, IDC_POWER_VALUE, mPowerValue);
-	DDX_Text(pDX, IDC_SPECULAR_VALUE, mSpecularValue);
-	DDX_Text(pDX, IDC_SPECULAR_TEXTURE, mSpecularTexture);
-	DDX_Text(pDX, IDC_DIFFUSE_TEXTURE, mDiffuseTexture);
-	DDX_Text(pDX, IDC_BUMP_TEXTURE, mBumpTexture);
-	DDX_Text(pDX, IDC_EMISSIVE_TEXTURE, mEmissiveTexture);
-	DDX_Text(pDX, IDC_MATERIAL_SHADER, mMaterialShader);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(MaterialDialog)
+    DDX_Control(pDX, IDC_SHADOW, mShadowList);
+    DDX_Control(pDX, IDC_BLEND_MODE, mBlendModeList);
+    DDX_Control(pDX, IDC_MATERIAL_LIST, mMaterialList);
+    DDX_Control(pDX, IDC_MATERIAL_PREVIEW, mMaterialThumb);
+    DDX_Control(pDX, IDC_SPECULAR_COLOR, mSpecularColor);
+    DDX_Control(pDX, IDC_EMISSIVE_COLOR, mEmissiveColor);
+    DDX_Control(pDX, IDC_DIFFUSE_COLOR, mDiffuseColor);
+    DDX_Control(pDX, IDC_AMBIENT_COLOR, mAmbientColor);
+    DDX_Text(pDX, IDC_AMBIENT_VALUE, mAmbientValue);
+    DDX_Text(pDX, IDC_BRILLIANCE_VALUE, mBrillianceValue);
+    DDX_Text(pDX, IDC_BUMP_VALUE, mBumpValue);
+    DDX_Text(pDX, IDC_DIFFUSE_VALUE, mDiffuseValue);
+    DDX_Text(pDX, IDC_EMISSIVE_VALUE, mEmissiveValue);
+    DDX_Text(pDX, IDC_MATERIAL_NAME, mMaterialName);
+    DDX_Text(pDX, IDC_POWER_VALUE, mPowerValue);
+    DDX_Text(pDX, IDC_SPECULAR_VALUE, mSpecularValue);
+    DDX_Text(pDX, IDC_SPECULAR_TEXTURE, mSpecularTexture);
+    DDX_Text(pDX, IDC_DIFFUSE_TEXTURE, mDiffuseTexture);
+    DDX_Text(pDX, IDC_BUMP_TEXTURE, mBumpTexture);
+    DDX_Text(pDX, IDC_EMISSIVE_TEXTURE, mEmissiveTexture);
+    DDX_Text(pDX, IDC_MATERIAL_SHADER, mMaterialShader);
+    //}}AFX_DATA_MAP
 
    if (!pDX->m_bSaveAndValidate) {
       if (solid && solid->GetModel()) {
@@ -148,37 +172,37 @@ void MaterialDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(MaterialDialog, CDialog)
-	//{{AFX_MSG_MAP(MaterialDialog)
-	ON_WM_PAINT()
-	ON_BN_CLICKED(IDC_AMBIENT_COLOR, OnAmbientColor)
-	ON_BN_CLICKED(IDC_DIFFUSE_COLOR, OnDiffuseColor)
-	ON_BN_CLICKED(IDC_EMISSIVE_COLOR, OnEmissiveColor)
-	ON_BN_CLICKED(IDC_SPECULAR_COLOR, OnSpecularColor)
-	ON_WM_DRAWITEM()
-	ON_EN_CHANGE(IDC_AMBIENT_VALUE, OnChangeMaterialValue)
-	ON_BN_CLICKED(IDC_FILE_DIFFUSE, OnFileDiffuse)
-	ON_BN_CLICKED(IDC_FILE_SPECULAR, OnFileSpecular)
-	ON_BN_CLICKED(IDC_FILE_EMISSIVE, OnFileEmissive)
-	ON_BN_CLICKED(IDC_FILE_BUMP, OnFileBump)
-	ON_EN_CHANGE(IDC_DIFFUSE_TEXTURE, OnChangeDiffuseTexture)
-	ON_EN_CHANGE(IDC_SPECULAR_TEXTURE, OnChangeSpecularTexture)
-	ON_EN_CHANGE(IDC_EMISSIVE_TEXTURE, OnChangeEmissiveTexture)
-	ON_EN_CHANGE(IDC_BUMP_TEXTURE, OnChangeBumpTexture)
-	ON_EN_CHANGE(IDC_MATERIAL_NAME, OnChangeMaterialName)
-	ON_LBN_SELCHANGE(IDC_MATERIAL_LIST, OnSelectMaterial)
-	ON_BN_CLICKED(IDC_SELECT_POLYS, OnSelectPolys)
-	ON_BN_CLICKED(IDC_NEW_MATERIAL, OnNewMaterial)
-	ON_BN_CLICKED(IDC_DEL_MATERIAL, OnDelMaterial)
-	ON_CBN_SELCHANGE(IDC_BLEND_MODE, OnSelectBlendMode)
-	ON_CBN_SELCHANGE(IDC_SHADOW, OnSelectShadow)
-	ON_EN_CHANGE(IDC_BRILLIANCE_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_BUMP_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_DIFFUSE_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_EMISSIVE_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_POWER_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_SPECULAR_VALUE, OnChangeMaterialValue)
-	ON_EN_CHANGE(IDC_MATERIAL_SHADER, OnChangeMaterialShader)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(MaterialDialog)
+    ON_WM_PAINT()
+    ON_BN_CLICKED(IDC_AMBIENT_COLOR, OnAmbientColor)
+    ON_BN_CLICKED(IDC_DIFFUSE_COLOR, OnDiffuseColor)
+    ON_BN_CLICKED(IDC_EMISSIVE_COLOR, OnEmissiveColor)
+    ON_BN_CLICKED(IDC_SPECULAR_COLOR, OnSpecularColor)
+    ON_WM_DRAWITEM()
+    ON_EN_CHANGE(IDC_AMBIENT_VALUE, OnChangeMaterialValue)
+    ON_BN_CLICKED(IDC_FILE_DIFFUSE, OnFileDiffuse)
+    ON_BN_CLICKED(IDC_FILE_SPECULAR, OnFileSpecular)
+    ON_BN_CLICKED(IDC_FILE_EMISSIVE, OnFileEmissive)
+    ON_BN_CLICKED(IDC_FILE_BUMP, OnFileBump)
+    ON_EN_CHANGE(IDC_DIFFUSE_TEXTURE, OnChangeDiffuseTexture)
+    ON_EN_CHANGE(IDC_SPECULAR_TEXTURE, OnChangeSpecularTexture)
+    ON_EN_CHANGE(IDC_EMISSIVE_TEXTURE, OnChangeEmissiveTexture)
+    ON_EN_CHANGE(IDC_BUMP_TEXTURE, OnChangeBumpTexture)
+    ON_EN_CHANGE(IDC_MATERIAL_NAME, OnChangeMaterialName)
+    ON_LBN_SELCHANGE(IDC_MATERIAL_LIST, OnSelectMaterial)
+    ON_BN_CLICKED(IDC_SELECT_POLYS, OnSelectPolys)
+    ON_BN_CLICKED(IDC_NEW_MATERIAL, OnNewMaterial)
+    ON_BN_CLICKED(IDC_DEL_MATERIAL, OnDelMaterial)
+    ON_CBN_SELCHANGE(IDC_BLEND_MODE, OnSelectBlendMode)
+    ON_CBN_SELCHANGE(IDC_SHADOW, OnSelectShadow)
+    ON_EN_CHANGE(IDC_BRILLIANCE_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_BUMP_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_DIFFUSE_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_EMISSIVE_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_POWER_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_SPECULAR_VALUE, OnChangeMaterialValue)
+    ON_EN_CHANGE(IDC_MATERIAL_SHADER, OnChangeMaterialShader)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 // +--------------------------------------------------------------------+
@@ -226,7 +250,7 @@ BOOL MaterialDialog::OnInitDialog()
    }
 
    if (!material)
-	   material = &emergency_material;
+       material = &emergency_material;
 
    mMaterialName     = material->name;
    mMaterialShader   = material->shader;
@@ -250,17 +274,17 @@ BOOL MaterialDialog::OnInitDialog()
    mBumpTexture      = material->tex_bumpmap ?
                        material->tex_bumpmap->GetFilename() : "";
 
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
    UpdateMaterial();
-	
+    
    return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+                  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void MaterialDialog::OnPaint() 
 {
-	CPaintDC dc(this); // device context for painting
+    CPaintDC dc(this); // device context for painting
 
    if (material && material->thumbnail) {
       ThumbPreview(mMaterialThumb.GetSafeHwnd(), material->thumbnail);
@@ -352,7 +376,7 @@ void MaterialDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
              &lpDrawItemStruct->rcItem,
               brush);
 
-	CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);
+    CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);
 }
 
 // +--------------------------------------------------------------------+
@@ -539,7 +563,7 @@ void MaterialDialog::OnSelectMaterial()
    }
 
    if (!mtl)
-	   mtl = &emergency_material;
+       mtl = &emergency_material;
 
    if (material != mtl) {
       material = mtl;
@@ -689,5 +713,5 @@ void MaterialDialog::OnOK()
    if (video)
       video->InvalidateCache();
 
-	CDialog::OnOK();
+    CDialog::OnOK();
 }

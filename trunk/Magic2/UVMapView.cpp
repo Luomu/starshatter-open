@@ -1,6 +1,30 @@
-/*  Project Magic 2.0
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
 
     SUBSYSTEM:    Magic.exe
     FILE:         UVMapView.cpp
@@ -266,21 +290,21 @@ UVMapView::End()
                DWORD value   = (p_index << 16) | i;
 
                if (select_mode == SELECT_REMOVE) {
-				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-					   if (*svi == value) {
-						   selverts.erase(svi);
-					   }
-				   }
+                   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+                       if (*svi == value) {
+                           selverts.erase(svi);
+                       }
+                   }
                }
                else {
-				   bool contains = false;
-				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-					   if (*svi == value) {
-							contains = true;
-					   }
-				   }
-				   if (!contains)
-					   selverts.push_back(value);
+                   bool contains = false;
+                   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+                       if (*svi == value) {
+                            contains = true;
+                       }
+                   }
+                   if (!contains)
+                       selverts.push_back(value);
                }
             }
          }
@@ -313,19 +337,19 @@ UVMapView::End()
                DWORD value   = (p_index << 16) | i;
 
                if (select_mode == SELECT_REMOVE) {
-				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-					   if (*svi == value)
-						   selverts.erase(svi);
-				   }
+                   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+                       if (*svi == value)
+                           selverts.erase(svi);
+                   }
                }
                else {
-				   bool contains = false;
-				   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-					   if (*svi == value)
-						   contains = true;
-				   }
-				   if (!contains)
-					   selverts.push_back(value);
+                   bool contains = false;
+                   for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+                       if (*svi == value)
+                           contains = true;
+                   }
+                   if (!contains)
+                       selverts.push_back(value);
                }
             }
          }
@@ -352,7 +376,7 @@ UVMapView::SelectAll()
       for (int i = 0; i < p->nverts; i++) {
          WORD  p_index = iter.index();
          DWORD value   = (p_index << 16) | i;
-		 selverts.push_back(value);
+         selverts.push_back(value);
       }
    }
 }
@@ -377,19 +401,19 @@ UVMapView::SelectInverse()
          WORD  p_index = iter.index();
          DWORD value   = (p_index << 16) | i;
 
-		 bool contains = false;
-		 auto svi = selverts.begin();
-		 for (; svi != selverts.end(); ++svi) {
-			 if (*svi == value) {
-				 contains = true;
-				 break;
-			 }
-		 }
+         bool contains = false;
+         auto svi = selverts.begin();
+         for (; svi != selverts.end(); ++svi) {
+             if (*svi == value) {
+                 contains = true;
+                 break;
+             }
+         }
 
          if (contains)
             selverts.erase(svi);
          else
-			 selverts.push_back(value);
+             selverts.push_back(value);
       }
    }
 }
@@ -401,11 +425,11 @@ UVMapView::IsSelected(Poly* poly, WORD v)
    DWORD value = (p << 16) | v;
 
    bool contains = false;
-	
-	for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
-		if (*svi == value)
-			return true;
-	}
+    
+    for (auto svi = selverts.begin(); svi != selverts.end(); ++svi) {
+        if (*svi == value)
+            return true;
+    }
 
    return false;
 }
