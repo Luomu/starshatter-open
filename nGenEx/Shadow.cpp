@@ -1,15 +1,39 @@
-/*  Project nGenEx
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    nGenEx.lib
-	FILE:         Shadow.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    nGenEx.lib
+    FILE:         Shadow.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Dynamic Stencil Shadow Volumes
+    OVERVIEW
+    ========
+    Dynamic Stencil Shadow Volumes
 */
 
 #include "MemDebug.h"
@@ -24,26 +48,26 @@ static bool visible_shadow_volumes = false;
 // +--------------------------------------------------------------------+
 
 Shadow::Shadow(Solid* s)
-: verts(0), nverts(0), max_verts(0), edges(0), num_edges(0), enabled(true)
+    : verts(0), nverts(0), max_verts(0), edges(0), num_edges(0), enabled(true)
 {
-	solid = s;
+    solid = s;
 
-	if (solid && solid->GetModel()) {
-		Model*   model       = solid->GetModel();
-		int      npolys      = model->NumPolys();
+    if (solid && solid->GetModel()) {
+        Model*   model       = solid->GetModel();
+        int      npolys      = model->NumPolys();
 
-		max_verts = model->NumVerts() * 4;
-		verts     = new(__FILE__,__LINE__) Vec3[max_verts];
-		edges     = new(__FILE__,__LINE__) WORD[npolys * 6];
-	}
+        max_verts = model->NumVerts() * 4;
+        verts     = new(__FILE__,__LINE__) Vec3[max_verts];
+        edges     = new(__FILE__,__LINE__) WORD[npolys * 6];
+    }
 }
 
 // +--------------------------------------------------------------------+
 
 Shadow::~Shadow()
 {
-	if (verts)  delete [] verts;
-	if (edges)  delete [] edges;
+    if (verts)  delete [] verts;
+    if (edges)  delete [] edges;
 }
 
 // +--------------------------------------------------------------------+
@@ -51,8 +75,8 @@ Shadow::~Shadow()
 void
 Shadow::Reset()
 {
-	num_edges   = 0;
-	nverts      = 0;
+    num_edges   = 0;
+    nverts      = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -60,8 +84,8 @@ Shadow::Reset()
 void
 Shadow::Render(Video* video)
 {
-	if (enabled)
-	video->DrawShadow(solid, nverts, verts, visible_shadow_volumes);
+    if (enabled)
+    video->DrawShadow(solid, nverts, verts, visible_shadow_volumes);
 }
 
 // +--------------------------------------------------------------------+
@@ -69,108 +93,108 @@ Shadow::Render(Video* video)
 void
 Shadow::Update(Light* light)
 {
-	Reset();
+    Reset();
 
-	if (!light || !solid || !solid->GetModel() || !edges) return;
+    if (!light || !solid || !solid->GetModel() || !edges) return;
 
-	Vec3     lpos        = light->Location();
-	bool     directional = light->Type() == Light::LIGHT_DIRECTIONAL;
-	Model*   model       = solid->GetModel();
+    Vec3     lpos        = light->Location();
+    bool     directional = light->Type() == Light::LIGHT_DIRECTIONAL;
+    Model*   model       = solid->GetModel();
 
-	ListIter<Surface> iter = model->GetSurfaces();
-	while (++iter) {
-		Surface* s = iter.value();
+    ListIter<Surface> iter = model->GetSurfaces();
+    while (++iter) {
+        Surface* s = iter.value();
 
-		// transform light location into surface object space
-		Matrix xform(solid->Orientation()); // XXX should be: (s->GetOrientation());
+        // transform light location into surface object space
+        Matrix xform(solid->Orientation()); // XXX should be: (s->GetOrientation());
 
-		Vec3 tmp = light->Location();
+        Vec3 tmp = light->Location();
 
-		if (!directional)
-		tmp -= (solid->Location() + s->GetOffset());
+        if (!directional)
+        tmp -= (solid->Location() + s->GetOffset());
 
-		lpos.x = tmp * Vec3(xform(0,0), xform(0,1), xform(0,2));
-		lpos.y = tmp * Vec3(xform(1,0), xform(1,1), xform(1,2));
-		lpos.z = tmp * Vec3(xform(2,0), xform(2,1), xform(2,2));
+        lpos.x = tmp * Vec3(xform(0,0), xform(0,1), xform(0,2));
+        lpos.y = tmp * Vec3(xform(1,0), xform(1,1), xform(1,2));
+        lpos.z = tmp * Vec3(xform(2,0), xform(2,1), xform(2,2));
 
-		// compute the silohuette for the mesh with respect to the light:
-		
-		for (int i = 0; i < s->NumPolys(); i++) {
-			Poly* p = s->GetPolys() + i;
+        // compute the silohuette for the mesh with respect to the light:
+        
+        for (int i = 0; i < s->NumPolys(); i++) {
+            Poly* p = s->GetPolys() + i;
 
-			// skip polys with non-shadowing materials:
-			if (p->material && !p->material->shadow)
-			continue;
+            // skip polys with non-shadowing materials:
+            if (p->material && !p->material->shadow)
+            continue;
 
-			// if this poly faces the light:
-			if (p->plane.normal * lpos > 0) {
-				for (int n = 0; n < p->nverts; n++) {
-					if (n < p->nverts-1)
-					AddEdge(p->vlocs[n], p->vlocs[n+1]);
-					else
-					AddEdge(p->vlocs[n], p->vlocs[0]);
-				}
-			}
-		}
+            // if this poly faces the light:
+            if (p->plane.normal * lpos > 0) {
+                for (int n = 0; n < p->nverts; n++) {
+                    if (n < p->nverts-1)
+                    AddEdge(p->vlocs[n], p->vlocs[n+1]);
+                    else
+                    AddEdge(p->vlocs[n], p->vlocs[0]);
+                }
+            }
+        }
 
-		// extrude the silohuette away from the light source
-		// to create the shadow volume:
+        // extrude the silohuette away from the light source
+        // to create the shadow volume:
 
-		Vec3 extent = lpos * -1;
-		extent.Normalize();
-		extent *= 50.0e3f; //solid->Radius() * 2.1f;
+        Vec3 extent = lpos * -1;
+        extent.Normalize();
+        extent *= 50.0e3f; //solid->Radius() * 2.1f;
 
-		for (int i = 0; i < (int) num_edges; i++) {
-			if (nverts+6 <= max_verts) {
-				Vec3 v1 = s->GetVLoc()[edges[2*i+0]];
-				Vec3 v2 = s->GetVLoc()[edges[2*i+1]];
-				Vec3 v3 = v1 + extent;
-				Vec3 v4 = v2 + extent;
+        for (int i = 0; i < (int) num_edges; i++) {
+            if (nverts+6 <= max_verts) {
+                Vec3 v1 = s->GetVLoc()[edges[2*i+0]];
+                Vec3 v2 = s->GetVLoc()[edges[2*i+1]];
+                Vec3 v3 = v1 + extent;
+                Vec3 v4 = v2 + extent;
 
-				verts[nverts++] = v1;
-				verts[nverts++] = v2;
-				verts[nverts++] = v3;
+                verts[nverts++] = v1;
+                verts[nverts++] = v2;
+                verts[nverts++] = v3;
 
-				verts[nverts++] = v2;
-				verts[nverts++] = v4;
-				verts[nverts++] = v3;
-			}
-		}
-	}
+                verts[nverts++] = v2;
+                verts[nverts++] = v4;
+                verts[nverts++] = v3;
+            }
+        }
+    }
 }
 
 void
 Shadow::AddEdge(WORD v1, WORD v2)
 {
-	// Remove interior edges (which appear in the list twice)
-	for (DWORD i = 0; i < num_edges; i++) {
-		if ((edges[2*i+0] == v1 && edges[2*i+1] == v2) ||
-				(edges[2*i+0] == v2 && edges[2*i+1] == v1))
-		{
-			if (num_edges > 1) {
-				edges[2*i+0] = edges[2*(num_edges-1)+0];
-				edges[2*i+1] = edges[2*(num_edges-1)+1];
-			}
+    // Remove interior edges (which appear in the list twice)
+    for (DWORD i = 0; i < num_edges; i++) {
+        if ((edges[2*i+0] == v1 && edges[2*i+1] == v2) ||
+                (edges[2*i+0] == v2 && edges[2*i+1] == v1))
+        {
+            if (num_edges > 1) {
+                edges[2*i+0] = edges[2*(num_edges-1)+0];
+                edges[2*i+1] = edges[2*(num_edges-1)+1];
+            }
 
-			num_edges--;
-			return;
-		}
-	}
+            num_edges--;
+            return;
+        }
+    }
 
-	edges[2*num_edges+0] = v1;
-	edges[2*num_edges+1] = v2;
+    edges[2*num_edges+0] = v1;
+    edges[2*num_edges+1] = v2;
 
-	num_edges++;
+    num_edges++;
 }
 
 bool
 Shadow::GetVisibleShadowVolumes()
 {
-	return visible_shadow_volumes;
+    return visible_shadow_volumes;
 }
 
 void
 Shadow::SetVisibleShadowVolumes(bool vis)
 {
-	visible_shadow_volumes = vis;
+    visible_shadow_volumes = vis;
 }

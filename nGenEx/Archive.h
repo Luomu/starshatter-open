@@ -1,10 +1,34 @@
-/*  Project nGenEx
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    nGenEx.lib
-	FILE:         Archive.h
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    nGenEx.lib
+    FILE:         Archive.h
+    AUTHOR:       John DiCamillo
 
 */
 
@@ -22,69 +46,69 @@
 
 struct DataHeader
 {
-	static const char* TYPENAME() { return "DataHeader"; }
+    static const char* TYPENAME() { return "DataHeader"; }
 
-	DWORD    version;
-	DWORD    nfiles;
-	DWORD    dir_blocks;
-	DWORD    dir_size_comp;
-	DWORD    dir_offset;
+    DWORD    version;
+    DWORD    nfiles;
+    DWORD    dir_blocks;
+    DWORD    dir_size_comp;
+    DWORD    dir_offset;
 };
 
 struct DataEntry
 {
-	static const char* TYPENAME() { return "DataEntry"; }
+    static const char* TYPENAME() { return "DataEntry"; }
 
-	char     name[NAMELEN];
-	DWORD    size_orig;
-	DWORD    size_comp;
-	DWORD    offset; 
+    char     name[NAMELEN];
+    DWORD    size_orig;
+    DWORD    size_comp;
+    DWORD    offset; 
 };
 
 class DataArchive
 {
 public:
-	static const char* TYPENAME() { return "DataArchive"; }
+    static const char* TYPENAME() { return "DataArchive"; }
 
-	// ctor:
-	DataArchive(const char* name = 0);
-	~DataArchive();
+    // ctor:
+    DataArchive(const char* name = 0);
+    ~DataArchive();
 
-	// operations:
-	void     LoadDatafile(const char* name);
-	void     Insert(const char* name);
-	void     Extract(const char* name);
-	void     Remove(const char* name);
-	void     List();
+    // operations:
+    void     LoadDatafile(const char* name);
+    void     Insert(const char* name);
+    void     Extract(const char* name);
+    void     Remove(const char* name);
+    void     List();
 
-	void     WriteEntry(int index, BYTE* buf);
-	int      FindEntry(const char* req_name);
-	int      ExpandEntry(int index, BYTE*& buf, bool null_terminate=false);
-	BYTE*    CompressEntry(int index);
-	int      InsertEntry(const char* name);
-	void     RemoveEntry(int index);
-	DWORD    Blocks(DWORD raw_size);
-	DWORD    DirBlocks();
-	DWORD    FileBlocks(int index);
-	int      FindDataBlocks(int blocks_needed);
-	void     CreateBlockMap();
+    void     WriteEntry(int index, BYTE* buf);
+    int      FindEntry(const char* req_name);
+    int      ExpandEntry(int index, BYTE*& buf, bool null_terminate=false);
+    BYTE*    CompressEntry(int index);
+    int      InsertEntry(const char* name);
+    void     RemoveEntry(int index);
+    DWORD    Blocks(DWORD raw_size);
+    DWORD    DirBlocks();
+    DWORD    FileBlocks(int index);
+    int      FindDataBlocks(int blocks_needed);
+    void     CreateBlockMap();
 
-	DWORD    NumFiles() { return header.nfiles; }
-	DataEntry* GetFile(int i) { if (i>=0 && i<(int)header.nfiles) return &directory[i]; return 0; }
+    DWORD    NumFiles() { return header.nfiles; }
+    DataEntry* GetFile(int i) { if (i>=0 && i<(int)header.nfiles) return &directory[i]; return 0; }
 
-	const char* Name()   const { return datafile; }
+    const char* Name()   const { return datafile; }
 
 private:
-	// persistent data members:
-	DataHeader  header;
-	DataEntry*  directory;
-	BYTE*       dirbuf;
+    // persistent data members:
+    DataHeader  header;
+    DataEntry*  directory;
+    BYTE*       dirbuf;
 
-	// transient members:
-	char        datafile[NAMELEN];
+    // transient members:
+    char        datafile[NAMELEN];
 
-	DWORD*      block_map;
-	DWORD       nblocks;
+    DWORD*      block_map;
+    DWORD       nblocks;
 };
 
 #endif Archive_h
