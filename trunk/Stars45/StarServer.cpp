@@ -1,10 +1,34 @@
-/*  Project Starshatter 5.0
-	Destroyer Studios LLC
-	Copyright © 1997-2007. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars
-	FILE:         StarServer.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars
+    FILE:         StarServer.cpp
+    AUTHOR:       John DiCamillo
 
 */
 
@@ -69,69 +93,69 @@ StarServer::StarServer()
 : loader(0), time_mark(0), minutes(0), game_mode(MENU_MODE),
 admin_server(0), lobby_server(0)
 {
-	if (!instance)
-	instance = this;
+    if (!instance)
+    instance = this;
 
-	app_name     = "Starserver 5.0";
-	title_text   = "Starserver";
-	palette_name = "alpha";
+    app_name     = "Starserver 5.0";
+    title_text   = "Starserver";
+    palette_name = "alpha";
 
-	Game::server      = true;
-	Game::show_mouse  = true;
+    Game::server      = true;
+    Game::show_mouse  = true;
 
-	DataLoader::Initialize();
-	loader       = DataLoader::GetLoader();
-	int loadstat = loader->EnableDatafile("shatter.dat");
+    DataLoader::Initialize();
+    loader       = DataLoader::GetLoader();
+    int loadstat = loader->EnableDatafile("shatter.dat");
 
-	if (loadstat != DataLoader::DATAFILE_OK) {
-		const char* err_msg = loadstat == DataLoader::DATAFILE_INVALID ?
-		"The file 'shatter.dat' appears to have been damaged.  Please re-install Starshatter." :
-		"Starshatter cannot open the file 'shatter.dat'.  Please re-install Starshatter.";
+    if (loadstat != DataLoader::DATAFILE_OK) {
+        const char* err_msg = loadstat == DataLoader::DATAFILE_INVALID ?
+        "The file 'shatter.dat' appears to have been damaged.  Please re-install Starshatter." :
+        "Starshatter cannot open the file 'shatter.dat'.  Please re-install Starshatter.";
 
-		::MessageBox(hwnd, err_msg, "Starshatter - Error", MB_OK);
-		::Print(err_msg);
-		::Print("\n\nFATAL ERROR: EXIT.");
-		exit(-1);
-	}
+        ::MessageBox(hwnd, err_msg, "Starshatter - Error", MB_OK);
+        ::Print(err_msg);
+        ::Print("\n\nFATAL ERROR: EXIT.");
+        exit(-1);
+    }
 
-	if (loader->FindFile("start.dat"))
-	loader->EnableDatafile("start.dat");
+    if (loader->FindFile("start.dat"))
+    loader->EnableDatafile("start.dat");
 
-	// no images or sounds in server mode:
-	loader->EnableMedia(false);
+    // no images or sounds in server mode:
+    loader->EnableMedia(false);
 }
 
 StarServer::~StarServer()
 {
-	delete admin_server;
-	delete lobby_server;
+    delete admin_server;
+    delete lobby_server;
 
-	admin_server = 0;
-	lobby_server = 0;
+    admin_server = 0;
+    lobby_server = 0;
 
-	// delete all the ships and stuff
-	// BEFORE getting rid of the system
-	// and weapons catalogs!
-	delete world;
-	world = 0; // don't let base class double delete the world
+    // delete all the ships and stuff
+    // BEFORE getting rid of the system
+    // and weapons catalogs!
+    delete world;
+    world = 0; // don't let base class double delete the world
 
-	Drive::Close();
-	Explosion::Close();
-	FlightDeck::Close();
-	Campaign::Close();
-	CombatRoster::Close();
-	Galaxy::Close();
-	RadioTraffic::Close();
-	Ship::Close();
-	WeaponDesign::Close();
-	SystemDesign::Close();
-	DataLoader::Close();
-	NetServerConfig::Close();
-	ModConfig::Close();
+    Drive::Close();
+    Explosion::Close();
+    FlightDeck::Close();
+    Campaign::Close();
+    CombatRoster::Close();
+    Galaxy::Close();
+    RadioTraffic::Close();
+    Ship::Close();
+    WeaponDesign::Close();
+    SystemDesign::Close();
+    DataLoader::Close();
+    NetServerConfig::Close();
+    ModConfig::Close();
 
-	instance = 0;
+    instance = 0;
 
-	Game::server = false;
+    Game::server = false;
 }
 
 // +--------------------------------------------------------------------+
@@ -139,10 +163,10 @@ StarServer::~StarServer()
 bool
 StarServer::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
 {
-	if (loader)
-	loader->UseFileSystem(false);
+    if (loader)
+    loader->UseFileSystem(false);
 
-	return Game::Init(hi, hpi, cmdline, nCmdShow);
+    return Game::Init(hi, hpi, cmdline, nCmdShow);
 }
 
 // +--------------------------------------------------------------------+
@@ -150,53 +174,53 @@ StarServer::Init(HINSTANCE hi, HINSTANCE hpi, LPSTR cmdline, int nCmdShow)
 bool
 StarServer::InitGame()
 {
-	if (!Game::InitGame())
-	return false;
+    if (!Game::InitGame())
+    return false;
 
-	RandomInit();
-	ModConfig::Initialize();
-	NetServerConfig::Initialize();
-	SystemDesign::Initialize("sys.def");
-	WeaponDesign::Initialize("wep.def");
-	Ship::Initialize();
-	Galaxy::Initialize();
-	CombatRoster::Initialize();
-	Campaign::Initialize();
+    RandomInit();
+    ModConfig::Initialize();
+    NetServerConfig::Initialize();
+    SystemDesign::Initialize("sys.def");
+    WeaponDesign::Initialize("wep.def");
+    Ship::Initialize();
+    Galaxy::Initialize();
+    CombatRoster::Initialize();
+    Campaign::Initialize();
 
-	Drive::Initialize();
-	Explosion::Initialize();
-	FlightDeck::Initialize();
-	Ship::Initialize();
-	Shot::Initialize();
-	RadioTraffic::Initialize();
+    Drive::Initialize();
+    Explosion::Initialize();
+    FlightDeck::Initialize();
+    Ship::Initialize();
+    Shot::Initialize();
+    RadioTraffic::Initialize();
 
-	time_mark = Game::GameTime();
-	minutes   = 0;
+    time_mark = Game::GameTime();
+    minutes   = 0;
 
-	NetServerConfig* server_config = NetServerConfig::GetInstance();
-	if (!server_config)
-	return false;
+    NetServerConfig* server_config = NetServerConfig::GetInstance();
+    if (!server_config)
+    return false;
 
-	::Print("\n\n\nStarshatter Server Init\n");
-	::Print("-----------------------\n");
-	::Print("Server Name:       %s\n", (const char*) server_config->Name());
-	::Print("Server Type:       %d\n", server_config->GetGameType());
+    ::Print("\n\n\nStarshatter Server Init\n");
+    ::Print("-----------------------\n");
+    ::Print("Server Name:       %s\n", (const char*) server_config->Name());
+    ::Print("Server Type:       %d\n", server_config->GetGameType());
 
-	if (server_config->GetMission().length() > 0)
-	::Print("Server Mission:    %s\n", (const char*) server_config->GetMission());
+    if (server_config->GetMission().length() > 0)
+    ::Print("Server Mission:    %s\n", (const char*) server_config->GetMission());
 
-	::Print("Lobby Server Port: %d\n", server_config->GetLobbyPort());
-	::Print("Admin Server Port: %d\n", server_config->GetAdminPort());
-	::Print("-----------------------\n");
+    ::Print("Lobby Server Port: %d\n", server_config->GetLobbyPort());
+    ::Print("Admin Server Port: %d\n", server_config->GetAdminPort());
+    ::Print("-----------------------\n");
 
-	NetLobbyServer* nls = new(__FILE__,__LINE__) NetLobbyServer;
-	NetAdminServer* nas = NetAdminServer::GetInstance(server_config->GetAdminPort());
-	nas->SetServerName(server_config->Name());
+    NetLobbyServer* nls = new(__FILE__,__LINE__) NetLobbyServer;
+    NetAdminServer* nas = NetAdminServer::GetInstance(server_config->GetAdminPort());
+    nas->SetServerName(server_config->Name());
 
-	lobby_server = nls;
-	admin_server = nas;
+    lobby_server = nls;
+    admin_server = nas;
 
-	return true;
+    return true;
 }
 
 // +--------------------------------------------------------------------+
@@ -204,39 +228,39 @@ StarServer::InitGame()
 void
 StarServer::SetGameMode(int m)
 {
-	if (game_mode == m)
-	return;
+    if (game_mode == m)
+    return;
 
-	if (m == LOAD_MODE) {
-		Print("  game_mode = LOAD_MODE\n");
-		paused = true;
-	}
+    if (m == LOAD_MODE) {
+        Print("  game_mode = LOAD_MODE\n");
+        paused = true;
+    }
 
-	else if (m == PLAY_MODE) {
-		Print("  game_mode = PLAY_MODE\n");
+    else if (m == PLAY_MODE) {
+        Print("  game_mode = PLAY_MODE\n");
 
-		if (!world) {
-			CreateWorld();
-			InstantiateMission();
-		}
+        if (!world) {
+            CreateWorld();
+            InstantiateMission();
+        }
 
-		// stand alone server should wait for players to connect
-		// before unpausing the simulation...
-		SetTimeCompression(1);
-		Pause(true);
-	}
+        // stand alone server should wait for players to connect
+        // before unpausing the simulation...
+        SetTimeCompression(1);
+        Pause(true);
+    }
 
-	else if (m == MENU_MODE) {
-		Print("  game_mode = MENU_MODE\n");
-		paused = true;
+    else if (m == MENU_MODE) {
+        Print("  game_mode = MENU_MODE\n");
+        paused = true;
 
-		Sim* sim = (Sim*) world;
+        Sim* sim = (Sim*) world;
 
-		if (sim)
-		sim->UnloadMission();
-	}
+        if (sim)
+        sim->UnloadMission();
+    }
 
-	game_mode = m;
+    game_mode = m;
 }
 
 // +--------------------------------------------------------------------+
@@ -244,8 +268,8 @@ StarServer::SetGameMode(int m)
 void
 StarServer::SetNextMission(const char* script)
 {
-	if (lobby_server)
-	lobby_server->SetServerMission(script);
+    if (lobby_server)
+    lobby_server->SetServerMission(script);
 }
 
 // +--------------------------------------------------------------------+
@@ -253,46 +277,46 @@ StarServer::SetNextMission(const char* script)
 void
 StarServer::CreateWorld()
 {
-	RadioTraffic::Initialize();
+    RadioTraffic::Initialize();
 
-	// create world
-	if (!world) {
-		Sim* sim = new(__FILE__,__LINE__) Sim(0);
-		world = sim;
-		Print("  World Created.\n");
-	}
+    // create world
+    if (!world) {
+        Sim* sim = new(__FILE__,__LINE__) Sim(0);
+        world = sim;
+        Print("  World Created.\n");
+    }
 }
 
 void
 StarServer::InstantiateMission()
 {
-	Memory::Check();
+    Memory::Check();
 
-	current_mission = 0;
+    current_mission = 0;
 
-	if (Campaign::GetCampaign()) {
-		current_mission = Campaign::GetCampaign()->GetMission();
-	}
+    if (Campaign::GetCampaign()) {
+        current_mission = Campaign::GetCampaign()->GetMission();
+    }
 
-	Sim* sim = (Sim*) world;
+    Sim* sim = (Sim*) world;
 
-	if (sim) {
-		sim->UnloadMission();
+    if (sim) {
+        sim->UnloadMission();
 
-		if (current_mission) {
-			sim->LoadMission(current_mission);
-			sim->ExecMission();
-			sim->SetTestMode(false);
+        if (current_mission) {
+            sim->LoadMission(current_mission);
+            sim->ExecMission();
+            sim->SetTestMode(false);
 
-			Print("  Mission Instantiated.\n");
-		}
+            Print("  Mission Instantiated.\n");
+        }
 
-		else {
-			Print("  *** WARNING: StarServer::InstantiateMission() - no mission selected ***\n");
-		}
-	}
+        else {
+            Print("  *** WARNING: StarServer::InstantiateMission() - no mission selected ***\n");
+        }
+    }
 
-	Memory::Check();
+    Memory::Check();
 }
 
 // +--------------------------------------------------------------------+
@@ -300,21 +324,21 @@ StarServer::InstantiateMission()
 bool
 StarServer::GameLoop()
 {
-	if (active && paused) {
-		UpdateWorld();
-		GameState();
-	}
+    if (active && paused) {
+        UpdateWorld();
+        GameState();
+    }
 
-	else if (!active) {
-		UpdateWorld();
-		GameState();
-		Sleep(10);
-	}
+    else if (!active) {
+        UpdateWorld();
+        GameState();
+        Sleep(10);
+    }
 
-	Game::GameLoop();
-	return false;  // must return false to keep processing
-	// true tells the outer loop to sleep until a
-	// windows event is available
+    Game::GameLoop();
+    return false;  // must return false to keep processing
+    // true tells the outer loop to sleep until a
+    // windows event is available
 }
 
 // +--------------------------------------------------------------------+
@@ -322,46 +346,46 @@ StarServer::GameLoop()
 void
 StarServer::UpdateWorld()
 {
-	long   new_time      = real_time;
-	double delta         = new_time - frame_time;
-	seconds       = max_frame_length;
-	gui_seconds   = delta * 0.001;
+    long   new_time      = real_time;
+    double delta         = new_time - frame_time;
+    seconds       = max_frame_length;
+    gui_seconds   = delta * 0.001;
 
-	if (frame_time == 0)
-	gui_seconds = 0;
+    if (frame_time == 0)
+    gui_seconds = 0;
 
-	time_comp = 1;
+    time_comp = 1;
 
-	if (delta < max_frame_length * 1000)
-	seconds = delta * 0.001;
+    if (delta < max_frame_length * 1000)
+    seconds = delta * 0.001;
 
-	frame_time = new_time;
+    frame_time = new_time;
 
-	Galaxy* galaxy = Galaxy::GetInstance();
-	if (galaxy) galaxy->ExecFrame();
+    Galaxy* galaxy = Galaxy::GetInstance();
+    if (galaxy) galaxy->ExecFrame();
 
-	Campaign* campaign = Campaign::GetCampaign();
-	if (campaign) campaign->ExecFrame();
+    Campaign* campaign = Campaign::GetCampaign();
+    if (campaign) campaign->ExecFrame();
 
-	if (paused) {
-		if (world)
-		world->ExecFrame(0);
-	}
+    if (paused) {
+        if (world)
+        world->ExecFrame(0);
+    }
 
-	else {
-		game_time += (DWORD) (seconds * 1000);
+    else {
+        game_time += (DWORD) (seconds * 1000);
 
-		Drive::StartFrame();
+        Drive::StartFrame();
 
-		if (world)
-		world->ExecFrame(seconds);
-	}
+        if (world)
+        world->ExecFrame(seconds);
+    }
 
-	static DWORD refresh_time = 0;
-	if (RealTime() - refresh_time > 1000) {
-		refresh_time = RealTime();
-		RedrawWindow(hwnd, 0, 0, RDW_ERASE|RDW_INVALIDATE);
-	}
+    static DWORD refresh_time = 0;
+    if (RealTime() - refresh_time > 1000) {
+        refresh_time = RealTime();
+        RedrawWindow(hwnd, 0, 0, RDW_ERASE|RDW_INVALIDATE);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -369,38 +393,38 @@ StarServer::UpdateWorld()
 void
 StarServer::GameState()
 {
-	if (lobby_server) {
-		lobby_server->ExecFrame();
+    if (lobby_server) {
+        lobby_server->ExecFrame();
 
-		if (lobby_server->GetStatus() == NetServerInfo::PERSISTENT)
-		paused = NetGame::NumPlayers() < 1;
-	}
+        if (lobby_server->GetStatus() == NetServerInfo::PERSISTENT)
+        paused = NetGame::NumPlayers() < 1;
+    }
 
-	if (game_mode == MENU_MODE) {
-		Sleep(30);
-	}
+    if (game_mode == MENU_MODE) {
+        Sleep(30);
+    }
 
-	else if (game_mode == LOAD_MODE) {
-		CreateWorld();
-		InstantiateMission();
+    else if (game_mode == LOAD_MODE) {
+        CreateWorld();
+        InstantiateMission();
 
-		SetGameMode(PLAY_MODE);
-	}
+        SetGameMode(PLAY_MODE);
+    }
 
-	else if (game_mode == PLAY_MODE) {
-		if (Game::GameTime() - time_mark > 60000) {
-			time_mark = Game::GameTime();
-			minutes++;
-			if (minutes > 60)
-			Print("  TIME %2d:%02d:00\n", minutes/60, minutes%60);
-			else
-			Print("  TIME    %2d:00\n", minutes);
-		}
+    else if (game_mode == PLAY_MODE) {
+        if (Game::GameTime() - time_mark > 60000) {
+            time_mark = Game::GameTime();
+            minutes++;
+            if (minutes > 60)
+            Print("  TIME %2d:%02d:00\n", minutes/60, minutes%60);
+            else
+            Print("  TIME    %2d:00\n", minutes);
+        }
 
-		Sleep(10);
-	}
+        Sleep(10);
+    }
 
-	Memory::Check();
+    Memory::Check();
 }
 
 // +--------------------------------------------------------------------+
@@ -408,116 +432,116 @@ StarServer::GameState()
 bool
 StarServer::OnPaint()
 {
-	PAINTSTRUCT paintstruct;
-	HDC hdc = BeginPaint(hwnd, &paintstruct);
+    PAINTSTRUCT paintstruct;
+    HDC hdc = BeginPaint(hwnd, &paintstruct);
 
-	Text txt_title = title_text;
-	Text txt_mode;
-	Text txt_users = Game::GetText("server.no-users");
-	char buf[256];
+    Text txt_title = title_text;
+    Text txt_mode;
+    Text txt_users = Game::GetText("server.no-users");
+    char buf[256];
 
-	txt_title += " ";
-	txt_title += versionInfo;
+    txt_title += " ";
+    txt_title += versionInfo;
 
-	switch (game_mode) {
-	case LOAD_MODE:
-	case MENU_MODE:  
-		txt_mode = Game::GetText("server.mode.lobby");
+    switch (game_mode) {
+    case LOAD_MODE:
+    case MENU_MODE:  
+        txt_mode = Game::GetText("server.mode.lobby");
 
-		if (lobby_server) {
-			sprintf_s(buf, Game::GetText("server.users").data(), lobby_server->NumUsers());
-			txt_users = buf;
-		}
-		break;
+        if (lobby_server) {
+            sprintf_s(buf, Game::GetText("server.users").data(), lobby_server->NumUsers());
+            txt_users = buf;
+        }
+        break;
 
-	case PLAY_MODE:  
-		txt_mode = Game::GetText("server.mode.active");
-		if (lobby_server) {
-			sprintf_s(buf, Game::GetText("server.users-and-players").data(), lobby_server->NumUsers(), NetGame::NumPlayers());
-		}
-		else {
-			sprintf_s(buf, Game::GetText("server.players").data(), NetGame::NumPlayers());
-		}
-		txt_users = buf;
-		break;
+    case PLAY_MODE:  
+        txt_mode = Game::GetText("server.mode.active");
+        if (lobby_server) {
+            sprintf_s(buf, Game::GetText("server.users-and-players").data(), lobby_server->NumUsers(), NetGame::NumPlayers());
+        }
+        else {
+            sprintf_s(buf, Game::GetText("server.players").data(), NetGame::NumPlayers());
+        }
+        txt_users = buf;
+        break;
 
-	default:
-		txt_mode = Game::GetText("server.mode.other");
-		break;
-	}
+    default:
+        txt_mode = Game::GetText("server.mode.other");
+        break;
+    }
 
-	if (lobby_server && lobby_server->GetStatus() == NetServerInfo::PERSISTENT)
-	txt_mode += " " + Game::GetText("server.alt.persistent");
+    if (lobby_server && lobby_server->GetStatus() == NetServerInfo::PERSISTENT)
+    txt_mode += " " + Game::GetText("server.alt.persistent");
 
-	if (paused)
-	txt_mode += " " + Game::GetText("server.alt.paused");
+    if (paused)
+    txt_mode += " " + Game::GetText("server.alt.paused");
 
-	TextOut(hdc, 4,  4, txt_title, txt_title.length());
-	TextOut(hdc, 4, 22, txt_mode,  txt_mode.length());
-	TextOut(hdc, 4, 40, txt_users, txt_users.length());
+    TextOut(hdc, 4,  4, txt_title, txt_title.length());
+    TextOut(hdc, 4, 22, txt_mode,  txt_mode.length());
+    TextOut(hdc, 4, 40, txt_users, txt_users.length());
 
-	Sim* sim = Sim::GetSim();
-	if (sim && sim->GetMission()) {
-		Mission* mission = sim->GetMission();
-		Text txt_msn = Game::GetText("server.mission");
-		txt_msn += mission->Name();
-		TextOut(hdc, 4, 58, txt_msn, txt_msn.length());
-	}
+    Sim* sim = Sim::GetSim();
+    if (sim && sim->GetMission()) {
+        Mission* mission = sim->GetMission();
+        Text txt_msn = Game::GetText("server.mission");
+        txt_msn += mission->Name();
+        TextOut(hdc, 4, 58, txt_msn, txt_msn.length());
+    }
 
-	EndPaint(hwnd, &paintstruct);
-	return true;
+    EndPaint(hwnd, &paintstruct);
+    return true;
 }
 
 // +--------------------------------------------------------------------+
 
 DWORD WINAPI StarServerShutdownProc(LPVOID link)
 {
-	StarServer* stars = (StarServer*) link;
+    StarServer* stars = (StarServer*) link;
 
-	Sleep(3000);
+    Sleep(3000);
 
-	if (stars) {
-		stars->Exit();
-		return 0;
-	}
+    if (stars) {
+        stars->Exit();
+        return 0;
+    }
 
-	return (DWORD) E_POINTER;
+    return (DWORD) E_POINTER;
 }
 
 DWORD WINAPI StarServerRestartProc(LPVOID link)
 {
-	StarServer* stars = (StarServer*) link;
+    StarServer* stars = (StarServer*) link;
 
-	Sleep(3000);
+    Sleep(3000);
 
-	if (stars) {
-		char cmdline[256];
-		strcpy_s(cmdline, "stars -server");
+    if (stars) {
+        char cmdline[256];
+        strcpy_s(cmdline, "stars -server");
 
-		STARTUPINFO s;
-		ZeroMemory(&s, sizeof(s));
-		s.cb = sizeof(s);
+        STARTUPINFO s;
+        ZeroMemory(&s, sizeof(s));
+        s.cb = sizeof(s);
 
-		PROCESS_INFORMATION pi;
-		ZeroMemory(&pi, sizeof(pi));
+        PROCESS_INFORMATION pi;
+        ZeroMemory(&pi, sizeof(pi));
 
-		CreateProcess("stars.exe", cmdline, 0, 0, 0, 0, 0, 0, &s, &pi);
-		stars->Exit();
-		CloseHandle( pi.hProcess );
-		CloseHandle( pi.hThread );
-		return 0;
-	}
+        CreateProcess("stars.exe", cmdline, 0, 0, 0, 0, 0, 0, &s, &pi);
+        stars->Exit();
+        CloseHandle( pi.hProcess );
+        CloseHandle( pi.hThread );
+        return 0;
+    }
 
-	return (DWORD) E_POINTER;
+    return (DWORD) E_POINTER;
 }
 
 void
 StarServer::Shutdown(bool restart)
 {
-	DWORD thread_id = 0;
+    DWORD thread_id = 0;
 
-	if (restart)
-	CreateThread(0, 4096, StarServerRestartProc,  (LPVOID) this, 0, &thread_id);
-	else
-	CreateThread(0, 4096, StarServerShutdownProc, (LPVOID) this, 0, &thread_id);
+    if (restart)
+    CreateThread(0, 4096, StarServerRestartProc,  (LPVOID) this, 0, &thread_id);
+    else
+    CreateThread(0, 4096, StarServerShutdownProc, (LPVOID) this, 0, &thread_id);
 }

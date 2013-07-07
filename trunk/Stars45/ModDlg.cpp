@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         ModDlg.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         ModDlg.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Mod Config Dialog Active Window class
+    OVERVIEW
+    ========
+    Mod Config Dialog Active Window class
 */
 
 #include "MemDebug.h"
@@ -54,8 +78,8 @@ btn_increase(0), btn_decrease(0), btn_accept(0), btn_cancel(0),
 aud_btn(0), vid_btn(0), ctl_btn(0), opt_btn(0), mod_btn(0),
 config(0), changed(false)
 {
-	config = ModConfig::GetInstance();
-	Init(def);
+    config = ModConfig::GetInstance();
+    Init(def);
 }
 
 ModDlg::~ModDlg()
@@ -67,71 +91,71 @@ ModDlg::~ModDlg()
 void
 ModDlg::RegisterControls()
 {
-	btn_accept     = (Button*) FindControl(  1);
-	btn_cancel     = (Button*) FindControl(  2);
-	btn_enable     = (Button*) FindControl(301);
-	btn_disable    = (Button*) FindControl(302);
-	btn_increase   = (Button*) FindControl(303);
-	btn_decrease   = (Button*) FindControl(304);
+    btn_accept     = (Button*) FindControl(  1);
+    btn_cancel     = (Button*) FindControl(  2);
+    btn_enable     = (Button*) FindControl(301);
+    btn_disable    = (Button*) FindControl(302);
+    btn_increase   = (Button*) FindControl(303);
+    btn_decrease   = (Button*) FindControl(304);
 
-	lst_disabled   = (ListBox*) FindControl(201);
-	lst_enabled    = (ListBox*) FindControl(202);
+    lst_disabled   = (ListBox*) FindControl(201);
+    lst_enabled    = (ListBox*) FindControl(202);
 
-	if (btn_accept)
-	REGISTER_CLIENT(EID_CLICK,    btn_accept,    ModDlg, OnAccept);
+    if (btn_accept)
+    REGISTER_CLIENT(EID_CLICK,    btn_accept,    ModDlg, OnAccept);
 
-	if (btn_cancel)
-	REGISTER_CLIENT(EID_CLICK,    btn_cancel,    ModDlg, OnCancel);
+    if (btn_cancel)
+    REGISTER_CLIENT(EID_CLICK,    btn_cancel,    ModDlg, OnCancel);
 
-	if (lst_enabled)
-	REGISTER_CLIENT(EID_SELECT,   lst_enabled,   ModDlg, OnSelectEnabled);
+    if (lst_enabled)
+    REGISTER_CLIENT(EID_SELECT,   lst_enabled,   ModDlg, OnSelectEnabled);
 
-	if (lst_disabled)
-	REGISTER_CLIENT(EID_SELECT,   lst_disabled,  ModDlg, OnSelectDisabled);
+    if (lst_disabled)
+    REGISTER_CLIENT(EID_SELECT,   lst_disabled,  ModDlg, OnSelectDisabled);
 
-	if (btn_enable) {
-		REGISTER_CLIENT(EID_CLICK,    btn_enable,    ModDlg, OnEnable);
-		btn_enable->SetEnabled(false);
-	}
+    if (btn_enable) {
+        REGISTER_CLIENT(EID_CLICK,    btn_enable,    ModDlg, OnEnable);
+        btn_enable->SetEnabled(false);
+    }
 
-	if (btn_disable) {
-		REGISTER_CLIENT(EID_CLICK,    btn_disable,   ModDlg, OnDisable);
-		btn_disable->SetEnabled(false);
-	}
+    if (btn_disable) {
+        REGISTER_CLIENT(EID_CLICK,    btn_disable,   ModDlg, OnDisable);
+        btn_disable->SetEnabled(false);
+    }
 
-	if (btn_increase) {
-		char up_arrow[2];
-		up_arrow[0] = Font::ARROW_UP;
-		up_arrow[1] = 0;
-		btn_increase->SetText(up_arrow);
-		btn_increase->SetEnabled(false);
-		REGISTER_CLIENT(EID_CLICK,    btn_increase,  ModDlg, OnIncrease);
-	}
+    if (btn_increase) {
+        char up_arrow[2];
+        up_arrow[0] = Font::ARROW_UP;
+        up_arrow[1] = 0;
+        btn_increase->SetText(up_arrow);
+        btn_increase->SetEnabled(false);
+        REGISTER_CLIENT(EID_CLICK,    btn_increase,  ModDlg, OnIncrease);
+    }
 
-	if (btn_decrease) {
-		char dn_arrow[2];
-		dn_arrow[0] = Font::ARROW_DOWN;
-		dn_arrow[1] = 0;
-		btn_decrease->SetText(dn_arrow);
-		btn_decrease->SetEnabled(false);
-		REGISTER_CLIENT(EID_CLICK,    btn_decrease,  ModDlg, OnDecrease);
-	}
+    if (btn_decrease) {
+        char dn_arrow[2];
+        dn_arrow[0] = Font::ARROW_DOWN;
+        dn_arrow[1] = 0;
+        btn_decrease->SetText(dn_arrow);
+        btn_decrease->SetEnabled(false);
+        REGISTER_CLIENT(EID_CLICK,    btn_decrease,  ModDlg, OnDecrease);
+    }
 
-	vid_btn = (Button*) FindControl(901);
-	REGISTER_CLIENT(EID_CLICK, vid_btn, ModDlg, OnVideo);
+    vid_btn = (Button*) FindControl(901);
+    REGISTER_CLIENT(EID_CLICK, vid_btn, ModDlg, OnVideo);
 
-	aud_btn = (Button*) FindControl(902);
-	REGISTER_CLIENT(EID_CLICK, aud_btn, ModDlg, OnAudio);
+    aud_btn = (Button*) FindControl(902);
+    REGISTER_CLIENT(EID_CLICK, aud_btn, ModDlg, OnAudio);
 
-	ctl_btn = (Button*) FindControl(903);
-	REGISTER_CLIENT(EID_CLICK, ctl_btn, ModDlg, OnControls);
+    ctl_btn = (Button*) FindControl(903);
+    REGISTER_CLIENT(EID_CLICK, ctl_btn, ModDlg, OnControls);
 
-	opt_btn = (Button*) FindControl(904);
-	REGISTER_CLIENT(EID_CLICK, opt_btn, ModDlg, OnOptions);
+    opt_btn = (Button*) FindControl(904);
+    REGISTER_CLIENT(EID_CLICK, opt_btn, ModDlg, OnOptions);
 
-	mod_btn = (Button*) FindControl(905);
-	if (mod_btn)
-	REGISTER_CLIENT(EID_CLICK, mod_btn, ModDlg, OnMod);
+    mod_btn = (Button*) FindControl(905);
+    if (mod_btn)
+    REGISTER_CLIENT(EID_CLICK, mod_btn, ModDlg, OnMod);
 }
 
 // +--------------------------------------------------------------------+
@@ -139,49 +163,49 @@ ModDlg::RegisterControls()
 void
 ModDlg::Show()
 {
-	FormWindow::Show();
-	UpdateLists();
+    FormWindow::Show();
+    UpdateLists();
 
-	if (vid_btn)   vid_btn->SetButtonState(0);
-	if (aud_btn)   aud_btn->SetButtonState(0);
-	if (ctl_btn)   ctl_btn->SetButtonState(0);
-	if (opt_btn)   opt_btn->SetButtonState(0);
-	if (mod_btn)   mod_btn->SetButtonState(1);
+    if (vid_btn)   vid_btn->SetButtonState(0);
+    if (aud_btn)   aud_btn->SetButtonState(0);
+    if (ctl_btn)   ctl_btn->SetButtonState(0);
+    if (opt_btn)   opt_btn->SetButtonState(0);
+    if (mod_btn)   mod_btn->SetButtonState(1);
 }
 
 void
 ModDlg::UpdateLists()
 {
-	config = ModConfig::GetInstance();
+    config = ModConfig::GetInstance();
 
-	if (config && lst_disabled && lst_enabled) {
-		lst_disabled->ClearItems();
-		lst_enabled->ClearItems();
+    if (config && lst_disabled && lst_enabled) {
+        lst_disabled->ClearItems();
+        lst_enabled->ClearItems();
 
-		ListIter<Text> iter_d = config->DisabledMods();
-		while (++iter_d) {
-			Text* t = iter_d.value();
-			lst_disabled->AddItem(*t);
-		}
+        ListIter<Text> iter_d = config->DisabledMods();
+        while (++iter_d) {
+            Text* t = iter_d.value();
+            lst_disabled->AddItem(*t);
+        }
 
-		ListIter<Text> iter_e = config->EnabledMods();
-		while (++iter_e) {
-			Text* t = iter_e.value();
-			lst_enabled->AddItem(*t);
-		}
-	}
+        ListIter<Text> iter_e = config->EnabledMods();
+        while (++iter_e) {
+            Text* t = iter_e.value();
+            lst_enabled->AddItem(*t);
+        }
+    }
 
-	if (btn_disable)
-	btn_disable->SetEnabled(false);
+    if (btn_disable)
+    btn_disable->SetEnabled(false);
 
-	if (btn_enable)
-	btn_enable->SetEnabled(false);
+    if (btn_enable)
+    btn_enable->SetEnabled(false);
 
-	if (btn_increase)
-	btn_increase->SetEnabled(false);
+    if (btn_increase)
+    btn_increase->SetEnabled(false);
 
-	if (btn_decrease)
-	btn_decrease->SetEnabled(false);
+    if (btn_decrease)
+    btn_decrease->SetEnabled(false);
 }
 
 // +--------------------------------------------------------------------+
@@ -189,10 +213,10 @@ ModDlg::UpdateLists()
 void
 ModDlg::ExecFrame()
 {
-	if (Keyboard::KeyDown(VK_RETURN)) {
-		if (btn_accept && btn_accept->IsEnabled())
-		OnAccept(0);
-	}
+    if (Keyboard::KeyDown(VK_RETURN)) {
+        if (btn_accept && btn_accept->IsEnabled())
+        OnAccept(0);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -200,101 +224,101 @@ ModDlg::ExecFrame()
 void
 ModDlg::OnSelectEnabled(AWEvent* event)
 {
-	static DWORD click_time = 0;
+    static DWORD click_time = 0;
 
-	if (lst_enabled) {
-		if (btn_disable)
-		btn_disable->SetEnabled(lst_enabled->GetSelCount() == 1);
+    if (lst_enabled) {
+        if (btn_disable)
+        btn_disable->SetEnabled(lst_enabled->GetSelCount() == 1);
 
-		if (btn_increase)
-		btn_increase->SetEnabled(lst_enabled->GetSelection() > 0);
+        if (btn_increase)
+        btn_increase->SetEnabled(lst_enabled->GetSelection() > 0);
 
-		if (btn_decrease)
-		btn_decrease->SetEnabled(lst_enabled->GetSelection() < lst_enabled->NumItems() - 1);
+        if (btn_decrease)
+        btn_decrease->SetEnabled(lst_enabled->GetSelection() < lst_enabled->NumItems() - 1);
 
-		// double-click:
-		if (Game::RealTime() - click_time < 350) {
-			if (lst_enabled->GetSelCount() == 1) {
-				int         index        = lst_enabled->GetSelection();
-				Text        mod_name     = lst_enabled->GetItemText(index);
-				ModInfo*    mod_info     = config->GetModInfo(mod_name);
-				ModInfoDlg* mod_info_dlg = manager->GetModInfoDlg();
+        // double-click:
+        if (Game::RealTime() - click_time < 350) {
+            if (lst_enabled->GetSelCount() == 1) {
+                int         index        = lst_enabled->GetSelection();
+                Text        mod_name     = lst_enabled->GetItemText(index);
+                ModInfo*    mod_info     = config->GetModInfo(mod_name);
+                ModInfoDlg* mod_info_dlg = manager->GetModInfoDlg();
 
-				if (mod_info && mod_info_dlg) {
-					mod_info_dlg->SetModInfo(mod_info);
-					manager->ShowModInfoDlg();
-				}
-			}
-		}
-	}
+                if (mod_info && mod_info_dlg) {
+                    mod_info_dlg->SetModInfo(mod_info);
+                    manager->ShowModInfoDlg();
+                }
+            }
+        }
+    }
 
-	click_time = Game::RealTime();
+    click_time = Game::RealTime();
 }
 
 void
 ModDlg::OnSelectDisabled(AWEvent* event)
 {
-	if (btn_enable && lst_disabled) {
-		btn_enable->SetEnabled(lst_disabled->GetSelCount() == 1);
-	}
+    if (btn_enable && lst_disabled) {
+        btn_enable->SetEnabled(lst_disabled->GetSelCount() == 1);
+    }
 }
 
 void
 ModDlg::OnEnable(AWEvent* event)
 {
-	int  index    = lst_disabled->GetSelection();
-	Text mod_name = lst_disabled->GetItemText(index);
+    int  index    = lst_disabled->GetSelection();
+    Text mod_name = lst_disabled->GetItemText(index);
 
-	config->EnableMod(mod_name);
-	changed = true;
+    config->EnableMod(mod_name);
+    changed = true;
 
-	UpdateLists();
+    UpdateLists();
 
-	ModInfo*    mod_info     = config->GetModInfo(mod_name);
-	ModInfoDlg* mod_info_dlg = manager->GetModInfoDlg();
+    ModInfo*    mod_info     = config->GetModInfo(mod_name);
+    ModInfoDlg* mod_info_dlg = manager->GetModInfoDlg();
 
-	if (mod_info && mod_info_dlg) {
-		mod_info_dlg->SetModInfo(mod_info);
-		manager->ShowModInfoDlg();
-	}
+    if (mod_info && mod_info_dlg) {
+        mod_info_dlg->SetModInfo(mod_info);
+        manager->ShowModInfoDlg();
+    }
 }
 
 void
 ModDlg::OnDisable(AWEvent* event)
 {
-	int  index    = lst_enabled->GetSelection();
-	Text mod_name = lst_enabled->GetItemText(index);
+    int  index    = lst_enabled->GetSelection();
+    Text mod_name = lst_enabled->GetItemText(index);
 
-	config->DisableMod(mod_name);
-	changed = true;
+    config->DisableMod(mod_name);
+    changed = true;
 
-	UpdateLists();
+    UpdateLists();
 }
 
 void
 ModDlg::OnIncrease(AWEvent* event)
 {
-	int index = lst_enabled->GetSelection();
-	config->IncreaseModPriority(index--);
+    int index = lst_enabled->GetSelection();
+    config->IncreaseModPriority(index--);
 
-	UpdateLists();
-	lst_enabled->SetSelected(index);
-	btn_disable->SetEnabled(true);
-	btn_increase->SetEnabled(index > 0);
-	btn_decrease->SetEnabled(index < lst_enabled->NumItems()-1);
+    UpdateLists();
+    lst_enabled->SetSelected(index);
+    btn_disable->SetEnabled(true);
+    btn_increase->SetEnabled(index > 0);
+    btn_decrease->SetEnabled(index < lst_enabled->NumItems()-1);
 }
 
 void
 ModDlg::OnDecrease(AWEvent* event)
 {
-	int index = lst_enabled->GetSelection();
-	config->DecreaseModPriority(index++);
+    int index = lst_enabled->GetSelection();
+    config->DecreaseModPriority(index++);
 
-	UpdateLists();
-	lst_enabled->SetSelected(index);
-	btn_disable->SetEnabled(true);
-	btn_increase->SetEnabled(index > 0);
-	btn_decrease->SetEnabled(index < lst_enabled->NumItems()-1);
+    UpdateLists();
+    lst_enabled->SetSelected(index);
+    btn_disable->SetEnabled(true);
+    btn_increase->SetEnabled(index > 0);
+    btn_decrease->SetEnabled(index < lst_enabled->NumItems()-1);
 }
 
 // +--------------------------------------------------------------------+
@@ -310,23 +334,23 @@ void ModDlg::OnMod(AWEvent* event)        { manager->ShowModDlg();  }
 void
 ModDlg::Apply()
 {
-	if (changed) {
-		config->Save();
-		config->FindMods();
-		config->Redeploy();
-		changed = false;
-	}
+    if (changed) {
+        config->Save();
+        config->FindMods();
+        config->Redeploy();
+        changed = false;
+    }
 }
 
 void
 ModDlg::Cancel()
 {
-	if (changed) {
-		config->Load();
-		config->FindMods();
-		config->Redeploy();
-		changed = false;
-	}
+    if (changed) {
+        config->Load();
+        config->FindMods();
+        config->Redeploy();
+        changed = false;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -334,11 +358,11 @@ ModDlg::Cancel()
 void
 ModDlg::OnAccept(AWEvent* event)
 {
-	manager->ApplyOptions();
+    manager->ApplyOptions();
 }
 
 void
 ModDlg::OnCancel(AWEvent* event)
 {
-	manager->CancelOptions();
+    manager->CancelOptions();
 }

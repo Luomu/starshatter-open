@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         System.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         System.cpp
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	Generic Ship Subsystem class 
+    OVERVIEW
+    ========
+    Generic Ship Subsystem class 
 */
 
 #include "MemDebug.h"
@@ -31,14 +55,14 @@ hull_factor(0.5f), energy((float) e), capacity((float) c), sink_rate((float) r),
 power_level(1.0f), power_flags(0), source_index(0), power_on(true),
 explosion_type(0), name(n), abrv(name), design(0), emcon(3)
 {
-	if (maxv < 100)
-	max_value = maxv;
-	else
-	max_value = (int) (maxv/100.0);
+    if (maxv < 100)
+    max_value = maxv;
+    else
+    max_value = (int) (maxv/100.0);
 
-	emcon_power[0] = 100;
-	emcon_power[1] = 100;
-	emcon_power[2] = 100;
+    emcon_power[0] = 100;
+    emcon_power[1] = 100;
+    emcon_power[2] = 100;
 }
 
 // +----------------------------------------------------------------------+
@@ -54,26 +78,26 @@ source_index(s.source_index), power_on(s.power_on), max_value(s.max_value),
 explosion_type(s.explosion_type), name(s.name), abrv(s.abrv), design(s.design),
 emcon(s.emcon)
 {
-	if (design) {
-		// cast-away const
-		ListIter<Component> c = (List<Component>&) s.components;
-		while (++c) {
-			Component* comp = new(__FILE__,__LINE__) Component(*(c.value()));
-			comp->SetSystem(this);
-			components.append(comp);
-		}
-	}
+    if (design) {
+        // cast-away const
+        ListIter<Component> c = (List<Component>&) s.components;
+        while (++c) {
+            Component* comp = new(__FILE__,__LINE__) Component(*(c.value()));
+            comp->SetSystem(this);
+            components.append(comp);
+        }
+    }
 
-	emcon_power[0] = s.emcon_power[0];
-	emcon_power[1] = s.emcon_power[1];
-	emcon_power[2] = s.emcon_power[2];
+    emcon_power[0] = s.emcon_power[0];
+    emcon_power[1] = s.emcon_power[1];
+    emcon_power[2] = s.emcon_power[2];
 }
 
 // +--------------------------------------------------------------------+
 
 System::~System()
 {
-	components.destroy();
+    components.destroy();
 }
 
 // +--------------------------------------------------------------------+
@@ -81,20 +105,20 @@ System::~System()
 void
 System::SetDesign(SystemDesign* d)
 {
-	if (design) {
-		design = 0;
-		components.destroy();
-	}
+    if (design) {
+        design = 0;
+        components.destroy();
+    }
 
-	if (d) {
-		design = d;
+    if (d) {
+        design = d;
 
-		ListIter<ComponentDesign> cd = design->components;
-		while (++cd) {
-			Component* comp = new(__FILE__,__LINE__) Component(cd.value(), this);
-			components.append(comp);
-		}
-	}
+        ListIter<ComponentDesign> cd = design->components;
+        while (++cd) {
+            Component* comp = new(__FILE__,__LINE__) Component(cd.value(), this);
+            components.append(comp);
+        }
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -102,81 +126,81 @@ System::SetDesign(SystemDesign* d)
 void
 System::SetPowerLevel(double level)
 {
-	if (level > 100)
-	level = 100;
-	else if (level < 0)
-	level = 0;
+    if (level > 100)
+    level = 100;
+    else if (level < 0)
+    level = 0;
 
-	level /= 100;
+    level /= 100;
 
-	if (power_level != level) {
-		// if the system is on emergency override power,
-		// do not let the EMCON system use this method
-		// to drop it back to normal power:
-		if (power_level > 1 && level == 1)
-		return;
+    if (power_level != level) {
+        // if the system is on emergency override power,
+        // do not let the EMCON system use this method
+        // to drop it back to normal power:
+        if (power_level > 1 && level == 1)
+        return;
 
-		power_level = (float) level;
+        power_level = (float) level;
 
-		NetUtil::SendSysStatus(ship, this);
-	}
+        NetUtil::SendSysStatus(ship, this);
+    }
 }
 
 void
 System::SetOverride(bool over)
 {
-	bool changed = false;
+    bool changed = false;
 
-	if (over && power_level != 1.2f) {
-		power_level = 1.2f;
-		changed = true;
-	}
+    if (over && power_level != 1.2f) {
+        power_level = 1.2f;
+        changed = true;
+    }
 
-	else if (!over && power_level > 1) {
-		power_level = 1.0f;
-		changed = true;
-	}
+    else if (!over && power_level > 1) {
+        power_level = 1.0f;
+        changed = true;
+    }
 
-	if (changed)
-	NetUtil::SendSysStatus(ship, this);
+    if (changed)
+    NetUtil::SendSysStatus(ship, this);
 }
 
 void
 System::SetEMCONPower(int index, int power_level)
 {
-	if (index >= 1 && index <= 3) {
-		emcon_power[index-1] = (BYTE) power_level;
-	}
+    if (index >= 1 && index <= 3) {
+        emcon_power[index-1] = (BYTE) power_level;
+    }
 }
 
 int
 System::GetEMCONPower(int index)
 {
-	if (index >= 1 && index <= 3) {
-		return emcon_power[index-1];
-	}
+    if (index >= 1 && index <= 3) {
+        return emcon_power[index-1];
+    }
 
-	return 100;
+    return 100;
 }
 
 void
 System::DoEMCON(int index)
 {
-	int e = GetEMCONPower(index);
+    int e = GetEMCONPower(index);
 
-	if (power_level * 100 > e || emcon != index) {
-		if (e == 0) {
-			PowerOff();
-		}
-		else {
-			if (emcon != index)
-			PowerOn();
+    if (power_level * 100 > e || emcon != index) {
+        if (e == 0) {
+            PowerOff();
+        }
+        else {
+            if (emcon != index)
+            PowerOn();
 
-			SetPowerLevel(e);
-		}
-	}
+            SetPowerLevel(e);
+        }
+    }
 
-	emcon = index;
+    emcon = index;
 }
 
 // +--------------------------------------------------------------------+
@@ -184,68 +208,68 @@ System::DoEMCON(int index)
 void
 System::ExecFrame(double seconds)
 {
-	if (seconds < 0.01)
-	seconds = 0.01;
+    if (seconds < 0.01)
+    seconds = 0.01;
 
-	STATUS s = DESTROYED;
+    STATUS s = DESTROYED;
 
-	if (availability > 0.99)
-	s = NOMINAL;
-	else if (availability > crit_level)
-	s = DEGRADED;
-	else
-	s = CRITICAL;
+    if (availability > 0.99)
+    s = NOMINAL;
+    else if (availability > crit_level)
+    s = DEGRADED;
+    else
+    s = CRITICAL;
 
-	bool repair = false;
+    bool repair = false;
 
-	if (components.size() > 0) {
-		ListIter<Component> comp = components;
-		while (++comp) {
-			if (comp->Status() > Component::NOMINAL) {
-				repair = true;
-				break;
-			}
-		}
-	}
+    if (components.size() > 0) {
+        ListIter<Component> comp = components;
+        while (++comp) {
+            if (comp->Status() > Component::NOMINAL) {
+                repair = true;
+                break;
+            }
+        }
+    }
 
-	if (repair) {
-		Repair();
-	}
+    if (repair) {
+        Repair();
+    }
 
-	else {
-		if (status != s) {
-			status = s;
-			NetUtil::SendSysStatus(ship, this);
-		}
+    else {
+        if (status != s) {
+            status = s;
+            NetUtil::SendSysStatus(ship, this);
+        }
 
-		// collateral damage due to unsafe operation:
-		if (power_on && power_level > safety) {
-			safety_overload += (float) seconds;
+        // collateral damage due to unsafe operation:
+        if (power_on && power_level > safety) {
+            safety_overload += (float) seconds;
 
-			// inflict some damage now:
-			if (safety_overload > 60) {
-				safety_overload -= (float) (rand() / (1000 * (power_level-safety)));
-				ApplyDamage(15);
+            // inflict some damage now:
+            if (safety_overload > 60) {
+                safety_overload -= (float) (rand() / (1000 * (power_level-safety)));
+                ApplyDamage(15);
 
-				NetUtil::SendSysStatus(ship, this);
-			}
-		}
+                NetUtil::SendSysStatus(ship, this);
+            }
+        }
 
-		else if (safety_overload > 0) {
-			safety_overload -= (float) seconds;
-		}
-	}
+        else if (safety_overload > 0) {
+            safety_overload -= (float) seconds;
+        }
+    }
 }
 
 void
 System::Repair()
 {
-	if (status != MAINT) {
-		status = MAINT;
-		safety_overload = 0.0f;
+    if (status != MAINT) {
+        status = MAINT;
+        safety_overload = 0.0f;
 
-		NetUtil::SendSysStatus(ship, this);
-	}
+        NetUtil::SendSysStatus(ship, this);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -253,14 +277,14 @@ System::Repair()
 void
 System::ExecMaintFrame(double seconds)
 {
-	if (components.size() > 0) {
-		ListIter<Component> comp = components;
-		while (++comp) {
-			if (comp->Status() > Component::NOMINAL) {
-				comp->ExecMaintFrame(seconds);
-			}
-		}
-	}
+    if (components.size() > 0) {
+        ListIter<Component> comp = components;
+        while (++comp) {
+            if (comp->Status() > Component::NOMINAL) {
+                comp->ExecMaintFrame(seconds);
+            }
+        }
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -268,61 +292,61 @@ System::ExecMaintFrame(double seconds)
 void
 System::ApplyDamage(double damage)
 {
-	if (!power_on)
-	damage /= 10;
+    if (!power_on)
+    damage /= 10;
 
-	if (components.size() > 0) {
-		int index = rand() % components.size();
+    if (components.size() > 0) {
+        int index = rand() % components.size();
 
-		if (damage > 50) {
-			damage/=2;
-			components[index]->ApplyDamage(damage);
+        if (damage > 50) {
+            damage/=2;
+            components[index]->ApplyDamage(damage);
 
-			index = rand() % components.size();
-		}
+            index = rand() % components.size();
+        }
 
-		components[index]->ApplyDamage(damage);
+        components[index]->ApplyDamage(damage);
 
-		if (safety < 0.5)
-		SetPowerLevel(50);
+        if (safety < 0.5)
+        SetPowerLevel(50);
 
-		else if (safety < 1.0)
-		SetPowerLevel(safety * 100);
-	}
-	else {
-		availability -= (float) (damage/100.0f);
-		if (availability < 0.01) availability = 0.0f;
-	}
+        else if (safety < 1.0)
+        SetPowerLevel(safety * 100);
+    }
+    else {
+        availability -= (float) (damage/100.0f);
+        if (availability < 0.01) availability = 0.0f;
+    }
 }
 
 void
 System::CalcStatus()
 {
-	if (components.size() > 0) {
-		availability = 1.0f;
-		safety       = 1.0f;
-		stability    = 1.0f;
+    if (components.size() > 0) {
+        availability = 1.0f;
+        safety       = 1.0f;
+        stability    = 1.0f;
 
-		ListIter<Component> comp = components;
-		while (++comp) {
-			if (comp->DamageEfficiency())
-			availability *= comp->Availability() / 100.0f;
+        ListIter<Component> comp = components;
+        while (++comp) {
+            if (comp->DamageEfficiency())
+            availability *= comp->Availability() / 100.0f;
 
-			if (comp->DamageSafety())
-			safety       *= comp->Availability() / 100.0f;
+            if (comp->DamageSafety())
+            safety       *= comp->Availability() / 100.0f;
 
-			if (comp->DamageStability())
-			stability    *= comp->Availability() / 100.0f;
+            if (comp->DamageStability())
+            stability    *= comp->Availability() / 100.0f;
 
-			if (comp->IsJerried()) {
-				safety       *= 0.95f;
-				stability    *= 0.95f;
-			}
-		}
+            if (comp->IsJerried()) {
+                safety       *= 0.95f;
+                stability    *= 0.95f;
+            }
+        }
 
-		if (net_avail >= 0 && availability < net_avail)
-		availability = net_avail;
-	}
+        if (net_avail >= 0 && availability < net_avail)
+        availability = net_avail;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -330,17 +354,17 @@ System::CalcStatus()
 void
 System::Mount(Point loc, float rad, float hull)
 {
-	mount_rel   = loc;
-	radius      = rad;
-	hull_factor = hull;
+    mount_rel   = loc;
+    radius      = rad;
+    hull_factor = hull;
 }
 
 void
 System::Mount(const System& system)
 {
-	mount_rel   = system.mount_rel;
-	radius      = system.radius;
-	hull_factor = system.hull_factor;
+    mount_rel   = system.mount_rel;
+    radius      = system.radius;
+    hull_factor = system.hull_factor;
 }
 
 // +--------------------------------------------------------------------+
@@ -348,10 +372,10 @@ System::Mount(const System& system)
 void
 System::Orient(const Physical* rep)
 {
-	const Matrix& orientation = rep->Cam().Orientation();
-	Point         loc         = rep->Location();
+    const Matrix& orientation = rep->Cam().Orientation();
+    Point         loc         = rep->Location();
 
-	mount_loc = (mount_rel * orientation) + loc;
+    mount_loc = (mount_rel * orientation) + loc;
 }
 
 // +----------------------------------------------------------------------+
@@ -359,11 +383,11 @@ System::Orient(const Physical* rep)
 double
 System::GetRequest(double seconds) const
 {
-	if (!power_on || capacity == energy)
-	return 0;
+    if (!power_on || capacity == energy)
+    return 0;
 
-	else
-	return power_level * sink_rate * seconds;
+    else
+    return power_level * sink_rate * seconds;
 }
 
 // +----------------------------------------------------------------------+
@@ -371,23 +395,23 @@ System::GetRequest(double seconds) const
 void
 System::Distribute(double delivered_energy, double seconds)
 {
-	if (UsesWatts()) {
-		if (seconds < 0.01)
-		seconds = 0.01;
+    if (UsesWatts()) {
+        if (seconds < 0.01)
+        seconds = 0.01;
 
-		// convert Joules to Watts:
-		energy = (float) (delivered_energy/seconds);
-	}
+        // convert Joules to Watts:
+        energy = (float) (delivered_energy/seconds);
+    }
 
-	else if (!Game::Paused()) {
-		energy += (float) delivered_energy;
+    else if (!Game::Paused()) {
+        energy += (float) delivered_energy;
 
-		if (energy > capacity)
-		energy = capacity;
+        if (energy > capacity)
+        energy = capacity;
 
-		else if (energy < 0)
-		energy = 0.0f;
-	}
+        else if (energy < 0)
+        energy = 0.0f;
+    }
 }
 
 // +----------------------------------------------------------------------+
@@ -395,5 +419,5 @@ System::Distribute(double delivered_energy, double seconds)
 void
 System::DrainPower(double to_level)
 {
-	energy = 0.0f;
+    energy = 0.0f;
 }

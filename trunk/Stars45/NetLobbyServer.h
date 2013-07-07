@@ -1,15 +1,39 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars.exe
-	FILE:         NetLobbyServer.h
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars.exe
+    FILE:         NetLobbyServer.h
+    AUTHOR:       John DiCamillo
 
 
-	OVERVIEW
-	========
-	UDP Server Engine for Multiplayer Lobby
+    OVERVIEW
+    ========
+    UDP Server Engine for Multiplayer Lobby
 */
 
 
@@ -35,83 +59,83 @@ class NetUnitEntry;
 class NetLobbyServer : public NetLobby
 {
 public:
-	NetLobbyServer();
-	virtual ~NetLobbyServer();
+    NetLobbyServer();
+    virtual ~NetLobbyServer();
 
-	int operator == (const NetLobbyServer& s) const { return this == &s; }
+    int operator == (const NetLobbyServer& s) const { return this == &s; }
 
-	virtual void            ExecFrame();
-	virtual bool            IsHost()        const { return true; }
-	virtual bool            IsServer()      const { return true; }
+    virtual void            ExecFrame();
+    virtual bool            IsHost()        const { return true; }
+    virtual bool            IsServer()      const { return true; }
 
-	virtual void            BanUser(NetUser* user);
-	virtual void            AddUser(NetUser* user);
-	virtual void            DelUser(NetUser* user);
-	virtual void            SendUsers();
-	virtual void            RequestAuth(NetUser* user);
+    virtual void            BanUser(NetUser* user);
+    virtual void            AddUser(NetUser* user);
+    virtual void            DelUser(NetUser* user);
+    virtual void            SendUsers();
+    virtual void            RequestAuth(NetUser* user);
 
-	virtual void            AddChat(NetUser* user, const char* msg, bool route=true);
-	virtual void            ClearChat();
-	virtual void            SaveChat();
+    virtual void            AddChat(NetUser* user, const char* msg, bool route=true);
+    virtual void            ClearChat();
+    virtual void            SaveChat();
 
-	virtual List<NetUnitEntry>&
-	GetUnitMap();
-	virtual void            MapUnit(int n, const char* user, bool lock=false);
-	virtual void            UnmapUnit(const char* user);
-	virtual void            SendUnits();
+    virtual List<NetUnitEntry>&
+    GetUnitMap();
+    virtual void            MapUnit(int n, const char* user, bool lock=false);
+    virtual void            UnmapUnit(const char* user);
+    virtual void            SendUnits();
 
-	virtual void            SelectMission(DWORD id);
-	virtual Text            Serialize(Mission* m, NetUser* u=0);
-	virtual Mission*        GetSelectedMission();
+    virtual void            SelectMission(DWORD id);
+    virtual Text            Serialize(Mission* m, NetUser* u=0);
+    virtual Mission*        GetSelectedMission();
 
-	virtual Text            GetServerName()         const { return server_name;      }
-	virtual void            SetServerName(const char* s)  { server_name = s;         }
-	virtual Text            GetServerMission()      const { return server_mission;   }
-	virtual void            SetServerMission(const char* script)
-	{ server_mission = script; }
+    virtual Text            GetServerName()         const { return server_name;      }
+    virtual void            SetServerName(const char* s)  { server_name = s;         }
+    virtual Text            GetServerMission()      const { return server_mission;   }
+    virtual void            SetServerMission(const char* script)
+    { server_mission = script; }
 
-	virtual void            GameStart();
-	virtual void            GameStop();
+    virtual void            GameStart();
+    virtual void            GameStop();
 
-	virtual void            GameOn();
-	virtual void            GameOff();
+    virtual void            GameOn();
+    virtual void            GameOff();
 
-	// singleton locator:
-	static NetLobbyServer*  GetInstance();
+    // singleton locator:
+    static NetLobbyServer*  GetInstance();
 
 protected:
-	virtual void            CheckSessions();
+    virtual void            CheckSessions();
 
-	virtual void            SendData(NetUser* dst, int type, Text msg);
-	virtual void            DoPing(NetPeer* peer, Text msg);
-	virtual void            DoServerInfo(NetPeer* peer, Text msg);
-	virtual void            DoServerMods(NetPeer* peer, Text msg);
-	virtual void            DoLogin(NetPeer* peer, Text msg);
-	virtual void            DoLogout(NetPeer* peer, Text msg);
-	virtual void            DoUserAuth(NetPeer* peer, Text msg);
-	virtual void            DoChat(NetPeer* peer, Text msg);
-	virtual void            DoUserList(NetPeer* peer, Text msg);
-	virtual void            DoBanUser(NetPeer* peer, Text msg);
-	virtual void            DoMissionList(NetPeer* peer, Text msg);
-	virtual void            DoMissionSelect(NetPeer* peer, Text msg);
-	virtual void            DoMissionData(NetPeer* peer, Text msg);
-	virtual void            DoUnitList(NetPeer* peer, Text msg);
-	virtual void            DoMapUnit(NetPeer* peer, Text msg);
-	virtual void            DoGameStart(NetPeer* peer, Text msg);
-	virtual void            DoGameStop(NetPeer* peer, Text msg);
+    virtual void            SendData(NetUser* dst, int type, Text msg);
+    virtual void            DoPing(NetPeer* peer, Text msg);
+    virtual void            DoServerInfo(NetPeer* peer, Text msg);
+    virtual void            DoServerMods(NetPeer* peer, Text msg);
+    virtual void            DoLogin(NetPeer* peer, Text msg);
+    virtual void            DoLogout(NetPeer* peer, Text msg);
+    virtual void            DoUserAuth(NetPeer* peer, Text msg);
+    virtual void            DoChat(NetPeer* peer, Text msg);
+    virtual void            DoUserList(NetPeer* peer, Text msg);
+    virtual void            DoBanUser(NetPeer* peer, Text msg);
+    virtual void            DoMissionList(NetPeer* peer, Text msg);
+    virtual void            DoMissionSelect(NetPeer* peer, Text msg);
+    virtual void            DoMissionData(NetPeer* peer, Text msg);
+    virtual void            DoUnitList(NetPeer* peer, Text msg);
+    virtual void            DoMapUnit(NetPeer* peer, Text msg);
+    virtual void            DoGameStart(NetPeer* peer, Text msg);
+    virtual void            DoGameStop(NetPeer* peer, Text msg);
 
-	virtual void            LoadMOTD();
-	virtual void            SendMOTD(NetUser* user);
-	virtual void            SendMods(NetUser* user);
+    virtual void            LoadMOTD();
+    virtual void            SendMOTD(NetUser* user);
+    virtual void            SendMods(NetUser* user);
 
-	Text                    server_name;
-	NetAddr                 server_addr;
-	DWORD                   announce_time;
-	NetServerConfig*        server_config;
-	Text                    server_mission;
-	int                     motd_index;
+    Text                    server_name;
+    NetAddr                 server_addr;
+    DWORD                   announce_time;
+    NetServerConfig*        server_config;
+    Text                    server_mission;
+    int                     motd_index;
 
-	List<Text>              motd;
+    List<Text>              motd;
 };
 
 // +-------------------------------------------------------------------+

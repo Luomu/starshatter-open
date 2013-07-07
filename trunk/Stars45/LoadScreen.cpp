@@ -1,10 +1,34 @@
-/*  Project Starshatter 4.5
-	Destroyer Studios LLC
-	Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+    Copyright (c) 1997-2004, Destroyer Studios LLC.
+    All Rights Reserved.
 
-	SUBSYSTEM:    Stars
-	FILE:         LoadScreen.cpp
-	AUTHOR:       John DiCamillo
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name "Destroyer Studios" nor the names of its contributors
+      may be used to endorse or promote products derived from this software
+      without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+    SUBSYSTEM:    Stars
+    FILE:         LoadScreen.cpp
+    AUTHOR:       John DiCamillo
 
 */
 
@@ -36,7 +60,7 @@ LoadScreen::LoadScreen()
 
 LoadScreen::~LoadScreen()
 {
-	TearDown();
+    TearDown();
 }
 
 // +--------------------------------------------------------------------+
@@ -44,25 +68,25 @@ LoadScreen::~LoadScreen()
 void
 LoadScreen::Setup(Screen* s)
 {
-	if (!s)
-	return;
+    if (!s)
+    return;
 
-	screen        = s;
+    screen        = s;
 
-	DataLoader* loader = DataLoader::GetLoader();
-	loader->UseFileSystem(true);
+    DataLoader* loader = DataLoader::GetLoader();
+    loader->UseFileSystem(true);
 
-	// create windows
-	FormDef load_def("LoadDlg", 0);
-	load_def.Load("LoadDlg");
-	load_dlg = new(__FILE__,__LINE__) LoadDlg(screen, load_def);
+    // create windows
+    FormDef load_def("LoadDlg", 0);
+    load_def.Load("LoadDlg");
+    load_dlg = new(__FILE__,__LINE__) LoadDlg(screen, load_def);
 
-	FormDef cmp_load_def("CmpLoadDlg", 0);
-	cmp_load_def.Load("CmpLoadDlg");
-	cmp_load_dlg = new(__FILE__,__LINE__) CmpLoadDlg(screen, cmp_load_def);
+    FormDef cmp_load_def("CmpLoadDlg", 0);
+    cmp_load_def.Load("CmpLoadDlg");
+    cmp_load_dlg = new(__FILE__,__LINE__) CmpLoadDlg(screen, cmp_load_def);
 
-	loader->UseFileSystem(Starshatter::UseFileSystem());
-	ShowLoadDlg();
+    loader->UseFileSystem(Starshatter::UseFileSystem());
+    ShowLoadDlg();
 }
 
 // +--------------------------------------------------------------------+
@@ -70,17 +94,17 @@ LoadScreen::Setup(Screen* s)
 void
 LoadScreen::TearDown()
 {
-	if (screen) {
-		if (load_dlg)     screen->DelWindow(load_dlg);
-		if (cmp_load_dlg) screen->DelWindow(cmp_load_dlg);
-	}
+    if (screen) {
+        if (load_dlg)     screen->DelWindow(load_dlg);
+        if (cmp_load_dlg) screen->DelWindow(cmp_load_dlg);
+    }
 
-	delete load_dlg;
-	delete cmp_load_dlg;
+    delete load_dlg;
+    delete cmp_load_dlg;
 
-	load_dlg       = 0;
-	cmp_load_dlg   = 0;
-	screen         = 0;
+    load_dlg       = 0;
+    cmp_load_dlg   = 0;
+    screen         = 0;
 }
 
 // +--------------------------------------------------------------------+
@@ -88,13 +112,13 @@ LoadScreen::TearDown()
 void
 LoadScreen::ExecFrame()
 {
-	Game::SetScreenColor(Color::Black);
+    Game::SetScreenColor(Color::Black);
 
-	if (load_dlg && load_dlg->IsShown())
-	load_dlg->ExecFrame();
+    if (load_dlg && load_dlg->IsShown())
+    load_dlg->ExecFrame();
 
-	if (cmp_load_dlg && cmp_load_dlg->IsShown())
-	cmp_load_dlg->ExecFrame();
+    if (cmp_load_dlg && cmp_load_dlg->IsShown())
+    cmp_load_dlg->ExecFrame();
 }
 
 // +--------------------------------------------------------------------+
@@ -102,25 +126,25 @@ LoadScreen::ExecFrame()
 bool
 LoadScreen::CloseTopmost()
 {
-	return false;
+    return false;
 }
 
 void
 LoadScreen::Show()
 {
-	if (!isShown) {
-		ShowLoadDlg();
-		isShown = true;
-	}
+    if (!isShown) {
+        ShowLoadDlg();
+        isShown = true;
+    }
 }
 
 void
 LoadScreen::Hide()
 {
-	if (isShown) {
-		HideLoadDlg();
-		isShown = false;
-	}
+    if (isShown) {
+        HideLoadDlg();
+        isShown = false;
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -128,26 +152,26 @@ LoadScreen::Hide()
 void
 LoadScreen::ShowLoadDlg()
 {
-	if (load_dlg)     load_dlg->Hide();
-	if (cmp_load_dlg) cmp_load_dlg->Hide();
+    if (load_dlg)     load_dlg->Hide();
+    if (cmp_load_dlg) cmp_load_dlg->Hide();
 
-	Starshatter* stars = Starshatter::GetInstance();
+    Starshatter* stars = Starshatter::GetInstance();
 
-	// show campaign load dialog if available and loading campaign
-	if (stars && cmp_load_dlg) {
-		if (stars->GetGameMode() == Starshatter::CLOD_MODE ||
-				stars->GetGameMode() == Starshatter::CMPN_MODE) {
-			cmp_load_dlg->Show();
-			Mouse::Show(false);
-			return;
-		}
-	}
+    // show campaign load dialog if available and loading campaign
+    if (stars && cmp_load_dlg) {
+        if (stars->GetGameMode() == Starshatter::CLOD_MODE ||
+                stars->GetGameMode() == Starshatter::CMPN_MODE) {
+            cmp_load_dlg->Show();
+            Mouse::Show(false);
+            return;
+        }
+    }
 
-	// otherwise, show regular load dialog
-	if (load_dlg) {
-		load_dlg->Show();
-		Mouse::Show(false);
-	}
+    // otherwise, show regular load dialog
+    if (load_dlg) {
+        load_dlg->Show();
+        Mouse::Show(false);
+    }
 }
 
 // +--------------------------------------------------------------------+
@@ -155,9 +179,9 @@ LoadScreen::ShowLoadDlg()
 void
 LoadScreen::HideLoadDlg()
 {
-	if (load_dlg && load_dlg->IsShown())
-	load_dlg->Hide();
+    if (load_dlg && load_dlg->IsShown())
+    load_dlg->Hide();
 
-	if (cmp_load_dlg && cmp_load_dlg->IsShown())
-	cmp_load_dlg->Hide();
+    if (cmp_load_dlg && cmp_load_dlg->IsShown())
+    cmp_load_dlg->Hide();
 }
