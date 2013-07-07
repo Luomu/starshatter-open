@@ -1,15 +1,39 @@
-/*  Project nGenEx
-    Destroyer Studios LLC
-    Copyright © 1997-2004. All Rights Reserved.
+/*  Starshatter OpenSource Distribution
+     Copyright (c) 1997-2004, Destroyer Studios LLC.
+     All Rights Reserved.
 
-    SUBSYSTEM:    NetEx.lib
-    FILE:         NetPeer.cpp
-    AUTHOR:       John DiCamillo
+     Redistribution and use in source and binary forms, with or without
+     modification, are permitted provided that the following conditions are met:
+
+     * Redistributions of source code must retain the above copyright notice,
+        this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice,
+        this list of conditions and the following disclaimer in the documentation
+        and/or other materials provided with the distribution.
+     * Neither the name "Destroyer Studios" nor the names of its contributors
+        may be used to endorse or promote products derived from this software
+        without specific prior written permission.
+
+     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     POSSIBILITY OF SUCH DAMAGE.
+
+     SUBSYSTEM:    NetEx.lib
+     FILE:         NetPeer.cpp
+     AUTHOR:       John DiCamillo
 
 
-    OVERVIEW
-    ========
-    One side of a UDP net link connection
+     OVERVIEW
+     ========
+     One side of a UDP net link connection
 */
 
 
@@ -34,23 +58,23 @@ static DWORD            multi_msg_sequence = 1;
 // +-------------------------------------------------------------------+
 
 NetPeer::NetPeer(const NetAddr& a, DWORD id)
-   : addr(a), netid(id), sequence(0), pps(0), bps(0), max_qsize(0),
-     status(OK), hist_indx(0), send_size(0), recv_size(0),
-     chunk_size(MULTIPART_CHUNKSIZE)
+    : addr(a), netid(id), sequence(0), pps(0), bps(0), max_qsize(0),
+      status(OK), hist_indx(0), send_size(0), recv_size(0),
+      chunk_size(MULTIPART_CHUNKSIZE)
 {
-   ZeroMemory(hist_time, sizeof(hist_time));
-   ZeroMemory(hist_size, sizeof(hist_size));
+    ZeroMemory(hist_time, sizeof(hist_time));
+    ZeroMemory(hist_size, sizeof(hist_size));
 
-   last_recv_time = NetLayer::GetUTC();
+    last_recv_time = NetLayer::GetUTC();
 }
 
 NetPeer::~NetPeer()
 {
-   send_list.destroy();
-   recv_list.destroy();
+    send_list.destroy();
+    recv_list.destroy();
 
-   multi_send_list.destroy();
-   multi_recv_list.destroy();
+    multi_send_list.destroy();
+    multi_recv_list.destroy();
 }
 
 // +-------------------------------------------------------------------+
@@ -58,70 +82,70 @@ NetPeer::~NetPeer()
 bool
 NetPeer::SendMessage(NetMsg* msg)
 {
-   if (msg) {
-      if (max_qsize > 0 && msg->Length() + send_size > max_qsize) {
-         status = SEND_OVERFLOW;
-         delete msg;
-         return false;
-      }
+    if (msg) {
+        if (max_qsize > 0 && msg->Length() + send_size > max_qsize) {
+            status = SEND_OVERFLOW;
+            delete msg;
+            return false;
+        }
 
-      // simple message
-      if (msg->Length() <= (int) chunk_size) {
-         if (msg->IsPriority())
-            send_list.insert(msg);
-         else
-            send_list.append(msg);
+        // simple message
+        if (msg->Length() <= (int) chunk_size) {
+            if (msg->IsPriority())
+                send_list.insert(msg);
+            else
+                send_list.append(msg);
 
-         send_size += msg->Length();
-      }
+            send_size += msg->Length();
+        }
 
-      // multipart message
-      else {
-         List<NetMsg>* list = &send_list;
+        // multipart message
+        else {
+            List<NetMsg>* list = &send_list;
 
-         if (msg->IsScatter())
-            list = &multi_send_list;
+            if (msg->IsScatter())
+                list = &multi_send_list;
 
-         DWORD nparts = msg->Length() / chunk_size;
-         DWORD extra  = msg->Length() % chunk_size;
+            DWORD nparts = msg->Length() / chunk_size;
+            DWORD extra  = msg->Length() % chunk_size;
 
-         if (extra > 0) nparts++;
+            if (extra > 0) nparts++;
 
-         multi_part_buffer.type   = NetMsg::MULTIPART;
-         multi_part_buffer.msgid  = multi_msg_sequence++;
-         multi_part_buffer.nparts = nparts;
+            multi_part_buffer.type   = NetMsg::MULTIPART;
+            multi_part_buffer.msgid  = multi_msg_sequence++;
+            multi_part_buffer.nparts = nparts;
 
-         DWORD header_size = (DWORD) (&multi_part_buffer.payload) -
-                             (DWORD) (&multi_part_buffer);
+            DWORD header_size = (DWORD) (&multi_part_buffer.payload) -
+                                (DWORD) (&multi_part_buffer);
 
-         const BYTE* p = msg->Data();
+            const BYTE* p = msg->Data();
 
-         for (DWORD i = 0; i < nparts; i++) {
-            multi_part_buffer.partno = i;
-            NetMsg* part = 0;
-            DWORD   part_size = chunk_size;
+            for (DWORD i = 0; i < nparts; i++) {
+                multi_part_buffer.partno = i;
+                NetMsg* part = 0;
+                DWORD   part_size = chunk_size;
 
-            if (i == nparts-1 && extra > 0) // last partial payload
-               part_size = extra;
+                if (i == nparts-1 && extra > 0) // last partial payload
+                    part_size = extra;
 
-            CopyMemory(multi_part_buffer.payload, p, part_size);
-            p += part_size;
-            part = new(__FILE__,__LINE__) NetMsg(msg->NetID(),
-                                                 &multi_part_buffer,
-                                                 header_size + part_size,
-                                                 msg->Flags());
+                CopyMemory(multi_part_buffer.payload, p, part_size);
+                p += part_size;
+                part = new(__FILE__,__LINE__) NetMsg(msg->NetID(),
+                                                     &multi_part_buffer,
+                                                     header_size + part_size,
+                                                     msg->Flags());
 
-            if (part) {
-               list->append(part);
-               send_size += part->Length();
+                if (part) {
+                    list->append(part);
+                    send_size += part->Length();
+                }
             }
-         }
-      }
+        }
 
-      return true;
-   }
+        return true;
+    }
 
-   return false;
+    return false;
 }
 
 // +-------------------------------------------------------------------+
@@ -129,13 +153,13 @@ NetPeer::SendMessage(NetMsg* msg)
 NetMsg*
 NetPeer::GetMessage()
 {
-   if (recv_list.size() > 0) {
-      NetMsg* msg = recv_list.removeIndex(0);
-      recv_size -= msg->Length();
-      return msg;
-   }
+    if (recv_list.size() > 0) {
+        NetMsg* msg = recv_list.removeIndex(0);
+        recv_size -= msg->Length();
+        return msg;
+    }
 
-   return 0;
+    return 0;
 }
 
 // +-------------------------------------------------------------------+
@@ -143,128 +167,128 @@ NetPeer::GetMessage()
 NetGram*
 NetPeer::ComposeGram()
 {
-   NetGram* g = 0;
+    NetGram* g = 0;
 
-   if ((send_list.size() || multi_send_list.size()) && OKtoSend()) {
-      AutoThreadSync auto_sync(sync);
+    if ((send_list.size() || multi_send_list.size()) && OKtoSend()) {
+        AutoThreadSync auto_sync(sync);
 
-      int   xmit_size = send_size;
-      int   nmsg      = send_list.size();
-      int   limit     = NET_GRAM_MAX_SIZE;
-      bool  reliable  = false;
-      bool  is_multi  = false;
+        int   xmit_size = send_size;
+        int   nmsg      = send_list.size();
+        int   limit     = NET_GRAM_MAX_SIZE;
+        bool  reliable  = false;
+        bool  is_multi  = false;
 
-      NetMsg*        multi_msg = 0;
-      List<NetMsg>*  list      = &send_list;
+        NetMsg*        multi_msg = 0;
+        List<NetMsg>*  list      = &send_list;
 
-      if (xmit_size > limit) {
-         xmit_size = 0;
-         nmsg      = 0;
+        if (xmit_size > limit) {
+            xmit_size = 0;
+            nmsg      = 0;
 
-         if (send_list.size() > 0) {
+            if (send_list.size() > 0) {
 
-            // if there is regular traffic, and multipart traffic
-            if (multi_send_list.size()) {
-               // just send one multipart message in this packet
-               multi_msg = multi_send_list.removeIndex(0);
-               limit -= multi_msg->Length();
-               reliable = true;
-               is_multi = true;
+                // if there is regular traffic, and multipart traffic
+                if (multi_send_list.size()) {
+                    // just send one multipart message in this packet
+                    multi_msg = multi_send_list.removeIndex(0);
+                    limit -= multi_msg->Length();
+                    reliable = true;
+                    is_multi = true;
+                }
+
+                for (int i = 0; i < send_list.size(); i++) {
+                    NetMsg* msg = send_list[i];
+
+                    if (xmit_size + msg->Length() < limit) {
+                        xmit_size += msg->Length();
+                        nmsg++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+            }
+            else {
+                // if there is only multipart traffic,
+                // send as many multipart messages as will fit:
+                list = &multi_send_list;
+                reliable = true;
+                is_multi = true;
+
+                for (int i = 0; i < multi_send_list.size(); i++) {
+                    NetMsg* msg = multi_send_list[i];
+
+                    if (xmit_size + msg->Length() < limit) {
+                        xmit_size += msg->Length();
+                        nmsg++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (xmit_size > 0 && nmsg > 0) {
+            BYTE* buffer   = new(__FILE__,__LINE__) BYTE[xmit_size];
+            BYTE* p        = buffer;
+
+            if (multi_msg) {
+                if (buffer) {
+                    CopyMemory(p, multi_msg->Data(), multi_msg->Length());
+                    p[1] = multi_msg->Length();
+                    p += multi_msg->Length();
+                }
+                delete multi_msg;
             }
 
-            for (int i = 0; i < send_list.size(); i++) {
-               NetMsg* msg = send_list[i];
+            while (nmsg-- && p < buffer + xmit_size) {
+                NetMsg* msg = list->removeIndex(0);
 
-               if (xmit_size + msg->Length() < limit) {
-                  xmit_size += msg->Length();
-                  nmsg++;
-               }
-               else {
-                  break;
-               }
+                if (msg) {
+                    if (msg->IsReliable()) reliable = true;
+                    if (buffer) {
+                        CopyMemory(p, msg->Data(), msg->Length());
+                        p[1] = msg->Length();
+                        p += msg->Length();
+                    }
+                    delete msg;
+                }
             }
-         }
-         else {
-            // if there is only multipart traffic,
-            // send as many multipart messages as will fit:
-            list = &multi_send_list;
-            reliable = true;
-            is_multi = true;
 
-            for (int i = 0; i < multi_send_list.size(); i++) {
-               NetMsg* msg = multi_send_list[i];
-
-               if (xmit_size + msg->Length() < limit) {
-                  xmit_size += msg->Length();
-                  nmsg++;
-               }
-               else {
-                  break;
-               }
-            }
-         }
-      }
-
-      if (xmit_size > 0 && nmsg > 0) {
-         BYTE* buffer   = new(__FILE__,__LINE__) BYTE[xmit_size];
-         BYTE* p        = buffer;
-
-         if (multi_msg) {
             if (buffer) {
-               CopyMemory(p, multi_msg->Data(), multi_msg->Length());
-               p[1] = multi_msg->Length();
-               p += multi_msg->Length();
+                Text user_data((const char*) buffer, xmit_size);
+                int  retries = 0;
+
+                if (reliable)
+                    retries = 5;
+
+                if (is_multi)
+                    retries = 10;
+
+                send_size -= xmit_size;
+
+                hist_size[hist_indx] = xmit_size + UDP_HEADER_SIZE;
+                hist_time[hist_indx] = NetLayer::GetTime();
+                hist_indx++;
+
+                if (hist_indx >= HIST_SIZE)
+                    hist_indx = 0;
+
+                g = new(__FILE__,__LINE__) NetGram(addr, user_data, retries);
+                delete[] buffer;
             }
-            delete multi_msg;
-         }
+        }
 
-         while (nmsg-- && p < buffer + xmit_size) {
-            NetMsg* msg = list->removeIndex(0);
+        // the next msg is too big to fit in a single packet
+        else {
+            NetMsg* m = send_list.removeIndex(0);
+            send_size -= m->Length();
+            delete m;
+        }
+    }
 
-            if (msg) {
-               if (msg->IsReliable()) reliable = true;
-               if (buffer) {
-                  CopyMemory(p, msg->Data(), msg->Length());
-                  p[1] = msg->Length();
-                  p += msg->Length();
-               }
-               delete msg;
-            }
-         }
-
-         if (buffer) {
-            Text user_data((const char*) buffer, xmit_size);
-            int  retries = 0;
-
-            if (reliable)
-               retries = 5;
-
-            if (is_multi)
-               retries = 10;
-
-            send_size -= xmit_size;
-
-            hist_size[hist_indx] = xmit_size + UDP_HEADER_SIZE;
-            hist_time[hist_indx] = NetLayer::GetTime();
-            hist_indx++;
-
-            if (hist_indx >= HIST_SIZE)
-               hist_indx = 0;
-
-            g = new(__FILE__,__LINE__) NetGram(addr, user_data, retries);
-            delete[] buffer;
-         }
-      }
-
-      // the next msg is too big to fit in a single packet
-      else {
-         NetMsg* m = send_list.removeIndex(0);
-         send_size -= m->Length();
-         delete m;
-      }
-   }
-
-   return g;
+    return g;
 }
 
 // +-------------------------------------------------------------------+
@@ -272,56 +296,56 @@ NetPeer::ComposeGram()
 bool
 NetPeer::ReceiveGram(NetGram* g, List<NetMsg>* q)
 {
-   if (g) {
-      if (max_qsize > 0 && recv_size + g->Size() > max_qsize) {
-         status = RECV_OVERFLOW;
-         delete g;
-         return false;
-      }
+    if (g) {
+        if (max_qsize > 0 && recv_size + g->Size() > max_qsize) {
+            status = RECV_OVERFLOW;
+            delete g;
+            return false;
+        }
 
-      sequence  =  g->Sequence();
-      recv_size += g->Size() - NET_GRAM_HEADER_SIZE;
+        sequence  =  g->Sequence();
+        recv_size += g->Size() - NET_GRAM_HEADER_SIZE;
 
-      // PARSE THE BLOCKS:
-      BYTE* p = g->UserData();
+        // PARSE THE BLOCKS:
+        BYTE* p = g->UserData();
 
-      while (p < g->Data() + g->Size()) {
-         BYTE block_type = p[0];
-         BYTE block_size = p[1];
+        while (p < g->Data() + g->Size()) {
+            BYTE block_type = p[0];
+            BYTE block_size = p[1];
 
-         if (!block_type || !block_size)
-            break;
+            if (!block_type || !block_size)
+                break;
 
-         NetMsg* msg = new(__FILE__,__LINE__) NetMsg(netid, p, block_size);
+            NetMsg* msg = new(__FILE__,__LINE__) NetMsg(netid, p, block_size);
 
-         if (msg) {
-            if (msg->Type() < NetMsg::RESERVED) {
-               msg->SetSequence(sequence);
+            if (msg) {
+                if (msg->Type() < NetMsg::RESERVED) {
+                    msg->SetSequence(sequence);
 
-               recv_list.insertSort(msg);
+                    recv_list.insertSort(msg);
 
-               if (q)
-                  q->insertSort(msg);
+                    if (q)
+                        q->insertSort(msg);
 
-               p += block_size;
+                    p += block_size;
+                }
+
+                else if (msg->Type() == NetMsg::MULTIPART) {
+                    multi_recv_list.insertSort(msg);
+                    p += block_size;
+
+                    CheckMultiRecv(q);
+                }
             }
+        }
 
-            else if (msg->Type() == NetMsg::MULTIPART) {
-               multi_recv_list.insertSort(msg);
-               p += block_size;
+        last_recv_time = NetLayer::GetUTC();
 
-               CheckMultiRecv(q);
-            }
-         }
-      }
+        delete g;
+        return true;
+    }
 
-      last_recv_time = NetLayer::GetUTC();
-
-      delete g;
-      return true;
-   }
-
-   return false;
+    return false;
 }
 
 // +-------------------------------------------------------------------+
@@ -329,112 +353,112 @@ NetPeer::ReceiveGram(NetGram* g, List<NetMsg>* q)
 bool
 NetPeer::OKtoSend() const
 {
-   if (pps || bps) {
-      DWORD hist_total  = 0;
-      DWORD hist_count  = 0;
-      DWORD now         = NetLayer::GetTime();
-      DWORD hist_oldest = now;
-      DWORD hist_newest = 0;
+    if (pps || bps) {
+        DWORD hist_total  = 0;
+        DWORD hist_count  = 0;
+        DWORD now         = NetLayer::GetTime();
+        DWORD hist_oldest = now;
+        DWORD hist_newest = 0;
 
-      for (int i = 0; i < HIST_SIZE; i++) {
-         if (hist_size[i] > 0) {
-            hist_total += hist_size[i];
-            hist_count++;
-         }
+        for (int i = 0; i < HIST_SIZE; i++) {
+            if (hist_size[i] > 0) {
+                hist_total += hist_size[i];
+                hist_count++;
+            }
 
-         if (hist_time[i] > 0) {
-            if (hist_time[i] < hist_oldest)
-               hist_oldest = hist_time[i];
+            if (hist_time[i] > 0) {
+                if (hist_time[i] < hist_oldest)
+                    hist_oldest = hist_time[i];
 
-            if (hist_time[i] > hist_newest)
-               hist_newest = hist_time[i];
-         }
-      }
+                if (hist_time[i] > hist_newest)
+                    hist_newest = hist_time[i];
+            }
+        }
 
-      if (now - hist_newest < (DWORD) pps)
-         return false;
+        if (now - hist_newest < (DWORD) pps)
+            return false;
 
-      DWORD delta   = now - hist_oldest;
-      DWORD avg_bps = hist_total / delta;
+        DWORD delta   = now - hist_oldest;
+        DWORD avg_bps = hist_total / delta;
 
-      if (bps > 0 && avg_bps > (DWORD) bps)
-         return false;
-   }
+        if (bps > 0 && avg_bps > (DWORD) bps)
+            return false;
+    }
 
-   return true;
+    return true;
 }
 
 // +-------------------------------------------------------------------+
 
 struct PacketAssembly {
-   DWORD msgid;
-   DWORD netid;
-   int   nreq;
-   int   nparts;
-   int   nbytes;
+    DWORD msgid;
+    DWORD netid;
+    int   nreq;
+    int   nparts;
+    int   nbytes;
 };
 
 void
 NetPeer::CheckMultiRecv(List<NetMsg>* q)
 {
-   const int MAX_SIMULTANEOUS_MULTI_SEQUENCES = 8;
+    const int MAX_SIMULTANEOUS_MULTI_SEQUENCES = 8;
 
-   PacketAssembly  assy[MAX_SIMULTANEOUS_MULTI_SEQUENCES];
-   ZeroMemory(assy, sizeof(assy));
+    PacketAssembly  assy[MAX_SIMULTANEOUS_MULTI_SEQUENCES];
+    ZeroMemory(assy, sizeof(assy));
 
-   DWORD header_size = (DWORD) (&multi_part_buffer.payload) -
-                       (DWORD) (&multi_part_buffer);
+    DWORD header_size = (DWORD) (&multi_part_buffer.payload) -
+                              (DWORD) (&multi_part_buffer);
 
-   // Catalog how much of each multipart sequence has been received:
-   for (int i = 0; i < multi_recv_list.size(); i++) {
-      NetMsg*           msg = multi_recv_list[i];
-      NetMsgMultipart*  m   = (NetMsgMultipart*) msg->Data();
+    // Catalog how much of each multipart sequence has been received:
+    for (int i = 0; i < multi_recv_list.size(); i++) {
+        NetMsg*           msg = multi_recv_list[i];
+        NetMsgMultipart*  m   = (NetMsgMultipart*) msg->Data();
 
-      for (int n = 0; n < MAX_SIMULTANEOUS_MULTI_SEQUENCES; n++) {
-         PacketAssembly* a = assy + n;
+        for (int n = 0; n < MAX_SIMULTANEOUS_MULTI_SEQUENCES; n++) {
+            PacketAssembly* a = assy + n;
 
-         if (a->msgid == 0 || (a->msgid == m->msgid && a->netid == msg->NetID())) {
-            a->msgid  = m->msgid;
-            a->netid  = msg->NetID();
-            a->nreq   = m->nparts;
-            a->nparts += 1;
-            a->nbytes += m->len - header_size;
-            break;
-         }
-      }
-   }
-
-   for (int n = 0; n < MAX_SIMULTANEOUS_MULTI_SEQUENCES; n++) {
-      PacketAssembly* a = assy + n;
-
-      // is this sequence complete?
-      if (a->msgid && a->nparts == a->nreq) {
-         BYTE* buffer = new BYTE[a->nbytes];
-         BYTE* p      = buffer;
-         WORD  nid    = 0;
-
-         ListIter<NetMsg> iter = multi_recv_list;
-         while (++iter) {
-            netid = iter->NetID();
-            NetMsgMultipart* m = (NetMsgMultipart*) iter->Data();
-
-            // found part of the sequence
-            if (m->msgid == a->msgid && netid == a->netid) {
-               // copy it into the buffer
-               CopyMemory(p, m->payload, m->len - header_size);
-               p += m->len - header_size;
-
-               delete iter.removeItem();
+            if (a->msgid == 0 || (a->msgid == m->msgid && a->netid == msg->NetID())) {
+                a->msgid  = m->msgid;
+                a->netid  = msg->NetID();
+                a->nreq   = m->nparts;
+                a->nparts += 1;
+                a->nbytes += m->len - header_size;
+                break;
             }
-         }
+        }
+    }
 
-         NetMsg* msg = new(__FILE__,__LINE__) NetMsg(netid, buffer, a->nbytes, NetMsg::RELIABLE);
-         if (msg) {
-            recv_list.insertSort(msg);
+    for (int n = 0; n < MAX_SIMULTANEOUS_MULTI_SEQUENCES; n++) {
+        PacketAssembly* a = assy + n;
 
-            if (q)
-               q->insertSort(msg);
-         }
-      }
-   }
+        // is this sequence complete?
+        if (a->msgid && a->nparts == a->nreq) {
+            BYTE* buffer = new BYTE[a->nbytes];
+            BYTE* p      = buffer;
+            WORD  nid    = 0;
+
+            ListIter<NetMsg> iter = multi_recv_list;
+            while (++iter) {
+                netid = iter->NetID();
+                NetMsgMultipart* m = (NetMsgMultipart*) iter->Data();
+
+                // found part of the sequence
+                if (m->msgid == a->msgid && netid == a->netid) {
+                    // copy it into the buffer
+                    CopyMemory(p, m->payload, m->len - header_size);
+                    p += m->len - header_size;
+
+                    delete iter.removeItem();
+                }
+            }
+
+            NetMsg* msg = new(__FILE__,__LINE__) NetMsg(netid, buffer, a->nbytes, NetMsg::RELIABLE);
+            if (msg) {
+                recv_list.insertSort(msg);
+
+                if (q)
+                    q->insertSort(msg);
+            }
+        }
+    }
 }
